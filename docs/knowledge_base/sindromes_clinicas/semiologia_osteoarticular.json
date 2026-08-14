@@ -1,0 +1,143 @@
+[
+  {
+    "id": "sindrome_do_tunel_do_carpo",
+    "nome": "Síndrome do Túnel do Carpo (Neuropatia do Mediano)",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "digitadores_trabalho_repetitivo": 3.0, "hipotireoidismo_diabetes_gravidez": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "parestesia_polegar_indicador_medio": 35, "dor_piora_a_noite": 30, "manobra_de_phalen_positiva": 35, "sinal_de_tinel_positivo": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["compressao_do_nervo_mediano_no_retinaculo_dos_flexores"],
+      "exclusao_ativa": ["poupanca_do_quinto_dedo_nervo_ulnar"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Uso de órtese/tala noturna em posição neutra, infiltração com corticoide ou descompressão cirúrgica"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Eletroneuromiografia (ENMG)", "Ultrassonografia de Punho"]
+    },
+    "vigneta": "Mulher de 44 anos, digitadora, refere dormência, queimação e formigamento na face palmar do polegar, indicador e dedo médio da mão direita há 4 meses, com frequentes despertares noturnos. Ao exame físico: a flexão palmar máxima do punho por 60 segundos reproduz os sintomas (Manobra de Phalen positiva) e a percussão da face volar do punho gera choques no trajeto do nervo mediano (Sinal de Tinel positivo).",
+    "respostas_esperadas": {
+      "diagnostico": ["sindrome do tunel do carpo", "tunel do carpo", "neuropatia do mediano", "compressao do nervo mediano"],
+      "exames": ["eletroneuromiografia", "enmg", "ultrassonografia", "usg de punho"],
+      "conduta": ["ortese noturna", "tala", "corticoide", "descompressao cirurgica", "cirurgia"]
+    },
+    "feedback_tecnico": "A Síndrome do Túnel do Carpo decorre da compressão do nervo mediano sob o retináculo dos flexores no punho[span_7](start_span)[span_7](end_span). A clínica manifesta-se por disestesias no território do nervo mediano (1º, 2º, 3º e metade radial do 4º dedo)[span_8](start_span)[span_8](end_span). O exame físico clássico baseia-se no Sinal de Tinel (percussão volar gerando choque) e na Manobra de Phalen (parestesia após flexão mantida por 1 minuto)[span_9](start_span)[span_9](end_span). Casos refratários ou com atrofia tenar são confirmados por ENMG e tratados cirurgicamente[span_10](start_span)[span_10](end_span)."
+  },
+  {
+    "id": "tenossinovite_de_de_quervain",
+    "nome": "Tenossinovite Estenosante de De Quervain",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "puerperas_amamentacao": 3.0, "movimentos_repetitivos_de_polegar_e_punho": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "dor_processo_estiloide_radial": 40, "teste_de_finkelstein_positivo": 40, "dor_ao_abduzir_polegar": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["inflamacao_do_abdutor_longo_e_extensor_curto_do_polegar"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Imobilização do polegar/punho com órtese + AINEs ou Infiltração local com corticoide"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Diagnóstico Clínico (Manobra de Finkelstein)", "Ultrassonografia de Punho/Tendões"]
+    },
+    "vigneta": "Puérpera de 30 anos queixa-se de dor intensa na borda lateral do punho direito ao segurar o bebê no colo há 3 semanas. Ao exame: dor localizada à palpação do processo estiloide do rádio e teste de Finkelstein fortemente positivo (dor lancinante no 1º compartimento extensor ao flexionar o polegar na palma da mão e realizar desvio ulnar passivo do punho).",
+    "respostas_esperadas": {
+      "diagnostico": ["tenossinovite de de quervain", "de quervain", "tendinite de de quervain"],
+      "exames": ["clinico", "finkelstein", "ultrassonografia", "usg"],
+      "conduta": ["ortese", "imobilizacao", "aines", "infiltracao", "fisioterapia"]
+    },
+    "feedback_tecnico": "A Tenossinovite de De Quervain é a inflamação estenosante do 1º compartimento dorsal do punho, envolvendo as bainhas sinoviais dos tendões Abdutor Longo e Extensor Curto do Polegar[span_11](start_span)[span_11](end_span). O Teste de Finkelstein (dor no estiloide radial ao desvio ulnar com polegar fletido) é patognomônico[span_12](start_span)[span_12](end_span). O tratamento inicial baseia-se em repouso com órtese espica, AINEs e infiltração de corticoide[span_13](start_span)[span_13](end_span)."
+  },
+  {
+    "id": "lesao_manguito_rotador_supraespinhoso",
+    "nome": "Síndrome do Impacto / Tendinopatia do Manguito Rotador (Supraespinhoso)",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "movimento_repetitivo_acima_da_cabeca": 3.0, "idade_maior_40_anos": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "dor_ao_elevar_braco": 35, "teste_de_jobe_positivo": 40, "manobra_de_neer_positiva": 35, "manobra_de_hawkins_positiva": 35 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["acometimento_do_tendao_do_musculo_supraespinhoso"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Fisioterapia motora para fortalecimento de estabilizadores, AINEs e reparo cirúrgico se rotura completa"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Ressonância Magnética de Ombro", "Ultrassonografia de Ombro", "Radiografia de Ombro"]
+    },
+    "vigneta": "Homem de 46 anos, pintor, queixa-se de dor no ombro direito que piora à noite ao deitar sobre o lado afetado e durante atividades com o braço elevado. Ao exame físico: Teste de Neer e Hawkins positivos (impacto subacromial). O Teste de Jobe (abdução do membro no plano da escápula a 90º em rotação interna contra resistência) desencadeia dor intensa e queda do braço.",
+    "respostas_esperadas": {
+      "diagnostico": ["manguito rotador", "supraespinhoso", "sindrome do impacto", "tendinite do supraespinhoso"],
+      "exames": ["ressonancia", "rm de ombro", "ultrassonografia", "usg"],
+      "conduta": ["fisioterapia", "aines", "reparo cirurgico", "artroscopia", "infiltracao"]
+    },
+    "feedback_tecnico": "O Músculo Supraespinhoso é o mais frequentemente lesado do manguito rotador devido ao atrito contra o acrômio (Síndrome do Impacto Subacromial)[span_14](start_span)[span_14](end_span). As manobras de Neer e Hawkins avaliam o impacto mecânico anterior, enquanto o Teste de Jobe avalia especificamente a integridade e força do tendão do supraespinhoso[span_15](start_span)[span_15](end_span). A RM de ombro é o exame padrão-ouro para distinguir tendinopatia de rotura parcial ou transfixante[span_16](start_span)[span_16](end_span)."
+  },
+  {
+    "id": "lesao_ligamento_cruzado_anterior_lca",
+    "nome": "Lesão do Ligamento Cruzado Anterior (LCA)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "entorse_esportiva_futebol_basquete": 4.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "estalido_pop_ao_trauma": 35, "hemartrose_derrame_agudo": 35, "teste_de_lachman_positivo": 40, "teste_da_gaveta_anterior_positivo": 35 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["translacao_anterior_da_tibia_em_relacao_ao_femur"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Crioterapia, imobilização com tala, analgesia e Reconstrução Cirúrgica do LCA em atletas/instáveis"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Ressonância Magnética de Joelho (Padrão-Ouro)", "Radiografia de Joelho (Descarte de Fraturas)"]
+    },
+    "vigneta": "Jogador de futebol de 22 anos sofre entorse em desaceleração com rotação do joelho direito. Refere ter ouvido um estalido ('pop') audível seguido de incapacidade funcional imediata e inchaço volumoso no joelho em menos de 2 horas (hemartrose). Ao exame ortopédico: Teste de Lachman e Teste da Gaveta Anterior com translação anterior patológica e ausência de ponto de parada firme.",
+    "respostas_esperadas": {
+      "diagnostico": ["lca", "lesao de lca", "ligamento cruzado anterior", "ruptura de lca"],
+      "exames": ["ressonancia", "rm de joelho", "rx de joelho"],
+      "conduta": ["reconstrucao cirurgica", "cirurgia", "artroscopia", "fisioterapia"]
+    },
+    "feedback_tecnico": "O Ligamento Cruzado Anterior (LCA) é o principal restritor da translação anterior da tíbia sobre o fêmur[span_17](start_span)[span_17](end_span). A lesão ocorre tipicamente por mecanismo de entorse em valgo e rotação com o pé fixo ao solo, cursando com hemartrose aguda precoce[span_18](start_span)[span_18](end_span). O Teste de Lachman (realizado com o joelho a 30º de flexão) é a manobra mais sensível no exame físico, acompanhado do Teste da Gaveta Anterior[span_19](start_span)[span_19](end_span). A RM confirma a rotura e avalia lesões associadas de meniscos[span_20](start_span)[span_20](end_span)."
+  },
+  {
+    "id": "epicondilite_lateral_cotovelo_tenista",
+    "nome": "Epicondilite Lateral ('Cotovelo de Tenista')",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "movimento_repetitivo_de_extensao_do_punho": 3.5, "pratica_de_tenis_backhand": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "dor_epicondilo_lateral": 40, "teste_de_cozen_positivo": 40, "dor_ao_estender_punho_contra_resistencia": 35 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["tendinopatia_dos_musculos_extensores_radiais_do_carpo"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Repouso das atividades com extensão repetitiva, órtese antebraquial, AINEs e fisioterapia"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Diagnóstico Clínico (Teste de Cozen)", "Ultrassonografia de Cotovelo"]
+    },
+    "vigneta": "Praticante de tênis de 38 anos relata dor na face lateral do cotovelo que irradia pelo dorso do antebraço, piorando ao segurar a raquete ou levantar objetos pesados. Ao exame físico: dor pontual à palpação do epicôndilo lateral e Teste de Cozen positivo (dor intensa no epicôndilo ao solicitar extensão do punho contra a resistência do examinador com o cotovelo a 90º).",
+    "respostas_esperadas": {
+      "diagnostico": ["epicondilite lateral", "cotovelo de tenista", "tendinite de cotovelo"],
+      "exames": ["clinico", "cozen", "ultrassonografia", "usg"],
+      "conduta": ["repouso", "ortese", "aines", "fisioterapia", "alongamento"]
+    },
+    "feedback_tecnico": "A Epicondilite Lateral ('cotovelo de tenista') decorre de microlesões e sobrecarga crônica na origem dos tendões extensores do punho e dos dedos no epicôndilo lateral (especialmente o extensor radial curto do carpo)[span_21](start_span)[span_21](end_span). É reproduzida pelo Teste de Cozen (extensão do punho contra resistência)[span_22](start_span)[span_22](end_span). Difere da Epicondilite Medial ('cotovelo de golfista'), que dói à flexão resistida do punho[span_23](start_span)[span_23](end_span)."
+  }
+]
