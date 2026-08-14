@@ -1,0 +1,87 @@
+[
+  {
+    "id": "neurotoxoplasmose_hiv",
+    "nome": "Neurotoxoplasmose (Neuroinfecção no HIV)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "imunossupressao_severa": 4.0, "cd4_menor_100": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "deficit_focal": 30, "cefaleia": 20, "febre": 15, "convulsao": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["lesoes_multiplas", "realce_em_anel"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Tratamento empírico presuntivo imediato"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["TC ou RM de Crânio", "Resposta Terapêutica em 14 dias"]
+    },
+    "vigneta": "Paciente com HIV, em abandono de TARV (CD4 = 80 cels/mm³). Trazido ao PS com cefaleia intensa, febre e hemiparesia à direita. TC de crânio revela múltiplas lesões hipodensas com edema perilesional e captação de contraste em forma de anel.",
+    "respostas_esperadas": {
+      "diagnostico": ["neurotoxoplasmose", "toxoplasmose", "neurotoxo"],
+      "exames": ["tomografia", "ressonancia", "tc", "rm"],
+      "conduta": ["sulfadiazina", "pirimetamina", "acido folinico"]
+    },
+    "feedback_tecnico": "O quadro de cefaleia, febre e déficit focal (hemiparesia) em paciente com CD4 < 100 sugere fortemente Neurotoxoplasmose. A imagem clássica revela lesões hipodensas (geralmente múltiplas), edema perilesional e realce de contraste em forma de anel. O diagnóstico é presuntivo e o tratamento imediato é feito com Sulfadiazina + Pirimetamina + Ácido folínico. Se o quadro for semelhante mas não melhorar após 14 dias de tratamento, a conduta é suspeitar de Linfoma Primário do SNC (associado ao vírus EBV, apresentando geralmente lesão única na RM)."
+  },
+  {
+    "id": "pneumocistose_pcp",
+    "nome": "Pneumocistose (PCP)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "cd4_menor_200": 3.0, "ausencia_profilaxia": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "tosse_seca": 20, "dispneia_progressiva": 30, "hipoxemia": 25, "ldh_elevado": 25 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["infiltrado_bilateral"],
+      "exclusao_ativa": ["sem_derrame_pleural", "sem_linfonodomegalia"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Suporte de O2, Antimicrobiano e Corticoide se PaO2 < 70"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Gasometria Arterial", "LDH", "Pesquisa no Escarro"]
+    },
+    "vigneta": "Paciente de 35 anos, sabidamente HIV positivo (CD4 atual 150), queixa-se de tosse seca há 3 semanas e dispneia progressiva. Gasometria em ar ambiente: PaO2 de 60 mmHg. Laboratório mostra LDH acentuadamente elevado. Radiografia de tórax evidencia infiltrado reticulonodular bilateral difuso.",
+    "respostas_esperadas": {
+      "diagnostico": ["pneumocistose", "pcp", "pneumocystis"],
+      "exames": ["gasometria", "ldh", "escarro", "broncoscopia"],
+      "conduta": ["smz + tmp", "sulfametoxazol", "trimetoprima", "corticoide", "corticoterapia"]
+    },
+    "feedback_tecnico": "O diagnóstico presuntivo de PCP baseia-se na clínica respiratória subaguda com hipoxemia, aumento de LDH e radiografia com infiltrado bilateral, caracteristicamente sem linfonodomegalia ou derrame pleural em paciente com CD4 < 200. O tratamento padrão é SMZ + TMP por 21 dias. Uma conduta crítica ativada pela hipoxemia severa (PaO2 < 70) é a adição obrigatória de corticoide ao esquema."
+  },
+  {
+    "id": "transmissao_vertical_hiv",
+    "nome": "Prevenção de Transmissão Vertical (Gestante HIV+ no Parto)",
+    "prevalencia_base": 10,
+    "01_campo_modulador": {
+      "pesos": { "gestante_hiv_positiva": 4.0, "carga_viral_desconhecida": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "trabalho_de_parto_inicial": 20, "bolsa_integra": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["risco_transmissao_vertical"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Bloqueio da transmissão no peri-parto e profilaxia do RN"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Carga Viral no 3º Trimestre", "Teste Rápido se desconhecido"]
+    },
+    "vigneta": "Gestante de 38 semanas, HIV positiva, chega à maternidade em fase inicial de trabalho de parto (dilatação 3 cm, bolsa íntegra). Refere uso irregular da TARV e a sua última Carga Viral (realizada com 35 semanas) não está disponível. O plantonista precisa definir a via de parto e a profilaxia para a mãe e o bebê.",
+    "respostas_esperadas": {
+      "diagnostico": ["transmissao vertical", "exposicao hiv", "risco de transmissao"],
+      "exames": ["teste rapido", "carga viral"],
+      "conduta": ["cesarea", "azt venoso", "azt ev", "azt + 3tc + ral", "zidovudina"]
+    },
+    "feedback_tecnico": "Em gestantes com carga viral > 1000 ou desconhecida após 34 semanas, o principal momento de intervenção é no parto. A conduta exige Cesárea Eletiva (se dilatação = 3-4cm e bolsa íntegra) combinada com AZT EV iniciado 3h antes do clampeamento do cordão. Para o recém-nascido de alto risco, a nova conduta do Ministério da Saúde orienta terapia tripla com AZT + 3TC + RAL por 28 dias. Fazer apenas AZT no bebê é reservado estritamente para mães que fizeram TARV a gestação inteira e possuem CV indetectável no 3º trimestre."
+  }
+]
