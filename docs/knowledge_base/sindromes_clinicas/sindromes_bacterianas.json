@@ -1,0 +1,86 @@
+[
+  {
+    "id": "endocardite_bovis",
+    "nome": "Endocardite Subaguda (Streptococcus bovis)",
+    "prevalencia_base": 10,
+    "01_campo_modulador": {
+      "pesos": { "febre_subaguda": 2.0, "sopro_cardiaco": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "fadiga": 15, "petequias": 15, "nodulos_osler": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["hemocultura_positiva_bovis"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Antibioticoterapia guiada e rastreio intestinal obrigatório"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Ecocardiograma", "Hemocultura", "Colonoscopia"]
+    },
+    "vigneta": "Paciente de 65 anos com febre baixa há 3 semanas, astenia e surgimento de novo sopro regurgitativo mitral. Traz resultado de hemocultura (2 amostras) evidenciando crescimento de Streptococcus gallolyticus (S. bovis). Ecocardiograma confirma vegetação valvar.",
+    "respostas_esperadas": {
+      "diagnostico": ["endocardite", "endocardite subaguda", "endocardite bacteriana"],
+      "exames": ["colonoscopia", "colono"],
+      "conduta": ["antibiotico e colonoscopia", "investigar intestino", "rastreio neoplasia", "colonoscopia"]
+    },
+    "feedback_tecnico": "Na endocardite por Streptococcus gallolyticus (bovis), é obrigatório fazer colono pois esse agente geralmente está no intestino[span_2](start_span)[span_2](end_span). A presença dessa bactéria é um grande indício de que a septicemia do paciente começou por uma lesão intestinal, frequentemente neoplásica[span_3](start_span)[span_3](end_span)."
+  },
+  {
+    "id": "osteomielite_falcemico",
+    "nome": "Osteomielite na Anemia Falciforme",
+    "prevalencia_base": 5,
+    "01_campo_modulador": {
+      "pesos": { "anemia_falciforme": 4.0, "crianca": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "dor_ossea": 30, "febre": 20, "edema_local": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["dor_focal_metafise"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Analgesia e Antibioticoterapia direcionada para Salmonella"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["RNM", "Hemocultura", "Cultura de fragmento"]
+    },
+    "vigneta": "Criança de 8 anos, portadora de anemia falciforme (falcêmico), apresenta quadro de febre aguda e dor intensa com edema em metáfise distal do fêmur direito. Radiografia simples inicial sem alterações evidentes.",
+    "respostas_esperadas": {
+      "diagnostico": ["osteomielite", "osteomielite aguda"],
+      "exames": ["rnm", "ressonancia magnetica", "ressonancia"],
+      "conduta": ["ceftriaxone", "ceftriaxona", "salmonella"]
+    },
+    "feedback_tecnico": "O RX simples não é um bom exame inicial para osteomielite, com alteração somente após 10 dias; a RNM tem melhor acurácia[span_4](start_span)[span_4](end_span). Enquanto o agente mais comum na população geral é o S. aureus, no paciente falcêmico a infecção é predominantemente por Salmonella, exigindo tratamento específico com Ceftriaxone[span_5](start_span)[span_5](end_span)."
+  },
+  {
+    "id": "endocardite_protese_precoce",
+    "nome": "Endocardite em Valva Protética (< 1 ano)",
+    "prevalencia_base": 5,
+    "01_campo_modulador": {
+      "pesos": { "troca_valvar_recente": 4.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "febre": 30, "novo_sopro": 30, "deiscencia_protese": 40 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["tempo_protese_menor_1_ano"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Esquema antimicrobiano triplo"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Ecocardiograma Transesofágico", "Hemocultura"]
+    },
+    "vigneta": "Paciente de 55 anos submetido a troca por valva artificial há 4 meses. Dá entrada com febre persistente e surgimento de novo sopro. Ecocardiograma sugere deiscência parcial da prótese e vegetação. Suspeita-se de infecção hospitalar por germes da pele (S. epidermidis / S. aureus).",
+    "respostas_esperadas": {
+      "diagnostico": ["endocardite", "endocardite protese", "endocardite bacteriana"],
+      "exames": ["hemocultura", "eco te", "ecocardiograma transesofagico"],
+      "conduta": ["vancomicina + gentamicina + rifampicina", "rifampicina", "vanco, genta e rifampicina"]
+    },
+    "feedback_tecnico": "A infecção da válvula artificial < 1 ano é considerada infecção hospitalar, causada geralmente por germes da pele[span_6](start_span)[span_6](end_span). O esquema padrão para essa condição é Vancomicina + Gentamicina + Rifampicina VO, sendo a Rifampicina essencial pois atua diretamente na prótese[span_7](start_span)[span_7](end_span)."
+  }
+]
