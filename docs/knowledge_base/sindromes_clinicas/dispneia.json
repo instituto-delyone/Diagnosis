@@ -1,0 +1,86 @@
+[
+  {
+    "id": "tep_agudo_wells_alto",
+    "nome": "Tromboembolismo Pulmonar Agudo (TEP)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "cirurgia_recente": 2.0, "imobilizacao": 2.0, "uso_acp": 1.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "dispneia_subita": 30, "dor_pleuritica": 25, "taquipneia": 20, "hemoptise": 15 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["wells_alta_probabilidade"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "AngioTC de Tórax e Anticoagulação imediata"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["AngioTC de Tórax", "Doppler de MMII", "D-Dímero se Wells Baixo"]
+    },
+    "vigneta": "Paciente de 48 anos, submetida a artroplastia total de joelho há 10 dias (imobilização), dá entrada no PS com dispneia súbita e dor torácica pleurítica à direita. Sinais vitais: FC 115 bpm, FR 26 irpm, PA 120x80 mmHg. Exame físico sem edema assimétrico visível de MMII, mas sem outro diagnóstico mais provável.",
+    "respostas_esperadas": {
+      "diagnostico": ["tep", "tromboembolismo pulmonar", "embolia pulmonar"],
+      "exames": ["angiotc", "angio tc", "angiotomografia"],
+      "conduta": ["anticoagulacao", "heparina", "rivaroxaban", "enoxaparina"]
+    },
+    "feedback_tecnico": "O TEP manifesta-se tipicamente com dispneia súbita (sintoma principal) e taquipneia (sinal principal) por obstáculo vascular e hipoxemia[span_2](start_span)[span_2](end_span). O cálculo do Escore de Wells resulta em alta probabilidade (> 4 pontos: cirurgia/imobilização = 1,5; FC > 100 = 1,5; sem outro diagnóstico mais provável = 3)[span_3](start_span)[span_3](end_span). Em alta probabilidade, a imagem direta por AngioTC é o exame de escolha (o D-Dímero é reservado para descartar TEP em baixa probabilidade)[span_4](start_span)[span_4](end_span). A conduta imediata é a anticoagulação[span_5](start_span)[span_5](end_span)."
+  },
+  {
+    "id": "exacerbacao_dpoc_infecciosa",
+    "nome": "Exacerbação Aguda do DPOC (Infecciosa)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "tabagismo_cronico": 3.0, "exposicao_fumaca": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "piora_dispneia": 25, "aumento_volume_escarro": 25, "escarro_purulento": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["sinais_cardinais_anthonisen"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Broncodilatador de curta, Corticoide sistêmico e Antibiótico"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Gasometria Arterial", "Raio-X de Tórax"]
+    },
+    "vigneta": "Paciente de 67 anos, tabagista grave (50 maços-ano) com diagnóstico prévio de DPOC, procura pronto atendimento por exacerbação dos sintomas. Refere que há 3 dias evolui com piora acentuada da dispneia, aumento do volume da secreção e mudança na cor do escarro, que se tornou purulento (amarelo-esverdeado).",
+    "respostas_esperadas": {
+      "diagnostico": ["dpoc exacerbado", "exacerbacao de dpoc", "dpoc"],
+      "exames": ["gasometria", "gasometria arterial", "rx de torax"],
+      "conduta": ["antibiotico", "amoxicilina com clavulanato", "broncodilatador", "corticoide"]
+    },
+    "feedback_tecnico": "A exacerbação do DPOC é caracterizada pelos 3 sinais cardinais: aumento da dispneia, aumento do volume do escarro e purulência[span_6](start_span)[span_6](end_span). A presença de escarro purulento aumenta a probabilidade de etiologia bacteriana (como H. influenzae, S. pneumoniae e M. catarrhalis), sendo indicação formal de antibioticoterapia (ex: Amoxicilina/Clavulanato, Macrolídeo ou Quinolona respiratória)[span_7](start_span)[span_7](end_span). O manejo da exacerbação envolve broncodilatação de curta ação, corticoide sistêmico por 5 dias e oxigenoterapia com alvo de saturação cauteloso[span_8](start_span)[span_8](end_span)."
+  },
+  {
+    "id": "crise_asmatica_grave",
+    "nome": "Crise Asmática Grave",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "atopia": 2.0, "historico_asma": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "sibilancia": 20, "fala_por_palavras": 30, "uso_musculatura_acessoria": 25, "sato2_menor_90": 25 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["pfe_menor_50_porcento"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "SABA + Ipratrópio contínuo/frequente, Corticoide EV/VO e Resgate"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Pico de Fluxo Expiratório (PFE)", "Gasometria Arterial"]
+    },
+    "vigneta": "Paciente de 22 anos, asmático, chega à emergência trazido por familiares em crise de broncoespasmo grave. Ao exame: agitado, consegue falar apenas por palavras desconectadas, taquipneico (FR 34 irpm), FC 125 bpm, SatO2 88% em ar ambiente e PFE de 40% do previsto. Ausculta pulmonar com sibilos difusos e tiragem intercostal.",
+    "respostas_esperadas": {
+      "diagnostico": ["asma", "crise asmatica", "crise asmatica grave", "asma grave"],
+      "exames": ["pfe", "pico de fluxo expiratorio", "gasometria"],
+      "conduta": ["beta-2", "ipratropio", "corticoide", "sulfato de magnesio", "oxigenio"]
+    },
+    "feedback_tecnico": "A crise asmática é classificada como GRAVE pela presença de: fala por palavras, agitação, FR > 30, FC > 120, SatO2 < 90% e PFE entre 30-50%[span_9](start_span)[span_9](end_span). O tratamento imediato inclui oxigênio suplementar para meta de SatO2 93-95%, Beta-2 agonista de curta duração em doses repetidas (3 doses nos primeiros 20/20 min), associação obrigatória de Ipratrópio e Corticoide sistêmico na 1ª hora[span_10](start_span)[span_10](end_span). Se refratário, considera-se Sulfato de Magnésio EV[span_11](start_span)[span_11](end_span)."
+  }
+]
