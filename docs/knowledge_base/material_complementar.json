@@ -383,6 +383,41 @@
     "diagnostico": "Acesso malárico clássico: calafrios violentos, febre altíssima e sudorese profusa (paroxismos intermitentes). Diagnóstico de certeza é a visualização direta da gota espessa (esfregaço de sangue).",
     "tratamento": "P. vivax é tratado com Cloroquina + Primaquina. P. falciparum (mais grave) usa derivados de Artemisinina (ex: Arteméter + Lumefantrina).",
     "particularidades": "A Primaquina é a única droga capaz de matar os 'hipnozoítos' (formas dormentes no fígado exclusivas do P. vivax); se o paciente não usá-la, ele terá recaídas da doença meses após a cura inicial."
+  },
+    "Sepse e Choque Séptico": {
+    "etiologia": "Infecção bacteriana, fúngica ou viral (ex: pneumonia, ITU, infecção abdominal) que perde o controle e deflagra uma resposta desregulada do hospedeiro.",
+    "fisiopatologia": "A tempestade de citocinas inflamatórias causa lesão endotelial difusa, vasodilatação sistêmica fulminante (choque distributivo) e vazamento capilar, privando as células de oxigênio.",
+    "diagnostico": "Foco infeccioso associado a disfunção orgânica (alteração do nível de consciência, hipotensão, oligúria, lactato alto). O escore SOFA (ou qSOFA na triagem) sela o diagnóstico.",
+    "tratamento": "Pacote da primeira hora (Surviving Sepsis): Culturas antes do antibiótico, Antibioticoterapia venosa de amplo espectro, Hidratação vigorosa com cristaloides (30 mL/kg) e Noradrenalina se o choque persistir.",
+    "particularidades": "Tempo é tecido. A cada hora de atraso na administração do antibiótico em um paciente com choque séptico, a mortalidade aumenta exponencialmente de forma linear."
+  },
+  "Tuberculose Pulmonar": {
+    "etiologia": "Infecção respiratória pelo Mycobacterium tuberculosis (Bacilo de Koch), transmitido por aerossóis de vias aéreas (gotículas minúsculas que ficam suspensas no ar).",
+    "fisiopatologia": "Os macrófagos alveolares não conseguem destruir o bacilo isoladamente e chamam linfócitos T para cercá-lo, formando o granuloma caseoso. A reativação derrete esse tecido, escavando o ápice do pulmão.",
+    "diagnostico": "Tosse produtiva ou seca por mais de 3 semanas (Sintomático Respiratório), sudorese noturna e emagrecimento. O Teste Rápido Molecular (TRM-TB) ou a baciloscopia de escarro confirmam o bacilo.",
+    "tratamento": "Esquema RIPE (Rifampicina, Isoniazida, Pirazinamida, Etambutol) nos 2 primeiros meses, seguido de Rifampicina + Isoniazida por mais 4 meses.",
+    "particularidades": "O paciente no pronto-socorro deve receber máscara cirúrgica imediatamente, mas a equipe médica deve obrigatoriamente usar a máscara N95 (PFF2) devido à via de transmissão por aerossóis."
+  },
+  "Intoxicação por Organofosforados (Síndrome Colinérgica)": {
+    "etiologia": "Exposição acidental, ocupacional ou tentativa de autoextermínio com defensivos agrícolas (agrotóxicos) ou 'chumbinho' ilegal.",
+    "fisiopatologia": "O veneno liga-se e inibe de forma irreversível a enzima Acetilcolinesterase. Sem a enzima para fazer a 'limpeza', os receptores são afogados por Acetilcolina em excesso.",
+    "diagnostico": "A clínica grita: 'O paciente vaza por todos os orifícios'. Miose puntiforme (pupila minúscula), sialorreia intensa (baba), broncorréia, lacrimejamento, diarreia, bradicardia e fasciculações musculares.",
+    "tratamento": "Proteção pessoal da equipe (o veneno absorve pela pele). Descontaminação cutânea. O antídoto vital é a Atropina em altas doses (para secar as secreções e reverter a bradicardia) e as Oximas (Pralidoxima).",
+    "particularidades": "O maior erro é achar que a Atropina reverte a fraqueza do paciente. Ela bloqueia os efeitos muscarínicos (secreção), mas não tem ação nos receptores nicotínicos (músculos); o paciente pode secar e ainda assim parar de respirar por falência do diafragma."
+  },
+  "Estenose Aórtica": {
+    "etiologia": "Degeneração e calcificação senil da válvula aórtica (em idosos) ou fusão precoce em pacientes com valva aórtica bicúspide congênita.",
+    "fisiopatologia": "As cúspides calcificam e não abrem direito. O ventrículo esquerdo precisa fazer uma força brutal (sobrecarga de pressão) para empurrar o sangue pelo buraco estreito, gerando hipertrofia concêntrica e fibrose.",
+    "diagnostico": "Sopro sistólico ejetivo 'em diamante' (crescendo-decrescendo) com irradiação para o pescoço (carótidas). O pulso clássico é o 'parvus et tardus' (fraco e prolongado). Ecocardiograma confirma a estenose severa.",
+    "tratamento": "Não há tratamento medicamentoso que salve a válvula. A resolução é puramente mecânica: Troca valvar aórtica cirúrgica ou implante percutâneo via cateter (TAVI).",
+    "particularidades": "A doença é silenciosa por anos, mas o relógio da morte começa a girar assim que a tríade clássica de sintomas aparece: Angina (sobrevida 5 anos), Síncope (3 anos) ou Insuficiência Cardíaca (2 anos)."
+  },
+  "Síndrome Nefrítica (Glomerulonefrite Pós-Estreptocócica - GNPE)": {
+    "etiologia": "Reação imunológica tardia (1 a 3 semanas) após uma infecção de garganta (faringite) ou pele (piodermite/impetigo) causada pelo Estreptococo beta-hemolítico do grupo A.",
+    "fisiopatologia": "Complexos de antígeno-anticorpo ficam presos na malha de filtração do glomérulo, deflagrando inflamação aguda. O glomérulo 'entope', caindo a filtração abruptamente e retendo água e sal (hipervolemia).",
+    "diagnostico": "Tríade nefrítica clássica: Oligúria, Edema (periorbital/facial) e Hipertensão Arterial. A urina é cor de 'Coca-Cola' ou chá-mate (hematúria dismórfica). ASLO elevado e Complemento C3 consumido.",
+    "tratamento": "É uma doença autolimitada; o tratamento é puramente de suporte com restrição hídrica, controle restrito do sal e diuréticos de alça (Furosemida) para esvaziar o volume retido e tratar a pressão alta.",
+    "particularidades": "Na emergência, a hipertensão gerada por essa síndrome pode ser tão violenta a ponto de causar uma encefalopatia hipertensiva com convulsões em uma criança ou adolescente previamente saudável."
   }
 
 }
