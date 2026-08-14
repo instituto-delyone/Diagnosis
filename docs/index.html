@@ -207,10 +207,11 @@
 </div>
 
 <script>
-  const manifestoConhecimento = {
+    const manifestoConhecimento = {
     "Clínica Médica": {
       pasta: "knowledge_base/sindromes_clinicas/",
       arquivos: [
+        "cardiologia.json",
         "cefaleias.json",
         "cirrose.json",
         "dispneia.json",
@@ -219,13 +220,16 @@
         "epilepsia.json",
         "geriatria.json",
         "hematologia.json",
-        "hemostasia.json", // <-- O novo módulo de Hemostasia e Coagulação ativado aqui!
+        "hemostasia.json",
         "hiv.json",
         "ictericia.json",
         "linfonodomegalia.json",
         "nefrologia.json",
         "neurologia.json",
+        "pcr.json", // <-- Módulo exclusivo de PCR / ACLS adicionado aqui!
         "pneumonia.json",
+        "reumatologia.json",
+        "sindrome_diarreica.json",
         "sindrome_metabolica_diabetes.json",
         "sindrome_metabolica_has.json",
         "sindrome_uremica.json",
@@ -235,6 +239,7 @@
         "tosse_cronica.json"
       ]
     },
+
   // Banco de dados em memória para os casos ativos
   let bancoDeDados = [];
 
