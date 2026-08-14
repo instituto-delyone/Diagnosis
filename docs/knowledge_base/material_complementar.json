@@ -1,0 +1,37 @@
+{
+  "Hipertensão Arterial Sistêmica": {
+    "etiologia": "Na imensa maioria (90-95%) é primária/essencial, impulsionada por fatores genéticos e ambientais (obesidade, sedentarismo, alto consumo de sódio).",
+    "fisiopatologia": "Desbalanço crônico entre o débito cardíaco e a resistência vascular periférica, frequentemente envolvendo hiperatividade do sistema renina-angiotensina-aldosterona (SRAA) e disfunção endotelial.",
+    "diagnostico": "Medida isolada em consultório ≥ 140/90 mmHg em pelo menos duas ocasiões. O uso de MAPA ou MRPA é ideal para confirmar o diagnóstico e descartar a hipertensão do avental branco.",
+    "tratamento": "Mudanças no estilo de vida são obrigatórias. A terapia farmacológica de primeira linha inclui IECA/BRA, bloqueadores de canais de cálcio e diuréticos tiazídicos.",
+    "particularidades": "É a clássica 'doença silenciosa'. A lesão progressiva de órgãos-alvo (coração, rins, cérebro, retina) é o que define o prognóstico e a gravidade do quadro."
+  },
+  "Diabetes Mellitus Tipo 2": {
+    "etiologia": "Forte componente genético associado intimamente a fatores do estilo de vida, como obesidade visceral, sedentarismo e dieta hipercalórica.",
+    "fisiopatologia": "Inicia-se com forte resistência periférica à ação da insulina, que a longo prazo leva à exaustão e declínio progressivo da secreção pelas células beta pancreáticas.",
+    "diagnostico": "Glicemia de jejum ≥ 126 mg/dL, HbA1c ≥ 6,5% ou TTG (2h) ≥ 200 mg/dL (confirmados em duas ocasiões), ou glicemia aleatória ≥ 200 mg/dL com sintomas clássicos.",
+    "tratamento": "Metformina como base farmacológica inicial. Inibidores de SGLT2 e agonistas de GLP-1 têm ganhado protagonismo pelo alto benefício cardiovascular e renal e auxílio na perda de peso.",
+    "particularidades": "Os '4 Ps' clássicos (poliúria, polidipsia, polifagia e perda de peso) costumam estar ausentes na fase inicial, tornando o rastreio laboratorial em grupos de risco fundamental."
+  },
+  "Trombose Venosa Profunda": {
+    "etiologia": "Baseada na Tríade de Virchow: estase venosa, lesão endotelial e hipercoagulabilidade (hereditária ou adquirida, como câncer, cirurgias recentes ou imobilização).",
+    "fisiopatologia": "Formação de um coágulo rico em fibrina e hemácias, predominantemente no sistema venoso profundo dos membros inferiores, que obstrui o fluxo sanguíneo local e gera edema assimétrico.",
+    "diagnostico": "Inicia-se com o Escore de Wells. O D-dímero é excelente para exclusão em pacientes de baixo risco, mas a ultrassonografia Doppler venosa é o padrão-ouro confirmatório.",
+    "tratamento": "Anticoagulação imediata (ex: DOACs ou heparina seguida de varfarina) por um período mínimo de 3 meses. Filtro de veia cava inferior apenas se houver contraindicação absoluta a anticoagulantes.",
+    "particularidades": "O grande terror agudo da TVP é o risco de Tromboembolismo Pulmonar (TEP). A principal complicação crônica a ser evitada é a Síndrome Pós-Trombótica."
+  },
+  "Resfriado Comum": {
+    "etiologia": "Infecção viral aguda do trato respiratório superior. Os rinovírus são os agentes isolados mais frequentes, seguidos por coronavírus sazonais, adenovírus e VSR.",
+    "fisiopatologia": "Invasão e replicação viral no epitélio respiratório, desencadeando forte liberação local de citocinas inflamatórias que causam vasodilatação, edema e hipersecreção mucosa.",
+    "diagnostico": "Eminentemente clínico: coriza, congestão nasal, espirros, dor de garganta leve e tosse seca. Geralmente não há febre alta, dispneia ou toxemia.",
+    "tratamento": "Puramente de suporte e alívio sintomático: hidratação, lavagem nasal com soro fisiológico e analgésicos/antitérmicos. O uso de antibióticos é totalmente ineficaz.",
+    "particularidades": "O papel do médico aqui é pedagógico: acalmar o paciente, evitar a prescrição irracional de antibióticos e orientar os sinais de alarme para complicações (como sinusite bacteriana ou pneumonia)."
+  },
+  "Pneumonia Adquirida na Comunidade": {
+    "etiologia": "Pode ser bacteriana (Streptococcus pneumoniae é o líder disparado, além de atípicos como Mycoplasma) ou viral (Influenza, VSR, SARS-CoV-2).",
+    "fisiopatologia": "Microaspiração de patógenos que vencem os macrófagos alveolares, gerando uma intensa cascata inflamatória e exsudato purulento que preenche os alvéolos (consolidação).",
+    "diagnostico": "Síndrome clínica aguda de tosse, febre, dispneia e dor pleurítica. O diagnóstico é sacramentado pela presença de um novo infiltrado/consolidação na radiografia de tórax.",
+    "tratamento": "Antibioticoterapia empírica direcionada aos patógenos mais comuns (ex: Amoxicilina, Macrolídeos ou Doxiciclina ambulatoriais). O escore CURB-65 guia a decisão entre tratamento em casa ou internação.",
+    "particularidades": "Em pacientes idosos, a PAC tem apresentação traiçoeira: muitas vezes cursa sem febre ou tosse clássica, manifestando-se apenas como confusão mental aguda ou quedas frequentes."
+  }
+}
