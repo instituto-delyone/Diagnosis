@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diagnosis Engine - Arena de Testes</title>
+  <title>Diagnosis Engine - Instituto Delyone</title>
   <style>
     /* === VARIÁVEIS DE IDENTIDADE VISUAL === */
     :root {
@@ -162,10 +162,10 @@
   <div class="header">
     <span class="badge">AIGAR ENGINE - V1.0 DATA FETCH</span>
     <h1>Simulador de Raciocínio</h1>
-    <p id="status-engine">Estabelecendo conexão neural com o banco de dados clínico...</p>
+    <p id="status-engine">Sincronizando com a base de conhecimento do Instituto Delyone...</p>
   </div>
 
-  <button id="btn-start" class="btn" onclick="iniciarJogo()" disabled>Aguardando Módulos...</button>
+  <button id="btn-start" class="btn" onclick="iniciarJogo()" disabled>Carregando Módulos...</button>
 
   <div id="case-display" class="case-box"></div>
 
@@ -183,37 +183,39 @@
 <!-- MANIFESTO VISUAL (STATUS DOS JSONS) -->
 <div class="modules-container">
   <h2 style="margin: 0 0 6px; font-size: 20px; color: var(--navy); font-weight: 800;">Módulos de Conhecimento</h2>
-  <p style="margin: 0 0 16px; font-size: 14px; color: var(--muted);">Status em tempo real de integração com a knowledge_base do Instituto Delyone.</p>
+  <p style="margin: 0 0 16px; font-size: 14px; color: var(--muted);">Status em tempo real da base de dados do repositório Diagnosis.</p>
   
   <div class="module-grid" id="module-grid">
-    <!-- Renderizado pelo JavaScript -->
+    <!-- Renderizado dinamicamente pelo JavaScript -->
   </div>
 </div>
 
 <script>
   /**
    * ==========================================
-   * 1. MANIFESTO DO CONHECIMENTO (O GPS)
+   * 1. MANIFESTO DO CONHECIMENTO (O GPS REGISTRO)
    * ==========================================
-   * Rota ajustada com base no print da árvore de arquivos do GitHub.
+   * Mapeamento exato dos 13 arquivos salvos em docs/knowledge_base/sindromes_clinicas/
    */
-    const manifestoConhecimento = {
+  const manifestoConhecimento = {
     "Clínica Médica": {
       pasta: "../knowledge_base/sindromes_clinicas/",
       arquivos: [
+        "cirrose.json",
+        "dispneia.json",
         "endocrinologia.json",
+        "geriatria.json",
+        "hiv.json",
         "ictericia.json",
+        "pneumonia.json",
         "sindrome_metabolica_diabetes.json",
         "sindrome_metabolica_has.json",
-        "pneumonia.json",
-        "terapia_intensiva.json",
-        "hiv.json",
         "sindromes_bacterianas.json",
-        "sindromes_febris.json" // <-- Mais um nó vital ativado aqui!
+        "sindromes_febris.json",
+        "terapia_intensiva.json",
+        "tosse_cronica.json"
       ]
     },
-// ...
-
     "Ginecologia e Obstetrícia": {
       pasta: "../knowledge_base/go/",
       arquivos: []
@@ -228,12 +230,12 @@
     }
   };
 
-  // Onde os dados dos JSONs serão armazenados após o download.
+  // Banco de dados em memória para os casos ativos
   let bancoDeDados = [];
 
   /**
    * ==========================================
-   * 2. MOTOR DE BUSCA (Data Fetcher)
+   * 2. MOTOR DE BUSCA ASSÍNCRONO (Data Fetcher)
    * ==========================================
    */
   async function carregarConhecimento() {
@@ -247,14 +249,14 @@
           const response = await fetch(caminhoCompleto);
           if (response.ok) {
             const casoJson = await response.json();
-            // Desempacota o array de síndromes do arquivo JSON
+            // Injeta todas as doenças da cápsula JSON na memória
             bancoDeDados.push(...casoJson);
             casosCarregados += casoJson.length;
           } else {
-            console.warn(`[AIGAR Engine] Arquivo não encontrado ou erro 404: ${caminhoCompleto}`);
+            console.warn(`[AIGAR Engine] Arquivo não encontrado (404): ${caminhoCompleto}`);
           }
         } catch (error) {
-          console.error(`[AIGAR Engine] Erro de CORS/Rede ao carregar ${arquivo}:`, error);
+          console.error(`[AIGAR Engine] Erro ao carregar ${arquivo}:`, error);
         }
       }
     }
@@ -267,16 +269,8 @@
       btnStart.innerText = "Gerar Novo Caso Clínico";
       btnStart.disabled = false;
     } else {
-      statusEl.innerHTML = `<span style="color: var(--red); font-weight: 600;">⚠️ Atenção: JSONs não localizados no servidor. Rodando Modo Demonstração.</span>`;
-      bancoDeDados.push({
-        id: "demo_falha",
-        nome: "Demonstração (Erro de Leitura)",
-        vigneta: "O sistema não conseguiu ler os arquivos JSON. Verifique a propagação do servidor no GitHub Pages.",
-        respostas_esperadas: { diagnostico: ["teste"], exames: ["teste"], conduta: ["teste"] },
-        feedback_tecnico: "Modo de demonstração ativado por falha de sincronização."
-      });
-      btnStart.innerText = "Testar Interface (Demonstração)";
-      btnStart.disabled = false;
+      statusEl.innerHTML = `<span style="color: var(--red); font-weight: 600;">⚠️ Atenção: JSONs não localizados. Verifique o deploy do GitHub Pages.</span>`;
+      btnStart.innerText = "Aguardando sincronização do servidor...";
     }
   }
 
@@ -287,11 +281,11 @@
     for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
       const temArquivos = dados.arquivos.length > 0;
       const badgeClass = temArquivos ? 'active' : 'empty';
-      const badgeText = temArquivos ? `${dados.arquivos.length} ARQUIVO(S)` : 'AGUARDANDO DADOS';
+      const badgeText = temArquivos ? `${dados.arquivos.length} MÓDULO(S)` : 'AGUARDANDO DADOS';
       
       let listaHtml = temArquivos 
         ? `<ul class="file-list">${dados.arquivos.map(arq => `<li>${arq}</li>`).join('')}</ul>`
-        : `<span style="font-size: 13px; color: var(--muted);">Sem conexões estabelecidas.</span>`;
+        : `<span style="font-size: 13px; color: var(--muted);">Nenhum arquivo integrado nesta área.</span>`;
 
       grid.innerHTML += `
         <div class="module-card">
@@ -362,16 +356,16 @@
     const regraAtual = etapasJogo[etapa];
     const respostasAceitas = casoAtual.respostas_esperadas[regraAtual.chave];
     
-    // Motor de verificação simples de palavras-chave
+    // Verificação por aproximação de string / palavras-chave
     let acertou = respostasAceitas.some(resp => inputUsuario.includes(normalizar(resp)));
 
     const logDiv = document.getElementById('log');
     
     if (acertou) {
       pontuacao += regraAtual.peso;
-      logDiv.innerHTML += `<div class="log-item log-correct"><strong>✓ Decisão Acurada (+${regraAtual.peso} pts):</strong> O motor de inferência validou a resposta clínica para [${regraAtual.chave}].</div>`;
+      logDiv.innerHTML += `<div class="log-item log-correct"><strong>✓ Decisão Acurada (+${regraAtual.peso} pts):</strong> O motor de inferência validou a resposta para [${regraAtual.chave}].</div>`;
     } else {
-      logDiv.innerHTML += `<div class="log-item log-incorrect"><strong>✕ Divergência Lógica:</strong> A conduta informada não atingiu a probabilidade necessária para [${regraAtual.chave}]. O sistema canônico esperava diretrizes como: <em>${respostasAceitas[0]}</em>.</div>`;
+      logDiv.innerHTML += `<div class="log-item log-incorrect"><strong>✕ Divergência Lógica:</strong> A conduta informada não atingiu a probabilidade necessária para [${regraAtual.chave}]. O sistema esperava diretrizes como: <em>${respostasAceitas[0]}</em>.</div>`;
     }
 
     etapa++;
@@ -390,11 +384,9 @@
       <button class="btn" style="margin-top: 24px; max-width: 250px;" onclick="iniciarJogo()">↻ Simular Novo Caso</button>`;
   }
 
-  // Aciona o motor na inicialização da página
+  // Executa o carregamento assim que a página é aberta
   window.onload = carregarConhecimento;
 </script>
 
 </body>
 </html>
-
-
