@@ -1,0 +1,118 @@
+[
+  {
+    "id": "dialise_urgencia_sindrome_uremica",
+    "nome": "Síndrome Urêmica Aguda com Indicação de Diálise de Urgência",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "lesao_renal_aguda_grave": 3.0, "drc_estagio_5": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "pericardite_uremica": 35, "encefalopatia_uremica": 35, "hipercalemia_refrataria": 30, "hipervolemia_refrataria": 25 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["uremia_franca_ou_complicacao_grave"],
+      "exclusao_ativa": ["resposta_a_diuretico_em_altas_doses"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Terapia de Substituição Renal (Hemodiálise de Urgência)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Ureia e Creatinina", "Eletrocardiograma (K+)", "Gasometria Arterial"]
+    },
+    "vigneta": "Paciente de 58 anos, portador de DRC conhecida, dá entrada na emergência com rebaixamento do nível de consciência, atrito pericárdico à ausculta cardíaca (pericardite urêmica) e respiração acidótica. Laboratório: Ureia 240 mg/dL, Creatinina 8,5 mg/dL, Potássio 7,2 mEq/L com ondas T apiculadas ao ECG, refratário às medidas de resgate.",
+    "respostas_esperadas": {
+      "diagnostico": ["sindrome uremica", "uremia", "uremia franca", "pericardite uremica", "ira grave"],
+      "exames": ["ureia", "creatinina", "potassio", "ecg", "gasometria"],
+      "conduta": ["hemodialise", "dialise", "dialise de urgencia", "hemodialise de urgencia"]
+    },
+    "feedback_tecnico": "A Síndrome Urêmica franca cursa com retenção de escórias nitrogenadas e disfunção multissistêmica (pericardite, encefalopatia, hemorragia)[span_2](start_span)[span_2](end_span). As indicações clássicas formais de Diálise de Urgência incluem: complicações diretas da uremia (pericardite, encefalopatia), além de hipercalemia, hipervolemia (EAP) e acidose metabólica refratárias ao tratamento clínico[span_3](start_span)[span_3](end_span)."
+  },
+  {
+    "id": "drc_osteodistrofia_renal",
+    "nome": "Osteodistrofia Renal (Osteíte Fibrosa / Hiperparatireoidismo Secundário)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "drc_estagio_4_ou_5": 3.5, "tfg_menor_30": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "hiperphosphatemia": 35, "hipocalcemia": 30, "pth_elevado": 35, "dor_ossea": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["reabsorcao_subperiosteal_falanges_rx"],
+      "exclusao_ativa": ["pth_baixo_doenca_adinamica"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Restrição de Fosfato na dieta + Quelante de Fosfato (Sevelamer) e Calcitriol/Vit D"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Fosfato Sérico", "Cálcio Sérico", "PTH Intacto", "Raio-X de Mãos/Crânio"]
+    },
+    "vigneta": "Paciente de 54 anos em hemodialise crônica queixa-se de dores ósseas difusas e fraqueza. Exames laboratoriais mostram Fosfato 7,2 mg/dL, Cálcio 7,8 mg/dL e PTH 850 pg/mL (muito elevado). Raio-X de mãos evidencia reabsorção óssea subperióstea nas falanges e crânio em 'sal e pimenta'.",
+    "respostas_esperadas": {
+      "diagnostico": ["osteodistrofia renal", "osteite fibrosa", "hiperparatireoidismo secundario", "hiperpara secundario"],
+      "exames": ["pth", "fosfato", "calcio", "raio-x"],
+      "conduta": ["sevelamer", "quelante de fosfato", "calcitriol", "vitamina d", "restricao de fosfato"]
+    },
+    "feedback_tecnico": "Na DRC avançada, a perda da função renal leva à retenção de fosfato e deficiência na produção de calcitriol (vitamina D ativa)[span_4](start_span)[span_4](end_span). A hipocalcemia e a hiperfosfatemia estimulam a paratireoide a secretar PTH em excesso (Hiperparatireoidismo Secundário), gerando a Osteíte Fibrosa com alta remodelação e reabsorção subperióstea[span_5](start_span)[span_5](end_span). O manejo exige restrição de fosfato, uso de quelantes (como Sevelamer) e reposição de Calcitriol[span_6](start_span)[span_6](end_span)."
+  },
+  {
+    "id": "ira_pre_renal_vs_nta",
+    "nome": "Lesão Renal Aguda Pré-Renal (Isquêmica)",
+    "prevalencia_base": 30,
+    "01_campo_modulador": {
+      "pesos": { "desidratacao_vomitos_diarreia": 3.0, "hipotensao_choque": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "oliguria": 25, "fe_na_menor_1_porcento": 35, "na_urinario_menor_20": 35, "densidade_urinaria_alta": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["reversibilidade_com_expansao_volemica"],
+      "exclusao_ativa": ["cilindros_epiteliais_ou_granulosos_ausentes"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Ressuscitação volêmica com Cristaloides (Soro Fisiológico ou Ringer Lactato)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Fração de Excreção de Sódio (FeNa)", "Sódio Urinário", "Ureia e Creatinina Sérica"]
+    },
+    "vigneta": "Paciente de 40 anos com quadro de gastroenterite aguda (vômitos e diarreia profusa há 3 dias) dá entrada desidratado, hipotenso (PA 85x55 mmHg) e oligoanúrico. Creatinina subiu de 0,9 para 2,4 mg/dL. Eletrólitos urinários: Sódio urinário de 12 mEq/L e Fração de Excreção de Sódio (FeNa) < 1%. Sedimento urinário sem cilindros granulosos.",
+    "respostas_esperadas": {
+      "diagnostico": ["ira pre-renal", "lesao renal aguda pre-renal", "pre-renal", "azotemia pre-renal"],
+      "exames": ["fena", "sodio urinario", "ureia e creatinina", "eas"],
+      "conduta": ["expansao volemica", "soro fisiologico", "cristaloide", "volume", "hidratacao"]
+    },
+    "feedback_tecnico": "A IRA Pré-Renal decorre da hipoperfusão renal mantendo a integridade tubular[span_7](start_span)[span_7](end_span). Diante da menor perfusão, os túbulos íntegros reabsorvem avidamente água e sódio: gerando Sódio Urinário < 20 mEq/L, FeNa < 1% e urina concentrada (osmolaridade alta)[span_8](start_span)[span_8](end_span). Difere da NTA (onde a FeNa é > 1% e há cilindros granulosos)[span_9](start_span)[span_9](end_span). O tratamento exige restauração rápida da volemia com cristaloides[span_10](start_span)[span_10](end_span)."
+  },
+  {
+    "id": "drc_anemia_normocitica",
+    "nome": "Anemia da Doença Renal Crônica (Deficiência de Eritropoietina)",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "drc_estagio_3_4_5": 3.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "anemia_normo_normo": 35, "cansaço_fadiga": 20, "reticulocitos_baixos": 25 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["deficiencia_de_epo"],
+      "exclusao_ativa": ["ferritina_e_saturacao_adequadas_antes_de_epo"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Suplementação de Ferro (se estoques baixos) seguida de Agente Estimulador da Eritropoiese (Alfaeritropoietina)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Hemograma Completo", "Ferritina Sérica", "Saturação de Transferrina"]
+    },
+    "vigneta": "Paciente de 62 anos, com DRC estágio 4 (TFG 22 mL/min), apresenta astenia e palidez mucosa progressivas. Hemograma: Hemoglobina 8,2 g/dL, normocítica e normocrômica. Ferritina = 320 ng/mL e Saturação de Transferrina = 28% (estoques de ferro adequados).",
+    "respostas_esperadas": {
+      "diagnostico": ["anemia da drc", "anemia por deficiencia de epo", "anemia renal"],
+      "exames": ["hemograma", "ferritina", "saturacao de transferrina", "ferro serico"],
+      "conduta": ["eritropoietina", "epo", "alfaeritropoietina", "darbepoetina"]
+    },
+    "feedback_tecnico": "A principal causa de anemia na DRC é a deficiência de Eritropoietina (EPO) produzida pelas células peritubulares renais[span_11](start_span)[span_11](end_span). O alvo terapêutico de Hb fica entre 10 e 11,5 g/dL (níveis > 13 g/dL aumentam a mortalidade cardiovascular)[span_12](start_span)[span_12](end_span). Antes de iniciar EPO, DEVE-SE garantir estoques de ferro adequados (Ferritina > 200 ng/mL ou > 500 na DRC e Saturação de Transferrina > 20-30%), repondo ferro venoso se necessário[span_13](start_span)[span_13](end_span)."
+  }
+]
