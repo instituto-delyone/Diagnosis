@@ -207,7 +207,12 @@
 </div>
 
 <script>
-    const manifestoConhecimento = {
+  /**
+   * ==========================================
+   * 1. MANIFESTO DO CONHECIMENTO (O GPS REGISTRO)
+   * ==========================================
+   */
+  const manifestoConhecimento = {
     "Clínica Médica": {
       pasta: "knowledge_base/sindromes_clinicas/",
       arquivos: [
@@ -239,6 +244,20 @@
         "tosse_cronica.json"
       ]
     },
+    "Ginecologia e Obstetrícia": {
+      pasta: "knowledge_base/go/",
+      arquivos: []
+    },
+    "Pediatria": {
+      pasta: "knowledge_base/pediatria/",
+      arquivos: []
+    },
+    "Cirurgia Geral": {
+      pasta: "knowledge_base/cirurgia/",
+      arquivos: []
+    }
+  };
+
   // Banco de dados em memória para os casos ativos
   let bancoDeDados = [];
 
@@ -401,3 +420,4 @@
 
 </body>
 </html>
+
