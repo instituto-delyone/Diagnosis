@@ -83,6 +83,19 @@
     .btn:hover:not(:disabled) { background: var(--blue); transform: translateY(-1px); }
     .btn:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; box-shadow: none; }
     
+    .btn-secondary {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      margin-top: 10px;
+      box-shadow: none;
+    }
+    .btn-secondary:hover {
+      background: #f0f4f8;
+      color: var(--navy);
+      border-color: var(--blue);
+    }
+
     .input-box {
       width: 100%;
       padding: 14px 16px;
@@ -174,6 +187,9 @@
     <div id="question-text" class="question"></div>
     <input type="text" id="user-input" class="input-box" placeholder="Digite sua conduta e pressione Enter..." onkeypress="handleEnter(event)">
     <button class="btn" onclick="processarResposta()" style="background: var(--blue);">Enviar Resposta Clínica</button>
+    
+    <!-- NOVO BOTÃO: SORTEAR OUTRO CASO -->
+    <button class="btn btn-secondary" onclick="iniciarJogo()">🔀 Sortear Outro Caso</button>
   </div>
 
   <div id="log" class="log-area"></div>
@@ -195,11 +211,11 @@
    * ==========================================
    * 1. MANIFESTO DO CONHECIMENTO (O GPS REGISTRO)
    * ==========================================
-   * Mapeamento exato dos 13 arquivos salvos em docs/knowledge_base/sindromes_clinicas/
+   * Mapeamento dos arquivos salvos em docs/knowledge_base/sindromes_clinicas/
    */
-    const manifestoConhecimento = {
+  const manifestoConhecimento = {
     "Clínica Médica": {
-      pasta: "knowledge_base/sindromes_clinicas/", // <-- Sem "../" !
+      pasta: "knowledge_base/sindromes_clinicas/",
       arquivos: [
         "cirrose.json",
         "dispneia.json",
@@ -319,17 +335,19 @@
   }
 
   function iniciarJogo() {
+    // Sorteia um novo caso aleatório do banco de dados
     casoAtual = bancoDeDados[Math.floor(Math.random() * bancoDeDados.length)];
     etapa = 0;
     pontuacao = 0;
 
+    // Redefina a exibição da tela para o novo cenário
     document.getElementById('btn-start').style.display = 'none';
     document.getElementById('case-display').style.display = 'block';
     document.getElementById('case-display').innerHTML = `<strong style="color: var(--navy);">Apresentação Clínica:</strong><br>${casoAtual.vigneta}`;
     
     document.getElementById('interaction').style.display = 'block';
-    document.getElementById('log').innerHTML = '';
-    document.getElementById('final-score').style.display = 'none';
+    document.getElementById('log').innerHTML = ''; // Limpa os feedbacks do caso anterior
+    document.getElementById('final-score').style.display = 'none'; // Reseta o placar
     
     carregarEtapa();
   }
