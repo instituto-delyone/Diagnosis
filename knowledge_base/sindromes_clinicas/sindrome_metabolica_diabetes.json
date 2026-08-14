@@ -1,0 +1,86 @@
+[
+  {
+    "id": "diabetes_lada",
+    "nome": "Diabetes LADA (Autoimune Latente do Adulto)",
+    "prevalencia_base": 5,
+    "01_campo_modulador": {
+      "pesos": { "adulto": 2.0, "magro_ou_imc_normal": 1.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "falha_antidiabeticos_orais": 30, "evolucao_lenta": 40 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["autoimune_tardio"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Acompanhamento e transição para insulina"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Anticorpos Anti-GAD", "Peptídeo C"]
+    },
+    "vigneta": "Paciente de 45 anos, inicialmente diagnosticado com DM2, retorna ao ambulatório. Apesar da boa adesão à dieta e uso otimizado de metformina, apresenta descontrole glicêmico progressivo ao longo dos últimos meses. Evolução lenta, sem cetoacidose. IMC de 23 kg/m².",
+    "respostas_esperadas": {
+      "diagnostico": ["lada", "diabetes lada", "autoimune tardio"],
+      "exames": ["anticorpos", "anti-gad", "peptideo c"],
+      "conduta": ["insulina", "analogos de insulina", "insulinoterapia"]
+    },
+    "feedback_tecnico": "O LADA é um DM autoimune tardio, caracterizado por ocorrer em adultos e apresentar uma evolução lenta para a dependência de insulina[span_0](start_span)[span_0](end_span). Diferente do MODY, que é genético e acomete jovens[span_1](start_span)[span_1](end_span). O uso de análogos de insulina evita hipoglicemias, pois possuem esquemas mais tranquilos de serem seguidos[span_2](start_span)[span_2](end_span)."
+  },
+  {
+    "id": "dm2_descompensado_sintomatico",
+    "nome": "DM2 Sintomático (Início de Terapia Combinada)",
+    "prevalencia_base": 30,
+    "01_campo_modulador": {
+      "pesos": { "obesidade_ou_sobrepeso": 2.0, "historia_familiar": 1.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "glicemia_200_a_300": 40, "presenca_de_sintomas": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["sintomas_cardinais_diabetes"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Terapia farmacológica dupla imediata"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["HbA1c", "Função Renal"]
+    },
+    "vigneta": "Paciente de 55 anos procura a UBS queixando-se de poliúria, polidipsia e perda de peso leve nas últimas semanas (paciente sintomático). Traz exames laboratoriais prévios mostrando Glicemia de Jejum de 260 mg/dL.",
+    "respostas_esperadas": {
+      "diagnostico": ["diabetes", "dm2", "diabetes mellitus"],
+      "exames": ["hba1c", "hemoglobina glicada"],
+      "conduta": ["metformina + hipoglicemiante", "metformina + incretinomimetico", "terapia dupla", "metformina e"]
+    },
+    "feedback_tecnico": "Regra prática: caso o paciente, antes de iniciar o tratamento, apresente glicemia de jejum entre 200 e 300 mg/dL associada a sintomas, a conduta correta é iniciar o tratamento com Metformina + um hipoglicemiante oral (ou incretinomiméticos)[span_3](start_span)[span_3](end_span)."
+  },
+  {
+    "id": "emergencia_hiperglicemica_bic",
+    "nome": "Emergência Hiperglicêmica (Preparo de BIC)",
+    "prevalencia_base": 10,
+    "01_campo_modulador": {
+      "pesos": { "dm1_previo": 2.0, "infeccao_subjacente": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "hiperglicemia_severa": 30, "rebaixamento_consciencia": 20, "acidose": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["necessidade_insulina_venosa"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Hidratação venosa e Insulinoterapia em BIC"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Gasometria", "Potássio", "Cetonemia/Cetonúria"]
+    },
+    "vigneta": "Paciente diabético chega à emergência torporoso, com diagnóstico confirmado de Cetoacidose Diabética (CAD). Após hidratação inicial vigorosa e checagem de potássio (> 3.3 mEq/L), a equipe médica decide iniciar a insulinoterapia venosa contínua.",
+    "respostas_esperadas": {
+      "diagnostico": ["cad", "cetoacidose", "estado hiperosmolar"],
+      "exames": ["gasometria", "potassio", "sodio", "cetonas"],
+      "conduta": ["bomba de infusao", "bic", "100 u + 100 ml", "100u de insulina", "100 unidades"]
+    },
+    "feedback_tecnico": "O conhecimento operacional do preparo da medicação é fundamental. O esquema prático de insulinoterapia em Bomba de Infusão Contínua (BIC) consiste na diluição de 100 U de insulina + 100 ml de Soro Fisiológico 0,9%[span_4](start_span)[span_4](end_span). Dessa forma, 1 ml/h equivale exatamente a 1 U/h, facilitando o ajuste de dose[span_5](start_span)[span_5](end_span)."
+  }
+]
