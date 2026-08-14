@@ -1,0 +1,144 @@
+[
+  {
+    "id": "sindrome_colinergica_organofosforados",
+    "nome": "Síndrome Colinérgica Aguda (Organofosforados / Carbamatos)",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "exposicao_a_inseticidas_pesticidas": 4.0, "trabalhador_rural": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "miose_puntiforme": 35, "sialorreia_broncorreia": 40, "bradicardia": 30, "fasciculacoes_musculares": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["hiperestimulacao_parassimpatica_e_nicotinica"],
+      "exclusao_ativa": ["sem_midriase_ou_pele_seca"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Descontaminação imediata + Atropina EV em doses dobradas até atropinização + Pralidoxima se organofosforado"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Atividade da Acetilcolinesterase Eritrocitária/Plasmática", "Gasometria Arterial", "Eletrocardiograma"]
+    },
+    "vigneta": "Trabalhador rural de 38 anos dá entrada na emergência após pulverização de lavoura apresentando sudorese profusa, salivação intensa (sialorreia), lacrimejamento, vômitos e diarreia. Ao exame físico: miose bilateral puntiforme, broncorreia audível com estertores difusos, FC 44 bpm (bradicardia) e miofasciculações musculares em tronco.",
+    "respostas_esperadas": {
+      "diagnostico": ["sindrome colinergica", "organofosforado", "organofosforados", "carbamato", "intoxicacao por pesticida"],
+      "exames": ["acetilcolinesterase", "colinesterase", "gasometria", "ecg"],
+      "conduta": ["atropina", "pralidoxima", "atropinizacao", "suporte ventilatorio"]
+    },
+    "feedback_tecnico": "A Síndrome Colinérgica decorre da inibição da enzima acetilcolinesterase por organofosforados (irreversível) ou carbamatos (reversível)[span_9](start_span)[span_9](end_span). O quadro associa sintomas muscarínicos (miose, broncorreia, salivação, bradicardia) e nicotínicos (fasciculações, fraqueza)[span_10](start_span)[span_10](end_span). O antídoto muscarínico de escolha e imediato é a Atropina (doses repetidas até secar secreções pulmonares)[span_11](start_span)[span_11](end_span). A Pralidoxima reativa a colinesterase em casos de organofosforados[span_12](start_span)[span_12](end_span)."
+  },
+  {
+    "id": "intoxicacao_antidepressivos_triciclicos",
+    "nome": "Intoxicação por Antidepressivos Tricíclicos (Amitriptilina / Nortriptilina)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "tentativa_autoexterminio_com_psicofarmacos": 3.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "alargamento_qrs_maior_100ms": 40, "sindrome_anticolinergica_boca_seca_midriase": 30, "hipotensao_choque": 35, "convulsoes": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["qrs_alargado_no_ecg_com_onda_r_ampla_avr"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Bicarbonato de Sódio 8,4% EV imediato se QRS > 100ms, arritmias ventriculares ou hipotensão"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Eletrocardiograma seriado (ECG)", "Gasometria Arterial (Alvo de pH 7,50-7,55)", "Eletrólitos"]
+    },
+    "vigneta": "Jovem de 24 anos é encontrada inconsciente ao lado de cartelas vazias de Amitriptilina. Ao exame: comatosa, pupilas em midríase, boca seca, rubor facial, PA 75x40 mmHg e FC 135 bpm. O ECG revela taquicardia com alargamento importante do QRS (140 ms) e onda R proeminente em aVR.",
+    "respostas_esperadas": {
+      "diagnostico": ["antidepressivos triciclicos", "amitriptilina", "triciclicos", "intoxicacao por triciclico"],
+      "exames": ["ecg", "eletrocardiograma", "gasometria"],
+      "conduta": ["bicarbonato de sodio", "bicarbonato", "nahco3", "alcalinizacao"]
+    },
+    "feedback_tecnico": "Os Antidepressivos Tricíclicos bloqueiam canais de sódio cardíacos rápidos (alargando o QRS e gerando arritmias letais) e possuem forte ação anticolinérgica periférica e alfa-1 bloqueadora (hipotensão)[span_13](start_span)[span_13](end_span). O antídoto e tratamento de escolha é o Bicarbonato de Sódio EV, indicado para QRS > 100 ms, hipotensão refratária ou arritmias ventriculares[span_14](start_span)[span_14](end_span)."
+  },
+  {
+    "id": "intoxicacao_aguda_acetaminofeno_paracetamol",
+    "nome": "Intoxicação Aguda por Paracetamol (Acetaminofeno)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "ingestao_dose_maior_10g_ou_150mg_kg": 4.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "hepatite_fulminante_ictericia": 40, "elevação_extrema_de_transaminases": 40, "coagulopatia_alargamento_inr": 35 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["nomograma_de_rumack_matthew_nivel_toxico"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Antídoto N-Acetilcisteína (NAC) oral ou EV nas primeiras 8 a 24 horas + Carvão Ativado se < 4h"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Nível Sérico de Paracetamol (4h após ingestão)", "TGO/AST e TGP/ALT", "Coagulograma (TAP/INR) e Função Renal"]
+    },
+    "vigneta": "Mulher de 29 anos é admitida após ingestão de 25 comprimidos de Paracetamol 750mg há cerca de 18 horas. Apresenta náuseas e dor no hipocôndrio direito. Exames laboratoriais revelam TGO de 4.800 U/L, TGP de 5.200 U/L e INR de 2,4.",
+    "respostas_esperadas": {
+      "diagnostico": ["paracetamol", "acetaminofeno", "intoxicacao por paracetamol", "hepatite toxica"],
+      "exames": ["nivel de paracetamol", "transaminases", "tgo e tgp", "inr", "coagulograma"],
+      "conduta": ["n-acetilcisteina", "acetilcisteina", "nac", "antidoto"]
+    },
+    "feedback_tecnico": "A toxicidade do Paracetamol ocorre pela saturação das vias de conjugação hepática, desviando o metabolismo para o citocromo P450 que gera o metabólito altamente tóxico NAPQI[span_15](start_span)[span_15](end_span). A depleção de glutationa leva à necrose hepática centrolobular maciça[span_16](start_span)[span_16](end_span). O antídoto é a N-Acetilcisteína (NAC), que atua como precursora da glutationa, neutralizando o NAPQI[span_17](start_span)[span_17](end_span)."
+  },
+  {
+    "id": "acidente_ofidico_crotalico_cascavel",
+    "nome": "Acidente Crotálico (Cascavel / Crotalus)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "acidente_rural_cobra_com_chocalho": 4.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "fascies_miastenica_ptose": 40, "diplopia_visao_turva": 35, "rabdomiolise_mialgia_urina_escura": 40, "dor_local_minima": 25 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["acao_neurotoxica_e_miotoxica_com_cpk_elevada"],
+      "exclusao_ativa": ["ausencia_de_edema_ou_necrose_local_importante"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Soro Anticrotálico (SAC) EV + Hidratação venosa vigorosa e alcalinização urinária para prevenir IRA por mioglobina"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Dosagem de CPK Sérica", "Ureia e Creatinina", "Tempo de Coagulação (TC)"]
+    },
+    "vigneta": "Agricultor de 45 anos dá entrada após picada de serpente em membro inferior. O local da picada apresenta apenas dor discreta, sem edema ou necrose. Queixa-se de visão dupla (diplopia), fraqueza para abrir os olhos (ptose palpebral bilateral - fácies miastênica), dor muscular intensa e urina de coloração acastanhada ('cor de coca-cola'). CPK de 35.000 U/L.",
+    "respostas_esperadas": {
+      "diagnostico": ["acidente crotalico", "crotalico", "cascavel", "crotalus"],
+      "exames": ["cpk", "creatinina", "tempo de coagulacao", "urina"],
+      "conduta": ["soro anticrotalico", "hidratacao", "soroterapia", "alcalinizacao"]
+    },
+    "feedback_tecnico": "O veneno da Cascavel (Crotalus) possui ações neurotóxica (bloqueio pré-sináptico de acetilcolina gerando fácies miastênica/ptose e oftalmoplegia), miotóxica (rabdomiólise com elevação de CPK e mioglobinúria) e coagulante[span_18](start_span)[span_18](end_span). É o acidente ofídico com maior taxa de letalidade no Brasil devido à Injúria Renal Aguda por mioglobina[span_19](start_span)[span_19](end_span). O tratamento baseia-se no Soro Anticrotálico EV associado a hidratação vigorosa[span_20](start_span)[span_20](end_span)."
+  },
+  {
+    "id": "acidente_aracnidico_loxosceles_aranha_marrom",
+    "nome": "Loxoscelismo (Aranha-Marrom / Loxosceles)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "regiao_sul_ou_sudeste": 2.5, "picada_ao_vestir_roupas": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "placa_marmorea_isquemia_cutanea": 40, "dor_de_instalacao_tardia": 30, "hemolise_intravascular_cutaneo_visceral": 35 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["evolucao_para_necros_seca_e_ulcera_fagedenica"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Soro Antiloxoscélico/Antiaracnídico EV + Corticoterapia (Prednisona) e cuidados locais"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Hemograma Completo (Hemólise/Plaquetopenia)", "Bilirrubinas e Reticulócitos", "Função Renal (IRA)"]
+    },
+    "vigneta": "Mulher de 35 anos, residente em Curitiba, relata picada imperceptível ao se vestir há 48 horas na região da coxa. Hoje apresenta dor em queimação no local com surgimento de uma lesão central arroxeada com áreas pálidas de isquemia intercaladas por eritema ('placa marmórea').",
+    "respostas_esperadas": {
+      "diagnostico": ["loxoscelismo", "aranha marrom", "loxosceles", "acidente por aranha marrom"],
+      "exames": ["hemograma", "funcao renal", "bilirrubinas", "coagulograma"],
+      "conduta": ["soro antiloxoscelico", "soro antiaracnidico", "prednisona", "corticoide"]
+    },
+    "feedback_tecnico": "O veneno da aranha-marrom (Loxosceles - enzima esfingomielinase D) promove vasculite necrotizante dermotóxica[span_21](start_span)[span_21](end_span). A apresentação clássica é a 'placa marmórea' (áreas de isquemia, eritema e cianose) de instalação insidiosa/tardia que evolui para necrose seca e úlcera de difícil cicatrização[span_22](start_span)[span_22](end_span). Na forma cutâneo-visceral, pode ocorrer hemólise intravascular grave e CIVD com IRA[span_23](start_span)[span_23](end_span). O tratamento inclui Soro Específico nas formas moderadas/graves e Corticoide oral[span_24](start_span)[span_24](end_span)."
+  }
+]
