@@ -1,0 +1,86 @@
+[
+  {
+    "id": "colangite_aguda",
+    "nome": "Colangite Aguda",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "coledocolitiase": 3.0, "manipulacao_biliar": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "ictericia": 30, "febre": 30, "dor_abdominal": 30, "hipotensao": 20, "confusao_mental": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["ictericia", "febre", "dor_abdominal"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Drenagem biliar e ATB"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["USG Abdominal", "Bilirrubinas", "Leucograma"]
+    },
+    "vigneta": "Paciente de 65 anos, com histórico prévio de coledocolitíase. Dá entrada no PS apresentando quadro de icterícia colestática associada a febre com calafrios e dor intensa em hipocôndrio direito. PA: 120x80 mmHg, sem confusão mental.",
+    "respostas_esperadas": {
+      "diagnostico": ["colangite", "colangite aguda"],
+      "exames": ["usg", "ultrassom", "ultrassonografia", "hemograma", "bilirrubinas", "tgo", "tgp"],
+      "conduta": ["antibiotico", "antibioticoterapia", "drenagem", "cpre", "cirurgia"]
+    },
+    "feedback_tecnico": "A Colangite Aguda exige identificação rápida da Tríade de Charcot (Icterícia, Febre e Dor). A conduta emergencial com ATB e preparo para drenagem biliar (CPRE) é o fator crítico."
+  },
+  {
+    "id": "hepatite_alcoolica",
+    "nome": "Hepatite Alcoólica",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "etilismo_cronico": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "ictericia": 30, "febre_baixa": 20, "dor_abdominal": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["tgo_maior_tgp", "transaminases_menor_400"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Avaliar escore de Maddrey > 32 para uso de corticoide"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["TGO", "TGP", "Leucograma", "Tempo de Protrombina"]
+    },
+    "vigneta": "Paciente de 50 anos, etilista crônico de longa data. Apresenta-se com icterícia progressiva há 1 semana, febre baixa e dor abdominal leve. Exames iniciais mostram TGO > TGP (relação maior que 2) e transaminases em torno de 300 U/L, além de leucocitose importante.",
+    "respostas_esperadas": {
+      "diagnostico": ["hepatite alcoolica", "hepatite alcoólica", "hepatite"],
+      "exames": ["funcao hepatica", "tempo de protrombina", "tap", "tgo", "tgp", "hemograma", "leucograma"],
+      "conduta": ["corticoide", "prednisolona", "pentoxifilina", "suporte", "abstinencia"]
+    },
+    "feedback_tecnico": "Na Hepatite Alcoólica, a inversão TGO/TGP > 2 (AST > ALT) e a reação leucemoide são moduladores chaves no laboratório. O tratamento de formas graves (Maddrey > 32) envolve corticoide."
+  },
+  {
+    "id": "colangite_biliar_primaria",
+    "nome": "Colangite Biliar Primária",
+    "prevalencia_base": 5,
+    "01_campo_modulador": {
+      "pesos": { "mulher_meia_idade": 2.5, "doencas_autoimunes": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "prurido": 30, "ictericia": 20, "hiperpigmentacao": 15, "xantelasmas": 15 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["anti_mitocondria_positivo"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Acompanhamento ambulatorial"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Anticorpo Antimitocôndria", "Fosfatase Alcalina", "GGT"]
+    },
+    "vigneta": "Mulher de 45 anos, com histórico de Tireoidite de Hashimoto, procura ambulatório com queixa de prurido intenso há meses e icterícia recente. Exame físico revela hiperpigmentação e xantelasmas. USG de vias biliares sem dilatações.",
+    "respostas_esperadas": {
+      "diagnostico": ["colangite biliar primaria", "cbp", "cirrose biliar primaria"],
+      "exames": ["antimitocondria", "anti-mitocondria", "fan", "fosfatase alcalina", "fa", "ggt"],
+      "conduta": ["acido ursodesoxicolico", "ursodesoxicolico", "udca", "acompanhamento"]
+    },
+    "feedback_tecnico": "O anticorpo anti-mitocôndria é o critério de confirmação necessária (sine qua non). O tratamento padrão para retardar a evolução para cirrose é o Ácido Ursodesoxicólico (UDCA)."
+  }
+]
