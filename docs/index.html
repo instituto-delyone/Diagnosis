@@ -164,6 +164,17 @@
     .file-list { margin: 0; padding-left: 20px; font-size: 13px; color: var(--muted); }
     .file-list li { margin-bottom: 6px; }
 
+    /* === RODAPÉ DE AVISO / GUIDELINES === */
+    .footer-note {
+      max-width: 780px;
+      width: 100%;
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.5;
+      padding: 0 10px;
+    }
+
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
   </style>
@@ -187,8 +198,6 @@
     <div id="question-text" class="question"></div>
     <input type="text" id="user-input" class="input-box" placeholder="Digite sua conduta e pressione Enter..." onkeypress="handleEnter(event)">
     <button class="btn" onclick="processarResposta()" style="background: var(--blue);">Enviar Resposta Clínica</button>
-    
-    <!-- NOVO BOTÃO: SORTEAR OUTRO CASO -->
     <button class="btn btn-secondary" onclick="iniciarJogo()">🔀 Sortear Outro Caso</button>
   </div>
 
@@ -201,15 +210,18 @@
   <h2 style="margin: 0 0 6px; font-size: 20px; color: var(--navy); font-weight: 800;">Módulos de Conhecimento</h2>
   <p style="margin: 0 0 16px; font-size: 14px; color: var(--muted);">Status em tempo real da base de dados do repositório Diagnosis.</p>
   
-  <div class="module-grid" id="module-grid">
-    <!-- Renderizado dinamicamente pelo JavaScript -->
-  </div>
+  <div class="module-grid" id="module-grid"></div>
 </div>
+
+<!-- AVISO DE ATUALIZAÇÃO / DIRETRIZES -->
+<footer class="footer-note">
+  <p>ℹ️ <strong>Nota Técnica:</strong> Esta base de conhecimento foi alimentada com referências e consensos médicos consolidados até 2022. <em>Guidelines</em> e diretrizes clínicas mais recentes serão inseridos gradativamente nas próximas versões do motor.</p>
+</footer>
 
 <script>
   /**
    * ==========================================
-   * 1. MANIFESTO DO CONHECIMENTO (O GPS REGISTRO)
+   * 1. MANIFESTO DO CONHECIMENTO (CLÍNICA MÉDICA COMPLETA)
    * ==========================================
    */
   const manifestoConhecimento = {
@@ -229,11 +241,14 @@
         "hiv.json",
         "ictericia.json",
         "linfonodomegalia.json",
+        "mordeduras_profilaxias.json",
         "nefrologia.json",
         "neurologia.json",
         "pcr.json",
         "pneumonia.json",
         "reumatologia.json",
+        "semiologia_osteoarticular.json",
+        "semiologia_respiratoria.json",
         "sindrome_diarreica.json",
         "sindrome_metabolica_diabetes.json",
         "sindrome_metabolica_has.json",
@@ -241,7 +256,9 @@
         "sindromes_bacterianas.json",
         "sindromes_febris.json",
         "terapia_intensiva.json",
-        "tosse_cronica.json"
+        "tosse_cronica.json",
+        "toxicologia.json",
+        "valvopatias.json"
       ]
     },
     "Ginecologia e Obstetrícia": {
@@ -258,7 +275,6 @@
     }
   };
 
-  // Banco de dados em memória para os casos ativos
   let bancoDeDados = [];
 
   /**
@@ -277,7 +293,6 @@
           const response = await fetch(caminhoCompleto);
           if (response.ok) {
             const casoJson = await response.json();
-            // Injeta todas as doenças da cápsula JSON na memória
             bancoDeDados.push(...casoJson);
             casosCarregados += casoJson.length;
           } else {
@@ -347,19 +362,17 @@
   }
 
   function iniciarJogo() {
-    // Sorteia um novo caso aleatório do banco de dados
     casoAtual = bancoDeDados[Math.floor(Math.random() * bancoDeDados.length)];
     etapa = 0;
     pontuacao = 0;
 
-    // Redefina a exibição da tela para o novo cenário
     document.getElementById('btn-start').style.display = 'none';
     document.getElementById('case-display').style.display = 'block';
     document.getElementById('case-display').innerHTML = `<strong style="color: var(--navy);">Apresentação Clínica:</strong><br>${casoAtual.vigneta}`;
     
     document.getElementById('interaction').style.display = 'block';
-    document.getElementById('log').innerHTML = ''; // Limpa os feedbacks do caso anterior
-    document.getElementById('final-score').style.display = 'none'; // Reseta o placar
+    document.getElementById('log').innerHTML = '';
+    document.getElementById('final-score').style.display = 'none';
     
     carregarEtapa();
   }
@@ -386,9 +399,7 @@
     const regraAtual = etapasJogo[etapa];
     const respostasAceitas = casoAtual.respostas_esperadas[regraAtual.chave];
     
-    // Verificação por aproximação de string / palavras-chave
     let acertou = respostasAceitas.some(resp => inputUsuario.includes(normalizar(resp)));
-
     const logDiv = document.getElementById('log');
     
     if (acertou) {
@@ -414,7 +425,6 @@
       <button class="btn" style="margin-top: 24px; max-width: 250px;" onclick="iniciarJogo()">↻ Simular Novo Caso</button>`;
   }
 
-  // Executa o carregamento assim que a página é aberta
   window.onload = carregarConhecimento;
 </script>
 
