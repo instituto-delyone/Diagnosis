@@ -1,0 +1,117 @@
+[
+  {
+    "id": "mononucleose_infecciosa_ebv",
+    "nome": "Mononucleose Infecciosa (Vírus Epstein-Barr)",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "faixa_etaria_15_a_24_anos": 3.0, "uso_recente_amoxicilina": 3.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "faringite_exsudativa": 30, "linfonodomegalia_cervical_posterior": 30, "rash_pos_amoxicilina": 35, "esplenomegalia": 25 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["linfocitose_com_atipia_linfocitaria_maior_10_porcento"],
+      "exclusao_ativa": ["sem_supuracao_amigdaliana_bacteriana_pura"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Suporte sintomático, repouso físico (evitar ruptura esplênica) e analgesia"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Hemograma com Pesquisa de Linfócitos Atípicos", "Monoteste / Paul-Bunnell", "Sorologia Anti-VCA IgM"]
+    },
+    "vigneta": "Jovem de 19 anos apresenta febre diária há 10 dias, dor de garganta intensa com placas exsudativas em amígdalas e linfonodomegalia cervical posterior dolorosa. Recebeu prescrição de amoxicilina em pronto atendimento e desenvolveu, 48 horas depois, exantema máculo-papular difuso pruriginoso. Ao exame físico: esplenomegalia palpável a 3 cm do rebordo costal esquerdo.",
+    "respostas_esperadas": {
+      "diagnostico": ["mononucleose", "mononucleose infecciosa", "ebv", "epstein barr", "doenca do beijo"],
+      "exames": ["hemograma", "linfocitos atipicos", "monoteste", "paul-bunnell", "sorologia ebv"],
+      "conduta": ["suporte", "sintomaticos", "repouso", "evitar esforco fisico", "analgesia"]
+    },
+    "feedback_tecnico": "A Mononucleose Infecciosa (causada pelo vírus Epstein-Barr) cursa classicamente com tríade de febre, faringoamigdalite exsudativa e linfonodomegalia cervical (especialmente cadeia posterior e occipital), acompanhada de esplenomegalia[span_6](start_span)[span_6](end_span). O uso inadvertido de aminopenicilinas (como amoxicilina) precipita o clássico exantema máculo-papular imune[span_7](start_span)[span_7](end_span). O hemograma evidencia leucocitose com atipia linfocitária marcante (> 10%)[span_8](start_span)[span_8](end_span). A conduta é de suporte, orientando restrição de contato físico pelo risco de ruptura do baço[span_9](start_span)[span_9](end_span)."
+  },
+  {
+    "id": "linfoma_de_hodgkin",
+    "nome": "Linfoma de Hodgkin",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "mulher_jovem_20_a_30_anos": 2.5, "homem_maior_50_anos": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "linfonodo_supraclavicular_endurecido": 35, "dor_linfonodal_pos_alcool": 35, "febre_de_pel_ebstein": 30, "sintomas_b_febre_sudorese_perda_peso": 25 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["celulas_de_reed_sternberg_na_biopsia_excisional"],
+      "exclusao_ativa": ["cd15_e_cd30_positivos"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Biópsia excisional de linfonodo e estadiamento clínico/tomográfico (Ann Arbor)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Biópsia Excisional de Linfonodo", "Imunohistoquímica (CD15 e CD30)", "TC de Pescoço, Tórax, Abdome e Pelve"]
+    },
+    "vigneta": "Mulher de 24 anos procura consulta por nódulo cervical indolor e de crescimento progressivo há 3 meses. Refere episódios de febre intermitente que dura alguns dias e desaparece espontaneamente (febre de Pel-Ebstein), sudorese noturna e dor no linfonodo acometido logo após ingerir bebidas alcoólicas. Ao exame: linfonodo supraclavicular esquerdo de 3,0 cm, endurecido, aderido a planos profundos e indolor à palpação.",
+    "respostas_esperadas": {
+      "diagnostico": ["linfoma de hodgkin", "doenca de hodgkin", "hodgkin", "linfoma"],
+      "exames": ["biopsia de linfonodo", "biopsia excisional", "imunohistoquimica", "tomografia", "tc"],
+      "conduta": ["quimioterapia", "abvd", "estadiamento", "biopsia excisional"]
+    },
+    "feedback_tecnico": "O Linfoma de Hodgkin acomete frequentemente adultos jovens, com pico de incidência em mulheres na faixa dos 20-30 anos (subtipo Esclerose Nodular)[span_10](start_span)[span_10](end_span). Caracteriza-se por linfonodomegalia cervical/supraclavicular indolor e sintomas específicos como dor linfonodal desencadeada por álcool e febre de Pel-Ebstein (ciclos de dias febris intercalados com períodos afebris)[span_11](start_span)[span_11](end_span). O diagnóstico definitivo exige biópsia excisional do linfonodo demonstrando as células neoplásicas gigantes de Reed-Sternberg em meio a infiltrado reacional[span_12](start_span)[span_12](end_span). O tratamento padrão utiliza o protocolo quimioterápico ABVD[span_13](start_span)[span_13](end_span)."
+  },
+  {
+    "id": "doenca_de_chagas_aguda",
+    "nome": "Doença de Chagas Aguda (Transmissão Oral)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "consumo_acai_caldo_de_cana_artesanal": 4.0, "regiao_norte_ou_nordeste": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "febre_prolongada": 30, "hepatoesplenomegalia": 30, "miocardite_aguda_ou_pericardite": 35, "edema_bipalpebral_ou_facial": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["parasitemia_direta_positiva_sangue_periferico"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Tratamento antiparasitário imediato com Benznidazol por 60 dias"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Exame a Fresco / Gota Espessa de Sangue Periférico", "Eletrocardiograma (ECG)", "Ecocardiograma"]
+    },
+    "vigneta": "Paciente de 34 anos procedente do Pará relata febre alta diária, cefaleia, mialgia e dispneia leve há 14 dias, iniciadas após consumo coletivo de açaí artesanal in natura. Exame físico evidencia hepatoesplenomegalia moderada, edema bipalpebral e taquicardia desproporcional à temperatura. O ECG revela bloqueio atrioventricular de 1º grau e extrassístoles ventriculares.",
+    "respostas_esperadas": {
+      "diagnostico": ["chagas", "doenca de chagas", "chagas aguda", "tripanossomiase"],
+      "exames": ["exame direto de sangue", "gota espessa", "fresco", "ecg", "parasitologico direto"],
+      "conduta": ["benznidazol", "tratar miocardite", "antiparasitario"]
+    },
+    "feedback_tecnico": "A Doença de Chagas Aguda por transmissão oral (ingestão de açaí ou caldo de cana contaminados com fezes de triatomíneo) costuma ser mais grave que a vetorial clássica, manifestando-se como síndrome febril prolongada associada à hepatoesplenomegalia e miocardite aguda grave[span_14](start_span)[span_14](end_span). Na fase aguda, a alta parasitemia torna o exame parasitológico direto do sangue periférico (gota espessa / lâmina a fresco) o método de escolha[span_15](start_span)[span_15](end_span). O tratamento de erradicação obrigatório é feito com Benznidazol por 60 dias[span_16](start_span)[span_16](end_span)."
+  },
+  {
+    "id": "tricoleucemia_hairy_cell",
+    "nome": "Tricoleucemia (Leucemia de Células Pilosas)",
+    "prevalencia_base": 10,
+    "01_campo_modulador": {
+      "pesos": { "homem_meia_idade_ou_idoso": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "esplenomegalia_gigante_de_monta": 40, "pancitopenia_com_monocitopenia": 35, "aspirado_de_medula_seco": 35 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["linfocitos_com_projecoes_citoplasmaticas_em_cabelo"],
+      "exclusao_ativa": ["ausencia_de_linfonodomegalia_periferica"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Biópsia de Medula Óssea e Quimioterapia com Análogos de Purina (Cladribina)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Biópsia de Medula Óssea", "Imunofenotipagem por Citometria de Fluxo", "Esfregaço de Sangue Periférico"]
+    },
+    "vigneta": "Homem de 56 anos apresenta plenitude pós-prandial precoce e desconforto abdominal no flanco esquerdo. Ao exame: baço gigante palpável na fossa ilíaca esquerda (esplenomegalia de grande monta), sem linfonodomegalias periféricas. Hemograma evidencia pancitopenia moderada com monocitopenia marcante (monócitos = 0%). A punção aspirativa da medula óssea resulta em 'aspirado seco' devido à mielofibrose reticulínica local.",
+    "respostas_esperadas": {
+      "diagnostico": ["tricoleucemia", "leucemia de celulas pilosas", "hairy cell"],
+      "exames": ["biopsia de medula", "imunofenotipagem", "citometria de fluxo", "esfregaco"],
+      "conduta": ["cladribina", "analogo de purina", "quimioterapia"]
+    },
+    "feedback_tecnico": "A Tricoleucemia é uma neoplasia linfoproliferativa crônica de células B maduras que apresentam projeções citoplasmáticas pilosas características[span_17](start_span)[span_17](end_span). Cursa tipicamente com esplenomegalia de grande monta decorrente de infiltração na polpa vermelha esplênica, ausência de adenomegalias periféricas e pancitopenia com monocitopenia quase absoluta[span_18](start_span)[span_18](end_span). A indução de reticulina leva ao achado clássico de aspirado de medula seco à punção[span_19](start_span)[span_19](end_span). O tratamento de escolha é a quimioterapia com Cladribina[span_20](start_span)[span_20](end_span)."
+  }
+]
