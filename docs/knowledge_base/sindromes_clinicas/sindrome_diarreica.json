@@ -1,0 +1,117 @@
+[
+  {
+    "id": "colite_pseudomembranosa_clostridium",
+    "nome": "Colite Pseudomembranosa (Clostridioides difficile)",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "uso_recente_antibiotico_clindamicina_quinolona": 4.0, "hospitalizacao_recente": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "diarreia_aquosa_profusa": 35, "dor_abdominal_colica": 25, "febre_leucocitose_acentuada": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["pesquisa_toxina_a_b_ou_pcr_fezes_positivos"],
+      "exclusao_ativa": ["contraindicacao_loperamida_antidiarreicos"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Suspensão do ATB causal e início de Vancomicina oral (1ª escolha) ou Fidaxomicina"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Pesquisa de Toxina A e B nas Fezes", "PCR para C. difficile", "Colonoscopia (Pseudomembranas)"]
+    },
+    "vigneta": "Paciente de 68 anos, internado há 12 dias para tratamento de pneumonia com Ceftriaxone e Clindamicina, evolui com diarreia aquosa profusa (8 a 10 episódios/dia), dor abdominal em cólica e febre (38,6ºC). Hemograma revela leucocitose de 22.000/mm³.",
+    "respostas_esperadas": {
+      "diagnostico": ["colite pseudomembranosa", "clostridium", "clostridioides difficile", "diarreia por clostridium"],
+      "exames": ["toxina nas fezes", "toxina a e b", "pcr fezes", "colonoscopia"],
+      "conduta": ["vancomicina oral", "vancomicina vo", "fidaxomicina", "suspender antibiotico"]
+    },
+    "feedback_tecnico": "A Colite Pseudomembranosa é causada pelo Clostridioides difficile após disbiose induzida pelo uso prévio de antibióticos (como clindamicina, cefalosporinas e quinolonas)[span_9](start_span)[span_9](end_span). O diagnóstico baseia-se na pesquisa de toxinas A/B ou PCR fecal[span_10](start_span)[span_10](end_span). A Vancomicina oral (125 mg 4x/dia) é o tratamento de primeira escolha para episódios iniciais[span_11](start_span)[span_11](end_span). É terminantemente proibido o uso de antidiarreicos (como loperamida) pelo risco de megacólon tóxico e perfuração[span_12](start_span)[span_12](end_span)."
+  },
+  {
+    "id": "doenca_de_crohn",
+    "nome": "Doença de Crohn (Doença Inflamatória Intestinal)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "jovem_20_a_40_anos": 2.0, "tabagismo_fator_risco": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "diarreia_cronica": 30, "dor_fossa_iliaca_direita": 30, "emagrecimento_febre": 25, "fistulas_perianais": 35 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["acometimento_transmural_descontinuo", "granuloma_nao_caseoso"],
+      "exclusao_ativa": ["asca_positivo_panca_negativo"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Indução de remissão com Corticoide/Biológico (Anti-TNF) e manutenção com Imunomodulador"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Colonoscopia com Ileo-Colonoscopia + Biópsia", "Calprotectina Fecal", "Sorologia ASCA"]
+    },
+    "vigneta": "Homem de 26 anos apresenta dor abdominal recorrente em fossa ilíaca direita, diarreia crônica sem sangue visível e perda de 7 kg há 5 meses. Ao exame: presença de plicomas e fístula perianal com drenagem purulenta. Colonoscopia mostra lesões ulceradas entremeadas por mucosa normal ('pedras de calçamento') em íleo terminal e cólon ascendente. Biópsia confirma granulomas não caseosos.",
+    "respostas_esperadas": {
+      "diagnostico": ["doenca de crohn", "crohn", "dii"],
+      "exames": ["colonoscopia", "ileocolonoscopia", "biopsia", "calprotectina", "asca"],
+      "conduta": ["anti-tnf", "infliximabe", "azatioprina", "corticoide", "corticoide para remissao"]
+    },
+    "feedback_tecnico": "A Doença de Crohn é uma DII caracterizada pelo acometimento transmural, descontínuo ('salteado') de qualquer ponto da boca ao ânus, com predileção pelo íleo terminal[span_13](start_span)[span_13](end_span). A presença de fístulas perianais e granulomas não caseosos à histopatologia são marcadores patognomônicos[span_14](start_span)[span_14](end_span). Apresenta sorologia ASCA(+) em 60-70% dos casos[span_15](start_span)[span_15](end_span). O tratamento de formas moderadas a graves envolve Imunobiológicos (Anti-TNF como Infliximabe) associados a imunomoduladores (Azatioprina)[span_16](start_span)[span_16](end_span)."
+  },
+  {
+    "id": "retocolite_ulcerativa_rcu",
+    "nome": "Retocolite Ulcerativa (RCU)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "nao_fumante_ou_ex_fumante": 2.0, "historia_familiar": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "diarreia_com_sangue_mucopus": 40, "tenesmo_urgencia_evacuatoria": 35, "dor_abdominal_baixa": 25, "pioderma_gangrenoso": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["acometimento_continuo_mucosa_reto_colon"],
+      "exclusao_ativa": ["panca_positivo_asca_negativo"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Derivados 5-ASA (Sulfassalazina/Mesalazina) para indução/manutenção e Cirurgia Curativa se refratário"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Retossigmoidoscopia / Colonoscopia + Biópsia", "p-ANCA", "Calprotectina Fecal"]
+    },
+    "vigneta": "Mulher de 31 anos queixa-se de diarreia baixa (pequeno volume e alta frequência) com fezes sanguinolentas e muco há 2 meses, associada a intenso tenesmo retal. Colonoscopia revela mucosa eritematosa, friável, com perda do padrão vascular, pseudopólipos e acometimento contínuo e ascendente a partir do reto até o cólon descendente. Biópsia mostra microabscessos de cripta e inflamação restrita à mucosa.",
+    "respostas_esperadas": {
+      "diagnostico": ["retocolite ulcerativa", "rcu", "retocolite"],
+      "exames": ["colonoscopia", "retossigmoidoscopia", "biopsia", "p-anca"],
+      "conduta": ["mesalazina", "sulfassalazina", "5-asa", "corticoide", "proctocolectomia"]
+    },
+    "feedback_tecnico": "A Retocolite Ulcerativa acomete de forma contínua e ascendente exclusivamente o reto e cólon, com lesão limitada à camada mucosa e submucosa (gerando sangramento retal, muco e tenesmo)[span_17](start_span)[span_17](end_span). Apresenta associação com o anticorpo p-ANCA(+) e a colangite esclerosante primária[span_18](start_span)[span_18](end_span). O tratamento clínico de base são os aminossalicilatos (derivados 5-ASA)[span_19](start_span)[span_19](end_span). A cirurgia de Proctocolectomia Total com Bolsa Ileal (IPAA) é curativa para os casos refratários ou com displasia de alto grau[span_20](start_span)[span_20](end_span)."
+  },
+  {
+    "id": "doenca_celiaca",
+    "nome": "Doença Celíaca (Enteropatia Sensível ao Glúten)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "parentes_primeiro_grau": 2.5, "sindrome_down_ou_turner": 2.0, "deficiencia_de_iga": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "diarreia_cronica_esteatorreia": 35, "anemia_ferropriva_refrataria": 30, "distensao_abdominal_perda_peso": 25, "dermatite_herpetiforme": 35 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["anti_transglutaminase_tecidual_iga_reagente", "atrofia_vilositaria_duodeno"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Dieta isenta de Glúten por toda a vida (exclusão de trigo, centeio e cevada)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Anticorpo Antitransglutaminase Tecidual IgA (tTG-IgA)", "Dosagem de IgA Total", "Endoscopia Digestiva Alta com Biópsia Duodenal"]
+    },
+    "vigneta": "Mulher de 27 anos apresenta quadro de distensão abdominal, diarreia crônica com fezes volumosas e esteatorreia há 1 ano. Refere anemia ferropriva de difícil tratamento refratária a sulfato ferroso oral. Ao exame dermatológico, apresenta vesículas pruriginosas agrupadas em superfícies extensoras dos cotovelos e joelhos (Dermatite Herpetiforme).",
+    "respostas_esperadas": {
+      "diagnostico": ["doenca celiaca", "enteropatia por gluten", "intolerancia ao gluten"],
+      "exames": ["antitransglutaminase", "ttg iga", "biopsia duodenal", "eda com biopsia"],
+      "conduta": ["dieta sem gluten", "excluir gluten", "suspender trigo", "dieta isenta de gluten"]
+    },
+    "feedback_tecnico": "A Doença Celíaca é uma enteropatia autoimune desencadeada pela ingestão de glúten (trigo, centeio, cevada) em indivíduos geneticamente suscetíveis (HLA-DQ2/DQ8)[span_21](start_span)[span_21](end_span). Cursa com síndrome disabsortiva (ferro, cálcio, gorduras)[span_22](start_span)[span_22](end_span). A Dermatite Herpetiforme é a manifestação cutânea patognomônica da doença celíaca[span_23](start_span)[span_23](end_span). O exame sorológico mais acurado é o anticorpo Antitransglutaminase Tecidual IgA (tTG-IgA), seguido de biópsia duodenal com atrofia de vilosidades e hiperplasia de criptas[span_24](start_span)[span_24](end_span). O tratamento consiste na exclusão estrita do glúten da dieta[span_25](start_span)[span_25](end_span)."
+  }
+]
