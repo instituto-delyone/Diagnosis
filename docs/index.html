@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Diagnosis Engine - Arena de Testes</title>
   <style>
+    /* === VARIÁVEIS DE IDENTIDADE VISUAL === */
     :root {
       --navy: #071426;
       --blue: #1f5fae;
@@ -15,154 +16,153 @@
       --card: #ffffff;
       --border: #dce5e8;
       --green: #238b57;
+      --green-soft: #ecf8f1;
       --red: #cf5148;
+      --red-soft: #fdf2f1;
     }
+
+    /* === RESET E BASE === */
+    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: var(--bg);
       color: var(--ink);
       margin: 0;
-      padding: 20px;
+      padding: 40px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 24px;
+      gap: 30px;
     }
+
+    /* === CONTAINERS === */
     .arena-container, .modules-container {
-      max-width: 740px;
+      max-width: 780px;
       width: 100%;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(7, 20, 38, 0.05);
-      box-sizing: border-box;
+      border-radius: 18px;
+      padding: 36px;
+      box-shadow: 0 12px 36px rgba(7, 20, 38, 0.04);
+      transition: all 0.3s ease;
     }
+
+    /* === CABEÇALHO === */
     .header {
       text-align: center;
       margin-bottom: 30px;
-      padding-bottom: 20px;
+      padding-bottom: 24px;
       border-bottom: 1px solid var(--border);
     }
-    .header span {
+    .header .badge {
       font-size: 11px;
       font-weight: 800;
       color: var(--blue);
       background: var(--light-blue);
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: 99px;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
-    .header h1 { margin: 10px 0 5px; color: var(--navy); }
-    .header p { margin: 0; color: var(--muted); font-size: 14px; }
-    
+    .header h1 { margin: 14px 0 8px; color: var(--navy); font-size: 28px; letter-spacing: -0.02em; }
+    .header p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    /* === BOTÕES E INPUTS === */
     .btn {
       background: var(--navy);
-      color: white;
+      color: #fff;
       border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
+      padding: 14px 28px;
+      border-radius: 10px;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
-      transition: 0.2s;
+      transition: all 0.2s ease;
       width: 100%;
+      box-shadow: 0 4px 12px rgba(7, 20, 38, 0.1);
     }
-    .btn:hover { background: var(--blue); }
-    .btn:disabled { background: var(--muted); cursor: not-allowed; }
+    .btn:hover:not(:disabled) { background: var(--blue); transform: translateY(-1px); }
+    .btn:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; box-shadow: none; }
     
-    .case-box {
-      background: #fafafa;
-      border-left: 4px solid var(--blue);
-      padding: 16px;
-      border-radius: 0 8px 8px 0;
-      margin-bottom: 20px;
-      font-size: 15px;
-      line-height: 1.6;
-      display: none;
-    }
-    
-    .interaction-area { display: none; }
-    .question { font-weight: 600; margin-bottom: 10px; color: var(--navy); }
     .input-box {
       width: 100%;
-      padding: 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 14px;
-      margin-bottom: 10px;
-      box-sizing: border-box;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      margin-bottom: 12px;
+      outline: none;
+      transition: border-color 0.2s;
     }
+    .input-box:focus { border-color: var(--blue); }
+
+    /* === ÁREAS DO SIMULADOR === */
+    .case-box {
+      background: #fafbfc;
+      border-left: 4px solid var(--blue);
+      padding: 20px;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 24px;
+      font-size: 16px;
+      line-height: 1.6;
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .interaction-area { display: none; animation: fadeIn 0.4s ease; }
+    .question { font-weight: 700; margin-bottom: 12px; color: var(--navy); font-size: 16px; }
     
-    .log-area {
-      margin-top: 20px;
-      border-top: 1px dashed var(--border);
-      padding-top: 20px;
-      font-size: 13px;
-    }
-    .log-item { margin-bottom: 8px; padding: 10px; border-radius: 6px; }
-    .log-correct { background: #ecf8f1; color: var(--green); border: 1px solid #c9ead8; }
-    .log-incorrect { background: #fdf2f1; color: var(--red); border: 1px solid #fad3d0; }
+    .log-area { margin-top: 24px; font-size: 14px; line-height: 1.5; }
+    .log-item { margin-bottom: 10px; padding: 14px 16px; border-radius: 8px; animation: slideDown 0.3s ease; }
+    .log-correct { background: var(--green-soft); color: var(--green); border: 1px solid #c9ead8; }
+    .log-incorrect { background: var(--red-soft); color: var(--red); border: 1px solid #fad3d0; }
     .log-info { background: #f0f4f8; color: var(--blue); border: 1px solid #d9e6f2; }
     
     .score-board {
       text-align: center;
-      margin-top: 20px;
-      font-size: 24px;
-      font-weight: bold;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--border);
+      font-size: 26px;
+      font-weight: 800;
       color: var(--navy);
       display: none;
+      animation: fadeIn 0.5s ease;
     }
 
-    /* Estilos do Card de Módulos */
+    /* === CARD DE MÓDULOS (O MANIFESTO VISUAL) === */
     .module-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 16px;
       margin-top: 20px;
     }
     .module-card {
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 16px;
+      padding: 18px;
       background: #fafbfc;
+      transition: transform 0.2s;
     }
-    .module-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .module-title {
-      font-weight: 700;
-      color: var(--navy);
-      font-size: 15px;
-    }
-    .badge {
-      font-size: 10px;
-      font-weight: 800;
-      padding: 4px 8px;
-      border-radius: 6px;
-    }
-    .badge.active { background: #ecf8f1; color: var(--green); border: 1px solid #c9ead8; }
-    .badge.empty { background: #f4f7f8; color: var(--muted); border: 1px solid var(--border); }
-    .file-list {
-      margin: 0;
-      padding-left: 18px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-    .file-list li { margin-bottom: 4px; }
+    .module-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.03); }
+    .module-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .module-title { font-weight: 800; color: var(--navy); font-size: 15px; }
+    .status-badge { font-size: 10px; font-weight: 800; padding: 5px 10px; border-radius: 6px; }
+    .status-badge.active { background: var(--green-soft); color: var(--green); border: 1px solid #c9ead8; }
+    .status-badge.empty { background: #f4f7f8; color: var(--muted); border: 1px solid var(--border); }
+    .file-list { margin: 0; padding-left: 20px; font-size: 13px; color: var(--muted); }
+    .file-list li { margin-bottom: 6px; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
 
-<!-- SIMULADOR PRINCIPAL -->
+<!-- SIMULADOR PRINCIPAL (AIGAR ENGINE) -->
 <div class="arena-container">
   <div class="header">
-    <span>AIGAR ENGINE - V0.2 DATA FETCH</span>
+    <span class="badge">AIGAR ENGINE - V1.0 DATA FETCH</span>
     <h1>Simulador de Raciocínio</h1>
-    <p id="status-engine">Conectando ao banco de dados clínico...</p>
+    <p id="status-engine">Estabelecendo conexão neural com o banco de dados clínico...</p>
   </div>
 
   <button id="btn-start" class="btn" onclick="iniciarJogo()" disabled>Aguardando Módulos...</button>
@@ -170,35 +170,43 @@
   <div id="case-display" class="case-box"></div>
 
   <div id="interaction" class="interaction-area">
-    <div id="step-indicator" style="font-size: 11px; color: var(--muted); margin-bottom: 5px; text-transform: uppercase; font-weight: bold;"></div>
+    <div id="step-indicator" style="font-size: 12px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em;"></div>
     <div id="question-text" class="question"></div>
-    <input type="text" id="user-input" class="input-box" placeholder="Digite sua resposta e aperte Enter..." onkeypress="handleEnter(event)">
-    <button class="btn" onclick="processarResposta()" style="background: var(--blue);">Enviar Resposta</button>
+    <input type="text" id="user-input" class="input-box" placeholder="Digite sua conduta e pressione Enter..." onkeypress="handleEnter(event)">
+    <button class="btn" onclick="processarResposta()" style="background: var(--blue);">Enviar Resposta Clínica</button>
   </div>
 
   <div id="log" class="log-area"></div>
   <div id="final-score" class="score-board"></div>
 </div>
 
-<!-- CARD DE MÓDULOS CARREGADOS -->
+<!-- MANIFESTO VISUAL (STATUS DOS JSONS) -->
 <div class="modules-container">
-  <h2 style="margin: 0 0 5px; font-size: 18px; color: var(--navy);">Módulos de Conhecimento</h2>
-  <p style="margin: 0 0 10px; font-size: 13px; color: var(--muted);">Status de integração com os arquivos JSON da knowledge_base.</p>
+  <h2 style="margin: 0 0 6px; font-size: 20px; color: var(--navy); font-weight: 800;">Módulos de Conhecimento</h2>
+  <p style="margin: 0 0 16px; font-size: 14px; color: var(--muted);">Status em tempo real de integração com a knowledge_base do Instituto Delyone.</p>
   
   <div class="module-grid" id="module-grid">
-    <!-- Os cards das matérias serão injetados aqui pelo JavaScript -->
+    <!-- Renderizado pelo JavaScript -->
   </div>
 </div>
 
 <script>
-  // ==========================================
-  // MANIFESTO DO CONHECIMENTO (Ponte de Arquivos)
-  // ==========================================
-  // Aqui você define quais matérias existem e quais arquivos JSON o algoritmo deve procurar.
+  /**
+   * ==========================================
+   * 1. MANIFESTO DO CONHECIMENTO (O GPS)
+   * ==========================================
+   * É aqui que o algoritmo sabe onde buscar os arquivos.
+   * O caminho "../../" volta 2 pastas (saindo de docs/diagnoses/) para achar a knowledge_base.
+   */
   const manifestoConhecimento = {
     "Clínica Médica": {
-      pasta: "../../knowledge_base/sindromes_clinicas/",
-      arquivos: ["ictericia.json"] // Adicione os próximos JSONs aqui
+      pasta: "../../knowledge_base/clinica_medica/",
+      arquivos: [
+        "ictericia.json",
+        "sindrome_metabolica_has.json",
+        "sindrome_metabolica_diabetes.json",
+        "endocrinologia.json"
+      ]
     },
     "Ginecologia e Obstetrícia": {
       pasta: "../../knowledge_base/go/",
@@ -214,11 +222,14 @@
     }
   };
 
+  // Onde os dados dos JSONs serão armazenados após o download.
   let bancoDeDados = [];
 
-  // ==========================================
-  // INICIALIZAÇÃO E FETCH (Engine)
-  // ==========================================
+  /**
+   * ==========================================
+   * 2. MOTOR DE BUSCA (Data Fetcher)
+   * ==========================================
+   */
   async function carregarConhecimento() {
     renderizarPainelModulos();
     let casosCarregados = 0;
@@ -227,19 +238,17 @@
       for (const arquivo of dados.arquivos) {
         const caminhoCompleto = dados.pasta + arquivo;
         try {
-          // Tenta baixar o arquivo JSON do repositório
           const response = await fetch(caminhoCompleto);
           if (response.ok) {
             const casoJson = await response.json();
-            // Para o simulador, assumimos que o JSON tem os campos vigneta, respostas e feedback
-            // Caso o JSON seja puro (molde estrutural), faremos um parse aqui no futuro.
-            bancoDeDados.push(casoJson);
-            casosCarregados++;
+            // Desempacota o array de síndromes do arquivo JSON
+            bancoDeDados.push(...casoJson);
+            casosCarregados += casoJson.length;
           } else {
-            console.warn(`Arquivo não encontrado ainda: ${caminhoCompleto}`);
+            console.warn(`[AIGAR Engine] Arquivo não encontrado ou erro 404: ${caminhoCompleto}`);
           }
         } catch (error) {
-          console.error(`Erro ao carregar ${arquivo}:`, error);
+          console.error(`[AIGAR Engine] Erro de CORS/Rede ao carregar ${arquivo}:`, error);
         }
       }
     }
@@ -248,24 +257,19 @@
     const btnStart = document.getElementById('btn-start');
 
     if (casosCarregados > 0) {
-      statusEl.innerHTML = `<span style="color: var(--green);">✓ Motor operacional. ${casosCarregados} caso(s) sincronizado(s).</span>`;
-      btnStart.innerText = "Gerar Caso Clínico Aleatório";
+      statusEl.innerHTML = `<span style="color: var(--green); font-weight: 600;">✓ Sistema Operacional. ${casosCarregados} patologias ativas no motor bayesiano.</span>`;
+      btnStart.innerText = "Gerar Novo Caso Clínico";
       btnStart.disabled = false;
     } else {
-      // FALLBACK DE TESTE: Se os arquivos JSON não existirem na pasta ainda, carrega 1 caso padrão na memória
-      statusEl.innerHTML = `<span style="color: var(--red);">Nenhum JSON encontrado. Rodando em Modo de Demonstração.</span>`;
+      statusEl.innerHTML = `<span style="color: var(--red); font-weight: 600;">⚠️ Atenção: JSONs não localizados no servidor. Rodando Modo Demonstração.</span>`;
       bancoDeDados.push({
-        id: "demo_colangite",
-        nome: "Colangite Aguda (Demo)",
-        vigneta: "Paciente de 65 anos, com histórico prévio de coledocolitíase. Dá entrada no PS apresentando quadro de icterícia colestática associada a febre com calafrios e dor intensa em hipocôndrio direito. PA: 120x80 mmHg, sem confusão mental.",
-        respostas_esperadas: {
-          diagnostico: ["colangite", "colangite aguda"],
-          exames: ["usg", "ultrassom", "hemograma", "bilirrubinas", "tgo", "tgp"],
-          conduta: ["antibiotico", "antibioticoterapia", "drenagem", "cpre"]
-        },
-        feedback_tecnico: "Demonstração: A Colangite Aguda exige identificação rápida da Tríade de Charcot (Icterícia, Febre e Dor)."
+        id: "demo_falha",
+        nome: "Demonstração (Erro de Leitura)",
+        vigneta: "O sistema não conseguiu ler os arquivos JSON. Certifique-se de que publicou a pasta knowledge_base no GitHub e que o caminho (../../) está correto.",
+        respostas_esperadas: { diagnostico: ["teste"], exames: ["teste"], conduta: ["teste"] },
+        feedback_tecnico: "Modo de demonstração ativado por falha de sincronização."
       });
-      btnStart.innerText = "Testar Caso de Demonstração";
+      btnStart.innerText = "Testar Interface (Demonstração)";
       btnStart.disabled = false;
     }
   }
@@ -277,17 +281,17 @@
     for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
       const temArquivos = dados.arquivos.length > 0;
       const badgeClass = temArquivos ? 'active' : 'empty';
-      const badgeText = temArquivos ? `${dados.arquivos.length} CARREGADO(S)` : 'AGUARDANDO';
+      const badgeText = temArquivos ? `${dados.arquivos.length} ARQUIVO(S)` : 'AGUARDANDO DADOS';
       
       let listaHtml = temArquivos 
         ? `<ul class="file-list">${dados.arquivos.map(arq => `<li>${arq}</li>`).join('')}</ul>`
-        : `<span style="font-size: 12px; color: var(--muted);">Nenhum caso inserido.</span>`;
+        : `<span style="font-size: 13px; color: var(--muted);">Sem conexões estabelecidas.</span>`;
 
       grid.innerHTML += `
         <div class="module-card">
           <div class="module-header">
             <span class="module-title">${materia}</span>
-            <span class="badge ${badgeClass}">${badgeText}</span>
+            <span class="status-badge ${badgeClass}">${badgeText}</span>
           </div>
           ${listaHtml}
         </div>
@@ -295,17 +299,19 @@
     }
   }
 
-  // ==========================================
-  // LÓGICA DO SIMULADOR (Jogo)
-  // ==========================================
+  /**
+   * ==========================================
+   * 3. LÓGICA DO SIMULADOR (Game Loop)
+   * ==========================================
+   */
   let casoAtual = null;
   let etapa = 0; 
   let pontuacao = 0;
   
   const etapasJogo = [
     { label: "PASSO 1: DIAGNÓSTICO", pergunta: "Qual a sua principal hipótese diagnóstica?", chave: "diagnostico", peso: 50 },
-    { label: "PASSO 2: INVESTIGAÇÃO", pergunta: "Cite 1 exame fundamental para solicitar agora:", chave: "exames", peso: 20 },
-    { label: "PASSO 3: INTERVENÇÃO", pergunta: "Qual a principal conduta ou tratamento indicado?", chave: "conduta", peso: 30 }
+    { label: "PASSO 2: INVESTIGAÇÃO", pergunta: "Cite 1 exame fundamental para solicitar neste contexto:", chave: "exames", peso: 20 },
+    { label: "PASSO 3: INTERVENÇÃO", pergunta: "Qual a principal conduta, antídoto ou tratamento indicado?", chave: "conduta", peso: 30 }
   ];
 
   function normalizar(texto) {
@@ -319,7 +325,8 @@
 
     document.getElementById('btn-start').style.display = 'none';
     document.getElementById('case-display').style.display = 'block';
-    document.getElementById('case-display').innerHTML = `<strong>Apresentação Clínica:</strong><br>${casoAtual.vigneta}`;
+    document.getElementById('case-display').innerHTML = `<strong style="color: var(--navy);">Apresentação Clínica:</strong><br>${casoAtual.vigneta}`;
+    
     document.getElementById('interaction').style.display = 'block';
     document.getElementById('log').innerHTML = '';
     document.getElementById('final-score').style.display = 'none';
@@ -349,15 +356,16 @@
     const regraAtual = etapasJogo[etapa];
     const respostasAceitas = casoAtual.respostas_esperadas[regraAtual.chave];
     
+    // Motor de verificação simples de palavras-chave
     let acertou = respostasAceitas.some(resp => inputUsuario.includes(normalizar(resp)));
 
     const logDiv = document.getElementById('log');
     
     if (acertou) {
       pontuacao += regraAtual.peso;
-      logDiv.innerHTML += `<div class="log-item log-correct"><strong>✓ Acertou (${regraAtual.peso} pts):</strong> O sistema validou a resposta para a chave [${regraAtual.chave}].</div>`;
+      logDiv.innerHTML += `<div class="log-item log-correct"><strong>✓ Decisão Acurada (+${regraAtual.peso} pts):</strong> O motor de inferência validou a resposta clínica para [${regraAtual.chave}].</div>`;
     } else {
-      logDiv.innerHTML += `<div class="log-item log-incorrect"><strong>✕ Incorreto:</strong> A conduta não atingiu a probabilidade necessária para [${regraAtual.chave}]. O sistema esperava diretrizes como: ${respostasAceitas[0]}.</div>`;
+      logDiv.innerHTML += `<div class="log-item log-incorrect"><strong>✕ Divergência Lógica:</strong> A conduta informada não atingiu a probabilidade necessária para [${regraAtual.chave}]. O sistema canônico esperava diretrizes como: <em>${respostasAceitas[0]}</em>.</div>`;
     }
 
     etapa++;
@@ -369,16 +377,17 @@
     const logDiv = document.getElementById('log');
     const scoreDiv = document.getElementById('final-score');
 
-    logDiv.innerHTML += `<div class="log-item log-info"><strong>📋 Relatório do Motor Bayesiano:</strong><br>${casoAtual.feedback_tecnico}</div>`;
+    logDiv.innerHTML += `<div class="log-item log-info"><strong>📋 Relatório do Algoritmo Bayesiano:</strong><br>${casoAtual.feedback_tecnico}</div>`;
     
     scoreDiv.style.display = 'block';
     scoreDiv.innerHTML = `Performance Clínica: ${pontuacao}/100<br>
-      <button class="btn" style="margin-top: 20px; font-size: 13px;" onclick="iniciarJogo()">↻ Gerar Novo Caso</button>`;
+      <button class="btn" style="margin-top: 24px; max-width: 250px;" onclick="iniciarJogo()">↻ Simular Novo Caso</button>`;
   }
 
-  // Aciona o download dos JSONs assim que a página carrega
+  // Aciona o motor na inicialização da página
   window.onload = carregarConhecimento;
 </script>
 
 </body>
 </html>
+
