@@ -1,0 +1,117 @@
+[
+  {
+    "id": "consolidacao_pulmonar_semiologia",
+    "nome": "Síndrome de Consolidação Pulmonar (Pneumonia Lobar)",
+    "prevalencia_base": 30,
+    "01_campo_modulador": {
+      "pesos": { "infeccao_respiratoria_aguda": 3.5, "febre_alta_e_tosse": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "fremito_toracovocal_aumentado": 40, "macicez_a_percussao": 35, "estertores_crepitantes_e_sopro_tubario": 35, "pectoriloquia_afonica": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["ftv_aumentado_com_broncofonia_nitida"],
+      "exclusao_ativa": ["ausencia_de_hipertimpanismo"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Antibioticoterapia empírica para germes comunitários (Ceftriaxone + Azitromicina ou Amoxicilina/Clavulanato) e suporte de O2"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Radiografia de Tórax (Infiltrado Alveolar Lobar)", "Hemograma Completo", "Gasometria Arterial"]
+    },
+    "vigneta": "Homem de 48 anos dá entrada com tosse produtiva purulenta, dor torácica ventilatório-dependente em hemitórax direito e febre há 3 dias. Ao exame respiratório do hemitórax direito: expansibilidade diminuída em base, frêmito toracovocal (FTV) aumentado, submacicez à percussão e presença de estertores crepitantes teleinspiratórios associados a pectoriloquia afônica nítida.",
+    "respostas_esperadas": {
+      "diagnostico": ["consolidacao pulmonar", "pneumonia", "pneumonia lobar", "sindrome de consolidacao"],
+      "exames": ["radiografia de torax", "rx de torax", "hemograma", "gasometria"],
+      "conduta": ["ceftriaxone e azitromicina", "amoxicilina", "antibiotico", "antibioticoterapia", "oxigenio"]
+    },
+    "feedback_tecnico": "A Síndrome de Consolidação Pulmonar ocorre pelo preenchimento alveolar por exsudato inflamatório. Como o meio sólido transmite melhor o som, o achado semiológico patognomônico é o FTV AUMENTADO associado a submacicez à percussão, sopro tubário e pectoriloquia afônica (voz sussurrada transmitida nitidamente). O tratamento exige antibioticoterapia direcionada para pneumonia adquirida na comunidade."
+  },
+  {
+    "id": "derrame_pleural_semiologia",
+    "nome": "Síndrome de Derrame Pleural",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "insuficiencia_cardiaca_ou_pneumonia": 3.0, "tuberculose_ou_neoplasia": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "fremito_toracovocal_abolido": 40, "macicez_linh_damoiseau": 40, "murmurio_vesicular_abolido": 35, "trepopneia": 25 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["ftv_diminuido_com_macicez_e_mv_abolido"],
+      "exclusao_ativa": ["egofonia_no_limite_superior_do_derrame"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Toracocentese diagnóstica/aliviadora com critérios de Light para diferenciação exsudato vs. transudato"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Radiografia de Tórax (Hjelm-Laurell)", "Análise do Líquido Pleural (Critérios de Light)", "Ultrassonografia de Tórax"]
+    },
+    "vigneta": "Mulher de 55 anos apresenta dispneia progressiva que piora ao deitar sobre o lado esquerdo saudável (trepopneia). Ao exame físico do hemitórax direito: abolição completa do frêmito toracovocal (FTV) no terço inferior, macicez pétrea à percussão com limite superior parabólico e ausência de ruídos respiratórios (murmúrio vesicular abolido) na mesma região. Na transição superior ouve-se voz com timbre anasalado (egofonia).",
+    "respostas_esperadas": {
+      "diagnostico": ["derrame pleural", "derrame pleural volumoso", "pleurisia"],
+      "exames": ["rx de torax", "toracocentese", "analise do liquido pleural", "criterios de light", "ultrassom de torax"],
+      "conduta": ["toracocentese", "toracocentese aliviadora", "drenagem pleural", "criterios de light"]
+    },
+    "feedback_tecnico": "O Derrame Pleural interpõe líquido entre o parênquima pulmonar e a parede torácica, amortecendo as vibrações acústicas. A tétrade semiológica clássica é: Expansibilidade reduzida + FTV ABOLIDO ou diminuído + MACICEZ à percussão + Murmúrio Vesicular ABOLIDO. No limite superior do líquido comprimido pode surgir egofonia (som anasalado em 'bleat de cabra'). A conduta mandatória é a toracocentese diagnóstica com aplicação dos Critérios de Light."
+  },
+  {
+    "id": "pneumotorax_hipertensivo_semiologia",
+    "nome": "Pneumotórax Hipertensivo (Emergência Torácica)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "trauma_toracico_ou_ventilacao_mecanica": 4.0, "biotipo_longilineo_bolhas_enfisema": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "hipertimpanismo_a_percussao": 40, "murmurio_vesicular_abolido": 40, "desvio_de_traqueia_contralateral": 35, "turgencia_jugular_e_choque": 35 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["hipertimpanismo_com_mv_abolido_e_instabilidade"],
+      "exclusao_ativa": ["contraindicacao_esperar_radiografia_para_tratar"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "EXTREMO",
+      "conduta_emergencial": "Toracocentese descompressiva imediata no 2º EIC na linha hemiclavicular ou 5º EIC na linha axilar anterior, seguida de Drenagem em Selo d'Água"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Diagnóstico Clínico Imediato", "POCUS / Ultrassom Pulmonar (Ponto Pulmonar)", "Radiografia de Tórax pós-drenagem"]
+    },
+    "vigneta": "Jovem de 21 anos vítima de ferimento por arma branca em hemitórax esquerdo evolui subitamente com dispneia extrema, cianose, sudorese fria, PA 70x40 mmHg e turgência jugular patológica. Exame respiratório: hemitórax esquerdo hiperinsuflado e sem expansibilidade, FTV nulo, hipertimpanismo timpânico à percussão, ausência de murmúrio vesicular e desvio da traqueia para o lado direito.",
+    "respostas_esperadas": {
+      "diagnostico": ["pneumotorax hipertensivo", "pneumotorax", "pneumotorax traumatico"],
+      "exames": ["clinico", "pocus", "ultrassom"],
+      "conduta": ["toracocentese descompressiva", "descompressao por agulha", "drenagem toracica", "dreno de torax", "selo d'agua"]
+    },
+    "feedback_tecnico": "O Pneumotórax Hipertensivo é uma emergência clínica com risco iminente de morte por colapso cardiovascular decorrente da restrição ao retorno venoso. A semiologia revela Hipertimpanismo à percussão + Murmúrio Vesicular Abolido + Desvio contralateral da traqueia e turgência jugular. O diagnóstico é puramente CLÍNICO e NÃO se deve aguardar radiografia. A conduta imediata de resgate é a punção descompressiva com agulha calibrosa (toracocentese com cateter 14G) seguida de drenagem tubular fechada em selo d'água."
+  },
+  {
+    "id": "padroes_respiratorios_cheyne_stokes_kussmaul",
+    "nome": "Distúrbios do Padrão Respiratório (Cheyne-Stokes / Kussmaul / Biot)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "cetoacidose_diabetica": 3.5, "avc_ou_ic_grave": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "hiperpneia_crescente_decrescente_com_apneia": 40, "respiracao_profunda_kussmaul": 40, "ritmo_ataxico_biot": 35 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["reconhecimento_do_ritmo_respiratorio_anormal"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Identificação e reversão do distúrbio subjacente (Acidose metabólica, Lesão neurológica ou Otimização da IC)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Gasometria Arterial", "TC de Encéfalo", "Glicemia Capilar e Eletrólitos"]
+    },
+    "vigneta": "Paciente com insuficiência cardíaca avançada e histórico de AVC isquêmico antigo é avaliado na enfermaria. O examinador nota um ciclo respiratório regular caracterizado por movimentos respiratórios progressivamente mais amplos e rápidos (hiperpneia em crescendo), seguidos de redução gradual da amplitude (em decrescendo) que culminam em uma pausa de apneia de 20 segundos antes de reiniciar o ciclo.",
+    "respostas_esperadas": {
+      "diagnostico": ["cheyne stokes", "respiracao de cheyne-stokes", "ritmo de cheyne-stokes"],
+      "exames": ["gasometria", "tc de cranio", "ecocardiograma"],
+      "conduta": ["tratar causa base", "otimizar ic", "oxigenioterapia", "suporte ventilatorio"]
+    },
+    "feedback_tecnico": "O padrão respiratório de Cheyne-Stokes decorre de alteração na sensibilidade dos centros respiratórios ao CO2. Apresenta padrão em crescendo-decrescendo intercalado por apneia central, sendo típico de Insuficiência Cardíaca grave ou lesões neurológicas hemisféricas difusas. Difere da respiração de Kussmaul (hiperventilação profunda e rítmica típica da acidose metabólica/CAD) e da respiração de Biot/atáxica (totalmente irregular, típica de lesão bulbar e hipertensão intracraniana grave)."
+  }
+]
