@@ -334,6 +334,55 @@
     "diagnostico": "A suspeita máxima parte da tríade clássica (febre aguda + intensa rigidez de nuca + redução do nível de consciência). Sela-se o diagnóstico com a punção liquórica que jorrará LCR turvo, com hipoglicorraquia celular densa (> 1000 polimorfonucleares).",
     "tratamento": "Nenhuma punção lombar deve atrasar o uso do Antibiótico. Institui-se empiricamente uma cefalosporina de 3ª geração agressiva cruzando a BHE, sempre ancorada em corticoide (Dexametasona) antes para amortecer a reação imunológica local.",
     "particularidades": "O achado semiológico de lesões cutâneas petequiais no corpo de um paciente confuso não é virose comum, é a marca mortal da Meningococcemia sepse. Ele grita por emergência de UTI isolada e profilaxia imediata de todos ao redor."
+  },
+    "Parada Cardiorrespiratória (Fibrilação Ventricular)": {
+    "etiologia": "Na maioria dos adultos, é a consequência final e letal de uma isquemia miocárdica aguda (infarto) não tratada.",
+    "fisiopatologia": "O miocárdio isquêmico torna-se eletricamente instável, substituindo a contração coordenada por tremores caóticos (fibrilação), o que zera o débito cardíaco imediatamente.",
+    "diagnostico": "Clínico: paciente irresponsivo, sem pulso central palpável (carotídeo/femoral) e em apneia ou gasping (respiração agônica) em até 10 segundos de checagem.",
+    "tratamento": "Suporte Básico de Vida (BLS): compressões torácicas de alta qualidade (100-120/min) ininterruptas e Desfibrilação Precoce (choque). Adrenalina a cada 3-5 minutos no ACLS.",
+    "particularidades": "Cada minuto que passa sem a aplicação do choque do DEA reduz a chance de sobrevivência neurológica intacta em até 10%."
+  },
+  "Artrite Reumatoide": {
+    "etiologia": "Doença autoimune sistêmica crônica, com predisposição genética clara (epítopo compartilhado HLA-DRB1) desencadeada por fatores ambientais, notadamente o tabagismo.",
+    "fisiopatologia": "Ataque imunomediado primariamente direcionado à membrana sinovial das articulações, gerando proliferação inflamatória do tecido ('pannus') que erode a cartilagem e o osso adjacente.",
+    "diagnostico": "Poliartrite simétrica e aditiva (acomete pequenas articulações das mãos/punhos), com rigidez matinal prolongada (>1 hora). Fator Reumatoide e Anti-CCP positivos sagram o laboratório.",
+    "tratamento": "Início rápido com Drogas Modificadoras do Curso da Doença (DMARDs sintéticos, liderados pelo Metotrexato). Corticoides são usados apenas como 'ponte' para alívio agudo da inflamação.",
+    "particularidades": "Diferente da artrose (que ataca a falange distal do dedo), a Artrite Reumatoide tipicamente poupa as interfalangeanas distais."
+  },
+  "Lúpus Eritematoso Sistêmico (LES)": {
+    "etiologia": "Perda severa da tolerância imunológica central e periférica, ocorrendo predominantemente em mulheres jovens em idade fértil (razão de 9:1 em relação aos homens).",
+    "fisiopatologia": "Produção maciça de autoanticorpos (notadamente antinucleares) que formam imunocomplexos circulantes. Estes 'grudam' nos capilares dos rins, pele, articulações e cérebro, ativando o sistema complemento e causando inflamação.",
+    "diagnostico": "Clínico-laboratorial extremamente variável (rash malar em borboleta, fotossensibilidade, artrite, nefrite lúpica). O anticorpo FAN é de triagem (alta sensibilidade), mas o Anti-DNA nativo e o Anti-Sm garantem a especificidade.",
+    "tratamento": "A pedra angular de manutenção e proteção renal contínua é a Hidroxicloroquina. Surtos de atividade de doença exigem pulsoterapia agressiva com corticoides e imunossupressores (Ciclofosfamida).",
+    "particularidades": "Apesar do nome 'sistêmico', a nefrite lúpica é a complicação que tradicionalmente dita o prognóstico e a mortalidade primária da doença."
+  },
+  "Gota (Artrite Microcristalina)": {
+    "etiologia": "Hiperuricemia crônica (níveis de ácido úrico no sangue excessivos) decorrente de baixa excreção renal (90% dos casos) ou superprodução.",
+    "fisiopatologia": "A supersaturação do ácido úrico precipita a formação de cristais de urato monossódico dentro das articulações, deflagrando uma inflamação macrofágica e neutrofílica vulcânica.",
+    "diagnostico": "A clássica 'Podagra': dor, inchaço, calor e rubor intensos, de início súbito (madrugada), pegando a base do dedão do pé (1ª metatarsofalangeana). Artrocentese mostra cristais em forma de agulha com birrefringência negativa sob luz polarizada.",
+    "tratamento": "Crise: AINEs em dose máxima ou Colchicina. Prevenção crônica: Alopurinol (inibidor da xantina oxidase) para reduzir a produção de ácido úrico.",
+    "particularidades": "Jamais inicie o Alopurinol durante a crise aguda de gota, pois a mobilização abrupta dos cristais reativa as células imunes e agrava o ataque. Só se abaixa o ácido úrico no período intercrítico (sem dor)."
+  },
+  "Diarreia Aguda Infecciosa (Gastroenterite)": {
+    "etiologia": "Maioria viral (Norovírus, Rotavírus). Origem bacteriana (Salmonella, Shigella, Campylobacter) tem maior associação a alimentos contaminados e quadros inflamatórios.",
+    "fisiopatologia": "Invasão e destruição do epitélio intestinal (diarreia inflamatória/disentérica) ou elaboração de toxinas que abrem os canais de cloro no enterócito, forçando água para o lúmen (diarreia secretória).",
+    "diagnostico": "Presença de sangue ou muco nas fezes (disenteria) combinada à febre alta sugere origem bacteriana enteroinvasiva.",
+    "tratamento": "Eixo mestre é a reidratação rigorosa (TRO). Uso empírico de antibióticos (Ciprofloxacino/Azitromicina) é restrito a quadros de disenteria febril, idosos ou imunodeprimidos.",
+    "particularidades": "O uso de antidiarreicos que paralisam o trânsito intestinal (como a loperamida) é proscrito na disenteria, pois ao 'trancar' a bactéria no cólon, amplifica-se a toxemia e pode-se precipitar o megacólon tóxico."
+  },
+  "Dengue": {
+    "etiologia": "Infecção pelo vírus da Dengue (Flavivírus, sorotipos 1 a 4) mediada pela picada da fêmea do Aedes aegypti.",
+    "fisiopatologia": "Uma infecção primária causa virose sistêmica. A reinfecção por um sorotipo diferente gera o fenômeno de 'amplificação dependente de anticorpos', onde a resposta imune exagerada leva a perda extrema da barreira capilar, extravasando plasma.",
+    "diagnostico": "Febre aguda acompanhada de mialgia, dor retro-orbital, artralgia (febre quebra-ossos) e exantema. O teste do laço demonstra fragilidade capilar (petéquias). NS1 na fase aguda.",
+    "tratamento": "Monitoramento clínico diário do hematócrito para checar hemoconcentração e hidratação oral (ou venosa) maciça baseada no estadiamento dos grupos A, B, C e D.",
+    "particularidades": "Diferente de outras doenças onde a febre sumir é sinal de cura, na Dengue, a remissão da febre (entre o 3º e o 5º dia) é o período exato onde ocorre o choque hipovolêmico por vazamento capilar plasmático (os 'sinais de alarme')."
+  },
+  "Malária": {
+    "etiologia": "Infecção hemoparasitária causada por protozoários Plasmodium (no Brasil, predominantemente Vivax e Falciparum), transmitidos pelo mosquito Anopheles.",
+    "fisiopatologia": "Os parasitas invadem as hemácias do paciente e se multiplicam assexuadamente até explodi-las de forma sincronizada, espalhando novas cópias e antígenos no sangue a cada 48h ou 72h.",
+    "diagnostico": "Acesso malárico clássico: calafrios violentos, febre altíssima e sudorese profusa (paroxismos intermitentes). Diagnóstico de certeza é a visualização direta da gota espessa (esfregaço de sangue).",
+    "tratamento": "P. vivax é tratado com Cloroquina + Primaquina. P. falciparum (mais grave) usa derivados de Artemisinina (ex: Arteméter + Lumefantrina).",
+    "particularidades": "A Primaquina é a única droga capaz de matar os 'hipnozoítos' (formas dormentes no fígado exclusivas do P. vivax); se o paciente não usá-la, ele terá recaídas da doença meses após a cura inicial."
   }
 
 }
