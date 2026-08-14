@@ -1,0 +1,86 @@
+[
+  {
+    "id": "status_epilepticus",
+    "nome": "Estado de Mal Epiléptico (Status Epilepticus)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "epilepsia_previa": 3.0, "parada_uso_anticonvulsivante": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "crises_subentrantes": 35, "crise_maior_5_minutos": 35, "sem_recuperacao_consciencia": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["crises_continuas_maior_5min"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Suporte de vias aéreas e Benzodiazepínico IV imediato (Diazepam ou Midazolam)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Glicemia Capilar", "Gasometria Arterial", "EEG"]
+    },
+    "vigneta": "Paciente de 28 anos, portador de epilepsia, é trazido pelo SAMU em crise tônico-clínica generalizada contínua há mais de 10 minutos, sem recuperar a consciência entre os paroxismos. Vias aéreas pérvias e glicemia capilar de 110 mg/dL.",
+    "respostas_esperadas": {
+      "diagnostico": ["status epilepticus", "estado de mal epileptico", "crise convulsiva prolongada"],
+      "exames": ["glicemia", "eeg", "eletroencefalograma", "gasometria"],
+      "conduta": ["diazepam", "midazolam", "fenitoina", "hidantal", "benzodiazepinico"]
+    },
+    "feedback_tecnico": "O Estado de Mal Epiléptico é definido por crises contínuas ou repetitivas sem melhora da consciência com duração > 5 minutos[span_4](start_span)[span_4](end_span). A 1ª linha de tratamento é o Benzodiazepínico IV (Diazepam 10mg IV ou Midazolam IM/IV)[span_5](start_span)[span_5](end_span). Se refratário, a 2ª linha é a Fenitoína IV (20mg/kg) ou Valproato/Levetiracetam[span_6](start_span)[span_6](end_span)."
+  },
+  {
+    "id": "epilepsia_ausencia_infantil",
+    "nome": "Epilepsia de Ausência Infantil (Pequeno Mal)",
+    "prevalencia_base": 10,
+    "01_campo_modulador": {
+      "pesos": { "idade_5_a_8_anos": 3.0, "historico_familiar": 1.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "pausas_comportamentais": 35, "olhar_vago": 30, "desempenho_escolar_queda": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["ponta_onda_3hz_eeg"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Tratamento ambulatorial e excelente prognóstico"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Eletroencefalograma (EEG) com hiperventilação"]
+    },
+    "vigneta": "Criança de 6 anos é trazida pela mãe devido a episódios diários repetidos de 'desligamento' e olhar vago que duram poucos segundos, interrompendo subitamente a fala. A professora nota queda no rendimento. No consultório, a hiperventilação provocada desencadeia um dos episódios.",
+    "respostas_esperadas": {
+      "diagnostico": ["ausencia", "epilepsia de ausencia", "pequeno mal"],
+      "exames": ["eeg", "eletroencefalograma"],
+      "conduta": ["etosuximida", "valproato", "acido valproico"]
+    },
+    "feedback_tecnico": "A Epilepsia de Ausência Infantil inicia-se entre 5 e 8 anos e tem como fator desencadeante clássico a hiperventilação[span_7](start_span)[span_7](end_span). O achado patognomônico no EEG é o padrão de complexos ponta-onda de 3Hz[span_8](start_span)[span_8](end_span). O tratamento de escolha é feito com Etosuximida ou Valproato de Sódio, apresentando excelente prognóstico[span_9](start_span)[span_9](end_span)."
+  },
+  {
+    "id": "neurocisticercose_epilepsia",
+    "nome": "Neurocisticercose (Causa Secundária de Epilepsia)",
+    "prevalencia_base": 10,
+    "01_campo_modulador": {
+      "pesos": { "area_endemica": 2.0, "ingestao_ovos_taenia": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "crise_epileptica_focal": 35, "cefaleia": 20, "deficits_focais": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["cistos_com_escolex_ou_calcificacoes"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Antiparasitário + Corticoide para evitar hipertensão intracraniana"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["TC de Crânio", "RM de Crânio (T1 e T2)", "Sorologia/Líquor"]
+    },
+    "vigneta": "Adulto de 34 anos apresenta primeiro episódio de crise epilética focal motora. Nega traumas. A TC de crânio revela múltiplas calcificações parenquimatosas e pequenos cistos com ponto hiperdenso no seu interior (sinal do escólex).",
+    "respostas_esperadas": {
+      "diagnostico": ["neurocisticercose", "cisticercose"],
+      "exames": ["tc", "rm", "tomografia", "ressonancia"],
+      "conduta": ["albendazol", "praziquantel", "corticoide", "dexametasona"]
+    },
+    "feedback_tecnico": "A Neurocisticercose (causada pela ingestão de ovos da Taenia solium) é uma das principais causas secundárias de epilepsia em adultos nos países em desenvolvimento[span_10](start_span)[span_10](end_span). O diagnóstico é de imagem (TC/RM) identificando cistos com escólex ou calcificações[span_11](start_span)[span_11](end_span). O tratamento envolve Albendazol (mínimo de 8 dias) associado obrigatoriamente a Corticoide (Dexametasona) para conter o edema e a hipertensão intracraniana gerados pela morte do parasita[span_12](start_span)[span_12](end_span)."
+  }
+]
