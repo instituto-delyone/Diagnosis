@@ -66,6 +66,34 @@
     .header h1 { margin: 14px 0 8px; color: var(--navy); font-size: 28px; letter-spacing: -0.02em; }
     .header p { margin: 0; color: var(--muted); font-size: 15px; }
 
+    /* === ESTILIZAÇÃO DO GOOGLE TRANSLATE === */
+    .translate-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .goog-te-gadget-simple {
+      background-color: #fafbfc !important;
+      border: 1px solid var(--border) !important;
+      padding: 6px 12px !important;
+      border-radius: 8px !important;
+      font-size: 13px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      cursor: pointer !important;
+    }
+    .goog-te-gadget-simple span {
+      color: var(--navy) !important;
+      font-weight: 600 !important;
+    }
+    .goog-te-banner-frame.skiptranslate {
+      display: none !important;
+    }
+    body {
+      top: 0px !important;
+    }
+
     /* === BOTÕES E INPUTS === */
     .btn {
       background: var(--navy);
@@ -184,6 +212,11 @@
 <!-- SIMULADOR PRINCIPAL (AIGAR ENGINE) -->
 <div class="arena-container">
   <div class="header">
+    <!-- SELETOR DE IDIOMAS DO GOOGLE -->
+    <div class="translate-wrapper">
+      <div id="google_translate_element"></div>
+    </div>
+
     <span class="badge">AIGAR ENGINE - V1.0 DATA FETCH</span>
     <h1>Simulador de Raciocínio</h1>
     <p id="status-engine">Sincronizando com a base de conhecimento do Instituto Delyone...</p>
@@ -217,6 +250,19 @@
 <footer class="footer-note">
   <p>ℹ️ <strong>Nota Técnica:</strong> Esta base de conhecimento foi alimentada com referências e consensos médicos consolidados até 2022. <em>Guidelines</em> e diretrizes clínicas mais recentes serão inseridos gradativamente nas próximas versões do motor.</p>
 </footer>
+
+<!-- SCRIPTS DO GOOGLE TRANSLATE -->
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'pt',
+      includedLanguages: 'en,es,pt',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script>
   /**
@@ -430,4 +476,3 @@
 
 </body>
 </html>
-
