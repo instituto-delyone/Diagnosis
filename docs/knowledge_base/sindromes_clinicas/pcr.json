@@ -1,0 +1,114 @@
+[
+  {
+    "id": "pcr_ritmo_chocavel_fv",
+    "nome": "Parada Cardiorrespiratória - Fibrilação Ventricular (FV)",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "isquemia_miocardica_aguda": 3.5, "choque_eletrico": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "irresponsividade_anoxia": 40, "ausencia_de_pulso_carotideo": 40, "ritmo_caotico_desorganizado_monitor": 40 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["fibrilacao_ventricular_no_monitor"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "EXTREMO",
+      "conduta_emergencial": "Choque imediato (Desfibrilação) + RCP 2 min + Adrenalina a cada 3-5 min (a partir do 2º choque) + Amiodarona (3º choque)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Checagem de Pulso em Central (< 10s)", "Análise do Ritmo no Monitor", "Capnografia Contínua (EtCO2)"]
+    },
+    "vigneta": "Paciente de 58 anos em monitorização na sala vermelha apresenta perda súbita da consciência e respiração agônica (gasping). Ao exame: ausência de pulso central carotídeo. O monitor cardíaco exibe padrão ondulatório totalmente caótico e desorganizado, sem complexos QRS identificáveis (Fibrilação Ventricular).",
+    "respostas_esperadas": {
+      "diagnostico": ["pcr", "fibrilacao ventricular", "fv", "parada cardiorrespiratoria"],
+      "exames": ["monitor", "capnografia", "etco2"],
+      "conduta": ["desfibrilacao", "choque", "rcp", "adrenalina", "amiodarona", "lidocaina"]
+    },
+    "feedback_tecnico": "Trata-se de PCR em ritmo chocável (Fibrilação Ventricular). A prioridade é a Desfibrilação precoce (choque único de 200J bifásico ou 360J monofásico) seguida imediatamente de 2 minutos de RCP. Acesso IV/IO deve ser obtido. A Epinefrina/Adrenalina (1mg EV) é administrada a partir do 2º choque (a cada 3-5 min). Se a FV persistir após o 3º choque, administra-se antiarrítmico (Amiodarona 300mg em bolus ou Lidocaína 1 a 1,5 mg/kg)."
+  },
+  {
+    "id": "pcr_ritmo_chocavel_tvsp",
+    "nome": "Parada Cardiorrespiratória - Taquicardia Ventricular sem Pulso (TVSP)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "infarto_antigo_ou_agudo": 3.0, "disturbio_eletrolitico": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "irresponsividade": 40, "ausencia_de_pulso_carotideo": 40, "qrs_largo_morfologia_regular_monomorfica": 35 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["taquicardia_com_qrs_largo_sem_pulso_palpavel"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "EXTREMO",
+      "conduta_emergencial": "Desfibrilação imediata (não sincronizada) + RCP 2 min + Epinefrina + Antiarrítmico (Amiodarona)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Checagem de Pulso Carotídeo", "Monitorização de Ritmo", "Capnografia Contínua"]
+    },
+    "vigneta": "Homem de 64 anos, com antecedente de cardiopatia isquêmica, perde a consciência subitamente. Não responde ao chamado e não possui pulso femoral ou carotídeo. O monitor mostra ritmo taquicárdico regular com complexos QRS largos (> 120ms) e frequência de 190 bpm.",
+    "respostas_esperadas": {
+      "diagnostico": ["pcr", "taquicardia ventricular sem pulso", "tvsp", "tv sem pulso"],
+      "exames": ["monitor", "capnografia", "etco2"],
+      "conduta": ["desfibrilacao", "choque", "rcp", "adrenalina", "amiodarona"]
+    },
+    "feedback_tecnico": "Na TV sem pulso, o manejo é idêntico ao da FV (ritmo chocável). Deve-se aplicar choque não sincronizado (desfibrilação) imediatamente, retornar às compressões por 2 minutos (30:2 ou contínuas se via aérea avançada) e seguir a alça do ACLS: Epinefrina 1mg após o 2º choque e Amiodarona 300mg (1ª dose) / 150mg (2ª dose) após o 3º choque."
+  },
+  {
+    "id": "pcr_ritmo_nao_chocavel_assistolia",
+    "nome": "Parada Cardiorrespiratória - Assistolia",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "parada_prolongada_nao_presenciada": 3.0, "hipoxia_grave": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "irresponsividade": 40, "ausencia_de_pulso": 40, "linha_reta_isoelétrica_monitor": 40 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["protocolo_cagada_para_confirmacao_linha_reta"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "EXTREMO",
+      "conduta_emergencial": "Epinefrina/Adrenalina 1mg EV imediata + RCP contínua + Investigar e tratar 5Hs e 5Ts (NÃO CHOCAR)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Protocolo CAGADA (Cabos, Aumento do ganho, Derivação)", "Capnografia Contínua (EtCO2 < 10 indica má qualidade)"]
+    },
+    "vigneta": "Paciente em insuficiência respiratória grave evolui para parada cardiorrespiratória. Sem pulso central. O monitor mostra uma linha reta (isoolétrica). A equipe realiza a checagem de segurança (checar Cabos, Aumentar ganho, Mudar derivação - Protocolo CAGADA), confirmando o ritmo.",
+    "respostas_esperadas": {
+      "diagnostico": ["pcr", "assistolia", "ritmo nao chocavel"],
+      "exames": ["capnografia", "etco2", "protocolo cagada"],
+      "conduta": ["adrenalina", "epinefrina", "adrenalina imediata", "rcp", "tratar 5hs e 5ts", "nao chocar"]
+    },
+    "feedback_tecnico": "Assistolia é um ritmo NÃO chocável. A prioridade é iniciar RCP imediatamente e administrar Epinefrina/Adrenalina 1mg EV o mais rápido possível (repetindo a cada 3 a 5 min). O protocolo CAGADA (Cabos, Aumento do ganho, Mudar derivação) deve ser feito para afastar falsa assistolia por erro técnico. Deve-se focar na busca e reversão das causas subjacentes (5 Hs e 5 Ts)."
+  },
+  {
+    "id": "pcr_ritmo_nao_chocavel_aesp",
+    "nome": "Parada Cardiorrespiratória - Atividade Elétrica sem Pulso (AESP)",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "hipovolemia_hemorragia": 3.0, "pneumotorax_expansivo_ou_tep": 3.5, "tamponamento_cardiaco": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "irresponsividade": 40, "ausencia_de_pulso_carotideo": 40, "ritmo_organizado_no_monitor": 35 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["presenca_de_atividade_eletrica_organizada_sem_mecanica_pulsatil"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "EXTREMO",
+      "conduta_emergencial": "Epinefrina/Adrenalina 1mg EV imediata + RCP de alta qualidade + Identificar e tratar a causa específica (5Hs e 5Ts)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Ultrassom Beira-Leito (POCUS)", "Capnografia Contínua (EtCO2)", "Checagem de Pulso Central (< 10s)"]
+    },
+    "vigneta": "Paciente vítima de trauma torácico dá entrada inconsciente e sem pulso central palpável. No monitor, observa-se ritmo sinusal organizado com frequência de 75 bpm, porém sem qualquer correspondência mecânica no paciente (Atividade Elétrica sem Pulso). POCUS mostra colabamento de VCI por choque hipovolêmico.",
+    "respostas_esperadas": {
+      "diagnostico": ["pcr", "aesp", "atividade eletrica sem pulso", "ritmo nao chocavel"],
+      "exames": ["pocus", "ultrassom", "capnografia", "etco2"],
+      "conduta": ["adrenalina", "epinefrina", "rcp", "repor volume", "tratar 5hs e 5ts", "nao chocar"]
+    },
+    "feedback_tecnico": "Na AESP, há atividade elétrica organizada no monitor, mas o coração não gera débito cardíaco/pulso mecânico. NÃO se deve chocar. A conduta exige RCP de alta qualidade, Epinefrina/Adrenalina 1mg EV imediata (a cada 3-5 min) e identificação urgente das causas reversíveis: 5 Hs (Hipovolemia, Hipóxia, H+ acidose, Hipo/Hipercalemia, Hipotermia) e 5 Ts (Tamponamento cardíaco, Tensão pneumotórax, Toxinas, TEP, Trombose coronariana)."
+  }
+]
