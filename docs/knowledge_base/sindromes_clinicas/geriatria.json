@@ -1,0 +1,87 @@
+[
+  {
+    "id": "hidrocefalia_normobarica",
+    "nome": "Hidrocefalia Normobárica (HNM)",
+    "prevalencia_base": 10,
+    "01_campo_modulador": {
+      "pesos": { "idoso": 2.5, "trauma_previo": 1.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "apraxia_da_marcha": 35, "incontinencia_urinaria": 35, "declinio_cognitivo": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["triade_de_hakim_adams"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Avaliçao neurocirúrgica para derivação ventriculoperitoneal"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["TC de Crânio", "RM de Crânio", "Tap Test (Punção Liquórica de Alívio)"]
+    },
+    "vigneta": "Paciente de 74 anos é trazido pela família por alteração progressiva da marcha há 8 meses (marcha magnética/apráxica - 'pés grudados no chão'), associada a episódios recentes de incontinência urinária de urgência e esquecimentos graduais. Exame de imagem evidencia dilatação ventricular desproporcional à atrofia cortical.",
+    "respostas_esperadas": {
+      "diagnostico": ["hidrocefalia normobarica", "hnm", "hidrocefalia de pressao normal"],
+      "exames": ["tc", "rm", "tap test", "puncao de alivio"],
+      "conduta": ["derivacao ventriculoperitoneal", "dvp", "cirurgia"]
+    },
+    "feedback_tecnico": "A Hidrocefalia Normobárica apresenta a Tríade Clássica de Hakim-Adams: Demência + Ataxia da marcha + Incontinência urinária[span_2](start_span)[span_2](end_span). A imagem confirma dilatação ventricular sem atrofia proporcional[span_3](start_span)[span_3](end_span). Trata-se de uma causa reversível de demência, cujo tratamento definitivo é a derivação ventriculoperitoneal (DVP)[span_4](start_span)[span_4](end_span)."
+  },
+  {
+    "id": "doenca_de_parkinson",
+    "nome": "Doença de Parkinson",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "idade_avancada": 2.0, "historia_familiar": 1.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "tremor_de_repouso_assimétrico": 35, "bradicinesia": 30, "rigidez_em_roda_dentada": 25, "hiposmia": 15 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["assimetria_sinais_cardinais"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Tratamento sintomático motor e acompanhamento"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Avaliação Clínica Estruturada", "Resposta à Levodopa"]
+    },
+    "vigneta": "Homem de 68 anos apresenta tremor involuntário em mão direita há 1 ano, presente no repouso (aspecto de 'contar moedas') que melhora ao realizar movimentos voluntários. Nota também lentificação para caminhar e vestir-se (bradicinesia) e rigidez plástica com fenômeno da roda dentada no mesmo membro.",
+    "respostas_esperadas": {
+      "diagnostico": ["parkinson", "doenca de parkinson", "síndrome parkinsoniana"],
+      "exames": ["clinico", "avaliacao clinica", "teste com levodopa"],
+      "conduta": ["levodopa", "pramipexol", "agonista dopaminergico"]
+    },
+    "feedback_tecnico": "A Doença de Parkinson decorre da degeneração da substância negra com redução de dopamina[span_5](start_span)[span_5](end_span). Apresenta como sinais cardinais: Tremor de repouso (assimétrico/unilateral), Bradicinesia, Instabilidade postural e Rigidez plástica (roda dentada)[span_6](start_span)[span_6](end_span). Difere do Tremor Essencial (que é postural/ação e bilateral)[span_7](start_span)[span_7](end_span). O tratamento em idosos utiliza Levodopa (+ inibidor de descarboxilase) ou agonistas dopaminérgicos (como pramipexol)[span_8](start_span)[span_8](end_span)."
+  },
+  {
+    "id": "doenca_de_alzheimer",
+    "nome": "Doença de Alzheimer",
+    "prevalencia_base": 30,
+    "01_campo_modulador": {
+      "pesos": { "idade_maior_65": 3.0, "genetica_apoe4": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "amnesia_anterograda": 35, "desorientacao_espacial": 25, "apraxia": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["descarte_causas_reversiveis"],
+      "exclusao_ativa": ["sem_deficit_focal_agudo"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Planejamento terapêutico e suporte familiar"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Mini-Mental / Avaliação Neuropsicológica", "TSH e Vitamina B12 (Exclusão)", "RM de Crânio"]
+    },
+    "vigneta": "Mulher de 78 anos é trazida pela filha com história de esquecimentos progressivos para fatos recentes (amnésia anterógrada) há 2 anos, repetindo as mesmas perguntas. Recentemente passou a se desorientar em caminhos conhecidos. RM mostra atrofia cortical desproporcional em região hipocampal. Laboratório exclui hipotireoidismo e deficiência de B12.",
+    "respostas_esperadas": {
+      "diagnostico": ["alzheimer", "doenca de alzheimer", "demencia de alzheimer"],
+      "exames": ["mini-mental", "rm", "vitamina b12", "tsh"],
+      "conduta": ["donepezila", "rivastigmina", "galantamina", "memantina", "anticolinesterásico"]
+    },
+    "feedback_tecnico": "O Alzheimer é uma doenca degenerativa cuja morte neuronal inicia-se no hipocampo (região crucial para a memória)[span_9](start_span)[span_9](end_span). Caracteriza-se por acúmulo de placa senil (beta-amiloide) e emaranhados neurofibrilares (proteína tau), levando à deficiência de Acetilcolina[span_10](start_span)[span_10](end_span). O diagnóstico exige a exclusão prévia de causas reversíveis (B12, TSH, VDRL)[span_11](start_span)[span_11](end_span). O tratamento sintomático inicial é feito com Anticolinesterásicos de ação central (Donepezil, Rivastigmina ou Galantamina)[span_12](start_span)[span_12](end_span)."
+  }
+]
