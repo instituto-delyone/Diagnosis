@@ -208,6 +208,132 @@
     "diagnostico": "Clínico e radiológico: dor articular mecânica (piora ao esforço, alivia ao repouso), rigidez matinal curta (< 30 min). Rx com redução do espaço articular, esclerose e osteófitos.",
     "tratamento": "Perda de peso, fisioterapia fortalecedora, uso de analgésicos e AINEs tópicos. Artroplastia (prótese) para dores refratárias e incapacitantes de joelho/quadril.",
     "particularidades": "Mãos com espessamento das articulações distais (Nódulos de Heberden) e proximais (Nódulos de Bouchard) são classicamente associadas ao fenótipo da doença em idosos."
+  },
+    "Anemia Ferropriva": {
+    "etiologia": "Na fase adulta, é quase sinônimo de sangramento crônico (trato gastrointestinal ou fluxo ginecológico). Em crianças, baixa ingestão ou absorção.",
+    "fisiopatologia": "A depleção crônica dos estoques de ferro impede a síntese adequada do grupo heme da hemoglobina, forçando a medula a liberar hemácias pequenas e sem cor.",
+    "diagnostico": "Anemia microcítica e hipocrômica no hemograma. A ferritina sérica < 15-30 ng/mL é o exame mais precoce e específico para confirmar a falta de estoque.",
+    "tratamento": "Reposição de sulfato ferroso via oral, idealmente em jejum ou associado a vitamina C. A investigação da fonte do sangramento (EDA e Colonoscopia) é mandatória no adulto.",
+    "particularidades": "Sinais bizarros como a pica (desejo incontrolável de comer gelo, giz ou terra) e a coiloníquia (unhas em formato de colher) são indicativos clássicos de ferropenia severa."
+  },
+  "Anemia Falciforme": {
+    "etiologia": "Doença autossômica recessiva originada por uma mutação pontual no gene da beta-globina, substituindo o ácido glutâmico por valina (HbS).",
+    "fisiopatologia": "Em situações de hipóxia, desidratação ou acidose, a hemoglobina S polimeriza, alterando a arquitetura da hemácia para formato de foice. Isso causa obstrução vascular dolorosa e hemólise precoce.",
+    "diagnostico": "História de crises de dor óssea, icterícia leve crônica e dactilite na infância. A eletroforese de hemoglobina sela o diagnóstico.",
+    "tratamento": "Durante crises álgicas: hidratação generosa e analgesia com opioides. Cronicamente: Hidroxiureia (induz a medula a produzir Hb fetal protetora) e ácido fólico contínuo.",
+    "particularidades": "Os infartos esplênicos de repetição levam à autoesplenectomia (perda de função do baço) logo na infância, tornando a vacinação contra pneumococo e meningococo uma prioridade vital."
+  },
+  "Leucemia Linfoide Aguda (LLA)": {
+    "etiologia": "Neoplasia maligna de proliferação rápida das células precursoras linfoides (linfoblastos). É o câncer mais comum da pediatria.",
+    "fisiopatologia": "Ocorre um bloqueio de maturação, e a medula óssea é sufocada por um enxame de linfoblastos disfuncionais, expulsando a produção de hemácias, plaquetas e leucócitos normais.",
+    "diagnostico": "Pacientes com febre persistente, palidez, sangramentos e dores ósseas intensas. Confirmação exige biópsia de medula óssea evidenciando infiltração superior a 20% de blastos.",
+    "tratamento": "Protocolos complexos de poliquimioterapia sistêmica e profilaxia rotineira do SNC (quimioterapia intratecal), dado o alto risco de invasão meníngea.",
+    "particularidades": "Apesar do comportamento hiperagressivo, a oncologia moderna transformou a LLA infantil em uma das neoplasias mais curáveis do mundo, com taxas de remissão acima de 80%."
+  },
+
+  "Púrpura Trombocitopênica Imune (PTI)": {
+    "etiologia": "Distúrbio autoimune isolado das plaquetas, frequentemente desencadeado (semanas antes) por uma infecção viral trivial, especialmente em crianças.",
+    "fisiopatologia": "O baço produz autoanticorpos (IgG) que revestem as glicoproteínas das plaquetas. Os macrófagos esplênicos devoram essas plaquetas marcadas, gerando plaquetopenia severa aguda.",
+    "diagnostico": "É puramente um diagnóstico de exclusão. Presença de petéquias e sangramento mucoso (gengiva, epistaxe) com hemograma normal em tudo, exceto por plaquetas muito baixas (frequentemente < 20.000).",
+    "tratamento": "Muitas vezes expectante em crianças. Se sangramento ativo ou risco hemorrágico, usa-se prednisona ou Imunoglobulina venosa (IgIV). A esplenectomia é reservada para refratários.",
+    "particularidades": "Se um paciente apresenta plaquetopenia mas possui o baço palpável no exame físico, afaste a PTI da sua mente. O baço da PTI destrói plaquetas, mas não costuma crescer clinicamente."
+  },
+  "Coagulação Intravascular Disseminada (CIVD)": {
+    "etiologia": "Jamais ocorre do nada. É sempre a resposta catastrófica a uma doença de base maciça (sepse bacteriana grave, choque no politrauma, descolamento prematuro de placenta ou neoplasias avançadas).",
+    "fisiopatologia": "Ocorre liberação maciça de fator tecidual no sangue, que deflagra a cascata de coagulação inteira. Forma-se um mar de microtrombos que entopem os órgãos e exaurem todos os fatores de coagulação e plaquetas.",
+    "diagnostico": "Trombocitopenia + prolongamento do TAP e do TTPA + D-dímero nas alturas e fibrinogênio esgotado. Esfregaço periférico evidencia hemácias fragmentadas (esquizócitos).",
+    "tratamento": "O único tratamento real é desligar o motor da doença (ex: antibióticos para a sepse ou esvaziamento uterino na obstetrícia). Transfusão de plasma e crioprecipitado se houver sangramento com risco de morte.",
+    "particularidades": "É o maior paradoxo da medicina de urgência: a cascata de coagulação é tão violentamente ativada que o paciente morre por exsanguinação difusa através de sítios de punção venosa."
+  },
+
+  "Síndrome Retroviral Aguda (Infecção Primária pelo HIV)": {
+    "etiologia": "Inoculação e replicação maciça do HIV no tecido linfoide nas primeiras 2 a 4 semanas após a infecção sexual ou parenteral.",
+    "fisiopatologia": "Antes da resposta imune adaptativa se organizar, o vírus tem um pico explosivo de replicação (viremia nas alturas), causando a destruição das células T-CD4+ locais e resposta citocinérgica sistêmica.",
+    "diagnostico": "Simula perfeitamente uma mononucleose (febre, faringite, mialgia, linfadenopatia e rash maculopapular no tronco). O RNA-HIV (carga viral) já estará alto, mas os testes rápidos de anticorpos (sorologia) podem estar falsamente negativos.",
+    "tratamento": "Iniciar o mais precocemente possível a Terapia Antirretroviral (TARV) para 'abortar' a replicação precoce, proteger o reservatório de memória CD4 e quebrar a cadeia de transmissão.",
+    "particularidades": "A maioria dos pacientes que procuram o PS achando ser uma virose estacional qualquer está, na verdade, na janela crucial de intervenção do HIV. A história epidemiológica muda a hipótese."
+  },
+  "Pneumocistose (Pneumonia por Pneumocystis jirovecii)": {
+    "etiologia": "Infecção fúngica oportunista emblemática da fase AIDS, ativando-se classicamente quando os linfócitos T-CD4 caem para menos de 200 céls/mm³.",
+    "fisiopatologia": "O fungo preenche os espaços alveolares com um material espumoso denso, bloqueando fisicamente a membrana alveolocapilar, gerando hipoxemia silenciosa e progressiva.",
+    "diagnostico": "Quadro subagudo (semanas) de dispneia, tosse seca incômoda e febre leve. A ausculta pulmonar costuma ser enganosamente normal. O RX ou TC mostram infiltrado intersticial bilateral tipo 'vidro fosco'.",
+    "tratamento": "Sulfametoxazol-Trimetoprima (Bactrim) em altas doses por 21 dias. Adiciona-se corticoide sistematicamente se houver hipoxemia relevante (PaO2 < 70 mmHg) para evitar piora da inflamação após lise do fungo.",
+    "particularidades": "Uma gasometria arterial mostrando alcalose respiratória severa combinada com uma ausculta pulmonar "limpa" em paciente imunodeprimido é Pneumocistose até prova em contrário."
+  },
+  "Neurotoxoplasmose": {
+    "etiologia": "Reativação de cistos de Toxoplasma gondii quiescentes no sistema nervoso central em pacientes gravemente imunossuprimidos (CD4 < 100).",
+    "fisiopatologia": "O parasita volta à atividade lítica destruindo o parênquima encefálico, gerando focos de necrose focal (abscessos) com edema cerebral adjacente.",
+    "diagnostico": "Sintomas de neuroinfecção focal: cefaleia progressiva, hemiparesia e convulsões. TC ou RM de crânio mostram lesões anelares múltiplas ('ring-enhancing lesions') preferencialmente em gânglios da base.",
+    "tratamento": "Tríade padrão: Sulfadiazina + Pirimetamina + Ácido Folínico. Inicia-se de forma empírica assim que a imagem for compatível. O paciente deve apresentar melhora clínica/radiológica em 1 a 2 semanas.",
+    "particularidades": "É a causa isolada mais comum de lesão expansiva no SNC em doentes de AIDS. Se o paciente não melhorar após 14 dias de medicação, a biópsia para descartar Linfoma Primário do SNC é obrigatória."
+  },
+
+  "Hepatite B Aguda": {
+    "etiologia": "Infecção pelo VHB (vírus DNA) via fluidos corporais infectados (via sexual, materno-infantil ou percutânea).",
+    "fisiopatologia": "A destruição do fígado não ocorre pela replicação do vírus em si, mas pela exaltação dos linfócitos T citotóxicos do próprio paciente tentando erradicar os hepatócitos infectados.",
+    "diagnostico": "Marcadores sorológicos: O HBsAg é o primeiro a positivar. O Anti-HBc IgM confirma a fase aguda. TGO/TGP encontram-se altíssimas (> 10x o limite), com icterícia e hepatomegalia dolorosa.",
+    "tratamento": "Apenas suporte e acompanhamento laboratorial, visto que a imensa maioria dos adultos (> 95%) cura a infecção sozinho e gera memória imune. Antivirais ficam reservados para as hepatites fulminantes.",
+    "particularidades": "Um paciente que comparece com quadro agudo severo de hepatite paradoxalmente tem menor risco de cronificar, porque demonstra que o seu sistema imunológico está respondendo com força total."
+  },
+  "Coledocolitíase": {
+    "etiologia": "Deslizamento de um cálculo formado na vesícula biliar (colelitíase) que agora se encontra impactado no Ducto Colédoco.",
+    "fisiopatologia": "A 'pedra' entope a via de saída principal do fígado. A bile, rica em bilirrubina conjugada (direta), reflui para o sangue e é filtrada pelo rim, escurecendo a urina e empalidecendo as fezes.",
+    "diagnostico": "Aparecimento de Icterícia associada a colúria (urina Coca-Cola) e acolia fecal (fezes brancas). Enzimas canaliculares (Fosfatase Alcalina e GGT) estouram. O Ultrassom pode mostrar a via biliar estourada/dilatada (> 6mm).",
+    "tratamento": "Extração mecânica do cálculo por endoscopia digestiva com CPRE, seguida da remoção preventiva da vesícula biliar em um segundo tempo.",
+    "particularidades": "Se a essa icterícia somarem-se febre com calafrios, a situação muda radicalmente: há bactérias proliferando no colédoco estagnado (Colangite), e o paciente pode evoluir para choque séptico em horas."
+  },
+
+  "Linfoma de Hodgkin": {
+    "etiologia": "Neoplasia linfoide monoclonal de células B, com fortíssima associação epifenomenal à infecção passada pelo vírus Epstein-Barr (EBV). Afeta classicamente adultos jovens (20-30 anos).",
+    "fisiopatologia": "A marca registrada é o achado espalhado da célula multinucleada de Reed-Sternberg, que recruta uma tempestade de citocinas inflamatórias, formando uma massa linfonodal fibrosa ao redor dela.",
+    "diagnostico": "O paciente nota um linfonodo indolor, móvel ou 'borrachudo', na região cervical supraclavicular ou mediastinal. É preciso extirpar (biópsia excisional) o gânglio inteiro para análise imuno-histoquímica.",
+    "tratamento": "O esquema ouro é a quimioterapia ABVD (Adriamicina, Bleomicina, Vimblastina e Dacarbazina). Radioterapia de consolidação a depender da massa envolvida.",
+    "particularidades": "Pacientes ocasionalmente referem a bizarra 'dor linfonodal induzida por álcool' e sintomas inflamatórios B como sudorese noturna intensa que encharca a cama."
+  },
+  "Mononucleose Infecciosa": {
+    "etiologia": "Primoinfecção pelo Vírus Epstein-Barr (EBV), contraída predominantemente na adolescência pelo contato direto de saliva ('doença do beijo').",
+    "fisiopatologia": "A replicação no epitélio da faringe e nos linfócitos B instiga a ativação maciça de linfócitos T reativos (células atípicas), promovendo uma hiperplasia reticuloendotelial formidável (linfonodos, baço e fígado aumentados).",
+    "diagnostico": "Tríade clínica: Faringite purulenta exsudativa + Linfonodomegalia difusa + Febre persistente. O hemograma grita com linfocitose atípica. Pesquisa de anticorpos heterófilos positiva (Monoteste).",
+    "tratamento": "Doença autolimitada; repouso e hidratação. Analgésicos/AINEs para sintomas. Jamais usar Amoxicilina para dor de garganta nesse quadro, pois gerará um 'rash' tóxico dramático em 90% dos casos.",
+    "particularidades": "O repouso absoluto não é frescura: devido à rápida esplenomegalia, pequenos traumas abdominais em jogos esportivos podem causar ruptura espontânea fatal do baço nas primeiras semanas."
+  },
+
+  "Acidente Botrópico (Jararaca)": {
+    "etiologia": "Envenenamento provocado por serpentes do gênero Bothrops, representando quase 90% dos acidentes ofídicos em território brasileiro.",
+    "fisiopatologia": "O veneno funciona como uma 'bomba enzimática'. Ele dissolve a barreira endotelial causando edema gigantesco, paralisa plaquetas e consome vorazmente os fatores de coagulação (gerando coagulopatia severa).",
+    "diagnostico": "Dor fulminante na perna/pé da picada, formação de bolhas/necrose aguda e sangramentos à distância (gengivorragia). Tempo de Coagulação (TC) prolongado ou sangue incoagulável.",
+    "tratamento": "Administração exclusiva do Soro Antibotrópico via intravenosa (quantidade de ampolas definida pela gravidade local + alteração sistêmica). Acompanha hidratação cristaloide vigorosa.",
+    "particularidades": "Um erro gravíssimo pré-hospitalar é fazer torniquetes. O torniquete prende as enzimas destrutivas no membro, garantindo a necrose isquêmica e amputação da perna do paciente."
+  },
+
+  "Lesão Renal Aguda (LRA) Pré-Renal": {
+    "etiologia": "Queda aguda da perfusão do órgão, quer seja por desidratação (hipovolemia) ou incapacidade cardíaca de bombear sangue (IC congestiva grave).",
+    "fisiopatologia": "Os rins são inteligentes: ao sentirem pouca pressão arterial, fecham suas arteríolas e tentam reabsorver toda a água e sódio possíveis na tentativa de repor a volemia do corpo humano.",
+    "diagnostico": "Ureia e Creatinina subindo no sangue enquanto a urina se torna escassa e muito concentrada (Osmolaridade alta > 500). Um clássico é a Fração de Excreção de Sódio urinário (FeNa) menor que 1%.",
+    "tratamento": "O único alvo é resgatar a pressão capilar. Hidratação salina maciça se houver perdas (ex: diarreia), ou ajuste da bomba cardíaca se houver ICC.",
+    "particularidades": "O dano aqui é reversível se tratado em até 48-72h. Porém, se a 'estiagem' durar muito, as células do túbulo renal morrem asfixiadas, convertendo o quadro para a catastrófica Necrose Tubular Aguda."
+  },
+  "Doença Renal Crônica (DRC)": {
+    "etiologia": "Sequela final das grandes epidemias globais: Diabetes Mellitus agindo como veneno microvascular e a Hipertensão Arterial Sistêmica esmagando o glomérulo por décadas.",
+    "fisiopatologia": "A morte progressiva de néfrons transfere o peso da filtração do corpo para as poucas unidades sobreviventes (teoria do hiperfluxo). Estas logo entram em colapso e esclerose (cicatrização) pela sobrecarga.",
+    "diagnostico": "A queda da Taxa de Filtração Glomerular (TFG) estimada pela fórmula CKD-EPI abaixo de 60 mL/min, acompanhada comumente da proteinúria flagrante no EAS de rotina, por mais de 3 meses.",
+    "tratamento": "A pedra angular da proteção renal hoje passa pelo uso de iECA/BRA associado a inibidores do SGLT2 (Gliflozinas), bloqueando a sobrepressão glomerular e reduzindo o consumo de energia renal.",
+    "particularidades": "Os rins são as fábricas de Eritropoetina e moduladores da vitamina D. Portanto, a anemia refratária com cálcio bagunçado e osso frágil (hiperparatireoidismo secundário) gritam para doença avançada na enfermaria."
+  },
+  
+  "Acidente Vascular Cerebral Isquêmico (AVCi)": {
+    "etiologia": "Oclusão aguda e severa de artérias cerebrais que irrigam áreas vitais. A origem é predominantemente trombótica local ou embolia à distância (vinda de uma Fibrilação Atrial do coração).",
+    "fisiopatologia": "A rolha oclui o vaso e 'apaga' a região central irrigada (o core isquêmico), que necrosa em minutos. A região circular de resgate imediato chama-se área de penumbra isquêmica.",
+    "diagnostico": "Todo o raciocínio é clínico e por imagem de exclusão primária: o aparecimento do déficit motor unilateral subitâneo exige TC de crânio apenas para comprovar que não há sangramento! O cérebro sem sangue não aparece na TC das primeiras horas.",
+    "tratamento": "Recanalização o mais rápido possível por injeção intravenosa de trombolíticos (ex: Alteplase - rtPA) para dissolver o coágulo até 4,5h do início dos sintomas.",
+    "particularidades": "No ambiente da emergência, abaixar intencionalmente a pressão arterial de um paciente com AVCi em curso é um homicídio culposo metabólico, pois desmorona a pouca perfusão que resta mantendo viva a área de penumbra cerebral."
+  },
+  "Meningite Bacteriana Aguda": {
+    "etiologia": "Invasão das leptomeninges (Pia-máter e Aracnoide) por bactérias disseminadas pelo sangue. Em adultos comunitários é dominada pelo Pneumococo (Streptococcus pneumoniae).",
+    "fisiopatologia": "A multiplicação bacteriana veloz num ambiente livre de leucócitos de defesa e repleto de nutrientes (líquor) gera um exsudato purulento violento e uma inflamação que esmaga as estruturas cerebrais com edema citotóxico intenso.",
+    "diagnostico": "A suspeita máxima parte da tríade clássica (febre aguda + intensa rigidez de nuca + redução do nível de consciência). Sela-se o diagnóstico com a punção liquórica que jorrará LCR turvo, com hipoglicorraquia celular densa (> 1000 polimorfonucleares).",
+    "tratamento": "Nenhuma punção lombar deve atrasar o uso do Antibiótico. Institui-se empiricamente uma cefalosporina de 3ª geração agressiva cruzando a BHE, sempre ancorada em corticoide (Dexametasona) antes para amortecer a reação imunológica local.",
+    "particularidades": "O achado semiológico de lesões cutâneas petequiais no corpo de um paciente confuso não é virose comum, é a marca mortal da Meningococcemia sepse. Ele grita por emergência de UTI isolada e profilaxia imediata de todos ao redor."
   }
 
 }
