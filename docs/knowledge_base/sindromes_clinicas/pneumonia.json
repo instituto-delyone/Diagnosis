@@ -1,0 +1,86 @@
+[
+  {
+    "id": "pac_grave_uti",
+    "nome": "Pneumonia Adquirida na Comunidade (PAC Grave)",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "idade_maior_65": 2.0, "comorbidades": 1.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "febre": 20, "tosse_secretiva": 20, "crepitacoes": 20, "confusao_mental": 30, "taquipneia": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["infiltrado_pulmonar"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Internação em UTI (CURB-65 >= 3)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Raio-X de Tórax", "Ureia", "Escarro e Hemocultura"]
+    },
+    "vigneta": "Paciente de 68 anos trazido ao PS por familiares devido a febre, tosse produtiva e confusão mental iniciada há 24h. Sinais vitais: FR 32 irpm, PA 100x60 mmHg. Exames mostram Ureia de 55 mg/dL. RX de tórax evidencia infiltrado pulmonar novo.",
+    "respostas_esperadas": {
+      "diagnostico": ["pac", "pneumonia", "pneumonia adquirida na comunidade"],
+      "exames": ["curb-65", "curb", "raio-x", "rx", "hemocultura"],
+      "conduta": ["uti", "internacao em uti", "macrolideo", "quinolona respiratoria"]
+    },
+    "feedback_tecnico": "O diagnóstico de pneumonia é clínico-radiológico (queda do estado geral, febre, tosse, crepitações e infiltrado)[span_0](start_span)[span_0](end_span). O paciente apresenta CURB-65 = 4 (Confusão, Ureia >= 43, FR >= 30, Idade >= 65)[span_1](start_span)[span_1](end_span). Escores >= 3 indicam internação em UTI[span_2](start_span)[span_2](end_span). O tratamento guiado para UTI geralmente envolve Macrolídeo ou Quinolona respiratória[span_3](start_span)[span_3](end_span)."
+  },
+  {
+    "id": "empiema_pleural",
+    "nome": "Derrame Pleural Complicado (Empiema)",
+    "prevalencia_base": 10,
+    "01_campo_modulador": {
+      "pesos": { "pneumonia_previa": 3.0, "atraso_terapeutico": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "dor_pleuritica": 20, "macicez_percussao": 20, "febre_persistente": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["ph_menor_7_2", "glicose_menor_60"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Drenagem torácica imediata"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Toracocentese", "Critérios de Light", "Gram do Líquido Pleural"]
+    },
+    "vigneta": "Paciente internado por PAC evolui no 4º dia com piora clínica, febre e opacidade em base direita no RX. Realizada toracocentese diagnóstica que mostra líquido pleural com Relação Proteína Pleural/Sérica > 0,5, pH de 7.1, Glicose de 40 mg/dL e LDH > 1000.",
+    "respostas_esperadas": {
+      "diagnostico": ["empiema", "derrame complicado", "derrame pleural complicado", "exsudato"],
+      "exames": ["criterios de light", "light", "ph", "glicose", "ldh", "toracocentese"],
+      "conduta": ["drenagem", "drenagem toracica", "dreno"]
+    },
+    "feedback_tecnico": "Pelos Critérios de Light, o aumento de proteínas e LDH caracteriza um exsudato[span_4](start_span)[span_4](end_span). Um derrame é considerado complicado (empiema) com indicação obrigatória de drenagem se apresentar: pH < 7,2, Glicose < 60, LDH > 1000 ou presença de pus/bactérias no Gram[span_5](start_span)[span_5](end_span)."
+  },
+  {
+    "id": "pneumonia_nosocomial_pavm",
+    "nome": "Pneumonia Nosocomial (PAVM)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "intubacao_maior_48h": 4.0, "internacao_prolongada": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "febre_nova": 30, "secrecao_purulenta_tubo": 40, "piora_oxigenacao": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["infiltrado_novo", "intubacao_previa"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Antibioticoterapia de amplo espectro (Cobertura Pseudomonas e MRSA)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Cultura de Aspirado Traqueal", "Hemocultura"]
+    },
+    "vigneta": "Paciente intubado em ventilação mecânica há 5 dias na UTI. Apresenta novo pico febril, aumento da secreção traqueal purulenta e necessidade de elevação da FiO2. Radiografia de hoje mostra novo infiltrado em lobo inferior direito.",
+    "respostas_esperadas": {
+      "diagnostico": ["pavm", "pneumonia nosocomial", "pneumonia associada a ventilacao"],
+      "exames": ["cultura", "aspirado traqueal", "rx", "radiografia"],
+      "conduta": ["cefepime", "piperacilina", "tazobactam", "meropenem", "vancomicina", "linezolida", "pseudomonas", "mrsa"]
+    },
+    "feedback_tecnico": "A infecção ocorreu >= 48h após a intubação, configurando Pneumonia Associada à Ventilação Mecânica (PAVM)[span_6](start_span)[span_6](end_span). O esquema empírico deve cobrir Gram-negativos como Pseudomonas aeruginosa (utilizando Ceftazidima/Cefepime, Piperacilina+Tazobactam ou Meropenem/Imipenem) e considerar cobertura para MRSA com Vancomicina ou Linezolida[span_7](start_span)[span_7](end_span)."
+  }
+]
