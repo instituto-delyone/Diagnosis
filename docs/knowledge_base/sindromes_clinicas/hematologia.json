@@ -1,0 +1,174 @@
+[
+  {
+    "id": "anemia_ferropriva",
+    "nome": "Anemia Ferropriva (Carencial)",
+    "prevalencia_base": 30,
+    "01_campo_modulador": {
+      "pesos": { "perda_sanguinea_gastrointestinal": 3.0, "hipermenorreia": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "anemia_microcitica_hipocromica": 35, "rdw_elevado_anisocitose": 30, "pica_pagofagia": 20, "cheilite_angular_glossite": 15 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["ferritina_serica_baixa"],
+      "exclusao_ativa": ["reticulocitopenia_inicial"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Suplementação de Sulfato Ferroso via oral e investigação da causa subjacente (Colonoscopia/EDA se > 50 anos)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Hemograma Completo", "Ferritina Sérica", "Saturação de Transferrina", "TIBC"]
+    },
+    "vigneta": "Homem de 58 anos refere fadiga, palidez e astenia há 4 meses. Nega sangramentos visíveis, mas relata vontade incomum de mastigar gelo (pagofagia). Hemograma: Hemoglobina 8,1 g/dL, VCM 68 fL (microcitose), HCM 22 pg (hipocromia) e RDW de 18,5% (anisocitose). Ferritina sérica de 8 ng/mL.",
+    "respostas_esperadas": {
+      "diagnostico": ["anemia ferropriva", "ferropriva", "deficiencia de ferro"],
+      "exames": ["ferritina", "saturacao de transferrina", "colonoscopia", "eda"],
+      "conduta": ["sulfato ferroso", "ferro oral", "reposicao de ferro", "investigar sangramento"]
+    },
+    "feedback_tecnico": "A Anemia Ferropriva é a anemia microcítica e hipocrômica mais comum, caracterizada por RDW elevado (anisocitose). A dosagem de Ferritina Sérica baixa (< 30 ng/mL) é o marcador mais sensível e específico para depleção de estoques de ferro. Em homens ou mulheres pós-menopausa, é obrigatória a investigação do trato gastrointestinal com Endoscopia e Colonoscopia para afastar neoplasias ocultas."
+  },
+  {
+    "id": "anemia_megaloblastica_b12",
+    "nome": "Anemia Megaloblástica por Deficiência de Vitamina B12",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "gastrectomia_previa_ou_vegetariano": 3.0, "doenca_ileal_ou_crohn": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "anemia_macrocitica_vcm_alto": 35, "neutrofilos_hipersegmentados": 35, "sintomas_neurologicos_parestesia": 30, "glossite_lingua_careca": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["acido_metilmalonico_e_homocisteina_elevados"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Reposição parenteral de Vitamina B12 (Cianocobalamina IM) urgente para evitar sequela neurológica irreversível"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Dosagem de Vitamina B12 Sérica", "Dosagem de Ácido Metilmalônico", "Hemograma (Esfregaço Sangue Periférico)"]
+    },
+    "vigneta": "Mulher de 64 anos, com antecedentes de hipotireoidismo, queixa-se de fraqueza, queimação na língua (glossite) e dormente constante nas mãos e pés (parestesia), associada a instabilidade na marcha há 3 meses. Hemograma: Hb 7,5 g/dL, VCM 118 fL (macrocitose). O esfregaço de sangue periférico demonstra neutrófilos hipersegmentados (pleocitose).",
+    "respostas_esperadas": {
+      "diagnostico": ["anemia megaloblastica", "deficiencia de b12", "deficiencia de vitamina b12", "anemia perniciosa"],
+      "exames": ["vitamina b12", "acido metilmalonico", "homocisteina", "esfregaco"],
+      "conduta": ["vitamina b12", "cianocobalamina", "b12 im", "reposicao de b12"]
+    },
+    "feedback_tecnico": "A deficiência de Vitamina B12 causa um defeito na síntese de DNA resultando em assincronismo núcleo-citoplasma (Anemia Megaloblástica). Caracteriza-se por VCM muito elevado (> 110 fL) e presença de neutrófilos hipersegmentados no sangue periférico. Diferente da deficiência de folato, a falta de B12 causa acometimento neurológico (desmielinização dos cordões posteriores da medula) e elevação isolada do Ácido Metilmalônico."
+  },
+  {
+    "id": "anemia_falciforme_crise_vaso_oclusiva",
+    "nome": "Anemia Falciforme (Crise Vaso-Oclusiva / Síndrome Torácica Aguda)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "homozigoto_hbs_conhecido": 4.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "crise_algica_ossea": 35, "infiltrado_pulmonar_novo_sta": 35, "dactilite_em_lactentes": 30, "ictericia_hemolitica": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["eletroforese_de_hemoglobina_com_hbs_maior_85_porcento"],
+      "exclusao_ativa": ["corpusculos_howell_jolly_presentes_em_maiores_5_anos"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Hidratação venosa, Analgesia otimizada (Opioide sem poupar), Oxigenoterapia e Transfusão se STA/AVE"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Eletroforese de Hemoglobina", "Raio-X de Tórax (STA)", "Hemograma com Reticulócitos"]
+    },
+    "vigneta": "Jovem de 18 anos, portador de Anemia Falciforme (HbSS), dá entrada na emergência com dor óssea intensa e refratária em MMII e dorso desencadeada após episódio febril. Evolui nas últimas horas com dor torácica, tosse, taquipneia e surgimento de novo infiltrado pulmonar à radiografia de tórax (Síndrome Torácica Aguda).",
+    "respostas_esperadas": {
+      "diagnostico": ["anemia falciforme", "sindrome toracica aguda", "crise vaso oclusiva", "falciforme"],
+      "exames": ["eletroforese de hemoglobina", "rx de torax", "reticulocitos"],
+      "conduta": ["analgesia", "opioide", "morfina", "hidratacao", "transfusao", "oxigenio"]
+    },
+    "feedback_tecnico": "A Anemia Falciforme resulta da mutação pontual da cadeia beta da globina (HbS), que se polimeriza em situações de hipóxia/deidratação formando 'plugs' vasculares e isquemia tecidual. A Síndrome Torácica Aguda (STA) é uma complicação grave definida por novo infiltrado radiológico associado a febre, dor torácica ou taquipneia. O tratamento das crises exige analgesia rigorosa com opioides, hidratação parcimoniosa, O2 e transfusão de hemácias nos casos graves."
+  },
+  {
+    "id": "leucemia_mieloide_aguda_lma",
+    "nome": "Leucemia Mieloide Aguda (LMA / LMA M3 Promielocítica)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "adulto_idoso": 2.0, "exposicao_quimioterapia_benzeno": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "pancitopenia_com_blastos": 35, "bastonetes_de_auer": 40, "coagulopatia_civd_m3": 35, "hiperplasia_gengival_m4_m5": 25 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["blastos_maior_igual_20_porcento_medula_ossea"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Suporte transfusional/ATB e início imediato de ATRA (Ácido Trans-Retinoico) se subtipo M3"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Mielograma (Aspirado de MO)", "Imunofenotipagem por Citometria de Fluxo", "Cariótipo / Citogenética"]
+    },
+    "vigneta": "Homem de 42 anos dá entrada com sangramento gengival abundante, petéquias e febre. Hemograma: Hb 6,5 g/dL, Plaquetas 18.000/mm³ e Leucócitos 35.000/mm³ com 45% de blastos na circulação. Mielograma revela > 20% de mieloblastos contendo os clássicos Bastonetes de Auer no citoplasma. Exames de coagulação mostram alargamento do TP/TPAE e consumo de fibrinogênio (CIVD).",
+    "respostas_esperadas": {
+      "diagnostico": ["lma", "leucemia mieloide aguda", "lma m3", "leucemia promielocitica"],
+      "exames": ["mielograma", "aspirado de medula", "imunofenotipagem", "citometria de fluxo"],
+      "conduta": ["atra", "acido trans-retinoico", "quimioterapia", "transfusao"]
+    },
+    "feedback_tecnico": "A LMA é caracterizada pela proliferação clonal de blastos mieloides na medula óssea ($\ge 20\%$). A presença de Bastonetes de Auer na microscopia é o achado patognomônico de linhagem mieloide. O subtipo LMA Promielocítica Aguda (M3) associa-se frequentemente a quadro severo de Coagulação Intravascular Disseminada (CIVD) e tem cura > 90% com o uso do Ácido Trans-Retinoico (ATRA)."
+  },
+  {
+    "id": "aplasia_de_medula_ossea",
+    "nome": "Aplasia de Medula Óssea (Anemia Aplásica)",
+    "prevalencia_base": 10,
+    "01_campo_modulador": {
+      "pesos": { "exposicao_toxica_farmacos_radiacao": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "pancitopenia_grave": 35, "ausencia_de_visceromegalias": 35, "reticulocitopenia_severa": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["biopsia_de_medula_hipocelular_substituicao_gordurosa"],
+      "exclusao_ativa": ["sem_esplenomegalia", "sem_adenomegalia"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Isolamento, suporte hemoterápico e Imunossupressão ou Transplante de Medula Óssea (TMO)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Biópsia de Medula Óssea (Padrão-Ouro)", "Mielograma (Aspirado Seco)", "Hemograma Completo"]
+    },
+    "vigneta": "Jovem de 22 anos apresenta quadro de palidez progressiva, sufusões hemorrágicas na pele e febre. Exame físico: ausência de linfonodomegalias e ausência de hepatoesplenomegalia (sem visceromegalias). Hemograma: Hb 5,2 g/dL, Leucócitos 1.200/mm³ (Neutrófilos 300/mm³) e Plaquetas 8.000/mm³. Biópsia de medula mostra hipocelularidade drástica com substituição por tecido adiposo.",
+    "respostas_esperadas": {
+      "diagnostico": ["aplasia de medula", "anemia aplasica", "aplasia medular"],
+      "exames": ["biopsia de medula", "biopsia", "mielograma"],
+      "conduta": ["transplante de medula", "tmo", "imunossupressao", "ciclosporina"]
+    },
+    "feedback_tecnico": "A Aplasia de Medula Óssea é uma falência medular primária caracterizada por desordem autoimune da célula-tronco (stem cell), gerando pancitopenia grave com reticulocitopenia. Por não haver recrutamento extramedular, caracteristicamente NÃO há esplenomegalia ou linfonodomegalia (diferencial crucial com leucemias e mielofibrose). O diagnóstico exige biópsia de medula evidenciando hipocelularidade e tecido gorduroso. O tratamento em < 45 anos é o Transplante de Medula Óssea (TMO)."
+  },
+  {
+    "id": "leucemia_mieloide_cronica_lmc",
+    "nome": "Leucemia Mieloide Crônica (LMC)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "faixa_etaria_40_a_60_anos": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "leucocitose_acentuada_com_desvio": 35, "esplenomegalia_de_monta": 35, "fosfatase_alcalina_leucocitaria_baixa": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["presenca_do_cromossomo_philadelphia_t9_22"],
+      "exclusao_ativa": ["blastos_menores_que_20_porcento_fase_cronica"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Inibidor de Tirosina Quinase (Mesilato de Imatinibe)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Cariótipo / FISH para Cromossomo Philadelphia t(9;22)", "PCR para gene BCR-ABL", "Mielograma"]
+    },
+    "vigneta": "Homem de 50 anos realiza exames admissionais e apresenta leucocitose maciça de 180.000/mm³ com desvio à esquerda escalonado até mieloblastos, mas com predomínio de mielócitos e metamielócitos maduros. Ao exame: esplenomegalia gigante (baço ultrapassando a cicatriz umbilical). A fosfatase alcalina leucocitária é baixa e o teste genético identifica a translocação t(9;22).",
+    "respostas_esperadas": {
+      "diagnostico": ["lmc", "leucemia mieloide cronica"],
+      "exames": ["cromossomo philadelphia", "bcr-abl", "cariotipo", "fish"],
+      "conduta": ["imatinibe", "mesilato de imatinibe", "glivec", "inibidor de tirosina quinase"]
+    },
+    "feedback_tecnico": "A LMC é uma síndrome mieloproliferativa crônica caracterizada pela presença do Cromossomo Philadelphia $t(9;22)$, que origina a proteína fusão BCR-ABL com atividade tirosina quinase constitutiva. Cursa com leucocitose extrema com escalonamento maturativo mieloide mantido e esplenomegalia de grande monta. A Fosfatase Alcalina Leucocitária (FAL) é baixa (diferencial com reação leucemoide de infecções). O tratamento de escolha é o Mesilato de Imatinibe."
+  }
+]
