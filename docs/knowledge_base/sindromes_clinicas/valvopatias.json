@@ -1,0 +1,118 @@
+[
+  {
+    "id": "estenose_aortica_grave",
+    "nome": "Estenose Aórtica Grave",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "idade_avancada_degenerativa": 3.0, "valva_aortica_bicuspide_jovem": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "sopro_sistolico_ejetivo_foco_aortico": 40, "pulso_parvus_et_tardus": 35, "triade_angina_sincope_dispneia": 35, "desdobramento_paradoxal_b2": 25 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["area_valvar_menor_1cm2_ecocardiograma"],
+      "exclusao_ativa": ["sem_refluxo_aortico_predominante"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Troca Valvar Aórtica (Cirúrgica ou TAVI) se sintomática (Angina/Síncope/Dispneia) ou FE < 50%"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Ecocardiograma Transtorácico com Doppler", "Eletrocardiograma (Sobrecarga de VE)", "Cateterismo Cardíaco"]
+    },
+    "vigneta": "Homem de 72 anos relata episódios de pré-síncope aos esforços físicos e dor precordial ao caminhar distâncias curtas. Ao exame físico: pulso carotídeo de ascensão lenta e pequena amplitude (pulso parvus et tardus) e sopro mesossistólico em diamante no 2º espaço intercostal direito (foco aórtico) irradiado para as carótidas. Presença de quarta bulha (B4).",
+    "respostas_esperadas": {
+      "diagnostico": ["estenose aortica", "ea", "estenose de valva aortica", "estenose aortica grave"],
+      "exames": ["ecocardiograma", "ecodoppler", "eco", "ecocardiograma com doppler"],
+      "conduta": ["troca valvar", "tavi", "troca valvar aortica", "substituicao valvar", "cirurgia valvar"]
+    },
+    "feedback_tecnico": "A Estenose Aórtica é caracterizada pela restrição à abertura da valva aórtica, gerando sobrecarga pressórica concêntrica no VE[span_6](start_span)[span_6](end_span). O sopro clássico é mesossistólico em crescendo-decrescendo (diamante) com irradiação carotídea, associado ao pulso 'parvus et tardus' e B4[span_7](start_span)[span_7](end_span). A tríade clássica de sintomas inclui Angina, Síncope e Dispneia (IC)[span_8](start_span)[span_8](end_span). Diante de sintomas ou disfunção ventricular (FE < 50%), a indicação é a substituição valvar cirúrgica ou implante transcateter (TAVI)[span_9](start_span)[span_9](end_span)."
+  },
+  {
+    "id": "insuficiencia_aortica_cronica",
+    "nome": "Insuficiência Aórtica Crônica Severa",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "febre_reumatica_previa": 2.5, "dilatacao_da_raiz_aortica": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "sopro_protodiastolico_aspirativo": 40, "pulso_em_martelo_dagua_corrigan": 35, "pressao_de_pulso_divergente": 35, "sinais_perifericos_hiperdinamicos": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["regurgitacao_aortica_ao_ecocardiograma"],
+      "exclusao_ativa": ["sopro_de_austin_flint_presente"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Controle com vasodilatadores e Troca Valvar Aórtica se sintomático ou dilatação de VE"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Ecocardiograma Transtorácico com Doppler", "Raio-X de Tórax (Cardiomegalia)", "Ressonância Cardíaca"]
+    },
+    "vigneta": "Mulher de 48 anos refere dispneia progressiva e sensação de 'coração batendo forte no peito'. Exame físico: PA de 160x50 mmHg (pressão arterial divergente), pulso de ascensão e colapso rápidos (pulso de Corrigan/martelo d'água), oscilação da cabeça com o batimento cardíaco (sinal de Musset) e pulsação no leito subungueal (sinal de Quincke). Ausculta: sopro diastólico aspirativo em decrescendo no foco aórtico acessório.",
+    "respostas_esperadas": {
+      "diagnostico": ["insuficiencia aortica", "ia", "insuficiencia de valva aortica", "regurgitacao aortica"],
+      "exames": ["ecocardiograma", "eco", "ecodoppler"],
+      "conduta": ["troca valvar", "troca valvar aortica", "cirurgia", "vasodilatadores"]
+    },
+    "feedback_tecnico": "A Insuficiência Aórtica cursa com refluxo de sangue para o VE na diástole, gerando grande sobrecarga de volume e pressão de pulso divergente (PA sistólica alta e diastólica muito baixa)[span_10](start_span)[span_10](end_span). Apresenta múltiplos estigmas periféricos hiperdinâmicos (Corrigan, Musset, Quincke, Müller)[span_11](start_span)[span_11](end_span). O sopro característico é protodiastólico aspirativo em decrescendo[span_12](start_span)[span_12](end_span). Pode cursar com o sopro de Austin Flint (ruflar mitral funcional pelo jato de refluxo aórtico)[span_13](start_span)[span_13](end_span). O tratamento definitivo é a cirurgia de troca valvar[span_14](start_span)[span_14](end_span)."
+  },
+  {
+    "id": "estenose_mitral_reumatica",
+    "nome": "Estenose Mitral (Etiologia Reumática)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "sequela_de_febre_reumatica": 3.5, "mulher_jovem_ou_meia_idade": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "ruflar_diastolico_com_reforco": 40, "estalido_de_abertura_mitral": 35, "hiperfonese_de_b1": 30, "hemoptise_ortopneia": 25 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["fusao_comissural_valvar_mitral_ao_eco"],
+      "exclusao_ativa": ["desaparecimento_reforco_presistolico_se_fa"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Controle da FC com Betabloqueador + Valvoplastia Mitral por Balão (VMMPB) ou Troca Valvar"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Ecocardiograma Transtorácico (Escore de Wilkins)", "Eletrocardiograma (Sobrecarga de Átrio Esquerdo)", "RX de Tórax"]
+    },
+    "vigneta": "Mulher de 36 anos com histórico de febre reumática na infância queixa-se de dispneia aos moderados esforços e palpitações. Ausculta cardíaca no ápice (foco mitral): primeira bulha hiperfonética (B1 alta), estalido de abertura mitral logo após B2 seguido de ruflar diastólico de baixa frequência com reforço pré-sistólico.",
+    "respostas_esperadas": {
+      "diagnostico": ["estenose mitral", "em", "estenose de valva mitral", "estenose mitral reumatica"],
+      "exames": ["ecocardiograma", "eco", "escore de wilkins"],
+      "conduta": ["valvoplastia por balao", "valvoplastia mitral", "troca valvar", "betabloqueador"]
+    },
+    "feedback_tecnico": "A Estenose Mitral é a sequela tardia mais frequente da cardite reumática, levando à fusão comissural e espessamento dos folhetos[span_15](start_span)[span_15](end_span). A semiologia clássica é composta pela tétrade: B1 hiperfonética + estalido de abertura + ruflar diastólico + reforço pré-sistólico (contrações do AE)[span_16](start_span)[span_16](end_span). A intervenção de escolha quando a anatomia é favorável (Escore de Wilkins $\le 8$ sem trombo em AE) é a Valvoplastia Mitral Percutânea por Balão[span_17](start_span)[span_17](end_span)."
+  },
+  {
+    "id": "cardiomiopatia_hipertrofica_obstrutiva",
+    "nome": "Cardiomiopatia Hipertrófica Obstrutiva (CMH)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "jovem_atleta": 3.0, "historia_familiar_de_morte_subita": 3.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "sopro_sistolico_que_aumenta_com_valsalva": 40, "sopro_que_diminui_com_agachamento": 40, "sincope_esforco": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["hipertrofia_septal_assimetrica_ecocardiograma", "movimento_anterior_sistolico_mitral"],
+      "exclusao_ativa": ["contraindicacao_diureticos_e_nitratos"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Betabloqueadores orais (Atenolol/Metoprolol), implante de CDI se alto risco e contraindicação a Nitratos/Diuréticos"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Ecocardiograma Transtorácico", "Ressonância Magnética Cardíaca", "Teste Genético / Holter 24h"]
+    },
+    "vigneta": "Jovem de 19 anos, jogador de futebol universitário, apresenta episódio de síncope durante treino intenso. O tio paterno faleceu subitamente aos 25 anos. Exame físico revela sopro sistólico ejetivo em borda esternal esquerda que AUMENTA de intensidade durante a manobra de Valsalva e DIMINUI quando o paciente se agacha.",
+    "respostas_esperadas": {
+      "diagnostico": ["cardiomiopatia hipertrofica", "cmh", "miocardiopatia hipertrofica", "hipertrofia septal assimetrica"],
+      "exames": ["ecocardiograma", "eco", "ressonancia cardiaca", "rm cardiaca"],
+      "conduta": ["betabloqueador", "evitar nitrato", "evitar diuretico", "cdi", "cardiodesfibrilador"]
+    },
+    "feedback_tecnico": "A Cardiomiopatia Hipertrófica (CMH) é uma desordem genética autossômica dominante dos sarcômeros cardíacos, sendo a principal causa de morte súbita em jovens atletas[span_18](start_span)[span_18](end_span). A hipertrofia septal assimétrica e o movimento anterior sistólico da mitral (MAMS) causam obstrução dinâmica da via de saída[span_19](start_span)[span_19](end_span). O sopro da CMH é a GRANDE EXCEÇÃO semiológica: PIORA com manobras que reduzem a pré-carga (Valsalva e ortostase - coração fica vazio e o septo obstrui mais) e MELHORA com agachamento (aumenta o volume ventricular e afasta o septo)[span_20](start_span)[span_20](end_span). O tratamento de 1ª linha são os Betabloqueadores, sendo PROIBIDO o uso de vasodilatadores e diuréticos[span_21](start_span)[span_21](end_span)."
+  }
+]
