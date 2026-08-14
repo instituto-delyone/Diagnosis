@@ -1,0 +1,176 @@
+[
+  {
+    "id": "artrite_gotosa_aguda",
+    "nome": "Artrite Gotosa Aguda (Gota)",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "homem_meia_idade": 2.5, "uso_de_tiazidicos_ou_etilismo": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "podagra_primeira_mtf": 40, "monoartrite_muito_intensa": 35, "eritema_local_intenso": 25, "tofo_gotoso": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["cristais_de_urato_com_birrefringencia_negativa"],
+      "exclusao_ativa": ["contraindicacao_alopurinol_na_crise_aguda"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Artrocentese para descarte de artrite séptica e tratamento da crise com AINEs ou Colchicina"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Artrocentese com Análise do Líquido Sinovial", "Ácido Úrico Sérico"]
+    },
+    "vigneta": "Homem de 50 anos dá entrada no PS com dor articular excruciante, eritema e edema de início súbito na primeira articulação metatarsofalângica do pé direito (podagra), impedindo até o contato com o lençol. Relata consumo excessivo de carne vermelha e cerveja no fim de semana. A artrocentese revela líquido inflamatório com cristais de agulha com birrefringência negativa à luz polarizada.",
+    "respostas_esperadas": {
+      "diagnostico": ["gota", "artrite gotosa", "artrite gotosa aguda", "podagra"],
+      "exames": ["artrocentese", "liquido sinovial", "acido urico"],
+      "conduta": ["colchicina", "aines", "indometacina", "naproxeno", "nao usar alopurinol"]
+    },
+    "feedback_tecnico": "A crise aguda de Gota caracteriza-se por monoartrite inflamatória intensa, afetando tipicamente a 1ª MTF (podagra)[span_10](start_span)[span_10](end_span). O diagnóstico de certeza exige artrocentese demonstrando cristais de urato monossódico no interior dos leucócitos com forte birrefringência negativa[span_11](start_span)[span_11](end_span). O tratamento da CRISE deve ser feito com AINEs (ex: Indometacina) ou Colchicina[span_12](start_span)[span_12](end_span). NÃO se deve iniciar nem suspender Alopurinol durante a crise aguda, pois flutuações na uricemia perpetuam a inflamação[span_13](start_span)[span_13](end_span)."
+  },
+  {
+    "id": "artrite_reumatoide",
+    "nome": "Artrite Reumatóide (AR)",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "mulher_35_a_55_anos": 3.0, "hla_drb1": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "poliartrite_simetrica_maos_punhos": 35, "rigidez_matutina_maior_1h": 35, "deformidade_pescoca_cisne_abotoadura": 25, "nodulos_reumatoides": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["anti_ccp_reagente_ou_fator_reumatoide"],
+      "exclusao_ativa": ["poupanca_das_interfalangianas_distais"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Sintomáticos (AINEs/Corticoides) e início precoce de DARMDs (Metotrexato)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Anti-CCP (Peptídeo Citrulinado Cíclico)", "Fator Reumatóide (FR)", "Radiografia de Mãos e Punhos"]
+    },
+    "vigneta": "Mulher de 42 anos queixa-se de dor, edema e calor nas articulações metacarpofalângicas e punhos bilateralmente há 3 meses. Apresenta rigidez matutina nas mãos que dura cerca de 2 horas até melhorar com o movimento. Exame físico: sinovite simétrica em MCFs e IFPs, poupando as interfalangianas distais. Anti-CCP positivo em altos títulos.",
+    "respostas_esperadas": {
+      "diagnostico": ["artrite reumatoide", "ar"],
+      "exames": ["anti-ccp", "fator reumatoide", "fr", "rx de maos", "vhs"],
+      "conduta": ["metotrexato", "mtx", "darmd", "farmd", "aines", "corticoide"]
+    },
+    "feedback_tecnico": "A Artrite Reumatóide é uma doença autoimune inflamatória crônica caracterizada por sinovite que causa erosão e deformidade articular[span_14](start_span)[span_14](end_span). O padrão clássico é uma poliartrite aditiva simétrica periférica (MCFs, IFPs, punhos), com rigidez matutina prolongada (> 1h) e poupando as interfalangianas distais (IFD)[span_15](start_span)[span_15](end_span). O anticorpo Anti-CCP tem sensibilidade alta e especificidade de 98%[span_16](start_span)[span_16](end_span). O tratamento de modulação exige uso precoce de DARMDs, sendo o Metotrexato a droga de 1ª escolha[span_17](start_span)[span_17](end_span)."
+  },
+  {
+    "id": "febre_reumatica_aguda",
+    "nome": "Febre Reumática Aguda (Surto)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "escolar_5_a_15_anos": 3.0, "faringoamigdalite_previa_2_a_4_semanas": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "artrite_migratoria_grandes_articulacoes": 35, "cardite_sopro_mitral": 35, "coreia_de_sydenham": 35, "eritema_marginado": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["criterios_de_jones_com_evidencia_estreptococica_aslo"],
+      "exclusao_ativa": ["artrite_responde_rapidamente_a_aines"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Peníclina Benzatina (erradicação), AINE/AAS para artrite e Corticoide para cardite grave"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["ASLO / Anti-DNAse B", "Ecocardiograma", "Eletrocardiograma (Intervalo PR)"]
+    },
+    "vigneta": "Criança de 10 anos apresenta dor e inchaço no joelho esquerdo que melhoraram após 3 dias, mas agora acometem o tornozelo direito e o cotovelo esquerdo (poliartrite migratória). A mãe relata dor de garganta há 3 semanas. Ao exame: ausculta cardíaca revela sopro sistólico mitral novo (regurgitação). ASLO positivo e VHS elevado.",
+    "respostas_esperadas": {
+      "diagnostico": ["febre reumatica", "febre reumatica aguda", "surto de febre reumatica"],
+      "exames": ["aslo", "ecocardiograma", "ecg", "vhs"],
+      "conduta": ["penicilina benzatina", "penicilina", "aas", "aines", "prednisona"]
+    },
+    "feedback_tecnico": "A Febre Reumática é uma complicação autoimune não supurativa após infecção orofaríngea pelo Streptococcus pyogenes (reação cruzada)[span_18](start_span)[span_18](end_span). O diagnóstico exige 2 critérios maiores de Jones (ou 1 maior + 2 menores) + comprovação de infecção estreptocócica recente (ASLO)[span_19](start_span)[span_19](end_span). Os critérios maiores são: Poliartrite migratória de grandes articulações, Cardite (valvulite mitral/pancardite), Coreia de Sydenham, Nódulos subcutâneos e Eritema marginado[span_20](start_span)[span_20](end_span). Tratamento: Penicilina Benzatina IM dose única + AAS para artrite + Corticoide se cardite moderada/grave[span_21](start_span)[span_21](end_span)."
+  },
+  {
+    "id": "lupus_eritematoso_sistemico_les",
+    "nome": "Lúpus Eritematoso Sistêmico (LES)",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "mulher_jovem_15_a_45_anos": 3.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "rash_malar_asa_de_borboleta": 35, "fotossensibilidade": 25, "artrite_nao_erosiva": 30, "nefrite_lupica_proteinuria": 30, "penias_hematologicas": 25 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["fan_positivo_triagem", "anti_dnahn_ou_anti_sm_especificos"],
+      "exclusao_ativa": ["consumo_de_complemento_c3_c4"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Hidroxicloroquina para todos os pacientes + Corticoide e Imunossupressor (Micofenolato/Ciclofosfamida) nas formas graves"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["FAN (Anticorpo Antinúcleo)", "Anti-DNA nativo", "Anti-Sm", "Complemento C3 e C4", "EAS e Proteinúria"]
+    },
+    "vigneta": "Mulher de 28 anos apresenta lesão eritematosa nas regiões malares e dorso do nariz poupando o sulco nasolabial (rash em asa de borboleta) que piora com sol, associada a dores nas articulações das mãos sem deformidades e úlceras orais indolores. Laboratório: FAN 1:640 padrão homogêneo, Anti-DNAhn positivo, plaquetopenia (85.000/mm³) e consumo de complemento C3 e C4.",
+    "respostas_esperadas": {
+      "diagnostico": ["les", "lupus", "lupus eritematoso sistemico"],
+      "exames": ["fan", "anti-dna", "anti-sm", "complemento", "c3 e c4"],
+      "conduta": ["hidroxicloroquina", "cloroquina", "prednisona", "corticoide", "micofenolato"]
+    },
+    "feedback_tecnico": "O LES é o protótipo da doença autoimune multissistêmica por imunocomplexos em mulheres em idade fértil[span_22](start_span)[span_22](end_span). Manifesta-se com acometimento cutâneo (rash malar, fotossensibilidade), articular (artrite não erosiva de Jaccoud), serosites (pleurite/pericardite), hematológico (penias) e renal (nefrite lúpica)[span_23](start_span)[span_23](end_span). O FAN é o teste de triagem mais sensível (> 95%), enquanto o Anti-DNAhn e o Anti-Sm são altamente específicos[span_24](start_span)[span_24](end_span). A Hidroxicloroquina é indicada para TODOS os pacientes lúpicos para reduzir surtos e mortalidade[span_25](start_span)[span_25](end_span)."
+  },
+  {
+    "id": "granulomatose_com_poliangeite_wegener",
+    "nome": "Granulomatose com Poliangeíte (Wegener)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "adulto_meia_idade_40_a_60_anos": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "sinusite_cronica_refrataria": 35, "hemoptise_infiltrado_nodular": 35, "glomerulonefrite_gnrp": 35, "nariz_em_sela": 25 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["c_anca_positivo_anti_pr3"],
+      "exclusao_ativa": ["biopsia_com_inflamacao_granulomatosa"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Pulsoterapia com Corticoide + Ciclofosfamida ou Rituximabe + Plasmaférese se hemorragia alveolar/GNRP"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["c-ANCA (Anticorpo Anti-Proteinase 3)", "Biópsia de Vias Aéreas/Pulmão/Rim", "TC de Tórax e Seios da Face"]
+    },
+    "vigneta": "Homem de 48 anos com história de rinossinusite crônica refratária com crostas nasais e perfuração do septo nasal (deformidade em sela) dá entrada por hemoptise e dispneia. A TC de tórax evidencia múltiplos nódulos pulmonares cavitados. Exames de função renal mostram glomerulonefrite rapidamente progressiva (creatinina de 3,8 mg/dL) e o c-ANCA é fortemente positivo.",
+    "respostas_esperadas": {
+      "diagnostico": ["wegener", "granulomatose de wegener", "granulomatose com poliangeite"],
+      "exames": ["c-anca", "anca", "biopsia", "tc de torax"],
+      "conduta": ["ciclofosfamida", "pulsoterapia", "prednisona", "rituximabe", "plasmaferese"]
+    },
+    "feedback_tecnico": "A Granulomatose de Wegener é uma vasculite de pequenos e médios vasos associada ao c-ANCA (anti-PR3)[span_26](start_span)[span_26](end_span). Caracteriza-se pela Tríade: Vasculite necrotizante de Vias Aéreas Superiores (sinusite, crostas nasais, nariz em sela) + Vias Aéreas Inferiores (hemoptise, nódulos cavitados) + Glomerulonefrite Necrotizante Pauci-Imune (Síndrome Pulmão-Rim)[span_27](start_span)[span_27](end_span). O tratamento de indução exige Pulsoterapia com Metilprednisolona associada à Ciclofosfamida ou Rituximabe[span_28](start_span)[span_28](end_span)."
+  },
+  {
+    "id": "esclerose_sistemica_esclerodermia",
+    "nome": "Esclerose Sistêmica (Esclerodermia / Síndrome CREST)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "mulher_30_a_50_anos": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "fenomeno_de_raynaud": 35, "esclerodactilia_maos_em_garra": 35, "esofagopatia_disfagia": 30, "crise_renal_esclerodermica": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["anti_scl70_difusa_ou_anti_centromero_crest"],
+      "exclusao_ativa": ["capilaroscopia_de_leito_ungueal_alterada"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "IECA para Crise Renal Esclerodérmica e Bloqueador de Canal de Cálcio para Fenômeno de Raynaud"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Anti-Scl70 (Anti-Topoisomerase I)", "Anti-Centrômero", "Capilaroscopia Periungueal", "TC de Tórax"]
+    },
+    "vigneta": "Mulher de 45 anos apresenta episódios de palidez seguidos de cianose e rubor nos dedos das mãos ao contato com o frio (Fenômeno de Raynaud trifásico). Evolui com espessamento e enrijecimento da pele dos dedos (esclerodactilia) com limitação de abertura bucal (microstomia) e disfagia para sólidos. Anticorpo Anti-Centrômero positivo (síndrome CREST).",
+    "respostas_esperadas": {
+      "diagnostico": ["esclerodermia", "esclerose sistemica", "crest", "sindrome crest"],
+      "exames": ["anti-scl70", "anti-centromero", "capilaroscopia", "fan"],
+      "conduta": ["ieca", "captopril", "nifedipina", "bloqueador de canal de calcio"]
+    },
+    "feedback_tecnico": "A Esclerose Sistêmica é uma doença autoimune vascular caracterizada por vasoespasmo e fibrose progressiva da pele e órgãos internos[span_29](start_span)[span_29](end_span). Divide-se em: Forma Limitada (Síndrome CREST: Calcinose, Raynaud, Esofagopatia, Esclerodactilia, Telangiectasias), associada ao Anti-Centrômero; e Forma Difusa, associada ao Anti-Scl70 (Anti-Topoisomerase I) com alto risco de fibrose pulmonar e Crise Renal Esclerodérmica[span_30](start_span)[span_30](end_span). Na Crise Renal Esclerodérmica (hipertensão maligna com oligoanúria), o tratamento de escolha salvador de vidas é o IECA (Captopril)[span_31](start_span)[span_31](end_span)."
+  }
+]
