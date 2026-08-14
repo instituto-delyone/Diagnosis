@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnosis Engine - Arena de Testes</title>
+  <style>
+    :root {
+      --navy: #071426;
+      --blue: #1f5fae;
+      --light-blue: #e5f2fc;
+      --ink: #1f2933;
+      --muted: #66757c;
+      --bg: #f7f9fc;
+      --card: #ffffff;
+      --border: #dce5e8;
+      --green: #238b57;
+      --red: #cf5148;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--ink);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .arena-container {
+      max-width: 700px;
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(7, 20, 38, 0.05);
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .header span {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--blue);
+      background: var(--light-blue);
+      padding: 6px 12px;
+      border-radius: 99px;
+      letter-spacing: 0.05em;
+    }
+    .header h1 { margin: 10px 0 5px; color: var(--navy); }
+    .header p { margin: 0; color: var(--muted); font-size: 14px; }
+    
+    .btn {
+      background: var(--navy);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+    }
+    .btn:hover { background: var(--blue); }
+    
+    .case-box {
+      background: #fafafa;
+      border-left: 4px solid var(--blue);
+      padding: 16px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 20px;
+      font-size: 15px;
+      line-height: 1.6;
+      display: none;
+    }
+    
+    .interaction-area { display: none; }
+    .question { font-weight: 600; margin-bottom: 10px; color: var(--navy); }
+    .input-box {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+    
+    .log-area {
+      margin-top: 20px;
+      border-top: 1px dashed var(--border);
+      padding-top: 20px;
+      font-size: 13px;
+    }
+    .log-item { margin-bottom: 8px; padding: 10px; border-radius: 6px; }
+    .log-correct { background: #ecf8f1; color: var(--green); border: 1px solid #c9ead8; }
+    .log-incorrect { background: #fdf2f1; color: var(--red); border: 1px solid #fad3d0; }
+    .log-info { background: #f0f4f8; color: var(--blue); border: 1px solid #d9e6f2; }
+    
+    .score-board {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--navy);
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="arena-container">
+  <div class="header">
+    <span>AIGAR ENGINE - V0.1 BETA</span>
+    <h1>Simulador de Raciocínio</h1>
+    <p>Treinamento clínico e validação do modelo bayesiano funcional.</p>
+  </div>
+
+  <button id="btn-start" class="btn" onclick="iniciarJogo()">Gerar Caso Clínico Aleatório</button>
+
+  <div id="case-display" class="case-box"></div>
+
+  <div id="interaction" class="interaction-area">
+    <div id="step-indicator" style="font-size: 11px; color: var(--muted); margin-bottom: 5px; text-transform: uppercase; font-weight: bold;"></div>
+    <div id="question-text" class="question"></div>
+    <input type="text" id="user-input" class="input-box" placeholder="Digite sua resposta e aperte Enter..." onkeypress="handleEnter(event)">
+    <button class="btn" onclick="processarResposta()" style="background: var(--blue);">Enviar Resposta</button>
+  </div>
+
+  <div id="log" class="log-area"></div>
+  <div id="final-score" class="score-board"></div>
+</div>
+
+<script>
+  // ==========================================
+  // O BANCO DE DADOS (Knowledge Base Embutido)
+  // ==========================================
+  const bancoDeDados = [
+    {
+      id: "colangite_aguda",
+      nome: "Colangite Aguda",
+      vigneta: "Paciente de 65 anos, com histórico prévio de coledocolitíase. Dá entrada no PS apresentando quadro de icterícia colestática associada a febre com calafrios e dor intensa em hipocôndrio direito. PA: 120x80 mmHg, sem confusão mental.",
+      respostas_esperadas: {
+        diagnostico: ["colangite", "colangite aguda"],
+        exames: ["usg", "ultrassom", "ultrassonografia", "hemograma", "bilirrubinas", "tgo", "tgp"],
+        conduta: ["antibiotico", "antibioticoterapia", "drenagem", "cpre"]
+      },
+      feedback_tecnico: "A Colangite Aguda exige identificação rápida da Tríade de Charcot (Icterícia, Febre e Dor). A conduta emergencial com ATB e preparo para drenagem biliar (CPRE) é o fator crítico."
+    },
+    {
+      id: "hepatite_alcoolica",
+      nome: "Hepatite Alcoólica",
+      vigneta: "Paciente de 50 anos, etilista crônico de longa data. Apresenta-se com icterícia progressiva há 1 semana, febre baixa e dor abdominal leve. Exames iniciais mostram TGO > TGP (relação maior que 2) e transaminases em torno de 300 U/L, além de leucocitose importante.",
+      respostas_esperadas: {
+        diagnostico: ["hepatite alcoolica", "hepatite alcoólica"],
+        exames: ["usg", "funcao hepatica", "tempo de protrombina", "tap"],
+        conduta: ["corticoide", "prednisolona", "pentoxifilina", "suporte", "abstinencia"]
+      },
+      feedback_tecnico: "Na Hepatite Alcoólica, a inversão TGO/TGP > 2 e a reação leucemoide são moduladores chaves no laboratório. O tratamento de formas graves (Maddrey > 32) envolve corticoide."
+    },
+    {
+      id: "colangite_biliar_primaria",
+      nome: "Colangite Biliar Primária",
+      vigneta: "Mulher de 45 anos, com histórico de Tireoidite de Hashimoto, procura ambulatório com queixa de prurido intenso há meses e icterícia recente. Exame físico revela hiperpigmentação e xantelasmas. USG de vias biliares sem dilatações.",
+      respostas_esperadas: {
+        diagnostico: ["colangite biliar primaria", "cbp", "cirrose biliar primaria"],
+        exames: ["antimitocondria", "anti-mitocondria", "fan", "fosfatase alcalina", "fa"],
+        conduta: ["acido ursodesoxicolico", "ursodesoxicolico", "udca"]
+      },
+      feedback_tecnico: "O anticorpo anti-mitocôndria é o critério de confirmação necessária (sine qua non). O tratamento padrão para retardar a evolução para cirrose é o Ácido Ursodesoxicólico."
+    }
+  ];
+
+  // ==========================================
+  // LÓGICA DO SIMULADOR (Engine)
+  // ==========================================
+  let casoAtual = null;
+  let etapa = 0; // 0 = Diagnostico, 1 = Exames, 2 = Conduta
+  let pontuacao = 0;
+  
+  const etapasJogo = [
+    { label: "PASSO 1: DIAGNÓSTICO", pergunta: "Qual a sua principal hipótese diagnóstica?", chave: "diagnostico", peso: 50 },
+    { label: "PASSO 2: INVESTIGAÇÃO", pergunta: "Cite 1 exame fundamental para solicitar agora:", chave: "exames", peso: 20 },
+    { label: "PASSO 3: INTERVENÇÃO", pergunta: "Qual a principal conduta ou tratamento indicado?", chave: "conduta", peso: 30 }
+  ];
+
+  function normalizar(texto) {
+    return texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+  }
+
+  function iniciarJogo() {
+    // Sorteia um caso
+    casoAtual = bancoDeDados[Math.floor(Math.random() * bancoDeDados.length)];
+    etapa = 0;
+    pontuacao = 0;
+
+    // Prepara a UI
+    document.getElementById('btn-start').style.display = 'none';
+    document.getElementById('case-display').style.display = 'block';
+    document.getElementById('case-display').innerHTML = `<strong>Apresentação Clínica:</strong><br>${casoAtual.vigneta}`;
+    document.getElementById('interaction').style.display = 'block';
+    document.getElementById('log').innerHTML = '';
+    document.getElementById('final-score').style.display = 'none';
+    
+    carregarEtapa();
+  }
+
+  function carregarEtapa() {
+    if (etapa < etapasJogo.length) {
+      document.getElementById('step-indicator').innerText = etapasJogo[etapa].label;
+      document.getElementById('question-text').innerText = etapasJogo[etapa].pergunta;
+      document.getElementById('user-input').value = '';
+      document.getElementById('user-input').focus();
+    } else {
+      finalizarCaso();
+    }
+  }
+
+  function handleEnter(e) {
+    if (e.key === 'Enter') processarResposta();
+  }
+
+  function processarResposta() {
+    const inputUsuario = normalizar(document.getElementById('user-input').value);
+    if (!inputUsuario) return;
+
+    const regraAtual = etapasJogo[etapa];
+    const respostasAceitas = casoAtual.respostas_esperadas[regraAtual.chave];
+    
+    let acertou = respostasAceitas.some(resp => inputUsuario.includes(normalizar(resp)));
+
+    const logDiv = document.getElementById('log');
+    
+    if (acertou) {
+      pontuacao += regraAtual.peso;
+      logDiv.innerHTML += `<div class="log-item log-correct"><strong>✓ Acertou (${regraAtual.peso} pts):</strong> O sistema validou a resposta "${inputUsuario}" para a chave [${regraAtual.chave}].</div>`;
+    } else {
+      logDiv.innerHTML += `<div class="log-item log-incorrect"><strong>✕ Incorreto:</strong> A resposta "${inputUsuario}" não atingiu a probabilidade necessária para [${regraAtual.chave}]. O ideal seria envolver termos como: ${respostasAceitas[0]}.</div>`;
+    }
+
+    etapa++;
+    carregarEtapa();
+  }
+
+  function finalizarCaso() {
+    document.getElementById('interaction').style.display = 'none';
+    const logDiv = document.getElementById('log');
+    const scoreDiv = document.getElementById('final-score');
+
+    logDiv.innerHTML += `<div class="log-item log-info"><strong>📋 Relatório do Motor Bayesiano:</strong><br>${casoAtual.feedback_tecnico}</div>`;
+    
+    scoreDiv.style.display = 'block';
+    scoreDiv.innerHTML = `Performance Clínica: ${pontuacao}/100<br>
+      <button class="btn" style="margin-top: 20px; font-size: 13px;" onclick="iniciarJogo()">↻ Gerar Novo Caso</button>`;
+  }
+</script>
+
+</body>
+</html>
