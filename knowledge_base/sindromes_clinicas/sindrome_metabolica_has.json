@@ -1,0 +1,86 @@
+[
+  {
+    "id": "disseccao_aortica",
+    "nome": "Dissecção Aórtica Aguda",
+    "prevalencia_base": 5,
+    "01_campo_modulador": {
+      "pesos": { "hipertensao_nao_controlada": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "dor_toracica_intensa_subita": 40, "pico_hipertensivo": 20, "assimetria_de_pulsos": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["dor_toracica_subita"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Normalizar PA (redução brusca), betabloqueador + nitroprussiato. Sempre operar tipo A"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["ECO TE", "AngioTC"]
+    },
+    "vigneta": "Paciente de 60 anos, hipertenso crônico, dá entrada no PS com dor torácica intensa, súbita e lancinante que se irradia para o dorso. PA: 220x120 mmHg. FC: 110 bpm.",
+    "respostas_esperadas": {
+      "diagnostico": ["disseccao", "dissecção aortica", "emergencia hipertensiva", "dissecção de aorta"],
+      "exames": ["angiotc", "angio tc", "ecote", "ecocardiograma transesofagico", "eco te"],
+      "conduta": ["beta-bloqueador", "betabloqueador", "nitroprussiato", "normalizar", "cirurgia"]
+    },
+    "feedback_tecnico": "Na dissecção aórtica, por mais que seja uma emergência hipertensiva, a conduta difere da regra geral: deve-se NORMALIZAR a pressão de forma brusca[span_3](start_span)[span_3](end_span). O manejo clínico exige beta-bloqueador associado ao nitroprussiato ou labetalol EV[span_4](start_span)[span_4](end_span), seguido de avaliação cirúrgica (sempre operar Stanford A)[span_5](start_span)[span_5](end_span)."
+  },
+  {
+    "id": "feocromocitoma",
+    "nome": "Feocromocitoma",
+    "prevalencia_base": 2,
+    "01_campo_modulador": {
+      "pesos": { "has_resistente": 2.5, "jovem_ou_idoso": 1.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "crises_adrenergicas": 35, "cefaleia": 15, "sudorese": 15, "palpitacoes": 15, "hipotensao_intercalada": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["crises_adrenergicas", "has_resistente"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Alfa-bloqueio antes do beta-bloqueio no preparo pré-operatório"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Metanefrinas urinárias", "Catecolaminas urinárias", "TC/RM/PET para localizar"]
+    },
+    "vigneta": "Paciente de 35 anos, encaminhado por HAS resistente ao uso de 4 drogas (incluindo diurético). Relata episódios súbitos de palpitações, cefaleia intensa e sudorese profusa, às vezes intercalados com sensação de desmaio (hipotensão).",
+    "respostas_esperadas": {
+      "diagnostico": ["feocromocitoma", "has secundaria", "hipertensão secundária"],
+      "exames": ["metanefrinas", "catecolaminas", "urina de 24h", "urina de 24 horas"],
+      "conduta": ["alfa-bloqueador", "alfabloqueador", "cirurgia", "ressecção", "doxazosin"]
+    },
+    "feedback_tecnico": "A presença de HAS resistente (não controlada com 3 drogas ou controlada com 4) associada a crises adrenérgicas típicas sugere Feocromocitoma[span_6](start_span)[span_6](end_span). O diagnóstico é confirmado com catecolaminas e metanefrinas na urina de 24h[span_7](start_span)[span_7](end_span). A regra de ouro no preparo cirúrgico é realizar o alfa-bloqueio ANTES do beta-bloqueador[span_8](start_span)[span_8](end_span)."
+  },
+  {
+    "id": "intoxicacao_cianeto",
+    "nome": "Intoxicação por Cianeto",
+    "prevalencia_base": 5,
+    "01_campo_modulador": {
+      "pesos": { "uso_nitroprussiato_prolongado": 4.0, "disfuncao_renal_hepatica": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "rebaixamento_consciencia": 30, "acidose_metabolica": 40, "instabilidade": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["uso_nitroprussiato"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Suspender droga e administrar Vitamina B12 ou Nitrito"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Gasometria arterial", "Lactato"]
+    },
+    "vigneta": "Paciente internado na UTI em tratamento de emergência hipertensiva, usando Nitroprussiato de Sódio há 3 dias em dose elevada. Evolui nas últimas horas com rebaixamento do nível de consciência, acidose lática inexplicada e instabilidade hemodinâmica.",
+    "respostas_esperadas": {
+      "diagnostico": ["intoxicacao", "cianeto", "intoxicacao por cianeto", "toxicidade"],
+      "exames": ["gasometria", "lactato", "ph", "gasometria arterial"],
+      "conduta": ["suspender", "vitamina b12", "hidroxicobalamina", "nitrito", "tiossulfato"]
+    },
+    "feedback_tecnico": "O uso prolongado (> 48h) ou em doses elevadas de Nitroprussiato pode gerar acúmulo de cianeto (metabolização pela luz / disfunção hepática/renal)[span_9](start_span)[span_9](end_span). O tratamento exige suspender o nitroprussiato e administrar o antídoto: Hidroxicobalamina (Vitamina B12) ou Nitrito/Tiossulfato de Sódio[span_10](start_span)[span_10](end_span)."
+  }
+]
