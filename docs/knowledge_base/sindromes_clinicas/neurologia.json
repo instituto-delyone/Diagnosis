@@ -1,0 +1,145 @@
+[
+  {
+    "id": "sindrome_guillain_barre",
+    "nome": "Síndrome de Guillain-Barré (GBS)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "diarreia_previa_campylobacter": 3.0, "infeccao_respiratoria_previa": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "fraqueza_ascendente": 35, "arreflexia_membros": 30, "parestesia_pes": 20, "disautonomia": 15 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["dissociacao_proteinocitologica_liquor"],
+      "exclusao_ativa": ["sem_atrofia_muscular_aguda", "sensibilidade_preservada_geralmente"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Suporte ventilatório e Imunoglobulina IV ou Plasmaférese"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Punção Liquórica (Líquor)", "Eletroneuromiografia (ENMG)"]
+    },
+    "vigneta": "Paciente de 29 anos refere que há 2 semanas teve quadro de diarreia aquosa. Há 3 dias iniciou com dormência nos pés que evoluiu para fraqueza muscular flácida, simétrica e ascendente, atualmente impedindo a deambulação. Exame físico: força grau 2/5 em MMII, ausência de reflexos patelar e aquileu (arreflexia) e sensibilidade dolorosa preservada.",
+    "respostas_esperadas": {
+      "diagnostico": ["guillain barre", "sindrome de guillain barre", "gbs", "polineuropatia desmielinizante"],
+      "exames": ["liquor", "puncao liquorica", "eletroneuromiografia", "enmg"],
+      "conduta": ["imunoglobulina", "plasmaferese", "imunoglobulina iv"]
+    },
+    "feedback_tecnico": "A Síndrome de Guillain-Barré é uma polineuropatia desmielinizante inflamatória aguda pós-infecciosa (frequentemente associada ao Campylobacter jejuni)[span_13](start_span)[span_13](end_span)[span_14](start_span)[span_14](end_span). Apresenta fraqueza flácida, simétrica e ascendente, com arreflexia e alteração do 2º neurônio motor[span_15](start_span)[span_15](end_span)[span_16](start_span)[span_16](end_span). O líquor revela a clássica 'dissociação proteínocitológica' (proteína elevada com contagem de células normal)[span_17](start_span)[span_17](end_span)[span_18](start_span)[span_18](end_span). O tratamento para encurtar o curso da doença é feito com Imunoglobulina IV ou Plasmaférese (Corticoides NÃO são indicados)[span_19](start_span)[span_19](end_span)[span_20](start_span)[span_20](end_span)."
+  },
+  {
+    "id": "miastenia_gravis",
+    "nome": "Miastenia Gravis",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "anormalidade_timo": 3.0, "mulher_jovem": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "fatigabilidade_muscular": 35, "ptose_palpebral": 30, "diplopia": 25, "piora_ao_fim_do_dia": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["anticorpo_anti_achr_positivo"],
+      "exclusao_ativa": ["sensibilidade_normal", "pupilas_normais"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Anticolinesterásico (Piridostigmina) e investigação de Timoma por TC de Tórax"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Eletroneuromiografia (ENMG)", "Dosagem de Anti-AChR", "TC de Tórax"]
+    },
+    "vigneta": "Mulher de 26 anos relata fraqueza nos braços ao pentear os cabelos e queda das pálpebras (ptose palpebral) associada a visão dupla (diplopia). Refere que acorda bem pela manhã, mas os sintomas pioram significativamente ao longo do dia e após esforços (fatigabilidade). Exame: sensibilidade e reflexos normais.",
+    "respostas_esperadas": {
+      "diagnostico": ["miastenia gravis", "miastenia"],
+      "exames": ["anti-achr", "enmg", "eletroneuromiografia", "tc de torax", "teste do edrofonio"],
+      "conduta": ["piridostigmina", "mestinon", "timectomia", "anticolinesterasico"]
+    },
+    "feedback_tecnico": "A Miastenia Gravis é uma doença autoimune com produção de anticorpos contra os receptores de acetilcolina (Anti-AChR) na placa motora[span_21](start_span)[span_21](end_span). A marca registrada é a fatigabilidade (fraqueza que piora com o movimento e melhora no repouso), acometendo frequentemente a musculatura ocular extrínseca[span_22](start_span)[span_22](end_span)[span_23](start_span)[span_23](end_span). Cerca de 75% dos pacientes apresentam alteração no timo (hiperplasia ou timoma)[span_24](start_span)[span_24](end_span). O tratamento sintomático inicial é feito com Piridostigmina[span_25](start_span)[span_25](end_span)."
+  },
+  {
+    "id": "esclerose_lateral_amiotrofica",
+    "nome": "Esclerose Lateral Amiotrófica (ELA)",
+    "prevalencia_base": 10,
+    "01_campo_modulador": {
+      "pesos": { "idade_maior_50_anos": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "miofasciculacoes": 35, "fraqueza_assimétrica": 30, "hiperreflexia_com_atrofia": 35 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["sinais_primeiro_e_segundo_neuronio"],
+      "exclusao_ativa": ["sem_alteracoes_sensitivas", "esfincteres_preservados"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Suporte multidisciplinar, Riluzol e planejamento ventilatório"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Eletroneuromiografia (ENMG)", "RM de Coluna (Exclusão)"]
+    },
+    "vigneta": "Homem de 62 anos é avaliado por fraqueza progressiva no pé direito há 1 ano (arrastando o pé). Ao exame físico, nota-se nítida atrofia e miofasciculações em panturrilha e língua (2º neurônio), associadas a hiperreflexia generalizada e sinal de Babinski bilateral (1º neurônio). Exame de sensibilidade totalmente normal.",
+    "respostas_esperadas": {
+      "diagnostico": ["ela", "esclerose lateral amiotrofica"],
+      "exames": ["enmg", "eletroneuromiografia", "ressonancia"],
+      "conduta": ["riluzol", "suporte", "suporte ventilatorio"]
+    },
+    "feedback_tecnico": "A ELA é uma doença degenerativa que afeta simultaneamente o 1º Neurônio Motor (gerando espasticidade, hiperreflexia e Babinski) e o 2º Neurônio Motor (causando atrofia, cãibras e miofasciculações - palavra-chave de prova)[span_26](start_span)[span_26](end_span)[span_27](start_span)[span_27](end_span). Caracteristicamente, NÃO há alterações sensitivas e o controle esfincteriano/ocular é preservado[span_28](start_span)[span_28](end_span)[span_29](start_span)[span_29](end_span). O diagnóstico é de exclusão e o tratamento farmacológico é o Riluzol[span_30](start_span)[span_30](end_span)[span_31](start_span)[span_31](end_span)."
+  },
+  {
+    "id": "esclerose_multipla",
+    "nome": "Esclerose Múltipla (EM)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "mulher_idade_fertil": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "neurite_optica": 35, "sintomas_disseminados_tempo_espaco": 30, "neuralgia_trigemeo_jovem": 25, "sinal_lhermitte": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["placas_desmielinizantes_rm", "bandas_oligoclonais_liquor"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Pulsoterapia com Corticoide no surto e Imunomoduladores para manutenção"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["RM de Crânio e Coluna com contraste", "Análise de Líquor (IgG)"]
+    },
+    "vigneta": "Mulher de 28 anos relata perda súbita e dolorosa da visão no olho esquerdo (neurite óptica) tratada há 6 meses com melhora parcial. Hoje dá entrada com dormência e fraqueza em membros inferiores e sensação de choque que desce pela coluna ao flexionar o pescoço (sinal de Lhermitte). RM de crânio revela múltiplas lesões hiperintensas em substância branca periventricular.",
+    "respostas_esperadas": {
+      "diagnostico": ["esclerose multipla", "em"],
+      "exames": ["rm", "ressonancia", "bandas oligoclonais", "liquor"],
+      "conduta": ["pulsoterapia", "metilprednisolona", "corticoide", "interferon", "glatiramer"]
+    },
+    "feedback_tecnico": "A Esclerose Múltipla é uma doença autoimune desmielinizante do SNC que cursa com 'disseminação no tempo e no espaço' (múltiplos surtos em locais diferentes do SNC)[span_32](start_span)[span_32](end_span)[span_33](start_span)[span_33](end_span). A neurite óptica e a neuralgia do trigêmeo em jovens são apresentações clássicas[span_34](start_span)[span_34](end_span)[span_35](start_span)[span_35](end_span). A RM com contraste demonstra as placas desmielinizantes e o líquor evidencia bandas oligoclonais de IgG[span_36](start_span)[span_36](end_span)[span_37](start_span)[span_37](end_span). Os surtos agudos são tratados com Pulsoterapia de Corticoide[span_38](start_span)[span_38](end_span)[span_39](start_span)[span_39](end_span)."
+  },
+  {
+    "id": "hemisseccao_medular_brown_sequard",
+    "nome": "Síndrome de Brown-Séquard (Hemissecção Medular)",
+    "prevalencia_base": 10,
+    "01_campo_modulador": {
+      "pesos": { "trauma_penetrante_faca_projetil": 4.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "paralisia_homolateral": 35, "perda_propriocepcao_homolateral": 35, "perda_termotatica_contralateral": 35 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["dissociacao_sensitiva_e_motora_cruzada"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Estabilização medular e avaliação neurocirúrgica urgência"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["RM de Coluna Torácica/Cervical", "TC de Coluna"]
+    },
+    "vigneta": "Paciente de 25 anos, vítima de ferimento por arma branca (faca) na região dorsal esquerda. Exame neurológico revela: perda da força motora e da propriocepção/vibração na perna esquerda (homolateral à lesão), associada à perda da sensibilidade dolorosa e térmica na perna direita (contralateral à lesão).",
+    "respostas_esperadas": {
+      "diagnostico": ["brown sequard", "sindrome de brown sequard", "hemisseccao medular"],
+      "exames": ["rm de coluna", "rm", "ressonancia", "tc de coluna"],
+      "conduta": ["estabilizacao", "cirurgia", "neurocirurgia", "descompressao"]
+    },
+    "feedback_tecnico": "A Síndrome de Brown-Séquard ocorre por hemissecção da medula[span_40](start_span)[span_40](end_span). Devido ao cruzamento das vias no SNC: a via motora (piramidal) e a coluna posterior (tato epicrítico/propriocepção) perdem a função do MESMO LADO da lesão (homolateral); enquanto o trato espinotalamico lateral (dor e temperatura) cruza logo na entrada da medula, gerando perda sensitiva do LADO OPOSTO (contralateral)[span_41](start_span)[span_41](end_span)."
+  }
+]
