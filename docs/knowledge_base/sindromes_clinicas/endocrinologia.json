@@ -1,0 +1,86 @@
+[
+  {
+    "id": "doenca_de_graves",
+    "nome": "Doença de Graves",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "mulher": 2.0, "meia_idade": 1.5, "historico_autoimune": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "palpitacoes": 20, "perda_de_peso": 20, "tremores": 15, "bocio": 25, "exoftalmia": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["anti_trab_positivo"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Controle sintomático com beta-bloqueador e antitireoidianos"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["TSH", "T4 Livre", "Anti-TRAB"]
+    },
+    "vigneta": "Mulher de 35 anos queixa-se de palpitações, irritabilidade e perda de peso nos últimos 2 meses, apesar de aumento do apetite. Ao exame físico: taquicárdica (110 bpm), presença de bócio difuso indolor e exoftalmia. Laboratório mostra TSH suprimido e T4 livre elevado.",
+    "respostas_esperadas": {
+      "diagnostico": ["graves", "doenca de graves", "hipertireoidismo"],
+      "exames": ["anti-trab", "trab"],
+      "conduta": ["antitireoidiano", "metimazol", "propiltiouracil", "beta-bloqueador"]
+    },
+    "feedback_tecnico": "O diagnóstico etiológico do hipertireoidismo primário neste caso é a Doença de Graves. O anticorpo Anti-TRAB é positivo em 100% dos doentes com essa condição[span_0](start_span)[span_0](end_span)."
+  },
+  {
+    "id": "hipotireoidismo_coronariopata",
+    "nome": "Hipotireoidismo no Coronariopata",
+    "prevalencia_base": 10,
+    "01_campo_modulador": {
+      "pesos": { "doenca_arterial_coronariana": 3.0, "idoso": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "astenia": 20, "constipacao": 15, "intolerancia_frio": 15, "bradicardia": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["tsh_elevado", "t4_baixo"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Reposição hormonal muito lenta e gradual"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["TSH", "T4 Livre", "ECG", "Troponina se dor"]
+    },
+    "vigneta": "Homem de 72 anos, com história de infarto agudo do miocárdio prévio e angina estável (coronariopata). Traz exames de rotina evidenciando TSH de 35 mUI/L e T4 livre baixo. Queixa-se apenas de lentidão e constipação. A equipe planeja iniciar levotiroxina.",
+    "respostas_esperadas": {
+      "diagnostico": ["hipotireoidismo", "hipotireoidismo primario"],
+      "exames": ["ecg", "eletrocardiograma"],
+      "conduta": ["t4 lento", "dose baixa", "reposicao lenta", "iniciar lentamente"]
+    },
+    "feedback_tecnico": "O coronariopata é perigoso pois geralmente tem uma obstrução[span_1](start_span)[span_1](end_span). Aumentar a demanda cardíaca subitamente dando T4 pode descompensá-lo[span_2](start_span)[span_2](end_span). O tratamento exige dar o hormônio lentamente pro coração se acostumar[span_3](start_span)[span_3](end_span)."
+  },
+  {
+    "id": "insuficiencia_adrenal_primaria",
+    "nome": "Insuficiência Adrenal Primária (Doença de Addison)",
+    "prevalencia_base": 5,
+    "01_campo_modulador": {
+      "pesos": { "doencas_autoimunes_associadas": 2.0, "tuberculose_previa": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "astenia_intensa": 20, "perda_de_peso": 15, "hipotensao": 30, "hiperpigmentacao": 35 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["cortisol_baixo", "aldosterona_baixa"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Reposição imediata de glicocorticoide e suporte volêmico"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Cortisol Basal", "ACTH", "Sódio e Potássio"]
+    },
+    "vigneta": "Paciente de 40 anos chega à emergência com fadiga extrema, perda de peso inexplicada e tontura ao levantar-se. Ao exame físico: PA 85x50 mmHg e hiperpigmentação difusa da pele e mucosas. Laboratório inicial: hiponatremia (Na 128) e hipercalemia (K 5.8).",
+    "respostas_esperadas": {
+      "diagnostico": ["addison", "insuficiencia adrenal primaria", "insuficiência suprarrenal"],
+      "exames": ["cortisol", "acth", "aldosterona"],
+      "conduta": ["glicocorticoide", "hidrocortisona", "corticoide", "mineralocorticoide"]
+    },
+    "feedback_tecnico": "O quadro de hiperpigmentação, hiponatremia e hipercalemia indica insuficiência primária. Se a doença for primária (Addison), o cortisol vai baixar e a aldosterona também[span_4](start_span)[span_4](end_span). Na secundária, apenas o cortisol abaixa, poupando a aldosterona[span_5](start_span)[span_5](end_span). Achados clínicos específicos diferenciam a primária da secundária[span_6](start_span)[span_6](end_span)."
+  }
+]
