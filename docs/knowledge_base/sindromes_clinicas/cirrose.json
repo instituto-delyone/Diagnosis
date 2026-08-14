@@ -1,0 +1,114 @@
+[
+  {
+    "id": "peritonite_bacteriana_espontanea",
+    "nome": "Peritonite Bacteriana Espontânea (PBE)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "cirrose_com_ascite": 3.0, "pbe_previa": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "febre": 25, "dor_abdominal": 25, "encefalopatia_piora": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["pmn_liquido_ascitico_maior_250"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Cefotaxima EV e Profilaxia de SHR com Albumina"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Paracentese Diagnóstica", "Contagem de Neutrófilos/PMN", "Cultura de Líquido Ascítico"]
+    },
+    "vigneta": "Paciente de 58 anos, cirrótico por vírus C com ascite volumosa, dá entrada com febre (38,2ºC), dor abdominal difusa e piora do estado mental. É realizada paracentese diagnóstica, revelando líquido citrino com contagem de Polimorfonucleares (PMN) de 380/mm³.",
+    "respostas_esperadas": {
+      "diagnostico": ["pbe", "peritonite bacteriana espontanea", "peritonite"],
+      "exames": ["paracentese", "pmn", "contagem de neutrofilos"],
+      "conduta": ["cefotaxima", "ceftriaxone", "albumina", "albumina ev"]
+    },
+    "feedback_tecnico": "A PBE é a infecção monobacteriana do líquido ascítico sem foco intra-abdominal cirúrgico (translocação bacteriana)[span_2](start_span)[span_2](end_span). O diagnóstico é confirmado pelo achado de PMN >= 250/mm³ no líquido ascítico[span_3](start_span)[span_3](end_span). O tratamento de escolha é Cefotaxima EV por 5 dias e a prevenção da Síndrome Hepatorrenal exige infusão de Albumina EV (1,5g/kg no 1º dia e 1g/kg no 3º dia)[span_4](start_span)[span_4](end_span)."
+  },
+  {
+    "id": "encefalopatia_hepatica_hda",
+    "nome": "Encefalopatia Hepática Precipitada por HDA",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "cirrose_conhecida": 3.0, "sangramento_digestivo": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "inversao_sono_vigilia": 20, "asterixis_flapping": 35, "rebaixamento_consciencia": 25 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["hiperamonemia_clinica"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Lactulona e Rifaximina (Acidificação intestinal) + Tratamento da causa base"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Avaliação Clínica de Asterixis", "Endoscopia Digestiva Alta (HDA)"]
+    },
+    "vigneta": "Paciente cirrótico por álcool apresenta episódio de melena (hemorragia digestiva alta) há 24h. Trazido à emergência sonolento, desorientado no tempo e espaço, apresentando inversão do ciclo sono-vigília e presença de asterixis (flapping) ao estender os punhos.",
+    "respostas_esperadas": {
+      "diagnostico": ["encefalopatia", "encefalopatia hepatica"],
+      "exames": ["eda", "endoscopia", "amonia"],
+      "conduta": ["lactulona", "rifaximina", "acidificar"]
+    },
+    "feedback_tecnico": "A hemorragia digestiva alta desencadeia encefalopatia hepática pois a digestão do sangue no intestino gera excesso de amônia[span_5](start_span)[span_5](end_span). O pH básico favorece a formação de NH3 (lipossolúvel e neurotóxica)[span_6](start_span)[span_6](end_span). O tratamento exige reverter o sangramento e acidificar o meio intestinal com Lactulona (para transformar NH3 em NH4+ e excretar) associada à Rifaximina (para reduzir a flora produtora de amônia)[span_7](start_span)[span_7](end_span)."
+  },
+  {
+    "id": "doenca_de_wilson",
+    "nome": "Doença de Wilson",
+    "prevalencia_base": 5,
+    "01_campo_modulador": {
+      "pesos": { "jovem": 3.0, "historia_familiar": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "hepatopatia_inexplicada": 25, "sintomas_neuropsiquiatricos": 30, "aneis_kayser_fleischer": 40 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["ceruloplasmina_baixa"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Quelante de cobre (Trientina/Penicilamina)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Ceruloplasmina Sérica", "Cobre Urinário de 24h", "Exame com Lâmpada de Fenda"]
+    },
+    "vigneta": "Jovem de 19 anos é avaliado por quadro de distonia, tremores e alteração de comportamento há alguns meses, associados à elevação de transaminases de origem indeterminada. A avaliação na lâmpada de fenda pelo oftalmologista revela anéis castanho-esverdeados na margem da córnea (Anéis de Kayser-Fleischer).",
+    "respostas_esperadas": {
+      "diagnostico": ["wilson", "doenca de wilson", "acumulo de cobre"],
+      "exames": ["ceruloplasmina", "lampada de fenda", "cobre urinario"],
+      "conduta": ["trientina", "penicilamina", "quelante", "quelante de cobre"]
+    },
+    "feedback_tecnico": "A Doença de Wilson é uma desordem genética na excreção biliar de cobre (mutação ATP7B)[span_8](start_span)[span_8](end_span)[span_9](start_span)[span_9](end_span). O excesso de cobre deposita-se no fígado e SNC[span_10](start_span)[span_10](end_span)[span_11](start_span)[span_11](end_span). Cerca de 98% dos pacientes com lesão no SNC apresentam os anéis de Kayser-Fleischer na córnea[span_12](start_span)[span_12](end_span)[span_13](start_span)[span_13](end_span). O exame confirmatório de escolha é a dosagem de Ceruloplasmina baixa (associada ao cobre urinário elevado)[span_14](start_span)[span_14](end_span)[span_15](start_span)[span_15](end_span). O tratamento exige uso de quelantes como Trientina ou Penicilamina[span_16](start_span)[span_16](end_span)[span_17](start_span)[span_17](end_span)."
+  },
+  {
+    "id": "sindrome_hepatorrenal",
+    "nome": "Síndrome Hepatorrenal Tipo 1 (SHR)",
+    "prevalencia_base": 10,
+    "01_campo_modulador": {
+      "pesos": { "cirrose_grave_child_c": 3.0, "uso_de_diureticos_ou_pbe": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "oligurismo": 25, "elevacao_creatinina": 35, "ausencia_resposta_volume": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["vasoconstricao_renal_funcional", "descarte_outras_causas_ira"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Albumina EV + Vasoconstritor Esplâncnico (Terlipressina ou Noradrenalina)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Creatinina Sérica", "USG Renal (Exclusão Parênquima)", "EAS"]
+    },
+    "vigneta": "Paciente cirrótico grave, internado em uso de diuréticos, evolui em 5 dias com oligúria e duplicação da creatinina basal (atingindo Cr 2,8 mg/dL). Foi realizada a suspensão de diuréticos e expansão volêmica com Albumina por 48h, sem melhora da função renal. USG renal e EAS normais.",
+    "respostas_esperadas": {
+      "diagnostico": ["shr", "sindrome hepatorrenal", "hepatorrenal"],
+      "exames": ["creatinina", "usg renal", "eas"],
+      "conduta": ["terlipressina", "noradrenalina", "albumina", "terlipressina e albumina"]
+    },
+    "feedback_tecnico": "A SHR é uma complicação funcional causada pela vasodilatação esplâncnica extrema que gera vasoconstrição renal reflexa severa (teoria underfill)[span_18](start_span)[span_18](end_span). A SHR Tipo 1 possui progressão rápida da IRA (dobra a creatinina para > 2,5 em < 2 semanas)[span_19](start_span)[span_19](end_span). O diagnóstico é de exclusão (sem resposta à expansão com albumina e sem lesão parenquimatosa)[span_20](start_span)[span_20](end_span). O tratamento medicamentoso de escolha é Albumina EV associada a Vasoconstritor Esplâncnico (Terlipressina ou Noradrenalina)[span_21](start_span)[span_21](end_span)."
+  }
+]
