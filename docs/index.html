@@ -195,29 +195,28 @@
    * ==========================================
    * 1. MANIFESTO DO CONHECIMENTO (O GPS)
    * ==========================================
-   * É aqui que o algoritmo sabe onde buscar os arquivos.
-   * O caminho "../../" volta 2 pastas (saindo de docs/diagnoses/) para achar a knowledge_base.
+   * Rota ajustada com base no print da árvore de arquivos do GitHub.
    */
   const manifestoConhecimento = {
     "Clínica Médica": {
-      pasta: "../../knowledge_base/clinica_medica/",
+      pasta: "../knowledge_base/sindromes_clinicas/",
       arquivos: [
+        "endocrinologia.json",
         "ictericia.json",
-        "sindrome_metabolica_has.json",
         "sindrome_metabolica_diabetes.json",
-        "endocrinologia.json"
+        "sindrome_metabolica_has.json"
       ]
     },
     "Ginecologia e Obstetrícia": {
-      pasta: "../../knowledge_base/go/",
+      pasta: "../knowledge_base/go/",
       arquivos: []
     },
     "Pediatria": {
-      pasta: "../../knowledge_base/pediatria/",
+      pasta: "../knowledge_base/pediatria/",
       arquivos: []
     },
     "Cirurgia Geral": {
-      pasta: "../../knowledge_base/cirurgia/",
+      pasta: "../knowledge_base/cirurgia/",
       arquivos: []
     }
   };
@@ -265,7 +264,7 @@
       bancoDeDados.push({
         id: "demo_falha",
         nome: "Demonstração (Erro de Leitura)",
-        vigneta: "O sistema não conseguiu ler os arquivos JSON. Certifique-se de que publicou a pasta knowledge_base no GitHub e que o caminho (../../) está correto.",
+        vigneta: "O sistema não conseguiu ler os arquivos JSON. Verifique a propagação do servidor no GitHub Pages.",
         respostas_esperadas: { diagnostico: ["teste"], exames: ["teste"], conduta: ["teste"] },
         feedback_tecnico: "Modo de demonstração ativado por falha de sincronização."
       });
