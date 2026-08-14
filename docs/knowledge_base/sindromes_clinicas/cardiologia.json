@@ -1,0 +1,146 @@
+[
+  {
+    "id": "ic_descompensada_perfil_b",
+    "nome": "Insuficiência Cardíaca Descompensada (Perfil B - Quente e Úmido)",
+    "prevalencia_base": 30,
+    "01_campo_modulador": {
+      "pesos": { "icfer_previa": 3.0, "ma_adesao_medicamentosa_ou_hipertensao": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "dispneia_paroxistica_noturna": 35, "estertores_crepitantes_pulmonares": 35, "turgencia_jugular_patologica": 30, "edema_membros_inferiores": 25 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["criterios_de_framingham_positivos", "bnp_elevado_maior_100"],
+      "exclusao_ativa": ["sem_sinais_de_hipoperfusao_periferica"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Diurético de alça EV (Furosemida) + Vasodilatador (Nitrato/Nitroprussiato) mantendo Betabloqueador se sem choque"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Dosagem de BNP / NT-proBNP", "Raio-X de Tórax", "Ecocardiograma"]
+    },
+    "vigneta": "Paciente de 62 anos, portador de IC com fração de ejeção reduzida (ICFER), dá entrada na emergência por piora da dispneia aos mínimos esforços e orthopneia há 3 dias. Exame físico: PA 150x90 mmHg, FC 98 bpm, turgência jugular a 45º, estertores crepitantes em terços médios bilaterais e edema simétrico de MMII 3+/4+. Bem perfundido (quente e úmido).",
+    "respostas_esperadas": {
+      "diagnostico": ["ic descompensada", "insuficiencia cardiaca", "perfil b", "icfer descompensada"],
+      "exames": ["bnp", "nt-probnp", "rx de torax", "ecocardiograma"],
+      "conduta": ["furosemida", "diuretico", "nitrato", "nitroprussiato", "vasodilatador"]
+    },
+    "feedback_tecnico": "O paciente apresenta Insuficiência Cardíaca Agudamente Descompensada preenchendo critérios de Framingham (dispneia, turgência jugular, estertores, edema). O perfil hemodinâmico de Stevenson é B (Quente e Úmido = Congestionado sem Choque). O tratamento da fase aguda baseia-se na descongestão com Diurético de alça EV (Furosemida) associado a Vasodilatadores venosos/arteriais (Nitrato ou Nitroprussiato). Não se deve suspender o Betabloqueador bruscamente salvo se houver choque ou BAV avançado."
+  },
+  {
+    "id": "iam_com_supra_st_iamst",
+    "nome": "Infarto Agudo do Miocárdio com Supra de ST (IAMST)",
+    "prevalencia_base": 30,
+    "01_campo_modulador": {
+      "pesos": { "has_dm_tabagismo_dislipidemia": 3.0, "doenca_coronariana_previa": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "dor_retroesternal_em_opressao": 35, "irradiacao_mandibula_braco_esquerdo": 30, "suorese_diaforese_e_nausea": 20, "supra_st_maior_1mm_duas_derivacoes": 40 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["supradesnivelamento_de_st_no_ecg_10min"],
+      "exclusao_ativa": ["imagem_em_espelho_presente"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Terapia de Reperfusão imediata (Angioplastia Primária em < 90-120 min ou Trombolítico) + Dupla Antiagregação (AAS + Ticagrelor) + Anticoagulação"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Eletrocardiograma de 12 derivações (ECG em 10 min)", "Troponina Sérica", "Catarismo Cardíaco / Angiografia"]
+    },
+    "vigneta": "Homem de 56 anos, tabagista e hipertenso, procura a emergência com dor retroesternal em opressão de forte intensidade há 1 hora, irradiada para o membro superior esquerdo e mandíbula, acompanhada de diaforese fria e náuseas. ECG realizado nos primeiros 8 minutos demonstra supradesnivelamento do segmento ST de 2,5 mm em DII, DIII e aVF (parede inferior).",
+    "respostas_esperadas": {
+      "diagnostico": ["iamst", "iam com supra", "infarto com supra de st", "síndrome coronariana aguda"],
+      "exames": ["ecg", "eletrocardiograma", "troponina"],
+      "conduta": ["angioplastia", "icp", "cateterismo", "trombolitico", "tenecteplase", "aas e ticagrelor"]
+    },
+    "fisiopatologia_e_conduta": "O IAMST é uma emergência médica decorrente da oclusão coronariana aguda total por ruptura de placa aterosclerótica com trombo. O ECG deve ser realizado em até 10 minutos. O tempo é miocárdio: a terapia de reperfusão de escolha é a Angioplastia Primária (ICP) se tempo porta-balão < 90-120 min; caso contrário, indica-se Fibrinolítico (Tenecteplase/Alteplase em < 30 min). A terapia medicamentosa associada exige AAS + 2º antiagregante (Ticagrelor/Clopidogrel), anticoagulação e estatina."
+  },
+  {
+    "id": "disseccao_aguda_de_aorta",
+    "nome": "Dissecção Aguda de Aorta (Stanford A / B)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "hipertensao_arterial_grave_refrataria": 3.5, "sindrome_de_marfan_ou_ehlers_danlos": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "dor_toracica_lacerante_rasgando": 40, "irradiacao_para_o_dorso_interescapular": 35, "assimetria_de_pulsos_ou_pa_entre_membros": 35, "sopro_insuficiencia_aortica_novo": 25 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["flap_intimal_demonstrado_em_angiotc"],
+      "exclusao_ativa": ["diferenca_de_pa_maior_20mmhg"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Controle rigoroso da PA (PAS 100-110) e FC (< 60) com Betabloqueador EV (Esmolol/Labetalol) + Nitroprussiato e Cirurgia urgente se Stanford A"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["AngioTC de Tórax e Aorta (Exame de Escolha)", "Ecocardiograma Transesofágico (ETE)", "RX de Tórax (Alargamento do Mediastino)"]
+    },
+    "vigneta": "Homem de 58 anos com histórico de hipertensão descontrolada é admitido por dor torácica súbita, de intensidade máxima no início, descrita como uma sensação de 'rasgo/laceração' com irradiação para a região interescapular nas costas. Exame físico: PA em braço direito 180x110 mmHg e braço esquerdo 130x70 mmHg (diferença de 50 mmHg), pulse esquerdo fraco e sopro diastólico em foco aórtico.",
+    "respostas_esperadas": {
+      "diagnostico": ["disseccao de aorta", "disseccao aguda de aorta", "stanford a"],
+      "exames": ["angiotc", "angiotc de aorta", "ecocardiograma transesofagico", "ete"],
+      "conduta": ["esmolol", "betabloqueador", "nitroprussiato", "cirurgia", "controle de pa e fc"]
+    },
+    "feedback_tecnico": "A Dissecção Aguda de Aorta ocorre pela laceração da camada íntima com criação de um falso lúmen. Cursa com dor torácica lancinante de início súbito irradiada para o dorso e assimetria de pulsos/pressão entre os membros (> 20 mmHg). A classificação de Stanford divide em Tipo A (envolve aorta ascendente - cirurgia de emergência) e Tipo B (apenas aorta descendente - tratamento clínico). A conduta imediata exige redução da PA (PAS 100-110 mmHg) e da FC (< 60 bpm) com Betabloqueador EV."
+  },
+  {
+    "id": "fibrilacao_atrial_com_resposta_alta",
+    "nome": "Fibrilação Atrial com Resposta Ventricular Alta (FA com RVA)",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "valvopatia_mitral_ou_hipertensao": 2.5, "hipertiroidismo_ou_pos_operatorio": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "palpitacoes_taquicardia": 30, "intervalos_rr_totalmente_irregulares": 40, "ausencia_de_onda_p_ecg": 40, "deficit_de_pulso": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["ecg_com_ritmo_irregularmente_irregular_sem_onda_p"],
+      "exclusao_ativa": ["calculo_chads_vasc_para_anticoagulacao"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Cardioversão Elétrica Sincronizada (50-100J) se INSTÁVEL; Controle de Frequência (Betabloqueador/Diltiazem) se ESTÁVEL"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Eletrocardiograma de 12 derivações", "Ecocardiograma", "Função Tireoidiana (TSH)"]
+    },
+    "vigneta": "Mulher de 67 anos é trazida à emergência com palpitações, tontura e mal-estar há 4 horas. Sinais vitais: PA 80x50 mmHg (hipotensão), FC 165 bpm, SatO2 91% e estertores pulmonares na ausculta. O ECG de 12 derivações demonstra ritmo taquicárdico com QRS estreito, ausência de onda P e intervalos R-R completamente irregulares.",
+    "respostas_esperadas": {
+      "diagnostico": ["fibrilacao atrial", "fa", "fa com rva", "taquiarrtimia"],
+      "exames": ["ecg", "eletrocardiograma", "ecocardiograma"],
+      "conduta": ["cardioversao eletrica", "cardioversao sincronizada", "choque sincronizado", "cardioversao"]
+    },
+    "feedback_tecnico": "A Fibrilação Atrial (FA) é a arritmia sustentada mais comum, caracterizada no ECG por atividade atrial desorganizada (ausência de onda P) e resposta ventricular com intervalos R-R irregularmente irregulares. Diante de uma taquiarritmia com sinais de instabilidade hemodinâmica (hipotensão, angina, EAP, alteração da consciência), a conduta imediata mandatória é a Cardioversão Elétrica Sincronizada. Se o paciente estivesse estável, a conduta seria o controle de frequência com Betabloqueador ou Diltiazem."
+  },
+  {
+    "id": "pcr_ritmo_chocavel_fv_tvsp",
+    "nome": "Parada Cardiorrespiratória em Ritmo Chocável (FV / TV sem Pulso)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "isquemia_miocardica_aguda_iam": 3.5, "disturbio_hidroeletrolitico_grave": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "irresponsividade_anoxia": 40, "ausencia_de_pulso_carotideo": 40, "respiracao_agonica_gasping": 30, "fv_tvsp_no_monitor": 40 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["fibrilacao_ventricular_ou_taquicardia_ventricular_sem_pulso"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "EXTREMO",
+      "conduta_emergencial": "Desfibrilação imediata (Choque único 200J Bifásico) + RCP de alta qualidade (100-120/min) + Adrenalina a cada 3-5 min + Amiodarona"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Checagem de Pulso em Central (< 10s)", "Análise de Ritmo no Monitor/DEA", "Capnografia Cúpula (EtCO2)"]
+    },
+    "vigneta": "Homem de 52 anos apresenta colapso súbito no leito do PS. Ao exame: irresponsivo, sem movimentos respiratórios e sem pulso carotídeo central palpável. O monitor cardíaco é instalado imediatamente e revela Fibrilação Ventricular (FV) - ritmo caótico e desorganizado.",
+    "respostas_esperadas": {
+      "diagnostico": ["pcr", "parada cardiorrespiratoria", "fibrilacao ventricular", "fv", "tv sem pulso"],
+      "exames": ["monitor", "monitorizacao", "capnografia", "etco2"],
+      "conduta": ["desfibrilacao", "choque", "rcp", "massagem cardiaca", "adrenalina", "amiodarona"]
+    },
+    "feedback_tecnico": "Na PCR com ritmo chocável (Fibrilação Ventricular ou Taquicardia Ventricular Sem Pulso), a prioridade absoluta é a Desfibrilação precoce (choque único imediato) intercalada com 2 minutos de RCP de alta qualidade. As compressões devem ter frequência de 100-120/min e profundidade de 5-6 cm. A Adrenalina (1mg EV) é administrada após o 2º choque (a cada 3-5 min) e os antiarrítmicos (Amiodarona 300mg ou Lidocaína) são indicados a partir do 3º choque."
+  }
+]
