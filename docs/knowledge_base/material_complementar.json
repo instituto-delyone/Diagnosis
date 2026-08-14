@@ -33,5 +33,181 @@
     "diagnostico": "Síndrome clínica aguda de tosse, febre, dispneia e dor pleurítica. O diagnóstico é sacramentado pela presença de um novo infiltrado/consolidação na radiografia de tórax.",
     "tratamento": "Antibioticoterapia empírica direcionada aos patógenos mais comuns (ex: Amoxicilina, Macrolídeos ou Doxiciclina ambulatoriais). O escore CURB-65 guia a decisão entre tratamento em casa ou internação.",
     "particularidades": "Em pacientes idosos, a PAC tem apresentação traiçoeira: muitas vezes cursa sem febre ou tosse clássica, manifestando-se apenas como confusão mental aguda ou quedas frequentes."
+  },
+    "Insuficiência Cardíaca": {
+    "etiologia": "Geralmente secundária a doença arterial coronariana, hipertensão arterial crônica não controlada, valvopatias ou cardiomiopatias primárias.",
+    "fisiopatologia": "Incapacidade do coração de bombear sangue em volume adequado ou falha no relaxamento (diástole), gerando hiperativação compensatória do sistema SRAA e simpático, o que piora o remodelamento cardíaco.",
+    "diagnostico": "Clínico (Critérios de Framingham), apoiado por elevação de BNP/NT-proBNP e ecocardiograma para avaliar a fração de ejeção (ICFEr vs ICFEp).",
+    "tratamento": "Terapia quádrupla para ICFEr: iECA/BRA/ARNI, Betabloqueadores, Antagonistas de Mineralocorticoides (Espironolactona) e inibidores de SGLT2. Diuréticos de alça para alívio sintomático (congestão).",
+    "particularidades": "A presença de B3 (terceira bulha) é um forte indicador de sobrecarga de volume e falência ventricular sistólica na emergência."
+  },
+  "Síndrome Coronariana Aguda": {
+    "etiologia": "Ruptura ou erosão de placa aterosclerótica rica em lipídios, seguida de agregação plaquetária e formação de trombo na artéria coronária.",
+    "fisiopatologia": "A oclusão parcial (IAMSSST/Angina Instável) ou total (IAMCSST) gera isquemia miocárdica, necrose tecidual irreversível e risco de arritmias letais.",
+    "diagnostico": "Eletrocardiograma em até 10 minutos (buscando supra de ST) e dosagem de Troponina ultrassensível. Dor torácica típica (opressiva, irradiada para braço/mandíbula).",
+    "tratamento": "Mona (Morfina, Oxigênio se hipoxemia, Nitrato, AAS) + Clopidogrel/Ticagrelor. Reperfusão imediata no IAMCSST: Angioplastia primária (ICP) ou trombolíticos.",
+    "particularidades": "Mulheres, idosos e diabéticos frequentemente apresentam 'equivalentes isquêmicos' (dispneia súbita, síncope ou epigastralgia) em vez da clássica dor no peito."
+  },
+  "Fibrilação Atrial": {
+    "etiologia": "Idade avançada, hipertensão, apneia do sono, obesidade, hipertireoidismo e insuficiência cardíaca são os principais gatilhos.",
+    "fisiopatologia": "Desorganização elétrica atrial com múltiplos focos de disparo rápido, levando à perda da contração atrial efetiva e risco de estase sanguínea no apêndice atrial esquerdo.",
+    "diagnostico": "ECG mostrando ausência de ondas P, ritmo RR irregularmente irregular e complexos QRS estreitos.",
+    "tratamento": "Controle de frequência (Betabloqueadores ou BCC) vs Controle de ritmo (Amiodarona, Cardioversão). Avaliação obrigatória do escore CHA2DS2-VASc para instituir anticoagulação.",
+    "particularidades": "É a arritmia sustentada mais comum do mundo e uma das principais causas de Acidente Vascular Cerebral (AVC) isquêmico cardioembólico."
+  },
+
+  "Enxaqueca (Migrânea)": {
+    "etiologia": "Doença neurológica primária com forte predisposição genética, desencadeada por estresse, privação de sono, jejum ou flutuações hormonais.",
+    "fisiopatologia": "Depressão alastrante cortical associada à ativação do sistema trigeminovascular, com liberação de neuropeptídios inflamatórios (CGRP) que causam vasodilatação e dor.",
+    "diagnostico": "Clínico: crises de cefaleia unilateral, pulsátil, intensidade moderada/grave, durando 4 a 72h, associada a náuseas, fotofobia e fonofobia.",
+    "tratamento": "Ataque: Triptanos, AINEs ou antieméticos precocemente. Profilaxia (se > 4 crises/mês): Betabloqueadores, Topiramato, Amitriptilina ou inibidores de CGRP.",
+    "particularidades": "O uso excessivo de analgésicos comuns pode gerar a 'Cefaleia por Uso Excessivo de Medicamentos', cronificando e piorando a migrânea."
+  },
+  "Cefaleia do Tipo Tensão": {
+    "etiologia": "Cefaleia primária mais prevalente, intimamente ligada a tensão muscular, estresse físico/emocional e postura inadequada.",
+    "fisiopatologia": "Sensibilização das vias periféricas e centrais da dor sem a intensa inflamação neurogênica vista na enxaqueca; há aumento da tensão na musculatura pericraniana.",
+    "diagnostico": "Cefaleia bilateral, sensação de aperto/pressão (faixa), intensidade leve a moderada, sem agravamento por atividade física de rotina e sem náuseas importantes.",
+    "tratamento": "Ataque: Analgésicos simples (Paracetamol, Ibuprofeno). Profilaxia: Antidepressivos tricíclicos (Amitriptilina) e relaxamento muscular/fisioterapia.",
+    "particularidades": "Diferente da enxaqueca, o paciente com cefaleia tensional geralmente consegue continuar trabalhando e não busca refúgio em quartos escuros."
+  },
+  "Hemorragia Subaracnoide (HSA)": {
+    "etiologia": "Ruptura de aneurisma sacular intracraniano (85% dos casos não traumáticos) ou malformações arteriovenosas.",
+    "fisiopatologia": "Extravasamento súbito de sangue para o espaço subaracnoideo, gerando irritação meníngea aguda, aumento drástico da pressão intracraniana e risco de vasoespasmo isquêmico dias depois.",
+    "diagnostico": "Apresentação clássica de 'a pior dor de cabeça da vida' (thunderclap headache). TC de crânio sem contraste imediata; se TC normal e alta suspeita, fazer punção lombar (líquor xantocrômico).",
+    "tratamento": "Controle estrito da PA, prevenção de vasoespasmo com Nimodipino e intervenção precoce do aneurisma (clipagem cirúrgica ou embolização endovascular).",
+    "particularidades": "Metade dos pacientes que sobrevivem à ruptura inicial pode evoluir com ressangramento fatal ou isquemia tardia se não houver intervenção rápida."
+  },
+
+  "Cirrose Hepática Alcoólica": {
+    "etiologia": "Consumo crônico e excessivo de etanol, geralmente superior a 30-50g/dia por mais de 10 anos.",
+    "fisiopatologia": "O metabolismo do álcool gera acetaldeído e estresse oxidativo, ativando as células estreladas hepáticas que depositam colágeno, substituindo o parênquima sadio por fibrose e nódulos regenerativos.",
+    "diagnostico": "Clínico-laboratorial (estigmas de hepatopatia, plaquetopenia, hipoalbuminemia, TAP alargado) e imagem (USG mostrando fígado de bordos rombos). O padrão-ouro histórico é a biópsia.",
+    "tratamento": "Abstinência alcoólica rigorosa. Manejo das complicações: diuréticos para ascite, betabloqueadores não seletivos para varizes esofágicas e rastreio semestral de hepatocarcinoma (USG).",
+    "particularidades": "Relação TGO > TGP (AST > ALT) na proporção de 2:1 é um achado laboratorial clássico da hepatopatia alcoólica."
+  },
+  "Doença Hepática Gordurosa Não Alcoólica (DHGNA / NASH)": {
+    "etiologia": "Manifestação hepática da Síndrome Metabólica (obesidade central, resistência à insulina, dislipidemia e diabetes tipo 2).",
+    "fisiopatologia": "Acúmulo de triglicerídeos nos hepatócitos (esteatose) evoluindo para lipotoxicidade, inflamação (esteatoepatite - NASH) e fibrose progressiva.",
+    "diagnostico": "Exclusão de consumo de álcool e outras hepatopatias. USG abdominal mostra infiltração gordurosa. Elastografia hepática ajuda a graduar a fibrose sem biópsia.",
+    "tratamento": "Perda de peso (7 a 10%), dieta mediterrânea e controle dos fatores metabólicos (uso de agonistas de GLP-1 ou Pioglitazona). Vitamina E em pacientes não diabéticos com biópsia comprovada.",
+    "particularidades": "Está rapidamente se tornando a principal causa de cirrose e indicação de transplante hepático nos países desenvolvidos."
+  },
+  "Encefalopatia Hepática": {
+    "etiologia": "Complicação neurológica da insuficiência hepática severa ou da criação de shunts portossistêmicos.",
+    "fisiopatologia": "Incapacidade do fígado cirrótico de converter a amônia (neurotoxina proveniente da microbiota intestinal) em ureia, permitindo que ela atravesse a barreira hematoencefálica.",
+    "diagnostico": "Clínico: alteração do ciclo sono-vigília, confusão mental, letargia e presença de 'flapping' (asterixe). Gatilhos devem ser buscados (sangramento digestivo, constipação, infecção).",
+    "tratamento": "Correção do fator precipitante. Redução da amônia intestinal com uso de Lactulose e antibióticos não absorvíveis (Rifaximina ou Neomicina).",
+    "particularidades": "A dosagem de amônia sérica não tem boa correlação com a gravidade clínica e não deve ser usada para guiar a terapia em pacientes já diagnosticados."
+  },
+
+  "Asma": {
+    "etiologia": "Doença inflamatória crônica das vias aéreas com forte componente atópico/alérgico, associada a fatores genéticos e exposição a aeroalérgenos.",
+    "fisiopatologia": "Inflamação brônquica mediada por Th2 (eosinófilos/IgE) que gera hiperresponsividade, broncoconstrição reversível, edema de mucosa e hipersecreção de muco.",
+    "diagnostico": "História de sibilância, falta de ar e tosse (piora à noite). Espirometria mostrando padrão obstrutivo que reverte significativamente após uso de broncodilatador.",
+    "tratamento": "Base da terapia: Corticoides Inalatórios (CI) + LABA (ex: Formoterol). Corticoides sistêmicos e SABA apenas em crises agudas.",
+    "particularidades": "Ao contrário da DPOC, a obstrução do fluxo aéreo na asma é caracteristicamente reversível, embora o remodelamento brônquico crônico possa diminuir essa reversibilidade com a idade."
+  },
+  "Doença Pulmonar Obstrutiva Crônica (DPOC)": {
+    "etiologia": "Exposição crônica a partículas nocivas, sendo o tabagismo o fator causal em mais de 80% dos casos. Queima de biomassa (fogão a lenha) é relevante no Brasil.",
+    "fisiopatologia": "Inflamação crônica neutrofílica/macrofágica que gera destruição do parênquima (enfisema) e fibrose das pequenas vias aéreas (bronquite crônica), com obstrução irreversível.",
+    "diagnostico": "Espirometria pós-broncodilatador com relação VEF1/CVF < 0.70. Pacientes tipicamente > 40 anos com tosse crônica, expectoração e dispneia progressiva.",
+    "tratamento": "Cessação do tabagismo. Broncodilatadores de longa duração (LAMA e LABA). Corticoide inalatório reservado para pacientes com exacerbações frequentes ou perfil eosinofílico.",
+    "particularidades": "A oxigenoterapia contínua domiciliar e a interrupção do tabagismo são as únicas medidas comprovadas que aumentam a sobrevida nestes pacientes."
+  },
+  "Edema Agudo de Pulmão (Cardiogênico)": {
+    "etiologia": "Descompensação aguda da insuficiência cardíaca esquerda (ex: crise hipertensiva, arritmias ou infarto agudo).",
+    "fisiopatologia": "Aumento abrupto da pressão hidrostática nos capilares pulmonares, forçando a transudação de fluido para o interstício e, posteriormente, para o interior dos alvéolos.",
+    "diagnostico": "Dispneia súbita e severa, ortopneia, expectoração espumosa e rósea, com estertores crepitantes bilaterais à ausculta. Rx de tórax mostra infiltrado alveolar em 'asa de borboleta'.",
+    "tratamento": "Vasodilatadores venosos/arteriais (Nitroglicerina), diuréticos de alça IV (Furosemida) e Suporte Ventilatório Não Invasivo (VNI - CPAP/BiPAP) para reduzir o trabalho respiratório.",
+    "particularidades": "O paciente caracteristicamente chega à emergência muito agitado, sentado à beira do leito, sudoreico e com extrema dificuldade de falar frases completas."
+  },
+
+  "Hiponatremia": {
+    "etiologia": "Desequilíbrio de água em relação ao sódio. Causas variam desde uso de diuréticos (tiazídicos), diarreia, até insuficiência cardíaca, cirrose e SIADH.",
+    "fisiopatologia": "Diluição do sódio extracelular causa gradiente osmótico, forçando o movimento de água para dentro das células, o que no SNC gera edema cerebral e sintomas neurológicos.",
+    "diagnostico": "Sódio sérico < 135 mEq/L. A investigação exige avaliar a volemia do paciente (hipovolêmico, euvolêmico ou hipervolêmico) e a osmolaridade urinária.",
+    "tratamento": "Reposição de NaCl 3% apenas em casos agudos severos sintomáticos. Correção restrição hídrica na SIADH. A correção deve ser LENTA para evitar mielinólise pontina.",
+    "particularidades": "A correção do sódio não deve ultrapassar 8 a 10 mEq/L nas primeiras 24 horas pelo risco da mortal Síndrome de Desmielinização Osmótica."
+  },
+  "Hipercalemia": {
+    "etiologia": "Principalmente disfunção renal (DRC ou IRA), acidose metabólica, retenção por medicamentos (IECA, Espironolactona) ou destruição tecidual massiva (Rabdomiólise).",
+    "fisiopatologia": "Aumento do potássio sérico despolariza a membrana celular em repouso, tornando o miocárdio gravemente instável e propenso a arritmias ventriculares letais.",
+    "diagnostico": "Potássio > 5.5 mEq/L. O ECG é mandatório: ondas T apiculadas (em 'tenda'), redução do intervalo QT, alargamento do QRS e, em casos graves, ritmo sinusoidal.",
+    "tratamento": "1º passo imediato: Gluconato de Cálcio IV para estabilizar o miocárdio. 2º passo: Insulina + Glicose e Beta-2 agonistas para jogar o K+ para dentro da célula. 3º: Furosemida ou resinas para excreção.",
+    "particularidades": "O Gluconato de Cálcio NÃO diminui os níveis de potássio no sangue; sua única função é impedir a parada cardíaca enquanto as outras drogas agem."
+  },
+  "Hipocalemia": {
+    "etiologia": "Perdas gastrointestinais (diarreia, vômitos severos), uso de diuréticos de alça/tiazídicos, ou shift intracelular (alcalose, uso de insulina).",
+    "fisiopatologia": "Redução do potássio extracelular causa hiperpolarização da membrana celular, gerando fraqueza muscular esquelética, íleo paralítico e atraso na repolarização ventricular.",
+    "diagnostico": "Potássio < 3.5 mEq/L. Achados no ECG: achatamento da onda T, depressão de segmento ST e presença da clássica Onda U.",
+    "tratamento": "Reposição de Cloreto de Potássio (KCl) via oral (preferível) ou intravenosa (lentamente e em acesso venoso central se altas doses, pois queima a veia periférica).",
+    "particularidades": "Pacientes com hipocalemia refratária frequentemente têm hipomagnesemia associada; o potássio só subirá após a correção prévia do magnésio."
+  },
+
+  "Hipotireoidismo": {
+    "etiologia": "A Tireoidite de Hashimoto (autoimune) é a causa número um no mundo com iodo suficiente. Pode ser iatrogênica pós-cirurgia ou radioterapia.",
+    "fisiopatologia": "Destruição dos folículos tireoidianos reduz a síntese de T3 e T4, diminuindo o metabolismo basal de todo o organismo e gerando acúmulo de glicosaminoglicanos (mixedema).",
+    "diagnostico": "TSH elevado com T4 livre baixo (hipotireoidismo primário). Presença de anticorpos Anti-TPO reforça a etiologia de Hashimoto.",
+    "tratamento": "Reposição contínua de Levotiroxina (T4 sintético) em jejum, ajustada periodicamente pelos níveis de TSH.",
+    "particularidades": "Sintomas clássicos incluem letargia, ganho de peso leve, intolerância ao frio, constipação crônica e queda do terço externo das sobrancelhas (sinal de madarose)."
+  },
+  "Hipertireoidismo (Doença de Graves)": {
+    "etiologia": "Distúrbio autoimune onde anticorpos estimuladores do receptor de TSH (TRAb) hiperativam a glândula tireoide.",
+    "fisiopatologia": "A estimulação contínua leva a hiperplasia glandular (bócio difuso) e liberação excessiva de T3/T4, causando estado hipermetabólico sistêmico e hipersensibilidade simpática.",
+    "diagnostico": "TSH suprimido com T4 livre elevado. TRAb positivo. Clínica de taquicardia, perda de peso com apetite preservado, tremores e intolerância ao calor.",
+    "tratamento": "Drogas antitireoidianas (Metimazol ou Propiltiouracil) e betabloqueadores para sintomas adrenérgicos. Terapias definitivas: Iodo radioativo ou tireoidectomia.",
+    "particularidades": "A oftalmopatia de Graves (exoftalmia, proptose ocular) e o mixedema pré-tibial são achados exclusivos dessa etiologia, não ocorrendo em outros tipos de hipertireoidismo."
+  },
+  "Insuficiência Adrenal": {
+    "etiologia": "Primária (Doença de Addison, autoimune/infecciosa) destruindo o córtex adrenal. Secundária por retirada abrupta de corticoides crônicos (supressão do eixo ACTH).",
+    "fisiopatologia": "Falta de glicocorticoides (cortisol) e mineralocorticoides (aldosterona na primária), gerando hipotensão severa, hipoglicemia e perda de controle do estresse.",
+    "diagnostico": "Cortisol basal matinal muito baixo (< 3 mcg/dL). Confirmação com teste de estímulo com ACTH sintético (Cosintropina). Hiponatremia e Hipercalemia são marcas da primária.",
+    "tratamento": "Reposição vitalícia de Glicocorticoides (Hidrocortisona) e Mineralocorticoides (Fludrocortisona). Dobrar/triplicar a dose em situações de doença ou cirurgia aguda.",
+    "particularidades": "A hiperpigmentação da pele e mucosas (principalmente gengivas) é exclusiva da doença primária (Addison) devido ao excesso compensatório de ACTH/MSH."
+  },
+
+  "Crise Tônico-Clônica Generalizada": {
+    "etiologia": "Descargas elétricas anormais e síncronas envolvendo ambos os hemisférios cerebrais. Pode ser idiopática (epilepsia) ou secundária (trauma, neuroinfecção, hipoglicemia).",
+    "fisiopatologia": "Falta de inibição mediada por GABA e excesso de excitação mediada por Glutamato. A crise evolui de uma fase tônica (rigidez espástica) para clônica (abalos musculares ritmados).",
+    "diagnostico": "História clínica testemunhada. O Eletroencefalograma (EEG) e Neuroimagem (RM) ajudam na investigação etiológica, mas a crise aguda é um diagnóstico visual.",
+    "tratamento": "Agudo: Proteção da via aérea e decúbito lateral. Se durar > 5 min, usar Benzodiazepínicos IV (Diazepam). Crônico: Ácido Valproico, Lamotrigina ou Levetiracetam.",
+    "particularidades": "É comumente seguida pelo 'estado pós-ictal', um período de confusão mental profunda, sonolência e letargia que pode durar minutos a horas."
+  },
+  "Estado de Mal Epiléptico (Status Epilepticus)": {
+    "etiologia": "Pausa irregular na medicação antiepiléptica, AVC agudo, hipóxia severa, distúrbios metabólicos profundos ou abstinência de álcool/sedativos.",
+    "fisiopatologia": "Falha total dos mecanismos inibitórios encefálicos, resultando em crise convulsiva contínua ou crises recorrentes sem recuperação da consciência entre elas.",
+    "diagnostico": "Crise tônico-clônica com duração superior a 5 minutos, ou duas/mais crises consecutivas sem que o paciente acorde. É uma emergência neurológica imediata.",
+    "tratamento": "1ª linha (0-5 min): Benzodiazepínicos (Diazepam ou Midazolam IV). 2ª linha: Fenitoína, Valproato ou Levetiracetam IV. 3ª linha: IOT e anestesia com Propofol ou Tiopental.",
+    "particularidades": "Após 30 minutos de crise contínua, inicia-se lesão neuronal irreversível por excitotoxicidade e edema citotóxico profundo."
+  },
+  "Crise Focal Complexa": {
+    "etiologia": "Lesão estrutural localizada em uma região cerebral específica, muito frequentemente uma esclerose mesial temporal (no lobo temporal).",
+    "fisiopatologia": "A descarga epiléptica inicia-se numa zona restrita de um hemisfério e compromete os circuitos límbicos, causando alteração do nível de consciência sem abalos bilaterais.",
+    "diagnostico": "O paciente parece 'desligado' ou 'olhando para o nada', realizando automatismos motores repetitivos (mastigar, estalar lábios, mexer nas roupas). Confirmação com EEG focais.",
+    "tratamento": "Medicamentos de escolha para crises focais: Carbamazepina, Oxcarbazepina ou Lamotrigina. Casos refratários podem ter indicação cirúrgica ressectiva.",
+    "particularidades": "A crise costuma ser precedida por uma 'aura' (ex: sensação de medo súbito ou odor estranho), que é o início consciente da convulsão focal."
+  },
+
+  "Doença de Alzheimer": {
+    "etiologia": "Doença neurodegenerativa primária progressiva, a causa mais comum de demência em idosos. Associação genética (ApoE4) é um forte fator de risco.",
+    "fisiopatologia": "Acúmulo patológico de placas de proteína beta-amiloide no meio extracelular e emaranhados neurofibrilares de proteína Tau hiperfosforilada intracelular, causando morte neuronal e atrofia cortical.",
+    "diagnostico": "Declínio cognitivo insidioso com foco inicial na memória recente (amnésia anterógrada). Avaliado pelo Mini Mental (MEEM). TC/RM mostram atrofia desproporcional do hipocampo.",
+    "tratamento": "Incurável. Uso de inibidores da acetilcolinesterase (Donepezila, Rivastigmina) para fases leves/moderadas e Memantina (antagonista NMDA) para fases moderadas/graves.",
+    "particularidades": "A memória autobiográfica antiga e as habilidades motoras basais costumam ser preservadas até estágios muito avançados da doença."
+  },
+  "Delirium (Estado Confusional Agudo)": {
+    "etiologia": "Manifestação cerebral de uma doença sistêmica aguda. Infecções (ITU, pneumonia), distúrbios metabólicos, pós-operatório ou descontinuação de drogas/álcool.",
+    "fisiopatologia": "Insulto tóxico ou inflamatório sistêmico gera desregulação generalizada de neurotransmissores no cérebro envelhecido ou vulnerável (disfunção colinérgica/dopaminérgica).",
+    "diagnostico": "Início agudo ou flutuante, desatenção profunda, pensamento desorganizado e alteração do nível de consciência (Critérios do CAM - Confusion Assessment Method).",
+    "tratamento": "O tratamento não é cerebral, mas sistêmico: procurar e tratar a causa base (antibióticos para infecção, hidratação). Antipsicóticos (Haloperidol) apenas se agitação colocar o paciente em risco.",
+    "particularidades": "Diferente da demência (crônica, arrastada, consciência limpa inicial), o delirium é de instalação abrupta e sempre exige busca imediata por uma doença orgânica aguda escondida."
+  },
+  "Osteoartrite (Artrose)": {
+    "etiologia": "Desgaste mecânico e metabólico associado ao envelhecimento, obesidade, trauma prévio articular e predisposição genética.",
+    "fisiopatologia": "Degradação progressiva da cartilagem articular associada a remodelação óssea subcondral inadequada (formação de osteófitos) e inflamação sinovial leve secundária.",
+    "diagnostico": "Clínico e radiológico: dor articular mecânica (piora ao esforço, alivia ao repouso), rigidez matinal curta (< 30 min). Rx com redução do espaço articular, esclerose e osteófitos.",
+    "tratamento": "Perda de peso, fisioterapia fortalecedora, uso de analgésicos e AINEs tópicos. Artroplastia (prótese) para dores refratárias e incapacitantes de joelho/quadril.",
+    "particularidades": "Mãos com espessamento das articulações distais (Nódulos de Heberden) e proximais (Nódulos de Bouchard) são classicamente associadas ao fenótipo da doença em idosos."
   }
+
 }
