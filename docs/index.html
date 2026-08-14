@@ -197,9 +197,9 @@
    * ==========================================
    * Mapeamento exato dos 13 arquivos salvos em docs/knowledge_base/sindromes_clinicas/
    */
-  const manifestoConhecimento = {
+    const manifestoConhecimento = {
     "Clínica Médica": {
-      pasta: "../knowledge_base/sindromes_clinicas/",
+      pasta: "knowledge_base/sindromes_clinicas/", // <-- Sem "../" !
       arquivos: [
         "cirrose.json",
         "dispneia.json",
@@ -217,15 +217,15 @@
       ]
     },
     "Ginecologia e Obstetrícia": {
-      pasta: "../knowledge_base/go/",
+      pasta: "knowledge_base/go/",
       arquivos: []
     },
     "Pediatria": {
-      pasta: "../knowledge_base/pediatria/",
+      pasta: "knowledge_base/pediatria/",
       arquivos: []
     },
     "Cirurgia Geral": {
-      pasta: "../knowledge_base/cirurgia/",
+      pasta: "knowledge_base/cirurgia/",
       arquivos: []
     }
   };
