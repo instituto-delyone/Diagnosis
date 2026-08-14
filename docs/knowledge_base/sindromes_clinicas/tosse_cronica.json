@@ -1,0 +1,86 @@
+[
+  {
+    "id": "tuberculose_pulmonar_pos_primaria",
+    "nome": "Tuberculose Pulmonar Pós-Primária",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "adulto": 2.0, "contato_com_bacilifero": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "tosse_maior_3_semanas": 30, "febre_vespertina": 25, "perda_ponderal": 20, "sudorese_noturna": 15 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["cavitacao_apical"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Isolamento respiratório e início imediato do Esquema RIPE"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["TRM-TB (Teste Rápido)", "Bacliloscopia (BAAR)", "RX de Tórax"]
+    },
+    "vigneta": "Paciente de 38 anos apresenta tosse produtiva há 4 semanas, acompanhada de febre vespertina, sudorese noturna e perda de 5 kg. Radiografia de tórax evidencia lesão cavitária no segmento apical do lobo superior direito.",
+    "respostas_esperadas": {
+      "diagnostico": ["tuberculose", "tb", "tuberculose pulmonar"],
+      "exames": ["trm-tb", "baar", "baciloscopia", "teste rapido"],
+      "conduta": ["ripe", "esquema ripe", "rifampicina", "isoniazida"]
+    },
+    "feedback_tecnico": "Quadros de tosse >= 3 semanas com sintomas constitucionais (febre vespertina, emagrecimento) impõem a suspeita de Tuberculose[span_1](start_span)[span_1](end_span). A forma pós-primária clássica do adulto apresenta imunidade celular que gera necrose caseosa e cavitações apicais (lobo superior apicoposterior)[span_2](start_span)[span_2](end_span). O Teste Rápido Molecular (TRM-TB) é o exame de escolha por avaliar resistência à rifampicina em 2h[span_3](start_span)[span_3](end_span). O tratamento padrão de ataque é o esquema RIPE (Rifampicina, Isoniazida, Pirazinamida e Etambutol) por 2 meses, seguido de RI por 4 meses[span_4](start_span)[span_4](end_span)."
+  },
+  {
+    "id": "paracoccidioidomicose_cronica",
+    "nome": "Paracoccidioidomicose (Forma Crônica)",
+    "prevalencia_base": 10,
+    "01_campo_modulador": {
+      "pesos": { "trabalhador_rural": 4.0, "homem_maior_30_anos": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "tosse_arrastada": 20, "dispneia": 20, "lesao_cutaneo_mucosa": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["aspecto_roda_de_leme"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "BAIXO",
+      "conduta_emergencial": "Tratamento ambulatorial com antifúngico oral"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Exame Micológico Direto (Escarro/Raspado)", "RX de Tórax"]
+    },
+    "vigneta": "Homem de 52 anos, lavrador rural, queixa-se de tosse crônica e dispneia progressiva há 6 meses. Ao exame físico: ulcerações dolentes em mucosa oral. RX de tórax revela infiltrado perihilar bilateral simétrico em 'asa de morcego'. Raspado da lesão mucosa evidencia leveduras com brotamento múltiplo em 'roda de leme'.",
+    "respostas_esperadas": {
+      "diagnostico": ["paracoccidioidomicose", "pbmicose", "pcm"],
+      "exames": ["micologico direto", "escarro", "raspado", "biopsia"],
+      "conduta": ["itraconazol", "antifungico"]
+    },
+    "feedback_tecnico": "A Paracoccidioidomicose na forma crônica afeta tipicamente homens > 30 anos com histórico de atividade agrícola (trabalho rural)[span_5](start_span)[span_5](end_span). Cursa com sintomas respiratórios arrastados, lesões ulceradas em mucosas e imagem em 'asa de morcego[span_6](start_span)'[span_6](end_span). A confirmação microscópica revela o achado patognomônico de leveduras multinucleadas em 'roda de leme' (ou orelha de Mickey)[span_7](start_span)[span_7](end_span). Casos não graves são tratados com Itraconazol oral[span_8](start_span)[span_8](end_span)."
+  },
+  {
+    "id": "coqueluche_fase_paroxistica",
+    "nome": "Coqueluche (Fase Paroxística)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "vacunacao_incompleta": 3.0, "contato_domiciliar": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "paroxismos_de_tosse": 35, "guincho_inspiratorio": 35, "vomitos_pos_tosse": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["reacao_leucemoide_linfocitose"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Macrolídeo oral e quimioprofilaxia de contatantes"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Hemograma", "PCR/Cultura de Secreção Nasofaríngea"]
+    },
+    "vigneta": "Lactente de 5 meses apresenta acessos súbitos e incontroláveis de tosse seguidos por um guincho inspiratório característico e vômitos. Hemograma mostra leucocitose acentuada (45.000 leucócitos) com predomínio de linfócitos (reação leucemoide). Cartão de vacinação em atraso.",
+    "respostas_esperadas": {
+      "diagnostico": ["coqueluche", "bordetella pertussis"],
+      "exames": ["hemograma", "pcr", "cultura"],
+      "conduta": ["azitromicina", "claritromicina", "macrolideo"]
+    },
+    "feedback_tecnico": "A Coqueluche (causada pela *Bordetella pertussis*) manifesta-se na fase paroxística com acessos de tosse intensa finalizados por guincho inspiratório e vômitos[span_9](start_span)[span_9](end_span). Em menores de 3 meses pode cursar com apneia e cianose[span_10](start_span)[span_10](end_span). O hemograma é marcante por apresentar reação leucemoide com intensa linfocitose[span_11](start_span)[span_11](end_span). O tratamento de primeira escolha é feito com Azitromicina, devendo-se realizar notificação e profilaxia dos comunicantes[span_12](start_span)[span_12](end_span)."
+  }
+]
