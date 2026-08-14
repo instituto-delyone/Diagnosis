@@ -24,16 +24,19 @@
       margin: 0;
       padding: 20px;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
     }
-    .arena-container {
-      max-width: 700px;
+    .arena-container, .modules-container {
+      max-width: 740px;
       width: 100%;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 30px;
       box-shadow: 0 10px 30px rgba(7, 20, 38, 0.05);
+      box-sizing: border-box;
     }
     .header {
       text-align: center;
@@ -66,6 +69,7 @@
       width: 100%;
     }
     .btn:hover { background: var(--blue); }
+    .btn:disabled { background: var(--muted); cursor: not-allowed; }
     
     .case-box {
       background: #fafafa;
@@ -109,18 +113,59 @@
       color: var(--navy);
       display: none;
     }
+
+    /* Estilos do Card de Módulos */
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .module-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      background: #fafbfc;
+    }
+    .module-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .module-title {
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 15px;
+    }
+    .badge {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .badge.active { background: #ecf8f1; color: var(--green); border: 1px solid #c9ead8; }
+    .badge.empty { background: #f4f7f8; color: var(--muted); border: 1px solid var(--border); }
+    .file-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .file-list li { margin-bottom: 4px; }
   </style>
 </head>
 <body>
 
+<!-- SIMULADOR PRINCIPAL -->
 <div class="arena-container">
   <div class="header">
-    <span>AIGAR ENGINE - V0.1 BETA</span>
+    <span>AIGAR ENGINE - V0.2 DATA FETCH</span>
     <h1>Simulador de Raciocínio</h1>
-    <p>Treinamento clínico e validação do modelo bayesiano funcional.</p>
+    <p id="status-engine">Conectando ao banco de dados clínico...</p>
   </div>
 
-  <button id="btn-start" class="btn" onclick="iniciarJogo()">Gerar Caso Clínico Aleatório</button>
+  <button id="btn-start" class="btn" onclick="iniciarJogo()" disabled>Aguardando Módulos...</button>
 
   <div id="case-display" class="case-box"></div>
 
@@ -135,51 +180,126 @@
   <div id="final-score" class="score-board"></div>
 </div>
 
+<!-- CARD DE MÓDULOS CARREGADOS -->
+<div class="modules-container">
+  <h2 style="margin: 0 0 5px; font-size: 18px; color: var(--navy);">Módulos de Conhecimento</h2>
+  <p style="margin: 0 0 10px; font-size: 13px; color: var(--muted);">Status de integração com os arquivos JSON da knowledge_base.</p>
+  
+  <div class="module-grid" id="module-grid">
+    <!-- Os cards das matérias serão injetados aqui pelo JavaScript -->
+  </div>
+</div>
+
 <script>
   // ==========================================
-  // O BANCO DE DADOS (Knowledge Base Embutido)
+  // MANIFESTO DO CONHECIMENTO (Ponte de Arquivos)
   // ==========================================
-  const bancoDeDados = [
-    {
-      id: "colangite_aguda",
-      nome: "Colangite Aguda",
-      vigneta: "Paciente de 65 anos, com histórico prévio de coledocolitíase. Dá entrada no PS apresentando quadro de icterícia colestática associada a febre com calafrios e dor intensa em hipocôndrio direito. PA: 120x80 mmHg, sem confusão mental.",
-      respostas_esperadas: {
-        diagnostico: ["colangite", "colangite aguda"],
-        exames: ["usg", "ultrassom", "ultrassonografia", "hemograma", "bilirrubinas", "tgo", "tgp"],
-        conduta: ["antibiotico", "antibioticoterapia", "drenagem", "cpre"]
-      },
-      feedback_tecnico: "A Colangite Aguda exige identificação rápida da Tríade de Charcot (Icterícia, Febre e Dor). A conduta emergencial com ATB e preparo para drenagem biliar (CPRE) é o fator crítico."
+  // Aqui você define quais matérias existem e quais arquivos JSON o algoritmo deve procurar.
+  const manifestoConhecimento = {
+    "Clínica Médica": {
+      pasta: "../../knowledge_base/sindromes_clinicas/",
+      arquivos: ["ictericia.json"] // Adicione os próximos JSONs aqui
     },
-    {
-      id: "hepatite_alcoolica",
-      nome: "Hepatite Alcoólica",
-      vigneta: "Paciente de 50 anos, etilista crônico de longa data. Apresenta-se com icterícia progressiva há 1 semana, febre baixa e dor abdominal leve. Exames iniciais mostram TGO > TGP (relação maior que 2) e transaminases em torno de 300 U/L, além de leucocitose importante.",
-      respostas_esperadas: {
-        diagnostico: ["hepatite alcoolica", "hepatite alcoólica"],
-        exames: ["usg", "funcao hepatica", "tempo de protrombina", "tap"],
-        conduta: ["corticoide", "prednisolona", "pentoxifilina", "suporte", "abstinencia"]
-      },
-      feedback_tecnico: "Na Hepatite Alcoólica, a inversão TGO/TGP > 2 e a reação leucemoide são moduladores chaves no laboratório. O tratamento de formas graves (Maddrey > 32) envolve corticoide."
+    "Ginecologia e Obstetrícia": {
+      pasta: "../../knowledge_base/go/",
+      arquivos: []
     },
-    {
-      id: "colangite_biliar_primaria",
-      nome: "Colangite Biliar Primária",
-      vigneta: "Mulher de 45 anos, com histórico de Tireoidite de Hashimoto, procura ambulatório com queixa de prurido intenso há meses e icterícia recente. Exame físico revela hiperpigmentação e xantelasmas. USG de vias biliares sem dilatações.",
-      respostas_esperadas: {
-        diagnostico: ["colangite biliar primaria", "cbp", "cirrose biliar primaria"],
-        exames: ["antimitocondria", "anti-mitocondria", "fan", "fosfatase alcalina", "fa"],
-        conduta: ["acido ursodesoxicolico", "ursodesoxicolico", "udca"]
-      },
-      feedback_tecnico: "O anticorpo anti-mitocôndria é o critério de confirmação necessária (sine qua non). O tratamento padrão para retardar a evolução para cirrose é o Ácido Ursodesoxicólico."
+    "Pediatria": {
+      pasta: "../../knowledge_base/pediatria/",
+      arquivos: []
+    },
+    "Cirurgia Geral": {
+      pasta: "../../knowledge_base/cirurgia/",
+      arquivos: []
     }
-  ];
+  };
+
+  let bancoDeDados = [];
 
   // ==========================================
-  // LÓGICA DO SIMULADOR (Engine)
+  // INICIALIZAÇÃO E FETCH (Engine)
+  // ==========================================
+  async function carregarConhecimento() {
+    renderizarPainelModulos();
+    let casosCarregados = 0;
+
+    for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
+      for (const arquivo of dados.arquivos) {
+        const caminhoCompleto = dados.pasta + arquivo;
+        try {
+          // Tenta baixar o arquivo JSON do repositório
+          const response = await fetch(caminhoCompleto);
+          if (response.ok) {
+            const casoJson = await response.json();
+            // Para o simulador, assumimos que o JSON tem os campos vigneta, respostas e feedback
+            // Caso o JSON seja puro (molde estrutural), faremos um parse aqui no futuro.
+            bancoDeDados.push(casoJson);
+            casosCarregados++;
+          } else {
+            console.warn(`Arquivo não encontrado ainda: ${caminhoCompleto}`);
+          }
+        } catch (error) {
+          console.error(`Erro ao carregar ${arquivo}:`, error);
+        }
+      }
+    }
+
+    const statusEl = document.getElementById('status-engine');
+    const btnStart = document.getElementById('btn-start');
+
+    if (casosCarregados > 0) {
+      statusEl.innerHTML = `<span style="color: var(--green);">✓ Motor operacional. ${casosCarregados} caso(s) sincronizado(s).</span>`;
+      btnStart.innerText = "Gerar Caso Clínico Aleatório";
+      btnStart.disabled = false;
+    } else {
+      // FALLBACK DE TESTE: Se os arquivos JSON não existirem na pasta ainda, carrega 1 caso padrão na memória
+      statusEl.innerHTML = `<span style="color: var(--red);">Nenhum JSON encontrado. Rodando em Modo de Demonstração.</span>`;
+      bancoDeDados.push({
+        id: "demo_colangite",
+        nome: "Colangite Aguda (Demo)",
+        vigneta: "Paciente de 65 anos, com histórico prévio de coledocolitíase. Dá entrada no PS apresentando quadro de icterícia colestática associada a febre com calafrios e dor intensa em hipocôndrio direito. PA: 120x80 mmHg, sem confusão mental.",
+        respostas_esperadas: {
+          diagnostico: ["colangite", "colangite aguda"],
+          exames: ["usg", "ultrassom", "hemograma", "bilirrubinas", "tgo", "tgp"],
+          conduta: ["antibiotico", "antibioticoterapia", "drenagem", "cpre"]
+        },
+        feedback_tecnico: "Demonstração: A Colangite Aguda exige identificação rápida da Tríade de Charcot (Icterícia, Febre e Dor)."
+      });
+      btnStart.innerText = "Testar Caso de Demonstração";
+      btnStart.disabled = false;
+    }
+  }
+
+  function renderizarPainelModulos() {
+    const grid = document.getElementById('module-grid');
+    grid.innerHTML = '';
+
+    for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
+      const temArquivos = dados.arquivos.length > 0;
+      const badgeClass = temArquivos ? 'active' : 'empty';
+      const badgeText = temArquivos ? `${dados.arquivos.length} CARREGADO(S)` : 'AGUARDANDO';
+      
+      let listaHtml = temArquivos 
+        ? `<ul class="file-list">${dados.arquivos.map(arq => `<li>${arq}</li>`).join('')}</ul>`
+        : `<span style="font-size: 12px; color: var(--muted);">Nenhum caso inserido.</span>`;
+
+      grid.innerHTML += `
+        <div class="module-card">
+          <div class="module-header">
+            <span class="module-title">${materia}</span>
+            <span class="badge ${badgeClass}">${badgeText}</span>
+          </div>
+          ${listaHtml}
+        </div>
+      `;
+    }
+  }
+
+  // ==========================================
+  // LÓGICA DO SIMULADOR (Jogo)
   // ==========================================
   let casoAtual = null;
-  let etapa = 0; // 0 = Diagnostico, 1 = Exames, 2 = Conduta
+  let etapa = 0; 
   let pontuacao = 0;
   
   const etapasJogo = [
@@ -193,12 +313,10 @@
   }
 
   function iniciarJogo() {
-    // Sorteia um caso
     casoAtual = bancoDeDados[Math.floor(Math.random() * bancoDeDados.length)];
     etapa = 0;
     pontuacao = 0;
 
-    // Prepara a UI
     document.getElementById('btn-start').style.display = 'none';
     document.getElementById('case-display').style.display = 'block';
     document.getElementById('case-display').innerHTML = `<strong>Apresentação Clínica:</strong><br>${casoAtual.vigneta}`;
@@ -237,9 +355,9 @@
     
     if (acertou) {
       pontuacao += regraAtual.peso;
-      logDiv.innerHTML += `<div class="log-item log-correct"><strong>✓ Acertou (${regraAtual.peso} pts):</strong> O sistema validou a resposta "${inputUsuario}" para a chave [${regraAtual.chave}].</div>`;
+      logDiv.innerHTML += `<div class="log-item log-correct"><strong>✓ Acertou (${regraAtual.peso} pts):</strong> O sistema validou a resposta para a chave [${regraAtual.chave}].</div>`;
     } else {
-      logDiv.innerHTML += `<div class="log-item log-incorrect"><strong>✕ Incorreto:</strong> A resposta "${inputUsuario}" não atingiu a probabilidade necessária para [${regraAtual.chave}]. O ideal seria envolver termos como: ${respostasAceitas[0]}.</div>`;
+      logDiv.innerHTML += `<div class="log-item log-incorrect"><strong>✕ Incorreto:</strong> A conduta não atingiu a probabilidade necessária para [${regraAtual.chave}]. O sistema esperava diretrizes como: ${respostasAceitas[0]}.</div>`;
     }
 
     etapa++;
@@ -257,6 +375,9 @@
     scoreDiv.innerHTML = `Performance Clínica: ${pontuacao}/100<br>
       <button class="btn" style="margin-top: 20px; font-size: 13px;" onclick="iniciarJogo()">↻ Gerar Novo Caso</button>`;
   }
+
+  // Aciona o download dos JSONs assim que a página carrega
+  window.onload = carregarConhecimento;
 </script>
 
 </body>
