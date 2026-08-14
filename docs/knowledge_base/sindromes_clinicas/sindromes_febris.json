@@ -1,0 +1,86 @@
+[
+  {
+    "id": "dengue_grupo_c",
+    "nome": "Dengue com Sinais de Alarme (Grupo C)",
+    "prevalencia_base": 30,
+    "01_campo_modulador": {
+      "pesos": { "epidemia_local": 4.0, "terceiro_ao_quarto_dia": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "dor_retroorbital": 15, "mialgia": 15, "vomitos_persistentes": 25, "dor_abdominal_continua": 25, "hepatomegalia": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["sinais_de_alarme"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Internação em enfermaria e hidratação IV imediata"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Hematócrito", "Sorologia ou NS1 (depende do dia)"]
+    },
+    "vigneta": "Paciente de 25 anos no 4º dia de quadro febril agudo (com mialgia e dor retro-orbital). Refere que a febre cedeu hoje, mas iniciou quadro de dor abdominal contínua à palpação e vômitos persistentes. Exame físico: lipotimia postural e hepatomegalia dolorosa (3 cm).",
+    "respostas_esperadas": {
+      "diagnostico": ["dengue", "dengue com sinais de alarme", "grupo c"],
+      "exames": ["hematocrito", "hemograma", "ns1", "sorologia"],
+      "conduta": ["internacao", "enfermaria", "hidratacao iv", "20ml/kg", "soro na veia"]
+    },
+    "feedback_tecnico": "Qualquer quadro febril agudo no Brasil deve levantar a suspeita de Dengue[span_0](start_span)[span_0](end_span). O paciente apresenta os clássicos Sinais de Alarme (dor abdominal, vômitos, hepatomegalia e lipotimia), que costumam surgir no 3º ao 4º dia, quando a febre cede e ocorre o aumento da permeabilidade vascular[span_1](start_span)[span_1](end_span). O aumento do hematócrito é o marcador laboratorial de gravidade[span_2](start_span)[span_2](end_span). A conduta para o Grupo C exige notificação, internação em enfermaria e hidratação venosa (20mL/kg em 2h)[span_3](start_span)[span_3](end_span)."
+  },
+  {
+    "id": "leptospirose_weil",
+    "nome": "Leptospirose Ictero-hemorrágica (Doença de Weil)",
+    "prevalencia_base": 10,
+    "01_campo_modulador": {
+      "pesos": { "contato_enchente_esgoto": 4.0, "profissionais_risco": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "febre": 20, "mialgia_panturrilha": 25, "sufusao_conjuntival": 25, "ictericia_rubinica": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["ictericia", "lesao_renal_aguda"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Penicilina G Cristalina e suporte em UTI (risco de hemorragia alveolar)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Microaglutinação", "Ureia e Creatinina", "CPK"]
+    },
+    "vigneta": "Paciente de 40 anos, gari, apresenta quadro febril há 6 dias com mialgia intensa em panturrilhas. Evoluiu nas últimas 24h com icterícia intensa (tom alaranjado/rubínico), oligúria e tosse com laivos de sangue (hemoptise). Exame físico revela sufusão conjuntival bilateral.",
+    "respostas_esperadas": {
+      "diagnostico": ["leptospirose", "doenca de weil", "weil", "forma ictero-hemorragica"],
+      "exames": ["microaglutinacao", "funcao renal", "cpk", "elisa"],
+      "conduta": ["penicilina g", "penicilina cristalina", "ceftriaxone", "internacao"]
+    },
+    "feedback_tecnico": "O contato com esgotos ou urina de roedores (ratos) aponta para Leptospirose[span_4](start_span)[span_4](end_span). A forma grave (Doença de Weil) acomete 10% dos pacientes, cursando com tríade: icterícia rubínica (combinação de icterícia + hemorragia da sufusão), hemorragia alveolar (hemoptise) e lesão renal aguda com hipocalemia[span_5](start_span)[span_5](end_span). O diagnóstico específico padrão-ouro é a microaglutinação[span_6](start_span)[span_6](end_span). A conduta para as formas graves exige notificação e tratamento com Penicilina G Cristalina ou Ceftriaxone[span_7](start_span)[span_7](end_span)."
+  },
+  {
+    "id": "malaria_falciparum",
+    "nome": "Malária Grave (Plasmodium falciparum)",
+    "prevalencia_base": 15,
+    "01_campo_modulador": {
+      "pesos": { "viagem_regiao_endemica": 4.0, "exposicao_mata": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "crises_febris": 30, "anemia_hemolitica": 30, "ictericia": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["parasitismo_eritrocitario"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Artesunato e Clindamicina"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Gota Espessa", "Teste Rápido"]
+    },
+    "vigneta": "Paciente de 32 anos relata retorno há 10 dias de viagem ao interior do Amazonas. Apresenta crises febris intensas, calafrios, sudorese, icterícia leve e anemia (Hemoglobina: 8.0 g/dL). Exames indicam hemólise e presença de Plasmodium falciparum. O paciente está prostrado e com sinais de hipoglicemia severa.",
+    "respostas_esperadas": {
+      "diagnostico": ["malaria", "malaria grave", "malaria falciparum"],
+      "exames": ["gota espessa", "esfraco de sangue"],
+      "conduta": ["artesunato", "clindamicina", "artesunato + clindamicina"]
+    },
+    "feedback_tecnico": "A malária caracteriza-se por um parasitismo eritrocitário com posterior hemólise (crises febris por lesão eritrocitária)[span_8](start_span)[span_8](end_span). A infecção pelo *P. falciparum* é a mais grave, pois causa maior parasitemia (acomete hemácias jovens) e gera proteínas de aderência que causam obstrução, disfunção e hipoglicemia severa[span_9](start_span)[span_9](end_span). O exame de escolha é a gota espessa[span_10](start_span)[span_10](end_span). Por se tratar de forma grave, o tratamento de escolha é Artesunato (6 dias) + Clindamicina (7 dias)[span_11](start_span)[span_11](end_span)."
+  }
+]
