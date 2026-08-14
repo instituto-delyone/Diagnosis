@@ -225,6 +225,32 @@
     .preceptor-card.incorrect { background: var(--red-soft); border-color: var(--red); color: #742a2a; }
     .preceptor-card.summary { background: #f0f4f8; border-color: var(--blue); color: var(--navy); }
     
+    /* === DISCUSSÃO CLÍNICA (MATERIAL COMPLEMENTAR) === */
+    .discussion-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--blue);
+      box-shadow: 0 8px 24px rgba(7, 20, 38, 0.05);
+      margin-top: 20px;
+      animation: slideDown 0.4s ease;
+    }
+    .discussion-card h3 {
+      margin: 0 0 14px 0;
+      color: var(--navy);
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .discussion-topic {
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .discussion-topic strong {
+      color: var(--navy);
+    }
+
     .score-board {
       text-align: center;
       margin-top: 30px;
@@ -397,6 +423,7 @@
   };
 
   let bancoDeDados = [];
+  let materialComplementar = {}; // NOVO: Guarda as revisões clínicas
 
   /**
    * ==========================================
@@ -406,6 +433,16 @@
   async function carregarConhecimento() {
     renderizarPainelModulos();
     let casosCarregados = 0;
+
+    // NOVO: Carregar o JSON de Material Complementar
+    try {
+      const respMat = await fetch("knowledge_base/material_complementar.json");
+      if (respMat.ok) {
+        materialComplementar = await respMat.json();
+      }
+    } catch (error) {
+      console.log("Aviso: material_complementar.json não encontrado ou vazio.");
+    }
 
     for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
       for (const arquivo of dados.arquivos) {
@@ -497,12 +534,10 @@
     for (const alvo of alvos) {
       const alvoNorm = normalizar(alvo);
       
-      // 1. Inclusão Direta
       if (inputNorm.includes(alvoNorm) || alvoNorm.includes(inputNorm)) {
         return { score: 1.0, matchedTarget: alvo };
       }
 
-      // 2. Levenshtein em palavras com mais de 4 letras (tolerância a typos)
       const tokensAlvo = alvoNorm.split(/\s+/);
       for (const tIn of tokensInput) {
         if (tIn.length < 4) continue;
@@ -516,6 +551,22 @@
       }
     }
     return { score: 0.0, matchedTarget: alvos[0] };
+  }
+
+  // NOVO: Função que cruza o gabarito do caso com as chaves do Material Complementar
+  function encontrarMaterialComplementar(caso) {
+    if (!caso || !caso.respostas_esperadas || !caso.respostas_esperadas.diagnostico) return null;
+    
+    const diagnosticosNorm = caso.respostas_esperadas.diagnostico.map(d => normalizar(d));
+    
+    for (const [doenca, dados] of Object.entries(materialComplementar)) {
+      const doencaNorm = normalizar(doenca);
+      // Se a chave do arquivo de estudo cruzar com o gabarito aceito do caso simulado
+      if (diagnosticosNorm.some(d => d === doencaNorm || d.includes(doencaNorm) || doencaNorm.includes(d))) {
+        return { nome: doenca, dados: dados };
+      }
+    }
+    return null;
   }
 
   /**
@@ -603,7 +654,6 @@
     const logDiv = document.getElementById('log');
 
     if (resultadoFuzzy.score >= 0.8) {
-      // Cálculo de Calibração Metacognitiva no Diagnóstico
       if (etapa === 0) {
         const bonusConfianca = nivelConfianca === 0.99 ? 1.1 : (nivelConfianca === 0.8 ? 1.0 : 0.85);
         pontuacao += Math.round(regraAtual.peso * bonusConfianca);
@@ -618,7 +668,6 @@
           <strong>✓ Decisão Clínica Validada:</strong> O preceptor reconheceu sua resposta [<em>${inputUsuario}</em>] como congruente com a diretriz esperada (<em>${resultadoFuzzy.matchedTarget}</em>). A probabilidade diagnóstica pós-teste foi elevada com sucesso.
         </div>`;
     } else {
-      // Penalidade bayesiana por calibração excessiva errônea
       if (etapa === 0 && nivelConfianca === 0.99) {
         pontuacao = Math.max(0, pontuacao - 10);
       }
@@ -639,11 +688,31 @@
     const logDiv = document.getElementById('log');
     const scoreDiv = document.getElementById('final-score');
 
+    // Feedback original técnico
     logDiv.innerHTML += `
       <div class="preceptor-card summary">
         <strong>📋 Discussão Anatomo-Clínica do Preceptor:</strong><br>
         <p style="margin: 8px 0 0;">${casoAtual.feedback_tecnico}</p>
       </div>`;
+    
+    // NOVO: Injeção do Painel Didático de Estudo (Material Complementar)
+    const material = encontrarMaterialComplementar(casoAtual);
+    if (material) {
+      const m = material.dados;
+      let htmlDiscussao = `
+        <div class="preceptor-card discussion-card">
+          <h3>📖 Revisão Estruturada: ${material.nome}</h3>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+      `;
+      if (m.etiologia) htmlDiscussao += `<div class="discussion-topic"><strong>Etiologia:</strong> ${m.etiologia}</div>`;
+      if (m.fisiopatologia) htmlDiscussao += `<div class="discussion-topic"><strong>Fisiopatologia:</strong> ${m.fisiopatologia}</div>`;
+      if (m.diagnostico) htmlDiscussao += `<div class="discussion-topic"><strong>Diagnóstico:</strong> ${m.diagnostico}</div>`;
+      if (m.tratamento) htmlDiscussao += `<div class="discussion-topic"><strong>Tratamento:</strong> ${m.tratamento}</div>`;
+      if (m.particularidades) htmlDiscussao += `<div class="discussion-topic"><strong style="color: var(--amber);">Particularidades:</strong> ${m.particularidades}</div>`;
+      
+      htmlDiscussao += `</div></div>`;
+      logDiv.innerHTML += htmlDiscussao;
+    }
     
     scoreDiv.style.display = 'block';
     scoreDiv.innerHTML = `Calibração Diagnóstica: ${pontuacao}/100<br>
