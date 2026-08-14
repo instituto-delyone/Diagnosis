@@ -1,0 +1,116 @@
+[
+  {
+    "id": "hipercalemia_grave_ecg",
+    "nome": "Hipercalemia Grave com Alteração Eletrocardiográfica",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "uso_ieca_bra_spironolactona": 2.5, "ira_ou_drc": 3.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "potassio_maior_6_5": 35, "onda_t_apiculada": 35, "fraqueza_muscular": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["ecg_com_onda_t_apiculada_ou_qrs_alargado"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Estabilização de membrana com Gluconato de Cálcio 10% EV seguido de Glicoinsulinoterapia"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Potássio Sérico", "Eletrocardiograma (ECG)", "Gasometria Arterial"]
+    },
+    "vigneta": "Paciente de 65 anos, diabético e portador de DRC, faz uso de Enalapril e Espironolactona. Dá entrada na emergência com fraqueza muscular difusa. Exames: Potássio sérico de 7,1 mEq/L. O ECG evidencia ondas T altas, simétricas e apiculadas em 'tenda' com encurtamento do intervalo QT.",
+    "respostas_esperadas": {
+      "diagnostico": ["hipercalemia", "hipercalemia grave", "hiperpotassemia"],
+      "exames": ["ecg", "eletrocardiograma", "potassio serico", "gasometria"],
+      "conduta": ["gluconato de calcio", "glicoinsulinoterapia", "insulina com glicose", "furosemida", "sorcal"]
+    },
+    "feedback_tecnico": "Diante de Hipercalemia com alterações no ECG (onda T apiculada, apagamento da onda P ou alargamento do QRS), a PRIMEIRA medida obrigatória é a estabilização da membrana miocárdica com Gluconato de Cálcio 10% EV (não reduz o K+, apenas protege o coração de arritmias fatais)[span_6](start_span)[span_6](end_span). Em seguida, aplicam-se medidas para colocar o potássio para dentro da célula (Glicoinsulinoterapia, Beta-2 agonista inalatório) e promover sua eliminação (Furosemida, resinas de troca ou Diálise)[span_7](start_span)[span_7](end_span)."
+  },
+  {
+    "id": "hiponatremia_aguda_siadh",
+    "nome": "Hiponatremia Severa Aguda (SIADH)",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "uso_carbamazepina_antidepressivos": 2.5, "neoplasia_pulmonar_oat_cell": 3.0, "lesao_snc": 2.0 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "sodio_menor_120": 35, "crise_convulsiva": 35, "rebaixamento_consciencia": 30, "normovolemia_clinica": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["hiponatremia_hipoosmolar_normovolemica"],
+      "exclusao_ativa": ["sem_edema", "sem_sinais_de_desidratacao"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Salina Hipertônica NaCl 3% para elevação rápida inicial e prevenção de Mielinólise Pontina"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Sódio Sérico e Urinário", "Osmolaridade Plasmática e Urinária", "Função Tireoidiana e Adrenal"]
+    },
+    "vigneta": "Mulher de 58 anos em investigação para nódulo pulmonar é trazida por torpor e um episódio de crise convulsiva tônico-clínica generalizada no leito. Exame físico: normovolêmica (sem edema e sem turgor reduzido). Laboratório: Sódio sérico de 112 mEq/L, osmolaridade plasmática reduzida e sódio urinário elevado.",
+    "respostas_esperadas": {
+      "diagnostico": ["hiponatremia", "siadh", "hiponatremia severa", "hiponatremia aguda"],
+      "exames": ["sodio serico", "osmolaridade", "sodio urinario"],
+      "conduta": ["nacl 3%", "salina hipertonica", "restricao hidrica", "solucao hipertonica"]
+    },
+    "feedback_tecnico": "A Hiponatremia aguda severa (< 120 mEq/L) com sintomas neurológicos graves (convulsão, coma) ocorre por edema cerebral/neuronal[span_8](start_span)[span_8](end_span). A SIADH é uma causa clássica de hiponatremia hipoosmolar normovolêmica[span_9](start_span)[span_9](end_span). Em casos sintomáticos graves, a conduta imediata é a correção rápida com Salina Hipertônica NaCl 3% para elevar o sódio em 4-6 mEq/L em poucas horas, respeitando o limite de segurança diário (8-10 mEq/L/24h) para evitar a Síndrome de Desmielinização Osmótica (Mielinólise Pontina)[span_10](start_span)[span_10](end_span)."
+  },
+  {
+    "id": "acidose_metabolica_anion_gap_elevado",
+    "nome": "Acidose Metabólica com Ânion Gap Elevado (Cetoacidose / Lactato / Uremia)",
+    "prevalencia_base": 25,
+    "01_campo_modulador": {
+      "pesos": { "diabetes_tipo_1": 3.0, "sepses_choque": 3.0, "insuficiencia_renal": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "ph_menor_7_35": 30, "bicarbonato_baixo": 35, "anion_gap_maior_12": 35, "respiracao_kussmaul": 20 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["anion_gap_calculado_elevado"],
+      "exclusao_ativa": ["sem_hipercloremia_isolada"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "ALTO",
+      "conduta_emergencial": "Tratamento da causa base (Insulina, Volume/Vasoativo, Diálse) + Bicarbonato se pH < 7,10-7,20"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Gasometria Arterial", "Eletrólitos (Na, Cl, K)", "Glicemia e Lactato Sérico"]
+    },
+    "vigneta": "Jovem de 19 anos, diabético tipo 1, dá entrada com dor abdominal, vômitos e hiperventilação profunda (Kussmaul). Gasometria arterial: pH = 7,15, pCO2 = 20 mmHg, HCO3 = 8 mEq/L. Na+ = 138 mEq/L, Cl- = 98 mEq/L. Glicemia = 380 mg/dL. Ânion Gap calculado = 32 mEq/L (normal: 8-12).",
+    "respostas_esperadas": {
+      "diagnostico": ["acidose metabolica", "cetoacidose", "cetoacidose diabetica", "cad", "acidose com anion gap elevado"],
+      "exames": ["gasometria", "gasometria arterial", "eletrolitos", "lactato", "cetona"],
+      "conduta": ["insulina", "hidratacao", "volume", "tratar causa base"]
+    },
+    "feedback_tecnico": "O quadro é de Acidose Metabólica (pH < 7,35 e HCO3 baixo)[span_11](start_span)[span_11](end_span). A fórmula do Ânion Gap é AG = Na - (Cl + HCO3)[span_12](start_span)[span_12](end_span). Um AG elevado (> 12 mEq/L) indica acúmulo de ânions não mensurados, cujas causas clássicas são: Cetoacidose, Acidose Láctica, Uremia e Intoxicações (Metanol, Etilenoglicol, AAS)[span_13](start_span)[span_13](end_span). O uso de Bicarbonato de Sódio é reservado para pH < 7,10-7,20, devendo-se focar no tratamento da causa base[span_14](start_span)[span_14](end_span)."
+  },
+  {
+    "id": "alcalose_metabolica_aciduria_paradoxal",
+    "nome": "Alcalose Metabólica Hipovolêmica com Acidúria Paradoxal",
+    "prevalencia_base": 20,
+    "01_campo_modulador": {
+      "pesos": { "vomitos_de_repeticao_estenose_pilorica": 3.5, "uso_diuretico_alca_tiazidico": 2.5 }
+    },
+    "02_campo_predicao_inicial": {
+      "pesos": { "ph_maior_7_45": 30, "bicarbonato_elevado": 35, "hipocloremia": 30, "hipocalemia": 30 }
+    },
+    "03_campo_busca_ativa_filtragem": {
+      "sine_qua_non": ["ph_urinario_acido_mesmo_com_alcalose_sérica"]
+    },
+    "04_campo_avaliacao_risco_T": {
+      "potencial_letalidade": "MEDIO",
+      "conduta_emergencial": "Expansão volêmica com Soro Fisiológico (NaCl 0,9%) + Reposição de Cloreto de Potássio (KCl)"
+    },
+    "05_campo_confirmacao_necessaria": {
+      "exames": ["Gasometria Arterial", "Eletrólitos Séricos (Na, K, Cl)", "pH Urinário"]
+    },
+    "vigneta": "Paciente de 52 anos em quimioterapia dá entrada desidratada devido a vômitos em grande quantidade há 4 dias. Gasometria arterial: pH = 7,52, pCO2 = 46 mmHg, HCO3 = 32 mEq/L, Na+ = 128, K+ = 2,5 e Cl- = 82 mEq/L. Apesar da alcalose no sangue, o pH urinário encontra-se ácido (acidúria paradoxal).",
+    "respostas_esperadas": {
+      "diagnostico": ["alcalose metabolica", "alcalose metabolica hipovolemica", "alcalose por vomitos"],
+      "exames": ["gasometria", "gasometria arterial", "eletrolitos", "cloro", "potassio"],
+      "conduta": ["nacl 0.9%", "soro fisiologico", "kcl", "cloreto de potassio", "repor potassio"]
+    },
+    "feedback_tecnico": "A perda de suco gástrico por vômitos gera Alcalose Metabólica associada a Hipovolemia, Hipocloremia e Hipocalemia[span_15](start_span)[span_15](end_span). Para conter a hipovolemia, o rim reabsorve Na+ no túbulo distal trocando-o por K+ e H+[span_16](start_span)[span_16](end_span). Como o K+ está esgotado, o rim secreta H+ em excesso na urina, gerando a clássica 'acidúria paradoxal[span_17](start_span)'[span_17](end_span). O tratamento exige reverter a causa com Soro Fisiológico 0,9% (fornece volume e Cloro) e reposição de Potássio (KCl)[span_18](start_span)[span_18](end_span)."
+  }
+]
