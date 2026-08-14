@@ -19,6 +19,8 @@
       --green-soft: #ecf8f1;
       --red: #cf5148;
       --red-soft: #fdf2f1;
+      --amber: #b7791f;
+      --amber-soft: #fefcbf;
     }
 
     /* === RESET E BASE === */
@@ -36,7 +38,7 @@
 
     /* === CONTAINERS === */
     .arena-container, .modules-container {
-      max-width: 780px;
+      max-width: 800px;
       width: 100%;
       background: var(--card);
       border: 1px solid var(--border);
@@ -49,8 +51,8 @@
     /* === CABEÇALHO === */
     .header {
       text-align: center;
-      margin-bottom: 30px;
-      padding-bottom: 24px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
       border-bottom: 1px solid var(--border);
     }
     .header .badge {
@@ -71,7 +73,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
     .goog-te-gadget-simple {
       background-color: #fafbfc !important;
@@ -83,18 +85,103 @@
       align-items: center !important;
       cursor: pointer !important;
     }
-    .goog-te-gadget-simple span {
-      color: var(--navy) !important;
-      font-weight: 600 !important;
+    .goog-te-gadget-simple span { color: var(--navy) !important; font-weight: 600 !important; }
+    .goog-te-banner-frame.skiptranslate { display: none !important; }
+    body { top: 0px !important; }
+
+    /* === BARRA DE PROBABILIDADE BAYESIANA === */
+    .bayes-tracker {
+      display: none;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 24px;
+      animation: fadeIn 0.4s ease;
     }
-    .goog-te-banner-frame.skiptranslate {
-      display: none !important;
+    .bayes-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
     }
-    body {
-      top: 0px !important;
+    .progress-bar-container {
+      width: 100%;
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      border-radius: 99px;
+      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease;
     }
 
-    /* === BOTÕES E INPUTS === */
+    /* === ÁREAS DO SIMULADOR === */
+    .case-box {
+      background: #fafbfc;
+      border-left: 4px solid var(--blue);
+      padding: 22px;
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 24px;
+      font-size: 16px;
+      line-height: 1.6;
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .interaction-area { display: none; animation: fadeIn 0.4s ease; }
+    .question { font-weight: 700; margin-bottom: 12px; color: var(--navy); font-size: 16px; }
+
+    /* Seletor de Confiança */
+    .confidence-box {
+      margin-bottom: 16px;
+      background: #f0f4f8;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      display: none;
+    }
+    .confidence-options {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .conf-btn {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--ink);
+      transition: all 0.2s;
+    }
+    .conf-btn.selected {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+    }
+
+    /* Inputs e Botões */
+    .input-box {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      margin-bottom: 12px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .input-box:focus { border-color: var(--blue); }
+
     .btn {
       background: var(--navy);
       color: #fff;
@@ -124,52 +211,33 @@
       border-color: var(--blue);
     }
 
-    .input-box {
-      width: 100%;
-      padding: 14px 16px;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      font-size: 15px;
-      margin-bottom: 12px;
-      outline: none;
-      transition: border-color 0.2s;
+    /* === FEEDBACK CONVERSACIONAL SOCRÁTICO === */
+    .log-area { margin-top: 24px; font-size: 14px; line-height: 1.6; }
+    .preceptor-card {
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 14px;
+      border-left: 5px solid;
+      animation: slideDown 0.3s ease;
     }
-    .input-box:focus { border-color: var(--blue); }
-
-    /* === ÁREAS DO SIMULADOR === */
-    .case-box {
-      background: #fafbfc;
-      border-left: 4px solid var(--blue);
-      padding: 20px;
-      border-radius: 0 10px 10px 0;
-      margin-bottom: 24px;
-      font-size: 16px;
-      line-height: 1.6;
-      display: none;
-      animation: fadeIn 0.4s ease;
-    }
-    .interaction-area { display: none; animation: fadeIn 0.4s ease; }
-    .question { font-weight: 700; margin-bottom: 12px; color: var(--navy); font-size: 16px; }
-    
-    .log-area { margin-top: 24px; font-size: 14px; line-height: 1.5; }
-    .log-item { margin-bottom: 10px; padding: 14px 16px; border-radius: 8px; animation: slideDown 0.3s ease; }
-    .log-correct { background: var(--green-soft); color: var(--green); border: 1px solid #c9ead8; }
-    .log-incorrect { background: var(--red-soft); color: var(--red); border: 1px solid #fad3d0; }
-    .log-info { background: #f0f4f8; color: var(--blue); border: 1px solid #d9e6f2; }
+    .preceptor-card.correct { background: var(--green-soft); border-color: var(--green); color: #1e4620; }
+    .preceptor-card.warning { background: var(--amber-soft); border-color: var(--amber); color: #744210; }
+    .preceptor-card.incorrect { background: var(--red-soft); border-color: var(--red); color: #742a2a; }
+    .preceptor-card.summary { background: #f0f4f8; border-color: var(--blue); color: var(--navy); }
     
     .score-board {
       text-align: center;
       margin-top: 30px;
       padding-top: 20px;
       border-top: 1px dashed var(--border);
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 800;
       color: var(--navy);
       display: none;
       animation: fadeIn 0.5s ease;
     }
 
-    /* === CARD DE MÓDULOS (O MANIFESTO VISUAL) === */
+    /* === MANIFESTO VISUAL === */
     .module-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -192,15 +260,13 @@
     .file-list { margin: 0; padding-left: 20px; font-size: 13px; color: var(--muted); }
     .file-list li { margin-bottom: 6px; }
 
-    /* === RODAPÉ DE AVISO / GUIDELINES === */
     .footer-note {
-      max-width: 780px;
+      max-width: 800px;
       width: 100%;
       text-align: center;
       font-size: 12.5px;
       color: var(--muted);
       line-height: 1.5;
-      padding: 0 10px;
     }
 
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -209,44 +275,62 @@
 </head>
 <body>
 
-<!-- SIMULADOR PRINCIPAL (AIGAR ENGINE) -->
+<!-- SIMULADOR PRINCIPAL (AIGAR BAYESIAN ENGINE) -->
 <div class="arena-container">
   <div class="header">
-    <!-- SELETOR DE IDIOMAS DO GOOGLE -->
     <div class="translate-wrapper">
       <div id="google_translate_element"></div>
     </div>
-
-    <span class="badge">AIGAR ENGINE - V1.0 DATA FETCH</span>
-    <h1>Simulador de Raciocínio</h1>
+    <span class="badge">AIGAR ENGINE - V2.0 CALIBRATION</span>
+    <h1>Simulador de Raciocínio Clínico</h1>
     <p id="status-engine">Sincronizando com a base de conhecimento do Instituto Delyone...</p>
   </div>
 
   <button id="btn-start" class="btn" onclick="iniciarJogo()" disabled>Carregando Módulos...</button>
+
+  <!-- BARRA DE PROBABILIDADE BAYESIANA -->
+  <div id="bayes-tracker" class="bayes-tracker">
+    <div class="bayes-header">
+      <span>Probabilidade Diagnóstica Pós-Teste</span>
+      <span id="prob-percent">25%</span>
+    </div>
+    <div class="progress-bar-container">
+      <div id="prob-bar" class="progress-bar-fill"></div>
+    </div>
+  </div>
 
   <div id="case-display" class="case-box"></div>
 
   <div id="interaction" class="interaction-area">
     <div id="step-indicator" style="font-size: 12px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em;"></div>
     <div id="question-text" class="question"></div>
+
+    <!-- Seletor de Confiança Metacognitiva (Aparece no Passo 1) -->
+    <div id="confidence-box" class="confidence-box">
+      <strong>Qual o seu nível de certeza nesta hipótese?</strong>
+      <div class="confidence-options">
+        <button type="button" class="conf-btn" onclick="setConfianca(0.5, this)">50% (Dúvida)</button>
+        <button type="button" class="conf-btn selected" onclick="setConfianca(0.8, this)">80% (Provável)</button>
+        <button type="button" class="conf-btn" onclick="setConfianca(0.99, this)">99% (Certeza)</button>
+      </div>
+    </div>
+
     <input type="text" id="user-input" class="input-box" placeholder="Digite sua conduta e pressione Enter..." onkeypress="handleEnter(event)">
-    <button class="btn" onclick="processarResposta()" style="background: var(--blue);">Enviar Resposta Clínica</button>
-    <button class="btn btn-secondary" onclick="iniciarJogo()">🔀 Sortear Outro Caso</button>
+    <button class="btn" onclick="processarResposta()" style="background: var(--blue);">Submeter Decisão Clínica</button>
+    <button class="btn btn-secondary" onclick="iniciarJogo()">🔀 Sortear Outro Cenário</button>
   </div>
 
   <div id="log" class="log-area"></div>
   <div id="final-score" class="score-board"></div>
 </div>
 
-<!-- MANIFESTO VISUAL (STATUS DOS JSONS) -->
+<!-- MANIFESTO VISUAL (BASE DE DADOS) -->
 <div class="modules-container">
   <h2 style="margin: 0 0 6px; font-size: 20px; color: var(--navy); font-weight: 800;">Módulos de Conhecimento</h2>
   <p style="margin: 0 0 16px; font-size: 14px; color: var(--muted);">Status em tempo real da base de dados do repositório Diagnosis.</p>
-  
   <div class="module-grid" id="module-grid"></div>
 </div>
 
-<!-- AVISO DE ATUALIZAÇÃO / DIRETRIZES -->
 <footer class="footer-note">
   <p>ℹ️ <strong>Nota Técnica:</strong> Esta base de conhecimento foi alimentada com referências e consensos médicos consolidados até 2022. <em>Guidelines</em> e diretrizes clínicas mais recentes serão inseridos gradativamente nas próximas versões do motor.</p>
 </footer>
@@ -267,7 +351,7 @@
 <script>
   /**
    * ==========================================
-   * 1. MANIFESTO DO CONHECIMENTO (CLÍNICA MÉDICA COMPLETA)
+   * 1. MANIFESTO DO CONHECIMENTO
    * ==========================================
    */
   const manifestoConhecimento = {
@@ -307,25 +391,16 @@
         "valvopatias.json"
       ]
     },
-    "Ginecologia e Obstetrícia": {
-      pasta: "knowledge_base/go/",
-      arquivos: []
-    },
-    "Pediatria": {
-      pasta: "knowledge_base/pediatria/",
-      arquivos: []
-    },
-    "Cirurgia Geral": {
-      pasta: "knowledge_base/cirurgia/",
-      arquivos: []
-    }
+    "Ginecologia e Obstetrícia": { pasta: "knowledge_base/go/", arquivos: [] },
+    "Pediatria": { pasta: "knowledge_base/pediatria/", arquivos: [] },
+    "Cirurgia Geral": { pasta: "knowledge_base/cirurgia/", arquivos: [] }
   };
 
   let bancoDeDados = [];
 
   /**
    * ==========================================
-   * 2. MOTOR DE BUSCA ASSÍNCRONO (Data Fetcher)
+   * 2. MOTOR DE BUSCA ASSÍNCRONO
    * ==========================================
    */
   async function carregarConhecimento() {
@@ -341,11 +416,9 @@
             const casoJson = await response.json();
             bancoDeDados.push(...casoJson);
             casosCarregados += casoJson.length;
-          } else {
-            console.warn(`[AIGAR Engine] Arquivo não encontrado (404): ${caminhoCompleto}`);
           }
         } catch (error) {
-          console.error(`[AIGAR Engine] Erro ao carregar ${arquivo}:`, error);
+          console.error(`Erro ao carregar ${arquivo}:`, error);
         }
       }
     }
@@ -359,7 +432,6 @@
       btnStart.disabled = false;
     } else {
       statusEl.innerHTML = `<span style="color: var(--red); font-weight: 600;">⚠️ Atenção: JSONs não localizados. Verifique o deploy do GitHub Pages.</span>`;
-      btnStart.innerText = "Aguardando sincronização do servidor...";
     }
   }
 
@@ -390,31 +462,110 @@
 
   /**
    * ==========================================
-   * 3. LÓGICA DO SIMULADOR (Game Loop)
+   * 3. ALGORITMOS DE NLP & FUZZY MATCHING (Levenshtein + Tokenização)
+   * ==========================================
+   */
+  function normalizar(texto) {
+    return texto.toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9\s]/g, " ")
+      .trim();
+  }
+
+  function distanciaLevenshtein(a, b) {
+    const matrix = Array.from({ length: a.length + 1 }, () => []);
+    for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
+    for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
+
+    for (let i = 1; i <= a.length; i++) {
+      for (let j = 1; j <= b.length; j++) {
+        const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j] + 1,
+          matrix[i][j - 1] + 1,
+          matrix[i - 1][j - 1] + cost
+        );
+      }
+    }
+    return matrix[a.length][b.length];
+  }
+
+  function avaliarSimilaridadeFuzzy(input, alvos) {
+    const inputNorm = normalizar(input);
+    const tokensInput = inputNorm.split(/\s+/);
+
+    for (const alvo of alvos) {
+      const alvoNorm = normalizar(alvo);
+      
+      // 1. Inclusão Direta
+      if (inputNorm.includes(alvoNorm) || alvoNorm.includes(inputNorm)) {
+        return { score: 1.0, matchedTarget: alvo };
+      }
+
+      // 2. Levenshtein em palavras com mais de 4 letras (tolerância a typos)
+      const tokensAlvo = alvoNorm.split(/\s+/);
+      for (const tIn of tokensInput) {
+        if (tIn.length < 4) continue;
+        for (const tAlvo of tokensAlvo) {
+          const dist = distanciaLevenshtein(tIn, tAlvo);
+          const limiar = tAlvo.length > 6 ? 2 : 1;
+          if (dist <= limiar) {
+            return { score: 0.85, matchedTarget: alvo };
+          }
+        }
+      }
+    }
+    return { score: 0.0, matchedTarget: alvos[0] };
+  }
+
+  /**
+   * ==========================================
+   * 4. MOTOR BAYESIANO E GAME LOOP
    * ==========================================
    */
   let casoAtual = null;
-  let etapa = 0; 
+  let etapa = 0;
   let pontuacao = 0;
-  
+  let probabilidadeBayesiana = 25;
+  let nivelConfianca = 0.8;
+
   const etapasJogo = [
-    { label: "PASSO 1: DIAGNÓSTICO", pergunta: "Qual a sua principal hipótese diagnóstica?", chave: "diagnostico", peso: 50 },
-    { label: "PASSO 2: INVESTIGAÇÃO", pergunta: "Cite 1 exame fundamental para solicitar neste contexto:", chave: "exames", peso: 20 },
-    { label: "PASSO 3: INTERVENÇÃO", pergunta: "Qual a principal conduta, antídoto ou tratamento indicado?", chave: "conduta", peso: 30 }
+    { label: "PASSO 1: HIPÓTESE DIAGNÓSTICA", pergunta: "Qual a sua principal hipótese diagnóstica para este quadro?", chave: "diagnostico", peso: 50 },
+    { label: "PASSO 2: PROPEDÊUTICA COMPLEMENTAR", pergunta: "Cite 1 exame fundamental para solicitar e confirmar esta hipótese:", chave: "exames", peso: 20 },
+    { label: "PASSO 3: CONDUTA TERAPÊUTICA", pergunta: "Qual a intervenção prioritária, antídoto ou conduta indicada?", chave: "conduta", peso: 30 }
   ];
 
-  function normalizar(texto) {
-    return texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+  function setConfianca(val, btn) {
+    nivelConfianca = val;
+    document.querySelectorAll('.conf-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  }
+
+  function atualizarBarraBayes(prob) {
+    probabilidadeBayesiana = Math.min(Math.max(prob, 5), 98);
+    const bar = document.getElementById('prob-bar');
+    const txt = document.getElementById('prob-percent');
+    
+    txt.innerText = `${Math.round(probabilidadeBayesiana)}%`;
+    bar.style.width = `${probabilidadeBayesiana}%`;
+    
+    if (probabilidadeBayesiana >= 80) bar.style.backgroundColor = 'var(--green)';
+    else if (probabilidadeBayesiana >= 50) bar.style.backgroundColor = 'var(--blue)';
+    else bar.style.backgroundColor = 'var(--red)';
   }
 
   function iniciarJogo() {
     casoAtual = bancoDeDados[Math.floor(Math.random() * bancoDeDados.length)];
     etapa = 0;
     pontuacao = 0;
+    probabilidadeBayesiana = casoAtual.prevalencia_base || 25;
 
     document.getElementById('btn-start').style.display = 'none';
+    document.getElementById('bayes-tracker').style.display = 'block';
+    atualizarBarraBayes(probabilidadeBayesiana);
+
     document.getElementById('case-display').style.display = 'block';
-    document.getElementById('case-display').innerHTML = `<strong style="color: var(--navy);">Apresentação Clínica:</strong><br>${casoAtual.vigneta}`;
+    document.getElementById('case-display').innerHTML = `<strong style="color: var(--navy); font-size: 16px;">Vigneta Clínica de Admissão:</strong><br><p style="margin: 8px 0 0;">${casoAtual.vigneta}</p>`;
     
     document.getElementById('interaction').style.display = 'block';
     document.getElementById('log').innerHTML = '';
@@ -428,6 +579,10 @@
       document.getElementById('step-indicator').innerText = etapasJogo[etapa].label;
       document.getElementById('question-text').innerText = etapasJogo[etapa].pergunta;
       document.getElementById('user-input').value = '';
+      
+      // Mostra o seletor de confiança apenas no passo de hipótese diagnóstica
+      document.getElementById('confidence-box').style.display = (etapa === 0) ? 'block' : 'none';
+      
       document.getElementById('user-input').focus();
     } else {
       finalizarCaso();
@@ -439,20 +594,40 @@
   }
 
   function processarResposta() {
-    const inputUsuario = normalizar(document.getElementById('user-input').value);
+    const inputUsuario = document.getElementById('user-input').value.trim();
     if (!inputUsuario) return;
 
     const regraAtual = etapasJogo[etapa];
     const respostasAceitas = casoAtual.respostas_esperadas[regraAtual.chave];
-    
-    let acertou = respostasAceitas.some(resp => inputUsuario.includes(normalizar(resp)));
+    const resultadoFuzzy = avaliarSimilaridadeFuzzy(inputUsuario, respostasAceitas);
     const logDiv = document.getElementById('log');
-    
-    if (acertou) {
-      pontuacao += regraAtual.peso;
-      logDiv.innerHTML += `<div class="log-item log-correct"><strong>✓ Decisão Acurada (+${regraAtual.peso} pts):</strong> O motor de inferência validou a resposta para [${regraAtual.chave}].</div>`;
+
+    if (resultadoFuzzy.score >= 0.8) {
+      // Cálculo de Calibração Metacognitiva no Diagnóstico
+      if (etapa === 0) {
+        const bonusConfianca = nivelConfianca === 0.99 ? 1.1 : (nivelConfianca === 0.8 ? 1.0 : 0.85);
+        pontuacao += Math.round(regraAtual.peso * bonusConfianca);
+        atualizarBarraBayes(probabilidadeBayesiana + 45);
+      } else {
+        pontuacao += regraAtual.peso;
+        atualizarBarraBayes(probabilidadeBayesiana + 15);
+      }
+
+      logDiv.innerHTML += `
+        <div class="preceptor-card correct">
+          <strong>✓ Decisão Clínica Validada:</strong> O preceptor reconheceu sua resposta [<em>${inputUsuario}</em>] como congruente com a diretriz esperada (<em>${resultadoFuzzy.matchedTarget}</em>). A probabilidade diagnóstica pós-teste foi elevada com sucesso.
+        </div>`;
     } else {
-      logDiv.innerHTML += `<div class="log-item log-incorrect"><strong>✕ Divergência Lógica:</strong> A conduta informada não atingiu a probabilidade necessária para [${regraAtual.chave}]. O sistema esperava diretrizes como: <em>${respostasAceitas[0]}</em>.</div>`;
+      // Penalidade bayesiana por calibração excessiva errônea
+      if (etapa === 0 && nivelConfianca === 0.99) {
+        pontuacao = Math.max(0, pontuacao - 10);
+      }
+      atualizarBarraBayes(probabilidadeBayesiana - 15);
+
+      logDiv.innerHTML += `
+        <div class="preceptor-card incorrect">
+          <strong>✕ Divergência Diagnóstica:</strong> A proposição informada [<em>${inputUsuario}</em>] afasta a probabilidade do nó decisório principal. No contexto desta vinheta, o algoritmo prioriza o reconhecimento de diretrizes como: <strong>${respostasAceitas[0]}</strong>.
+        </div>`;
     }
 
     etapa++;
@@ -464,11 +639,15 @@
     const logDiv = document.getElementById('log');
     const scoreDiv = document.getElementById('final-score');
 
-    logDiv.innerHTML += `<div class="log-item log-info"><strong>📋 Relatório do Algoritmo Bayesiano:</strong><br>${casoAtual.feedback_tecnico}</div>`;
+    logDiv.innerHTML += `
+      <div class="preceptor-card summary">
+        <strong>📋 Discussão Anatomo-Clínica do Preceptor:</strong><br>
+        <p style="margin: 8px 0 0;">${casoAtual.feedback_tecnico}</p>
+      </div>`;
     
     scoreDiv.style.display = 'block';
-    scoreDiv.innerHTML = `Performance Clínica: ${pontuacao}/100<br>
-      <button class="btn" style="margin-top: 24px; max-width: 250px;" onclick="iniciarJogo()">↻ Simular Novo Caso</button>`;
+    scoreDiv.innerHTML = `Calibração Diagnóstica: ${pontuacao}/100<br>
+      <button class="btn" style="margin-top: 20px; max-width: 280px;" onclick="iniciarJogo()">↻ Simular Próximo Cenário</button>`;
   }
 
   window.onload = carregarConhecimento;
