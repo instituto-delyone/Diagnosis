@@ -1,0 +1,170 @@
+[
+  {
+    "modulo": "Ginecologia e Obstetricia",
+    "cenario_id": "GO_BENIGNO_001",
+    "titulo": "Investigação de Dismenorreia Secundária e Infertilidade",
+    "vinheta_clinica": "Paciente 32 anos, nuligesta, tentando engravidar há 2 anos sem sucesso. Queixa-se de cólicas menstruais intensas (dismenorreia secundária) de caráter progressivo e dor profunda durante as relações sexuais (dispareunia). Ao exame físico: útero fixo e doloroso à mobilização, nódulo palpável ao toque vaginal no fundo de saco posterior.",
+    "sinais_vitais": {
+      "PA": "110/70 mmHg",
+      "FC": "76 bpm",
+      "Temperatura": "36.5 C"
+    },
+    
+    "hipoteses_concorrentes": [
+      {
+        "id": "H1",
+        "nome": "Endometriose Pélvica Profunda",
+        "prior_pre_teste": 0.65,
+        "verdadeira": true
+      },
+      {
+        "id": "H2",
+        "nome": "Adenomioso",
+        "prior_pre_teste": 0.20,
+        "verdadeira": false
+      },
+      {
+        "id": "H3",
+        "nome": "Miomatose Uterina",
+        "prior_pre_teste": 0.10,
+        "verdadeira": false
+      },
+      {
+        "id": "H4",
+        "nome": "Doença Inflamatória Pélvica (DIP) Crônica",
+        "prior_pre_teste": 0.05,
+        "verdadeira": false
+      }
+    ],
+
+    "propedêutica_disponivel": [
+      {
+        "acao": "Ultrassonografia Transvaginal (USG TV) Simples",
+        "custo_iep": 1,
+        "resultados_esperados": {
+          "H1": {
+            "achado": "Útero de volume e ecotextura normais. Ausência de imagens císticas nos ovários. (Nota: USG simples frequentemente é normal em endometriose profunda).",
+            "LR_positivo": 0.5,
+            "LR_negativo": 0.9
+          }
+        }
+      },
+      {
+        "acao": "Ultrassonografia Transvaginal com Preparo Intestinal",
+        "custo_iep": 3,
+        "resultados_esperados": {
+          "H1": {
+            "achado": "Presença de lesão hipoecoica, espiculada, medindo 2 cm, infiltrando o septo retovaginal e ligamentos uterossacros.",
+            "LR_positivo": 20.0,
+            "LR_negativo": 0.1
+          }
+        }
+      },
+      {
+        "acao": "Ressonância Magnética (RNM) de Pelve",
+        "custo_iep": 4,
+        "resultados_esperados": {
+          "H1": {
+            "achado": "Focos de hipersinal em T1 (hemorrágicos) no fundo de saco de Douglas e espessamento dos ligamentos uterossacros. Ausência de espessamento da zona juncional mioendometrial (afasta adenomiose).",
+            "LR_positivo": 25.0,
+            "LR_negativo": 0.1
+          }
+        }
+      },
+      {
+        "acao": "Laparoscopia Diagnóstica",
+        "custo_iep": 6,
+        "resultados_esperados": {
+          "H1": {
+            "achado": "Visualização de implantes escuros ('pólvora') no peritônio pélvico e aderências densas bloqueando o fundo de saco.",
+            "LR_positivo": 99.0,
+            "LR_negativo": 0.01
+          }
+        }
+      }
+    ],
+
+    "condutas_terapeuticas": [
+      {
+        "acao": "Indicação de Fertilização In Vitro (FIV)",
+        "correta_para": ["H1"],
+        "feedback": "Correto! Diante de um quadro de endometriose com infertilidade associada e distorção anatômica (útero fixo e aderências), o tratamento clínico para dor não resolve a infertilidade. A FIV é a indicação para casos severos com fator tubário/aderencial."
+      },
+      {
+        "acao": "Prescrever Pílula Combinada ou Progesterona Contínua",
+        "correta_para": [],
+        "feedback": "Incorreto. Essa é a primeira linha de tratamento APENAS para o controle da dor. Como a queixa principal da paciente também envolve infertilidade, o bloqueio hormonal não ajudará a paciente a engravidar."
+      }
+    ]
+  },
+  {
+    "modulo": "Ginecologia e Obstetricia",
+    "cenario_id": "GO_CLIMATERIO_001",
+    "titulo": "Prescrição de Terapia Hormonal no Climatério",
+    "vinheta_clinica": "Paciente 52 anos. Queixa-se de fogachos intensos (ondas de calor) que prejudicam a qualidade do sono. Relata última menstruação há 14 meses. Antecedentes cirúrgicos: Histerectomia total há 4 anos por miomatose uterina. Nega comorbidades (DM, HAS) ou história de trombose.",
+    "sinais_vitais": {
+      "PA": "120/80 mmHg",
+      "FC": "72 bpm",
+      "Temperatura": "36.4 C"
+    },
+    
+    "hipoteses_concorrentes": [
+      {
+        "id": "H1",
+        "nome": "Sintomas Vasomotores da Menopausa",
+        "prior_pre_teste": 0.95,
+        "verdadeira": true
+      },
+      {
+        "id": "H2",
+        "nome": "Hipertireoidismo",
+        "prior_pre_teste": 0.05,
+        "verdadeira": false
+      }
+    ],
+
+    "propedêutica_disponivel": [
+      {
+        "acao": "Dosagem de FSH",
+        "custo_iep": 1,
+        "penalidade": "A paciente já preenche critério clínico para menopausa (> 1 ano de amenorreia) e tem sintomas clássicos. A dosagem laboratorial (FSH > 35) é dispensável para fechar o diagnóstico e iniciar o tratamento. Leve perda de IEP.",
+        "resultados_esperados": {
+          "H1": {
+            "achado": "FSH: 58 mUI/mL",
+            "LR_positivo": 2.0,
+            "LR_negativo": 0.1
+          }
+        }
+      },
+      {
+        "acao": "Mamografia e Perfil Lipídico (Rastreio pré-TH)",
+        "custo_iep": 1,
+        "resultados_esperados": {
+          "H1": {
+            "achado": "Mamografia BI-RADS 2 (sem contraindicação ao estrogênio). Colesterol e triglicerídeos normais.",
+            "LR_positivo": 1.0,
+            "LR_negativo": 1.0
+          }
+        }
+      }
+    ],
+
+    "condutas_terapeuticas": [
+      {
+        "acao": "Terapia Hormonal APENAS com Estrogênio (via oral ou transdérmica)",
+        "correta_para": ["H1"],
+        "feedback": "Correto! A regra de ouro da TH indica que pacientes SEM útero devem receber terapia apenas com estrogênio (a progesterona serviria apenas para proteger o endométrio, que ela já não possui)."
+      },
+      {
+        "acao": "Terapia Hormonal Combinada (Estrogênio + Progesterona)",
+        "correta_para": [],
+        "feedback": "Incorreto. A progesterona é obrigatória apenas em pacientes COM útero para evitar a hiperplasia endometrial. Como a paciente é histerectomizada, o uso de progesterona é desnecessário e adiciona risco sem benefício."
+      },
+      {
+        "acao": "Opções Não Hormonais (Clonidina / Venlafaxina / Fluoxetina)",
+        "correta_para": [],
+        "feedback": "Inadequado. Como a paciente não tem contraindicações formais à TH (ex: câncer de mama, trombose), a terapia hormonal é o padrão-ouro e muito mais eficaz para fogachos do que as terapias não hormonais."
+      }
+    ]
+  }
+]
