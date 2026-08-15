@@ -417,8 +417,8 @@
         "valvopatias.json"
       ]
     },
-        "Ginecologia e Obstetrícia": {
-      pasta: "knowledge_base/ginecologia_obstetricia",
+    "Ginecologia e Obstetrícia": {
+      pasta: "knowledge_base/ginecologia_obstetricia/",
       arquivos: [
         "00_diretrizes_gerais.json",
         "avaliacao_inicial_de_gravidez.json",
@@ -432,7 +432,6 @@
         "sindromes_transmissao_sexual.json"
       ]
     },
-
     "Pediatria": { pasta: "knowledge_base/pediatria/", arquivos: [] },
     "Cirurgia Geral": { pasta: "knowledge_base/cirurgia/", arquivos: [] }
   };
@@ -449,16 +448,31 @@
     renderizarPainelModulos();
     let casosCarregados = 0;
 
-    // NOVO: Carregar o JSON de Material Complementar
+    // NOVO: Carregar o JSON de Material Complementar Específico de GO
     try {
-      const respMat = await fetch("knowledge_base/material_complementar.json");
+      const respMat = await fetch("knowledge_base/ginecologia_obstetricia/complementar_ginecologia_obstetricia.json");
       if (respMat.ok) {
-        materialComplementar = await respMat.json();
+        const dadosMat = await respMat.json();
+        
+        // Achatando as listas de gineco e obstetrícia para o formato do dicionário de Front-End
+        const unificar = (lista) => {
+          if (!lista) return;
+          lista.forEach(item => {
+            materialComplementar[item.doenca] = {
+              fisiopatologia: item.resumo,
+              particularidades: item.dica_clinica
+            };
+          });
+        };
+        
+        unificar(dadosMat.ginecologia);
+        unificar(dadosMat.obstetricia);
       }
     } catch (error) {
-      console.log("Aviso: material_complementar.json não encontrado ou vazio.");
+      console.log("Aviso: complementar_ginecologia_obstetricia.json não encontrado ou caminho incorreto.");
     }
 
+    // Carregamento dos Cenários de Simulação
     for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
       for (const arquivo of dados.arquivos) {
         const caminhoCompleto = dados.pasta + arquivo;
@@ -466,8 +480,15 @@
           const response = await fetch(caminhoCompleto);
           if (response.ok) {
             const casoJson = await response.json();
-            bancoDeDados.push(...casoJson);
-            casosCarregados += casoJson.length;
+            // Evita carregar arquivos que não são Arrays (como o 00_diretrizes_gerais se ele for um Object solto)
+            if (Array.isArray(casoJson)) {
+                bancoDeDados.push(...casoJson);
+                casosCarregados += casoJson.length;
+            } else if (casoJson.vigneta) {
+                // Se for um único objeto de cenário solto
+                bancoDeDados.push(casoJson);
+                casosCarregados += 1;
+            }
           }
         } catch (error) {
           console.error(`Erro ao carregar ${arquivo}:`, error);
@@ -514,7 +535,7 @@
 
   /**
    * ==========================================
-   * 3. ALGORITMOS DE NLP & FUZZY MATCHING (Levenshtein + Tokenização)
+   * 3. ALGORITMOS DE NLP & FUZZY MATCHING
    * ==========================================
    */
   function normalizar(texto) {
@@ -543,6 +564,8 @@
   }
 
   function avaliarSimilaridadeFuzzy(input, alvos) {
+    if (!alvos || !Array.isArray(alvos)) return { score: 0.0, matchedTarget: "Erro: Alvos Indefinidos" };
+    
     const inputNorm = normalizar(input);
     const tokensInput = inputNorm.split(/\s+/);
 
@@ -568,7 +591,7 @@
     return { score: 0.0, matchedTarget: alvos[0] };
   }
 
-  // NOVO: Função que cruza o gabarito do caso com as chaves do Material Complementar
+  // NOVO: Cruza o gabarito do caso com as chaves unificadas do Material Complementar
   function encontrarMaterialComplementar(caso) {
     if (!caso || !caso.respostas_esperadas || !caso.respostas_esperadas.diagnostico) return null;
     
@@ -576,7 +599,6 @@
     
     for (const [doenca, dados] of Object.entries(materialComplementar)) {
       const doencaNorm = normalizar(doenca);
-      // Se a chave do arquivo de estudo cruzar com o gabarito aceito do caso simulado
       if (diagnosticosNorm.some(d => d === doencaNorm || d.includes(doencaNorm) || doencaNorm.includes(d))) {
         return { nome: doenca, dados: dados };
       }
@@ -621,6 +643,8 @@
   }
 
   function iniciarJogo() {
+    if (bancoDeDados.length === 0) return;
+    
     casoAtual = bancoDeDados[Math.floor(Math.random() * bancoDeDados.length)];
     etapa = 0;
     pontuacao = 0;
@@ -646,9 +670,7 @@
       document.getElementById('question-text').innerText = etapasJogo[etapa].pergunta;
       document.getElementById('user-input').value = '';
       
-      // Mostra o seletor de confiança apenas no passo de hipótese diagnóstica
       document.getElementById('confidence-box').style.display = (etapa === 0) ? 'block' : 'none';
-      
       document.getElementById('user-input').focus();
     } else {
       finalizarCaso();
@@ -690,7 +712,7 @@
 
       logDiv.innerHTML += `
         <div class="preceptor-card incorrect">
-          <strong>✕ Divergência Diagnóstica:</strong> A proposição informada [<em>${inputUsuario}</em>] afasta a probabilidade do nó decisório principal. No contexto desta vinheta, o algoritmo prioriza o reconhecimento de diretrizes como: <strong>${respostasAceitas[0]}</strong>.
+          <strong>✕ Divergência Diagnóstica:</strong> A proposição informada [<em>${inputUsuario}</em>] afasta a probabilidade do nó decisório principal. No contexto desta vinheta, o algoritmo prioriza o reconhecimento de diretrizes como: <strong>${respostasAceitas ? respostasAceitas[0] : 'N/A'}</strong>.
         </div>`;
     }
 
@@ -703,14 +725,14 @@
     const logDiv = document.getElementById('log');
     const scoreDiv = document.getElementById('final-score');
 
-    // Feedback original técnico
+    // Feedback original técnico do json do caso
     logDiv.innerHTML += `
       <div class="preceptor-card summary">
         <strong>📋 Discussão Anatomo-Clínica do Preceptor:</strong><br>
         <p style="margin: 8px 0 0;">${casoAtual.feedback_tecnico}</p>
       </div>`;
     
-    // NOVO: Injeção do Painel Didático de Estudo (Material Complementar)
+    // Injeção do Painel Didático de Estudo (Material Complementar Unificado)
     const material = encontrarMaterialComplementar(casoAtual);
     if (material) {
       const m = material.dados;
@@ -720,10 +742,10 @@
           <div style="display: flex; flex-direction: column; gap: 6px;">
       `;
       if (m.etiologia) htmlDiscussao += `<div class="discussion-topic"><strong>Etiologia:</strong> ${m.etiologia}</div>`;
-      if (m.fisiopatologia) htmlDiscussao += `<div class="discussion-topic"><strong>Fisiopatologia:</strong> ${m.fisiopatologia}</div>`;
+      if (m.fisiopatologia) htmlDiscussao += `<div class="discussion-topic"><strong>Fisiopatologia / Resumo Clínico:</strong> ${m.fisiopatologia}</div>`;
       if (m.diagnostico) htmlDiscussao += `<div class="discussion-topic"><strong>Diagnóstico:</strong> ${m.diagnostico}</div>`;
       if (m.tratamento) htmlDiscussao += `<div class="discussion-topic"><strong>Tratamento:</strong> ${m.tratamento}</div>`;
-      if (m.particularidades) htmlDiscussao += `<div class="discussion-topic"><strong style="color: var(--amber);">Particularidades:</strong> ${m.particularidades}</div>`;
+      if (m.particularidades) htmlDiscussao += `<div class="discussion-topic"><strong style="color: var(--amber);">Dica Clínica:</strong> ${m.particularidades}</div>`;
       
       htmlDiscussao += `</div></div>`;
       logDiv.innerHTML += htmlDiscussao;
