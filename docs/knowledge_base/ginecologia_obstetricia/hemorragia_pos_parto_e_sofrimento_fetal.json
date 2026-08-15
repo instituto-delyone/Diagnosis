@@ -1,0 +1,147 @@
+[
+  {
+    "modulo": "Ginecologia e Obstetricia",
+    "cenario_id": "GO_OBSTETRICIA_002",
+    "titulo": "Manejo de Hemorragia Pós-Parto (HPP) em Paciente Hipertensa",
+    "vinheta_clinica": "Secundigesta, 38 semanas, com diagnóstico de Pré-eclâmpsia leve. Evoluiu para parto vaginal de feto macrossômico (4.100g). Cerca de 15 minutos após a dequitação placentária completa, a paciente apresenta sangramento vaginal profuso (estimado > 800 ml). Exame físico: palidez cutaneomucosa, útero amolecido e palpável acima da cicatriz umbilical.",
+    "sinais_vitais": {
+      "PA": "150/100 mmHg",
+      "FC": "112 bpm",
+      "Temperatura": "36.5 C"
+    },
+    
+    "hipoteses_concorrentes": [
+      {
+        "id": "H1",
+        "nome": "Atonia Uterina",
+        "prior_pre_teste": 0.85,
+        "verdadeira": true
+      },
+      {
+        "id": "H2",
+        "nome": "Laceração de Trajeto",
+        "prior_pre_teste": 0.10,
+        "verdadeira": false
+      },
+      {
+        "id": "H3",
+        "nome": "Retenção de Restos Placentários",
+        "prior_pre_teste": 0.05,
+        "verdadeira": false
+      }
+    ],
+
+    "propedêutica_disponivel": [
+      {
+        "acao": "Revisão do Canal de Parto (Inspeção Vaginal e Cervical)",
+        "custo_iep": 1,
+        "resultados_esperados": {
+          "H1": {
+            "achado": "Ausência de lacerações ativas no canal vaginal ou colo uterino. Confirma sangramento de origem uterina.",
+            "LR_positivo": 5.0,
+            "LR_negativo": 0.1
+          }
+        }
+      },
+      {
+        "acao": "Revisão Manual da Cavidade Uterina (Curetagem de Urgência)",
+        "custo_iep": 3,
+        "penalidade": "A placenta já foi dequitada completa. Submeter a paciente a procedimento invasivo sem antes tratar o tônus uterino (principal causa de HPP) atrasa a estabilização. Perda de IEP.",
+        "resultados_esperados": null
+      }
+    ],
+
+    "condutas_terapeuticas": [
+      {
+        "acao": "Massagem Uterina Bimanual (Manobra de Hamilton) + Oxitocina IV/IM",
+        "correta_para": ["H1"],
+        "feedback": "Conduta Correta! A atonia uterina é a principal causa de HPP (associada à macrossomia). O manejo inicial exige massagem para estimular a contração e administração de uterotônicos seguros como a Oxitocina."
+      },
+      {
+        "acao": "Administração de Ergometrina 0,2 mg IM",
+        "correta_para": [],
+        "feedback": "Erro Crítico Iatrogênico! Embora seja um uterotônico potente, a Ergometrina é estritamente CONTRAINDICADA em pacientes hipertensas (como esta paciente com pré-eclâmpsia), pois pode causar crise hipertensiva severa e AVE."
+      },
+      {
+        "acao": "Inserção Imediata de Balão de Bakri",
+        "correta_para": [],
+        "feedback": "Incorreto como primeira linha. O tamponamento mecânico com Balão de Bakri é indicado quando há falha do tratamento medicamentoso (uterotônicos e massagem) inicial."
+      }
+    ]
+  },
+  {
+    "modulo": "Ginecologia e Obstetricia",
+    "cenario_id": "GO_OBSTETRICIA_003",
+    "titulo": "Avaliação de Vitalidade Fetal em CIUR",
+    "vinheta_clinica": "Gestante 31 semanas, portadora de Hipertensão Crônica. Encaminhada para avaliação de vitalidade fetal devido a diagnóstico de Crescimento Intrauterino Restrito (CIUR) assimétrico na ultrassonografia. A paciente relata diminuição da movimentação fetal nas últimas 24 horas.",
+    "sinais_vitais": {
+      "PA": "140/90 mmHg",
+      "FC": "80 bpm",
+      "Temperatura": "36.6 C"
+    },
+    
+    "hipoteses_concorrentes": [
+      {
+        "id": "H1",
+        "nome": "Insuficiência Placentária com Hipóxia Grave (Sofrimento Fetal Agudo)",
+        "prior_pre_teste": 0.80,
+        "verdadeira": true
+      },
+      {
+        "id": "H2",
+        "nome": "Vitalidade Fetal Preservada",
+        "prior_pre_teste": 0.20,
+        "verdadeira": false
+      }
+    ],
+
+    "propedêutica_disponivel": [
+      {
+        "acao": "Cardiotocografia (CTG)",
+        "custo_iep": 1,
+        "resultados_esperados": {
+          "H1": {
+            "achado": "Linha de base em 150 bpm, variabilidade ausente (< 6 bpm), presença de desacelerações tardias repetidas após as contrações (DIP II).",
+            "LR_positivo": 15.0,
+            "LR_negativo": 0.1
+          }
+        }
+      },
+      {
+        "acao": "Dopplerfluxometria (Umbilical, Cerebral Média e Ducto Venoso)",
+        "custo_iep": 2,
+        "resultados_esperados": {
+          "H1": {
+            "achado": "Artéria Umbilical com diástole zero. Artéria Cerebral Média com redução do IP (centralização). Ducto Venoso apresentando Onda A negativa.",
+            "LR_positivo": 50.0,
+            "LR_negativo": 0.01
+          }
+        }
+      },
+      {
+        "acao": "Perfil Biofísico Fetal (PBF)",
+        "custo_iep": 2,
+        "resultados_esperados": {
+          "H1": {
+            "achado": "Pontuação 2/10 (Apenas volume de líquido amniótico presente, porém oligodrâmnio). Ausência de movimentos respiratórios e tônus fetal alterado.",
+            "LR_positivo": 10.0,
+            "LR_negativo": 0.2
+          }
+        }
+      }
+    ],
+
+    "condutas_terapeuticas": [
+      {
+        "acao": "Interrupção Imediata da Gestação (PARTO)",
+        "correta_para": ["H1"],
+        "feedback": "Conduta Salva-Vidas! A presença de Onda A negativa no ducto venoso e DIP II na cardiotocografia indicam risco iminente de morte fetal e acidose grave. A via de parto deve ser a mais rápida, geralmente cesariana."
+      },
+      {
+        "acao": "Administrar Corticoterapia (Betametasona) e aguardar 48 horas",
+        "correta_para": [],
+        "feedback": "Erro Fatal! Embora o feto seja prematuro (< 32 semanas), a onda A negativa significa falência miocárdica iminente. Não há tempo hábil para maturação pulmonar. Aguardar resultará em óbito fetal."
+      }
+    ]
+  }
+]
