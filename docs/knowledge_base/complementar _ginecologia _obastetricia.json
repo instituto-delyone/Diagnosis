@@ -1,0 +1,88 @@
+{
+  "modulo": "Ginecologia e Obstetricia",
+  "tipo": "Material Complementar",
+  "ginecologia": [
+    {
+      "doenca": "Vaginose Bacteriana",
+      "resumo": "Desequilíbrio da flora vaginal (Gardnerella vaginalis) sem sinais de inflamação intensa.",
+      "dica_clinica": "Diagnóstico exige 3 de 4 Critérios de Amsel (Corrimento homogêneo, pH > 4.5, Whiff test positivo, Clue cells). Tratamento de escolha: Metronidazol."
+    },
+    {
+      "doenca": "Candidíase Vulvovaginal",
+      "resumo": "Infecção fúngica (Candida albicans) caracterizada por intenso prurido e corrimento grumoso.",
+      "dica_clinica": "Diferencia-se da vaginose pelo pH ácido (< 4.5) e presença de pseudo-hifas na microscopia. Tratamento com fluconazol oral ou cremes imidazólicos."
+    },
+    {
+      "doenca": "Câncer de Mama",
+      "resumo": "Neoplasia maligna mais comum na mulher. O tipo invasor mais frequente é o Carcinoma Ductal Infiltrante.",
+      "dica_clinica": "Nódulo palpável endurecido ou mamografia BI-RADS 4/5 exige biópsia (Core Biopsy). Lesões < 3,5 cm permitem cirurgia conservadora (Quadrantectomia) com radioterapia obrigatória."
+    },
+    {
+      "doenca": "Câncer de Endométrio",
+      "resumo": "Principal suspeita diante de sangramento vaginal na pós-menopausa. Mais comum em obesas, diabéticas e nulíparas.",
+      "dica_clinica": "USG transvaginal com endométrio espessado (> 4mm sem TH ou > 8mm com TH) exige investigação com Histeroscopia + Biópsia (Padrão-ouro)."
+    },
+    {
+      "doenca": "Endometriose",
+      "resumo": "Presença de glândulas e estroma endometrial fora do útero (mais comum no ovário).",
+      "dica_clinica": "Causa dismenorreia secundária, dispareunia profunda e infertilidade. A USG simples frequentemente é normal. O padrão-ouro diagnóstico é a Laparoscopia."
+    },
+    {
+      "doenca": "Sífilis Primária e Secundária",
+      "resumo": "IST causada pelo Treponema pallidum. A fase primária é marcada pelo cancro duro (úlcera única e indolor).",
+      "dica_clinica": "Tratamento de escolha é Penicilina Benzatina. Para controle de cura, utiliza-se o VDRL (não treponêmico), pois testes treponêmicos podem permanecer positivos para o resto da vida (cicatriz sorológica)."
+    },
+    {
+      "doenca": "Incontinência Urinária de Esforço (IUE)",
+      "resumo": "Perda involuntária de urina ao tossir, espirrar ou realizar esforço, geralmente por hipermobilidade vesical.",
+      "dica_clinica": "Sempre solicitar EAS e Urocultura primeiro para descartar infecção. O tratamento cirúrgico atual de escolha é o Sling (TVT ou TOT)."
+    },
+    {
+      "doenca": "Miomatose Uterina",
+      "resumo": "Tumor benigno mais comum do trato genital feminino. A maioria é assintomática.",
+      "dica_clinica": "Miomas submucosos e intramurais são as principais causas de sangramento (SUA). Pacientes assintomáticas não precisam de tratamento cirúrgico."
+    }
+  ],
+  "obstetricia": [
+    {
+      "doenca": "Pré-Eclâmpsia e Eclâmpsia",
+      "resumo": "Hipertensão (PA ≥ 140/90) após 20 semanas de gestação, acompanhada de proteinúria ou lesão de órgão-alvo.",
+      "dica_clinica": "Na iminência de eclâmpsia ou eclâmpsia instalada, usa-se Sulfato de Magnésio. Em caso de intoxicação (arreflexia patelar ou bradipneia), o antídoto é o Gluconato de Cálcio 10%."
+    },
+    {
+      "doenca": "Diabetes Gestacional",
+      "resumo": "Intolerância aos carboidratos iniciada na gestação (devido aos hormônios contrainsulínicos da placenta). Não causa malformações de organogênese.",
+      "dica_clinica": "Alvos: Jejum < 95, 1h pós-prandial < 140 e 2h pós-prandial < 120. Após o parto, a insulina deve ser suspensa imediatamente."
+    },
+    {
+      "doenca": "Hemorragia Pós-Parto (HPP)",
+      "resumo": "Perda de > 500 ml no parto vaginal ou > 1000 ml na cesárea. A causa principal (Tônus) é a Atonia Uterina.",
+      "dica_clinica": "Conduta inicial: Massagem bimanual e uterotônicos (Oxitocina). Atenção: Ergometrina é estritamente contraindicada em pacientes hipertensas."
+    },
+    {
+      "doenca": "Sofrimento Fetal Agudo (SFA)",
+      "resumo": "Hipóxia fetal súbita durante o trabalho de parto, geralmente por insuficiência placentária ou compressão de cordão.",
+      "dica_clinica": "Desacelerações tardias (DIP II) na cardiotocografia ou Onda A negativa no ducto venoso indicam asfixia severa e risco de morte. A conduta é o parto imediato."
+    },
+    {
+      "doenca": "Infecção do Trato Urinário na Gestação",
+      "resumo": "O agente principal é a E. coli. Toda gestante deve ser rastreada no pré-natal, pois aumenta o risco de trabalho de parto prematuro.",
+      "dica_clinica": "Diferente de mulheres não grávidas, a bacteriúria assintomática (cultura positiva sem sintomas) DEVE ser tratada na gestação com antibióticos e exige urocultura de controle."
+    },
+    {
+      "doenca": "Gemelaridade",
+      "resumo": "Gestação múltipla que aumenta riscos maternos e fetais. O exame mais importante é a USG de 1º trimestre para avaliar a corionicidade.",
+      "dica_clinica": "Placenta dicoriônica apresenta o 'Sinal do Lambda' na USG. Placenta monocoriônica apresenta o 'Sinal do T' e possui alto risco para Síndrome de Transfusão Feto-Fetal."
+    },
+    {
+      "doenca": "Prevenção de GBS (Streptococcus agalactiae)",
+      "resumo": "Rastreio universal realizado entre 35-37 semanas com swab vaginal e retal para prevenir sepse neonatal precoce.",
+      "dica_clinica": "Profilaxia intraparto com Penicilina Cristalina é mandatória se swab positivo, bacteriúria atual para GBS ou se filho anterior teve doença invasiva por GBS."
+    },
+    {
+      "doenca": "Toxoplasmose na Gestação",
+      "resumo": "Infecção com alto risco de transmissão vertical e sequelas fetais graves se adquirida na gestação.",
+      "dica_clinica": "Se IgG e IgM forem positivos no 1º trimestre (< 16 semanas), solicitar Teste de Avidez. Avidez baixa (< 30%) confirma infecção aguda. Iniciar Espiramicina imediatamente para a mãe."
+    }
+  ]
+}
