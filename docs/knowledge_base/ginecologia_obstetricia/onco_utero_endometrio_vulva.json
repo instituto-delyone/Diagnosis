@@ -1,0 +1,76 @@
+{
+  "modulo": "Ginecologia e Obstetricia",
+  "cenario_id": "GO_ONCO_UTERO_001",
+  "titulo": "Investigação de Sangramento na Pós-Menopausa",
+  "vinheta_clinica": "Paciente 65 anos, obesa (IMC 34), hipertensa e diabética. Nulípara. Refere episódio de sangramento vaginal moderado há 1 semana. A menopausa ocorreu aos 55 anos. Nega uso de Terapia Hormonal (TH).",
+  "sinais_vitais": {
+    "PA": "150/90 mmHg",
+    "FC": "82 bpm",
+    "Temperatura": "36.7 C"
+  },
+  
+  "hipoteses_concorrentes": [
+    {
+      "id": "H1",
+      "nome": "Câncer de Endométrio (Tipo Endometrioide)",
+      "prior_pre_teste": 0.45,
+      "verdadeira": true
+    },
+    {
+      "id": "H2",
+      "nome": "Atrofia Endometrial",
+      "prior_pre_teste": 0.30,
+      "verdadeira": false
+    },
+    {
+      "id": "H3",
+      "nome": "Câncer de Colo do Útero",
+      "prior_pre_teste": 0.05,
+      "verdadeira": false
+    }
+  ],
+
+  "propedêutica_disponivel": [
+    {
+      "acao": "Ultrassonografia Transvaginal (USG TV)",
+      "custo_iep": 1,
+      "resultados_esperados": {
+        "H1": {
+          "achado": "Útero com volume de 90 cm³. Espessura do eco endometrial de 12 mm, heterogêneo.",
+          "LR_positivo": 8.0,
+          "LR_negativo": 0.1
+        }
+      }
+    },
+    {
+      "acao": "Histeroscopia com Biópsia Direcionada",
+      "custo_iep": 4,
+      "resultados_esperados": {
+        "H1": {
+          "achado": "Visualização direta de lesão polipoide atípica e friável. Biópsia: Adenocarcinoma endometrioide grau 1.",
+          "LR_positivo": 99.0,
+          "LR_negativo": 0.01
+        }
+      }
+    },
+    {
+      "acao": "Cureta de Novak ou Curetagem Fracionada",
+      "custo_iep": 2,
+      "penalidade": "Procedimento às cegas. Apesar de ambulatorial, possui altos índices de falso-negativo. O padrão-ouro é a visualização direta (Histeroscopia). Redução do IEP.",
+      "resultados_esperados": null
+    }
+  ],
+
+  "condutas_terapeuticas": [
+    {
+      "acao": "Laparotomia: Histerectomia Total Abdominal + Anexectomia Bilateral + Lavado Peritoneal",
+      "correta_para": ["H1"],
+      "feedback": "Correto! O câncer de endométrio é de estadiamento e tratamento cirúrgico. A HTA + Lavado + Anexectomia Bilateral é a conduta padrão inicial."
+    },
+    {
+      "acao": "Tratamento Conservador com Progesterona em Alta Dose",
+      "correta_para": [],
+      "feedback": "Incorreto. A terapia com progesterona é exceção, reservada apenas para pacientes jovens com desejo de gestar ou com risco cirúrgico proibitivo."
+    }
+  ]
+}
