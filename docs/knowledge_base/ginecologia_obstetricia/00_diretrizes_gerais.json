@@ -1,0 +1,41 @@
+{
+  "modulo": "Ginecologia e Obstetricia",
+  "tipo_arquivo": "meta_diretriz",
+  "descricao": "Regras heurísticas globais, fatores de risco basais e propedêutica obrigatória para o domínio de GO.",
+  
+  "variaveis_universais_obrigatorias": [
+    "Idade da paciente",
+    "Data da Última Menstruação (DUM)",
+    "Idade Gestacional (IG - se aplicável)",
+    "Histórico Obstétrico (Gesta/Para/Aborto - GPA)",
+    "Uso de Contraceptivo"
+  ],
+
+  "red_flags_absolutas": [
+    {
+      "sinal": "Instabilidade hemodinâmica associada a sangramento ou dor pélvica",
+      "conduta_imediata": "Estabilização hemodinâmica (Acesso venoso, Cristaloides) e avaliação cirúrgica de urgência.",
+      "penalidade_iep": "Falha em reconhecer instabilidade zera o Índice de Eficiência Propedêutica (IEP) do cenário."
+    },
+    {
+      "sinal": "Abdome agudo em mulher em idade fértil",
+      "conduta_imediata": "Beta-hCG obrigatório para descartar gestação ectópica antes de qualquer exame de imagem com radiação."
+    }
+  ],
+
+  "regras_bayesianas_globais": {
+    "regra_gestacao_idade_fertil": {
+      "contexto": "Mulher em idade fértil com dor abdominal ou sangramento anormal.",
+      "modificador_prior": "O Prior de 'Complicação na Gestação' sobe automaticamente. A solicitação de Beta-hCG é considerada 'Custo Cognitivo/Financeiro Zero' (Ação mandatória).",
+      "lr_positivo_beta_hcg": 99.0
+    },
+    "regra_imagem_pelvica": {
+      "contexto": "Investigação de massa, dor ou sangramento de origem uterina/anexial.",
+      "modificador_prior": "A Ultrassonografia Transvaginal (USG TV) é o exame de primeira linha (Padrão-ouro inicial). Solicitar Tomografia ou Ressonância como primeiro exame gera penalidade de IEP por alto custo desnecessário."
+    },
+    "regra_sangramento_pos_menopausa": {
+      "contexto": "Sangramento vaginal após 1 ano de amenorreia (menopausa).",
+      "modificador_prior": "O Prior para Câncer de Endométrio é elevado. A conduta inicial obrigatória é a USG Transvaginal para avaliar a espessura do eco endometrial."
+    }
+  }
+}
