@@ -1,0 +1,73 @@
+[
+  {
+    "modulo": "Ginecologia e Obstetricia",
+    "cenario_id": "GO_OBSTETRICIA_001",
+    "titulo": "Manejo de Pré-Eclâmpsia Grave e Sulfatação",
+    "vinheta_clinica": "Gestante 32 anos, primigesta, com 33 semanas de IG. Admitida com cefaleia de forte intensidade, escotomas cintilantes e dor epigástrica. PA: 160/110 mmHg. Exames laboratoriais revelam plaquetas 90.000, TGO 85, LDH 700. Iniciada sulfatação (Esquema de Pritchard) e controle anti-hipertensivo. Quatro horas depois, enfermeira relata que paciente está sonolenta, com Frequência Respiratória de 10 irpm e diurese de 15 mL/h nas últimas 2 horas. Reflexo patelar abolido.",
+    "sinais_vitais": {
+      "PA": "145/95 mmHg",
+      "FC": "88 bpm",
+      "FR": "10 irpm (Bradipneia)",
+      "Temperatura": "36.5 C"
+    },
+    
+    "hipoteses_concorrentes": [
+      {
+        "id": "H1",
+        "nome": "Intoxicação por Sulfato de Magnésio secundária a oligúria (Pré-eclâmpsia Grave / Síndrome HELLP)",
+        "prior_pre_teste": 0.85,
+        "verdadeira": true
+      },
+      {
+        "id": "H2",
+        "nome": "Eclâmpsia Iminente",
+        "prior_pre_teste": 0.10,
+        "verdadeira": false
+      },
+      {
+        "id": "H3",
+        "nome": "Acidente Vascular Encefálico (AVE)",
+        "prior_pre_teste": 0.05,
+        "verdadeira": false
+      }
+    ],
+
+    "propedêutica_disponivel": [
+      {
+        "acao": "Avaliação Clínica da Toxicidade (Reflexos, FR e Diurese)",
+        "custo_iep": 1,
+        "resultados_esperados": {
+          "H1": {
+            "achado": "Reflexo patelar ausente (primeiro sinal de toxicidade). Frequência respiratória < 16 irpm. Oligúria grave.",
+            "LR_positivo": 50.0,
+            "LR_negativo": 0.05
+          }
+        }
+      },
+      {
+        "acao": "Tomografia Computadorizada (TC) de Crânio",
+        "custo_iep": 5,
+        "penalidade": "Conduta desnecessária e que atrasa o manejo emergencial da intoxicação óbvia por magnésio. Perda severa de IEP.",
+        "resultados_esperados": null
+      }
+    ],
+
+    "condutas_terapeuticas": [
+      {
+        "acao": "Suspender Sulfato de Magnésio IMEDIATAMENTE + Administrar Gluconato de Cálcio 10% IV",
+        "correta_para": ["H1"],
+        "feedback": "Perfeito! A depressão respiratória (FR < 16) e a abolição do reflexo patelar confirmam a intoxicação por magnésio, agravada pela oligúria da pré-eclâmpsia. O antídoto mandatório é o Gluconato de Cálcio a 10%."
+      },
+      {
+        "acao": "Ajustar dose de Sulfato de Magnésio (diminuir gotejamento) + Observação",
+        "correta_para": [],
+        "feedback": "Erro Crítico! Apenas ajustar a dose é feito quando a paciente tem APENAS oligúria. Como a paciente já apresenta abolição de reflexo e depressão respiratória, a medicação deve ser suspensa e o antídoto aplicado imediatamente para evitar parada cardiorrespiratória."
+      },
+      {
+        "acao": "Realizar Parto Cesárea de Emergência imediatamente, sem estabilização",
+        "correta_para": [],
+        "feedback": "Erro! Apesar de a paciente ter Síndrome HELLP e indicação de interrupção (parto), a regra de ouro da obstetrícia é: Parto só após estabilização materna. A intoxicação deve ser tratada primeiro."
+      }
+    ]
+  }
+]
