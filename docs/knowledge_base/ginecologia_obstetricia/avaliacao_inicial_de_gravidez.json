@@ -1,0 +1,147 @@
+[
+  {
+    "modulo": "Ginecologia e Obstetricia",
+    "cenario_id": "GO_PRENATAL_001",
+    "titulo": "Rastreio de Toxoplasmose no Primeiro Trimestre",
+    "vinheta_clinica": "Gestante 24 anos, primigesta, comparece à primeira consulta de pré-natal com 12 semanas de idade gestacional (estimada por USG de 1º trimestre). Assintomática. Traz resultados de exames laboratoriais de rotina solicitados no posto de saúde.",
+    "sinais_vitais": {
+      "PA": "110/70 mmHg",
+      "FC": "78 bpm",
+      "Temperatura": "36.6 C"
+    },
+    
+    "hipoteses_concorrentes": [
+      {
+        "id": "H1",
+        "nome": "Infecção Aguda por Toxoplasmose (Risco Fetal)",
+        "prior_pre_teste": 0.50,
+        "verdadeira": true
+      },
+      {
+        "id": "H2",
+        "nome": "Imunidade Prévia para Toxoplasmose",
+        "prior_pre_teste": 0.40,
+        "verdadeira": false
+      },
+      {
+        "id": "H3",
+        "nome": "Suscetibilidade à Toxoplasmose",
+        "prior_pre_teste": 0.10,
+        "verdadeira": false
+      }
+    ],
+
+    "propedêutica_disponivel": [
+      {
+        "acao": "Análise da Sorologia para Toxoplasmose (IgG e IgM)",
+        "custo_iep": 1,
+        "resultados_esperados": {
+          "H1": {
+            "achado": "Toxoplasmose IgG Positivo (+) e IgM Positivo (+).",
+            "LR_positivo": 10.0,
+            "LR_negativo": 0.1
+          }
+        }
+      },
+      {
+        "acao": "Teste de Avidez da IgG",
+        "custo_iep": 2,
+        "resultados_esperados": {
+          "H1": {
+            "achado": "Avidez Baixa (< 30%). Confirma infecção adquirida há menos de 4 meses (durante a gestação atual).",
+            "LR_positivo": 50.0,
+            "LR_negativo": 0.05
+          }
+        }
+      },
+      {
+        "acao": "Amniocentese para PCR de Toxoplasma",
+        "custo_iep": 5,
+        "penalidade": "Conduta precipitada. A amniocentese é um exame invasivo para confirmar infecção fetal e só deve ser indicada após o rastreio sorológico materno inicial com avidez.",
+        "resultados_esperados": null
+      }
+    ],
+
+    "condutas_terapeuticas": [
+      {
+        "acao": "Iniciar Espiramicina Imediatamente + Rastrear o feto",
+        "correta_para": ["H1"],
+        "feedback": "Correto! Avidez baixa em gestação menor que 16 semanas confirma infecção aguda na gravidez. A Espiramicina não trata o feto, mas trata a infecção materna e impede que o parasita atravesse a placenta enquanto o feto é investigado."
+      },
+      {
+        "acao": "Iniciar Sulfadiazina, Pirimetamina e Ácido Folínico",
+        "correta_para": [],
+        "feedback": "Incorreto neste momento. O esquema triplo é utilizado para tratar o FETO quando já existe confirmação de infecção fetal (ou após 30 semanas). A conduta materna inicial é Espiramicina."
+      },
+      {
+        "acao": "Tranquilizar a paciente, pois IgG positivo significa imunidade antiga.",
+        "correta_para": [],
+        "feedback": "Erro Grave! Como o IgM também está positivo, é obrigatório solicitar o Teste de Avidez (se IG < 16 semanas) para descartar infecção recente."
+      }
+    ]
+  },
+  {
+    "modulo": "Ginecologia e Obstetricia",
+    "cenario_id": "GO_PRENATAL_002",
+    "titulo": "Prevenção de Infecção Neonatal pelo GBS",
+    "vinheta_clinica": "Gestante 36 semanas, secundigesta. Internada em trabalho de parto ativo. Apresenta bolsa rota há 4 horas e dilatação de 6 cm. Durante a anamnese admissional, informa que não realizou a coleta do 'exame do cotonete' (Swab vaginal e retal). Porém, o cartão de pré-natal revela Urocultura positiva para Streptococcus agalactiae (GBS) tratada com sucesso na 12ª semana.",
+    "sinais_vitais": {
+      "PA": "120/80 mmHg",
+      "FC": "90 bpm",
+      "Temperatura": "36.8 C"
+    },
+    
+    "hipoteses_concorrentes": [
+      {
+        "id": "H1",
+        "nome": "Indicação Absoluta de Profilaxia Intraparto para GBS",
+        "prior_pre_teste": 0.90,
+        "verdadeira": true
+      },
+      {
+        "id": "H2",
+        "nome": "Necessidade de Rastreio com Swab no momento da admissão",
+        "prior_pre_teste": 0.10,
+        "verdadeira": false
+      }
+    ],
+
+    "propedêutica_disponivel": [
+      {
+        "acao": "Coleta de Swab Vaginal e Retal para GBS na admissão",
+        "custo_iep": 3,
+        "penalidade": "Conduta desnecessária. A paciente já tem indicação formal para profilaxia devido à bacteriúria atual. Além disso, o resultado da cultura do swab demoraria dias, não alterando a conduta intraparto. Perda de IEP.",
+        "resultados_esperados": null
+      },
+      {
+        "acao": "Revisão de Fatores de Risco Clínicos no Cartão de Pré-natal",
+        "custo_iep": 1,
+        "resultados_esperados": {
+          "H1": {
+            "achado": "Bacteriúria por GBS na gestação atual confirmada. Ausência de febre materna. Bolsa rota < 18 horas.",
+            "LR_positivo": 99.0,
+            "LR_negativo": 0.01
+          }
+        }
+      }
+    ],
+
+    "condutas_terapeuticas": [
+      {
+        "acao": "Administrar Penicilina Cristalina IV Imediatamente",
+        "correta_para": ["H1"],
+        "feedback": "Conduta Perfeita! A presença de bacteriúria para GBS em qualquer momento da gestação atual é uma indicação absoluta para profilaxia intraparto, dispensando a coleta do swab no final da gravidez."
+      },
+      {
+        "acao": "Aguardar febre (TAX ≥ 38ºC) ou ruptura de membranas > 18 horas para indicar antibiótico",
+        "correta_para": [],
+        "feedback": "Erro! Esses são os fatores de risco utilizados APENAS quando o status do GBS é desconhecido e a paciente não possui indicações absolutas prévias (como a bacteriúria atual)."
+      },
+      {
+        "acao": "Não realizar profilaxia, pois a bacteriúria do 1º trimestre já foi tratada",
+        "correta_para": [],
+        "feedback": "Incorreto. O tratamento da infecção urinária no 1º trimestre trata a mãe, mas a colonização vaginal pelo GBS é persistente/intermitente. O risco de sepse neonatal precoce permanece alto."
+      }
+    ]
+  }
+]
