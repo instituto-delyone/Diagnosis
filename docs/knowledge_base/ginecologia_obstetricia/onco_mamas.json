@@ -1,0 +1,76 @@
+{
+  "modulo": "Ginecologia e Obstetricia",
+  "cenario_id": "GO_ONCO_MAMA_001",
+  "titulo": "Investigação de Nódulo Mamário Palpável",
+  "vinheta_clinica": "Paciente 52 anos, menarca aos 11 anos, nulípara. Procura atendimento por ter notado nódulo endurecido em mama direita durante autoexame. Ao exame físico: nódulo indolor, aderido a planos profundos, medindo cerca de 3 cm no quadrante superior externo da mama direita, com retração de pele focal.",
+  "sinais_vitais": {
+    "PA": "120/80 mmHg",
+    "FC": "72 bpm",
+    "Temperatura": "36.6 C"
+  },
+  
+  "hipoteses_concorrentes": [
+    {
+      "id": "H1",
+      "nome": "Câncer de Mama (Carcinoma Ductal Infiltrante)",
+      "prior_pre_teste": 0.70,
+      "verdadeira": true
+    },
+    {
+      "id": "H2",
+      "nome": "Fibroadenoma",
+      "prior_pre_teste": 0.10,
+      "verdadeira": false
+    },
+    {
+      "id": "H3",
+      "nome": "Alteração Funcional Benigna da Mama (AFBM)",
+      "prior_pre_teste": 0.05,
+      "verdadeira": false
+    }
+  ],
+
+  "propedêutica_disponivel": [
+    {
+      "acao": "Mamografia e Ultrassonografia (MMG + USG)",
+      "custo_iep": 2,
+      "resultados_esperados": {
+        "H1": {
+          "achado": "Mamografia com nódulo espiculado e microcalcificações pleomórficas agrupadas (BI-RADS 5). USG mostra lesão sólida, hipoecoica, de margens irregulares e sombra acústica posterior.",
+          "LR_positivo": 15.0,
+          "LR_negativo": 0.1
+        }
+      }
+    },
+    {
+      "acao": "Core Biopsy (Punção com Agulha Grossa)",
+      "custo_iep": 3,
+      "resultados_esperados": {
+        "H1": {
+          "achado": "Fragmentos de parênquima mamário infiltrados por carcinoma ductal invasor.",
+          "LR_positivo": 99.0,
+          "LR_negativo": 0.01
+        }
+      }
+    },
+    {
+      "acao": "Punção Aspirativa por Agulha Fina (PAAF)",
+      "custo_iep": 1,
+      "penalidade": "A PAAF não permite avaliar invasão tecidual nem realizar painel imuno-histoquímico completo para receptores hormonais. Perda de IEP.",
+      "resultados_esperados": null
+    }
+  ],
+
+  "condutas_terapeuticas": [
+    {
+      "acao": "Cirurgia Conservadora (Quadrantectomia) + Radioterapia Adjuvante + Pesquisa de Linfonodo Sentinela",
+      "correta_para": ["H1"],
+      "feedback": "Correto! O tumor tem menos de 3,5 cm (ou 20% da mama), permitindo cirurgia conservadora. A Radioterapia pós-operatória é obrigatória nesses casos, e a pesquisa do linfonodo sentinela evita o esvaziamento axilar radical desnecessário."
+    },
+    {
+      "acao": "Mastectomia Radical Modificada a Madden",
+      "correta_para": [],
+      "feedback": "Incorreto/Subótimo. Não há indicação formal de mastectomia radical para uma lesão única de 3 cm com relação tumor/mama favorável, a menos que houvesse contraindicação à radioterapia adjuvante."
+    }
+  ]
+}
