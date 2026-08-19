@@ -5,7 +5,6 @@
  * 
  * Licenciado sob a Licença Creative Commons Atribuição-NãoComercial 4.0 Internacional (CC BY-NC 4.0).
  * Uso comercial estritamente proibido sem autorização expressa do autor.
- * Detalhes em: https://creativecommons.org/licenses/by-nc/4.0/
  */
 
 <html lang="pt-BR">
@@ -256,9 +255,7 @@
       line-height: 1.5;
       margin-bottom: 10px;
     }
-    .discussion-topic strong {
-      color: var(--navy);
-    }
+    .discussion-topic strong { color: var(--navy); }
 
     .score-board {
       text-align: center;
@@ -272,10 +269,10 @@
       animation: fadeIn 0.5s ease;
     }
 
-    /* === MANIFESTO VISUAL === */
+    /* === MANIFESTO VISUAL & TOGGLES === */
     .module-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 16px;
       margin-top: 20px;
     }
@@ -285,15 +282,41 @@
       padding: 18px;
       background: #fafbfc;
       transition: transform 0.2s;
+      position: relative;
     }
     .module-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.03); }
     .module-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
     .module-title { font-weight: 800; color: var(--navy); font-size: 15px; }
+    
     .status-badge { font-size: 10px; font-weight: 800; padding: 5px 10px; border-radius: 6px; }
     .status-badge.active { background: var(--green-soft); color: var(--green); border: 1px solid #c9ead8; }
     .status-badge.empty { background: #f4f7f8; color: var(--muted); border: 1px solid var(--border); }
-    .file-list { margin: 0; padding-left: 20px; font-size: 13px; color: var(--muted); }
+    
+    .file-list { margin: 0 0 16px 0; padding-left: 20px; font-size: 13px; color: var(--muted); min-height: 40px; }
     .file-list li { margin-bottom: 6px; }
+
+    /* Estilização do Botão Toggle (On/Off) */
+    .toggle-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+    }
+    .toggle-label { font-size: 12px; font-weight: 800; color: var(--navy); text-transform: uppercase; }
+    
+    .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--border); transition: .4s; border-radius: 24px; }
+    .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+    
+    input:checked + .slider { background-color: var(--green); }
+    input:checked + .slider:before { transform: translateX(20px); }
+    
+    /* Estado desabilitado (Para Clínica Médica e módulos vazios) */
+    input:disabled + .slider { background-color: #e2e8f0; cursor: not-allowed; }
+    input:disabled:checked + .slider { background-color: #8ccba8; cursor: not-allowed; }
+    input:disabled + .slider:before { box-shadow: none; }
 
     .footer-note {
       max-width: 800px;
@@ -316,7 +339,7 @@
     <div class="translate-wrapper">
       <div id="google_translate_element"></div>
     </div>
-    <span class="badge">AIGAR ENGINE - V2.0 CALIBRATION</span>
+    <span class="badge">AIGAR ENGINE - V3.0 MODULAR</span>
     <h1>Simulador de Raciocínio Clínico</h1>
     <p id="status-engine">Sincronizando com a base de conhecimento do Instituto Delyone...</p>
   </div>
@@ -340,7 +363,7 @@
     <div id="step-indicator" style="font-size: 12px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em;"></div>
     <div id="question-text" class="question"></div>
 
-    <!-- Seletor de Confiança Metacognitiva (Aparece no Passo 1) -->
+    <!-- Seletor de Confiança Metacognitiva -->
     <div id="confidence-box" class="confidence-box">
       <strong>Qual o seu nível de certeza nesta hipótese?</strong>
       <div class="confidence-options">
@@ -361,13 +384,13 @@
 
 <!-- MANIFESTO VISUAL (BASE DE DADOS) -->
 <div class="modules-container">
-  <h2 style="margin: 0 0 6px; font-size: 20px; color: var(--navy); font-weight: 800;">Módulos de Conhecimento</h2>
-  <p style="margin: 0 0 16px; font-size: 14px; color: var(--muted);">Status em tempo real da base de dados do repositório Diagnosis.</p>
+  <h2 style="margin: 0 0 6px; font-size: 20px; color: var(--navy); font-weight: 800;">Módulos de Raciocínio (On/Off)</h2>
+  <p style="margin: 0 0 16px; font-size: 14px; color: var(--muted);">Ligue ou desligue as especialidades ativas no seu plantão. A Clínica Médica é o módulo mestre irremovível.</p>
   <div class="module-grid" id="module-grid"></div>
 </div>
 
 <footer class="footer-note">
-  <p>ℹ️ <strong>Nota Técnica:</strong> Esta base de conhecimento foi alimentada com referências e consensos médicos consolidados até 2022. <em>Guidelines</em> e diretrizes clínicas mais recentes serão inseridos gradativamente nas próximas versões do motor.</p>
+  <p>ℹ️ <strong>Nota Técnica:</strong> Base de conhecimento alimentada com diretrizes clínicas atualizadas até o ano corrente (2026). Registrado no INPI sob titularidade do Instituto Delyone de Medicina e Tecnologia.</p>
 </footer>
 
 <!-- SCRIPTS DO GOOGLE TRANSLATE -->
@@ -386,102 +409,82 @@
 <script>
   /**
    * ==========================================
-   * 1. MANIFESTO DO CONHECIMENTO
+   * 1. MANIFESTO DO CONHECIMENTO & CHAVES ON/OFF
    * ==========================================
    */
   const manifestoConhecimento = {
     "Clínica Médica": {
       pasta: "knowledge_base/sindromes_clinicas/",
       arquivos: [
-        "cardiologia.json",
-        "cefaleias.json",
-        "cirrose.json",
-        "dispneia.json",
-        "disturbios_hidroeletroliticos.json",
-        "endocrinologia.json",
-        "epilepsia.json",
-        "geriatria.json",
-        "hematologia.json",
-        "hemostasia.json",
-        "hiv.json",
-        "ictericia.json",
-        "linfonodomegalia.json",
-        "mordeduras_profilaxias.json",
-        "nefrologia.json",
-        "neurologia.json",
-        "pcr.json",
-        "pneumonia.json",
-        "reumatologia.json",
-        "semiologia_osteoarticular.json",
-        "semiologia_respiratoria.json",
-        "sindrome_diarreica.json",
-        "sindrome_metabolica_diabetes.json",
-        "sindrome_metabolica_has.json",
-        "sindrome_uremica.json",
-        "sindromes_bacterianas.json",
-        "sindromes_febris.json",
-        "terapia_intensiva.json",
-        "tosse_cronica.json",
-        "toxicologia.json",
-        "valvopatias.json"
+        "cardiologia.json", "cefaleias.json", "cirrose.json", "dispneia.json",
+        "disturbios_hidroeletroliticos.json", "endocrinologia.json", "epilepsia.json",
+        "geriatria.json", "hematologia.json", "hemostasia.json", "hiv.json",
+        "ictericia.json", "linfonodomegalia.json", "mordeduras_profilaxias.json",
+        "nefrologia.json", "neurologia.json", "pcr.json", "pneumonia.json",
+        "reumatologia.json", "semiologia_osteoarticular.json", "semiologia_respiratoria.json",
+        "sindrome_diarreica.json", "sindrome_metabolica_diabetes.json",
+        "sindrome_metabolica_has.json", "sindrome_uremica.json", "sindromes_bacterianas.json",
+        "sindromes_febris.json", "terapia_intensiva.json", "tosse_cronica.json",
+        "toxicologia.json", "valvopatias.json"
       ]
     },
     "Ginecologia e Obstetrícia": {
       pasta: "knowledge_base/ginecologia_obstetricia/",
       arquivos: [
-        "00_diretrizes_gerais.json",
-        "avaliacao_inicial_de_gravidez.json",
-        "cenarios-uroginecologia.json",
-        "doencas_clinicas_gravidez.json",
-        "hemorragia_pos_parto_e_sofrimento.json",
-        "onco_mamas.json",
-        "onco_utero_endometrio_vulva.json",
-        "sangramento-ginecologico.json",
-        "sangramentos_gravidez.json",
-        "sindromes_transmissao_sexual.json"
+        "00_diretrizes_gerais.json", "avaliacao_inicial_de_gravidez.json",
+        "cenarios-uroginecologia.json", "doencas_clinicas_gravidez.json",
+        "hemorragia_pos_parto_e_sofrimento.json", "onco_mamas.json",
+        "onco_utero_endometrio_vulva.json", "sangramento-ginecologico.json",
+        "sangramentos_gravidez.json", "sindromes_transmissao_sexual.json"
       ]
     },
-    "Pediatria": { pasta: "knowledge_base/pediatria/", arquivos: [] },
-    "Cirurgia Geral": { pasta: "knowledge_base/cirurgia/", arquivos: [] }
+    "Pediatria": { 
+      pasta: "knowledge_base/pediatria/", 
+      arquivos: ["pediatria.json"] // Já mapeado aguardando o seu arquivo!
+    },
+    "Cirurgia Geral": { 
+      pasta: "knowledge_base/cirurgia/", 
+      arquivos: [] 
+    }
   };
 
-  let bancoDeDados = [];
-  let materialComplementar = {}; // NOVO: Guarda as revisões clínicas
+  // Estado global das chaves (Toggles)
+  let modulosAtivos = {
+    "Clínica Médica": true,
+    "Ginecologia e Obstetrícia": true,
+    "Pediatria": true,
+    "Cirurgia Geral": true
+  };
+
+  let bancoDeDadosMestre = []; // Memória RAM de todos os JSONs baixados
+  let materialComplementar = {};
 
   /**
    * ==========================================
-   * 2. MOTOR DE BUSCA ASSÍNCRONO
+   * 2. MOTOR DE BUSCA ASSÍNCRONO & RENDERIZAÇÃO
    * ==========================================
    */
   async function carregarConhecimento() {
-    renderizarPainelModulos();
-    let casosCarregados = 0;
+    renderizarPainelModulos(); // Renderiza a interface imediatamente
+    let totalCarregado = 0;
 
-    // NOVO: Carregar o JSON de Material Complementar Específico de GO
+    // Carregar o JSON de Material Complementar Específico de GO (Opcional)
     try {
       const respMat = await fetch("knowledge_base/ginecologia_obstetricia/complementar_ginecologia_obstetricia.json");
       if (respMat.ok) {
         const dadosMat = await respMat.json();
-        
-        // Achatando as listas de gineco e obstetrícia para o formato do dicionário de Front-End
         const unificar = (lista) => {
           if (!lista) return;
           lista.forEach(item => {
-            materialComplementar[item.doenca] = {
-              fisiopatologia: item.resumo,
-              particularidades: item.dica_clinica
-            };
+            materialComplementar[item.doenca] = { fisiopatologia: item.resumo, particularidades: item.dica_clinica };
           });
         };
-        
         unificar(dadosMat.ginecologia);
         unificar(dadosMat.obstetricia);
       }
-    } catch (error) {
-      console.log("Aviso: complementar_ginecologia_obstetricia.json não encontrado ou caminho incorreto.");
-    }
+    } catch (error) { /* Ignora se não existir */ }
 
-    // Carregamento dos Cenários de Simulação
+    // Carregamento Varredura JSON (Alimenta a Memória Mestre)
     for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
       for (const arquivo of dados.arquivos) {
         const caminhoCompleto = dados.pasta + arquivo;
@@ -489,32 +492,25 @@
           const response = await fetch(caminhoCompleto);
           if (response.ok) {
             const casoJson = await response.json();
-            // Evita carregar arquivos que não são Arrays (como o 00_diretrizes_gerais se ele for um Object solto)
+            
+            // Marca a origem do caso para o filtro do Toggle funcionar
             if (Array.isArray(casoJson)) {
-                bancoDeDados.push(...casoJson);
-                casosCarregados += casoJson.length;
+                casoJson.forEach(c => c._moduloOrigem = materia);
+                bancoDeDadosMestre.push(...casoJson);
+                totalCarregado += casoJson.length;
             } else if (casoJson.vigneta) {
-                // Se for um único objeto de cenário solto
-                bancoDeDados.push(casoJson);
-                casosCarregados += 1;
+                casoJson._moduloOrigem = materia;
+                bancoDeDadosMestre.push(casoJson);
+                totalCarregado += 1;
             }
           }
         } catch (error) {
-          console.error(`Erro ao carregar ${arquivo}:`, error);
+          console.error(`Aguardando criação do arquivo: ${arquivo}`);
         }
       }
     }
 
-    const statusEl = document.getElementById('status-engine');
-    const btnStart = document.getElementById('btn-start');
-
-    if (casosCarregados > 0) {
-      statusEl.innerHTML = `<span style="color: var(--green); font-weight: 600;">✓ Sistema Operacional. ${casosCarregados} patologias ativas no motor bayesiano.</span>`;
-      btnStart.innerText = "Gerar Novo Caso Clínico";
-      btnStart.disabled = false;
-    } else {
-      statusEl.innerHTML = `<span style="color: var(--red); font-weight: 600;">⚠️ Atenção: JSONs não localizados. Verifique o deploy do GitHub Pages.</span>`;
-    }
+    atualizarBotaoStart();
   }
 
   function renderizarPainelModulos() {
@@ -524,11 +520,16 @@
     for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
       const temArquivos = dados.arquivos.length > 0;
       const badgeClass = temArquivos ? 'active' : 'empty';
-      const badgeText = temArquivos ? `${dados.arquivos.length} MÓDULO(S)` : 'AGUARDANDO DADOS';
+      const badgeText = temArquivos ? `${dados.arquivos.length} ARQUIVOS` : 'AGUARDANDO JSON';
       
+      const isCM = (materia === "Clínica Médica"); // Regra do Módulo Mestre
+      const isLocked = isCM || !temArquivos; // Trava se for CM ou se a pasta estiver vazia
+      const isChecked = modulosAtivos[materia] && temArquivos ? "checked" : "";
+      const labelId = `lbl-toggle-${materia.replace(/\s+/g, '')}`;
+
       let listaHtml = temArquivos 
         ? `<ul class="file-list">${dados.arquivos.map(arq => `<li>${arq}</li>`).join('')}</ul>`
-        : `<span style="font-size: 13px; color: var(--muted);">Nenhum arquivo integrado nesta área.</span>`;
+        : `<div class="file-list" style="display:flex;align-items:center;">Nenhum arquivo integrado.</div>`;
 
       grid.innerHTML += `
         <div class="module-card">
@@ -537,8 +538,49 @@
             <span class="status-badge ${badgeClass}">${badgeText}</span>
           </div>
           ${listaHtml}
+          <div class="toggle-wrapper" title="${isCM ? 'A Clínica Médica é o módulo mestre obrigatório.' : 'Ativar/Desativar este módulo no sorteio.'}">
+            <span class="toggle-label">STATUS: <span id="${labelId}" style="color: ${modulosAtivos[materia] && temArquivos ? 'var(--green)' : 'var(--muted)'};">${modulosAtivos[materia] && temArquivos ? 'ON' : 'OFF'}</span></span>
+            <label class="switch">
+              <input type="checkbox" onchange="toggleModulo('${materia}', this.checked)" ${isChecked} ${isLocked ? 'disabled' : ''}>
+              <span class="slider"></span>
+            </label>
+          </div>
         </div>
       `;
+    }
+  }
+
+  // Função disparada quando o usuário clica na chave On/Off
+  function toggleModulo(materia, status) {
+    if (materia === "Clínica Médica") return; // Failsafe para proteger o módulo mestre
+    
+    modulosAtivos[materia] = status; // Atualiza a variável global
+    
+    // Atualiza o texto ON/OFF visualmente
+    const label = document.getElementById(`lbl-toggle-${materia.replace(/\s+/g, '')}`);
+    if(label) {
+      label.innerText = status ? 'ON' : 'OFF';
+      label.style.color = status ? 'var(--green)' : 'var(--muted)';
+    }
+    
+    atualizarBotaoStart(); // Refiltra a base de dados
+  }
+
+  function atualizarBotaoStart() {
+    const btnStart = document.getElementById('btn-start');
+    const statusEl = document.getElementById('status-engine');
+    
+    // Filtra o banco mestre com base nas chaves que estão "ON"
+    const casosAtivos = bancoDeDadosMestre.filter(c => modulosAtivos[c._moduloOrigem]).length;
+    
+    if (casosAtivos > 0) {
+      statusEl.innerHTML = `<span style="color: var(--green); font-weight: 600;">✓ Sistema Operacional. ${casosAtivos} patologias ativas nos módulos selecionados.</span>`;
+      btnStart.innerText = "Gerar Novo Caso Clínico";
+      btnStart.disabled = false;
+    } else {
+      statusEl.innerHTML = `<span style="color: var(--red); font-weight: 600;">⚠️ Nenhum caso localizado. Ligue algum módulo ou verifique a conexão dos JSONs.</span>`;
+      btnStart.innerText = "Módulos Desligados";
+      btnStart.disabled = true;
     }
   }
 
@@ -580,10 +622,7 @@
 
     for (const alvo of alvos) {
       const alvoNorm = normalizar(alvo);
-      
-      if (inputNorm.includes(alvoNorm) || alvoNorm.includes(inputNorm)) {
-        return { score: 1.0, matchedTarget: alvo };
-      }
+      if (inputNorm.includes(alvoNorm) || alvoNorm.includes(inputNorm)) return { score: 1.0, matchedTarget: alvo };
 
       const tokensAlvo = alvoNorm.split(/\s+/);
       for (const tIn of tokensInput) {
@@ -591,21 +630,16 @@
         for (const tAlvo of tokensAlvo) {
           const dist = distanciaLevenshtein(tIn, tAlvo);
           const limiar = tAlvo.length > 6 ? 2 : 1;
-          if (dist <= limiar) {
-            return { score: 0.85, matchedTarget: alvo };
-          }
+          if (dist <= limiar) return { score: 0.85, matchedTarget: alvo };
         }
       }
     }
     return { score: 0.0, matchedTarget: alvos[0] };
   }
 
-  // NOVO: Cruza o gabarito do caso com as chaves unificadas do Material Complementar
   function encontrarMaterialComplementar(caso) {
     if (!caso || !caso.respostas_esperadas || !caso.respostas_esperadas.diagnostico) return null;
-    
     const diagnosticosNorm = caso.respostas_esperadas.diagnostico.map(d => normalizar(d));
-    
     for (const [doenca, dados] of Object.entries(materialComplementar)) {
       const doencaNorm = normalizar(doenca);
       if (diagnosticosNorm.some(d => d === doencaNorm || d.includes(doencaNorm) || doencaNorm.includes(d))) {
@@ -642,19 +676,23 @@
     probabilidadeBayesiana = Math.min(Math.max(prob, 5), 98);
     const bar = document.getElementById('prob-bar');
     const txt = document.getElementById('prob-percent');
-    
     txt.innerText = `${Math.round(probabilidadeBayesiana)}%`;
     bar.style.width = `${probabilidadeBayesiana}%`;
-    
     if (probabilidadeBayesiana >= 80) bar.style.backgroundColor = 'var(--green)';
     else if (probabilidadeBayesiana >= 50) bar.style.backgroundColor = 'var(--blue)';
     else bar.style.backgroundColor = 'var(--red)';
   }
 
   function iniciarJogo() {
-    if (bancoDeDados.length === 0) return;
+    // FILTRAGEM ATIVA: Só sorteia casos que pertençam aos módulos "ON"
+    const bancoDeDadosAtivo = bancoDeDadosMestre.filter(caso => modulosAtivos[caso._moduloOrigem]);
     
-    casoAtual = bancoDeDados[Math.floor(Math.random() * bancoDeDados.length)];
+    if (bancoDeDadosAtivo.length === 0) {
+        alert("Ative pelo menos um módulo que contenha arquivos JSON para gerar um caso.");
+        return;
+    }
+    
+    casoAtual = bancoDeDadosAtivo[Math.floor(Math.random() * bancoDeDadosAtivo.length)];
     etapa = 0;
     pontuacao = 0;
     probabilidadeBayesiana = casoAtual.prevalencia_base || 25;
@@ -664,7 +702,11 @@
     atualizarBarraBayes(probabilidadeBayesiana);
 
     document.getElementById('case-display').style.display = 'block';
-    document.getElementById('case-display').innerHTML = `<strong style="color: var(--navy); font-size: 16px;">Vigneta Clínica de Admissão:</strong><br><p style="margin: 8px 0 0;">${casoAtual.vigneta}</p>`;
+    
+    // Feedback visual indicando de onde veio a pergunta (Opcional, mas muito legal)
+    const tagModulo = `<span style="font-size:10px; font-weight:800; color:#fff; background:var(--blue); padding:3px 8px; border-radius:4px; margin-bottom:8px; display:inline-block;">${casoAtual._moduloOrigem}</span><br>`;
+    
+    document.getElementById('case-display').innerHTML = `${tagModulo}<strong style="color: var(--navy); font-size: 16px;">Vigneta Clínica de Admissão:</strong><br><p style="margin: 8px 0 0;">${casoAtual.vigneta}</p>`;
     
     document.getElementById('interaction').style.display = 'block';
     document.getElementById('log').innerHTML = '';
@@ -678,7 +720,6 @@
       document.getElementById('step-indicator').innerText = etapasJogo[etapa].label;
       document.getElementById('question-text').innerText = etapasJogo[etapa].pergunta;
       document.getElementById('user-input').value = '';
-      
       document.getElementById('confidence-box').style.display = (etapa === 0) ? 'block' : 'none';
       document.getElementById('user-input').focus();
     } else {
@@ -686,9 +727,7 @@
     }
   }
 
-  function handleEnter(e) {
-    if (e.key === 'Enter') processarResposta();
-  }
+  function handleEnter(e) { if (e.key === 'Enter') processarResposta(); }
 
   function processarResposta() {
     const inputUsuario = document.getElementById('user-input').value.trim();
@@ -708,21 +747,11 @@
         pontuacao += regraAtual.peso;
         atualizarBarraBayes(probabilidadeBayesiana + 15);
       }
-
-      logDiv.innerHTML += `
-        <div class="preceptor-card correct">
-          <strong>✓ Decisão Clínica Validada:</strong> O preceptor reconheceu sua resposta [<em>${inputUsuario}</em>] como congruente com a diretriz esperada (<em>${resultadoFuzzy.matchedTarget}</em>). A probabilidade diagnóstica pós-teste foi elevada com sucesso.
-        </div>`;
+      logDiv.innerHTML += `<div class="preceptor-card correct"><strong>✓ Decisão Validada:</strong> O preceptor reconheceu [<em>${inputUsuario}</em>] congruente com (<em>${resultadoFuzzy.matchedTarget}</em>). A probabilidade pós-teste subiu.</div>`;
     } else {
-      if (etapa === 0 && nivelConfianca === 0.99) {
-        pontuacao = Math.max(0, pontuacao - 10);
-      }
+      if (etapa === 0 && nivelConfianca === 0.99) pontuacao = Math.max(0, pontuacao - 10);
       atualizarBarraBayes(probabilidadeBayesiana - 15);
-
-      logDiv.innerHTML += `
-        <div class="preceptor-card incorrect">
-          <strong>✕ Divergência Diagnóstica:</strong> A proposição informada [<em>${inputUsuario}</em>] afasta a probabilidade do nó decisório principal. No contexto desta vinheta, o algoritmo prioriza o reconhecimento de diretrizes como: <strong>${respostasAceitas ? respostasAceitas[0] : 'N/A'}</strong>.
-        </div>`;
+      logDiv.innerHTML += `<div class="preceptor-card incorrect"><strong>✕ Divergência Diagnóstica:</strong> A conduta [<em>${inputUsuario}</em>] afasta a probabilidade do nó decisório. O algoritmo prioriza: <strong>${respostasAceitas ? respostasAceitas[0] : 'N/A'}</strong>.</div>`;
     }
 
     etapa++;
@@ -734,39 +763,26 @@
     const logDiv = document.getElementById('log');
     const scoreDiv = document.getElementById('final-score');
 
-    // Feedback original técnico do json do caso
-    logDiv.innerHTML += `
-      <div class="preceptor-card summary">
-        <strong>📋 Discussão Anatomo-Clínica do Preceptor:</strong><br>
-        <p style="margin: 8px 0 0;">${casoAtual.feedback_tecnico}</p>
-      </div>`;
+    logDiv.innerHTML += `<div class="preceptor-card summary"><strong>📋 Discussão do Preceptor:</strong><br><p style="margin: 8px 0 0;">${casoAtual.feedback_tecnico}</p></div>`;
     
-    // Injeção do Painel Didático de Estudo (Material Complementar Unificado)
     const material = encontrarMaterialComplementar(casoAtual);
     if (material) {
       const m = material.dados;
-      let htmlDiscussao = `
-        <div class="preceptor-card discussion-card">
-          <h3>📖 Revisão Estruturada: ${material.nome}</h3>
-          <div style="display: flex; flex-direction: column; gap: 6px;">
-      `;
+      let htmlDiscussao = `<div class="preceptor-card discussion-card"><h3>📖 Revisão Estruturada: ${material.nome}</h3><div style="display: flex; flex-direction: column; gap: 6px;">`;
       if (m.etiologia) htmlDiscussao += `<div class="discussion-topic"><strong>Etiologia:</strong> ${m.etiologia}</div>`;
-      if (m.fisiopatologia) htmlDiscussao += `<div class="discussion-topic"><strong>Fisiopatologia / Resumo Clínico:</strong> ${m.fisiopatologia}</div>`;
+      if (m.fisiopatologia) htmlDiscussao += `<div class="discussion-topic"><strong>Fisiopatologia:</strong> ${m.fisiopatologia}</div>`;
       if (m.diagnostico) htmlDiscussao += `<div class="discussion-topic"><strong>Diagnóstico:</strong> ${m.diagnostico}</div>`;
       if (m.tratamento) htmlDiscussao += `<div class="discussion-topic"><strong>Tratamento:</strong> ${m.tratamento}</div>`;
       if (m.particularidades) htmlDiscussao += `<div class="discussion-topic"><strong style="color: var(--amber);">Dica Clínica:</strong> ${m.particularidades}</div>`;
-      
       htmlDiscussao += `</div></div>`;
       logDiv.innerHTML += htmlDiscussao;
     }
     
     scoreDiv.style.display = 'block';
-    scoreDiv.innerHTML = `Calibração Diagnóstica: ${pontuacao}/100<br>
-      <button class="btn" style="margin-top: 20px; max-width: 280px;" onclick="iniciarJogo()">↻ Simular Próximo Cenário</button>`;
+    scoreDiv.innerHTML = `Calibração Diagnóstica: ${pontuacao}/100<br><button class="btn" style="margin-top: 20px; max-width: 280px;" onclick="iniciarJogo()">↻ Simular Próximo Cenário</button>`;
   }
 
   window.onload = carregarConhecimento;
 </script>
-
 </body>
 </html>
