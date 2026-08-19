@@ -253,7 +253,261 @@
       "algoritmo_diagnostico": {
         "velocidade_crescimento_normal": "Se a VC é normal (acompanha a curva): investigar Variantes Normais. Se Idade Óssea = Idade Cronológica e pais baixos = Baixa Estatura Familiar[span_23](start_span)[span_23](end_span). Se Idade Óssea < Idade Cronológica e pais com altura normal = Retardo Constitucional do Crescimento[span_24](start_span)[span_24](end_span).",
         "velocidade_crescimento_anormal": "Se a VC é baixa (horizontalizou a curva): investigar Condições Mórbidas. Se alteração fenotípica (ex: Turner) -> Doença Genética (pedir cariótipo em meninas)[span_25](start_span)[span_25](end_span). Sem alteração fenotípica, avaliar IMC: Se magro -> Desnutrição. Se normal/obeso -> Doença Endócrina (ex: Hipotireoidismo, Deficiência de GH, Hipercortisolismo)[span_26](start_span)[span_26](end_span)."
+      },
+      {
+  "modulo": "Pediatria",
+  "categoria": "Imunizações (Atualizado PNI)",
+  "data_atualizacao": "2026-08-19",
+  "topicos": [
+    {
+      "nome": "Tipos de Imunidade e Composição",
+      "imunidade_adquirida": "Ativa: Infecção natural ou Vacina (imunidade com memória). Passiva: Anticorpos maternos ou Soro/Imunoglobulina (proteção imediata sem memória; soro é mais imunogênico que Ig).",
+      "vacinas_agentes_vivos": "Atenuadas. Sofrem interferência de anticorpos. Exemplos: BCG, VORH, Varicela, Febre Amarela, Tríplice Viral, Tetraviral. Contraindicadas para imunodeprimidos e gestantes (exceção: Febre Amarela pode ser avaliada na gestação se alto risco).",
+      "vacinas_agentes_nao_vivos": "Inativadas. Não causam a doença. Exemplos: VIP, Hepatite B, Pentavalente, Pnm-10, MnC, Hepatite A, HPV, Influenza. Podem conter adjuvantes (imunopotencializadores)."
+    },
+    {
+      "nome": "Contraindicações",
+      "falsas_contraindicacoes": "Doenças benignas (resfriado, diarreia), desnutrição, história familiar de evento adverso, baixa dose de corticoide, alergia NÃO-grave a dose prévia.",
+      "verdadeiras_contraindicacoes": "Anafilaxia em dose prévia ou a componente da vacina (ex: ovo na Febre Amarela). Para Agentes Vivos: Imunossupressão (ex: Prednisona >= 2mg/kg/dia ou 20mg/dia por 14 dias), gestação (não engravidar por 30 dias após vacina viva)."
+    },
+    {
+      "nome": "Calendário Vacinal Básico (Doses Iniciais)",
+      "esquema": [
+        {"idade": "Ao nascer", "vacinas": "BCG, Hepatite B"},
+        {"idade": "2 meses", "vacinas": "Pentavalente, VIP, Pneumo-10, VORH"},
+        {"idade": "3 meses", "vacinas": "Meningococo C"},
+        {"idade": "4 meses", "vacinas": "Pentavalente, VIP, Pneumo-10, VORH"},
+        {"idade": "5 meses", "vacinas": "Meningococo C"},
+        {"idade": "6 meses", "vacinas": "Pentavalente, VIP"},
+        {"idade": "9 meses", "vacinas": "Febre Amarela"}
+      ]
+    },
+    {
+      "nome": "Calendário Vacinal (Reforços e Específicas)",
+      "esquema": [
+        {"idade": "12 meses", "vacinas": "Tríplice viral, Reforço Pneumo-10, Reforço Meningo C"},
+        {"idade": "15 meses", "vacinas": "Tetraviral, Hepatite A, 1º Reforço DTP, 1º Reforço VIP (Substituiu VOP pelo PNI atual)"},
+        {"idade": "4 anos", "vacinas": "Varicela, 2º Reforço DTP, 2º Reforço VIP (Substituiu VOP pelo PNI atual)"}
+      ]
+    },
+    {
+      "nome": "Vacinas no Adolescente",
+      "esquema": "Verificar caderneta. Se sem vacinas: Hepatite B (3 doses), dT (3 doses + reforço a cada 10 anos), Febre Amarela (1 dose), Tríplice Viral (2 doses). Rotina do adolescente: HPV quadrivalente (9 a 14 anos, 2 doses 0-6 meses; imunossuprimidos 9-26 anos, 3 doses) e Meningo ACWY (11 a 14 anos - Atualizado PNI)."
+    },
+    {
+      "nome": "Eventos Adversos e Condutas Específicas",
+      "bcg": "Via ID (deltoide direito). Cicatriz evolui de mácula -> pústula -> úlcera -> cicatriz atrófica. Contraindicada se < 2kg ou lesão de pele extensa. Úlcera > 1cm ou abscesso regional: tratar com Isoniazida. Não revacinar se ausência de cicatriz.",
+      "dtp_pentavalente": "Febre alta (>39,5) ou choro incontrolável: mantém esquema com DTP. Episódio hipotônico-hiporresponsivo ou convulsão: suspende DTP, passa para DTPa (acelular). Encefalopatia: suspende componente pertussis, passa para DT.",
+      "rotavirus_vorh": "Nunca reaplicar se criança vomitar ou cuspir. Limites rígidos: 1ª dose até 3m 15d; 2ª dose até 7m 29d. Contraindicada em malformação intestinal não corrigida ou histórico de invaginação."
+    },
+    {
+      "nome": "Profilaxia de Tétano Acidental",
+      "conduta": "Ferimento limpo/superficial + vacinação incerta/< 3 doses: Apenas Vacina. Ferimento alto risco (profundo, mordedura, sujeira) + vacinação incerta/< 3 doses: Vacina + SAT/IGAT. Ferimento limpo + >= 3 doses com última há > 10 anos: Apenas Vacina. Ferimento alto risco + >= 3 doses com última entre 5 e 10 anos: Apenas Vacina. Ferimento alto risco + >= 3 doses com última > 10 anos: Vacina (idoso/imunodeprimido add SAT)."
+    },
+    {
+  "modulo": "Pediatria",
+  "categoria": "Gastroenterologia e Pneumologia",
+  "data_atualizacao": "2026-08-19",
+  "topicos": [
+    {
+      "nome": "Diarreia Aguda e Desidratação",
+      "etiologia": "Viral (Rotavírus, Norovírus - aquosa, vômitos associados). Bacteriana Aquosa (E. coli ETEC - diarreia do viajante; Vibrião colérico - água de arroz). Bacteriana Disentérica com sangue/pus (Shigella, Campylobacter, Salmonella, E. coli entero-hemorrágica)[span_3](start_span)[span_3](end_span). Parasitária (Giardia)[span_4](start_span)[span_4](end_span).",
+      "complicacoes_especificas": "Shigella: sintomas neurológicos ou SHU[span_5](start_span)[span_5](end_span). Campylobacter: Síndrome de Guillain-Barré[span_6](start_span)[span_6](end_span). E. coli O157:H7: Síndrome Hemolítico-Urêmica (SHU - IRA, trombocitopenia e anemia microangiopática)[span_7](start_span)[span_7](end_span).",
+      "classificacao_desidratacao": {
+        "sem_desidratacao": "Alerta, olhos normais, lágrimas presentes, boca úmida, sede normal, prega volta rapidamente, pulso cheio[span_8](start_span)[span_8](end_span). Conduta: PLANO A[span_9](start_span)[span_9](end_span).",
+        "desidratacao": "Irritada, olhos fundos, lágrimas ausentes, boca seca, sedenta (bebe ávida), prega volta lentamente (<2s), pulso débil[span_10](start_span)[span_10](end_span). Conduta: PLANO B[span_11](start_span)[span_11](end_span).",
+        "desidratacao_grave": "Letárgica/inconsciente, olhos muito fundos, sem lágrimas, muito seca, incapaz de beber, prega volta muito lentamente (>2s), pulso muito débil/ausente[span_12](start_span)[span_12](end_span). Conduta: PLANO C[span_13](start_span)[span_13](end_span)."
+      },
+      "tratamento_planos": {
+        "plano_a": "Domiciliar. Aumentar líquidos, Soro Caseiro (1 punhado de açúcar + 1 pitada de sal). SRO após cada evacuação (<1 ano: 50-100ml; >1 ano: 100-200ml). Zinco por 10-14 dias[span_14](start_span)[span_14](end_span).",
+        "plano_b": "Na UBS. TRO com SRO de osmolaridade reduzida (Na+ 75mEq/L). Volume: 75mL/kg em 4h. Se vômitos persistentes (>=4/h) ou recusa: Gastróclise (20-30ml/kg/h)[span_15](start_span)[span_15](end_span).",
+        "plano_c": "Hospitalar/EV. Ringer Lactato ou SF 0,9% - 100mL/kg. Se < 1 ano: 30ml/kg em 1h + 70ml/kg em 5h. Se > 1 ano: 30ml/kg em 30min + 70ml/kg em 2h30[span_16](start_span)[span_16](end_span)."
       }
+    },
+    {
+      "nome": "Infecções de Vias Aéreas Superiores (IVAS)",
+      "variantes": [
+        {
+          "tipo": "Resfriado Comum",
+          "agentes": "Rinovírus (50%), Coronavírus[span_17](start_span)[span_17](end_span).",
+          "clinica": "Coriza, obstrução nasal, tosse noturna, febre baixa[span_18](start_span)[span_18](end_span).",
+          "tratamento": "Suporte. Lavagem nasal com SF 0,9%, hidratação, antipiréticos[span_19](start_span)[span_19](end_span). NÃO usar AAS, mucolíticos, antitussígenos ou anti-histamínicos[span_20](start_span)[span_20](end_span)."
+        },
+        {
+          "tipo": "Otite Média Aguda (OMA)",
+          "agentes": "S. pneumoniae, H. influenzae, M. catarrhalis[span_21](start_span)[span_21](end_span).",
+          "clinica": "Otalgia, abaulamento da membrana timpânica (sinal de maior valor), opacidade, hiperemia, otorreia[span_22](start_span)[span_22](end_span).",
+          "tratamento": "Amoxicilina 40-50mg/kg/dia ou 80-100mg/kg/dia por 10 dias se: < 6 meses, otorreia, sinais de gravidade (febre >=39C, dor intensa) ou bilateral (6m a 2 anos)[span_23](start_span)[span_23](end_span). Amox+Clavulanato se falha, uso recente de Amoxicilina ou OMA+Conjuntivite[span_24](start_span)[span_24](end_span).",
+          "complicacoes": "Mastoidite aguda (dor, rubor e edema retroauricular apagando o sulco) -> Internar, TC, ATB parenteral[span_25](start_span)[span_25](end_span)."
+        },
+        {
+          "tipo": "Sinusite Bacteriana Aguda",
+          "clinica": "Resfriado arrastado (>10 dias), coriza mucopurulenta, tosse intensa ou quadro grave bifásico[span_26](start_span)[span_26](end_span).",
+          "complicacoes": "Celulite orbitária (proptose ocular, quemose) ou periorbitária (apenas pálpebra)[span_27](start_span)[span_27](end_span)."
+        },
+        {
+          "tipo": "Faringoamigdalite Bacteriana",
+          "agentes": "Streptococcus beta-hemolítico do grupo A (S. pyogenes)[span_28](start_span)[span_28](end_span).",
+          "clinica": "Pico 5-15 anos (raro < 3 anos). Febre, exsudato, petéquias no palato, adenopatia[span_29](start_span)[span_29](end_span). SEM tosse ou coriza[span_30](start_span)[span_30](end_span).",
+          "tratamento": "Penicilina Benzatina (DU) ou Amoxicilina (10 dias)[span_31](start_span)[span_31](end_span). Previne Febre Reumática[span_32](start_span)[span_32](end_span)."
+        },
+        {
+          "tipo": "Síndromes do Estridor (Laringe)",
+          "variantes_laringe": [
+            {
+              "subtipo": "Crupe Viral (Laringotraqueíte)",
+              "agente": "Parainfluenza[span_33](start_span)[span_33](end_span).",
+              "clinica": "Tosse metálica (cachorro), afonia, rouquidão, estridor. Sinal da torre no Rx[span_34](start_span)[span_34](end_span).",
+              "tratamento": "Dexametasona VO/IM. Se estridor em repouso: associar NBZ com Adrenalina (observar por 2h)[span_35](start_span)[span_35](end_span)."
+            },
+            {
+              "subtipo": "Epiglotite Aguda",
+              "agentes": "Hib, S. pyogenes, S. aureus[span_36](start_span)[span_36](end_span).",
+              "clinica": "Evolução aguda, febre alta, toxemia, disfagia, sialorreia, posição de tripé[span_37](start_span)[span_37](end_span).",
+              "tratamento": "NÃO examinar orofaringe. Garantir via aérea (IOT), oxigênio, ATB parenteral[span_38](start_span)[span_38](end_span)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "Infecções de Vias Aéreas Inferiores (IVAI)",
+      "diagnostico_base": "Sensibilidade máxima: Taquipneia. < 2m: >= 60 irpm; 2-12m: >= 50 irpm; 1-5a: >= 40 irpm[span_39](start_span)[span_39](end_span).",
+      "variantes": [
+        {
+          "tipo": "Pneumonia Bacteriana",
+          "agentes": "S. pneumoniae (mais comum). S. aureus (pneumatocele/empiema). < 2 meses: S. agalactiae (GBS), Gram-negativos[span_40](start_span)[span_40](end_span).",
+          "clinica": "Taquipneia, febre, tosse, tiragem subcostal (gravidade), batimento de asa nasal, gemência, cianose[span_41](start_span)[span_41](end_span).",
+          "tratamento_ambulatorial": "> 2 meses sem gravidade: Amoxicilina VO (10 dias) ou Penicilina Procaína IM[span_42](start_span)[span_42](end_span).",
+          "tratamento_hospitalar": "Indicado se < 2 meses, cianose, tiragem, intolerância oral. < 2 meses: Ampicilina + Aminoglicosídeo. > 2 meses: Penicilina Cristalina EV. Se grave: Oxacilina + Ceftriaxona[span_43](start_span)[span_43](end_span).",
+          "falha_terapeutica": "Avaliar Empiema (pH < 7.2, Glicose < 40) -> Conduta: Toracocentese e Drenagem torácica[span_44](start_span)[span_44](end_span)."
+        },
+        {
+          "tipo": "Pneumonia Atípica (Afebril do Lactente)",
+          "agente": "Chlamydia trachomatis (parto vaginal)[span_45](start_span)[span_45](end_span).",
+          "clinica": "Conjuntivite neonatal prévia, quadro insidioso aos 1-3 meses, tosse, afebril, taquipneia. Eosinofilia[span_46](start_span)[span_46](end_span).",
+          "tratamento": "Macrolídeo (Eritromicina/Azitromicina)[span_47](start_span)[span_47](end_span)."
+        },
+        {
+          "tipo": "Bronquiolite Viral Aguda (BVA)",
+          "agente": "Vírus Sincicial Respiratório (VSR)[span_48](start_span)[span_48](end_span).",
+          "clinica": "Primeiro episódio de sibilância em < 2 anos associado a pródromos virais e taquipneia[span_49](start_span)[span_49](end_span). Rx com hiperinsuflação[span_50](start_span)[span_50](end_span).",
+          "tratamento": "Suporte. Oxigênio (se Sat < 90%), nutrição/hidratação. NBZ com salina hipertônica (3%) para internados. NÃO fazer corticoide ou fisioterapia respiratória[span_51](start_span)[span_51](end_span).",
+          "prevencao": "Palivizumabe (5 doses) para prematuros < 29 semanas, ou < 2 anos com cardiopatia congênita/doença pulmonar da prematuridade[span_52](start_span)[span_52](end_span)."
+        },
+        {
+  "modulo": "Pediatria",
+  "categoria": "Especialidades (Nefro, Infecto e Cardio)",
+  "data_atualizacao": "2026-08-19",
+  "topicos": [
+    {
+      "nome": "Infecção do Trato Urinário (ITU)",
+      "etiologia": "E. coli (mais comum)[span_4](start_span)[span_4](end_span). Proteus (produz urease, associado a cálculos de estruvita)[span_5](start_span)[span_5](end_span). S. saprophyticus (adolescentes sex ativas)[span_6](start_span)[span_6](end_span).",
+      "fatores_de_risco": "Feminino (uretra curta), ausência de circuncisão, Válvula de Uretra Posterior (masculino; suspeita pré-natal por hidronefrose ou pós-natal por globo vesical/jato fraco), constipação[span_7](start_span)[span_7](end_span).",
+      "clinica": "Cistite: Disúria, polaciúria, dor suprapúbica. Pielonefrite: Febre, calafrios, dor lombar. FSSL (Febre Sem Sinal Localizatório) em lactente: principal causa é ITU[span_8](start_span)[span_8](end_span).",
+      "diagnostico_laboratorial": {
+        "equ": "Esterase leucocitária (sensível), Nitrito (específico para gram-negativo, requer >4h de urina na bexiga), Leucócitos (> 5 por campo ou >10.000/ml)[span_9](start_span)[span_9](end_span).",
+        "urinocultura": "Jato médio: >= 100.000 UFC/mL (junto com EAS alterado/sintomas). Cateterismo: >= 50.000 UFC/mL. Punção suprapúbica: qualquer crescimento de patógeno[span_10](start_span)[span_10](end_span)."
+      },
+      "tratamento": {
+        "cistite": "Ambulatorial por 3-5 dias (Sulfametoxazol+Trimetoprim, Nitrofurantoína, Amoxicilina ou Cefalexina)[span_11](start_span)[span_11](end_span).",
+        "pielonefrite_ambulatorial": "Ceftriaxona IM, Ciprofloxacino VO, Cefalexina, Amox+Clavulanato por 7-14 dias[span_12](start_span)[span_12](end_span). Obs: Não usar Nitrofurantoína (não atinge níveis parenquimatosos)[span_13](start_span)[span_13](end_span).",
+        "pielonefrite_hospitalar": "Indicado se < 1 a 3 meses, sepse, desidratação, intolerância oral[span_14](start_span)[span_14](end_span). Uso de Ampicilina + Aminoglicosídeo ou Ceftriaxona[span_15](start_span)[span_15](end_span)."
+      },
+      "investigacao_imagem_rvu": "Refluxo Vesicoureteral (RVU) Primário é a anomalia mais comum[span_16](start_span)[span_16](end_span). Exames: USG de Vias Urinárias (alterações grosseiras), Cintilografia com DMSA (padrão ouro para pielonefrite aguda/cicatriz), Uretrocistografia Miccional - UCM (padrão ouro para RVU)[span_17](start_span)[span_17](end_span). SBP indica USG + UCM após 1º episódio em < 2 anos[span_18](start_span)[span_18](end_span)."
+    },
+    {
+      "nome": "Doenças Exantemáticas Pediátricas",
+      "diagnostico_diferencial": [
+        {
+          "doenca": "Sarampo (Paramixovírus)",
+          "clinica": "Tosse marcante, coriza, conjuntivite (fotofobia)[span_19](start_span)[span_19](end_span). Sinal patognomônico: Manchas de Koplik (enantema branco em bochecha)[span_20](start_span)[span_20](end_span). Exantema morbiliforme com progressão cranio-caudal lenta e descamação furfurácea[span_21](start_span)[span_21](end_span). Piora da febre no pico do exantema[span_22](start_span)[span_22](end_span).",
+          "complicacoes": "Otite Média Aguda (mais comum), Pneumonia (causa mortis principal)[span_23](start_span)[span_23](end_span).",
+          "profilaxia_pos_contato": "Vacina até o 3º dia ou Imunoglobulina até o 6º dia (para gestantes, <6m ou imunocomprometidos)[span_24](start_span)[span_24](end_span)."
+        },
+        {
+          "doenca": "Rubéola (Togavírus)",
+          "clinica": "Linfadenopatia retroauricular/occipital, Sinal de Forschheimer (petéquias no palato)[span_25](start_span)[span_25](end_span). Exantema rubeoliforme (lesões isoladas), progressão cranio-caudal rápida, sem descamação[span_26](start_span)[span_26](end_span)."
+        },
+        {
+          "doenca": "Eritema Infeccioso (Parvovírus B19)",
+          "clinica": "Exantema trifásico: 1- Face esbofeteada (malar). 2- Exantema reticulado/rendilhado em extensoras. 3- Recidiva com sol/calor[span_27](start_span)[span_27](end_span). Não isolar criança com exantema (já não transmite o vírus)[span_28](start_span)[span_28](end_span)."
+        },
+        {
+          "doenca": "Exantema Súbito (Roséola / HHV-6)",
+          "clinica": "Doença de lactente. Febre alta (39-40C) que DESAPARECE em crise, seguida IMEDIATAMENTE pelo surgimento do exantema maculopapular[span_29](start_span)[span_29](end_span). Progressão centrífuga (inicia no tronco e vai pras extremidades)[span_30](start_span)[span_30](end_span). Principal complicação: Crise Febril[span_31](start_span)[span_31](end_span)."
+        },
+        {
+          "doenca": "Varicela (Vírus Varicela-Zoster)",
+          "clinica": "Exantema vesicular pleomórfico (mácula, pápula, vesícula, pústula e crosta ao mesmo tempo)[span_32](start_span)[span_32](end_span). Distribuição centrípeta e muito pruriginoso (acomete mucosas)[span_33](start_span)[span_33](end_span). Transmite até que todas as lesões sejam crostas[span_34](start_span)[span_34](end_span).",
+          "tratamento_pos_contato": "Vacina até 5 dias ou IGHA-VZ até 4 dias para grupos de risco[span_35](start_span)[span_35](end_span). Aciclovir VO indicado para maiores de 12 anos[span_36](start_span)[span_36](end_span)."
+        },
+        {
+          "doenca": "Escarlatina (Streptococcus pyogenes)",
+          "clinica": "Faringite exsudativa. Língua em morango (branco depois vermelho)[span_37](start_span)[span_37](end_span). Exantema micropapular (lixa), Sinal de Pastia (piora nas dobras/antecubital), Sinal de Filatov (palidez perioral)[span_38](start_span)[span_38](end_span). Descamação lamelar/laminar de extremidades[span_39](start_span)[span_39](end_span). Tratamento com Penicilina Benzatina[span_40](start_span)[span_40](end_span)."
+        },
+        {
+          "doenca": "Doença de Kawasaki",
+          "clinica": "Principal Vasculite infantil. Critérios: Febre >= 5 dias + (Conjuntivite, Alteração em lábios/boca, Adenomegalia, Exantema, Alteração de extremidades)[span_41](start_span)[span_41](end_span). Alto risco de aneurisma coronariano[span_42](start_span)[span_42](end_span)."
+        },
+        {
+          "doenca": "Doença Mão-Pé-Boca (Coxsackie A16)",
+          "clinica": "Vesículas em mãos/pés e cavidade oral, pápulas em região glútea[span_43](start_span)[span_43](end_span)."
+        },
+        {
+          "doenca": "Herpangina (Coxsackie A)",
+          "clinica": "Úlceras na orofaringe POSTERIOR (palato mole, úvula, pilares)[span_44](start_span)[span_44](end_span)."
+        }
+      ]
+    },
+    {
+      "nome": "Cardiopatias Congênitas",
+      "conceito_geral": "Acianóticas (shunt Esq-Dir, sobrecarga volume/pressão): CIV, CIA, PCA, Coarctação[span_45](start_span)[span_45](end_span). Cianóticas: Tetralogia de Fallot e Transposição dos Grandes Vasos (TGV)[span_46](start_span)[span_46](end_span).",
+      "acianoticas": [
+        {
+          "tipo": "Comunicação Interventricular (CIV)",
+          "clinica": "Cardiopatia MAIS COMUM[span_47](start_span)[span_47](end_span). Sopro holossistólico em BEE com frêmito[span_48](start_span)[span_48](end_span). Evolui para Insuficiência Cardíaca se defeito grande[span_49](start_span)[span_49](end_span). Pode levar à Síndrome de Eisenmenger (inversão do shunt para Dir-Esq gerando cianose tardia)[span_50](start_span)[span_50](end_span)."
+        },
+        {
+          "tipo": "Comunicação Interatrial (CIA)",
+          "clinica": "Desdobramento fixo de B2[span_51](start_span)[span_51](end_span)."
+        },
+        {
+          "tipo": "Persistência do Canal Arterial (PCA)",
+          "clinica": "Sopro contínuo em maquinaria[span_52](start_span)[span_52](end_span). Comum no prematuro e Síndrome da Rubéola Congênita[span_53](start_span)[span_53](end_span). Tratamento farmacológico com Indometacina/Ibuprofeno[span_54](start_span)[span_54](end_span)."
+        },
+        {
+          "tipo": "Defeito do Septo Atrioventricular (DSAV)",
+          "clinica": "Cardiopatia clássica da Síndrome de Down[span_55](start_span)[span_55](end_span)."
+        },
+        {
+          "tipo": "Coarctação da Aorta",
+          "clinica": "Pressão alta em MMSS e pulsos débeis/pressão baixa em MMII[span_56](start_span)[span_56](end_span). Associada a Síndrome de Turner e aorta bicúspide[span_57](start_span)[span_57](end_span). Rx: sinal do '3' e erosões costais[span_58](start_span)[span_58](end_span)."
+        }
+      ],
+      "cianoticas": [
+        {
+          "tipo": "Tetralogia de Fallot",
+          "clinica": "Cianótica mais comum (>1 ano)[span_59](start_span)[span_59](end_span). Tétrade: Obstrução via saída VD, Hipertrofia VD, CIV, Dextroposição aorta[span_60](start_span)[span_60](end_span). Crise hipercianótica (ao acordar/choro): conduta com posição genupeitoral, O2, morfina, betabloqueador[span_61](start_span)[span_61](end_span). Rx: Coração em Bota[span_62](start_span)[span_62](end_span)."
+        },
+        {
+          "tipo": "Transposição de Grandes Vasos (TGV)",
+          "clinica": "Cianose logo no período neonatal[span_63](start_span)[span_63](end_span). Incompatível com a vida a menos que haja shunt (CIA, CIV, PCA)[span_64](start_span)[span_64](end_span). Rx: Ovo deitado[span_65](start_span)[span_65](end_span). Conduta imediata: Prostaglandina EV (manter canal aberto) -> Cirurgia de Jatene até 21 dias[span_66](start_span)[span_66](end_span)."
+        }
+      ]
+    }
+  ]
+}
+
+      ]
+    }
+  ]
+}
+
+    
+  ]
+}
+
     }
   ]
 }
