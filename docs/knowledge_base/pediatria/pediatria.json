@@ -493,21 +493,40 @@
         {
           "tipo": "Transposição de Grandes Vasos (TGV)",
           "clinica": "Cianose logo no período neonatal[span_63](start_span)[span_63](end_span). Incompatível com a vida a menos que haja shunt (CIA, CIV, PCA)[span_64](start_span)[span_64](end_span). Rx: Ovo deitado[span_65](start_span)[span_65](end_span). Conduta imediata: Prostaglandina EV (manter canal aberto) -> Cirurgia de Jatene até 21 dias[span_66](start_span)[span_66](end_span)."
-        }
-      ]
-    }
-  ]
-}
-
-      ]
-    }
-  ]
-}
-
-    
-  ]
-}
-
+        },
+        {
+  "modulo": "Pediatria",
+  "categoria": "Suporte de Vida Pediátrico (PBLS / PALS)",
+  "data_atualizacao": "2026-08-19",
+  "topicos": [
+    {
+      "nome": "Classificação por Idade (Reanimação)",
+      "faixas": "< 1 ano (exceto RN). > 1 ano até a puberdade (meninas: telarca / meninos: pelos axilares)[span_4](start_span)[span_4](end_span). Após a puberdade, o protocolo é igual ao do adulto[span_5](start_span)[span_5](end_span)."
+    },
+    {
+      "nome": "Suporte Básico (PBLS)",
+      "passos_iniciais": "Avaliar segurança da cena -> Checar responsividade -> Se irresponsivo, gritar por ajuda/usar celular[span_6](start_span)[span_6](end_span). Avaliar respiração e pulso simultaneamente (máx 10s)[span_7](start_span)[span_7](end_span).",
+      "locais_pulso": "< 1 ano: Braquial. > 1 ano: Carotídeo ou Femoral[span_8](start_span)[span_8](end_span).",
+      "dinamica_parada": "Na pediatria, a PCR ocorre mais por hipóxia/asfixia (ritmos não chocáveis: assistolia/AESP)[span_9](start_span)[span_9](end_span). Se o colapso for SÚBITO E TESTEMUNHADO (maior chance de causa cardíaca/ritmo chocável): chamar ajuda com DEA é prioridade imediata[span_10](start_span)[span_10](end_span).",
+      "rcp_c_a_b": {
+        "compressao": "Frequência: 100-120/min[span_11](start_span)[span_11](end_span). Profundidade: 5 cm (> 1 ano, 1 ou 2 mãos); 4 cm (< 1 ano, 2 dedos ou 2 polegares se houver 2 socorristas)[span_12](start_span)[span_12](end_span).",
+        "relacao_compressao_ventilacao": "1 Socorrista = 30:2. 2 Socorristas = 15:2[span_13](start_span)[span_13](end_span).",
+        "ventilacao": "< 1 ano: Boca a boca-nariz. > 1 ano: Boca a boca[span_14](start_span)[span_14](end_span)."
+      }
+    },
+    {
+      "nome": "Suporte Avançado (PALS) - Algoritmo Geral",
+      "via_aerea_avancada": "Após IOT, as compressões não pausam para ventilar: Compressões contínuas (100-120/min) + 1 ventilação a cada 6 segundos (10x/min)[span_15](start_span)[span_15](end_span).",
+      "ritmos_nao_chocaveis": "Assistolia / AESP[span_16](start_span)[span_16](end_span). Conduta: Checar cabos/derivações (protocolo da linha reta)[span_17](start_span)[span_17](end_span) -> RCP 2 minutos -> Acesso IV/IO -> Adrenalina a cada 3-5 min -> Considerar IOT -> Tratar causas reversíveis (5H, 5T e hipoglicemia)[span_18](start_span)[span_18](end_span).",
+      "ritmos_chocaveis": "FV / TV sem pulso[span_19](start_span)[span_19](end_span). Conduta: Choque (1ª carga: 2J/kg)[span_20](start_span)[span_20](end_span) -> RCP 2 minutos -> Acesso IV/IO -> Checar ritmo[span_21](start_span)[span_21](end_span). Se ainda chocável -> Choque (2ª carga: 4J/kg) -> RCP 2 min + Adrenalina (3-5 min) + IOT[span_22](start_span)[span_22](end_span). Se persistir -> Choque -> RCP 2 min + Amiodarona ou Lidocaína[span_23](start_span)[span_23](end_span). (Carga máxima progressiva até 10J/kg ou carga de adulto)[span_24](start_span)[span_24](end_span)."
+    },
+    {
+      "nome": "Parâmetros para IOT Pediátrica",
+      "tubos": "< 1 ano: 3,5. 1-2 anos: 4,0[span_25](start_span)[span_25](end_span). Tubo SEM cuff (> 2 anos): (Idade / 4) + 4[span_26](start_span)[span_26](end_span). Tubo COM cuff (> 2 anos): (Idade / 4) + 3,5[span_27](start_span)[span_27](end_span)."
+    },
+    {
+      "nome": "Obstrução de Vias Aéreas por Corpo Estranho (OVACE)",
+      "conduta_grave": "Paciente não respira, não tosse, não fala[span_28](start_span)[span_28](end_span). Se > 1 ano: Manobra de Heimlich[span_29](start_span)[span_29](end_span). Se < 1 ano: 5 golpes no dorso alternados com 5 compressões torácicas[span_30](start_span)[span_30](end_span)."
     }
   ]
 }
