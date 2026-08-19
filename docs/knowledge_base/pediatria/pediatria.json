@@ -72,8 +72,188 @@
         {
           "patogeno": "HIV",
           "conduta": "Contraindicação absoluta ao aleitamento materno[span_52](start_span)[span_52](end_span). AZT para todos os RN em até 4h pós-parto por 4 semanas[span_53](start_span)[span_53](end_span). Nevirapina adicionada em casos de alto risco[span_54](start_span)[span_54](end_span)."
+        },
+        {
+  "modulo": "Pediatria",
+  "categoria": "Neonatologia",
+  "data_atualizacao": "2026-08-19",
+  "sindromes": [
+    {
+      "nome": "Reanimação Neonatal na Sala de Parto",
+      "avaliacao_inicial": "Realizar 3 perguntas: RN a termo? Respirando ou chorando? Tônus adequado?[span_2](start_span)[span_2](end_span). Se sim para todas, a criança fica no colo da mãe[span_3](start_span)[span_3](end_span).",
+      "clampeamento_cordao": "Se < 34 semanas: aguardar 30 a 60 segundos[span_4](start_span)[span_4](end_span). Se >= 34 semanas: aguardar 1 a 3 minutos[span_5](start_span)[span_5](end_span). Se o RN não respira e/ou não chora: clampear imediatamente[span_6](start_span)[span_6](end_span).",
+      "passos_iniciais": "Em 30 segundos (APAS): Aquecer (sala 23-26°C, saco plástico se < 34 sem), Posicionar (leve extensão), Aspirar se necessário (boca depois narinas), Secar (exceto se em saco plástico)[span_7](start_span)[span_7](end_span).",
+      "reanimacao_avancada": {
+        "vpp": "Indicada se FC < 100 ou apneia/respiração irregular[span_8](start_span)[span_8](end_span). Feita em ar ambiente se >= 34 sem, ou O2 a 30% se < 34 sem[span_9](start_span)[span_9](end_span). Ritmo: aperta-solta-solta (40-60x/min)[span_10](start_span)[span_10](end_span).",
+        "mce": "Massagem Cardíaca Externa indicada se FC < 60 após VPP e IOT[span_11](start_span)[span_11](end_span). Relação de 3 compressões para 1 ventilação (3C:1V)[span_12](start_span)[span_12](end_span).",
+        "farmacos": "Epinefrina via traqueal (única vez) ou veia umbilical (3-5 min) se FC < 60 persistente[span_13](start_span)[span_13](end_span). Expansão com SF 0,9% (10ml/kg) se hipovolemia[span_14](start_span)[span_14](end_span)."
+      }
+    },
+    {
+      "nome": "Icterícia Neonatal",
+      "fisiopatologia": "No RN, há maior hematócrito, menor meia-vida das hemácias, deficiência na captação/conjugação (glicuroniltransferase) e aumento da circulação entero-hepática (beta-glicuronidase)[span_15](start_span)[span_15](end_span).",
+      "zonas_kramer": "I: Face (6 mg/dL) | II: Tronco até umbigo (9 mg/dL) | III: Umbigo até joelhos (>12 mg/dL - limite de alerta) | IV: Joelhos a tornozelos/punhos (15 mg/dL) | V: Mãos e pés (16 mg/dL)[span_16](start_span)[span_16](end_span).",
+      "ictericia_precoce": "Início < 24h[span_17](start_span)[span_17](end_span). Causas hemolíticas: Incompatibilidade Rh (mãe Rh-, RN Rh+ com Coombs Direto positivo) ou Incompatibilidade ABO (mãe O, RN A ou B)[span_18](start_span)[span_18](end_span).",
+      "ictericia_tardia": "Icterícia do Aleitamento (trânsito intestinal diminuído por dificuldade técnica) vs Icterícia do Leite Materno (substância do leite interfere no metabolismo)[span_19](start_span)[span_19](end_span).",
+      "colestase": "Aumento de Bilirrubina Direta[span_20](start_span)[span_20](end_span). Principal suspeita: Atresia de vias biliares[span_21](start_span)[span_21](end_span). Conduta de urgência: Portoenterostomia de Kasai até a 8ª semana[span_22](start_span)[span_22](end_span).",
+      "tratamento": "Fototerapia (fotoisomerização da BI) ou Exsanguineotransfusão[span_23](start_span)[span_23](end_span)."
+    },
+    {
+      "nome": "Distúrbios Respiratórios do RN",
+      "variantes": [
+        {
+          "tipo": "Doença da Membrana Hialina (SDRN)",
+          "caracteristica": "Deficiência de surfactante alveolar (produzido por pneumócitos II) gerando colapso e hipoxemia[span_24](start_span)[span_24](end_span). Fatores de risco: Prematuridade, asfixia, DM materna[span_25](start_span)[span_25](end_span).",
+          "clinica_rx": "Taquipneia, retrações, gemido nas primeiras horas[span_26](start_span)[span_26](end_span). Rx com infiltrado reticulogranular difuso (vidro fosco) e baixo volume pulmonar[span_27](start_span)[span_27](end_span).",
+          "tratamento": "CPAP nasal precoce, surfactante exógeno (profilático ou terapêutico) e ATB[span_28](start_span)[span_28](end_span)."
+        },
+        {
+          "tipo": "Taquipneia Transitória do RN (TTRN)",
+          "caracteristica": "Retardo na absorção do líquido pulmonar[span_29](start_span)[span_29](end_span). Fatores de risco: Cesariana eletiva, RN a termo/pré-termo[span_30](start_span)[span_30](end_span).",
+          "clinica_rx": "Desconforto moderado com rápida resolução (< 72h)[span_31](start_span)[span_31](end_span). Rx com congestão hilar, líquido cisural e hiperinsuflação[span_32](start_span)[span_32](end_span).",
+          "tratamento": "Oxigenoterapia de suporte (FiO2 até 40%)[span_33](start_span)[span_33](end_span)."
+        },
+        {
+          "tipo": "Síndrome de Aspiração Meconial (SAM)",
+          "caracteristica": "Asfixia leva a relaxamento esfincteriano intraútero[span_34](start_span)[span_34](end_span). Ocorre em RN a termo/pós-termo[span_35](start_span)[span_35](end_span).",
+          "clinica_rx": "Bloqueio expiratório e pneumonite química[span_36](start_span)[span_36](end_span). Rx com infiltrados alveolares grosseiros e hiperinsuflação[span_37](start_span)[span_37](end_span).",
+          "tratamento": "Ventilação mecânica, ATB e reposição de surfactante[span_38](start_span)[span_38](end_span)."
         }
       ]
+    },
+    {
+      "nome": "Infecções Congênitas",
+      "fisiopatologia": "Transmissão transplacentária (hematogênica)[span_39](start_span)[span_39](end_span). Sorologia IgM no RN confirma infecção; IgG pode ser apenas passagem materna[span_40](start_span)[span_40](end_span).",
+      "variantes": [
+        {
+          "patogeno": "Sífilis (Treponema pallidum)",
+          "clinica": "Precoce (<2 anos): Rinite sifilítica, lesões cutâneas (pênfigo), periostite (sinal do duplo-contorno no Rx)[span_41](start_span)[span_41](end_span). Tardia (>2 anos): Osteocondrite, pseudoparalisia de Parrot, fronte olímpica, dentes de Hutchinson, tíbia em sabre[span_42](start_span)[span_42](end_span).",
+          "tratamento": "Depende do VDRL, LCR e tratamento materno[span_43](start_span)[span_43](end_span). Cristalina IV ou Procaína IM por 10 dias, ou Benzatina dose única se assintomático com exames normais[span_44](start_span)[span_44](end_span)."
+        },
+        {
+          "patogeno": "Rubéola",
+          "clinica": "Tríade SRC: Surdez, catarata (reflexo vermelho ausente) e cardiopatia congênita (ex: PCA)[span_45](start_span)[span_45](end_span)."
+        },
+        {
+          "patogeno": "Toxoplasmose",
+          "clinica": "Tríade de Sabin: Coriorretinite, hidrocefalia e calcificações intracranianas difusas[span_46](start_span)[span_46](end_span).",
+          "tratamento": "Sulfadiazina + Pirimetamina + Ácido Folínico no 1º ano[span_47](start_span)[span_47](end_span). Corticoide se inflamação acentuada[span_48](start_span)[span_48](end_span)."
+        },
+        {
+          "patogeno": "Citomegalovirose (CMV)",
+          "clinica": "Calcificações periventriculares[span_49](start_span)[span_49](end_span). Principal causa de surdez neurossensorial não hereditária[span_50](start_span)[span_50](end_span).",
+          "tratamento": "Ganciclovir EV por 6 semanas apenas nas formas graves[span_51](start_span)[span_51](end_span)."
+        },
+        {
+          "patogeno": "HIV",
+          "conduta": "Contraindicação absoluta ao aleitamento materno[span_52](start_span)[span_52](end_span). AZT para todos os RN em até 4h pós-parto por 4 semanas[span_53](start_span)[span_53](end_span). Nevirapina adicionada em casos de alto risco[span_54](start_span)[span_54](end_span)."
+        },
+        {
+  "modulo": "Pediatria",
+  "categoria": "Puericultura",
+  "data_atualizacao": "2026-08-19",
+  "topicos": [
+    {
+      "nome": "Aleitamento Materno",
+      "recomendacoes_gerais": "Aleitamento Materno Exclusivo (AME) até os 6 meses (sem água, chás ou sucos)[span_2](start_span)[span_2](end_span). Alimentação complementar a partir dos 6 meses, mantendo o LM no mínimo até os 2 anos[span_3](start_span)[span_3](end_span).",
+      "composicao_leite_humano": {
+        "proteinas": "Menor quantidade (menos sobrecarga renal), predomínio de a-lactoalbumina (maior digestibilidade, menos alergênico que a b-lactoglobulina do LV)[span_4](start_span)[span_4](end_span).",
+        "eletrolitos": "Menos sódio que o LV (previne desidratação)[span_5](start_span)[span_5](end_span).",
+        "carboidratos": "Mais lactose; gera pH intestinal ácido (inibe patógenos e melhora absorção de cálcio) e fezes amolecidas[span_6](start_span)[span_6](end_span).",
+        "gorduras": "Rico em colesterol, ARA e DHA (formação da retina e mielinização)[span_7](start_span)[span_7](end_span). O leite posterior (emulsão) tem mais gordura, gerando saciedade[span_8](start_span)[span_8](end_span).",
+        "fatores_protecao": "Lisozima (bactericida), IgA secretória, Lactoferrina (bacteriostático) e Fator Bífido (crescimento da flora saprófita)[span_9](start_span)[span_9](end_span)."
+      },
+      "fisiologia_e_tecnica": {
+        "hormonios": "Sucção estimula prolactina (produção) e ocitocina (ejeção)[span_10](start_span)[span_10](end_span).",
+        "pega_correta": "Boca bem aberta, lábio inferior evertido, aréola mais visível acima da boca, queixo tocando a mama[span_11](start_span)[span_11](end_span).",
+        "complicacoes": "Fissuras (corrigir pega; não passar nada, usar o próprio leite)[span_12](start_span)[span_12](end_span). Ingurgitamento (esvaziar mamas, compressa fria no intervalo)[span_13](start_span)[span_13](end_span). Mastite (esvaziar mamas, ATB contra S. aureus se sintoma sistêmico)[span_14](start_span)[span_14](end_span)."
+      },
+      "contraindicacoes": "Absolutas na mãe: HIV e HTLV[span_15](start_span)[span_15](end_span). Relativas: Lesão herpética ativa na mama, CMV (se prematuro < 32 sem ou < 1500g)[span_16](start_span)[span_16](end_span). Doenças do lactente: Galactosemia (absoluta)[span_17](start_span)[span_17](end_span). Fenilcetonúria (suspender se fenilalanina > 17mg/dl)[span_18](start_span)[span_18](end_span)."
+    },
+    {
+      "nome": "Profilaxias Pediátricas",
+      "ferro": "Se a termo e > 2,5kg: AME até 6 meses = zero reposição. Após os 3 meses: 1mg/kg/dia até os 2 anos (exceto se >500ml/dia de fórmula)[span_19](start_span)[span_19](end_span). Prematuro ou < 2,5kg: Inicia com 30 dias de vida: se <1000g = 4mg/kg/dia; se <1500g = 3mg/kg/dia; se <2500g = 2mg/kg/dia no 1º ano, e 1mg/kg/dia no 2º ano[span_20](start_span)[span_20](end_span).",
+      "vitamina_d": "Iniciar na 1ª semana de vida. Até 12 meses: 400UI/dia. De 12-24 meses: 600UI/dia[span_21](start_span)[span_21](end_span)."
+    },
+    {
+      "nome": "Crescimento Físico",
+      "peso": "RN a termo nasce com média de 3,4kg (pode perder até 10% e recuperar até o 10º dia)[span_22](start_span)[span_22](end_span). Ganho no 1º ano: 700g/mês (1º tri), 600g/mês (2º tri), 500g/mês (3º tri) e 400g/mês (4º tri)[span_23](start_span)[span_23](end_span). O peso duplica com 4-5 meses e triplica com 1 ano[span_24](start_span)[span_24](end_span).",
+      "estatura": "Nasce com cerca de 50cm[span_25](start_span)[span_25](end_span). Ganha 25cm no 1º ano (15cm no 1º sem, 10cm no 2º sem)[span_26](start_span)[span_26](end_span).",
+      "perimetro_cefalico": "Aumenta 12cm no 1º ano (2cm/mês no 1º tri; 1cm/mês no 2º tri; 0,5cm/mês no 2º sem)[span_27](start_span)[span_27](end_span)."
+    },
+    {
+      "nome": "Puberdade",
+      "inicio_fisiologico": "Feminino: 8 a 13 anos[span_28](start_span)[span_28](end_span). Masculino: 9 a 14 anos[span_29](start_span)[span_29](end_span).",
+      "estadios_tanner_feminino": "M2: Telarca (broto mamário - 1º sinal). M3: Aumento de mama e aréola (pico de crescimento 8-9cm/ano). M4: Duplo contorno e menarca. M5: Madura[span_30](start_span)[span_30](end_span).",
+      "estadios_tanner_masculino": "G2: Aumento testicular (1º sinal). G3: Aumento do pênis em comprimento. G4: Aumento do pênis em diâmetro (pico de crescimento 9-10cm/ano). G5: Adulto[span_31](start_span)[span_31](end_span).",
+      "puberdade_precoce": "Início < 8 anos (meninas) ou < 9 anos (meninos)[span_32](start_span)[span_32](end_span). Central (verdadeira/GnRH dependente): idiopática (meninas) ou lesão no SNC (meninos); testículos aumentados bilateralmente[span_33](start_span)[span_33](end_span). Periférica: doença adrenal (testículos pré-puberais) ou tumor testicular (testículos assimétricos)[span_34](start_span)[span_34](end_span)."
+    },
+    {
+      "nome": "Desenvolvimento Neuropsicomotor (DNPM)",
+      "caracteristicas": "Processo sequencial e previsível. Motor: crânio-caudal. Adaptativo: cubital-radial[span_35](start_span)[span_35](end_span).",
+      "marcos_importantes": [
+        {"idade": "2 meses", "marco": "Levanta cabeça em prona, sorriso social, segue objeto em 180°[span_36](start_span)[span_36](end_span)."},
+        {"idade": "4 meses", "marco": "Sustenta cabeça, pega cubital, olha para as mãos na linha média, ri alto[span_37](start_span)[span_37](end_span)."},
+        {"idade": "6 a 7 meses", "marco": "Senta sem apoio por pouco tempo, rola, transfere objetos entre as mãos (pega radial)[span_38](start_span)[span_38](end_span)."},
+        {"idade": "9 a 10 meses", "marco": "Senta sozinho, engatinha, pega com pinça (polegar/indicador), estranha, bate palmas (sentido de permanência do objeto)[span_39](start_span)[span_39](end_span)."},
+        {"idade": "12 meses", "marco": "Anda com apoio, entrega objetos por solicitação, fala algumas palavras com significado[span_40](start_span)[span_40](end_span)."}
+      ]
+    },
+    {
+  "modulo": "Pediatria",
+  "categoria": "Distúrbios Nutricionais e Crescimento",
+  "data_atualizacao": "2026-08-19",
+  "topicos": [
+    {
+      "nome": "Classificação Nutricional (Escore-Z)",
+      "conceito": "Escore-Z zero equivale ao p50. EZ < -2 indica desnutrição moderada (baixo peso/baixa estatura/magreza). EZ < -3 indica desnutrição grave[span_3](start_span)[span_3](end_span). A OMS classifica edema nutricional diretamente como desnutrição grave[span_4](start_span)[span_4](end_span).",
+      "imc_idade": {
+        "zero_a_cinco_anos": "EZ > +1: Risco de sobrepeso. EZ > +2: Sobrepeso. EZ > +3: Obesidade[span_5](start_span)[span_5](end_span).",
+        "cinco_a_dezenove_anos": "EZ > +1: Sobrepeso. EZ > +2: Obesidade. EZ > +3: Obesidade Grave[span_6](start_span)[span_6](end_span)."
+      }
+    },
+    {
+      "nome": "Desnutrição Grave",
+      "variantes": [
+        {
+          "tipo": "Marasmo",
+          "caracteristica": "Deficiência global de energia e proteínas. Instalação lenta no 1º ano de vida[span_7](start_span)[span_7](end_span).",
+          "clinica": "Ausência de tecido adiposo, fácies senil/simiesca, hipotrofia e hipotonia, irritabilidade[span_8](start_span)[span_8](end_span). Sem edema[span_9](start_span)[span_9](end_span)."
+        },
+        {
+          "tipo": "Kwashiorkor",
+          "caracteristica": "Deficiência proteica com ingestão energética normal. Instalação rápida após desmame[span_10](start_span)[span_10](end_span).",
+          "clinica": "Edema de extremidades/anasarca, hepatomegalia (esteatose), subcutâneo preservado, hiperceratose, sinal da bandeira (cabelo)[span_11](start_span)[span_11](end_span)."
+        },
+        {
+          "tipo": "Kwashiorkor-Marasmático",
+          "caracteristica": "Quadro de marasmo deflagrado por infecção aguda evoluindo com Kwashiorkor[span_12](start_span)[span_12](end_span)."
+        }
+      ],
+      "alteracoes_laboratoriais": "Hipoglicemia (< 54), hiponatremia (Na corporal total normal), hipocalemia, hipomagnesemia e hipoalbuminemia (em todos os tipos)[span_13](start_span)[span_13](end_span).",
+      "tratamento_fases": [
+        {
+          "fase": "Estabilização (1-7 dias)",
+          "conduta": "Tratar hipotermia, corrigir hipoglicemia (VO ou EV) e distúrbios eletrolíticos. Reabastecer via oral com ReSoMal (menos Na+, mais K+)[span_14](start_span)[span_14](end_span). NÃO hiperalimentar para evitar Síndrome de Realimentação (pico de insulina causando hipocalemia, hipomagnesemia e hipofosfatemia graves)[span_15](start_span)[span_15](end_span). Suplementar K+, Mg, Zn, Vit A e Ácido fólico[span_16](start_span)[span_16](end_span). NÃO dar Ferro nesta fase[span_17](start_span)[span_17](end_span)."
+        },
+        {
+          "fase": "Reabilitação (2-6 semanas)",
+          "conduta": "Inicia com retorno do apetite. Aumentar calorias/proteínas (catch-up) e introduzir Ferro em dose terapêutica[span_18](start_span)[span_18](end_span)."
+        },
+        {
+          "fase": "Acompanhamento (Follow-up)",
+          "conduta": "Pesagem semanal em regime ambulatorial[span_19](start_span)[span_19](end_span)."
+        }
+      ]
+    },
+    {
+      "nome": "Investigação de Baixa Estatura",
+      "criterio_diagnostico": "Estatura por Idade (E/I) < p3 ou EZ < -2[span_20](start_span)[span_20](end_span).",
+      "parametros_avaliacao": "Calcular o Alvo Genético: Meninos = [altura pai + (mãe + 13)] / 2. Meninas = [altura mãe + (pai - 13)] / 2[span_21](start_span)[span_21](end_span). Solicitar Rx mão/punho para Idade Óssea (IO)[span_22](start_span)[span_22](end_span).",
+      "algoritmo_diagnostico": {
+        "velocidade_crescimento_normal": "Se a VC é normal (acompanha a curva): investigar Variantes Normais. Se Idade Óssea = Idade Cronológica e pais baixos = Baixa Estatura Familiar[span_23](start_span)[span_23](end_span). Se Idade Óssea < Idade Cronológica e pais com altura normal = Retardo Constitucional do Crescimento[span_24](start_span)[span_24](end_span).",
+        "velocidade_crescimento_anormal": "Se a VC é baixa (horizontalizou a curva): investigar Condições Mórbidas. Se alteração fenotípica (ex: Turner) -> Doença Genética (pedir cariótipo em meninas)[span_25](start_span)[span_25](end_span). Sem alteração fenotípica, avaliar IMC: Se magro -> Desnutrição. Se normal/obeso -> Doença Endócrina (ex: Hipotireoidismo, Deficiência de GH, Hipercortisolismo)[span_26](start_span)[span_26](end_span)."
+      }
     }
   ]
 }
