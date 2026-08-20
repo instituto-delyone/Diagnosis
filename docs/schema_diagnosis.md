@@ -1,55 +1,43 @@
-# Diagnosis Engine: Schema v1.0 (Molde do Conhecimento)
+# Diagnosis Engine: Schema v2.0 (Molde Operacional Canônico)
 
-Este documento define a estrutura matemática oficial de como o conhecimento médico humano deve ser traduzido para a linguagem do algoritmo Diagnosis (AIGAR Engine).
+Este documento define a estrutura JSON oficial para inserção de síndromes e cenários clínicos no Diagnosis Engine (AIGAR Engine V4.2+).
 
-Qualquer nova síndrome clínica adicionada ao banco de dados (`knowledge_base/`) deve seguir RIGOROSAMENTE a estrutura JSON abaixo.
+Qualquer novo caso clínico ou patologia adicionada à base de dados (`knowledge_base/`) deve seguir a estrutura abaixo para compatibilidade total com o Game Loop, NLP/Fuzzy Matching, badges e revisão estruturada.
 
-## A Estrutura Canônica (Copiar e Preencher)
+---
+
+## 1. Estrutura Canônica de Cenário Clínico (Copiar e Preencher)
 
 ```json
 {
-  "id_patologia": "nome_sem_espaco_ou_acento",
-  "nome_oficial": "Nome Completo da Doença",
-  "prevalencia_base": 10, 
-
-  "01_campo_modulador": {
-    "descricao": "Fatores que multiplicam a probabilidade pré-teste (epidemiologia, fisiologia, histórico).",
-    "pesos": {
-      "fator_de_risco_1": 1.5,
-      "fator_de_risco_2": 2.0
-    }
-  },
-
-  "02_campo_predicao_inicial": {
-    "descricao": "Sintomas e achados relacionados. Cada um soma pontos de probabilidade.",
-    "pesos": {
-      "sintoma_1": 30,
-      "sintoma_2": 20
-    }
-  },
-
-  "03_campo_busca_ativa_filtragem": {
-    "descricao": "Critérios para exclusão ativa ou confirmação obrigatória.",
-    "sine_qua_non": [
-      "sintoma_obrigatorio"
+  "id": "nome_unico_da_doenca",
+  "badgeName": "Nome da Patologia para a Badge",
+  "categoria": "Clínica Médica / Cirurgia Geral / Ginecologia e Obstetrícia / Pediatria",
+  "prevalencia_base": 25,
+  "vigneta": "Texto detalhado do caso clínico de admissão (sintomas, dados vitais, exame físico inicial).",
+  "respostas_esperadas": {
+    "diagnostico": [
+      "hipotese_principal",
+      "sinonimo_1",
+      "sigla"
     ],
-    "exclusao_ativa": [
-      "criterio_de_exclusao"
-    ]
-  },
-
-  "04_campo_avaliacao_risco_T": {
-    "descricao": "Avaliação de risco de intervenção e letalidade para evitar atraso terapêutico.",
-    "potencial_letalidade": "ALTO / MEDIO / BAIXO",
-    "tempo_critico": true,
-    "conduta_emergencial": "Ação imediata necessária (se houver)."
-  },
-
-  "05_campo_confirmacao_necessaria": {
-    "descricao": "Ferramentas tecnológicas para o diagnóstico etiológico não definitivo/confirmação.",
     "exames": [
-      "Exame 1",
-      "Exame 2"
+      "exame_padrao_ouro",
+      "sinonimo_exame",
+      "exame_laboratorial"
+    ],
+    "conduta": [
+      "intervencao_prioritaria",
+      "medicamento_escolha",
+      "conduta_cirurgica"
     ]
+  },
+  "feedback_tecnico": "Discussão do preceptor explicando o racional diagnóstico, metas terapêuticas e armadilhas clínicas.",
+  "revisao_estruturada": {
+    "etiologia": "Origem etiológica, patógenos comuns ou mecanismo causal.",
+    "fisiopatologia": "Mecanismo fisiopatológico conciso do quadro.",
+    "diagnostico": "Critérios clínicos, laboratoriais e de imagem indispensáveis.",
+    "tratamento": "Manejo imediato, suporte e medidas curativas/manutenção.",
+    "particularidades": "Pérola clínica ou 'red flag' crucial para a prática médica."
   }
 }
