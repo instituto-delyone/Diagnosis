@@ -1,0 +1,137 @@
+[
+  {
+    "id": "ped_vacina_evento_adverso_dtp_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [2, 6],
+    "prevalencia_base": 25,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "lactente admitido 4 horas após receber a 1ª dose da vacina Pentavalente",
+        "quadro de palidez cutânea súbita, perda de tônus muscular generalizado e rebaixamento do nível de consciência",
+        "recuperação espontânea completa após 30 minutos em observação (Episódio Hipotônico-Hiporresponsivo - EHH)"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "presença de febre prévia de 38,2°C" },
+        { "sinal": "histórico de convulsão febril na família" },
+        { "sinal": "choro inconsolável prévio ao episódio" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Episódio Hipotônico-Hiporresponsivo",
+        "EHH pós-vacinal",
+        "Evento adverso da vacina Pentavalente",
+        "Reação adversa ao componente Pertussis"
+      ],
+      "exames": ["Nenhum", "Clínico", "Notificação de evento adverso pós-vacinação"],
+      "conduta": [
+        "Substituir DTP por DTPa nas próximas doses",
+        "Indicar vacina tríplice acelular (DTPa)",
+        "Contraindicar DTP celular de células inteiras",
+        "Encaminhar ao CRIE",
+        "Notificar evento adverso grave"
+      ]
+    },
+    "feedback_tecnico": "O Episódio Hipotônico-Hiporresponsivo (EHH) e a convulsão são eventos adversos moderados associados ao componente Pertussis de células inteiras da vacina Pentavalente/DTP. Embora benignos e sem sequelas, exigem a substituição mandatória das doses subsequentes pela vacina Tríplice Bacteriana Acelular (DTPa). Caso houvesse ocorrido encefalopatia nos primeiros 7 dias, a contraindicação ao componente Pertussis seria absoluta, devendo-se utilizar a dupla infantil (DT)."
+  },
+  {
+    "id": "ped_vacina_calendario_atualizado_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [15, 16],
+    "prevalencia_base": 30,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "criança saudável de 15 meses de idade comparece à UBS para atualização da caderneta",
+        "todas as doses anteriores até os 12 meses foram aplicadas rigorosamente em dia",
+        "mãe solicita prescrição dos imunizantes preconizados pelo PNI para a faixa etária atual"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "ausência de contraindicações a vacinas de agentes vivos" },
+        { "sinal": "solicitação de reforço para poliomielite" },
+        { "sinal": "indicação da vacina Tetraviral ou tríplice viral + varicela" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Vacinação de rotina aos 15 meses",
+        "Atualização do calendário vacinal PNI",
+        "Puericultura vacinal aos 15 meses"
+      ],
+      "exames": ["Nenhum", "Checagem de caderneta de saúde"],
+      "conduta": [
+        "VIP 1º reforço (inativada injetável)",
+        "DTP 1º reforço",
+        "Hepatite A dose única",
+        "Tetraviral ou Tríplice Viral + Varicela",
+        "Não utilizar VOP (gotinha extinta)"
+      ]
+    },
+    "feedback_tecnico": "Aos 15 meses, o PNI preconiza: 1º reforço da DTP, Hepatite A (dose única), Tetraviral (ou Tríplice Viral + Varicela) e o 1º reforço da Poliomielite utilizando a vacina inativada injetável (VIP). O uso da vacina oral atenuada (VOP) foi completamente substituído pela VIP em todo o esquema básico e de reforço para eliminar o risco de paralisia flácida associada ao vírus vacinal."
+  },
+  {
+    "id": "ped_profilaxia_tetano_ferimento_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [60, 144],
+    "prevalencia_base": 20,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "escolar admitido após sofrer ferimento perfurocortante profundo no pé direito com prego enferrujado em terreno baldio",
+        "apresenta ferida suja e com tecido desvitalizado",
+        "caderneta de vacinação confirma esquema básico de 3 doses de Pentavalente/DTP completo na infância, porém a última dose de reforço foi realizada há 7 anos"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "ferimento de alto risco para tétano" },
+        { "sinal": "paciente sem histórico de imunodeficiência" },
+        { "sinal": "ausência de sinais flogísticos locais no momento" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Profilaxia pós-exposição de tétano acidental",
+        "Ferimento de alto risco tétano",
+        "Risco de tétano acidental"
+      ],
+      "exames": ["Nenhum", "Clínico", "Lavagem e debridação da ferida"],
+      "conduta": [
+        "Aplicar apenas vacina com componente tetânico (dT ou DTP)",
+        "Dose de reforço da vacina dT",
+        "Não indicar soro (SAT) ou imunoglobulina (IGHAT)",
+        "Limpeza cirúrgica e assepsia do ferimento"
+      ]
+    },
+    "feedback_tecnico": "Em ferimentos de alto risco/contaminados em pacientes com esquema primário completo (>= 3 doses prévias) e cuja última dose foi aplicada entre 5 e 10 anos atrás, a conduta recomendada é apenas a antecipação de uma dose da vacina (dT). A imunização passiva com Soro Antitetânico (SAT) ou Imunoglobulina Humana Antitetânica (IGHAT) só seria necessária se o paciente fosse imunodeprimido/idoso, se a vacinação fosse incerta/< 3 doses ou se a última dose tivesse mais de 10 anos em pacientes sem garantia de acompanhamento."
+  },
+  {
+    "id": "ped_vacina_rotavirus_vorh_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [2, 4],
+    "prevalencia_base": 20,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "lactente de 2 meses recebe a primeira dose da vacina oral contra Rotavírus (VORH) na sala de vacinas",
+        "imediatamente após a administração do líquido por via oral, a criança regurgita e vomita parte do conteúdo",
+        "mãe questiona o profissional se deve administrar uma nova dose imediatamente"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "ausência de histórico de invaginação intestinal" },
+        { "sinal": "criança afebril e em bom estado geral" },
+        { "sinal": "dúvida sobre perda de eficácia vacinal" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Manejo de administração de vacina oral",
+        "Conduta em regurgitação pós-vacinal de VORH",
+        "Imunização contra Rotavírus"
+      ],
+      "exames": ["Nenhum", "Orientação clínica"],
+      "conduta": [
+        "NÃO reaplicar a vacina",
+        "Manter o calendário vacinal habitual",
+        "Agendar a 2ª dose para os 4 meses",
+        "Tranquilizar a mãe e registrar a dose aplicada"
+      ]
+    },
+    "feedback_tecnico": "A vacina oral contra Rotavírus Humano (VORH) NUNCA deve ser reaplicada caso a criança cuspa, vomite ou regurgite durante ou após a administração. Deve-se considerar a dose como válida e aguardar o intervalo para a 2ª dose (aos 4 meses). Lembrar dos prazos etários do PNI: a 1ª dose só pode ser aplicada até 3 meses e 15 dias, e a 2ª dose até 7 meses e 29 dias. É contraindicada em crianças com antecedente de invaginação intestinal ou malformações congênitas do trato digestivo não corrigidas."
+  }
+]
