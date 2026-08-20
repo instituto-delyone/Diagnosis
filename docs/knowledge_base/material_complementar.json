@@ -55,7 +55,6 @@
     "tratamento": "Controle de frequência (Betabloqueadores ou BCC) vs Controle de ritmo (Amiodarona, Cardioversão). Avaliação obrigatória do escore CHA2DS2-VASc para instituir anticoagulação.",
     "particularidades": "É a arritmia sustentada mais comum do mundo e uma das principais causas de Acidente Vascular Cerebral (AVC) isquêmico cardioembólico."
   },
-
   "Enxaqueca (Migrânea)": {
     "etiologia": "Doença neurológica primária com forte predisposição genética, desencadeada por estresse, privação de sono, jejum ou flutuações hormonais.",
     "fisiopatologia": "Depressão alastrante cortical associada à ativação do sistema trigeminovascular, com liberação de neuropeptídios inflamatórios (CGRP) que causam vasodilatação e dor.",
@@ -77,7 +76,6 @@
     "tratamento": "Controle estrito da PA, prevenção de vasoespasmo com Nimodipino e intervenção precoce do aneurisma (clipagem cirúrgica ou embolização endovascular).",
     "particularidades": "Metade dos pacientes que sobrevivem à ruptura inicial pode evoluir com ressangramento fatal ou isquemia tardia se não houver intervenção rápida."
   },
-
   "Cirrose Hepática Alcoólica": {
     "etiologia": "Consumo crônico e excessivo de etanol, geralmente superior a 30-50g/dia por mais de 10 anos.",
     "fisiopatologia": "O metabolismo do álcool gera acetaldeído e estresse oxidativo, ativando as células estreladas hepáticas que depositam colágeno, substituindo o parênquima sadio por fibrose e nódulos regenerativos.",
@@ -99,7 +97,6 @@
     "tratamento": "Correção do fator precipitante. Redução da amônia intestinal com uso de Lactulose e antibióticos não absorvíveis (Rifaximina ou Neomicina).",
     "particularidades": "A dosagem de amônia sérica não tem boa correlação com a gravidade clínica e não deve ser usada para guiar a terapia em pacientes já diagnosticados."
   },
-
   "Asma": {
     "etiologia": "Doença inflamatória crônica das vias aéreas com forte componente atópico/alérgico, associada a fatores genéticos e exposição a aeroalérgenos.",
     "fisiopatologia": "Inflamação brônquica mediada por Th2 (eosinófilos/IgE) que gera hiperresponsividade, broncoconstrição reversível, edema de mucosa e hipersecreção de muco.",
@@ -121,7 +118,6 @@
     "tratamento": "Vasodilatadores venosos/arteriais (Nitroglicerina), diuréticos de alça IV (Furosemida) e Suporte Ventilatório Não Invasivo (VNI - CPAP/BiPAP) para reduzir o trabalho respiratório.",
     "particularidades": "O paciente caracteristicamente chega à emergência muito agitado, sentado à beira do leito, sudoreico e com extrema dificuldade de falar frases completas."
   },
-
   "Hiponatremia": {
     "etiologia": "Desequilíbrio de água em relação ao sódio. Causas variam desde uso de diuréticos (tiazídicos), diarreia, até insuficiência cardíaca, cirrose e SIADH.",
     "fisiopatologia": "Diluição do sódio extracelular causa gradiente osmótico, forçando o movimento de água para dentro das células, o que no SNC gera edema cerebral e sintomas neurológicos.",
@@ -143,7 +139,6 @@
     "tratamento": "Reposição de Cloreto de Potássio (KCl) via oral (preferível) ou intravenosa (lentamente e em acesso venoso central se altas doses, pois queima a veia periférica).",
     "particularidades": "Pacientes com hipocalemia refratária frequentemente têm hipomagnesemia associada; o potássio só subirá após a correção prévia do magnésio."
   },
-
   "Hipotireoidismo": {
     "etiologia": "A Tireoidite de Hashimoto (autoimune) é a causa número um no mundo com iodo suficiente. Pode ser iatrogênica pós-cirurgia ou radioterapia.",
     "fisiopatologia": "Destruição dos folículos tireoidianos reduz a síntese de T3 e T4, diminuindo o metabolismo basal de todo o organismo e gerando acúmulo de glicosaminoglicanos (mixedema).",
@@ -165,7 +160,6 @@
     "tratamento": "Reposição vitalícia de Glicocorticoides (Hidrocortisona) e Mineralocorticoides (Fludrocortisona). Dobrar/triplicar a dose em situações de doença ou cirurgia aguda.",
     "particularidades": "A hiperpigmentação da pele e mucosas (principalmente gengivas) é exclusiva da doença primária (Addison) devido ao excesso compensatório de ACTH/MSH."
   },
-
   "Crise Tônico-Clônica Generalizada": {
     "etiologia": "Descargas elétricas anormais e síncronas envolvendo ambos os hemisférios cerebrais. Pode ser idiopática (epilepsia) ou secundária (trauma, neuroinfecção, hipoglicemia).",
     "fisiopatologia": "Falta de inibição mediada por GABA e excesso de excitação mediada por Glutamato. A crise evolui de uma fase tônica (rigidez espástica) para clônica (abalos musculares ritmados).",
@@ -187,7 +181,6 @@
     "tratamento": "Medicamentos de escolha para crises focais: Carbamazepina, Oxcarbazepina ou Lamotrigina. Casos refratários podem ter indicação cirúrgica ressectiva.",
     "particularidades": "A crise costuma ser precedida por uma 'aura' (ex: sensação de medo súbito ou odor estranho), que é o início consciente da convulsão focal."
   },
-
   "Doença de Alzheimer": {
     "etiologia": "Doença neurodegenerativa primária progressiva, a causa mais comum de demência em idosos. Associação genética (ApoE4) é um forte fator de risco.",
     "fisiopatologia": "Acúmulo patológico de placas de proteína beta-amiloide no meio extracelular e emaranhados neurofibrilares de proteína Tau hiperfosforilada intracelular, causando morte neuronal e atrofia cortical.",
@@ -230,7 +223,6 @@
     "tratamento": "Protocolos complexos de poliquimioterapia sistêmica e profilaxia rotineira do SNC (quimioterapia intratecal), dado o alto risco de invasão meníngea.",
     "particularidades": "Apesar do comportamento hiperagressivo, a oncologia moderna transformou a LLA infantil em uma das neoplasias mais curáveis do mundo, com taxas de remissão acima de 80%."
   },
-
   "Púrpura Trombocitopênica Imune (PTI)": {
     "etiologia": "Distúrbio autoimune isolado das plaquetas, frequentemente desencadeado (semanas antes) por uma infecção viral trivial, especialmente em crianças.",
     "fisiopatologia": "O baço produz autoanticorpos (IgG) que revestem as glicoproteínas das plaquetas. Os macrófagos esplênicos devoram essas plaquetas marcadas, gerando plaquetopenia severa aguda.",
@@ -267,7 +259,6 @@
     "tratamento": "Tríade padrão: Sulfadiazina + Pirimetamina + Ácido Folínico. Inicia-se de forma empírica assim que a imagem for compatível. O paciente deve apresentar melhora clínica/radiológica em 1 a 2 semanas.",
     "particularidades": "É a causa isolada mais comum de lesão expansiva no SNC em doentes de AIDS. Se o paciente não melhorar após 14 dias de medicação, a biópsia para descartar Linfoma Primário do SNC é obrigatória."
   },
-
   "Hepatite B Aguda": {
     "etiologia": "Infecção pelo VHB (vírus DNA) via fluidos corporais infectados (via sexual, materno-infantil ou percutânea).",
     "fisiopatologia": "A destruição do fígado não ocorre pela replicação do vírus em si, mas pela exaltação dos linfócitos T citotóxicos do próprio paciente tentando erradicar os hepatócitos infectados.",
@@ -275,7 +266,6 @@
     "tratamento": "Apenas suporte e acompanhamento laboratorial, visto que a imensa maioria dos adultos (> 95%) cura a infecção sozinho e gera memória imune. Antivirais ficam reservados para as hepatites fulminantes.",
     "particularidades": "Um paciente que comparece com quadro agudo severo de hepatite paradoxalmente tem menor risco de cronificar, porque demonstra que o seu sistema imunológico está respondendo com força total."
   },
-  
   "Coledocolitíase": {
     "etiologia": "Deslizamento de um cálculo formado na vesícula biliar (colelitíase) que agora se encontra impactado no Ducto Colédoco.",
     "fisiopatologia": "A 'pedra' entope a via de saída principal do fígado. A bile, rica em bilirrubina conjugada (direta), reflui para o sangue e é filtrada pelo rim, escurecendo a urina e empalidecendo as fezes.",
