@@ -596,7 +596,29 @@
     "diagnostico": "Definição: Estatura/Idade < p3 ou Escore-Z < -2[span_24](start_span)[span_24](end_span). Propedêutica inicial: cálculo do Alvo Genético Parental [Meninos: (Pai + Mãe + 13)/2; Meninas: (Mãe + Pai - 13)/2][span_25](start_span)[span_25](end_span) e radiografia de mãos e punhos para determinação da Idade Óssea (IO)[span_26](start_span)[span_26](end_span).",
     "tratamento": "Variantes normais não requerem intervenção farmacológica[span_27](start_span)[span_27](end_span). Condições mórbidas exigem tratamento específico da causa de base (reposição de Levotiroxina no hipotireoidismo[span_28](start_span)[span_28](end_span), GH recombinante na deficiência hormonal ou Síndrome de Turner, e suporte nutricional na desnutrição[span_29](start_span)[span_29](end_span)).",
     "particularidades": "No Retardo Constitucional, a Idade Óssea é atrasada em relação à Cronológica (IO < IC) e os pais têm estatura normal[span_30](start_span)[span_30](end_span). Na Baixa Estatura Familiar, a Idade Óssea é igual à Cronológica (IO = IC) e os pais são baixos[span_31](start_span)[span_31](end_span). Em meninas com baixa estatura e velocidade de crescimento anormal sem causa evidente, o cariótipo é mandatório para rastreio de Síndrome de Turner[span_32](start_span)[span_32](end_span)."
+  },
+  "Imunizações no Calendário Pediátrico e Atualizações do PNI": {
+    "etiologia": "Proteção ativa por indução de imunidade humoral (anticorpos neutralizantes) e celular com memória imunológica permanente.",
+    "fisiopatologia": "Vacinas atenuadas contêm microrganismos vivos com virulência atenuada, mimetizando a infecção natural com forte resposta imune, mas sendo contraindicadas em gestantes e imunodeprimidos. Vacinas inativadas e conjugadas (polissacarídeo bacteriano ligado a carreador proteico) geram resposta T-dependente, permitindo imunogenicidade eficaz em menores de 2 anos.",
+    "diagnostico": "Calendário básico do 1º ano: Ao nascer (BCG e Hepatite B); 2m (Pentavalente, VIP, Pneumo-10, VORH); 3m (Meningo C); 4m (Penta, VIP, Pneumo-10, VORH); 5m (Meningo C); 6m (Penta, VIP); 9m (Febre Amarela); 12m (Tríplice Viral, Reforço Pneumo-10, Reforço Meningo C).",
+    "tratamento": "Reforços e Atualizações: Aos 15 meses (DTP, Hepatite A, Tetraviral e VIP injetável - substituindo a VOP oral). Aos 4 anos (Varicela, DTP e VIP injetável). Na adolescência: HPV quadrivalente em dose única (9 a 14 anos) e Meningocócica conjugada ACWY (11 a 14 anos).",
+    "particularidades": "A vacina BCG intradérmica previne formas disseminadas e graves de tuberculose (miliar e meníngea). Se houver evolução com abscesso subcutâneo frio ou úlcera > 1 cm refratária, o tratamento de escolha é a Isoniazida. Não há indicação de revacinação em crianças que não desenvolveram a cicatriz vacinal após a dose ao nascer."
+  },
+  "Eventos Adversos Pós-Vacinação e Condutas Específicas": {
+    "etiologia": "Reações reatogênicas desencadeadas por componentes antigênicos, adjuvantes ou conservantes presentes nos imunobiológicos.",
+    "fisiopatologia": "O componente de células inteiras de Bordetella pertussis presente na vacina DTP/Pentavalente é o principal indutor de reações febris altas, choro persistente inconsolável, convulsões febris e episódios hipotônico-hiporresponsivos (EHH) por instabilidade vasomotora aguda.",
+    "diagnostico": "Classificação da reação à DTP: Febre alta (> 39,5°C) ou choro incontrolável (não alteram a conduta); EHH e/ou convulsão pós-vacinal (indicação de transição para DTPa acelular); Encefalopatia aguda nos primeiros 7 dias (contraindicação definitiva ao componente Pertussis, devendo-se utilizar a vacina DT dupla infantil).",
+    "tratamento": "Notificação compulsória em formulário do Sinan/CRIE. Encaminhamento para aplicação de imunobiológicos especiais (CRIE) quando houver indicação formal para DTPa, VIP ou outras formulações acelulares/purificadas.",
+    "particularidades": "Em contactantes domiciliares de indivíduos gravemente imunossuprimidos ou hospitalizados, vacinas com vírus vivos eliminados nas fezes (como a VOP histórica) são contraindicadas; a indicação mandatória é a utilização da vacina inativada injetável (VIP)."
+  },
+  "Manejo Profilático do Tétano Acidental": {
+    "etiologia": "Ação da exotoxina neurotóxica (tetanospasmina) produzida pelo bacilo anaeróbio Clostridium tetani inoculado em soluções de continuidade tecidual.",
+    "fisiopatologia": "A tetanospasmina atinge os terminais axonais por via retrógrada e bloqueia a liberação de neurotransmissores inibitórios (GABA e glicina) nos interneurônios medulares de Renshaw, deflagrando espasmos musculares sustentados e hiper-reflexia autônoma.",
+    "diagnostico": "Avaliação simultânea da gravidade da lesão (limpa/superficial vs. contaminada/profunda/com tecido desvitalizado) e do histórico vacinal documentado do paciente.",
+    "tratamento": "Ferimentos de alto risco em pacientes com status vacinal incerto ou < 3 doses: Vacina com toxoide tetânico (dT) + Imunização passiva imediata com Soro Antitetânico (SAT) ou Imunoglobulina Humana Antitetânica (IGHAT). Ferimentos de alto risco em pacientes com vacinação completa e última dose entre 5 e 10 anos: apenas 1 dose de reforço da vacina (sem necessidade de soro/imunoglobulina).",
+    "particularidades": "A limpeza mecânica exaustiva, debridação de tecidos desvitalizados e remoção cirúrgica de corpos estranhos da ferida são medidas locais mandatórias para eliminar o microambiente anaeróbio propício à germinação dos esporos."
   }
+
 
 
 
