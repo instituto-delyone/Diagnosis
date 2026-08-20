@@ -510,129 +510,41 @@
       "Trombólise sistêmica se choque obstrutivo ou instabilidade hemodinâmica (TEP de alto risco)"
     ]
   },
+  "cetoacidose_diabetica": {
+    "id": "cetoacidose_diabetica",
+    "badgeName": "Cetoacidose Diabética",
+    "categoria": "Emergência Metabólica",
+    "vinheta": "Paciente jovem c...",
+    "diagnosticoCorreto": "Cetoacidose...",
+    "criteriosDiagnosticos": [
+      "Glicemia > 200-250 mg/dL",
+      "Acidose metabólica com ânion gap"
+    ],
+    "condutaImediata": [
+      "Expansão volêmica vigorosa"
+    ]
+  },
+  "apendicite_aguda": {
     "id": "apendicite_aguda",
     "badgeName": "Apendicite Aguda",
     "categoria": "Urgência Cirúrgica",
-    "vinheta": "Paciente de 22 anos relata dor abdominal iniciada há cerca de 18 horas em região periumbilical, associada a anorexia e náuseas. Nas últimas 6 horas, a dor migrou e se intensificou na fossa ilíaca direita. Ao exame físico: descompressão dolorosa positiva no ponto de McBurney (sinal de Blumberg presente).",
-    "diagnosticoCorreto": "Apendicite Aguda",
+    "vinheta": "Paciente de 22 a...",
+    "diagnosticoCorreto": "Apendicite...",
     "criteriosDiagnosticos": [
-      "Quadro clínico típico com dor migratória e sinais de irritação peritoneal",
-      "Avaliação por escore de risco clínico (Escore de Alvarado)",
-      "Ultrassonografia abdominal (método de escolha para crianças/gestantes) ou Tomografia Computadorizada de abdome e pelve (em casos duvidosos ou adultos)"
+      "Quadro clínico típico com dor"
     ],
     "condutaImediata": [
-      "Dieta zero e hidratação venosa isotônica",
-      "Controle álgico e sintomático",
-      "Antibioticoterapia profilática/terapêutica cobrindo germes gram-negativos e anaeróbios",
-      "Avaliação cirúrgica de urgência para apendicectomia"
+      "Dieta zero e hidratação"
     ]
   },
+  "colecistite_aguda": {
     "id": "colecistite_aguda",
     "badgeName": "Colecistite Aguda",
     "categoria": "Cirurgia Geral",
     "prevalencia_base": 30,
-    "vinheta": "Mulher de 44 anos, multípara e com IMC de 32 kg/m², chega à emergência com dor intensa em hipocôndrio direito irradiada para a escápula iniciada após refeição gordurosa, associada a febre (38,2°C), náuseas e vômitos. Ao exame físico: interrupção abrupta da inspiração durante a palpação profunda do rebordo costal direito (sinal de Murphy positivo).",
+    "vinheta": "Mulher de 44 ano...",
     "respostas_esperadas": {
-      "diagnostico": [
-        "colecistite aguda",
-        "colecistite",
-        "colecistite calculosa",
-        "colecistite aguda calculosa"
-      ],
-      "exames": [
-        "ultrassonografia",
-        "ultrassom de abdome",
-        "usg de abdome",
-        "ultrassom",
-        "leucograma"
-      ],
-      "conduta": [
-        "colecistectomia",
-        "colecistectomia videolaparoscopica",
-        "antibioticoterapia",
-        "cirurgia",
-        "hidratacao venosa"
-      ]
-    },
-    "feedback_tecnico": "O diagnóstico de colecistite aguda baseia-se na presença de dor no hipocôndrio direito, Murphy positivo, sinais sistêmicos de inflamação e confirmação ultrassonográfica (espessamento da parede > 4 mm, cálculo impactado e líquido pericolecístico). A conduta definitiva é a colecistectomia videolaparoscópica precoce associada a antibioticoterapia venosa.",
-    "revisao_estruturada": {
-      "etiologia": "Obstrução mecânica sustentada do ducto cístico por litíase biliar (cálculo), levando a estase biliar e proliferação bacteriana secundária.",
-      "fisiopatologia": "A hipertensão intraluminal gera isquemia mural, liberação de mediadores inflamatórios e translocação de germes entéricos (como E. coli e Klebsiella).",
-      "diagnostico": "Quadro clínico compatível + Sinal de Murphy positivo + Ultrassonografia de abdome superior (espessamento parietal da vesícula > 4 mm e cálculo impactado).",
-      "tratamento": "Jejum, analgesia, hidratação venosa, antibioticoterapia de largo espectro e colecistectomia laparoscópica nas primeiras 72 horas.",
-      "particularidades": "A colecistectomia precoce reduz morbidade, tempo de internação e taxas de complicações em relação à conduta conservadora inicial."
-    }
-  },
-    "id": "obstrucao_intestinal_bridas",
-    "badgeName": "Obstrução Intestinal",
-    "categoria": "Cirurgia Geral",
-    "prevalencia_base": 25,
-    "vinheta": "Homem de 61 anos, com histórico de laparotomia prévia por trauma há 5 anos, apresenta distensão abdominal progressiva, cólicas em crises, náuseas, vômitos biliosos e parada de eliminação de fezes e flatos há 36 horas. Ao exame físico: abdome distendido e timpânico, com ruídos hidroaéreos aumentados e metálicos em momentos de dor, sem peritonite.",
-    "respostas_esperadas": {
-      "diagnostico": [
-        "obstrucao intestinal",
-        "suboclusao intestinal",
-        "ileo mecanico",
-        "obstrucao por bridas",
-        "aderencias"
-      ],
-      "exames": [
-        "radiografia de abdome",
-        "rotina de abdome agudo",
-        "tomografia de abdome",
-        "tc de abdome",
-        "raio x de abdome"
-      ],
-      "conduta": [
-        "sondagem nasogastrica",
-        "sonda nasogastrica",
-        "descompressao gastrica",
-        "hidratacao venosa",
-        "laparotomia"
-      ]
-    },
-    "feedback_tecnico": "A obstrução de intestino delgado tem como principal etiologia as bridas/aderências pós-operatórias. A conduta inicial em casos não complicados (sem sinais de estrangulamento ou isquemia) envolve descompressão gástrica por SNG, reposição volêmica vigorosa, correção de distúrbios hidroeletrolíticos e vigilância clínica estrita.",
-    "revisao_estruturada": {
-      "etiologia": "Aderências e bridas pós-cirúrgicas são responsáveis por mais de 60% dos casos de oclusão mecânica do intestino delgado.",
-      "fisiopatologia": "O bloqueio luminal causa acúmulo retrógrado de líquidos e gases, levando a hiperperistaltismo de luta, perda de fluidos para o terceiro espaço e risco de isquemia de alça se houver estrangulamento.",
-      "diagnostico": "Tríade de dor em cólica, vômitos e parada de gases/fezes + Radiografia de abdome (níveis hidroaéreos e distensão central) ou TC com contraste.",
-      "tratamento": "Descompressão por sonda nasogástrica calibrosa, reposição com cristaloides e monitorização clínica; indicação cirúrgica imediata se sinais de sepse, peritonite ou falha do manejo conservador.",
-      "particularidades": "A presença de dor contínua intensa, febre, leucocitose e acidose metabólica alerta para isquemia ou perfuração de alça intestinal."
-    }
-  },
-    "id": "ulcera_peptica_perfurada",
-    "badgeName": "Úlcera Perfurada",
-    "categoria": "Cirurgia Geral",
-    "prevalencia_base": 20,
-    "vinheta": "Homem de 52 anos, etilista e usuário crônico de anti-inflamatórios não esteroidais (AINEs) para lombalgia, desenvolve subitamente dor epigástrica de início súbito ('em facada'), de intensidade 10/10, que se espalhou rapidamente por todo o abdome. Ao exame físico: taquicárdico, diaforético, com abdome rígido em tábua e descompressão dolorosa difusamente positiva.",
-    "respostas_esperadas": {
-      "diagnostico": [
-        "ulcera perfurada",
-        "ulcera peptica perfurada",
-        "pneumoperitonio",
-        "abdome agudo perfurativo"
-      ],
-      "exames": [
-        "radiografia de torax",
-        "rotina de abdome agudo",
-        "raio x de torax",
-        "tomografia de abdome",
-        "tc de abdome"
-      ],
-      "conduta": [
-        "laparotomia exploradora",
-        "cirurgia de urgencia",
-        "ulcerorrafia",
-        "patch de graham",
-        "antibioticoterapia"
-      ]
-    },
-    "feedback_tecnico": "Trata-se de um abdome agudo perfurativo clássico, manifestando-se com abdome em tábua e peritonite química que progride para bacteriana. O achado propedêutico definidor é o pneumoperitônio (ar subdiafragmático na radiografia de tórax em ortostase), exigindo ressuscitação volêmica imediata, antibioticoterapia venosa e exploração cirúrgica de emergência.",
-    "revisao_estruturada": {
-      "etiologia": "Perfuração transmural da parede gástrica ou duodenal por úlcera péptica crônica, frequentemente associada ao uso de AINEs e infecção por H. pylori.",
-      "fisiopatologia": "O extravasamento de ácido e conteúdo gástrico na cavidade peritoneal deflagra peritonite química hiperaguda, seguida de translocação bacteriana e choque séptico.",
-      "diagnostico": "História de dor súbita em facada + Abdome em tábua + Identificação de ar livre na cavidade peritoneal (pneumoperitônio na radiografia de tórax em ortostase ou TC).",
-      "tratamento": "Estabilização hemodinâmica, antibioticoterapia de largo espectro e correção cirúrgica de urgência (rafia primária com omentoplastia / Patch de Graham).",
-      "particularidades": "A radiografia de tórax em posição ortostática (em pé) é mais sensível que a radiografia de abdome para evidenciar pequenas lâminas de pneumoperitônio sob as cúpulas diafragmáticas."
+      "diagnostico": [ "colecistite aguda" ]
     }
   }
+}
