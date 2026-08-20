@@ -488,5 +488,62 @@
     "diagnostico": "Inconsciência com ausência de respiração e pulso central (braquial em lactentes; carotídeo/femoral em crianças) checado em até 10 segundos.",
     "tratamento": "Compressões 100-120/min com profundidade adequada (4 cm em < 1 ano e 5 cm em > 1 ano). Relação 15:2 com 2 socorristas. Em ritmos não chocáveis: Adrenalina precoce (0,01 mg/kg) a cada 3-5 min e busca ativa de causas reversíveis (5H e 5T). Em FV/TVSP: Choque inicial 2 J/kg, seguido de 4 J/kg e antiarrítmicos (Amiodarona ou Lidocaína).",
     "particularidades": "Após intubação traqueal, a massagem cardíaca torna-se contínua (sem pausas) e aplica-se 1 ventilação a cada 6 segundos (10 incursões/minuto)."
+  },
+  [
+  {
+    "id": "cetoacidose_diabetica",
+    "badgeName": "Cetoacidose Diabética",
+    "categoria": "Emergência Metabólica",
+    "vinheta": "Paciente jovem com diabetes mellitus tipo 1 chega ao pronto-socorro apresentando náuseas, vômitos, dor abdominal difusa e respiração profunda e rápida (Kussmaul). Exames laboratoriais revelam glicemia de 380 mg/dL, pH 7,18, HCO3 de 10 mEq/L e cetonúria 4+.",
+    "diagnosticoCorreto": "Cetoacidose Diabética (CAD)",
+    "criteriosDiagnosticos": [
+      "Glicemia > 200-250 mg/dL",
+      "Acidose metabólica com ânion gap elevado (pH < 7,30 e HCO3 < 18 mEq/L)",
+      "Presença de cetonemia ou cetonúria moderada a acentuada"
+    ],
+    "condutaImediata": [
+      "Expansão volêmica vigorosa com SF 0,9%",
+      "Avaliação e reposição de potássio antes de iniciar insulinoterapia (garantir K+ > 3,3 mEq/L)",
+      "Insulinoterapia venosa regular em bomba de infusão contínua",
+      "Adição de glicose a 5% à hidratação quando a glicemia atingir cerca de 200-250 mg/dL para evitar edema cerebral e hipoglicemia"
+    ]
+  },
+  {
+    "id": "tromboembolismo_pulmonar",
+    "badgeName": "Tromboembolismo Pulmonar",
+    "categoria": "Emergência Cardiovascular",
+    "vinheta": "Paciente de 54 anos, em recuperação pós-artroplastia de quadril, desenvolve subitamente dispneia intensa e dor torácica de padrão pleurítico. Ao exame: taquipneia, taquicardia (FC 115 bpm) e saturação de oxigênio de 89% em ar ambiente, com murmúrio vesicular preservado e sem ruídos adventícios.",
+    "diagnosticoCorreto": "Tromboembolismo Pulmonar (TEP)",
+    "criteriosDiagnosticos": [
+      "Aplicação de escores preditivos (Wells ou Geneva)",
+      "D-Dímero para exclusão em cenários de baixa/intermediária probabilidade",
+      "Angiotomografia de artérias pulmonares (padrão-ouro confirmatório) para alta probabilidade ou D-Dímero elevado"
+    ],
+    "condutaImediata": [
+      "Oxigenoterapia para manter SpO2 >= 90-92%",
+      "Anticoagulação plena precoce (Heparina de Baixo Peso Molecular ou Não Fracionada / DOACs)",
+      "Estratificação de gravidade (pesquisa de disfunção de VD por ecocardiograma ou troponina)",
+      "Trombólise sistêmica se choque obstrutivo ou instabilidade hemodinâmica (TEP de alto risco)"
+    ]
+  },
+  {
+    "id": "apendicite_aguda",
+    "badgeName": "Apendicite Aguda",
+    "categoria": "Urgência Cirúrgica",
+    "vinheta": "Paciente de 22 anos relata dor abdominal iniciada há cerca de 18 horas em região periumbilical, associada a anorexia e náuseas. Nas últimas 6 horas, a dor migrou e se intensificou na fossa ilíaca direita. Ao exame físico: descompressão dolorosa positiva no ponto de McBurney (sinal de Blumberg presente).",
+    "diagnosticoCorreto": "Apendicite Aguda",
+    "criteriosDiagnosticos": [
+      "Quadro clínico típico com dor migratória e sinais de irritação peritoneal",
+      "Avaliação por escore de risco clínico (Escore de Alvarado)",
+      "Ultrassonografia abdominal (método de escolha para crianças/gestantes) ou Tomografia Computadorizada de abdome e pelve (em casos duvidosos ou adultos)"
+    ],
+    "condutaImediata": [
+      "Dieta zero e hidratação venosa isotônica",
+      "Controle álgico e sintomático",
+      "Antibioticoterapia profilática/terapêutica cobrindo germes gram-negativos e anaeróbios",
+      "Avaliação cirúrgica de urgência para apendicectomia"
+    ]
   }
+]
+
 
