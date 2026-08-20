@@ -42,7 +42,7 @@
       gap: 30px;
     }
 
-    .arena-container, .modules-container, .trophy-container {
+    .arena-container, .modules-container, .trophy-container, .leaderboard-container {
       max-width: 800px;
       width: 100%;
       background: var(--card);
@@ -297,6 +297,59 @@
       margin-top: 6px;
     }
 
+    /* === MURAL TOP 10 === */
+    .leaderboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 13.5px;
+    }
+    .leaderboard-table th {
+      text-align: left;
+      padding: 10px 12px;
+      background: #f8fafc;
+      color: var(--navy);
+      font-weight: 800;
+      border-bottom: 2px solid var(--border);
+    }
+    .leaderboard-table td {
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+      color: var(--ink);
+    }
+    .leaderboard-table tr:nth-child(even) { background-color: #fafbfc; }
+    .rank-pill {
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+    .rank-1 { background: #fef08a; color: #854d0e; }
+    .rank-2 { background: #e2e8f0; color: #475569; }
+    .rank-3 { background: #ffedd5; color: #9a3412; }
+
+    /* === MODAL HALL OF FAME === */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(7, 20, 38, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+    .modal-card {
+      background: #fff;
+      padding: 32px;
+      border-radius: 18px;
+      max-width: 480px;
+      width: 90%;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
     .module-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -410,6 +463,40 @@
   </div>
   <p style="margin: 6px 0 0; font-size: 13px; color: var(--muted);">Acertos com 100% de calibração desbloqueiam badges nominais da patologia (máximo 3 por dia por dispositivo).</p>
   <div class="trophy-grid" id="trophy-grid"></div>
+</div>
+
+<!-- MURAL DOS 10 PRIMEIROS DO DIA -->
+<div class="leaderboard-container">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h2 style="margin: 0; font-size: 18px; color: var(--navy); font-weight: 800;">🎖️ Hall dos Mestres Clínicos (Top 10 do Dia)</h2>
+    <span style="font-size: 12px; color: var(--muted);">Atualizado Diariamente</span>
+  </div>
+  <p style="margin: 6px 0 0; font-size: 13px; color: var(--muted);">Os 10 primeiros médicos/estudantes a completarem as 3 badges diárias com 100% de calibração.</p>
+  <table class="leaderboard-table">
+    <thead>
+      <tr>
+        <th style="width: 60px;">Pos.</th>
+        <th>Mestre Clínico</th>
+        <th>Horário</th>
+        <th>Badges Conquistadas</th>
+      </tr>
+    </thead>
+    <tbody id="leaderboard-body">
+      <tr><td colspan="4" style="text-align: center; color: var(--muted); padding: 18px;">Aguardando os primeiros mestres de hoje...</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- MODAL DE REGISTRO DO 3º TROFÉU -->
+<div id="hall-of-fame-modal" class="modal-overlay">
+  <div class="modal-card">
+    <span style="font-size: 44px;">👑</span>
+    <h2 style="color: var(--navy); margin: 10px 0 6px;">Maestria Diária Concluída!</h2>
+    <p style="font-size: 14px; color: var(--muted); margin: 0 0 20px;">Você alcançou o 3º troféu com 100% de acerto hoje! Como deseja registrar seu nome no Hall dos Mestres?</p>
+    <input type="text" id="hof-username" class="input-box" placeholder="Ex: Dr. Delyone ou Dra. Beatriz..." style="text-align: center;">
+    <button class="btn" onclick="LeaderboardSystem.submeterAoHall()" style="background: var(--green); margin-bottom: 8px;">Registrar no Mural</button>
+    <button class="btn btn-secondary" onclick="LeaderboardSystem.submeterComIp()">Usar apenas meu IP público</button>
+  </div>
 </div>
 
 <div class="modules-container">
@@ -531,6 +618,11 @@
       this.salvarDados(dados);
       this.renderizarGaleria();
 
+      // Checa se completou o 3º troféu
+      if (dados.daily[hoje] === 3) {
+        LeaderboardSystem.abrirModalRegistro(dados.badges.slice(-3));
+      }
+
       return { concedida: true, totalHoje: dados.daily[hoje] };
     }
 
@@ -549,6 +641,114 @@
       }
 
       gridEl.innerHTML = dados.badges.map(b => `<div class="trophy-badge">🏆 ${b}</div>`).join('');
+    }
+  }
+
+  /**
+   * ==========================================
+   * 2.1 MURAL TOP 10 (LEADERBOARD)
+   * ==========================================
+   */
+  class LeaderboardSystem {
+    static badgesParaSubmissao = [];
+
+    static getChaveHoje() {
+      return `medunity_top10_${BadgeSystem.getHojeStr()}`;
+    }
+
+    static getTop10() {
+      try {
+        return JSON.parse(localStorage.getItem(this.getChaveHoje()) || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    static salvarTop10(lista) {
+      localStorage.setItem(this.getChaveHoje(), JSON.stringify(lista));
+    }
+
+    static abrirModalRegistro(badgesRecentes) {
+      this.badgesParaSubmissao = badgesRecentes;
+      const modal = document.getElementById("hall-of-fame-modal");
+      if (modal) modal.style.display = "flex";
+    }
+
+    static fecharModal() {
+      const modal = document.getElementById("hall-of-fame-modal");
+      if (modal) modal.style.display = "none";
+    }
+
+    static async obterIpPublico() {
+      try {
+        const resp = await fetch("https://api.ipify.org?format=json");
+        const data = await resp.json();
+        return data.ip || "127.0.0.1";
+      } catch (e) {
+        return "IP Anônimo";
+      }
+    }
+
+    static async submeterComIp() {
+      const ip = await this.obterIpPublico();
+      this.adicionarAoTop10(`Dr(a). Anônimo (${ip})`);
+    }
+
+    static submeterAoHall() {
+      const nomeInput = document.getElementById("hof-username").value.trim();
+      const nomeFinal = nomeInput ? (nomeInput.startsWith("Dr") ? nomeInput : `Dr(a). ${nomeInput}`) : "Dr(a). Anônimo";
+      this.adicionarAoTop10(nomeFinal);
+    }
+
+    static adicionarAoTop10(nomeIdentificador) {
+      const top10 = this.getTop10();
+      if (top10.length >= 10) {
+        alert("O Top 10 de hoje já foi preenchido!");
+        this.fecharModal();
+        return;
+      }
+
+      const agora = new Date();
+      const horaStr = `${String(agora.getHours()).padStart(2, '0')}:${String(agora.getMinutes()).padStart(2, '0')}`;
+
+      top10.push({
+        nome: nomeIdentificador,
+        horario: horaStr,
+        badges: this.badgesParaSubmissao.length > 0 ? this.badgesParaSubmissao : ["Clínica Avançada"]
+      });
+
+      this.salvarTop10(top10);
+      this.renderizarLeaderboard();
+      this.fecharModal();
+    }
+
+    static renderizarLeaderboard() {
+      const tbody = document.getElementById("leaderboard-body");
+      if (!tbody) return;
+
+      const top10 = this.getTop10();
+      if (top10.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--muted); padding: 18px;">Aguardando os primeiros mestres de hoje...</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = top10.map((item, index) => {
+        let rankBadge = `<span class="rank-pill">${index + 1}º</span>`;
+        if (index === 0) rankBadge = `<span class="rank-pill rank-1">🥇 1º</span>`;
+        if (index === 1) rankBadge = `<span class="rank-pill rank-2">🥈 2º</span>`;
+        if (index === 2) rankBadge = `<span class="rank-pill rank-3">🥉 3º</span>`;
+
+        const badgesStr = Array.isArray(item.badges) ? item.badges.join(", ") : item.badges;
+
+        return `
+          <tr>
+            <td>${rankBadge}</td>
+            <td><strong>${item.nome}</strong></td>
+            <td style="color: var(--muted); font-weight: 600;">${item.horario}</td>
+            <td style="color: var(--navy);">${badgesStr}</td>
+          </tr>
+        `;
+      }).join('');
     }
   }
 
@@ -631,13 +831,11 @@
 
   /**
    * ==========================================
-   * 4. CARREGAMENTO ASSÍNCRONO & ADAPTAÇÃO
+   * 4. CARREGAMENTO ASSÍNCRONO & NORMALIZAÇÃO
    * ==========================================
    */
   function normalizarCasoCustom(c) {
     if (!c) return null;
-    
-    // Converte modelos com 'vinheta', 'diagnosticoCorreto', 'criteriosDiagnosticos', 'condutaImediata'
     const vigneta = c.vigneta || c.vinheta;
     if (!vigneta) return null;
 
@@ -668,15 +866,13 @@
   async function carregarConhecimento() {
     renderizarPainelModulos();
     BadgeSystem.renderizarGaleria();
+    LeaderboardSystem.renderizarLeaderboard();
     let totalCarregado = 0;
 
-    // 1. CARREGA O MATERIAL COMPLEMENTAR (Casos e Dicionário)
     try {
       const respMat = await fetch("knowledge_base/material_complementar.json");
       if (respMat.ok) {
         const dadosMat = await respMat.json();
-        
-        // Se for um Array de casos
         if (Array.isArray(dadosMat)) {
           dadosMat.forEach(item => {
             const casoPronto = normalizarCasoCustom(item);
@@ -685,11 +881,8 @@
               totalCarregado++;
             }
           });
-        } 
-        // Se for um Objeto
-        else if (typeof dadosMat === "object" && dadosMat !== null) {
+        } else if (typeof dadosMat === "object" && dadosMat !== null) {
           materialComplementar = dadosMat;
-          // Se tiver uma lista de casos embutida
           if (Array.isArray(dadosMat.casos)) {
             dadosMat.casos.forEach(item => {
               const casoPronto = normalizarCasoCustom(item);
@@ -701,11 +894,8 @@
           }
         }
       }
-    } catch (error) {
-      console.warn("Aviso ao carregar material complementar:", error);
-    }
+    } catch (error) {}
 
-    // 2. CARREGA OS DEMAIS ARQUIVOS DA BASE DE CONHECIMENTO
     for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
       for (const arquivo of dados.arquivos) {
         const caminhoCompleto = dados.pasta + arquivo;
