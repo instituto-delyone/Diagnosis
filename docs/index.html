@@ -631,19 +631,81 @@
 
   /**
    * ==========================================
-   * 4. CARREGAMENTO ASSÍNCRONO
+   * 4. CARREGAMENTO ASSÍNCRONO & ADAPTAÇÃO
    * ==========================================
    */
+  function normalizarCasoCustom(c) {
+    if (!c) return null;
+    
+    // Converte modelos com 'vinheta', 'diagnosticoCorreto', 'criteriosDiagnosticos', 'condutaImediata'
+    const vigneta = c.vigneta || c.vinheta;
+    if (!vigneta) return null;
+
+    let respostas = c.respostas_esperadas;
+    if (!respostas) {
+      respostas = {
+        diagnostico: c.diagnosticoCorreto ? [c.diagnosticoCorreto, c.badgeName || ""] : [c.badgeName || "Diagnóstico"],
+        exames: Array.isArray(c.criteriosDiagnosticos) ? c.criteriosDiagnosticos : ["Avaliação Clínica"],
+        conduta: Array.isArray(c.condutaImediata) ? c.condutaImediata : ["Manejo Terapêutico"]
+      };
+    }
+
+    let moduloOrigem = c._moduloOrigem || c.modulo || "Clínica Médica";
+    if (c.categoria && (c.categoria.includes("Cirúrgica") || c.categoria.includes("Cirurgia"))) {
+      moduloOrigem = "Cirurgia Geral";
+    }
+
+    return {
+      id: c.id || "caso_" + Math.random().toString(36).substr(2, 9),
+      _moduloOrigem: moduloOrigem,
+      vigneta: vigneta,
+      prevalencia_base: c.prevalencia_base || 30,
+      respostas_esperadas: respostas,
+      feedback_tecnico: c.feedback_tecnico || (c.condutaImediata ? c.condutaImediata.join(". ") : "Conduta baseada nas diretrizes institucionais.")
+    };
+  }
+
   async function carregarConhecimento() {
     renderizarPainelModulos();
     BadgeSystem.renderizarGaleria();
     let totalCarregado = 0;
 
+    // 1. CARREGA O MATERIAL COMPLEMENTAR (Casos e Dicionário)
     try {
       const respMat = await fetch("knowledge_base/material_complementar.json");
-      if (respMat.ok) materialComplementar = await respMat.json();
-    } catch (error) {}
+      if (respMat.ok) {
+        const dadosMat = await respMat.json();
+        
+        // Se for um Array de casos
+        if (Array.isArray(dadosMat)) {
+          dadosMat.forEach(item => {
+            const casoPronto = normalizarCasoCustom(item);
+            if (casoPronto) {
+              bancoDeDadosMestre.push(casoPronto);
+              totalCarregado++;
+            }
+          });
+        } 
+        // Se for um Objeto
+        else if (typeof dadosMat === "object" && dadosMat !== null) {
+          materialComplementar = dadosMat;
+          // Se tiver uma lista de casos embutida
+          if (Array.isArray(dadosMat.casos)) {
+            dadosMat.casos.forEach(item => {
+              const casoPronto = normalizarCasoCustom(item);
+              if (casoPronto) {
+                bancoDeDadosMestre.push(casoPronto);
+                totalCarregado++;
+              }
+            });
+          }
+        }
+      }
+    } catch (error) {
+      console.warn("Aviso ao carregar material complementar:", error);
+    }
 
+    // 2. CARREGA OS DEMAIS ARQUIVOS DA BASE DE CONHECIMENTO
     for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
       for (const arquivo of dados.arquivos) {
         const caminhoCompleto = dados.pasta + arquivo;
@@ -652,12 +714,16 @@
           if (response.ok) {
             const casoJson = await response.json();
             if (Array.isArray(casoJson)) {
-              casoJson.forEach(c => c._moduloOrigem = materia);
-              bancoDeDadosMestre.push(...casoJson);
+              casoJson.forEach(c => {
+                const casoPronto = normalizarCasoCustom(c) || c;
+                casoPronto._moduloOrigem = materia;
+                bancoDeDadosMestre.push(casoPronto);
+              });
               totalCarregado += casoJson.length;
-            } else if (casoJson.vigneta || casoJson.slots_sintomas) {
-              casoJson._moduloOrigem = materia;
-              bancoDeDadosMestre.push(casoJson);
+            } else if (casoJson.vigneta || casoJson.vinheta || casoJson.slots_sintomas) {
+              const casoPronto = normalizarCasoCustom(casoJson) || casoJson;
+              casoPronto._moduloOrigem = materia;
+              bancoDeDadosMestre.push(casoPronto);
               totalCarregado += 1;
             }
           }
@@ -675,16 +741,16 @@
     for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
       const temArquivos = dados.arquivos.length > 0;
       const badgeClass = temArquivos ? 'active' : 'empty';
-      const badgeText = temArquivos ? `${dados.arquivos.length} ARQUIVOS` : 'AGUARDANDO JSON';
+      const badgeText = temArquivos ? `${dados.arquivos.length} ARQUIVOS` : 'EM OPERAÇÃO';
       
       const isCM = (materia === "Clínica Médica");
-      const isLocked = isCM || !temArquivos;
-      const isChecked = modulosAtivos[materia] && temArquivos ? "checked" : "";
+      const isLocked = isCM;
+      const isChecked = modulosAtivos[materia] ? "checked" : "";
       const labelId = `lbl-toggle-${materia.replace(/\s+/g, '')}`;
 
       let listaHtml = temArquivos 
         ? `<ul class="file-list">${dados.arquivos.map(arq => `<li>${arq}</li>`).join('')}</ul>`
-        : `<div class="file-list" style="display:flex;align-items:center;">Nenhum arquivo integrado.</div>`;
+        : `<div class="file-list" style="display:flex;align-items:center;">Integrado via Base Dinâmica.</div>`;
 
       grid.innerHTML += `
         <div class="module-card">
@@ -694,7 +760,7 @@
           </div>
           ${listaHtml}
           <div class="toggle-wrapper">
-            <span class="toggle-label">STATUS: <span id="${labelId}" style="color: ${modulosAtivos[materia] && temArquivos ? 'var(--green)' : 'var(--muted)'};">${modulosAtivos[materia] && temArquivos ? 'ON' : 'OFF'}</span></span>
+            <span class="toggle-label">STATUS: <span id="${labelId}" style="color: ${modulosAtivos[materia] ? 'var(--green)' : 'var(--muted)'};">${modulosAtivos[materia] ? 'ON' : 'OFF'}</span></span>
             <label class="switch">
               <input type="checkbox" onchange="toggleModulo('${materia}', this.checked)" ${isChecked} ${isLocked ? 'disabled' : ''}>
               <span class="slider"></span>
@@ -738,7 +804,7 @@
    * ==========================================
    */
   function normalizar(texto) {
-    return texto.toLowerCase()
+    return String(texto).toLowerCase()
       .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
       .replace(/[^a-z0-9\s]/g, " ")
       .trim();
@@ -770,6 +836,7 @@
 
     for (const alvo of alvos) {
       const alvoNorm = normalizar(alvo);
+      if (!alvoNorm) continue;
       if (inputNorm.includes(alvoNorm) || alvoNorm.includes(inputNorm)) return { score: 1.0, matchedTarget: alvo };
 
       const tokensAlvo = alvoNorm.split(/\s+/);
@@ -787,8 +854,10 @@
 
   function encontrarMaterialComplementar(caso) {
     if (!caso || !caso.respostas_esperadas || !caso.respostas_esperadas.diagnostico) return null;
-    const diagnosticosNorm = caso.respostas_esperadas.diagnostico.map(d => normalizar(d));
+    const diagnosticosNorm = caso.respostas_esperadas.diagnostico.map(d => normalizar(d)).filter(d => d.length > 0);
+    
     for (const [doenca, dados] of Object.entries(materialComplementar)) {
+      if (typeof dados !== "object" || !dados) continue;
       const doencaNorm = normalizar(doenca);
       if (diagnosticosNorm.some(d => d === doencaNorm || d.includes(doencaNorm) || doencaNorm.includes(d))) {
         return { nome: doenca, dados: dados };
