@@ -493,22 +493,22 @@
       "Adição de glicose a 5% à hidratação quando a glicemia atingir cerca de 200-250 mg/dL para evitar edema cerebral e hipoglicemia"
     ]
   },
-{
+  "tromboembolismo_pulmonar": {
     "id": "tromboembolismo_pulmonar",
     "badgeName": "Tromboembolismo Pulmonar",
     "categoria": "Emergência Cardiovascular",
-    "vinheta": "Paciente de 54 anos, em recuperação pós-artroplastia de quadril, desenvolve subitamente dispneia intensa e dor torácica de padrão pleurítico. Ao exame: taquipneia, taquicardia (FC 115 bpm) e saturação de oxigênio de 89% em ar ambiente, com murmúrio vesicular preservado e sem ruídos adventícios.",
-    "diagnosticoCorreto": "Tromboembolismo Pulmonar (TEP)",
+    "vinheta": "Paciente de 54 anos...",
+    "diagnosticoCorreto": "Tromboembolismo Pulmonar",
     "criteriosDiagnosticos": [
-      "Aplicação de escores preditivos (Wells ou Geneva)",
-      "D-Dímero para exclusão em cenários de baixa/intermediária probabilidade",
-      "Angiotomografia de artérias pulmonares (padrão-ouro confirmatório) para alta probabilidade ou D-Dímero elevado"
+      "Aplicação de escores preditivos...",
+      "D-Dímero para exclusão...",
+      "Angiotomografia de artérias..."
     ],
     "condutaImediata": [
-      "Oxigenoterapia para manter SpO2 >= 90-92%",
-      "Anticoagulação plena precoce (Heparina de Baixo Peso Molecular ou Não Fracionada / DOACs)",
-      "Estratificação de gravidade (pesquisa de disfunção de VD por ecocardiograma ou troponina)",
-      "Trombólise sistêmica se choque obstrutivo ou instabilidade hemodinâmica (TEP de alto risco)"
+      "Oxigenoterapia para manter SpO2...",
+      "Anticoagulação plena precoce...",
+      "Estratificação de gravidade...",
+      "Trombólise sistêmica se choque..."
     ]
   }
 }
