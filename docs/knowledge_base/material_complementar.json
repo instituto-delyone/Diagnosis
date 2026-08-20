@@ -418,6 +418,75 @@
     "diagnostico": "Tríade nefrítica clássica: Oligúria, Edema (periorbital/facial) e Hipertensão Arterial. A urina é cor de 'Coca-Cola' ou chá-mate (hematúria dismórfica). ASLO elevado e Complemento C3 consumido.",
     "tratamento": "É uma doença autolimitada; o tratamento é puramente de suporte com restrição hídrica, controle restrito do sal e diuréticos de alça (Furosemida) para esvaziar o volume retido e tratar a pressão alta.",
     "particularidades": "Na emergência, a hipertensão gerada por essa síndrome pode ser tão violenta a ponto de causar uma encefalopatia hipertensiva com convulsões em uma criança ou adolescente previamente saudável."
+  },
+  "Bronquiolite Viral Aguda (BVA)": {
+    "etiologia": "Vírus Sincicial Respiratório (VSR) em mais de 70% dos casos.",
+    "fisiopatologia": "Invasão e necrose do epitélio bronquiolar em lactentes menores de 2 anos, gerando edema de mucosa, tampões de muco e obstrução parcial das pequenas vias aéreas com hiperinsuflação e sibilância expiratória.",
+    "diagnostico": "Quadro eminentemente clínico: Pródromos catarrais seguidos de taquipneia, tiragem subcostal e sibilos difusos. O Rx de tórax revela hiperinsuflação (retificação diafragmática e aumento de espaços intercostais).",
+    "tratamento": "Suporte ventilatório e hidratação. Oxigenioterapia se SatO2 < 90% e nebulização com salina hipertônica (3%) em internados. Corticosteroides e beta-2-agonistas não são indicados de rotina.",
+    "particularidades": "Profilaxia com anticorpo monoclonal (Palivizumabe) indicada para prematuros < 29 semanas no 1º ano de vida ou cardiopatas/pneumopatas congênitos graves até 2 anos de idade."
+  },
+  "Epiglotite Aguda": {
+    "etiologia": "Haemophilus influenzae tipo B (cepas invasivas), além de Streptococcus pyogenes e Staphylococcus aureus.",
+    "fisiopatologia": "Inflamação bacteriana fulminante da epiglote e tecidos supraglóticos adjacentes, levando ao edema volumoso e risco iminente de colapso mecânico da laringe.",
+    "diagnostico": "Quadro súbito e toxêmico: febre alta, disfagia grave, sialorreia intensa (babando) e posição de tripé. O Rx cervical em perfil mostra o sinal do polegar (espessamento da epiglote).",
+    "tratamento": "Emergência médica: NÃO manipular a orofaringe nem deitar o paciente. Garantir via aérea definitiva em ambiente cirúrgico/UTI (IOT ou traqueostomia) e iniciar Ceftriaxona parenteral imediata.",
+    "particularidades": "A sialorreia e a recusa da deglutição são os grandes marcadores clínicos de gravidade para diferenciar a epiglotite da laringotraqueíte viral comum."
+  },
+  "Desidratação Aguda na Infância": {
+    "etiologia": "Complicação de gastroenterites virais (Rotavírus, Norovírus) ou bacterianas (E. coli, Shigella).",
+    "fisiopatologia": "Perda aguda de água e eletrólitos pelo trato gastrointestinal, reduzindo o volume circulante efetivo até o choque hipovolêmico.",
+    "diagnostico": "Classificação da OMS: Sem Desidratação (Plano A), Algum grau/Moderada (Plano B: sede intensa, olhos fundos, turgor diminuído com prega < 2s) e Grave (Plano C: letargia, incapacidade de beber, pulso débil, prega > 2s).",
+    "tratamento": "Plano A: Líquidos caseiros + SRO após cada evacuação + Zinco por 10-14 dias. Plano B: TRO na UBS (75 mL/kg em 4h). Plano C: Expansão com SF 0,9% ou Ringer Lactato (100 mL/kg fracionados conforme a faixa etária).",
+    "particularidades": "Nunca reaplicar vacina de Rotavírus caso a criança cuspa ou regurgite durante a administração; manter a alimentação habitual nos quadros com Plano A e B."
+  },
+  "Infecção do Trato Urinário (ITU) Pediátrica": {
+    "etiologia": "Escherichia coli (mais de 80%), Proteus mirabilis (associado a cálculos de estruvita por urease) e Staphylococcus saprophyticus em adolescentes.",
+    "fisiopatologia": "Ascensão bacteriana a partir da microbiota perineal facilitada por uretra curta, ausência de circuncisão, estase urinária ou disfunção miccional associada a constipação intestinal.",
+    "diagnostico": "Cistite: disúria e polaciúria em crianças maiores. Pielonefrite/Lactentes: Febre Sem Sinais Localizatórios (FSSL). Urinocultura padrão-ouro: >= 100.000 UFC/mL em jato médio ou >= 50.000 UFC/mL em cateterismo vesical.",
+    "tratamento": "Cistite: Nitrofurantoína, Cefalexina ou Amoxicilina (3 a 5 dias). Pielonefrite: Ceftriaxona ou Amoxicilina+Clavulanato (7 a 14 dias). Nitrofurantoína é contraindicada em infecções parenquimatosas renais.",
+    "particularidades": "Investigação de imagem com USG de vias urinárias e Uretrocistografia Miccional (UCM) indicada em menores de 2 anos no 1º episódio febril para descartar Refluxo Vesicoureteral (RVU) ou Válvula de Uretra Posterior."
+  },
+  "Sarampo": {
+    "etiologia": "Vírus do gênero Morbillivirus (família Paramyxoviridae), transmitido por aerossóis respiratórios.",
+    "fisiopatologia": "Disseminação linfo-hematogênica com tropismo epitelial e imunossupressão transitória de células T, predispondo a superinfecções bacterianas graves.",
+    "diagnostico": "Pródromos com tosse intensa, coriza, conjuntivite com fotofobia e enantema patognomônico de Manchas de Koplik. Exantema morbiliforme confluente com progressão crânio-caudal lenta e descamação furfurácea.",
+    "tratamento": "Suporte clínico, isolamento por aerossóis e administração mandatória de Vitamina A em 2 doses para diminuir mortalidade pulmonar e neurológica.",
+    "particularidades": "A tosse persiste após o desaparecimento do exantema e a febre atinge seu pico máximo exatamente com a eclosão das lesões cutâneas. A pneumonia bacteriana é a principal causa mortis."
+  },
+  "Exantema Súbito (Roséola Infantil)": {
+    "etiologia": "Herpesvírus Humano tipo 6 (HHV-6), com capacidade de latência em glândulas salivares.",
+    "fisiopatologia": "Infecção primária em lactentes com replicação viral sistêmica rápida, seguida de resposta imunológica abrupta mediada por anticorpos neutralizantes.",
+    "diagnostico": "Febre alta contínua (39-40°C) por 3 a 5 dias que desaparece subitamente em crise; no momento da defervescência térmica surge exantema maculopapular róseo de progressão centrífuga (tronco para membros).",
+    "tratamento": "Manejo conservador e suporte com antitérmicos e hidratação; a doença é autolimitada.",
+    "particularidades": "A principal complicação durante a fase febril aguda é a crise convulsiva febril simples, que cessa com a queda da temperatura."
+  },
+  "Escarlatina": {
+    "etiologia": "Streptococcus pyogenes (Streptococcus beta-hemolítico do grupo A) produtor de exotoxinas pirogênicas (eritrogênicas).",
+    "fisiopatologia": "Reação de hipersensibilidade tardia às exotoxinas eritrogênicas liberadas a partir de foco primário em orofaringe.",
+    "diagnostico": "Faringite exsudativa associada a exantema micropapular áspero (pele em lixa), palidez perioral (Sinal de Filatov), acentuação em dobras flexoras (Sinal de Pastia) e língua em morango branco/vermelho.",
+    "tratamento": "Penicilina Benzatina em dose única intramuscular ou Amoxicilina via oral por 10 dias para erradicação bacteriana e prevenção primária de Febre Reumática.",
+    "particularidades": "A descamação final é tipicamente lamelar ou laminar, acometendo polpas digitais, palmas das mãos e plantas dos pés."
+  },
+  "Doença de Kawasaki": {
+    "etiologia": "Vasculite sistêmica aguda de artérias de médio calibre de etiologia imunomediada desencadeada por antígenos infecciosos em indivíduos geneticamente predispostos.",
+    "fisiopatologia": "Inflamação transmural endotelial difusa com necrose da lâmina elástica das artérias coronárias, predispondo à formação de aneurismas, trombose e infarto agudo do miocárdio na infância.",
+    "diagnostico": "Febre mantida por >= 5 dias associada a 4 de 5 critérios: conjuntivite bulbar não exsudativa, alterações orais (lábios fissurados/língua em morango), adenomegalia cervical > 1,5 cm unilateral, exantema polimorfo e edema/eritema de extremidades.",
+    "tratamento": "Imunoglobulina Humana Intravenosa (IGIV em dose de 2 g/kg) associada a Ácido Acetilsalicílico (AAS) em dose anti-inflamatória, com redução para dose antiagregante após a queda da febre.",
+    "particularidades": "O ecocardiograma bidimensional com mapeamento de fluxo em cores é obrigatório no diagnóstico e seguimento para monitorização do diâmetro das artérias coronárias."
+  },
+  "Tetralogia de Fallot": {
+    "etiologia": "Defeito congênito derivado do desvio ântero-superior do septo infundibular cardíaco.",
+    "fisiopatologia": "Tétrade clássica: 1) Estenose pulmonar infundibular/valvar; 2) Comunicação Interventricular (CIV); 3) Hipertrofia de ventrículo direito; 4) Dextroposição da aorta com cavalgamento sobre o septo.",
+    "diagnostico": "Cianose progressiva em lactentes com sopro sistólico ejetivo rude em borda esternal esquerda média. A radiografia de tórax evidencia a silhueta clássica de 'coração em bota' (tamanco holandês) com hipofluxo pulmonar.",
+    "tratamento": "Manejo da crise de hipóxia: Posição genupeitoral, Oxigenioterapia, Morfina e Betabloqueadores (Propranolol) para relaxamento do infundíbulo. Correção cirúrgica definitiva eletiva no primeiro ano de vida.",
+    "particularidades": "A crise hipercianótica ocorre por espasmo infundibular que aumenta a resistência na via de saída direita, forçando um desvio maciço de sangue desoxigenado da direita para a esquerda pela CIV."
+  },
+  "Suporte de Vida Pediátrico Avançado (PALS)": {
+    "etiologia": "A parada cardiorrespiratória (PCR) pediátrica decorre principalmente de hipóxia progressiva, asfixia e choque descompensado.",
+    "fisiopatologia": "Insuficiência respiratória ou choque geram acidose e isquemia miocárdica que culminam em ritmos não chocáveis (Assistolia e Atividade Elétrica Sem Pulso - AESP).",
+    "diagnostico": "Inconsciência com ausência de respiração e pulso central (braquial em lactentes; carotídeo/femoral em crianças) checado em até 10 segundos.",
+    "tratamento": "Compressões 100-120/min com profundidade adequada (4 cm em < 1 ano e 5 cm em > 1 ano). Relação 15:2 com 2 socorristas. Em ritmos não chocáveis: Adrenalina precoce (0,01 mg/kg) a cada 3-5 min e busca ativa de causas reversíveis (5H e 5T). Em FV/TVSP: Choque inicial 2 J/kg, seguido de 4 J/kg e antiarrítmicos (Amiodarona ou Lidocaína).",
+    "particularidades": "Após intubação traqueal, a massagem cardíaca torna-se contínua (sem pausas) e aplica-se 1 ventilação a cada 6 segundos (10 incursões/minuto)."
   }
 
-}
