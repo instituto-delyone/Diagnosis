@@ -1,110 +1,124 @@
 [
   {
-    "vigneta": "Lactente de 6 meses, sexo masculino, é trazido ao PS com história de coriza e febre baixa há 3 dias. Há 12 horas evoluiu com taquipneia, tosse e recusa alimentar. Exame físico: FR 62 irpm, SatO2 88% em ar ambiente, presença de tiragem subcostal e sibilos difusos bilaterais. Nasceu a termo, sem histórico de prematuridade.",
-    "respostas_esperadas": {
-      "diagnostico": ["Bronquiolite", "Bronquiolite Viral Aguda", "BVA", "Infecção pelo VSR", "VSR"],
-      "exames": ["Radiografia de tórax", "Pesquisa de antígenos virais", "Oximetria", "Painel viral", "Nenhum", "Clínico"],
-      "conduta": ["Oxigenioterapia", "Oxigênio", "O2", "Suporte", "Internação", "Hidratação", "Salina hipertônica"]
+    "id": "ped_reanimacao_neonatal_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [0, 0],
+    "prevalencia_base": 30,
+    "slots_sintomas": {
+      "obrigatorios": ["recém-nascido em sala de parto", "avaliação inicial em apneia ou respiração irregular", "passos iniciais de 30 segundos (aquecer, posicionar, aspirar, secar) já concluídos"],
+      "variaveis_gravidade": [
+        { "sinal": "frequência cardíaca auscultada de 80 bpm" },
+        { "sinal": "tônus muscular flácido" },
+        { "sinal": "idade gestacional de 39 semanas (a termo)" },
+        { "sinal": "líquido amniótico meconial com depressão neonatal" }
+      ]
     },
-    "feedback_tecnico": "Trata-se de uma Bronquiolite Viral Aguda (BVA), cujo principal agente é o Vírus Sincicial Respiratório (VSR). O diagnóstico é eminentemente clínico. A conduta principal para este paciente, que apresenta hipoxemia e sinais de esforço, é a internação para suporte com Oxigenioterapia e hidratação."
+    "gabarito_dinamico": {
+      "diagnostico": ["Asfixia perinatal", "Apneia neonatal", "Depressão neonatal", "Parada respiratória neonatal"],
+      "exames": ["Monitorização cardíaca", "Oximetria de pulso em MSD", "Ausculta precordial", "Nenhum"],
+      "conduta": ["VPP", "Ventilação com Pressão Positiva", "VPP em ar ambiente", "Ventilar com máscara", "Golden minute"]
+    },
+    "feedback_tecnico": "RN a termo com FC < 100 bpm ou em apneia após os passos iniciais de 30 segundos tem indicação mandatória de VPP com máscara facial no Golden Minute. Em RN >= 34 semanas, a VPP deve ser iniciada com ar ambiente (O2 21%). A ausculta do precórdio é o método mais fidedigno para checar a FC."
   },
   {
-    "vigneta": "RN de 38 semanas, nascido de parto normal com líquido amniótico claro. Ao nascer, não respira e apresenta hipotonia. Foi levado à mesa de reanimação. Passados os passos iniciais (aquecer, posicionar, aspirar, secar) em 30 segundos, o RN mantém apneia e sua frequência cardíaca (FC) é de 85 bpm.",
-    "respostas_esperadas": {
-      "diagnostico": ["Asfixia perinatal", "Apneia neonatal", "Depressão neonatal", "Hipóxia"],
-      "exames": ["Monitorização cardíaca", "Oximetria de pulso", "Oximetria", "Ausculta cardíaca"],
-      "conduta": ["VPP", "Ventilação com Pressão Positiva", "Ventilação", "VPP em ar ambiente", "Ventilar"]
+    "id": "ped_membrana_hialina_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [0, 1],
+    "prevalencia_base": 25,
+    "slots_sintomas": {
+      "obrigatorios": ["prematuro de 31 semanas", "início do desconforto nas primeiras horas de vida", "retrações costais e gemência expiratória", "Rx com infiltrado reticulogranular difuso em vidro fosco e volume pulmonar reduzido"],
+      "variaveis_gravidade": [
+        { "sinal": "cianose central progressiva" },
+        { "sinal": "batimento de asa nasal" },
+        { "sinal": "filho de mãe com diabetes gestacional" },
+        { "sinal": "SatO2 de 82% em ar ambiente" }
+      ]
     },
-    "feedback_tecnico": "Diante de um RN a termo em apneia ou com FC < 100 bpm após os 30 segundos de passos iniciais, a conduta imediata (Golden Minute) é iniciar a Ventilação com Pressão Positiva (VPP). Por ser um RN a termo (>= 34 semanas), a VPP deve ser iniciada em ar ambiente (O2 a 21%)."
+    "gabarito_dinamico": {
+      "diagnostico": ["Doença da Membrana Hialina", "SDRN", "Síndrome do Desconforto Respiratório do RN", "Deficiência de surfactante"],
+      "exames": ["Radiografia de tórax", "Gasometria arterial", "Glicemia"],
+      "conduta": ["CPAP nasal", "Surfactante exógeno", "Surfactante endotraqueal", "Oxigenioterapia", "Antibioticoterapia empírica"]
+    },
+    "feedback_tecnico": "Quadro clássico de Doença da Membrana Hialina (deficiência de surfactante alveolar em prematuros). O Rx com infiltrado reticulogranular difuso (vidro fosco) e broncogramas aéreos sela o diagnóstico. O suporte inicial deve ser feito com CPAP nasal precoce e reposição de surfactante exógeno por via traqueal se houver falha ou indicação estrita."
   },
   {
-    "vigneta": "Menina de 3 anos é trazida à UBS com febre alta (39,5°C) há 2 dias, sem tosse ou coriza. Mãe relata que a criança chora ao urinar e está inapetente. Exame físico: corada, hidratada, eupneica. Sinal de Giordano negativo. Abdome flácido, com leve dor à palpação suprapúbica.",
-    "respostas_esperadas": {
-      "diagnostico": ["ITU", "Infecção do Trato Urinário", "Cistite", "Pielonefrite"],
-      "exames": ["EAS e Urinocultura", "EAS", "Urinocultura", "EQU"],
-      "conduta": ["Antibioticoterapia oral", "Cefalexina", "Amoxicilina", "Sulfametoxazol", "Ambulatorial"]
+    "id": "ped_ttrn_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [0, 1],
+    "prevalencia_base": 20,
+    "slots_sintomas": {
+      "obrigatorios": ["nascido a termo por cesariana eletiva sem trabalho de parto", "taquipneia precoce iniciada nas primeiras horas", "desconforto respiratório de grau leve a moderado", "Rx com congestão hilar, líquido cisural e hiperinsuflação"],
+      "variaveis_gravidade": [
+        { "sinal": "tiragem intercostal discreta" },
+        { "sinal": "necessidade de baixo fluxo de oxigênio" },
+        { "sinal": "melhora progressiva do quadro clínico" }
+      ]
     },
-    "feedback_tecnico": "FSSL com disúria em pré-escolar levanta altíssima suspeita de ITU. A coleta de Urinocultura e EAS é mandatória antes de iniciar o ATB. O tratamento empírico pode ser feito ambulatorialmente com cefalosporinas de 1ª geração, sulfas ou amoxicilina."
+    "gabarito_dinamico": {
+      "diagnostico": ["Taquipneia Transitória do RN", "TTRN", "Síndrome do Pulmão Úmido", "SDR tipo II"],
+      "exames": ["Radiografia de tórax", "Gasometria", "Oximetria"],
+      "conduta": ["Suporte ventilatório", "Oxigenoterapia de baixo fluxo", "FiO2 até 40%", "Observação clínica", "Manter jejum se taquipneia grave"]
+    },
+    "feedback_tecnico": "A Taquipneia Transitória do RN (Pulmão Úmido) ocorre pelo retardo na reabsorção do líquido pulmonar devido à ausência do estresse do trabalho de parto em cesarianas eletivas. Trata-se de uma condição autolimitada (resolução em até 72h), tratada com suporte geral e oxigenioterapia em baixas concentrações (FiO2 < 40%)."
   },
   {
-    "vigneta": "Lactente de 8 meses, sexo feminino, apresenta quadro de febre de 40°C contínua há 3 dias. Hoje, a febre desapareceu subitamente (em crise) e a mãe notou o surgimento de erupções maculopapulares róseas que se iniciaram no tronco e estão se espalhando para os braços. A criança encontra-se ativa e bem.",
-    "respostas_esperadas": {
-      "diagnostico": ["Exantema Súbito", "Roséola", "Roséola Infantil", "Infecção por HHV-6"],
-      "exames": ["Nenhum", "Clínico", "Observação"],
-      "conduta": ["Sintomáticos", "Antitérmico", "Orientação", "Alta"]
+    "id": "ped_sam_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [0, 1],
+    "prevalencia_base": 15,
+    "slots_sintomas": {
+      "obrigatorios": ["RN pós-termo (42 semanas)", "história de sofrimento fetal intraútero com líquido amniótico meconial espesso", "desconforto respiratório grave logo ao nascer", "Rx com infiltrados alveolares grosseiros assimétricos e áreas de hiperinsuflação"],
+      "variaveis_gravidade": [
+        { "sinal": "tórax hiperinsuflado com arcos costais retificados" },
+        { "sinal": "hipoxemia refratária" },
+        { "sinal": "acidose respiratória mista na gasometria" }
+      ]
     },
-    "feedback_tecnico": "Caso clássico de Exantema Súbito (Roséola), tipicamente causado pelo HHV-6. A assinatura clínica é a febre alta que cede em crise, seguida pelo surgimento do rash de progressão centrífuga (tronco para extremidades). Conduta é apenas suporte."
+    "gabarito_dinamico": {
+      "diagnostico": ["Síndrome de Aspiração Meconial", "SAM", "Aspiração de mecônio"],
+      "exames": ["Radiografia de tórax", "Gasometria arterial", "Ecocardiograma"],
+      "conduta": ["Ventilação mecânica", "Surfactante", "Antibioticoterapia", "Suporte em UTI neonatal", "Óxido nítrico se HPPN"]
+    },
+    "feedback_tecnico": "A SAM ocorre pela eliminação de mecônio associada à asfixia em RNs a termo ou pós-termo. O mecônio gera obstrução mecânica (alçapão), pneumonite química e inativação do surfactante. A conduta inclui suporte intensivo, ventilação mecânica invasiva e reposição de surfactante."
   },
   {
-    "vigneta": "Criança de 3 anos chega à emergência levada pelos pais, apresentando febre alta, toxemia intensa, sialorreia (babando muito) e disfagia grave de início agudo. Ao exame, a criança adota a posição de tripé e apresenta estridor inspiratório. Não há tosse.",
-    "respostas_esperadas": {
-      "diagnostico": ["Epiglotite", "Epiglotite Aguda", "Infecção por Haemophilus", "Infecção supraglótica"],
-      "exames": ["Nenhum", "Raio-x", "Clínico"],
-      "conduta": ["Garantir via aérea", "IOT", "Intubação", "Não examinar orofaringe", "Oxigênio", "Antibioticoterapia EV"]
+    "id": "ped_ictericia_incompatibilidade_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [0, 1],
+    "prevalencia_base": 25,
+    "slots_sintomas": {
+      "obrigatorios": ["icterícia de início precoce com menos de 24 horas de vida", "mãe tipada como O negativo e RN A positivo", "icterícia atingindo zona III de Kramer (abaixo do umbigo)"],
+      "variaveis_gravidade": [
+        { "sinal": "Coombs direto positivo" },
+        { "sinal": "palidez cutaneomucosa e reticulocitose" },
+        { "sinal": "Bilirrubina total elevada à custa de fração indireta" }
+      ]
     },
-    "feedback_tecnico": "Emergência absoluta: Epiglotite Aguda (causada classicamente pelo Haemophilus influenzae B). A conduta primordial é NÃO examinar a orofaringe (para evitar laringoespasmo e obstrução total) e garantir a via aérea imediatamente (IOT/Traqueostomia) em ambiente controlado, seguido de ATB parenteral."
+    "gabarito_dinamico": {
+      "diagnostico": ["Incompatibilidade Rh", "Incompatibilidade ABO", "Doença Hemolítica Perinatal", "Icterícia patológica precoce"],
+      "exames": ["Coombs Direto", "Bilirrubina Total e Frações", "Hemograma completo com reticulócitos", "Tipagem sanguínea e Rh"],
+      "conduta": ["Fototerapia intensiva", "Exsanguineotransfusão", "Imunoglobulina venosa se hemólise grave", "Internação em UTIN"]
+    },
+    "feedback_tecnico": "Toda icterícia com início nas primeiras 24 horas de vida é patológica até prova em contrário, sendo a doença hemolítica por incompatibilidade materno-fetal (ABO ou Rh) a principal causa. A presença de Coombs direto positivo confirma a hemólise imunomediada. A conduta imediata é fototerapia intensiva, com monitorização para eventual exsanguineotransfusão."
   },
   {
-    "vigneta": "Lactente de 14 meses é trazido à UBS por edema generalizado (anasarca). A mãe refere desmame recente e substituição do aleitamento por mingau de amido. Ao exame: apatia, hepatomegalia palpável, tecido celular subcutâneo preservado, áreas de hiperceratose e hipopigmentação na pele, além de alteração na cor do cabelo (sinal da bandeira).",
-    "respostas_esperadas": {
-      "diagnostico": ["Kwashiorkor", "Desnutrição grave", "Desnutrição proteica", "Desnutrição edematosa"],
-      "exames": ["Glicemia", "Eletrólitos", "Albumina", "Proteínas totais"],
-      "conduta": ["Estabilização", "Prevenir hipoglicemia", "Prevenir hipotermia", "ReSoMal", "Plano de realimentação lenta"]
+    "id": "ped_sifilis_congenita_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [0, 2],
+    "prevalencia_base": 20,
+    "slots_sintomas": {
+      "obrigatorios": ["RN de mãe tratada inadequadamente para sífilis durante a gestação", "presença de rinite serossanguinolenta", "lesões vesicobolhosas em palmas e plantas (pênfigo sifilítico)"],
+      "variaveis_gravidade": [
+        { "sinal": "Rx com periostite e sinal do duplo contorno em ossos longos" },
+        { "sinal": "hepatoesplenomegalia e icterícia colestática" },
+        { "sinal": "VDRL sérico reagente maior que o materno" }
+      ]
     },
-    "feedback_tecnico": "Quadro clássico de Kwashiorkor (desnutrição proteica grave com ingestão energética mantida). A presença de edema classifica automaticamente como desnutrição grave pela OMS. O tratamento inicial foca na estabilização (corrigir hipoglicemia, hipotermia e distúrbios hidroeletrolíticos com ReSoMal), evitando a síndrome de realimentação."
-  },
-  {
-    "vigneta": "RN de 5 dias de vida, pré-termo (34 semanas), é trazido por apresentar secreção nasal serossanguinolenta intensa (rinite) e lesões vesicobolhosas em palmas e plantas (pênfigo). O Raio-X de ossos longos evidencia reação periosteal com sinal de duplo-contorno. Mãe não realizou pré-natal.",
-    "respostas_esperadas": {
-      "diagnostico": ["Sífilis Congênita", "Sífilis Congênita Precoce", "Sífilis neonatal", "Lues congênita"],
-      "exames": ["VDRL", "Punção lombar", "LCR", "Hemograma", "Avaliação hepática"],
-      "conduta": ["Penicilina Cristalina", "Penicilina Procaína", "Penicilina EV", "Tratamento para sífilis"]
+    "gabarito_dinamico": {
+      "diagnostico": ["Sífilis Congênita", "Sífilis Congênita Precoce", "Lues congênita"],
+      "exames": ["VDRL no sangue periférico", "Punção lombar com análise de LCR", "Radiografia de ossos longos", "Hemograma"],
+      "conduta": ["Penicilina Cristalina EV por 10 dias", "Penicilina Procaína IM por 10 dias", "Investigação completa do RN", "Notificação compulsória"]
     },
-    "feedback_tecnico": "Sífilis Congênita Precoce. A tríade de rinite sifilítica, pênfigo palmo-plantar e osteocondrite/periostite é clássica. O RN deve ser totalmente investigado (VDRL, LCR, hemograma) e tratado com Penicilina Cristalina IV ou Procaína IM por 10 dias, assumindo neurossífilis em caso de alterações liquóricas."
-  },
-  {
-    "vigneta": "Lactente de 8 meses, sexo masculino, dá entrada no PS com diarreia líquida profusa (10 episódios/dia) e vômitos há 24 horas. Exame físico: letárgico, olhos muito fundos, lágrimas ausentes, mucosa oral muito seca. Prega cutânea retorna muito lentamente (> 2s) e pulsos periféricos estão débeis. Peso atual: 8kg.",
-    "respostas_esperadas": {
-      "diagnostico": ["Desidratação Grave", "Gastroenterite com desidratação grave", "Choque hipovolêmico", "Diarreia aguda com desidratação grave"],
-      "exames": ["Glicemia capilar", "Eletrólitos", "Sódio", "Potássio", "Gasometria", "Nenhum"],
-      "conduta": ["Plano C", "Expansão volumétrica", "Ringer lactato", "Soro Fisiológico EV", "Fase rápida EV"]
-    },
-    "feedback_tecnico": "Paciente em Desidratação Grave (Plano C) de etiologia viral (provável Rotavírus). A letargia, olhos muito fundos e turgor diminuído mandam o paciente imediatamente para a hidratação venosa. A conduta é expansão com Cristaloides (SF 0,9% ou Ringer Lactato) a 100ml/kg (30ml/kg em 1 hora, seguido de 70ml/kg em 5 horas por ser < 1 ano)."
-  },
-  {
-    "vigneta": "Pré-escolar de 4 anos apresenta quadro febril associado a odinofagia. Ao exame, observa-se orofaringe intensamente hiperemiada com exsudato amigdaliano e língua em 'morango vermelho'. Há também um exantema micropapular difuso, áspero como lixa, mais evidente em dobras (Sinal de Pastia) e palidez perioral (Sinal de Filatov).",
-    "respostas_esperadas": {
-      "diagnostico": ["Escarlatina", "Faringite Estreptocócica", "Infecção por Streptococcus pyogenes", "SGA"],
-      "exames": ["Teste rápido para Streptococcus", "Cultura de orofaringe", "Swab de orofaringe", "Nenhum"],
-      "conduta": ["Penicilina Benzatina", "Amoxicilina", "Antibioticoterapia", "Tratar com penicilina"]
-    },
-    "feedback_tecnico": "Quadro inequívoco de Escarlatina, complicação exantemática da infecção pelo Streptococcus beta-hemolítico do grupo A (S. pyogenes). A língua em morango e a pele em 'lixa' com sinal de Pastia são características. O tratamento de eleição é a Penicilina Benzatina em dose única para erradicar o agente e prevenir Febre Reumática."
-  },
-  {
-    "vigneta": "Lactente de 1 ano e 2 meses apresenta quadro arrastado de febre há 6 dias. Evoluiu com hiperemia conjuntival bilateral sem exsudato, fissuras nos lábios, língua em morango, linfonodomegalia cervical unilateral e edema/eritema duro nas mãos e pés. Suspeita-se de uma vasculite sistêmica.",
-    "respostas_esperadas": {
-      "diagnostico": ["Doença de Kawasaki", "Síndrome de Kawasaki", "Vasculite de Kawasaki"],
-      "exames": ["Ecocardiograma", "Eco", "Hemograma", "PCR", "VHS", "ECG"],
-      "conduta": ["Imunoglobulina", "Imunoglobulina Venosa", "IGIV", "AAS", "Ácido Acetilsalicílico", "Aspirina"]
-    },
-    "feedback_tecnico": "Doença de Kawasaki. Os critérios (febre >= 5 dias + conjuntivite, alterações orais, adenopatia e alterações de extremidades) estão presentes. O maior risco a longo prazo é a formação de aneurismas de artéria coronária. O ecocardiograma é mandatório. O tratamento padrão-ouro na fase aguda é Imunoglobulina IV (IGIV) associada a doses altas de AAS."
-  },
-  {
-    "vigneta": "Mãe traz RN de 2 dias de vida, a termo, apresentando icterícia zona III de Kramer (até joelhos). A tipagem sanguínea materna é O negativo (O-) e a do RN é A positivo (A+). Mãe não utilizou imunoglobulina anti-D na gestação. O RN apresenta taquicardia e palidez.",
-    "respostas_esperadas": {
-      "diagnostico": ["Incompatibilidade Rh", "Doença Hemolítica do Recém-Nascido", "Icterícia neonatal precoce", "Incompatibilidade materno-fetal", "Isoimunização Rh", "Anemia hemolítica"],
-      "exames": ["Coombs Direto", "Bilirrubinas", "BTF", "Hemograma", "Reticulócitos", "Hematoscopia"],
-      "conduta": ["Fototerapia", "Exsanguineotransfusão", "Internação"]
-    },
-    "feedback_tecnico": "Icterícia precoce (< 24-48h) com risco hemolítico. Pela tipagem sanguínea (Mãe O- / RN A+), há risco tanto de Incompatibilidade ABO quanto de Incompatibilidade Rh. O Coombs Direto será fundamental (costuma ser francamente positivo na DHRN por Rh). A conduta de urgência exige fototerapia imediata, com possível indicação de exsanguineotransfusão dependendo do nível de bilirrubina e grau de anemia."
-  },
-  {
-    "vigneta": "Adolescente de 14 anos, sexo feminino, foi mordida por um cão de rua não observável, sofrendo ferimento profundo, lacerante e com sujidade na perna direita. A carteira de vacinação está completamente desatualizada e sem registros prévios. Em relação à profilaxia antitetânica, qual a conduta?",
-    "respostas_esperadas": {
-      "diagnostico": ["Tétano acidental", "Ferimento de alto risco para tétano", "Risco de tétano"],
-      "exames": ["Nenhum", "Clínico"],
-      "conduta": ["Vacina e Soro", "Vacina e IGAT", "SAT e Vacina", "dT e SAT", "dT e Imunoglobulina"]
-    },
-    "feedback_tecnico": "Trata-se de um ferimento de ALTO RISCO para tétano (profundo, mordedura). Como o status vacinal da paciente é incerto/desatualizado (< 3 doses), a profilaxia completa é obrigatória. A paciente deve receber a vacina (dT) E o Soro Antitetânico (SAT) ou Imunoglobulina Humana Antitetânica (IGHAT)."
+    "feedback_tecnico": "A sífilis congênita precoce manifesta-se tipicamente com rinite sifilítica, pênfigo palmo-plantar e osteocondrite/periostite ao Rx. RNs de mães não tratadas ou inadequadamente tratadas devem ser submetidos à propedêutica completa (VDRL, LCR, Rx de ossos longos) e tratados com Penicilina Cristalina IV ou Procaína IM por 10 dias."
   }
 ]
