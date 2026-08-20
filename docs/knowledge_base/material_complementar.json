@@ -275,6 +275,7 @@
     "tratamento": "Apenas suporte e acompanhamento laboratorial, visto que a imensa maioria dos adultos (> 95%) cura a infecção sozinho e gera memória imune. Antivirais ficam reservados para as hepatites fulminantes.",
     "particularidades": "Um paciente que comparece com quadro agudo severo de hepatite paradoxalmente tem menor risco de cronificar, porque demonstra que o seu sistema imunológico está respondendo com força total."
   },
+  
   "Coledocolitíase": {
     "etiologia": "Deslizamento de um cálculo formado na vesícula biliar (colelitíase) que agora se encontra impactado no Ducto Colédoco.",
     "fisiopatologia": "A 'pedra' entope a via de saída principal do fígado. A bile, rica em bilirrubina conjugada (direta), reflui para o sangue e é filtrada pelo rim, escurecendo a urina e empalidecendo as fezes.",
@@ -282,7 +283,6 @@
     "tratamento": "Extração mecânica do cálculo por endoscopia digestiva com CPRE, seguida da remoção preventiva da vesícula biliar em um segundo tempo.",
     "particularidades": "Se a essa icterícia somarem-se febre com calafrios, a situação muda radicalmente: há bactérias proliferando no colédoco estagnado (Colangite), e o paciente pode evoluir para choque séptico em horas."
   },
-
   "Linfoma de Hodgkin": {
     "etiologia": "Neoplasia linfoide monoclonal de células B, com fortíssima associação epifenomenal à infecção passada pelo vírus Epstein-Barr (EBV). Afeta classicamente adultos jovens (20-30 anos).",
     "fisiopatologia": "A marca registrada é o achado espalhado da célula multinucleada de Reed-Sternberg, que recruta uma tempestade de citocinas inflamatórias, formando uma massa linfonodal fibrosa ao redor dela.",
@@ -297,7 +297,6 @@
     "tratamento": "Doença autolimitada; repouso e hidratação. Analgésicos/AINEs para sintomas. Jamais usar Amoxicilina para dor de garganta nesse quadro, pois gerará um 'rash' tóxico dramático em 90% dos casos.",
     "particularidades": "O repouso absoluto não é frescura: devido à rápida esplenomegalia, pequenos traumas abdominais em jogos esportivos podem causar ruptura espontânea fatal do baço nas primeiras semanas."
   },
-
   "Acidente Botrópico (Jararaca)": {
     "etiologia": "Envenenamento provocado por serpentes do gênero Bothrops, representando quase 90% dos acidentes ofídicos em território brasileiro.",
     "fisiopatologia": "O veneno funciona como uma 'bomba enzimática'. Ele dissolve a barreira endotelial causando edema gigantesco, paralisa plaquetas e consome vorazmente os fatores de coagulação (gerando coagulopatia severa).",
@@ -305,7 +304,6 @@
     "tratamento": "Administração exclusiva do Soro Antibotrópico via intravenosa (quantidade de ampolas definida pela gravidade local + alteração sistêmica). Acompanha hidratação cristaloide vigorosa.",
     "particularidades": "Um erro gravíssimo pré-hospitalar é fazer torniquetes. O torniquete prende as enzimas destrutivas no membro, garantindo a necrose isquêmica e amputação da perna do paciente."
   },
-
   "Lesão Renal Aguda (LRA) Pré-Renal": {
     "etiologia": "Queda aguda da perfusão do órgão, quer seja por desidratação (hipovolemia) ou incapacidade cardíaca de bombear sangue (IC congestiva grave).",
     "fisiopatologia": "Os rins são inteligentes: ao sentirem pouca pressão arterial, fecham suas arteríolas e tentam reabsorver toda a água e sódio possíveis na tentativa de repor a volemia do corpo humano.",
@@ -320,7 +318,6 @@
     "tratamento": "A pedra angular da proteção renal hoje passa pelo uso de iECA/BRA associado a inibidores do SGLT2 (Gliflozinas), bloqueando a sobrepressão glomerular e reduzindo o consumo de energia renal.",
     "particularidades": "Os rins são as fábricas de Eritropoetina e moduladores da vitamina D. Portanto, a anemia refratária com cálcio bagunçado e osso frágil (hiperparatireoidismo secundário) gritam para doença avançada na enfermaria."
   },
-  
   "Acidente Vascular Cerebral Isquêmico (AVCi)": {
     "etiologia": "Oclusão aguda e severa de artérias cerebrais que irrigam áreas vitais. A origem é predominantemente trombótica local ou embolia à distância (vinda de uma Fibrilação Atrial do coração).",
     "fisiopatologia": "A rolha oclui o vaso e 'apaga' a região central irrigada (o core isquêmico), que necrosa em minutos. A região circular de resgate imediato chama-se área de penumbra isquêmica.",
@@ -489,8 +486,6 @@
     "tratamento": "Compressões 100-120/min com profundidade adequada (4 cm em < 1 ano e 5 cm em > 1 ano). Relação 15:2 com 2 socorristas. Em ritmos não chocáveis: Adrenalina precoce (0,01 mg/kg) a cada 3-5 min e busca ativa de causas reversíveis (5H e 5T). Em FV/TVSP: Choque inicial 2 J/kg, seguido de 4 J/kg e antiarrítmicos (Amiodarona ou Lidocaína).",
     "particularidades": "Após intubação traqueal, a massagem cardíaca torna-se contínua (sem pausas) e aplica-se 1 ventilação a cada 6 segundos (10 incursões/minuto)."
   },
-  [
-  {
     "id": "cetoacidose_diabetica",
     "badgeName": "Cetoacidose Diabética",
     "categoria": "Emergência Metabólica",
@@ -508,7 +503,6 @@
       "Adição de glicose a 5% à hidratação quando a glicemia atingir cerca de 200-250 mg/dL para evitar edema cerebral e hipoglicemia"
     ]
   },
-  {
     "id": "tromboembolismo_pulmonar",
     "badgeName": "Tromboembolismo Pulmonar",
     "categoria": "Emergência Cardiovascular",
@@ -526,7 +520,6 @@
       "Trombólise sistêmica se choque obstrutivo ou instabilidade hemodinâmica (TEP de alto risco)"
     ]
   },
-  {
     "id": "apendicite_aguda",
     "badgeName": "Apendicite Aguda",
     "categoria": "Urgência Cirúrgica",
@@ -543,7 +536,113 @@
       "Antibioticoterapia profilática/terapêutica cobrindo germes gram-negativos e anaeróbios",
       "Avaliação cirúrgica de urgência para apendicectomia"
     ]
+  },
+    "id": "colecistite_aguda",
+    "badgeName": "Colecistite Aguda",
+    "categoria": "Cirurgia Geral",
+    "prevalencia_base": 30,
+    "vinheta": "Mulher de 44 anos, multípara e com IMC de 32 kg/m², chega à emergência com dor intensa em hipocôndrio direito irradiada para a escápula iniciada após refeição gordurosa, associada a febre (38,2°C), náuseas e vômitos. Ao exame físico: interrupção abrupta da inspiração durante a palpação profunda do rebordo costal direito (sinal de Murphy positivo).",
+    "respostas_esperadas": {
+      "diagnostico": [
+        "colecistite aguda",
+        "colecistite",
+        "colecistite calculosa",
+        "colecistite aguda calculosa"
+      ],
+      "exames": [
+        "ultrassonografia",
+        "ultrassom de abdome",
+        "usg de abdome",
+        "ultrassom",
+        "leucograma"
+      ],
+      "conduta": [
+        "colecistectomia",
+        "colecistectomia videolaparoscopica",
+        "antibioticoterapia",
+        "cirurgia",
+        "hidratacao venosa"
+      ]
+    },
+    "feedback_tecnico": "O diagnóstico de colecistite aguda baseia-se na presença de dor no hipocôndrio direito, Murphy positivo, sinais sistêmicos de inflamação e confirmação ultrassonográfica (espessamento da parede > 4 mm, cálculo impactado e líquido pericolecístico). A conduta definitiva é a colecistectomia videolaparoscópica precoce associada a antibioticoterapia venosa.",
+    "revisao_estruturada": {
+      "etiologia": "Obstrução mecânica sustentada do ducto cístico por litíase biliar (cálculo), levando a estase biliar e proliferação bacteriana secundária.",
+      "fisiopatologia": "A hipertensão intraluminal gera isquemia mural, liberação de mediadores inflamatórios e translocação de germes entéricos (como E. coli e Klebsiella).",
+      "diagnostico": "Quadro clínico compatível + Sinal de Murphy positivo + Ultrassonografia de abdome superior (espessamento parietal da vesícula > 4 mm e cálculo impactado).",
+      "tratamento": "Jejum, analgesia, hidratação venosa, antibioticoterapia de largo espectro e colecistectomia laparoscópica nas primeiras 72 horas.",
+      "particularidades": "A colecistectomia precoce reduz morbidade, tempo de internação e taxas de complicações em relação à conduta conservadora inicial."
+    }
+  },
+    "id": "obstrucao_intestinal_bridas",
+    "badgeName": "Obstrução Intestinal",
+    "categoria": "Cirurgia Geral",
+    "prevalencia_base": 25,
+    "vinheta": "Homem de 61 anos, com histórico de laparotomia prévia por trauma há 5 anos, apresenta distensão abdominal progressiva, cólicas em crises, náuseas, vômitos biliosos e parada de eliminação de fezes e flatos há 36 horas. Ao exame físico: abdome distendido e timpânico, com ruídos hidroaéreos aumentados e metálicos em momentos de dor, sem peritonite.",
+    "respostas_esperadas": {
+      "diagnostico": [
+        "obstrucao intestinal",
+        "suboclusao intestinal",
+        "ileo mecanico",
+        "obstrucao por bridas",
+        "aderencias"
+      ],
+      "exames": [
+        "radiografia de abdome",
+        "rotina de abdome agudo",
+        "tomografia de abdome",
+        "tc de abdome",
+        "raio x de abdome"
+      ],
+      "conduta": [
+        "sondagem nasogastrica",
+        "sonda nasogastrica",
+        "descompressao gastrica",
+        "hidratacao venosa",
+        "laparotomia"
+      ]
+    },
+    "feedback_tecnico": "A obstrução de intestino delgado tem como principal etiologia as bridas/aderências pós-operatórias. A conduta inicial em casos não complicados (sem sinais de estrangulamento ou isquemia) envolve descompressão gástrica por SNG, reposição volêmica vigorosa, correção de distúrbios hidroeletrolíticos e vigilância clínica estrita.",
+    "revisao_estruturada": {
+      "etiologia": "Aderências e bridas pós-cirúrgicas são responsáveis por mais de 60% dos casos de oclusão mecânica do intestino delgado.",
+      "fisiopatologia": "O bloqueio luminal causa acúmulo retrógrado de líquidos e gases, levando a hiperperistaltismo de luta, perda de fluidos para o terceiro espaço e risco de isquemia de alça se houver estrangulamento.",
+      "diagnostico": "Tríade de dor em cólica, vômitos e parada de gases/fezes + Radiografia de abdome (níveis hidroaéreos e distensão central) ou TC com contraste.",
+      "tratamento": "Descompressão por sonda nasogástrica calibrosa, reposição com cristaloides e monitorização clínica; indicação cirúrgica imediata se sinais de sepse, peritonite ou falha do manejo conservador.",
+      "particularidades": "A presença de dor contínua intensa, febre, leucocitose e acidose metabólica alerta para isquemia ou perfuração de alça intestinal."
+    }
+  },
+    "id": "ulcera_peptica_perfurada",
+    "badgeName": "Úlcera Perfurada",
+    "categoria": "Cirurgia Geral",
+    "prevalencia_base": 20,
+    "vinheta": "Homem de 52 anos, etilista e usuário crônico de anti-inflamatórios não esteroidais (AINEs) para lombalgia, desenvolve subitamente dor epigástrica de início súbito ('em facada'), de intensidade 10/10, que se espalhou rapidamente por todo o abdome. Ao exame físico: taquicárdico, diaforético, com abdome rígido em tábua e descompressão dolorosa difusamente positiva.",
+    "respostas_esperadas": {
+      "diagnostico": [
+        "ulcera perfurada",
+        "ulcera peptica perfurada",
+        "pneumoperitonio",
+        "abdome agudo perfurativo"
+      ],
+      "exames": [
+        "radiografia de torax",
+        "rotina de abdome agudo",
+        "raio x de torax",
+        "tomografia de abdome",
+        "tc de abdome"
+      ],
+      "conduta": [
+        "laparotomia exploradora",
+        "cirurgia de urgencia",
+        "ulcerorrafia",
+        "patch de graham",
+        "antibioticoterapia"
+      ]
+    },
+    "feedback_tecnico": "Trata-se de um abdome agudo perfurativo clássico, manifestando-se com abdome em tábua e peritonite química que progride para bacteriana. O achado propedêutico definidor é o pneumoperitônio (ar subdiafragmático na radiografia de tórax em ortostase), exigindo ressuscitação volêmica imediata, antibioticoterapia venosa e exploração cirúrgica de emergência.",
+    "revisao_estruturada": {
+      "etiologia": "Perfuração transmural da parede gástrica ou duodenal por úlcera péptica crônica, frequentemente associada ao uso de AINEs e infecção por H. pylori.",
+      "fisiopatologia": "O extravasamento de ácido e conteúdo gástrico na cavidade peritoneal deflagra peritonite química hiperaguda, seguida de translocação bacteriana e choque séptico.",
+      "diagnostico": "História de dor súbita em facada + Abdome em tábua + Identificação de ar livre na cavidade peritoneal (pneumoperitônio na radiografia de tórax em ortostase ou TC).",
+      "tratamento": "Estabilização hemodinâmica, antibioticoterapia de largo espectro e correção cirúrgica de urgência (rafia primária com omentoplastia / Patch de Graham).",
+      "particularidades": "A radiografia de tórax em posição ortostática (em pé) é mais sensível que a radiografia de abdome para evidenciar pequenas lâminas de pneumoperitônio sob as cúpulas diafragmáticas."
+    }
   }
-]
-
-
