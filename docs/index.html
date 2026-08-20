@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-/*
- * MedUnity Delyone — Clinical Document Engine
- * Copyright (c) 2025-2026 Dr. Delyone de Paula Canedo Filho / Instituto Delyone
- * 
- * Licenciado sob a Licença Creative Commons Atribuição-NãoComercial 4.0 Internacional (CC BY-NC 4.0).
- * Uso comercial estritamente proibido sem autorização expressa do autor.
- */
+<!--
+  MedUnity Delyone — Clinical Document Engine
+  Copyright (c) 2025-2026 Dr. Delyone de Paula Canedo Filho / Instituto Delyone
+  Licenciado sob a Licença Creative Commons Atribuição-NãoComercial 4.0 Internacional (CC BY-NC 4.0).
+-->
 
 <html lang="pt-BR">
 <head>
@@ -13,7 +11,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Diagnosis Engine - Instituto Delyone</title>
   <style>
-    /* === VARIÁVEIS DE IDENTIDADE VISUAL === */
     :root {
       --navy: #071426;
       --blue: #1f5fae;
@@ -31,7 +28,6 @@
       --amber-soft: #fefcbf;
     }
 
-    /* === RESET E BASE === */
     * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
     body {
       background-color: var(--bg);
@@ -44,7 +40,6 @@
       gap: 30px;
     }
 
-    /* === CONTAINERS === */
     .arena-container, .modules-container {
       max-width: 800px;
       width: 100%;
@@ -56,7 +51,6 @@
       transition: all 0.3s ease;
     }
 
-    /* === CABEÇALHO === */
     .header {
       text-align: center;
       margin-bottom: 24px;
@@ -76,7 +70,6 @@
     .header h1 { margin: 14px 0 8px; color: var(--navy); font-size: 28px; letter-spacing: -0.02em; }
     .header p { margin: 0; color: var(--muted); font-size: 15px; }
 
-    /* === ESTILIZAÇÃO DO GOOGLE TRANSLATE === */
     .translate-wrapper {
       display: flex;
       justify-content: center;
@@ -97,7 +90,6 @@
     .goog-te-banner-frame.skiptranslate { display: none !important; }
     body { top: 0px !important; }
 
-    /* === BARRA DE PROBABILIDADE BAYESIANA === */
     .bayes-tracker {
       display: none;
       background: #f8fafc;
@@ -130,7 +122,6 @@
       transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease;
     }
 
-    /* === ÁREAS DO SIMULADOR === */
     .case-box {
       background: #fafbfc;
       border-left: 4px solid var(--blue);
@@ -145,7 +136,6 @@
     .interaction-area { display: none; animation: fadeIn 0.4s ease; }
     .question { font-weight: 700; margin-bottom: 12px; color: var(--navy); font-size: 16px; }
 
-    /* Seletor de Confiança */
     .confidence-box {
       margin-bottom: 16px;
       background: #f0f4f8;
@@ -177,7 +167,6 @@
       border-color: var(--navy);
     }
 
-    /* Inputs e Botões */
     .input-box {
       width: 100%;
       padding: 14px 16px;
@@ -219,7 +208,6 @@
       border-color: var(--blue);
     }
 
-    /* === FEEDBACK CONVERSACIONAL SOCRÁTICO === */
     .log-area { margin-top: 24px; font-size: 14px; line-height: 1.6; }
     .preceptor-card {
       padding: 18px;
@@ -229,11 +217,9 @@
       animation: slideDown 0.3s ease;
     }
     .preceptor-card.correct { background: var(--green-soft); border-color: var(--green); color: #1e4620; }
-    .preceptor-card.warning { background: var(--amber-soft); border-color: var(--amber); color: #744210; }
     .preceptor-card.incorrect { background: var(--red-soft); border-color: var(--red); color: #742a2a; }
     .preceptor-card.summary { background: #f0f4f8; border-color: var(--blue); color: var(--navy); }
     
-    /* === DISCUSSÃO CLÍNICA (MATERIAL COMPLEMENTAR) === */
     .discussion-card {
       background: #ffffff;
       border: 1px solid var(--border);
@@ -269,7 +255,6 @@
       animation: fadeIn 0.5s ease;
     }
 
-    /* === MANIFESTO VISUAL & TOGGLES === */
     .module-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -295,7 +280,6 @@
     .file-list { margin: 0 0 16px 0; padding-left: 20px; font-size: 13px; color: var(--muted); min-height: 40px; }
     .file-list li { margin-bottom: 6px; }
 
-    /* Estilização do Botão Toggle (On/Off) */
     .toggle-wrapper {
       display: flex;
       align-items: center;
@@ -313,7 +297,6 @@
     input:checked + .slider { background-color: var(--green); }
     input:checked + .slider:before { transform: translateX(20px); }
     
-    /* Estado desabilitado (Para Clínica Médica e módulos vazios) */
     input:disabled + .slider { background-color: #e2e8f0; cursor: not-allowed; }
     input:disabled:checked + .slider { background-color: #8ccba8; cursor: not-allowed; }
     input:disabled + .slider:before { box-shadow: none; }
@@ -333,20 +316,18 @@
 </head>
 <body>
 
-<!-- SIMULADOR PRINCIPAL (AIGAR BAYESIAN ENGINE) -->
 <div class="arena-container">
   <div class="header">
     <div class="translate-wrapper">
       <div id="google_translate_element"></div>
     </div>
-    <span class="badge">AIGAR ENGINE - V3.0 MODULAR</span>
+    <span class="badge">AIGAR ENGINE - V4.0 PROCEDURAL BAYESIAN</span>
     <h1>Simulador de Raciocínio Clínico</h1>
     <p id="status-engine">Sincronizando com a base de conhecimento do Instituto Delyone...</p>
   </div>
 
   <button id="btn-start" class="btn" onclick="iniciarJogo()" disabled>Carregando Módulos...</button>
 
-  <!-- BARRA DE PROBABILIDADE BAYESIANA -->
   <div id="bayes-tracker" class="bayes-tracker">
     <div class="bayes-header">
       <span>Probabilidade Diagnóstica Pós-Teste</span>
@@ -363,7 +344,6 @@
     <div id="step-indicator" style="font-size: 12px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em;"></div>
     <div id="question-text" class="question"></div>
 
-    <!-- Seletor de Confiança Metacognitiva -->
     <div id="confidence-box" class="confidence-box">
       <strong>Qual o seu nível de certeza nesta hipótese?</strong>
       <div class="confidence-options">
@@ -382,18 +362,16 @@
   <div id="final-score" class="score-board"></div>
 </div>
 
-<!-- MANIFESTO VISUAL (BASE DE DADOS) -->
 <div class="modules-container">
   <h2 style="margin: 0 0 6px; font-size: 20px; color: var(--navy); font-weight: 800;">Módulos de Raciocínio (On/Off)</h2>
-  <p style="margin: 0 0 16px; font-size: 14px; color: var(--muted);">Ligue ou desligue as especialidades ativas no seu plantão. A Clínica Médica é o módulo mestre irremovível.</p>
+  <p style="margin: 0 0 16px; font-size: 14px; color: var(--muted);">Ative ou desative especialidades. O motor seleciona casos ponderando prevalência real e taxa histórica de acerto.</p>
   <div class="module-grid" id="module-grid"></div>
 </div>
 
 <footer class="footer-note">
-  <p>ℹ️ <strong>Nota Técnica:</strong> Base de conhecimento alimentada com diretrizes clínicas atualizadas até o ano corrente (2026). Registrado no INPI sob titularidade do Instituto Delyone de Medicina e Tecnologia.</p>
+  <p>ℹ️ <strong>Nota Técnica:</strong> Motor adaptativo estocástico com calibração pós-teste bayesiana. Registrado sob titularidade do Instituto Delyone de Medicina e Tecnologia.</p>
 </footer>
 
-<!-- SCRIPTS DO GOOGLE TRANSLATE -->
 <script type="text/javascript">
   function googleTranslateElementInit() {
     new google.translate.TranslateElement({
@@ -409,7 +387,7 @@
 <script>
   /**
    * ==========================================
-   * 1. MANIFESTO DO CONHECIMENTO & CHAVES ON/OFF
+   * 1. MANIFESTO DO CONHECIMENTO
    * ==========================================
    */
   const manifestoConhecimento = {
@@ -440,7 +418,7 @@
     },
     "Pediatria": { 
       pasta: "knowledge_base/pediatria/", 
-      arquivos: ["pediatria.json"] // Já mapeado aguardando o seu arquivo!
+      arquivos: ["pediatria.json"]
     },
     "Cirurgia Geral": { 
       pasta: "knowledge_base/cirurgia/", 
@@ -448,7 +426,6 @@
     }
   };
 
-  // Estado global das chaves (Toggles)
   let modulosAtivos = {
     "Clínica Médica": true,
     "Ginecologia e Obstetrícia": true,
@@ -456,35 +433,102 @@
     "Cirurgia Geral": true
   };
 
-  let bancoDeDadosMestre = []; // Memória RAM de todos os JSONs baixados
+  let bancoDeDadosMestre = [];
   let materialComplementar = {};
 
   /**
    * ==========================================
-   * 2. MOTOR DE BUSCA ASSÍNCRONO & RENDERIZAÇÃO
+   * 2. MOTOR PROCEDURAL & SELEÇÃO ADAPTATIVA
+   * ==========================================
+   */
+  class ClinicalEngineAdapter {
+    static getHistorico() {
+      try {
+        return JSON.parse(localStorage.getItem("diagnosis_user_stats") || "{}");
+      } catch (e) {
+        return {};
+      }
+    }
+
+    static registrarDesfecho(idCaso, acertou) {
+      if (!idCaso) return;
+      const stats = this.getHistorico();
+      if (!stats[idCaso]) stats[idCaso] = { erros: 0, total: 0 };
+      stats[idCaso].total += 1;
+      if (!acertou) stats[idCaso].erros += 1;
+      localStorage.setItem("diagnosis_user_stats", JSON.stringify(stats));
+    }
+
+    static selecionarCasoPonderado(casosDisponiveis) {
+      const stats = this.getHistorico();
+      const pesos = casosDisponiveis.map(c => {
+        const id = c.id || c.vigneta?.substring(0, 30) || "default";
+        const dado = stats[id] || { erros: 0, total: 0 };
+        const taxaErro = dado.total > 0 ? (dado.erros / dado.total) : 0.5;
+        const prevBase = (c.prevalencia_base || 25) / 100;
+        return prevBase * (1.0 + 1.8 * taxaErro);
+      });
+
+      const somaPesos = pesos.reduce((a, b) => a + b, 0);
+      let random = Math.random() * somaPesos;
+
+      for (let i = 0; i < casosDisponiveis.length; i++) {
+        if (random < pesos[i]) return casosDisponiveis[i];
+        random -= pesos[i];
+      }
+      return casosDisponiveis[0];
+    }
+
+    static sintetizarVinhetaProcedural(matriz) {
+      if (matriz.vigneta) return matriz; // Caso estático padrão
+
+      const sexo = Math.random() > 0.5 ? "masculino" : "feminino";
+      const minM = matriz.faixa_etaria_meses ? matriz.faixa_etaria_meses[0] : 1;
+      const maxM = matriz.faixa_etaria_meses ? matriz.faixa_etaria_meses[1] : 24;
+      const idadeMeses = Math.floor(Math.random() * (maxM - minM + 1)) + minM;
+
+      let fr;
+      if (idadeMeses < 2) fr = Math.floor(Math.random() * 20) + 60;
+      else if (idadeMeses < 12) fr = Math.floor(Math.random() * 25) + 50;
+      else fr = Math.floor(Math.random() * 20) + 40;
+
+      const sintomas = [...(matriz.slots_sintomas?.obrigatorios || [])];
+      if (matriz.slots_sintomas?.variaveis_gravidade) {
+        matriz.slots_sintomas.variaveis_gravidade.forEach(v => {
+          if (Math.random() > 0.4) sintomas.push(v.sinal);
+        });
+      }
+
+      const idadeFormatada = idadeMeses >= 12 ? `${Math.floor(idadeMeses / 12)} ano(s)` : `${idadeMeses} meses`;
+      const vinhetaGerada = `Paciente de ${idadeFormatada}, sexo ${sexo}, admitido na emergência com história de ${sintomas.join(", ")}. Ao exame físico: FR ${fr} irpm, padrão respiratório instável.`;
+
+      return {
+        id: matriz.id,
+        _moduloOrigem: matriz._moduloOrigem,
+        vigneta: vinhetaGerada,
+        prevalencia_base: (matriz.prevalencia_base ? matriz.prevalencia_base * 100 : 35),
+        respostas_esperadas: matriz.gabarito_dinamico || matriz.respostas_esperadas,
+        feedback_tecnico: matriz.feedback_tecnico || "Discussão clínica baseada nas variáveis fisiológicas simuladas."
+      };
+    }
+  }
+
+  /**
+   * ==========================================
+   * 3. CARREGAMENTO ASSÍNCRONO
    * ==========================================
    */
   async function carregarConhecimento() {
-    renderizarPainelModulos(); // Renderiza a interface imediatamente
+    renderizarPainelModulos();
     let totalCarregado = 0;
 
-    // Carregar o JSON de Material Complementar Específico de GO (Opcional)
     try {
-      const respMat = await fetch("knowledge_base/ginecologia_obstetricia/complementar_ginecologia_obstetricia.json");
+      const respMat = await fetch("knowledge_base/material_complementar.json");
       if (respMat.ok) {
-        const dadosMat = await respMat.json();
-        const unificar = (lista) => {
-          if (!lista) return;
-          lista.forEach(item => {
-            materialComplementar[item.doenca] = { fisiopatologia: item.resumo, particularidades: item.dica_clinica };
-          });
-        };
-        unificar(dadosMat.ginecologia);
-        unificar(dadosMat.obstetricia);
+        materialComplementar = await respMat.json();
       }
-    } catch (error) { /* Ignora se não existir */ }
+    } catch (error) {}
 
-    // Carregamento Varredura JSON (Alimenta a Memória Mestre)
     for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
       for (const arquivo of dados.arquivos) {
         const caminhoCompleto = dados.pasta + arquivo;
@@ -492,21 +536,17 @@
           const response = await fetch(caminhoCompleto);
           if (response.ok) {
             const casoJson = await response.json();
-            
-            // Marca a origem do caso para o filtro do Toggle funcionar
             if (Array.isArray(casoJson)) {
-                casoJson.forEach(c => c._moduloOrigem = materia);
-                bancoDeDadosMestre.push(...casoJson);
-                totalCarregado += casoJson.length;
-            } else if (casoJson.vigneta) {
-                casoJson._moduloOrigem = materia;
-                bancoDeDadosMestre.push(casoJson);
-                totalCarregado += 1;
+              casoJson.forEach(c => c._moduloOrigem = materia);
+              bancoDeDadosMestre.push(...casoJson);
+              totalCarregado += casoJson.length;
+            } else if (casoJson.vigneta || casoJson.slots_sintomas) {
+              casoJson._moduloOrigem = materia;
+              bancoDeDadosMestre.push(casoJson);
+              totalCarregado += 1;
             }
           }
-        } catch (error) {
-          console.error(`Aguardando criação do arquivo: ${arquivo}`);
-        }
+        } catch (error) {}
       }
     }
 
@@ -522,8 +562,8 @@
       const badgeClass = temArquivos ? 'active' : 'empty';
       const badgeText = temArquivos ? `${dados.arquivos.length} ARQUIVOS` : 'AGUARDANDO JSON';
       
-      const isCM = (materia === "Clínica Médica"); // Regra do Módulo Mestre
-      const isLocked = isCM || !temArquivos; // Trava se for CM ou se a pasta estiver vazia
+      const isCM = (materia === "Clínica Médica");
+      const isLocked = isCM || !temArquivos;
       const isChecked = modulosAtivos[materia] && temArquivos ? "checked" : "";
       const labelId = `lbl-toggle-${materia.replace(/\s+/g, '')}`;
 
@@ -550,35 +590,28 @@
     }
   }
 
-  // Função disparada quando o usuário clica na chave On/Off
   function toggleModulo(materia, status) {
-    if (materia === "Clínica Médica") return; // Failsafe para proteger o módulo mestre
-    
-    modulosAtivos[materia] = status; // Atualiza a variável global
-    
-    // Atualiza o texto ON/OFF visualmente
+    if (materia === "Clínica Médica") return;
+    modulosAtivos[materia] = status;
     const label = document.getElementById(`lbl-toggle-${materia.replace(/\s+/g, '')}`);
-    if(label) {
+    if (label) {
       label.innerText = status ? 'ON' : 'OFF';
       label.style.color = status ? 'var(--green)' : 'var(--muted)';
     }
-    
-    atualizarBotaoStart(); // Refiltra a base de dados
+    atualizarBotaoStart();
   }
 
   function atualizarBotaoStart() {
     const btnStart = document.getElementById('btn-start');
     const statusEl = document.getElementById('status-engine');
-    
-    // Filtra o banco mestre com base nas chaves que estão "ON"
     const casosAtivos = bancoDeDadosMestre.filter(c => modulosAtivos[c._moduloOrigem]).length;
     
     if (casosAtivos > 0) {
-      statusEl.innerHTML = `<span style="color: var(--green); font-weight: 600;">✓ Sistema Operacional. ${casosAtivos} patologias ativas nos módulos selecionados.</span>`;
+      statusEl.innerHTML = `<span style="color: var(--green); font-weight: 600;">✓ Sistema Operacional. ${casosAtivos} nós decisórios ativos no motor adaptativo.</span>`;
       btnStart.innerText = "Gerar Novo Caso Clínico";
       btnStart.disabled = false;
     } else {
-      statusEl.innerHTML = `<span style="color: var(--red); font-weight: 600;">⚠️ Nenhum caso localizado. Ligue algum módulo ou verifique a conexão dos JSONs.</span>`;
+      statusEl.innerHTML = `<span style="color: var(--red); font-weight: 600;">⚠️ Nenhum caso localizado. Ligue algum módulo ou verifique os arquivos.</span>`;
       btnStart.innerText = "Módulos Desligados";
       btnStart.disabled = true;
     }
@@ -586,7 +619,7 @@
 
   /**
    * ==========================================
-   * 3. ALGORITMOS DE NLP & FUZZY MATCHING
+   * 4. ALGORITMOS DE NLP & FUZZY MATCHING
    * ==========================================
    */
   function normalizar(texto) {
@@ -651,7 +684,7 @@
 
   /**
    * ==========================================
-   * 4. MOTOR BAYESIANO E GAME LOOP
+   * 5. MOTOR BAYESIANO E GAME LOOP
    * ==========================================
    */
   let casoAtual = null;
@@ -659,6 +692,7 @@
   let pontuacao = 0;
   let probabilidadeBayesiana = 25;
   let nivelConfianca = 0.8;
+  let casoTeveErro = false;
 
   const etapasJogo = [
     { label: "PASSO 1: HIPÓTESE DIAGNÓSTICA", pergunta: "Qual a sua principal hipótese diagnóstica para este quadro?", chave: "diagnostico", peso: 50 },
@@ -684,17 +718,19 @@
   }
 
   function iniciarJogo() {
-    // FILTRAGEM ATIVA: Só sorteia casos que pertençam aos módulos "ON"
     const bancoDeDadosAtivo = bancoDeDadosMestre.filter(caso => modulosAtivos[caso._moduloOrigem]);
     
     if (bancoDeDadosAtivo.length === 0) {
-        alert("Ative pelo menos um módulo que contenha arquivos JSON para gerar um caso.");
-        return;
+      alert("Ative ao menos um módulo com casos para prosseguir.");
+      return;
     }
     
-    casoAtual = bancoDeDadosAtivo[Math.floor(Math.random() * bancoDeDadosAtivo.length)];
+    const casoSelecionado = ClinicalEngineAdapter.selecionarCasoPonderado(bancoDeDadosAtivo);
+    casoAtual = ClinicalEngineAdapter.sintetizarVinhetaProcedural(casoSelecionado);
+
     etapa = 0;
     pontuacao = 0;
+    casoTeveErro = false;
     probabilidadeBayesiana = casoAtual.prevalencia_base || 25;
 
     document.getElementById('btn-start').style.display = 'none';
@@ -702,10 +738,7 @@
     atualizarBarraBayes(probabilidadeBayesiana);
 
     document.getElementById('case-display').style.display = 'block';
-    
-    // Feedback visual indicando de onde veio a pergunta (Opcional, mas muito legal)
     const tagModulo = `<span style="font-size:10px; font-weight:800; color:#fff; background:var(--blue); padding:3px 8px; border-radius:4px; margin-bottom:8px; display:inline-block;">${casoAtual._moduloOrigem}</span><br>`;
-    
     document.getElementById('case-display').innerHTML = `${tagModulo}<strong style="color: var(--navy); font-size: 16px;">Vigneta Clínica de Admissão:</strong><br><p style="margin: 8px 0 0;">${casoAtual.vigneta}</p>`;
     
     document.getElementById('interaction').style.display = 'block';
@@ -749,6 +782,7 @@
       }
       logDiv.innerHTML += `<div class="preceptor-card correct"><strong>✓ Decisão Validada:</strong> O preceptor reconheceu [<em>${inputUsuario}</em>] congruente com (<em>${resultadoFuzzy.matchedTarget}</em>). A probabilidade pós-teste subiu.</div>`;
     } else {
+      casoTeveErro = true;
       if (etapa === 0 && nivelConfianca === 0.99) pontuacao = Math.max(0, pontuacao - 10);
       atualizarBarraBayes(probabilidadeBayesiana - 15);
       logDiv.innerHTML += `<div class="preceptor-card incorrect"><strong>✕ Divergência Diagnóstica:</strong> A conduta [<em>${inputUsuario}</em>] afasta a probabilidade do nó decisório. O algoritmo prioriza: <strong>${respostasAceitas ? respostasAceitas[0] : 'N/A'}</strong>.</div>`;
@@ -763,6 +797,9 @@
     const logDiv = document.getElementById('log');
     const scoreDiv = document.getElementById('final-score');
 
+    const idCaso = casoAtual.id || casoAtual.vigneta.substring(0, 30);
+    ClinicalEngineAdapter.registrarDesfecho(idCaso, !casoTeveErro);
+
     logDiv.innerHTML += `<div class="preceptor-card summary"><strong>📋 Discussão do Preceptor:</strong><br><p style="margin: 8px 0 0;">${casoAtual.feedback_tecnico}</p></div>`;
     
     const material = encontrarMaterialComplementar(casoAtual);
@@ -770,7 +807,7 @@
       const m = material.dados;
       let htmlDiscussao = `<div class="preceptor-card discussion-card"><h3>📖 Revisão Estruturada: ${material.nome}</h3><div style="display: flex; flex-direction: column; gap: 6px;">`;
       if (m.etiologia) htmlDiscussao += `<div class="discussion-topic"><strong>Etiologia:</strong> ${m.etiologia}</div>`;
-      if (m.fisiopatologia) htmlDiscussao += `<div class="discussion-topic"><strong>Fisiopatologia:</strong> ${m.fisiopatologia}</div>`;
+      if (m.fisiopatologia) htmlDiscussao += `<div class="discussion-topic"><strong>Fisiopatologia / Resumo Clínico:</strong> ${m.fisiopatologia}</div>`;
       if (m.diagnostico) htmlDiscussao += `<div class="discussion-topic"><strong>Diagnóstico:</strong> ${m.diagnostico}</div>`;
       if (m.tratamento) htmlDiscussao += `<div class="discussion-topic"><strong>Tratamento:</strong> ${m.tratamento}</div>`;
       if (m.particularidades) htmlDiscussao += `<div class="discussion-topic"><strong style="color: var(--amber);">Dica Clínica:</strong> ${m.particularidades}</div>`;
