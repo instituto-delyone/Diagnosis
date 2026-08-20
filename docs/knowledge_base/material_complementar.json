@@ -554,5 +554,34 @@
     "diagnostico": "Precoce (< 2 anos): rinite sanguinolenta persistente, pênfigo palmo-plantar, hepatoesplenomegalia e periostite/osteocondrite ao Rx de ossos longos (sinal do duplo contorno). Laboratório com VDRL sérico e análise de LCR.",
     "tratamento": "Penicilina G Cristalina (100.000 a 150.000 UI/kg/dia IV dividida de acordo com a idade) por 10 dias se alteração liquórica/clínica, ou Penicilina G Procaína IM por 10 dias.",
     "particularidades": "Estigmas tardios (> 2 anos) incluem dentes de Hutchinson, molares em amora, fronte olímpica, nariz em sela e a deformidade clássica da tíbia em sabre."
+  },
+  "Aleitamento Materno e Composição do Leite Humano": {
+    "etiologia": "O aleitamento materno exclusivo (AME) é a estratégia nutricional recomendada até os 6 meses, suprindo integralmente as demandas hídricas e metabólicas do lactente.",
+    "fisiopatologia": "O leite humano contém predomínio de alfa-lactoalbumina (soro), facilitando a digestibilidade e gerando menor sobrecarga osmolar renal em comparação com o leite de vaca (rico em beta-lactoglobulina). A presença de mais lactose e oligossacarídeos (fator bífido) acidifica o pH entérico e inibe colonização patogênica.",
+    "diagnostico": "Avaliação clínica de pega e posicionamento: boca amplamente aberta, lábio inferior evertido, aréola mais visível na porção superior e queixo tocando a mama. A produção láctea é mediada pela prolactina (adenohipófise) e a ejeção pela ocitocina (neurohipófise).",
+    "tratamento": "Livre demanda sem limitação de tempo. Manejo de intercorrências: fissuras (correção da pega e aplicação do próprio leite), ingurgitamento (ordenha prévia e compressas frias intermamadas) e mastite (esvaziamento mamário associado a Cefalexina se toxemia).",
+    "particularidades": "Contraindicações absolutas na nutriz: infecção por HIV e HTLV. No lactente: Galactosemia clássica. Na fenilcetonúria, permite-se o aleitamento materno intercalado com fórmulas isentas de fenilalanina sob controle sérico."
+  },
+  "Suplementação Profilática na Infância (Ferro e Vitamina D)": {
+    "etiologia": "Prevenção da anemia ferropriva carencial e do raquitismo nutricional decorrente do rápido crescimento somático nos dois primeiros anos.",
+    "fisiopatologia": "Os estoques fetais de ferro esgotam-se entre o 4º e o 6º mês em nascidos a termo, e mais precocemente em prematuros ou crianças com baixo peso (< 2.500g), demandando aporte exógeno.",
+    "diagnostico": "Prescrição baseada em peso ao nascer, idade gestacional e dieta: Termo > 2.500g em AME inicia ferro com 3 meses (1 mg/kg/dia até 2 anos). Prematuros/< 2.500g iniciam ferro aos 30 dias com doses escalonadas por faixa de peso (< 1.000g = 4 mg/kg/dia; < 1.500g = 3 mg/kg/dia; < 2.500g = 2 mg/kg/dia).",
+    "tratamento": "Vitamina D profilática: 400 UI/dia iniciada na 1ª semana de vida até os 12 meses; 600 UI/dia dos 12 aos 24 meses, independentemente do tipo de aleitamento.",
+    "particularidades": "O sulfato ferroso apresenta melhor absorção quando administrado longe das mamadas ou associado a fontes de vitamina C, evitando o consumo concomitante de chás ou leite não humano."
+  },
+  "Marcos do Desenvolvimento Neuropsicomotor (DNPM)": {
+    "etiologia": "Processo contínuo de maturação do sistema nervoso central determinado por fatores biológicos intrínsecos e estímulos ambientais.",
+    "fisiopatologia": "A mielinização e a formação sináptica progridem no eixo motor em sentido crânio-caudal e no eixo adaptativo em sentido cubital-radial.",
+    "diagnostico": "Principais marcos cronológicos: 2 meses (sorriso social, segue 180°), 4 meses (sustentação cefálica, mãos na linha média, pega cubital), 6-7 meses (rola, senta sem apoio brevemente, transfere objetos), 9-10 meses (senta sem apoio, pinça polegar-indicador, estranha desconhecidos, bate palmas) e 12 meses (anda com apoio, primeiras palavras com significado).",
+    "tratamento": "Identificação precoce de atrasos com encaminhamento para intervenção multiprofissional (fisioterapia, terapia ocupacional e fonoaudiologia) e estímulo domiciliar orientado.",
+    "particularidades": "O reflexo tônico-cervical assimétrico (postura de esgrimista) é fisiológico no recém-nascido e deve desaparecer progressivamente até o 3º-4º mês de vida para permitir a linha média."
+  },
+  "Avaliação do Crescimento Físico e Puberdade": {
+    "etiologia": "Controle endócrino e nutricional mediado pelo eixo somatotrófico (GH/IGF-1) na infância e pela reativação pulsátil do eixo hipotálamo-hipófise-gonadal (GnRH/LH/FSH) na puberdade.",
+    "fisiopatologia": "O ganho ponderal esperado no 1º ano decresce trimestralmente (700g, 600g, 500g e 400g/mês). A puberdade feminina inicia-se pela telarca (M2 de Tanner, 8-13 anos) e a masculina pelo aumento testicular >= 4 mL (G2 de Tanner, 9-14 anos).",
+    "diagnostico": "Classificação de Tanner: pico de crescimento ocorre em M3 nas meninas (8-9 cm/ano, antes da menarca que surge em M4) e em G4 nos meninos (9-10 cm/ano). Puberdade precoce: caracteres sexuais antes dos 8 anos em meninas e 9 anos em meninos.",
+    "tratamento": "Na puberdade precoce central verdadeira: bloqueio farmacológico com análogos de GnRH de depósito (Leuprorrelina) para evitar fusão epifisária prematura e perda de estatura final.",
+    "particularidades": "A puberdade precoce periférica (GnRH-independente) cursa com gonadotrofinas suprimidas e decorre de tumores gonadais, hiperplasia adrenal congênita ou cistos ovarianos autônomos."
   }
+
 
