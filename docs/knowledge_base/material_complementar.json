@@ -617,7 +617,29 @@
     "diagnostico": "Avaliação simultânea da gravidade da lesão (limpa/superficial vs. contaminada/profunda/com tecido desvitalizado) e do histórico vacinal documentado do paciente.",
     "tratamento": "Ferimentos de alto risco em pacientes com status vacinal incerto ou < 3 doses: Vacina com toxoide tetânico (dT) + Imunização passiva imediata com Soro Antitetânico (SAT) ou Imunoglobulina Humana Antitetânica (IGHAT). Ferimentos de alto risco em pacientes com vacinação completa e última dose entre 5 e 10 anos: apenas 1 dose de reforço da vacina (sem necessidade de soro/imunoglobulina).",
     "particularidades": "A limpeza mecânica exaustiva, debridação de tecidos desvitalizados e remoção cirúrgica de corpos estranhos da ferida são medidas locais mandatórias para eliminar o microambiente anaeróbio propício à germinação dos esporos."
+  },
+  "Gastroenterite Aguda e Manejo da Desidratação": {
+    "etiologia": "Infecções virais (Rotavírus, Norovírus) ou bacterianas (E. coli enterotoxigênica/ETEC, Shigella, Salmonella, Campylobacter) e parasitárias (Giardia)[span_16](start_span)[span_16](end_span).",
+    "fisiopatologia": "Mecanismo osmótico por lesão de enterócitos e deficiência transitória de dissacaridases (como no Rotavírus) ou mecanismo secretor mediado por enterotoxinas bacterianas com hipersecreção de eletrólitos[span_17](start_span)[span_17](end_span). A perda hidroeletrolítica aguda predispõe à desidratação e choque hipovolêmico[span_18](start_span)[span_18](end_span).",
+    "diagnostico": "Classificação da OMS: Sem Desidratação (Plano A: alerta, lágrimas presentes, boca úmida), Com Desidratação (Plano B: irritada, sedenta, olhos fundos, sinal da prega < 2s) e Desidratação Grave (Plano C: letárgica/inconsciente, incapaz de beber, sinal da prega > 2s, pulso débil)[span_19](start_span)[span_19](end_span).",
+    "tratamento": "Plano A: Líquidos caseiros + SRO após perdas + Zinco por 10-14 dias[span_20](start_span)[span_20](end_span). Plano B: TRO na UBS (75 mL/kg em 4h com SRO de osmolaridade reduzida)[span_21](start_span)[span_21](end_span). Plano C: Expansão com SF 0,9% ou Ringer Lactato (100 mL/kg fracionados conforme idade: < 1 ano em 6h; > 1 ano em 3h)[span_22](start_span)[span_22](end_span).",
+    "particularidades": "Shigella e E. coli entero-hemorrágica (O157:H7) produtoras de toxina Shiga podem precipitar a Síndrome Hemolítico-Urêmica (tríade: Injúria Renal Aguda, Plaquetopenia e Anemia Hemolítica Microangiopática)[span_23](start_span)[span_23](end_span)."
+  },
+  "Infecções de Vias Aéreas Superiores (IVAS e Complicações)": {
+    "etiologia": "Resfriado comum viral (Rinovírus, Coronavírus)[span_24](start_span)[span_24](end_span); OMA bacteriana (S. pneumoniae, H. influenzae não tipável, M. catarrhalis)[span_25](start_span)[span_25](end_span); e Faringite bacteriana (Streptococcus pyogenes / SGA)[span_26](start_span)[span_26](end_span).",
+    "fisiopatologia": "O edema mucoso nasofaríngeo compromete a aeração e drenagem da tuba auditiva e seios paranasais, propiciando acúmulo de secreções e colonização bacteriana secundária na orelha média e cavidades anexas[span_27](start_span)[span_27](end_span).",
+    "diagnostico": "Resfriado: coriza e tosse autolimitadas[span_28](start_span)[span_28](end_span). OMA: otalgia e abaulamento inflamatório da membrana timpânica[span_29](start_span)[span_29](end_span). Faringite Estreptocócica: febre alta, exsudato amigdaliano e petéquias no palato em maiores de 3-5 anos, na ausência de tosse ou coriza[span_30](start_span)[span_30](end_span).",
+    "tratamento": "Resfriado: sintomáticos e lavagem nasal com SF 0,9% (contraindicados descongestionantes, antitussígenos e AAS)[span_31](start_span)[span_31](end_span). OMA: Amoxicilina (40-50 ou 80-90 mg/kg/dia)[span_32](start_span)[span_32](end_span). Faringite Estreptocócica: Penicilina G Benzatina em dose única ou Amoxicilina por 10 dias[span_33](start_span)[span_33](end_span).",
+    "particularidades": "A complicação supurativa clássica da OMA é a Mastoidite Aguda (apagamento do sulco retroauricular e desvio do pavilhão auricular), exigindo internação hospitalar, TC e antibioticoterapia parenteral[span_34](start_span)[span_34](end_span)."
+  },
+  "Pneumonias na Infância e Complicações Pleurais": {
+    "etiologia": "Streptococcus pneumoniae é o agente bacteriano típico mais prevalente após os 2 meses de vida[span_35](start_span)[span_35](end_span). Em menores de 2 meses predominam Streptococcus agalactiae (GBS) e bacilos Gram-negativos entéricos[span_36](start_span)[span_36](end_span).",
+    "fisiopatologia": "Invasão alveolar com exsudato inflamatório rico em neutrófilos, gerando consolidação pulmonar, queda da complacência elástica torácica e desequilíbrio na relação ventilação/perfusão (shunt)[span_37](start_span)[span_37](end_span).",
+    "diagnostico": "Presença cardinal de taquipneia[span_38](start_span)[span_38](end_span). Sinais de gravidade: tiragem subcostal mantida, gemência expiratória (tentativa de manter a CRF com fechamento parcial da glote), batimento de asa nasal e cianose central[span_39](start_span)[span_39](end_span).",
+    "tratamento": "Ambulatorial (> 2 meses sem gravidade): Amoxicilina oral por 10 dias[span_40](start_span)[span_40](end_span). Hospitalar: Penicilina Cristalina ou Ampicilina EV[span_41](start_span)[span_41](end_span); menores de 2 meses recebem Ampicilina + Gentamicina[span_42](start_span)[span_42](end_span). Empiema exige drenagem em selo d'água[span_43](start_span)[span_43](end_span).",
+    "particularidades": "A principal causa de falha terapêutica bacteriana após 48-72h é o Derrame Pleural Parapneumônico complicado / Empiema[span_44](start_span)[span_44](end_span). A toracocentese diagnóstica define empiema quando o líquido pleural apresenta aspecto purulento, pH < 7,2, glicose < 40 mg/dL ou presença de bactérias ao Gram/cultura[span_45](start_span)[span_45](end_span)."
   }
+
 
 
 
