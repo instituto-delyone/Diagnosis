@@ -1,0 +1,166 @@
+[
+  {
+    "id": "ped_kwashiorkor_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [12, 36],
+    "prevalencia_base": 20,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "história de desmame recente com dieta exclusiva à base de amido",
+        "edema depressível simétrico de extremidades e anasarca",
+        "hepatomegalia palpável e indolor por esteatose",
+        "alterações cutâneas com placas de hiperceratose e despigmentação"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "cabelos quebradiços com faixas de descoloração (sinal da bandeira)" },
+        { "sinal": "apatia e letargia marcante" },
+        { "sinal": "glicemia de 45 mg/dL (hipoglicemia)" },
+        { "sinal": "hipoalbuminemia grave" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Kwashiorkor",
+        "Desnutrição proteica grave",
+        "Desnutrição edematosa",
+        "Desnutrição grave"
+      ],
+      "exames": [
+        "Glicemia de jejum",
+        "Eletrólitos séricos (sódio, potássio, magnésio)",
+        "Albumina sérica",
+        "Hemograma completo"
+      ],
+      "conduta": [
+        "Fase de estabilização",
+        "Aquecimento e prevenção de hipotermia",
+        "Correção de hipoglicemia",
+        "Reidratação com ReSoMal",
+        "Não prescrever ferro na fase aguda",
+        "Suplementação de potássio, magnésio, zinco, vitamina A e ácido fólico"
+      ]
+    },
+    "feedback_tecnico": "O Kwashiorkor decorre de deficiência proteica com aporte calórico mantido, instalando-se rapidamente após o desmame[span_1](start_span)[span_1](end_span). Pela OMS, a presença de edema nutricional classifica automaticamente o quadro como Desnutrição Grave[span_2](start_span)[span_2](end_span). Na fase de estabilização (dias 1 a 7), deve-se evitar a hiperalimentação e a reposição precoce de ferro para prevenir Síndrome de Realimentação e estresse oxidativo[span_3](start_span)[span_3](end_span)."
+  },
+  {
+    "id": "ped_marasmo_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [2, 11],
+    "prevalencia_base": 25,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "privação crônica global de energia e proteínas desde os primeiros meses",
+        "emagrecimento extremo com perda total do tecido celular subcutâneo",
+        "fácies senil ou simiesca",
+        "ausência de edema"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "hipotrofia e hipotonia muscular generalizada" },
+        { "sinal": "escore-Z de peso para idade < -3" },
+        { "sinal": "temperatura axilar de 35,2°C (hipotermia)" },
+        { "sinal": "irritabilidade com apetite preservado" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Marasmo",
+        "Desnutrição energético-proteica",
+        "Desnutrição grave não edematosa",
+        "Magreza acentuada"
+      ],
+      "exames": [
+        "Glicemia capilar",
+        "Ionograma",
+        "Gasometria",
+        "Hemograma"
+      ],
+      "conduta": [
+        "Estabilização térmica (manta e aquecimento)",
+        "Glicose oral ou venosa",
+        "Manejo hidroeletrolítico cauteloso com ReSoMal",
+        "Suplementação de micronutrientes sem ferro",
+        "Transição gradual para fase de reabilitação"
+      ]
+    },
+    "feedback_tecnico": "O Marasmo representa a forma crônica de privação energética e proteica global no 1º ano de vida, caracterizado pelo consumo extremo de gordura subcutânea e massa magra, sem edema[span_4](start_span)[span_4](end_span). A fase de estabilização visa tratar hipotermia, hipoglicemia e distúrbios eletrolíticos[span_5](start_span)[span_5](end_span). A fase de reabilitação (semanas 2 a 6) é marcada pelo retorno do apetite, dieta hipercalórica para catch-up e introdução de ferro em dose terapêutica[span_6](start_span)[span_6](end_span)."
+  },
+  {
+    "id": "ped_baixa_estatura_retardo_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [72, 144],
+    "prevalencia_base": 20,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "queixa de baixa estatura em escolar",
+        "estatura por idade abaixo do percentil 3 (E/I < p3)",
+        "velocidade de crescimento normal para a idade (5 a 6 cm/ano)",
+        "pais com alturas dentro da média populacional (alvo genético normal)"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "radiografia de punho com Idade Óssea atrasada em relação à Idade Cronológica (IO < IC)" },
+        { "sinal": "Idade Óssea compatível com a Idade Estatural (IO = IE)" },
+        { "sinal": "atraso puberal constitucional associado" },
+        { "sinal": "histórico familiar paterno de estirão puberal tardio" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Retardo Constitucional do Crescimento e da Puberdade",
+        "RCCP",
+        "Baixa estatura constitucional",
+        "Variante normal do crescimento"
+      ],
+      "exames": [
+        "Radiografia de mãos e punhos para Idade Óssea",
+        "Cálculo do Alvo Genético Parental",
+        "Curva de velocidade de crescimento"
+      ],
+      "conduta": [
+        "Tranquilizar a família e o paciente",
+        "Explicar o prognóstico de estatura final normal",
+        "Acompanhamento clínico periódico da velocidade de crescimento",
+        "Não há indicação de terapia com hormônio do crescimento (GH)"
+      ]
+    },
+    "feedback_tecnico": "O Retardo Constitucional do Crescimento (RCCP) é uma variante normal do crescimento em que a velocidade de crescimento é normal, os pais têm estatura normal, mas a Idade Óssea está atrasada em relação à cronológica (IO < IC = IE)[span_7](start_span)[span_7](end_span). Diferencia-se da Baixa Estatura Familiar, na qual a Idade Óssea é igual à Cronológica (IO = IC) e os pais são baixos[span_8](start_span)[span_8](end_span)."
+  },
+  {
+    "id": "ped_baixa_estatura_morbida_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [48, 120],
+    "prevalencia_base": 15,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "estatura por idade abaixo do percentil 3 com desaceleração estatural",
+        "curva de crescimento horizontalizada (velocidade de crescimento anormalmente baixa)",
+        "ganho de peso mantido com IMC elevado (sobrepeso/obesidade)"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "constipação intestinal e intolerância ao frio" },
+        { "sinal": "pele seca e sonolência excessiva" },
+        { "sinal": "Idade Óssea significativamente atrasada" },
+        { "sinal": "ausência de estigmas sindrômicos fenotípicos" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Baixa estatura patológica",
+        "Hipotireoidismo adquirido",
+        "Doença endócrina",
+        "Déficit de hormônio do crescimento"
+      ],
+      "exames": [
+        "TSH e T4 livre",
+        "IGF-1 e IGFBP-3",
+        "Radiografia para Idade Óssea",
+        "Cariótipo se paciente do sexo feminino"
+      ],
+      "conduta": [
+        "Investigação laboratorial endócrina",
+        "Reposição hormonal com Levotiroxina (se hipotireoidismo)",
+        "Encaminhamento ao Endocrinologista Pediátrico"
+      ]
+    },
+    "feedback_tecnico": "Queda na velocidade de crescimento (curva horizontalizada) aponta para condição mórbida[span_9](start_span)[span_9](end_span). Criança com baixa velocidade de crescimento que se mantém eutrófica/obesa deve ser investigada para causas endócrinas (sendo o Hipotireoidismo a mais comum, seguido de deficiência de GH e hipercortisolismo)[span_10](start_span)[span_10](end_span). Se estivesse emagrecida, a principal hipótese seria Desnutrição[span_11](start_span)[span_11](end_span)."
+  }
+]
