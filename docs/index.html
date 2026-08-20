@@ -644,29 +644,16 @@
     }
   }
 
-  /**
+/**
    * ==========================================
-   * 2.1 MURAL TOP 10 (LEADERBOARD)
+   * 2.1 MURAL TOP 10 (LEADERBOARD GLOBAL - NUVEM)
    * ==========================================
    */
   class LeaderboardSystem {
     static badgesParaSubmissao = [];
-
-    static getChaveHoje() {
-      return `medunity_top10_${BadgeSystem.getHojeStr()}`;
-    }
-
-    static getTop10() {
-      try {
-        return JSON.parse(localStorage.getItem(this.getChaveHoje()) || '[]');
-      } catch (e) {
-        return [];
-      }
-    }
-
-    static salvarTop10(lista) {
-      localStorage.setItem(this.getChaveHoje(), JSON.stringify(lista));
-    }
+    
+    // COLE O SEU LINK ENTRE AS ASPAS ABAIXO:
+    static API_URL = "https://script.google.com/macros/s/AKfycbz5oOsjVrkLdJJmqKTiV6pZTtrN3v6P83QTrE7UBBjW4x6S9Kk1WWLGJuqJZX7TzwJo/exec";
 
     static abrirModalRegistro(badgesRecentes) {
       this.badgesParaSubmissao = badgesRecentes;
@@ -691,64 +678,69 @@
 
     static async submeterComIp() {
       const ip = await this.obterIpPublico();
-      this.adicionarAoTop10(`Dr(a). Anônimo (${ip})`);
+      this.submeterNaNuvem(`Dr(a). Anônimo (${ip})`);
     }
 
     static submeterAoHall() {
       const nomeInput = document.getElementById("hof-username").value.trim();
-      const nomeFinal = nomeInput ? (nomeInput.startsWith("Dr") ? nomeInput : `Dr(a). ${nomeInput}`) : "Dr(a). Anônimo";
-      this.adicionarAoTop10(nomeFinal);
+      const nomeFinal = nomeInput ? (nomeInput.toLowerCase().startsWith("dr") ? nomeInput : `Dr(a). ${nomeInput}`) : "Dr(a). Anônimo";
+      this.submeterNaNuvem(nomeFinal);
     }
 
-    static adicionarAoTop10(nomeIdentificador) {
-      const top10 = this.getTop10();
-      if (top10.length >= 10) {
-        alert("O Top 10 de hoje já foi preenchido!");
-        this.fecharModal();
-        return;
-      }
-
-      const agora = new Date();
-      const horaStr = `${String(agora.getHours()).padStart(2, '0')}:${String(agora.getMinutes()).padStart(2, '0')}`;
-
-      top10.push({
-        nome: nomeIdentificador,
-        horario: horaStr,
-        badges: this.badgesParaSubmissao.length > 0 ? this.badgesParaSubmissao : ["Clínica Avançada"]
-      });
-
-      this.salvarTop10(top10);
-      this.renderizarLeaderboard();
+    static async submeterNaNuvem(nomeIdentificador) {
       this.fecharModal();
+      const tbody = document.getElementById("leaderboard-body");
+      if (tbody) tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--muted); padding: 18px;">Salvando no Hall Global...</td></tr>`;
+
+      const badgesStr = this.badgesParaSubmissao.length > 0 ? this.badgesParaSubmissao.join(", ") : "Clínica Avançada";
+      
+      try {
+        // Envia os dados para a Planilha do Google
+        const urlSalvar = `${this.API_URL}?action=salvar&nome=${encodeURIComponent(nomeIdentificador)}&badges=${encodeURIComponent(badgesStr)}`;
+        await fetch(urlSalvar, { mode: 'no-cors' }); 
+        
+        // Dá um pequeno tempo para a planilha processar e atualiza a lista
+        setTimeout(() => this.renderizarLeaderboard(), 1500);
+      } catch (error) {
+        console.error("Erro ao salvar:", error);
+        if (tbody) tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--red); padding: 18px;">Erro ao conectar com a nuvem.</td></tr>`;
+      }
     }
 
-    static renderizarLeaderboard() {
+    static async renderizarLeaderboard() {
       const tbody = document.getElementById("leaderboard-body");
       if (!tbody) return;
 
-      const top10 = this.getTop10();
-      if (top10.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--muted); padding: 18px;">Aguardando os primeiros mestres de hoje...</td></tr>`;
-        return;
+      try {
+        // Busca os dados atualizados da Planilha do Google
+        const urlListar = `${this.API_URL}?action=listar`;
+        const resp = await fetch(urlListar);
+        const top10 = await resp.json();
+
+        if (!top10 || top10.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--muted); padding: 18px;">Aguardando os primeiros mestres de hoje...</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = top10.map((item, index) => {
+          let rankBadge = `<span class="rank-pill">${index + 1}º</span>`;
+          if (index === 0) rankBadge = `<span class="rank-pill rank-1">🥇 1º</span>`;
+          if (index === 1) rankBadge = `<span class="rank-pill rank-2">🥈 2º</span>`;
+          if (index === 2) rankBadge = `<span class="rank-pill rank-3">🥉 3º</span>`;
+
+          return `
+            <tr>
+              <td>${rankBadge}</td>
+              <td><strong>${item.nome}</strong></td>
+              <td style="color: var(--muted); font-weight: 600;">${item.horario}</td>
+              <td style="color: var(--navy);">${item.badges}</td>
+            </tr>
+          `;
+        }).join('');
+      } catch (error) {
+        console.error("Erro ao buscar top 10:", error);
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--muted); padding: 18px;">Conectando com o servidor...</td></tr>`;
       }
-
-      tbody.innerHTML = top10.map((item, index) => {
-        let rankBadge = `<span class="rank-pill">${index + 1}º</span>`;
-        if (index === 0) rankBadge = `<span class="rank-pill rank-1">🥇 1º</span>`;
-        if (index === 1) rankBadge = `<span class="rank-pill rank-2">🥈 2º</span>`;
-        if (index === 2) rankBadge = `<span class="rank-pill rank-3">🥉 3º</span>`;
-
-        const badgesStr = Array.isArray(item.badges) ? item.badges.join(", ") : item.badges;
-
-        return `
-          <tr>
-            <td>${rankBadge}</td>
-            <td><strong>${item.nome}</strong></td>
-            <td style="color: var(--muted); font-weight: 600;">${item.horario}</td>
-            <td style="color: var(--navy);">${badgesStr}</td>
-          </tr>
-        `;
-      }).join('');
     }
   }
 
