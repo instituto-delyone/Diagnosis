@@ -26,6 +26,8 @@
       --red-soft: #fdf2f1;
       --amber: #b7791f;
       --amber-soft: #fefcbf;
+      --gold: #d4af37;
+      --gold-soft: #fffbeb;
     }
 
     * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
@@ -40,7 +42,7 @@
       gap: 30px;
     }
 
-    .arena-container, .modules-container {
+    .arena-container, .modules-container, .trophy-container {
       max-width: 800px;
       width: 100%;
       background: var(--card);
@@ -220,6 +222,20 @@
     .preceptor-card.incorrect { background: var(--red-soft); border-color: var(--red); color: #742a2a; }
     .preceptor-card.summary { background: #f0f4f8; border-color: var(--blue); color: var(--navy); }
     
+    .badge-conquest-card {
+      background: var(--gold-soft);
+      border: 1px solid var(--gold);
+      border-left: 5px solid var(--gold);
+      color: #744210;
+      padding: 16px;
+      border-radius: 12px;
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: slideDown 0.4s ease;
+    }
+
     .discussion-card {
       background: #ffffff;
       border: 1px solid var(--border);
@@ -253,6 +269,32 @@
       color: var(--navy);
       display: none;
       animation: fadeIn 0.5s ease;
+    }
+
+    /* === PAINEL DE TROFÉUS / BADGES === */
+    .trophy-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .trophy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold-soft);
+      border: 1px solid var(--gold);
+      color: #744210;
+      padding: 6px 12px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(212, 175, 55, 0.15);
+    }
+    .daily-badge-counter {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
     }
 
     .module-grid {
@@ -296,10 +338,8 @@
     
     input:checked + .slider { background-color: var(--green); }
     input:checked + .slider:before { transform: translateX(20px); }
-    
     input:disabled + .slider { background-color: #e2e8f0; cursor: not-allowed; }
     input:disabled:checked + .slider { background-color: #8ccba8; cursor: not-allowed; }
-    input:disabled + .slider:before { box-shadow: none; }
 
     .footer-note {
       max-width: 800px;
@@ -321,7 +361,7 @@
     <div class="translate-wrapper">
       <div id="google_translate_element"></div>
     </div>
-    <span class="badge">AIGAR ENGINE - V4.0 PROCEDURAL BAYESIAN</span>
+    <span class="badge">AIGAR ENGINE - V4.2 CONQUEST EDITION</span>
     <h1>Simulador de Raciocínio Clínico</h1>
     <p id="status-engine">Sincronizando com a base de conhecimento do Instituto Delyone...</p>
   </div>
@@ -362,14 +402,24 @@
   <div id="final-score" class="score-board"></div>
 </div>
 
+<!-- GALERIA DE TROFÉUS / BADGES -->
+<div class="trophy-container">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h2 style="margin: 0; font-size: 18px; color: var(--navy); font-weight: 800;">🏆 Galeria de Badges de Maestria</h2>
+    <span id="badge-daily-status" class="daily-badge-counter">Badges hoje: 0/3</span>
+  </div>
+  <p style="margin: 6px 0 0; font-size: 13px; color: var(--muted);">Acertos com 100% de calibração desbloqueiam badges nominais da patologia (máximo 3 por dia por dispositivo).</p>
+  <div class="trophy-grid" id="trophy-grid"></div>
+</div>
+
 <div class="modules-container">
   <h2 style="margin: 0 0 6px; font-size: 20px; color: var(--navy); font-weight: 800;">Módulos de Raciocínio (On/Off)</h2>
-  <p style="margin: 0 0 16px; font-size: 14px; color: var(--muted);">Ative ou desative especialidades. O motor seleciona casos ponderando prevalência real e taxa histórica de acerto.</p>
+  <p style="margin: 0 0 16px; font-size: 14px; color: var(--muted);">Ative ou desative especialidades. O motor seleciona casos ponderando prevalência e histórico de acertos.</p>
   <div class="module-grid" id="module-grid"></div>
 </div>
 
 <footer class="footer-note">
-  <p>ℹ️ <strong>Nota Técnica:</strong> Motor adaptativo estocástico com calibração pós-teste bayesiana. Registrado sob titularidade do Instituto Delyone de Medicina e Tecnologia.</p>
+  <p>ℹ️ <strong>Nota Técnica:</strong> Motor adaptativo estocástico com calibração pós-teste bayesiana e sistema de progressão. Registrado sob titularidade do Instituto Delyone de Medicina e Tecnologia.</p>
 </footer>
 
 <script type="text/javascript">
@@ -438,7 +488,73 @@
 
   /**
    * ==========================================
-   * 2. MOTOR PROCEDURAL & SELEÇÃO ADAPTATIVA
+   * 2. SISTEMA DE TROFÉUS / BADGES DIÁRIAS
+   * ==========================================
+   */
+  class BadgeSystem {
+    static getHojeStr() {
+      const d = new Date();
+      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    }
+
+    static getDados() {
+      try {
+        return JSON.parse(localStorage.getItem("medunity_badges_db") || '{"badges":[], "daily":{}}');
+      } catch (e) {
+        return { badges: [], daily: {} };
+      }
+    }
+
+    static salvarDados(dados) {
+      localStorage.setItem("medunity_badges_db", JSON.stringify(dados));
+    }
+
+    static getBadgesHoje() {
+      const dados = this.getDados();
+      const hoje = this.getHojeStr();
+      return dados.daily[hoje] || 0;
+    }
+
+    static tentarConcederBadge(nomeDoenca) {
+      const dados = this.getDados();
+      const hoje = this.getHojeStr();
+      const countHoje = dados.daily[hoje] || 0;
+
+      if (countHoje >= 3) {
+        return { concedida: false, motivo: "Limite diário de 3 badges atingido para este dispositivo." };
+      }
+
+      if (!dados.badges.includes(nomeDoenca)) {
+        dados.badges.push(nomeDoenca);
+      }
+      dados.daily[hoje] = countHoje + 1;
+      this.salvarDados(dados);
+      this.renderizarGaleria();
+
+      return { concedida: true, totalHoje: dados.daily[hoje] };
+    }
+
+    static renderizarGaleria() {
+      const dados = this.getDados();
+      const countHoje = this.getBadgesHoje();
+      const statusEl = document.getElementById("badge-daily-status");
+      const gridEl = document.getElementById("trophy-grid");
+
+      if (statusEl) statusEl.innerText = `Badges hoje: ${countHoje}/3`;
+      if (!gridEl) return;
+
+      if (dados.badges.length === 0) {
+        gridEl.innerHTML = `<span style="font-size: 13px; color: var(--muted);">Nenhuma badge desbloqueada ainda. Alcance 100% de pontuação em um caso.</span>`;
+        return;
+      }
+
+      gridEl.innerHTML = dados.badges.map(b => `<div class="trophy-badge">🏆 ${b}</div>`).join('');
+    }
+  }
+
+  /**
+   * ==========================================
+   * 3. MOTOR PROCEDURAL & ADAPTATIVO
    * ==========================================
    */
   class ClinicalEngineAdapter {
@@ -480,7 +596,7 @@
     }
 
     static sintetizarVinhetaProcedural(matriz) {
-      if (matriz.vigneta) return matriz; // Caso estático padrão
+      if (matriz.vigneta) return matriz;
 
       const sexo = Math.random() > 0.5 ? "masculino" : "feminino";
       const minM = matriz.faixa_etaria_meses ? matriz.faixa_etaria_meses[0] : 1;
@@ -500,7 +616,7 @@
       }
 
       const idadeFormatada = idadeMeses >= 12 ? `${Math.floor(idadeMeses / 12)} ano(s)` : `${idadeMeses} meses`;
-      const vinhetaGerada = `Paciente de ${idadeFormatada}, sexo ${sexo}, admitido na emergência com história de ${sintomas.join(", ")}. Ao exame físico: FR ${fr} irpm, padrão respiratório instável.`;
+      const vinhetaGerada = `Paciente de ${idadeFormatada}, sexo ${sexo}, admitido na emergência com história de ${sintomas.join(", ")}. Ao exame físico: FR ${fr} irpm.`;
 
       return {
         id: matriz.id,
@@ -515,18 +631,17 @@
 
   /**
    * ==========================================
-   * 3. CARREGAMENTO ASSÍNCRONO
+   * 4. CARREGAMENTO ASSÍNCRONO
    * ==========================================
    */
   async function carregarConhecimento() {
     renderizarPainelModulos();
+    BadgeSystem.renderizarGaleria();
     let totalCarregado = 0;
 
     try {
       const respMat = await fetch("knowledge_base/material_complementar.json");
-      if (respMat.ok) {
-        materialComplementar = await respMat.json();
-      }
+      if (respMat.ok) materialComplementar = await respMat.json();
     } catch (error) {}
 
     for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
@@ -578,7 +693,7 @@
             <span class="status-badge ${badgeClass}">${badgeText}</span>
           </div>
           ${listaHtml}
-          <div class="toggle-wrapper" title="${isCM ? 'A Clínica Médica é o módulo mestre obrigatório.' : 'Ativar/Desativar este módulo no sorteio.'}">
+          <div class="toggle-wrapper">
             <span class="toggle-label">STATUS: <span id="${labelId}" style="color: ${modulosAtivos[materia] && temArquivos ? 'var(--green)' : 'var(--muted)'};">${modulosAtivos[materia] && temArquivos ? 'ON' : 'OFF'}</span></span>
             <label class="switch">
               <input type="checkbox" onchange="toggleModulo('${materia}', this.checked)" ${isChecked} ${isLocked ? 'disabled' : ''}>
@@ -607,11 +722,11 @@
     const casosAtivos = bancoDeDadosMestre.filter(c => modulosAtivos[c._moduloOrigem]).length;
     
     if (casosAtivos > 0) {
-      statusEl.innerHTML = `<span style="color: var(--green); font-weight: 600;">✓ Sistema Operacional. ${casosAtivos} nós decisórios ativos no motor adaptativo.</span>`;
+      statusEl.innerHTML = `<span style="color: var(--green); font-weight: 600;">✓ Sistema Operacional. ${casosAtivos} nós decisórios ativos.</span>`;
       btnStart.innerText = "Gerar Novo Caso Clínico";
       btnStart.disabled = false;
     } else {
-      statusEl.innerHTML = `<span style="color: var(--red); font-weight: 600;">⚠️ Nenhum caso localizado. Ligue algum módulo ou verifique os arquivos.</span>`;
+      statusEl.innerHTML = `<span style="color: var(--red); font-weight: 600;">⚠️ Nenhum caso localizado. Ligue algum módulo.</span>`;
       btnStart.innerText = "Módulos Desligados";
       btnStart.disabled = true;
     }
@@ -619,7 +734,7 @@
 
   /**
    * ==========================================
-   * 4. ALGORITMOS DE NLP & FUZZY MATCHING
+   * 5. ALGORITMOS DE NLP & FUZZY MATCHING
    * ==========================================
    */
   function normalizar(texto) {
@@ -684,7 +799,7 @@
 
   /**
    * ==========================================
-   * 5. MOTOR BAYESIANO E GAME LOOP
+   * 6. GAME LOOP & GESTÃO DE PONTUAÇÃO
    * ==========================================
    */
   let casoAtual = null;
@@ -721,7 +836,7 @@
     const bancoDeDadosAtivo = bancoDeDadosMestre.filter(caso => modulosAtivos[caso._moduloOrigem]);
     
     if (bancoDeDadosAtivo.length === 0) {
-      alert("Ative ao menos um módulo com casos para prosseguir.");
+      alert("Ative ao menos um módulo para prosseguir.");
       return;
     }
     
@@ -780,12 +895,12 @@
         pontuacao += regraAtual.peso;
         atualizarBarraBayes(probabilidadeBayesiana + 15);
       }
-      logDiv.innerHTML += `<div class="preceptor-card correct"><strong>✓ Decisão Validada:</strong> O preceptor reconheceu [<em>${inputUsuario}</em>] congruente com (<em>${resultadoFuzzy.matchedTarget}</em>). A probabilidade pós-teste subiu.</div>`;
+      logDiv.innerHTML += `<div class="preceptor-card correct"><strong>✓ Decisão Validada:</strong> Resposta [<em>${inputUsuario}</em>] congruente com (<em>${resultadoFuzzy.matchedTarget}</em>).</div>`;
     } else {
       casoTeveErro = true;
       if (etapa === 0 && nivelConfianca === 0.99) pontuacao = Math.max(0, pontuacao - 10);
       atualizarBarraBayes(probabilidadeBayesiana - 15);
-      logDiv.innerHTML += `<div class="preceptor-card incorrect"><strong>✕ Divergência Diagnóstica:</strong> A conduta [<em>${inputUsuario}</em>] afasta a probabilidade do nó decisório. O algoritmo prioriza: <strong>${respostasAceitas ? respostasAceitas[0] : 'N/A'}</strong>.</div>`;
+      logDiv.innerHTML += `<div class="preceptor-card incorrect"><strong>✕ Divergência Diagnóstica:</strong> Proposição [<em>${inputUsuario}</em>] incorreta. Esperado: <strong>${respostasAceitas ? respostasAceitas[0] : 'N/A'}</strong>.</div>`;
     }
 
     etapa++;
@@ -802,6 +917,30 @@
 
     logDiv.innerHTML += `<div class="preceptor-card summary"><strong>📋 Discussão do Preceptor:</strong><br><p style="margin: 8px 0 0;">${casoAtual.feedback_tecnico}</p></div>`;
     
+    // GESTÃO DE BADGE (Troféu por 100% de Acerto)
+    if (pontuacao >= 100 && !casoTeveErro) {
+      const nomeDoenca = (casoAtual.respostas_esperadas.diagnostico && casoAtual.respostas_esperadas.diagnostico[0]) || "Patologia Clínica";
+      const resultadoBadge = BadgeSystem.tentarConcederBadge(nomeDoenca);
+
+      if (resultadoBadge.concedida) {
+        logDiv.innerHTML += `
+          <div class="badge-conquest-card">
+            <span style="font-size: 28px;">🏆</span>
+            <div>
+              <strong style="font-size: 15px;">Troféu Desbloqueado: ${nomeDoenca}!</strong><br>
+              <span style="font-size: 12.5px;">Parabéns! Você alcançou calibração perfeita neste caso. Badge registrada na sua galeria diária (${resultadoBadge.totalHoje}/3).</span>
+            </div>
+          </div>
+        `;
+      } else {
+        logDiv.innerHTML += `
+          <div class="preceptor-card summary" style="border-left-color: var(--amber);">
+            <strong>ℹ️ Desempenho Impecável (100%):</strong> Você dominou o quadro de <em>${nomeDoenca}</em>. O limite de 3 badges diárias para este dispositivo já foi completado hoje.
+          </div>
+        `;
+      }
+    }
+
     const material = encontrarMaterialComplementar(casoAtual);
     if (material) {
       const m = material.dados;
