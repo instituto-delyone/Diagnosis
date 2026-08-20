@@ -1,0 +1,82 @@
+[
+  {
+    "id": "ped_puericultura_dnpm_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [9, 11],
+    "prevalencia_base": 30,
+    "slots_sintomas": {
+      "obrigatorios": ["avaliação de marcos do desenvolvimento na consulta de rotina", "senta sozinho sem apoio", "estranha pessoas desconhecidas e bate palmas ao estímulo"],
+      "variaveis_gravidade": [
+        { "sinal": "preensão de objetos com pinça entre polegar e indicador" },
+        { "sinal": "emissão de polissílabos (mama, papa)" },
+        { "sinal": "engatinha ativamente" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": ["Desenvolvimento neuropsicomotor adequado", "DNPM adequado para 9-10 meses", "Marcos adequados", "DNPM normal"],
+      "exames": ["Nenhum", "Clínico", "Avaliação da caderneta de saúde"],
+      "conduta": ["Manter acompanhamento ambulatorial", "Estimulação continuada", "Orientações de puericultura", "Reforçar vacinação e profilaxias"]
+    },
+    "feedback_tecnico": "O lactente apresenta marcos clássicos da faixa de 9 a 10 meses: postura sentada sem apoio, preensão em pinça com polegar/indicador, vocalização polissilábica e comportamento social de estranhamento/permanência do objeto. O desenvolvimento motor segue a progressão crânio-caudal e o adaptativo segue o sentido cubital-radial."
+  },
+  {
+    "id": "ped_mastite_lactacao_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [1, 3],
+    "prevalencia_base": 25,
+    "slots_sintomas": {
+      "obrigatorios": ["nutriz refere dor intensa em mama direita", "presença de fissura mamilar prévia", "área em cunha hiperemiada, endurecida e dolorosa na mama"],
+      "variaveis_gravidade": [
+        { "sinal": "picos febris de 38,8°C e calafrios" },
+        { "sinal": "ingurgitamento mamário associado" },
+        { "sinal": "pega inadequada com lábio inferior invertido" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": ["Mastite", "Mastite puerperal", "Mastite lactacional", "Infecção por Staphylococcus aureus"],
+      "exames": ["Nenhum", "Clínico", "Ultrassonografia mamária se suspeita de abscesso"],
+      "conduta": ["Antibioticoterapia oral contra S. aureus", "Cefalexina", "Amoxicilina com clavulanato", "Manter esvaziamento da mama", "Corrigir técnica de pega"]
+    },
+    "feedback_tecnico": "A mastite decorre da estase láctea com proliferação bacteriana secundária (predomínio de Staphylococcus aureus). A conduta exige manutenção obrigatória da amamentação ou ordenha para esvaziar a mama acometida, correção da técnica de pega e antibioticoterapia sistêmica se houver repercussão sistêmica (febre, calafrios)."
+  },
+  {
+    "id": "ped_puberdade_precoce_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [72, 90],
+    "prevalencia_base": 15,
+    "slots_sintomas": {
+      "obrigatorios": ["menina trazida pela mãe com queixa de desenvolvimento puberal precoce", "telarca bilateral aos 6 anos de idade (M2 de Tanner)", "aceleração recente da velocidade de crescimento"],
+      "variaveis_gravidade": [
+        { "sinal": "presença de pubarca incipiente (P2)" },
+        { "sinal": "avaliação neurológica sem déficits focais" },
+        { "sinal": "ultrassonografia pélvica com aumento do volume uterino" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": ["Puberdade precoce", "Puberdade precoce central", "Puberdade precoce GnRH-dependente", "Puberdade precoce idiopática"],
+      "exames": ["Radiografia de punho e mão para idade óssea", "LH e FSH basais ou pós-GnRH", "Ultrassom pélvico", "Ressonância de encéfalo"],
+      "conduta": ["Bloqueio com análogo de GnRH", "Agonista de GnRH de depósito", "Leuprorrelina", "Encaminhamento à endocrinologia pediátrica"]
+    },
+    "feedback_tecnico": "O surgimento de caracteres sexuais secundários em meninas antes dos 8 anos (e antes dos 9 anos em meninos) define puberdade precoce. No sexo feminino, o quadro central é majoritariamente idiopático. A conduta inclui confirmação hormonal, avaliação do avanço de idade óssea e bloqueio com análogo de GnRH de depósito para preservar a estatura final."
+  },
+  {
+    "id": "ped_profilaxia_ferro_vitd_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [3, 4],
+    "prevalencia_base": 30,
+    "slots_sintomas": {
+      "obrigatorios": ["lactente nascido a termo com 3.200g", "em aleitamento materno exclusivo", "consulta de puericultura ao completar 3 meses de vida"],
+      "variaveis_gravidade": [
+        { "sinal": "ganho de peso ponderal adequado de 700g/mês" },
+        { "sinal": "uso regular de Vitamina D desde a 1ª semana" },
+        { "sinal": "ausência de queixas gastrointestinais" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": ["Puericultura de rotina", "Prescrição de profilaxia com ferro", "Suplementação preventiva"],
+      "exames": ["Nenhum", "Clínico"],
+      "conduta": ["Iniciar sulfato ferroso profilático", "Ferro elementar 1 mg/kg/dia", "Manter Vitamina D 400 UI/dia", "Manter AME até 6 meses"]
+    },
+    "feedback_tecnico": "Em lactentes a termo e com peso de nascimento > 2.500g sob AME, a profilaxia com ferro elementar (1 mg/kg/dia) deve ser iniciada a partir dos 3 meses e mantida até os 2 anos. A vitamina D (400 UI/dia até 12 meses e 600 UI/dia dos 12 aos 24 meses) deve ser introduzida já na primeira semana de vida."
+  }
+]
