@@ -1,0 +1,184 @@
+[
+  {
+    "id": "ped_oma_estatuto_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [6, 24],
+    "prevalencia_base": 30,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "história de resfriado comum há 4 dias que evoluiu com otalgia intensa e irritabilidade",
+        "otoscopia evidenciando membrana timpânica hiperemiada, opaca e abaulada"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "febre alta de 39,2°C" },
+        { "sinal": "presença de otorreia purulenta recente" },
+        { "sinal": "acometimento bilateral da membrana timpânica" },
+        { "sinal": "frequenta creche e usou amoxicilina há 20 dias" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Otite Média Aguda",
+        "OMA",
+        "Otite média bacteriana",
+        "OMA supurada"
+      ],
+      "exames": ["Nenhum", "Otoscopia pneumática", "Clínico"],
+      "conduta": [
+        "Amoxicilina em dose dobrada (80 a 90 mg/kg/dia)",
+        "Amoxicilina com Clavulanato",
+        "Amoxicilina oral",
+        "Analgesia e reavaliação em 48-72h"
+      ]
+    },
+    "feedback_tecnico": "O achado semiológico de maior valor diagnóstico para Otite Média Aguda (OMA) é o abaulamento da membrana timpânica[span_1](start_span)[span_1](end_span). O tratamento de primeira linha é a Amoxicilina[span_2](start_span)[span_2](end_span). A dose dobrada (80-90 mg/kg/dia) ou a associação com Clavulanato está indicada em menores de 2 anos, frequentadores de creche, uso de beta-lactâmico nos últimos 30 dias ou presença de conjuntivite associada (suspeita de H. influenzae)[span_3](start_span)[span_3](end_span)."
+  },
+  {
+    "id": "ped_faringite_strepto_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [60, 144],
+    "prevalencia_base": 25,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "escolar admitido com odinofagia intensa de início súbito e febre alta",
+        "orofaringe com exsudato purulento amigdaliano e petéquias no palato",
+        "ausência de tosse, coriza ou sintomas nasais"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "linfonodomegalia cervical anterior dolorosa" },
+        { "sinal": "dor abdominal e vômitos associados" },
+        { "sinal": "teste rápido antigênico para Streptococcus positivo" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Faringoamigdalite bacteriana",
+        "Faringite estreptocócica",
+        "Infecção por Streptococcus pyogenes",
+        "Streptococcus beta-hemolítico do grupo A"
+      ],
+      "exames": [
+        "Teste rápido antigênico para Streptococcus",
+        "Cultura de orofaringe",
+        "Swab de orofaringe",
+        "Nenhum"
+      ],
+      "conduta": [
+        "Penicilina G Benzatina dose única IM",
+        "Amoxicilina via oral por 10 dias",
+        "Azitromicina ou Claritromicina se alergia a penicilina",
+        "Antitérmicos e sintomáticos"
+      ]
+    },
+    "feedback_tecnico": "A faringite estreptocócica ocorre tipicamente entre 5 e 15 anos e cursa sem sintomas de IVAS viral (sem tosse/coriza)[span_4](start_span)[span_4](end_span). As petéquias no palato são o achado com maior correlação diagnóstica[span_5](start_span)[span_5](end_span). O tratamento de escolha é a Penicilina Benzatina (dose única) ou Amoxicilina por 10 dias, tendo como objetivo primário a erradicação bacteriana e a prevenção de Febre Reumática[span_6](start_span)[span_6](end_span)."
+  },
+  {
+    "id": "ped_crupe_laringite_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [6, 36],
+    "prevalencia_base": 20,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "pródromos catarrais que evoluíram com tosse ladrante metálica (tosse de cachorro)",
+        "rouquidão, afonia e estridor inspiratório"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "estridor presente em repouso" },
+        { "sinal": "tiragem de fúrcula e intercostal" },
+        { "sinal": "Rx cervical com estreitamento subglótico (sinal da torre ou ponta de lápis)" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Crupe viral",
+        "Laringotraqueíte viral aguda",
+        "Laringite estridulosa",
+        "Infecção por Parainfluenza"
+      ],
+      "exames": ["Nenhum", "Clínico", "Radiografia de coluna cervical"],
+      "conduta": [
+        "Dexametasona dose única (VO ou IM)",
+        "Nebulização com Adrenalina (se estridor em repouso)",
+        "Observação clínica por no mínimo 2 horas após adrenalina",
+        "Oxigenioterapia se hipoxemia"
+      ]
+    },
+    "feedback_tecnico": "A Laringotraqueíte Viral (Crupe) é causada principalmente pelo vírus Parainfluenza[span_7](start_span)[span_7](end_span). O corticoide (Dexametasona) é mandatório para todos os casos[span_8](start_span)[span_8](end_span). A presença de estridor em repouso define gravidade e indica nebulização com Adrenalina não diluída, exigindo observação por no mínimo 2 horas devido ao risco de efeito rebote após o término da ação da adrenalina[span_9](start_span)[span_9](end_span)."
+  },
+  {
+    "id": "ped_pneumonia_bacteriana_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [12, 60],
+    "prevalencia_base": 25,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "febre alta, tosse e taquipneia sustentada",
+        "ausculta com estertores crepitantes inspiratórios focais e aumento do frêmito tóraco-vocal"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "tiragem subcostal mantida" },
+        { "sinal": "gemência expiratória" },
+        { "sinal": "batimento de asa nasal" },
+        { "sinal": "SatO2 de 89% em ar ambiente" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Pneumonia bacteriana",
+        "Pneumonia adquirida na comunidade",
+        "Pneumonia pneumocócica",
+        "Infecção por Streptococcus pneumoniae"
+      ],
+      "exames": [
+        "Radiografia de tórax",
+        "Oximetria de pulso",
+        "Hemograma e PCR",
+        "Gasometria arterial"
+      ],
+      "conduta": [
+        "Internação hospitalar e Penicilina Cristalina EV (se sinais de gravidade)",
+        "Amoxicilina via oral (se sem gravidade/ambulatorial)",
+        "Oxigenioterapia",
+        "Toracocentese diagnóstica se derrame pleural parapneumônico"
+      ]
+    },
+    "feedback_tecnico": "A taquipneia é o sinal de maior sensibilidade para acometimento do trato respiratório inferior na infância[span_10](start_span)[span_10](end_span). Sinais como tiragem subcostal, gemência e batimento de asa nasal denotam gravidade e indicam internação imediata para oxigenioterapia e antibioticoterapia parenteral (Penicilina Cristalina ou Ampicilina)[span_11](start_span)[span_11](end_span). Em casos ambulatoriais sem gravidade, utiliza-se Amoxicilina oral[span_12](start_span)[span_12](end_span)."
+  },
+  {
+    "id": "ped_pneumonia_afebril_lactente_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [1, 3],
+    "prevalencia_base": 15,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "lactente jovem com tosse seca em crises e taquipneia de evolução insidiosa e arrastada",
+        "ausência de febre durante todo o quadro",
+        "histórico de conjuntivite neonatal nas primeiras semanas de vida pós-parto vaginal"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "hemograma com eosinofilia marcante" },
+        { "sinal": "Rx de tórax com infiltrado intersticial bilateral e hiperinsuflação" },
+        { "sinal": "mãe com histórico de corrimento genital não tratado" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Pneumonia Afebril do Lactente",
+        "Infecção por Chlamydia trachomatis",
+        "Pneumonia atípica neonatal"
+      ],
+      "exames": [
+        "Hemograma com contagem de eosinófilos",
+        "Radiografia de tórax",
+        "Pesquisa de Chlamydia por PCR ou sorologia"
+      ],
+      "conduta": [
+        "Macrolídeo oral",
+        "Azitromicina por 5 dias",
+        "Eritromicina por 14 dias",
+        "Tratamento e investigação da mãe e parceiro"
+      ]
+    },
+    "feedback_tecnico": "A Pneumonia Afebril do Lactente é causada tipicamente pela Chlamydia trachomatis adquirida durante o parto vaginal[span_13](start_span)[span_13](end_span). Caracteriza-se por tosse persistente em lactentes de 1 a 3 meses, taquipneia, ausência de febre, conjuntivite neonatal prévia e eosinofilia no hemograma[span_14](start_span)[span_14](end_span). O tratamento de escolha é feito com macrolídeos (Azitromicina ou Eritromicina)[span_15](start_span)[span_15](end_span)."
+  }
+]
