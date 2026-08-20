@@ -509,42 +509,4 @@
       "Estratificação de gravidade (pesquisa de disfunção de VD por ecocardiograma ou troponina)",
       "Trombólise sistêmica se choque obstrutivo ou instabilidade hemodinâmica (TEP de alto risco)"
     ]
-  },
-  "cetoacidose_diabetica": {
-    "id": "cetoacidose_diabetica",
-    "badgeName": "Cetoacidose Diabética",
-    "categoria": "Emergência Metabólica",
-    "vinheta": "Paciente jovem c...",
-    "diagnosticoCorreto": "Cetoacidose...",
-    "criteriosDiagnosticos": [
-      "Glicemia > 200-250 mg/dL",
-      "Acidose metabólica com ânion gap"
-    ],
-    "condutaImediata": [
-      "Expansão volêmica vigorosa"
-    ]
-  },
-  "apendicite_aguda": {
-    "id": "apendicite_aguda",
-    "badgeName": "Apendicite Aguda",
-    "categoria": "Urgência Cirúrgica",
-    "vinheta": "Paciente de 22 a...",
-    "diagnosticoCorreto": "Apendicite...",
-    "criteriosDiagnosticos": [
-      "Quadro clínico típico com dor"
-    ],
-    "condutaImediata": [
-      "Dieta zero e hidratação"
-    ]
-  },
-  "colecistite_aguda": {
-    "id": "colecistite_aguda",
-    "badgeName": "Colecistite Aguda",
-    "categoria": "Cirurgia Geral",
-    "prevalencia_base": 30,
-    "vinheta": "Mulher de 44 ano...",
-    "respostas_esperadas": {
-      "diagnostico": [ "colecistite aguda" ]
-    }
   }
-}
