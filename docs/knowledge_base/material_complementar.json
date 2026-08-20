@@ -512,4 +512,47 @@
       "Trombólise sistêmica se choque..."
     ]
   }
-}
+},
+  "Reanimação Neonatal em Sala de Parto": {
+    "etiologia": "A necessidade de reanimação decorre predominantemente de asfixia intraparto, prematuridade e falha na transição respiratória fisiológica.",
+    "fisiopatologia": "A hipóxia perinatal leva à vasoconstrição pulmonar sustentada, bradicardia e acidose respiratória/metabólica. O principal estímulo para o restabelecimento hemodinâmico do neonato é a aeração pulmonar efetiva.",
+    "diagnostico": "Avaliação baseada em 3 perguntas na recepção: Gestação a termo? Respirando ou chorando? Tônus adequado? A frequência cardíaca (auscultada no precórdio) e a respiração são os determinantes para iniciar as manobras.",
+    "tratamento": "Passos iniciais em 30s (APAS). Se FC < 100 ou apneia: VPP em ar ambiente (>= 34 sem) ou O2 a 30% (< 34 sem) no Golden Minute. Se FC < 60 após VPP com técnica checada e IOT: Massagem Cardíaca (3C:1V) por 60s. Adrenalina via umbilical se refratário.",
+    "particularidades": "A única indicação formal para intubação orotraqueal imediata antes de realizar a VPP com máscara facial na sala de parto é a presença de Hérnia Diafragmática Congênita."
+  },
+  "Doença da Membrana Hialina (SDRN)": {
+    "etiologia": "Imaturidade pulmonar com deficiência quantitativa e qualitativa de surfactante alveolar produzido pelos pneumócitos tipo II.",
+    "fisiopatologia": "Ocorre aumento da tensão superficial nos alvéolos, levando ao colapso expiratório difuso, microatelectasias, alteração da relação V/Q com shunt intrapulmonar, hipoxemia e acidose mista.",
+    "diagnostico": "Lactente prematuro (< 34 semanas) com taquipneia, retrações intercostais/subcostais e gemência nas primeiras horas. Radiografia de tórax com padrão clássico em vidro fosco (reticulogranular difuso) e broncogramas aéreos com volume pulmonar reduzido.",
+    "tratamento": "CPAP nasal precoce em sala de parto para recrutamento alveolar. Administração de surfactante exógeno por via traqueal se houver indicação ou piora clínica. Corticoterapia antenatal materna é a principal estratégia preventiva.",
+    "particularidades": "Filhos de mães diabéticas apresentam maior risco de desenvolver membrana hialina, mesmo quando próximos ao termo, devido à inibição da síntese de surfactante pela hiperinsulinemia fetal."
+  },
+  "Taquipneia Transitória do RN (TTRN)": {
+    "etiologia": "Deficiência no clearance e na reabsorção do líquido pulmonar pelas células epiteliais após o nascimento.",
+    "fisiopatologia": "A ausência do trabalho de parto (comum em cesarianas eletivas) reduz a liberação de catecolaminas maternas e fetais, diminuindo a ativação dos canais de sódio epiteliais (ENaC) responsáveis por drenar o fluido alveolar.",
+    "diagnostico": "RN a termo ou pré-termo limítrofe apresentando taquipneia de início precoce e curso autolimitado (< 72h). O Rx de tórax revela congestão hilar, proeminência de trama vascular, espessamento de cissuras e hiperinsuflação pulmonar leve.",
+    "tratamento": "Conduta de suporte clínico com restrição hídrica leve e oxigenioterapia de baixo fluxo (FiO2 < 40%) por halo ou cânula nasal. Não há indicação de diuréticos ou antibióticos.",
+    "particularidades": "A presença de derrame cisural (líquido na pequena cissura) associada a campos pulmonares bem insuflados é o achado radiológico mais característico."
+  },
+  "Síndrome de Aspiração Meconial (SAM)": {
+    "etiologia": "Eliminação de mecônio intraútero secundária a eventos de asfixia e sofrimento fetal com movimentos de gasping antes do nascimento.",
+    "fisiopatologia": "A aspiração do mecônio para as vias aéreas distais gera obstrução mecânica com mecanismo de válvula (alçapão aéreo e atelectasias), pneumonite química estéril e inativação secundária do surfactante endógeno.",
+    "diagnostico": "RN a termo ou pós-termo com histórico de líquido meconial espesso, evoluindo com desconforto respiratório grave imediato. Radiografia evidencia infiltrados nodulares e alveolares grosseiros e assimétricos com áreas de hiperinsuflação e risco de pneumotórax.",
+    "tratamento": "Suporte intensivo em UTIN com ventilação mecânica invasiva, reposição de surfactante exógeno e antibioticoterapia profilática/terapêutica. Uso de óxido nítrico inalatório se associado a Hipertensão Pulmonar Persistente.",
+    "particularidades": "RN banhado em mecônio que nasce ativo e vigoroso não deve ser aspirado traquealmente; deve ser conduzido diretamente ao colo materno com clampeamento oportuno do cordão."
+  },
+  "Icterícia Neonatal Patológica e Doença Hemolítica": {
+    "etiologia": "Hiperbilirrubinemia indireta decorrente de hemólise imune (Incompatibilidade Rh, Incompatibilidade ABO) ou defeitos eritrocitários/enzimáticos.",
+    "fisiopatologia": "Anticorpos maternos IgG atravessam a barreira transplacentária e ligam-se aos antígenos das hemácias fetais, deflagrando lise eritrocitária no sistema reticuloendotelial e liberação massiva de bilirrubina não conjugada.",
+    "diagnostico": "Icterícia precoce (surgimento nas primeiras 24 horas de vida), elevação de BI > 5 mg/dL/dia ou zonas de Kramer avançadas (zona III ultrapassando o umbigo precocemente). Coombs direto positivo confirma a etiologia imune.",
+    "tratamento": "Fototerapia contínua de alta intensidade (fotoisomerização estrutural para lumirrubina excretável). Exsanguineotransfusão indicada em casos refratários ou em curvas de risco neurotóxico (risco de Kernicterus).",
+    "particularidades": "A incompatibilidade Rh ocorre tipicamente em mães Rh negativo sensibilizadas com RN Rh positivo e costuma ter evolução clínica mais grave do que a incompatibilidade por subgrupos ABO."
+  },
+  "Sífilis Congênita": {
+    "etiologia": "Infecção transplacentária hematogênica pelo espiroqueta Treponema pallidum transmitido por gestante não tratada ou tratada inadequadamente.",
+    "fisiopatologia": "Disseminação sistêmica da espiroqueta pelos tecidos fetais, gerando endarterite obliterante difusa, resposta inflamatória crônica periosteal e acometimento visceral multissistêmico.",
+    "diagnostico": "Precoce (< 2 anos): rinite sanguinolenta persistente, pênfigo palmo-plantar, hepatoesplenomegalia e periostite/osteocondrite ao Rx de ossos longos (sinal do duplo contorno). Laboratório com VDRL sérico e análise de LCR.",
+    "tratamento": "Penicilina G Cristalina (100.000 a 150.000 UI/kg/dia IV dividida de acordo com a idade) por 10 dias se alteração liquórica/clínica, ou Penicilina G Procaína IM por 10 dias.",
+    "particularidades": "Estigmas tardios (> 2 anos) incluem dentes de Hutchinson, molares em amora, fronte olímpica, nariz em sela e a deformidade clássica da tíbia em sabre."
+  }
+
