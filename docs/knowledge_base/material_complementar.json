@@ -250,7 +250,7 @@
     "fisiopatologia": "O fungo preenche os espaços alveolares com um material espumoso denso, bloqueando fisicamente a membrana alveolocapilar, gerando hipoxemia silenciosa e progressiva.",
     "diagnostico": "Quadro subagudo (semanas) de dispneia, tosse seca incômoda e febre leve. A ausculta pulmonar costuma ser enganosamente normal. O RX ou TC mostram infiltrado intersticial bilateral tipo 'vidro fosco'.",
     "tratamento": "Sulfametoxazol-Trimetoprima (Bactrim) em altas doses por 21 dias. Adiciona-se corticoide sistematicamente se houver hipoxemia relevante (PaO2 < 70 mmHg) para evitar piora da inflamação após lise do fungo.",
-    "particularidades": "Uma gasometria arterial mostrando alcalose respiratória severa combinada com uma ausculta pulmonar "limpa" em paciente imunodeprimido é Pneumocistose até prova em contrário."
+    "particularidades": "Uma gasometria arterial mostrando alcalose respiratória severa combinada com uma ausculta pulmonar 'limpa' em paciente imunodeprimido é Pneumocistose até prova em contrário."
   },
   "Neurotoxoplasmose": {
     "etiologia": "Reativação de cistos de Toxoplasma gondii quiescentes no sistema nervoso central em pacientes gravemente imunossuprimidos (CD4 < 100).",
@@ -476,6 +476,7 @@
     "tratamento": "Compressões 100-120/min com profundidade adequada (4 cm em < 1 ano e 5 cm em > 1 ano). Relação 15:2 com 2 socorristas. Em ritmos não chocáveis: Adrenalina precoce (0,01 mg/kg) a cada 3-5 min e busca ativa de causas reversíveis (5H e 5T). Em FV/TVSP: Choque inicial 2 J/kg, seguido de 4 J/kg e antiarrítmicos (Amiodarona ou Lidocaína).",
     "particularidades": "Após intubação traqueal, a massagem cardíaca torna-se contínua (sem pausas) e aplica-se 1 ventilação a cada 6 segundos (10 incursões/minuto)."
   },
+  "cetoacidose_diabetica": {
     "id": "cetoacidose_diabetica",
     "badgeName": "Cetoacidose Diabética",
     "categoria": "Emergência Metabólica",
