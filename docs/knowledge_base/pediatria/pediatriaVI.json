@@ -1,1 +1,196 @@
-
+[
+  {
+    "id": "ped_fallot_crise_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [6, 24],
+    "prevalencia_base": 20,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "lactente com cardiopatia congênita conhecida",
+        "crise de choro vigoroso ao acordar seguida de cianose labial e de extremidades súbita e intensa",
+        "diminuição da intensidade do sopro sistólico prévio durante o episódio"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "taquipneia sem estertoração pulmonar" },
+        { "sinal": "hipoxemia grave com SatO2 de 65%" },
+        { "sinal": "irritabilidade seguida de sonolência" },
+        { "sinal": "Rx com ápice cardíaco elevado e arco pulmonar escavado (coração em bota)" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Crise de hipóxia",
+        "Crise hipercianótica",
+        "Tetralogia de Fallot",
+        "Espasmo infundibular em Fallot"
+      ],
+      "exames": [
+        "Ecocardiograma com Doppler",
+        "Radiografia de tórax",
+        "Gasometria arterial",
+        "Nenhum no momento agudo"
+      ],
+      "conduta": [
+        "Posição genupeitoral",
+        "Flexão das pernas sobre o tórax",
+        "Oxigenioterapia em alto fluxo",
+        "Morfina subcutânea ou venosa",
+        "Betabloqueador (Propranolol venoso)",
+        "Expansão volêmica com cristaloide"
+      ]
+    },
+    "feedback_tecnico": "A crise hipercianótica da Tetralogia de Fallot decorre de espasmo da musculatura infundibular da via de saída do ventrículo direito[span_2](start_span)[span_2](end_span)[span_3](start_span)[span_3](end_span), desviando sangue desoxigenado pelo CIV em direção à aorta (shunt D-E maciço)[span_4](start_span)[span_4](end_span)[span_5](start_span)[span_5](end_span). A conduta imediata consiste em posicionar a criança em posição genupeitoral (aumenta a resistência vascular sistêmica e reduz o shunt)[span_6](start_span)[span_6](end_span)[span_7](start_span)[span_7](end_span), administrar oxigênio[span_8](start_span)[span_8](end_span)[span_9](start_span)[span_9](end_span), Morfina (suprime o drive ventilatório e acalma o paciente)[span_10](start_span)[span_10](end_span)[span_11](start_span)[span_11](end_span) e Betabloqueadores para relaxamento infundibular[span_12](start_span)[span_12](end_span)[span_13](start_span)[span_13](end_span)."
+  },
+  {
+    "id": "ped_tgv_neonatal_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [0, 1],
+    "prevalencia_base": 15,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "recém-nascido a termo com poucas horas de vida apresentando cianose central progressiva",
+        "ausência de melhora após teste da hiperóxia (O2 a 100%)",
+        "ausência de sopros cardíacos audíveis e segunda bulha hiperfonética",
+        "Rx de tórax com silhueta cardiovascular em forma de ovo deitado"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "acidose metabólica láctica em piora" },
+        { "sinal": "SatO2 de 60% refratária em ar ambiente e O2" },
+        { "sinal": "pulsos amplos e taquicardia compensatória" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Transposição das Grandes Artérias",
+        "Transposição dos Grandes Vasos",
+        "TGV",
+        "Cardiopatia congênita cianótica canal-dependente"
+      ],
+      "exames": [
+        "Ecocardiograma bidimensional com Doppler",
+        "Radiografia de tórax",
+        "Gasometria arterial com teste de hiperóxia"
+      ],
+      "conduta": [
+        "Infusão contínua de Prostaglandina E1 venosa (Alprostadil)",
+        "Manter canal arterial patente",
+        "Atriosseptostomia por balão de Rashkind",
+        "Programar cirurgia anatômica de Jatene até 21 dias de vida"
+      ]
+    },
+    "feedback_tecnico": "Na Transposição dos Grandes Vasos (TGV), as circulações sistêmica e pulmonar funcionam em paralelo[span_14](start_span)[span_14](end_span)[span_15](start_span)[span_15](end_span). A sobrevida imediata depende da manutenção de comunicações (shunts) entre os circuitos[span_16](start_span)[span_16](end_span)[span_17](start_span)[span_17](end_span). A conduta farmacológica de emergência é a infusão de Prostaglandina E1 para manter o canal arterial aberto[span_18](start_span)[span_18](end_span)[span_19](start_span)[span_19](end_span), procedendo-se à atriosseptostomia com balão (Rashkind) se a mistura atrial for restritiva[span_20](start_span)[span_20](end_span)[span_21](start_span)[span_21](end_span), seguida de correção cirúrgica anatômica definitiva (Cirurgia de Jatene) nas primeiras 3 semanas de vida[span_22](start_span)[span_22](end_span)[span_23](start_span)[span_23](end_span)."
+  },
+  {
+    "id": "ped_coarctacao_aorta_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [48, 144],
+    "prevalencia_base": 15,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "escolar assintomático encaminhado por achado de hipertensão arterial em membros superiores",
+        "pulsos femorais e pediosos marcadamente diminuídos e filiformes",
+        "gradiente pressórico evidente entre membros superiores e membros inferiores (PA em MMSS > MMII)"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "queixa de claudicação ou dor em panturrilhas aos esforços físicos" },
+        { "sinal": "frêmito tóraco-abdominal palpável nos espaços intercostais" },
+        { "sinal": "Rx de tórax com erosões no bordo inferior das costelas (sinal de Roesler) e sinal do 3 aórtico" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Coarctação de Aorta",
+        "CoA",
+        "Estenose aórtica justaductal"
+      ],
+      "exames": [
+        "Ecocardiograma com Doppler",
+        "Angiotomografia de tórax / Angiorressonância",
+        "Radiografia de tórax"
+      ],
+      "conduta": [
+        "Correção cirúrgica (anastomose término-terminal) ou angioplastia com stent",
+        "Avaliação cardiológica especializada",
+        "Rastreio de valva aórtica bicúspide associada",
+        "Cariótipo se paciente do sexo feminino (rastreio de Turner)"
+      ]
+    },
+    "feedback_tecnico": "A Coarctação da Aorta cursa com obstrução do fluxo sistêmico descendente[span_24](start_span)[span_24](end_span)[span_25](start_span)[span_25](end_span). Em escolares e adolescentes, manifesta-se tipicamente com hipertensão arterial em membros superiores e pulsos periféricos débeis ou ausentes em membros inferiores[span_26](start_span)[span_26](end_span)[span_27](start_span)[span_27](end_span). O Rx pode demonstrar erosão dos arcos costais por dilatação das artérias intercostais colaterais[span_28](start_span)[span_28](end_span)[span_29](start_span)[span_29](end_span). A associação com valva aórtica bicúspide e com a Síndrome de Turner é prevalente[span_30](start_span)[span_30](end_span)[span_31](start_span)[span_31](end_span)."
+  },
+  {
+    "id": "ped_pals_parada_asfixia_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [12, 60],
+    "prevalencia_base": 25,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "lactente admitido em parada cardiorrespiratória (PCR) após episódio de afogamento/asfixia",
+        "ausência de movimentos ventilatórios e pulso carotídeo impalpável checado em 10 segundos",
+        "monitor cardíaco evidenciando ritmo de Assistolia confirmado pelo protocolo da linha reta"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "tempo de submersão de 4 minutos" },
+        { "sinal": "cianose periférica e midríase paralítica bilateral" },
+        { "sinal": "RCP em andamento com 2 socorristas na relação 15:2" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Parada Cardiorrespiratória",
+        "PCR em ritmo não chocável",
+        "Assistolia pediátrica",
+        "PCR por hipóxia/asfixia"
+      ],
+      "exames": ["Monitorização eletrocardiográfica contínua", "Glicemia capilar", "Gasometria"],
+      "conduta": [
+        "RCP de alta qualidade (100 a 120 compressões/minuto)",
+        "Adrenalina 0,01 mg/kg IV ou IO a cada 3 a 5 minutos",
+        "Ventilação com bolsa-válvula-máscara e O2 a 100%",
+        "Acesso intraósseo ou venoso imediato",
+        "Tratar causas reversíveis (5H e 5T) e hipoglicemia",
+        "Não aplicar choque elétrico (ritmo não chocável)"
+      ]
+    },
+    "feedback_tecnico": "A maioria das paradas cardiorrespiratórias na faixa pediátrica decorre de hipóxia e insuficiência respiratória terminal, culminando em ritmos não chocáveis (Assistolia ou AESP)[span_32](start_span)[span_32](end_span)[span_33](start_span)[span_33](end_span). O protocolo do PALS exige RCP imediata de alta qualidade, Adrenalina precoce (0,01 mg/kg IV/IO) repetida a cada 3-5 minutos e identificação ativa de causas reversíveis (5H, 5T e hipoglicemia)[span_34](start_span)[span_34](end_span)[span_35](start_span)[span_35](end_span). Não há indicação de desfibrilação em ritmos não chocáveis[span_36](start_span)[span_36](end_span)[span_37](start_span)[span_37](end_span)."
+  },
+  {
+    "id": "ped_mononucleose_infecciosa_01",
+    "_moduloOrigem": "Pediatria",
+    "faixa_etaria_meses": [60, 180],
+    "prevalencia_base": 20,
+    "slots_sintomas": {
+      "obrigatorios": [
+        "adolescente admitido com febre alta e odinofagia intensa com exsudato amigdaliano",
+        "linfadenopatia generalizada acometendo cadeias cervicais anteriores, posteriores e occipitais",
+        "hepatoesplenomegalia palpável e indolor",
+        "surgimento de exantema maculopapular difuso 24 horas após início empírico de Amoxicilina"
+      ],
+      "variaveis_gravidade": [
+        { "sinal": "presença de edema palpebral bilateral (sinal de Hoagland)" },
+        { "sinal": "leucocitose importante com presença de > 10% de linfócitos atípicos no sangue periférico" },
+        { "sinal": "astenia e fadiga acentuadas" }
+      ]
+    },
+    "gabarito_dinamico": {
+      "diagnostico": [
+        "Mononucleose Infecciosa",
+        "Infecção pelo Vírus Epstein-Barr",
+        "EBV",
+        "Doença do Beijo"
+      ],
+      "exames": [
+        "Hemograma completo com pesquisa de atipia linfocitária",
+        "Sorologia para EBV (anticorpos heterófilos ou específicos)",
+        "Transaminases hepáticas"
+      ],
+      "conduta": [
+        "Suspender imediatamente a Amoxicilina",
+        "Tratamento sintomático e repouso",
+        "Restrição de atividades físicas de contato para evitar ruptura esplênica",
+        "Não prescrever antibióticos"
+      ]
+    },
+    "feedback_tecnico": "A Mononucleose Infecciosa (causada pelo vírus Epstein-Barr) caracteriza-se pela tríade clássica: febre, faringite exsudativa e poliadenomegalia, frequentemente acompanhada de esplenomegalia e atipia linfocitária[span_38](start_span)[span_38](end_span)[span_39](start_span)[span_39](end_span). A prescrição inadvertida de aminopenicilinas (como a Amoxicilina) precipita o surgimento de um exantema maculopapular característico mediado por imunocomplexos[span_40](start_span)[span_40](end_span)[span_41](start_span)[span_41](end_span). A conduta envolve suporte clínico e afastamento de esportes de contato pelo risco de ruptura esplênica[span_42](start_span)[span_42](end_span)[span_43](start_span)[span_43](end_span)."
+  }
+]
+p
