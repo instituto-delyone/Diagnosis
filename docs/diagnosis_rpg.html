@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<!--
+  Diagnosis Engine v5.0 — True Clinical RPG
+  Copyright (c) 2026 Instituto Delyone
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnosis Engine - RPG Clínico</title>
+  <style>
+    :root {
+      --navy: #071426;
+      --blue: #1f5fae;
+      --ink: #1f2933;
+      --muted: #66757c;
+      --bg: #f7f9fc;
+      --card: #ffffff;
+      --border: #dce5e8;
+      --green: #238b57;
+      --red: #cf5148;
+      --red-dark: #742a2a;
+      --gold: #d4af37;
+    }
+
+    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    body {
+      background-color: var(--navy); /* Fundo escuro imersivo */
+      color: var(--ink);
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app-container {
+      max-width: 900px;
+      width: 100%;
+      height: 95vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* === TELA INICIAL (SELEÇÃO DE MODO) === */
+    #selection-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 40px;
+      text-align: center;
+      background: var(--navy);
+      color: #fff;
+    }
+    #selection-screen h1 { font-size: 32px; margin-bottom: 10px; }
+    #selection-screen p { color: #cbd5e1; margin-bottom: 40px; font-size: 16px; max-width: 600px; }
+
+    .mode-cards {
+      display: flex;
+      gap: 20px;
+      width: 100%;
+      max-width: 700px;
+    }
+    .mode-card {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 30px 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .mode-card:hover { transform: translateY(-5px); }
+    .mode-card.red-room:hover { background: rgba(207, 81, 72, 0.15); border-color: var(--red); }
+    .mode-card.clinic:hover { background: rgba(31, 95, 174, 0.15); border-color: var(--blue); }
+    
+    .mode-icon { font-size: 40px; margin-bottom: 15px; }
+    .mode-title { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
+    .mode-desc { font-size: 14px; color: #94a3b8; line-height: 1.5; }
+
+    /* === TELA DO CHAT (RPG) === */
+    #chat-screen {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .header {
+      padding: 15px 24px;
+      background: var(--navy);
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h2 { margin: 0; font-size: 18px; display: flex; align-items: center; gap: 8px; }
+    .vital-sign-bar {
+      display: flex;
+      gap: 15px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+    .vital { background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 6px; }
+    .vital.alert { color: #fca5a5; background: rgba(207,81,72,0.2); animation: pulse 1.5s infinite; }
+
+    .chat-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: var(--bg);
+    }
+
+    .message {
+      max-width: 85%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-size: 15px;
+      line-height: 1.5;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .message.gm { /* Game Master */
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--navy);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+    .message.gm.critical {
+      border-left-color: var(--red);
+      background: #fdf2f1;
+      color: var(--red-dark);
+      font-weight: 600;
+    }
+
+    .message.user {
+      background: var(--blue);
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+      box-shadow: 0 4px 12px rgba(31,95,174,0.2);
+    }
+
+    /* DEBRIEFING CARD */
+    .debriefing-card {
+      background: #fff;
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 20px;
+      text-align: center;
+      animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .debriefing-card h3 { color: var(--navy); margin-top: 0; font-size: 22px; }
+    .score-circle {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; font-weight: 800;
+      margin: 0 auto 15px;
+    }
+    .debriefing-text { text-align: left; font-size: 14.5px; color: var(--ink); line-height: 1.6; margin-bottom: 20px; }
+
+    /* INPUT AREA */
+    .input-container {
+      padding: 20px;
+      background: #fff;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+    }
+    .input-box {
+      flex: 1;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .input-box:focus { border-color: var(--blue); }
+    .btn-send {
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      padding: 0 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-send:hover { background: var(--blue); }
+
+    .typing-indicator {
+      display: none;
+      align-items: center;
+      gap: 4px;
+      padding: 12px 18px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      align-self: flex-start;
+      margin-bottom: 10px;
+    }
+    .dot { width: 6px; height: 6px; background: var(--muted); border-radius: 50%; animation: bounce 1.4s infinite ease-in-out; }
+    .dot:nth-child(1) { animation-delay: -0.32s; }
+    .dot:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+    @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+  </style>
+</head>
+<body>
+
+<div class="app-container">
+  
+  <!-- TELA DE SELEÇÃO DE MODO -->
+  <div id="selection-screen">
+    <h1>O Verdadeiro Diagnóstico</h1>
+    <p>Escolha o cenário de simulação. Suas condutas alterarão o desfecho do paciente em tempo real.</p>
+    
+    <div class="mode-cards">
+      <div class="mode-card red-room" onclick="iniciarJogo('sala_vermelha')">
+        <div class="mode-icon">🚨</div>
+        <div class="mode-title">Sala Vermelha</div>
+        <div class="mode-desc">Adrenalina pura. Dados limitados, paciente instável. A prioridade é a ação e estabilização imediata. Um erro pode ser fatal.</div>
+      </div>
+      <div class="mode-card clinic" onclick="iniciarJogo('clinica_medica')">
+        <div class="mode-icon">🩺</div>
+        <div class="mode-title">Clínica Médica</div>
+        <div class="mode-desc">Raciocínio profundo. Anamnese completa e sinais vitais estáveis. A prioridade é o diagnóstico diferencial minucioso.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELA DO JOGO (RPG) -->
+  <div id="chat-screen">
+    <div class="header">
+      <h2 id="room-title">🚨 Sala Vermelha</h2>
+      <div class="vital-sign-bar">
+        <span class="vital" id="vit-pa">PA: --/--</span>
+        <span class="vital" id="vit-fc">FC: --</span>
+        <span class="vital" id="vit-spo2">SpO2: --%</span>
+      </div>
+    </div>
+
+    <div class="chat-container" id="chat-box"></div>
+    
+    <div class="typing-indicator" id="typing">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+
+    <div class="input-container">
+      <input type="text" id="user-input" class="input-box" placeholder="O que você faz ou pergunta agora?" onkeypress="handleEnter(event)">
+      <button id="btn-send" class="btn-send" onclick="enviarMensagem()">Ação</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  /* 
+   * MOCKUP DO GAME MASTER (Mestre de Jogo)
+   * Na versão final, essa lógica seria processada pela IA via API baseada no Master Schema.
+   */
+
+  const selectionScreen = document.getElementById('selection-screen');
+  const chatScreen = document.getElementById('chat-screen');
+  const chatBox = document.getElementById('chat-box');
+  const userInput = document.getElementById('user-input');
+  const btnSend = document.getElementById('btn-send');
+  const typingIndicator = document.getElementById('typing');
+  
+  // Elementos Vitais
+  const vitPA = document.getElementById('vit-pa');
+  const vitFC = document.getElementById('vit-fc');
+  const vitSpO2 = document.getElementById('vit-spo2');
+
+  // Estado do Jogo
+  let modoAtual = '';
+  let turnos = 0;
+  let pontuacao = 100;
+  let estadoPaciente = { 
+    vivo: true, 
+    diagnosticoFeito: false, 
+    examePedido: false,
+    complica_nitrato: false
+  };
+
+  // Banco de Dados Mockado (Master Schema do IAM de VD)
+  const cenario = {
+    sala_vermelha: "O SAMU acaba de deixar um paciente masculino, 60 anos, na maca. Ele está pálido, muito sudoreico, com a mão no peito (sinal de Levine). O monitor acabou de ser ligado. <br><br>Doutor, qual a sua conduta inicial imediata?",
+    clinica_medica: "Homem de 60 anos, hipertenso e tabagista, internado na enfermaria. Queixa-se de dor retroesternal em aperto há 2 horas, associada a náuseas e sudorese. <br><br>Sinais vitais preliminares: PA 110/70 mmHg, FC 88 bpm, SpO2 96%. <br><br>Qual sua linha de investigação e conduta primária?",
+    debriefing: "<strong>IAM de Ventrículo Direito.</strong><br>No IAM de VD (Supra inferior + V4R), o ventrículo perde força e depende da pré-carga (volume) para manter o débito cardíaco. Prescrever Nitrato ou Morfina (vasodilatadores) reduz o retorno venoso, causando choque imediato. O tratamento exige expansão volêmica e evitar nitratos, seguido de reperfusão."
+  };
+
+  function iniciarJogo(modo) {
+    modoAtual = modo;
+    selectionScreen.style.display = 'none';
+    chatScreen.style.display = 'flex';
+    
+    document.getElementById('room-title').innerHTML = modo === 'sala_vermelha' ? '🚨 Sala Vermelha' : '🩺 Clínica Médica';
+    
+    if (modo === 'sala_vermelha') {
+      vitPA.innerText = "PA: 90/60"; vitPA.classList.add('alert');
+      vitFC.innerText = "FC: 110";
+      vitSpO2.innerText = "SpO2: 92%";
+      adicionarMensagemGM(cenario.sala_vermelha);
+    } else {
+      vitPA.innerText = "PA: 110/70"; vitPA.classList.remove('alert');
+      vitFC.innerText = "FC: 88";
+      vitSpO2.innerText = "SpO2: 96%";
+      adicionarMensagemGM(cenario.clinica_medica);
+    }
+    
+    userInput.focus();
+  }
+
+  function handleEnter(e) { if (e.key === 'Enter') enviarMensagem(); }
+
+  function enviarMensagem() {
+    const texto = userInput.value.trim();
+    if (!texto || !estadoPaciente.vivo) return;
+
+    adicionarMensagemUser(texto);
+    userInput.value = '';
+    bloquearInput();
+    turnos++;
+    
+    setTimeout(() => { processarAcaoRPG(texto.toLowerCase()); }, 1500);
+  }
+
+  function processarAcaoRPG(input) {
+    let msgGM = "";
+    let isCritical = false;
+
+    // 1. VERIFICA FATALIDADE (Red Flag: Nitrato/Morfina no IAM VD)
+    if (input.includes("nitrato") || input.includes("isordil") || input.includes("morfina") || input.includes("vasodilatador")) {
+      estadoPaciente.complica_nitrato = true;
+      pontuacao -= 50;
+      isCritical = true;
+      vitPA.innerText = "PA: 60/40"; vitPA.classList.add('alert');
+      vitFC.innerText = "FC: 130"; vitFC.classList.add('alert');
+      
+      msgGM = "⚠️ ALARME DO MONITOR! A pressão arterial do paciente despencou para 60x40 mmHg logo após a administração da medicação. Ele rebaixa o nível de consciência. <br><br><em>O que você faz agora, doutor? Rápido!</em>";
+    }
+    
+    // 2. SALVAÇÃO DA RED FLAG (Soro/Volume)
+    else if (estadoPaciente.complica_nitrato && (input.includes("volume") || input.includes("soro") || input.includes("ringer") || input.includes("cristaloide") || input.includes("expansao"))) {
+      estadoPaciente.complica_nitrato = false;
+      pontuacao += 10; // Recuperou um pouco
+      vitPA.innerText = "PA: 95/60"; vitPA.classList.remove('alert');
+      vitFC.innerText = "FC: 100"; vitFC.classList.remove('alert');
+      msgGM = "Você iniciou expansão volêmica vigorosa. A pressão subiu para 95x60 e o paciente recobrou a consciência, queixando-se ainda de dor. Ufa. <br><br><em>E agora, como fechamos esse diagnóstico e tratamento?</em>";
+    }
+
+    // 3. SE NÃO SALVOU A RED FLAG E FEZ OUTRA COISA
+    else if (estadoPaciente.complica_nitrato) {
+      estadoPaciente.vivo = false;
+      isCritical = true;
+      vitPA.innerText = "PA: --/--"; vitFC.innerText = "FC: 0 (FV)";
+      msgGM = "O paciente evoluiu com choque cardiogênico irreversível secundário à vasodilatação, fez Fibrilação Ventricular e foi a óbito na sala.";
+      finalizarJogo();
+    }
+
+    // 4. EXAMES (ECG)
+    else if (input.includes("ecg") || input.includes("eletrocardiograma")) {
+      estadoPaciente.examePedido = true;
+      msgGM = "A enfermagem rodou o ECG em 5 minutos. <br><br><strong>Achado:</strong> Supradesnivelamento do segmento ST nas derivações DII, DIII e aVF. Você pede derivações direitas e nota Supra em V4R. <br><br><em>Qual o seu diagnóstico topográfico? E a conduta?</em>";
+    }
+
+    // 5. DIAGNÓSTICO
+    else if (input.includes("iam") || input.includes("infarto") || input.includes("sca")) {
+      estadoPaciente.diagnosticoFeito = true;
+      if (input.includes("vd") || input.includes("ventriculo direito")) {
+        pontuacao += 20;
+        msgGM = "Exato. IAM de Ventrículo Direito. Hipótese registrada. <br><br><em>Qual a sua conduta terapêutica definitiva e medicações?</em>";
+      } else {
+        msgGM = "IAM inferior, sim. Mas repare bem na derivação V4R. Que área a mais foi acometida? <br><em>E independente disso, qual a conduta?</em>";
+      }
+    }
+
+    // 6. CONDUTA SALVADORA E END GAME
+    else if (input.includes("cateterismo") || input.includes("angioplastia") || input.includes("aas") || input.includes("trombolitico")) {
+      if (!estadoPaciente.examePedido) pontuacao -= 20; // Prescreveu sem ECG
+      
+      vitPA.innerText = "PA: 110/70"; vitPA.classList.remove('alert');
+      vitFC.innerText = "FC: 85";
+      msgGM = "Dupla agregação administrada e Hemodinâmica acionada. O paciente foi estabilizado e transferido com segurança.";
+      finalizarJogo(true);
+    }
+
+    // 7. AÇÃO GENÉRICA OU INÚTIL
+    else {
+      pontuacao -= 5; // Perde ponto por enrolar
+      msgGM = `Ação "${input}" anotada. Feito. No entanto, a dor retroesternal se mantém 9/10 e o quadro geral não mudou.<br><br><em>Qual é a conduta médica principal, doutor? O relógio está correndo.</em>`;
+    }
+
+    if (estadoPaciente.vivo) {
+      adicionarMensagemGM(msgGM, isCritical);
+      liberarInput();
+    } else {
+      adicionarMensagemGM(msgGM, isCritical);
+    }
+  }
+
+  function finalizarJogo(vitoria = false) {
+    esconderTyping();
+    const finalScore = Math.max(0, pontuacao - (turnos * 2)); // Desconta pontos por demorar muito
+    
+    let titulo = vitoria ? "✅ Paciente Salvo" : "❌ Óbito / Falha Crítica";
+    let cor = vitoria ? "var(--green)" : "var(--red)";
+
+    const div = document.createElement('div');
+    div.className = 'debriefing-card';
+    div.innerHTML = `
+      <h3 style="color: ${cor}">${titulo}</h3>
+      <div class="score-circle" style="background: ${cor}">${finalScore}</div>
+      <div class="debriefing-text">
+        <strong>Debriefing Técnico (Preceptor):</strong><br>
+        ${cenario.debriefing}
+      </div>
+      <button class="btn-send" onclick="location.reload()">Jogar Novamente</button>
+    `;
+    chatBox.appendChild(div);
+    scrollToBottom();
+  }
+
+  function adicionarMensagemUser(texto) {
+    const div = document.createElement('div');
+    div.className = 'message user';
+    div.innerText = texto;
+    chatBox.appendChild(div);
+    scrollToBottom();
+  }
+
+  function adicionarMensagemGM(htmlTexto, isCritical = false) {
+    esconderTyping();
+    const div = document.createElement('div');
+    div.className = `message gm ${isCritical ? 'critical' : ''}`;
+    div.innerHTML = htmlTexto;
+    chatBox.appendChild(div);
+    scrollToBottom();
+  }
+
+  function mostrarTyping() { chatBox.appendChild(typingIndicator); typingIndicator.style.display = 'flex'; scrollToBottom(); }
+  function esconderTyping() { typingIndicator.style.display = 'none'; }
+  function bloquearInput() { userInput.disabled = true; btnSend.disabled = true; mostrarTyping(); }
+  function liberarInput() { userInput.disabled = false; btnSend.disabled = false; userInput.focus(); }
+  function scrollToBottom() { chatBox.scrollTop = chatBox.scrollHeight; }
+
+</script>
+</body>
+</html>
