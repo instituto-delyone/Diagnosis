@@ -1,117 +1,110 @@
 [
   {
-    "id": "purpura_trombocitopenica_trombotica_ptt",
-    "nome": "Púrpura Trombocitopênica Trombótica (PTT)",
-    "prevalencia_base": 15,
-    "01_campo_modulador": {
-      "pesos": { "mulher_jovem_20_a_40_anos": 2.5 }
+    "id_caso": "hemostasia_ptt_01",
+    "patologia_alvo": "Púrpura Trombocitopênica Trombótica (PTT)",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Mulher de 32 anos dá entrada com cefaleia, confusão mental flutuante e febre (38,1ºC). Exame físico: petéquias em membros e icterícia leve. Hemograma: Hemoglobina 7,2 g/dL, Plaquetas 12.000/mm³. O TAP e PTTa estão normais e o Coombs direto é negativo.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["esfregaco", "esquizocitos", "adamts13", "esfregaco de sangue periferico", "funcao renal"],
+      "achado_sucesso": "Excelente! O esfregaço de sangue periférico revelou inúmeros esquizócitos (hemácias fragmentadas) e a função renal indicou injúria aguda (Cr 2,1). A atividade da enzima ADAMTS13 está severamente reduzida.",
+      "resposta_preceptor_erro": "Doutora, temos uma anemia hemolítica Coombs negativo associada à plaquetopenia e clínica neurológica. Precisamos olhar as hemácias no microscópio (esfregaço) e buscar fragmentação."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "plaquetopenia_severa": 35, "anemia_hemolitica_microangiopatica": 35, "esquizocitos_sangue_periferico": 35, "sintomas_neurologicos_flutuantes": 30 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["ptt", "purpura trombocitopenica trombotica", "deficiencia de adamts13", "microangiopatia trombotica"],
+      "distrator_comum": ["civd", "coagulacao intravascular disseminada", "purpura trombocitopenica imune", "pti"],
+      "feedback_distrator": "Na CIVD o TAP e o PTTa estariam muito alargados pelo consumo dos fatores de coagulação. Na PTI, não há anemia hemolítica microangiopática nem febre/sintomas neurológicos.",
+      "achado_sucesso": "Correto! Você identificou a clássica pêntade da Púrpura Trombocitopênica Trombótica (PTT)."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["atividade_adamts13_menor_10_porcento"],
-      "exclusao_ativa": ["contraindicacao_transfusao_de_plaquetas"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["plasmaferese", "plasmaferese terapeutica", "troca plasmatica"],
+      "red_flag_mortal": ["transfusao de plaquetas", "concentrado de plaquetas", "alta"],
+      "feedback_sucesso": "Conduta irretocável! Você acionou a Plasmaférese Terapêutica emergencial (fornecendo ADAMTS13 e removendo autoanticorpos), salvando o encéfalo e rins da paciente.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você transfundiu plaquetas em uma PTT. As plaquetas novas funcionaram como 'lenha na fogueira', agregando-se instantaneamente aos multímeros gigantes de von Willebrand, obstruindo massivamente a microcirculação cerebral e levando a óbito."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "ALTO",
-      "conduta_emergencial": "Plasmaférese terapêutica imediata (NÃO repor plaquetas salvo risco iminente de morte)"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Dosagem de Atividade do ADAMTS13", "Esfregaço de Sangue Periférico (Esquizócitos)", "Coombs Direto (Negativo)"]
-    },
-    "vigneta": "Mulher de 32 anos dá entrada com cefaleia, confusão mental flutuante e febre (38,1ºC). Exame físico: petéquias em membros e icterícia leve. Hemograma: Hemoglobina 7,2 g/dL, Plaquetas 12.000/mm³. Esfregaço de sangue periférico revela inúmeros esquizócitos (hemácias fragmentadas). Coombs direto negativo, TAP e PTTa normais.",
-    "respostas_esperadas": {
-      "diagnostico": ["ptt", "purpura trombocitopenica trombotica", "deficiencia de adamts13"],
-      "exames": ["adamts13", "esfregaco", "esquizocitos", "coombs direto"],
-      "conduta": ["plasmaferese", "plasmaferese terapeutica", "nao repor plaquetas"]
-    },
-    "feedback_tecnico": "A PTT decorre da deficiência autoimune da enzima ADAMTS13, levando ao acúmulo de multímeros gigantes do Fator de von Willebrand que agregam e consomem plaquetas na microcirculação. A clássica Pêntade inclui: Plaquetopenia + Anemia Hemolítica Microangiopática (com esquizócitos) + Sintomas Neurológicos + Febre + Disfunção Renal. O tratamento emergencial obrigatorio é a Plasmaférese Terapêutica. A transfusão de plaquetas é CONTRAINDICADA pois 'alimenta' a microtrombose."
+    "discussao_clinica_final": {
+      "takeaway_message": "A PTT é uma emergência onde a transfusão de plaquetas é CONTRAINDICADA. O tratamento que salva vidas é a Plasmaférese Terapêutica imediata.",
+      "fisiopatologia": "A deficiência autoimune da enzima ADAMTS13 impede a clivagem do Fator de von Willebrand. Multímeros gigantes se acumulam e 'pescam' plaquetas, formando microtrombos que obstruem pequenos vasos e 'cortam' as hemácias que tentam passar (esquizócitos)."
+    }
   },
   {
-    "id": "hemofilia_a_ou_b",
-    "nome": "Hemofilia A (Fator VIII) / Hemofilia B (Fator IX)",
-    "prevalencia_base": 20,
-    "01_campo_modulador": {
-      "pesos": { "homem_heranca_recessiva_x": 3.5, "historico_familiar_materno": 2.5 }
+    "id_caso": "hemostasia_hemofilia_01",
+    "patologia_alvo": "Hemofilia (A ou B)",
+    "dificuldade": "Intermediária",
+    "vinheta_admissao": "Menino de 6 anos é levado à emergência por dor intensa e edema acentuado no joelho direito após pequeno trauma (hemartrose). O histórico revela episódios prévios de grandes hematomas com vacinas. Exames de coagulação: TAP normal (INR 1,0), Plaquetas 280.000/mm³, porém PTTa muito alargado (Relação 2,2).",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["dosagem de fator viii", "dosagem de fator ix", "teste do mistura", "dosagem de fatores"],
+      "achado_sucesso": "O Teste da Mistura com plasma normal corrigiu o PTTa, indicando deficiência de fator (e não inibidor). A dosagem específica revelou Fator VIII muito baixo (< 1%).",
+      "resposta_preceptor_erro": "Doutor, paciente do sexo masculino com clínica de sangramento profundo e via intrínseca isoladamente lentificada (PTTa longo). Solicite o teste de mistura e a dosagem dos fatores da via intrínseca."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "hemartroses_recorrentes": 40, "hematomas_musculares_profundos": 35, "ptta_alargado_com_tap_normal": 35 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["hemofilia", "hemofilia a", "deficiencia de fator viii"],
+      "distrator_comum": ["doenca de von willebrand", "purpura trombocitopenica", "deficiencia de vitamina k"],
+      "feedback_distrator": "A deficiência de Vitamina K alargaria primariamente o TAP (via extrínseca). A Doença de Von Willebrand causa sangramento mucocutâneo (hemostasia primária), diferentemente das hemartroses, que marcam defeitos da hemostasia secundária.",
+      "achado_sucesso": "Exato! Diagnóstico confirmado de Hemofilia A grave."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["dosagem_baixa_fator_viii_ou_fator_ix"],
-      "exclusao_ativa": ["ptta_corrige_com_plasma_teste_do_mistura"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["repor fator viii", "fator viii", "fator concentrado", "crioprecipitado", "fator viii liofilizado"],
+      "red_flag_mortal": ["puncao articular isolada", "drenagem sem reposicao", "aspirina", "aas"],
+      "feedback_sucesso": "Conduta perfeita! Você iniciou a reposição imediata de concentrado de Fator VIII, estancando o sangramento intra-articular e prevenindo artropatia irreversível.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você tentou drenar a hemartrose com agulha calibrosa sem repor o fator de coagulação ou receitou AINEs antiagregantes. O sangramento piorou drasticamente, destruindo a cartilagem articular e gerando choque hemorrágico."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "MEDIO",
-      "conduta_emergencial": "Reposicão de Fator Concentrado (Fator VIII ou IX) ou Crioprecipitado/DDAVP nas formas leves"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Dosagem Específica de Fator VIII e IX", "PTTa e TAP", "Teste do Mistura com Plasma Normal"]
-    },
-    "vigneta": "Menino de 6 anos é levado à emergência por dor intensa e edema acentuado no joelho direito após pequeno trauma (hemartrose). O histórico revela episódios prévios de grandes hematomas com vacinas. Exames de coagulação: TAP normal (INR 1,0), Plaquetas 280.000/mm³, porém PTTa muito alargado (Relação 2,2). O PTTa corrige após mistura com plasma normal.",
-    "respostas_esperadas": {
-      "diagnostico": ["hemofilia", "hemofilia a", "hemofilia b", "deficiencia de fator viii"],
-      "exames": ["dosagem de fator viii", "dosagem de fator ix", "ptta", "teste do mistura"],
-      "conduta": ["repor fator viii", "fator viii", "fator ix", "crioprecipitado", "ddavp"]
-    },
-    "feedback_tecnico": "As Hemofilias A (deficiência de Fator VIII - 85% dos casos) e B (deficiência de Fator IX) são distúrbios da hemostasia secundária ligados ao cromossomo X, afetando predominantemente homens. Caracterizam-se por sangramentos profundos (hemartroses e hematomas musculares). Laboratorialmente apresentam PTTa alargado (via intrínseca) com TAP e plaquetas normais. O tratamento é a reposição do fator deficiente concentrado."
+    "discussao_clinica_final": {
+      "takeaway_message": "Sangramentos profundos (hemartroses/hematomas musculares) em homens com PTTa isoladamente alargado sugerem hemofilia congênita (falta de Fator VIII ou IX).",
+      "fisiopatologia": "A deficiência hereditária ligada ao cromossomo X dos fatores VIII ou IX paralisa a via intrínseca da cascata de coagulação, impedindo a formação de uma rede de fibrina estável para consolidar o tampão plaquetário primário."
+    }
   },
   {
-    "id": "trombocitopenia_induzida_por_heparina_hit",
-    "nome": "Trombocitopenia Induzida por Heparina (HIT Tipo II)",
-    "prevalencia_base": 15,
-    "01_campo_modulador": {
-      "pesos": { "uso_heparina_nao_fracionada_5_a_10_dias": 3.5, "pos_operatorio_cirurgia_vascular_ortopedica": 2.0 }
+    "id_caso": "hemostasia_hit_01",
+    "patologia_alvo": "Trombocitopenia Induzida por Heparina (HIT Tipo II)",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Paciente de 60 anos, no 7º dia de pós-operatório de cirurgia cardíaca em uso de Heparina Não Fracionada profilática, desenvolve quadro de TVP em membro inferior esquerdo. O hemograma demonstra queda da contagem de plaquetas de 220.000/mm³ no pré-operatório para 85.000/mm³ hoje (queda > 50%). Sem sangramentos.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["anti-pf4", "anticorpo heparina", "elisa pf4", "escore 4ts", "pesquisa de anticorpos"],
+      "achado_sucesso": "O Escore 4Ts apontou alta probabilidade clínica e o ensaio ELISA para Anticorpos Anti-PF4/Heparina retornou fortemente positivo.",
+      "resposta_preceptor_erro": "Doutor, paciente em uso de heparina há uma semana desenvolve plaquetopenia paradoxalmente associada à trombose nova. Calcule o escore de probabilidade clínica e solicite o marcador imune."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "queda_plaquetaria_maior_50_porcento": 35, "novos_eventos_tromboticos": 35, "escore_4ts_alto": 30 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["hit", "trombocitopenia induzida por heparina", "hit tipo ii"],
+      "distrator_comum": ["trombose idiopatica", "purpura trombocitopenica imune", "pti", "civd"],
+      "feedback_distrator": "A PTI causa plaquetopenia com sangramentos, não com fenômenos trombóticos severos. O tempo (7 dias de uso) e a queda de 50% são marcadores patognomônicos da complicação mediada pela heparina.",
+      "achado_sucesso": "Correto! Trombocitopenia Induzida por Heparina (HIT Tipo II)."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["anticorpos_anti_pf4_heparina_positivos"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["suspender heparina", "fondaparinux", "argatroban", "trocar anticoagulante", "bivalirudina"],
+      "red_flag_mortal": ["manter heparina", "trocar por enoxaparina", "transfusao de plaquetas"],
+      "feedback_sucesso": "Conduta cirúrgica! Você suspendeu imediatamente toda a heparina e iniciou anticoagulação alternativa segura (ex: Fondaparinux), bloqueando o estado pró-trombótico extremo.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você achou que era falha terapêutica e dobrou a dose da heparina, ou trocou por Enoxaparina (que tem reatividade cruzada). A ativação plaquetária explodiu, o paciente fez embolia pulmonar maciça e isquemia arterial de perna, falecendo em seguida."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "ALTO",
-      "conduta_emergencial": "Suspensão imediata de TODAS as formas de Heparina e início de Anticoagulante Não-Heparínico (Fondaparinux / Argatroban)"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Anticorpo Anti-PF4/Heparina (ELISA)", "Teste de Liberação de Serotonina", "Hemogramas Seriados"]
-    },
-    "vigneta": "Paciente de 60 anos, no 7º dia de pós-operatório de cirurgia cardíaca em uso de Heparina Não Fracionada profilática, desenvolve quadro de TVP em membro inferior esquerdo. O hemograma demonstra queda da contagem de plaquetas de 220.000/mm³ no pré-operatório para 85.000/mm³ hoje (queda > 50%). Sem sangramentos.",
-    "respostas_esperadas": {
-      "diagnostico": ["hit", "trombocitopenia induzida por heparina", "hit tipo ii"],
-      "exames": ["anti-pf4", "anticorpo heparina", "elisa pf4"],
-      "conduta": ["suspender heparina", "fondaparinux", "argatroban", "trocar anticoagulante"]
-    },
-    "feedback_tecnico": "A HIT Tipo II é uma reação imune mediada por IgG contra o complexo Heparina-Fator 4 Plaquetário (PF4), ocorrendo tipicamente 5 a 10 dias após o início do fármaco. Provoca ativação e consumo plaquetário, gerando um estado paradoxal de pro-trombose grave (venosa ou arterial) acompanhado de plaquetopenia. A conduta imediata é a suspensão de qualquer heparina (incluindo enoxaparina/lavagem de cateter) e troca por um anticoagulante direto não-heparínico como Fondaparinux ou Argatroban."
+    "discussao_clinica_final": {
+      "takeaway_message": "Queda inexplicada de plaquetas > 50% entre o 5º e 10º dia de uso de heparina, especialmente se associada à trombose paradoxal, é HIT até prova em contrário. Suspenda IMEDIATAMENTE.",
+      "fisiopatologia": "Anticorpos IgG atacam o complexo Heparina-Fator 4 Plaquetário (PF4). Esses imunocomplexos ativam intensamente os receptores Fc das plaquetas circulantes, causando consumo maciço (plaquetopenia) e liberação brutal de fatores pró-coagulantes (trombose grave)."
+    }
   },
   {
-    "id": "purpura_trombocitopenica_imune_pti",
-    "nome": "Púrpura Trombocitopênica Imune (PTI)",
-    "prevalencia_base": 25,
-    "01_campo_modulador": {
-      "pesos": { "crianca_pos_infeccao_viral": 2.5, "mulher_jovem_20_a_40_anos": 2.0 }
+    "id_caso": "hemostasia_pti_01",
+    "patologia_alvo": "Púrpura Trombocitopênica Imune (PTI)",
+    "dificuldade": "Básica",
+    "vinheta_admissao": "Mulher de 28 anos procura atendimento por aparecimento súbito de petéquias nas pernas e sangramento ao escovar os dentes (gingivorragia) há 3 dias. Exame físico sem organomegalias ou linfonodomegalias. Hemograma: Plaquetas 14.000/mm³, Hemoglobina 13,2 g/dL e Leucócitos 6.500/mm³ (série vermelha e branca totalmente preservadas).",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["esfregaco", "sorologias", "hiv", "hcv", "funcao tireoidiana", "fan"],
+      "achado_sucesso": "O esfregaço de sangue confirmou a plaquetopenia verdadeira (sem grumos) com hemácias e leucócitos normais. Sorologias (HIV, HCV) e marcadores reumatológicos negativos.",
+      "resposta_preceptor_erro": "Paciente com sangramento mucocutâneo e plaquetopenia severa e isolada. Precisamos garantir que as outras linhagens estão normais no esfregaço e afastar causas virais crônicas."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "plaquetopenia_isolada": 35, "petequias_equimoses_gingivorragia": 30, "ausencia_de_esplenomegalia": 30 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["pti", "purpura trombocitopenica imune", "purpura trombocitopenica idiopatica"],
+      "distrator_comum": ["leucemia aguda", "aplasia de medula", "ptt"],
+      "feedback_distrator": "Leucemia e aplasia cursariam com anemia e leucopenia/neutropenia associadas. A PTT teria febre, esquizócitos e sintomas neurológicos. A clínica aqui é a clássica plaquetopenia autoimune isolada.",
+      "achado_sucesso": "Exato! Diagnóstico (de exclusão) fechado: Púrpura Trombocitopênica Imune (PTI)."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["descarte_outras_causas_de_plaquetopenia"],
-      "exclusao_ativa": ["series_vermelha_e_branca_normais"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["prednisona", "corticoide", "imunoglobulina", "imunoglobulina iv", "dexametasona"],
+      "red_flag_mortal": ["esplenectomia de urgencia imediata sem drogas", "alta", "aines", "aas"],
+      "feedback_sucesso": "Conduta excelente! Diante de sangramento mucoso e plaquetas < 20.000, você instituiu corticoterapia imediatamente, com resgate por Imunoglobulina IV disponível, cessando a destruição autoimune.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você deu alta prescrevendo anti-inflamatórios ou negligenciou a contagem < 20.000 com sangramento ativo. A paciente retornou horas depois em coma por sangramento intracraniano maciço (hemorragia intraparenquimatosa)."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "BAIXO",
-      "conduta_emergencial": "Corticoterapia oral (Prednisona) ou Imunoglobulina IV se sangramento grave / plaquetas < 20.000"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Hemograma Completo (Plaquetopenia Isolada)", "Esfregaço de Sangue Periférico", "Sorologias (HIV, HCV)"]
-    },
-    "vigneta": "Mulher de 28 anos procura atendimento por aparecimento súbito de petéquias nas pernas e sangramento ao escovar os dentes (gingivorragia) há 3 dias. Exame físico sem organomegalias ou linfonodomegalias. Hemograma: Plaquetas 14.000/mm³, Hemoglobina 13,2 g/dL e Leucócitos 6.500/mm³ (série vermelha e branca totalmente preservadas).",
-    "respostas_esperadas": {
-      "diagnostico": ["pti", "purpura trombocitopenica imune", "purpura trombocitopenica idiopatica"],
-      "exames": ["hemograma", "esfregaco", "sorologias", "hiv", "hcv"],
-      "conduta": ["prednisona", "corticoide", "imunoglobulina", "imunoglobulina iv"]
-    },
-    "feedback_tecnico": "A PTI é uma desordem autoimune onde autoanticorpos (IgG) opsonizam as glicoproteínas da superfície das plaquetas, promovendo sua destruição pelos macrófagos no baço. Apresenta-se como PLAQUETOPENIA ISOLADA sem alteração em hemácias ou leucócitos e sem esplenomegalia. O tratamento de 1ª linha em adultos com plaquetas < 20.000-30.000 ou sangramentos mucosos é a Corticoterapia (Prednisona). Em emergências com sangramento grave do SNC/TGI, associa-se Imunoglobulina IV."
+    "discussao_clinica_final": {
+      "takeaway_message": "A PTI apresenta-se como PLAQUETOPENIA ISOLADA sem esplenomegalia. Adultos com sangramento ativo ou plaquetas muito baixas (< 20.000-30.000) requerem tratamento imediato com corticoides sistêmicos.",
+      "fisiopatologia": "Doença autoimune em que autoanticorpos (IgG) opsonizam as glicoproteínas da membrana plaquetária. Essas plaquetas 'marcadas' são capturadas e destruídas pelos macrófagos, sobretudo no baço."
+    }
   }
 ]
