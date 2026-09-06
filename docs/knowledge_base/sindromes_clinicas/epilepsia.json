@@ -1,86 +1,83 @@
 [
   {
-    "id": "status_epilepticus",
-    "nome": "Estado de Mal Epiléptico (Status Epilepticus)",
-    "prevalencia_base": 15,
-    "01_campo_modulador": {
-      "pesos": { "epilepsia_previa": 3.0, "parada_uso_anticonvulsivante": 2.5 }
+    "id_caso": "neuro_status_01",
+    "patologia_alvo": "Estado de Mal Epiléptico (Status Epilepticus)",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Paciente de 28 anos, portador de epilepsia, é trazido pelo SAMU em crise tônico-clínica generalizada contínua há mais de 10 minutos, sem recuperar a consciência entre os paroxismos. Vias aéreas pérvias e respiração ruidosa.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["glicemia", "glicemia capilar", "destro", "hgt"],
+      "achado_sucesso": "Excelente reflexo. Na emergência neurológica, a regra é clara: 'Don't Ever Forget Glucose'. A glicemia capilar resultou em 110 mg/dL.",
+      "resposta_preceptor_erro": "Doutor, paciente em crise prolongada. Antes de pensarmos no traçado elétrico, precisamos descartar a causa metabólica reversível mais comum com um teste de ponta de dedo na beira do leito."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "crises_subentrantes": 35, "crise_maior_5_minutos": 35, "sem_recuperacao_consciencia": 30 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["status epilepticus", "estado de mal epileptico", "estado de mal"],
+      "distrator_comum": ["crise febril", "pseudocrise", "sincope convulsiva"],
+      "feedback_distrator": "Qualquer convulsão tônico-clínica que ultrapassa a marca de 5 minutos contínuos já não é uma crise simples, e sim uma emergência neurológica que não vai parar sozinha.",
+      "achado_sucesso": "Correto. Trata-se de Estado de Mal Epiléptico (Status Epilepticus)."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["crises_continuas_maior_5min"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["diazepam", "midazolam", "lorazepam", "benzodiazepinico"],
+      "red_flag_mortal": ["esperar parar", "observacao", "tomografia antes da medicacao"],
+      "feedback_sucesso": "Conduta perfeita! O Benzodiazepínico IV/IM (1ª linha) foi administrado imediatamente para abortar a crise, enquanto você já prepara a segunda linha (Fenitoína/Levetiracetam).",
+      "feedback_red_flag": "ERRO CRÍTICO! Atrasar o tratamento para 'ver se para' expõe o cérebro à excitotoxicidade, hipóxia severa e torna os receptores refratários aos medicamentos. O paciente evoluiu com lesão neuronal irreversível."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "ALTO",
-      "conduta_emergencial": "Suporte de vias aéreas e Benzodiazepínico IV imediato (Diazepam ou Midazolam)"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Glicemia Capilar", "Gasometria Arterial", "EEG"]
-    },
-    "vigneta": "Paciente de 28 anos, portador de epilepsia, é trazido pelo SAMU em crise tônico-clínica generalizada contínua há mais de 10 minutos, sem recuperar a consciência entre os paroxismos. Vias aéreas pérvias e glicemia capilar de 110 mg/dL.",
-    "respostas_esperadas": {
-      "diagnostico": ["status epilepticus", "estado de mal epileptico", "crise convulsiva prolongada"],
-      "exames": ["glicemia", "eeg", "eletroencefalograma", "gasometria"],
-      "conduta": ["diazepam", "midazolam", "fenitoina", "hidantal", "benzodiazepinico"]
-    },
-    "feedback_tecnico": "O Estado de Mal Epiléptico é definido por crises contínuas ou repetitivas sem melhora da consciência com duração > 5 minutos[span_4](start_span)[span_4](end_span). A 1ª linha de tratamento é o Benzodiazepínico IV (Diazepam 10mg IV ou Midazolam IM/IV)[span_5](start_span)[span_5](end_span). Se refratário, a 2ª linha é a Fenitoína IV (20mg/kg) ou Valproato/Levetiracetam[span_6](start_span)[span_6](end_span)."
+    "discussao_clinica_final": {
+      "takeaway_message": "O Status Epilepticus é uma corrida contra o tempo. Qualquer crise durando mais de 5 minutos exige Benzodiazepínico imediato, sem esperar exames.",
+      "fisiopatologia": "A falha nos mecanismos inibitórios (GABA) e o excesso excitatório prolongam a crise, levando a dano neuronal progressivo e colapso metabólico."
+    }
   },
   {
-    "id": "epilepsia_ausencia_infantil",
-    "nome": "Epilepsia de Ausência Infantil (Pequeno Mal)",
-    "prevalencia_base": 10,
-    "01_campo_modulador": {
-      "pesos": { "idade_5_a_8_anos": 3.0, "historico_familiar": 1.5 }
+    "id_caso": "neuro_ausencia_01",
+    "patologia_alvo": "Epilepsia de Ausência Infantil",
+    "dificuldade": "Básica",
+    "vinheta_admissao": "Criança de 6 anos é trazida pela mãe devido a episódios diários repetidos de 'desligamento' e olhar vago que duram poucos segundos, interrompendo subitamente a fala. A professora nota queda no rendimento. No consultório, a hiperventilação provocada desencadeia um dos episódios.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["eeg", "eletroencefalograma"],
+      "achado_sucesso": "O Eletroencefalograma confirmou o diagnóstico ao registrar o padrão clássico e patognomônico de complexos ponta-onda de 3Hz.",
+      "resposta_preceptor_erro": "Doutor, estamos diante de um quadro de perda de contato com o meio desencadeado por hiperventilação. Qual o exame que avalia a atividade elétrica cerebral?"
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "pausas_comportamentais": 35, "olhar_vago": 30, "desempenho_escolar_queda": 20 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["ausencia", "epilepsia de ausencia", "pequeno mal"],
+      "distrator_comum": ["tdah", "deficit de atencao", "crise focal complexa"],
+      "feedback_distrator": "A interrupção súbita da fala com olhar vago desencadeada por hiperventilação (sem aura ou confusão pós-ictal) não é TDAH, é um distúrbio elétrico primário.",
+      "achado_sucesso": "Exato! Epilepsia de Ausência Infantil (Pequeno Mal)."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["ponta_onda_3hz_eeg"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["etosuximida", "valproato", "acido valproico"],
+      "red_flag_mortal": ["carbamazepina", "fenitoina", "ritalina"],
+      "feedback_sucesso": "Conduta excelente! Você prescreveu Etosuximida (ou Valproato), que é o tratamento de escolha para ausência, garantindo um ótimo prognóstico escolar.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você receitou Carbamazepina ou Fenitoína. Diferente das crises focais, esses bloqueadores de canal de sódio podem piorar e agravar terrivelmente as crises de ausência."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "BAIXO",
-      "conduta_emergencial": "Tratamento ambulatorial e excelente prognóstico"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Eletroencefalograma (EEG) com hiperventilação"]
-    },
-    "vigneta": "Criança de 6 anos é trazida pela mãe devido a episódios diários repetidos de 'desligamento' e olhar vago que duram poucos segundos, interrompendo subitamente a fala. A professora nota queda no rendimento. No consultório, a hiperventilação provocada desencadeia um dos episódios.",
-    "respostas_esperadas": {
-      "diagnostico": ["ausencia", "epilepsia de ausencia", "pequeno mal"],
-      "exames": ["eeg", "eletroencefalograma"],
-      "conduta": ["etosuximida", "valproato", "acido valproico"]
-    },
-    "feedback_tecnico": "A Epilepsia de Ausência Infantil inicia-se entre 5 e 8 anos e tem como fator desencadeante clássico a hiperventilação[span_7](start_span)[span_7](end_span). O achado patognomônico no EEG é o padrão de complexos ponta-onda de 3Hz[span_8](start_span)[span_8](end_span). O tratamento de escolha é feito com Etosuximida ou Valproato de Sódio, apresentando excelente prognóstico[span_9](start_span)[span_9](end_span)."
+    "discussao_clinica_final": {
+      "takeaway_message": "Criança com apagões frequentes e queda escolar, que são desencadeados por hiperventilação, tem Epilepsia de Ausência até prova em contrário. Trate com Etosuximida ou Valproato.",
+      "fisiopatologia": "Descargas generalizadas sincronizadas e bilaterais geradas por circuitos tálamo-corticais anômalos envolvendo canais de cálcio tipo T."
+    }
   },
   {
-    "id": "neurocisticercose_epilepsia",
-    "nome": "Neurocisticercose (Causa Secundária de Epilepsia)",
-    "prevalencia_base": 10,
-    "01_campo_modulador": {
-      "pesos": { "area_endemica": 2.0, "ingestao_ovos_taenia": 3.0 }
+    "id_caso": "neuro_cisticercose_01",
+    "patologia_alvo": "Neurocisticercose (Epilepsia Secundária)",
+    "dificuldade": "Intermediária",
+    "vinheta_admissao": "Adulto de 34 anos apresenta primeiro episódio de crise epilética focal motora. Nega traumas. A TC de crânio revela múltiplas calcificações parenquimatosas e 4 pequenos cistos viáveis com ponto hiperdenso no interior (sinal do escólex).",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["tc de cranio", "rm de cranio", "imagem", "tomografia", "ressonancia"],
+      "achado_sucesso": "As neuroimagens confirmam múltiplos cistos parenquimatosos viáveis com o sinal do escólex, sem hidrocefalia obstrutiva.",
+      "resposta_preceptor_erro": "Doutor, adulto jovem com primeira crise convulsiva focal em área endêmica. O protocolo exige uma neuroimagem (TC ou RM) antes de qualquer coisa."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "crise_epileptica_focal": 35, "cefaleia": 20, "deficits_focais": 20 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["neurocisticercose", "cisticercose"],
+      "distrator_comum": ["tumor cerebral", "esquistossomose", "toxoplasmose"],
+      "feedback_distrator": "A presença de calcificações de permeio e o sinal do escólex (o 'ponto' dentro do cisto) são patognomônicos da infecção pela Taenia, afastando neoplasias primárias.",
+      "achado_sucesso": "Exato. Trata-se de Neurocisticercose, importante causa secundária de epilepsia."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["cistos_com_escolex_ou_calcificacoes"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["albendazol", "praziquantel", "corticoide", "dexametasona", "terapia dupla com corticoide"],
+      "red_flag_mortal": ["antiparasitario isolado", "albendazol sem corticoide", "praziquantel sem corticoide"],
+      "feedback_sucesso": "Conduta cirúrgica! Por haver mais de 2 cistos, você usou terapia dupla (Albendazol + Praziquantel) e cobriu com Dexametasona para prevenir edema.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você administrou o antiparasitário sem corticoide prévio. A morte simultânea dos cistos gerou uma tempestade inflamatória, causando edema cerebral difuso, herniação e morte do paciente."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "MEDIO",
-      "conduta_emergencial": "Antiparasitário + Corticoide para evitar hipertensão intracraniana"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["TC de Crânio", "RM de Crânio (T1 e T2)", "Sorologia/Líquor"]
-    },
-    "vigneta": "Adulto de 34 anos apresenta primeiro episódio de crise epilética focal motora. Nega traumas. A TC de crânio revela múltiplas calcificações parenquimatosas e pequenos cistos com ponto hiperdenso no seu interior (sinal do escólex).",
-    "respostas_esperadas": {
-      "diagnostico": ["neurocisticercose", "cisticercose"],
-      "exames": ["tc", "rm", "tomografia", "ressonancia"],
-      "conduta": ["albendazol", "praziquantel", "corticoide", "dexametasona"]
-    },
-    "feedback_tecnico": "A Neurocisticercose (causada pela ingestão de ovos da Taenia solium) é uma das principais causas secundárias de epilepsia em adultos nos países em desenvolvimento[span_10](start_span)[span_10](end_span). O diagnóstico é de imagem (TC/RM) identificando cistos com escólex ou calcificações[span_11](start_span)[span_11](end_span). O tratamento envolve Albendazol (mínimo de 8 dias) associado obrigatoriamente a Corticoide (Dexametasona) para conter o edema e a hipertensão intracraniana gerados pela morte do parasita[span_12](start_span)[span_12](end_span)."
+    "discussao_clinica_final": {
+      "takeaway_message": "Nunca inicie antiparasitário para Neurocisticercose parenquimatosa viável sem antes iniciar Corticoide (Dexametasona) para conter o edema da morte parasitária.",
+      "fisiopatologia": "A ingestão dos ovos da *Taenia solium* leva à formação de cistos no SNC. A destruição do parasita rompe a barreira de tolerância imunológica, gerando inflamação severa e epilepsia reativa."
+    }
   }
 ]
