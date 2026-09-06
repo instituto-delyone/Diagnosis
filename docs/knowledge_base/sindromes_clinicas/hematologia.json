@@ -1,174 +1,164 @@
 [
   {
-    "id": "anemia_ferropriva",
-    "nome": "Anemia Ferropriva (Carencial)",
-    "prevalencia_base": 30,
-    "01_campo_modulador": {
-      "pesos": { "perda_sanguinea_gastrointestinal": 3.0, "hipermenorreia": 2.5 }
+    "id_caso": "hemato_ferropriva_01",
+    "patologia_alvo": "Anemia Ferropriva (Carencial)",
+    "dificuldade": "Básica",
+    "vinheta_admissao": "Homem de 58 anos refere fadiga, palidez e astenia há 4 meses. Nega sangramentos visíveis, mas relata vontade incomum de mastigar gelo (pagofagia). Hemograma: Hemoglobina 8,1 g/dL, VCM 68 fL (microcitose), HCM 22 pg (hipocromia) e RDW de 18,5% (anisocitose).",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["ferritina", "cinetica de ferro", "ferritina serica", "saturacao de transferrina"],
+      "achado_sucesso": "A cinética de ferro confirmou o diagnóstico: a ferritina sérica (marcador mais sensível) retornou muito baixa (8 ng/mL).",
+      "resposta_preceptor_erro": "Doutor, estamos diante de uma anemia microcítica, hipocrômica e com anisocitose (RDW alto). Precisamos avaliar o estoque corporal de ferro com urgência."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "anemia_microcitica_hipocromica": 35, "rdw_elevado_anisocitose": 30, "pica_pagofagia": 20, "cheilite_angular_glossite": 15 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["anemia ferropriva", "ferropriva", "deficiencia de ferro"],
+      "distrator_comum": ["talassemia", "anemia de doenca cronica", "anemia sideroblastica"],
+      "feedback_distrator": "Na talassemia menor, a microcitose costuma ser muito mais acentuada que a anemia, o RDW é normal (sem anisocitose) e a ferritina não cai. O quadro aqui é puramente carencial.",
+      "achado_sucesso": "Exato! Diagnóstico de Anemia Ferropriva confirmada."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["ferritina_serica_baixa"],
-      "exclusao_ativa": ["reticulocitopenia_inicial"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["sulfato ferroso", "ferro oral", "reposicao de ferro", "colonoscopia", "eda"],
+      "red_flag_mortal": ["transfusao de hemacias", "alta sem investigar"],
+      "feedback_sucesso": "Conduta perfeita! Você prescreveu reposição oral de ferro e, muito bem, indicou endoscopia e colonoscopia para investigar a causa da perda, já que o paciente tem mais de 50 anos.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você deu alta com ferro e não investigou o trato gastrointestinal. O paciente tinha um câncer de cólon oculto que evoluiu para metástase disseminada por atraso no diagnóstico."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "BAIXO",
-      "conduta_emergencial": "Suplementação de Sulfato Ferroso via oral e investigação da causa subjacente (Colonoscopia/EDA se > 50 anos)"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Hemograma Completo", "Ferritina Sérica", "Saturação de Transferrina", "TIBC"]
-    },
-    "vigneta": "Homem de 58 anos refere fadiga, palidez e astenia há 4 meses. Nega sangramentos visíveis, mas relata vontade incomum de mastigar gelo (pagofagia). Hemograma: Hemoglobina 8,1 g/dL, VCM 68 fL (microcitose), HCM 22 pg (hipocromia) e RDW de 18,5% (anisocitose). Ferritina sérica de 8 ng/mL.",
-    "respostas_esperadas": {
-      "diagnostico": ["anemia ferropriva", "ferropriva", "deficiencia de ferro"],
-      "exames": ["ferritina", "saturacao de transferrina", "colonoscopia", "eda"],
-      "conduta": ["sulfato ferroso", "ferro oral", "reposicao de ferro", "investigar sangramento"]
-    },
-    "feedback_tecnico": "A Anemia Ferropriva é a anemia microcítica e hipocrômica mais comum, caracterizada por RDW elevado (anisocitose). A dosagem de Ferritina Sérica baixa (< 30 ng/mL) é o marcador mais sensível e específico para depleção de estoques de ferro. Em homens ou mulheres pós-menopausa, é obrigatória a investigação do trato gastrointestinal com Endoscopia e Colonoscopia para afastar neoplasias ocultas."
+    "discussao_clinica_final": {
+      "takeaway_message": "A Ferritina sérica baixa (< 30 ng/mL) é o marcador mais sensível para depleção de ferro. Em homens ou mulheres pós-menopausa, anemia ferropriva exige investigação do trato gastrointestinal para afastar neoplasias.",
+      "fisiopatologia": "A falta de ferro compromete a síntese do grupo Heme, gerando hemácias pequenas (microcitose) e pálidas (hipocromia). O aumento da EPO gera assincronismo na medula, lançando hemácias de tamanhos variados (RDW elevado)."
+    }
   },
   {
-    "id": "anemia_megaloblastica_b12",
-    "nome": "Anemia Megaloblástica por Deficiência de Vitamina B12",
-    "prevalencia_base": 20,
-    "01_campo_modulador": {
-      "pesos": { "gastrectomia_previa_ou_vegetariano": 3.0, "doenca_ileal_ou_crohn": 2.0 }
+    "id_caso": "hemato_megaloblastica_01",
+    "patologia_alvo": "Anemia Megaloblástica por Deficiência de Vitamina B12",
+    "dificuldade": "Intermediária",
+    "vinheta_admissao": "Mulher de 64 anos, com antecedentes de hipotireoidismo, queixa-se de fraqueza, queimação na língua (glossite) e dormente constante nas mãos e pés (parestesia), associada a instabilidade na marcha há 3 meses. Hemograma: Hb 7,5 g/dL, VCM 118 fL (macrocitose).",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["vitamina b12", "esfregaco", "acido metilmalonico", "b12"],
+      "achado_sucesso": "O esfregaço de sangue periférico demonstra neutrófilos hipersegmentados (pleocariócitos). A Vitamina B12 e o Ácido Metilmalônico retornaram alterados.",
+      "resposta_preceptor_erro": "Doutor, paciente com anemia severamente macrocítica associada a quadro neurológico (parestesias/marcha). Precisamos avaliar o esfregaço e os níveis da vitamina que protege a bainha de mielina."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "anemia_macrocitica_vcm_alto": 35, "neutrofilos_hipersegmentados": 35, "sintomas_neurologicos_parestesia": 30, "glossite_lingua_careca": 20 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["anemia megaloblastica", "deficiencia de b12", "deficiencia de vitamina b12", "anemia perniciosa"],
+      "distrator_comum": ["deficiencia de acido folico", "hipotireoidismo descompensado", "sindrome mielodisplasica"],
+      "feedback_distrator": "A deficiência de ácido fólico (folato) pode causar macrocitose, mas NUNCA causa sintomas neurológicos, pois não afeta a desmielinização dos cordões posteriores da medula.",
+      "achado_sucesso": "Correto! Anemia Megaloblástica por deficiência de Vitamina B12."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["acido_metilmalonico_e_homocisteina_elevados"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["vitamina b12 im", "cianocobalamina im", "b12 intramuscular", "reposicao parenteral de b12"],
+      "red_flag_mortal": ["acido folico", "reposicao de folato", "alta sem reposicao"],
+      "feedback_sucesso": "Excelente! Você iniciou a reposição parenteral de Vitamina B12 urgente, revertendo o quadro hematológico e prevenindo sequelas neurológicas.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você prescreveu Ácido Fólico para uma deficiência de B12. O folato corrige a anemia no hemograma, mascarando a doença, enquanto a degeneração da medula espinhal continua, deixando a paciente paraplégica."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "MEDIO",
-      "conduta_emergencial": "Reposição parenteral de Vitamina B12 (Cianocobalamina IM) urgente para evitar sequela neurológica irreversível"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Dosagem de Vitamina B12 Sérica", "Dosagem de Ácido Metilmalônico", "Hemograma (Esfregaço Sangue Periférico)"]
-    },
-    "vigneta": "Mulher de 64 anos, com antecedentes de hipotireoidismo, queixa-se de fraqueza, queimação na língua (glossite) e dormente constante nas mãos e pés (parestesia), associada a instabilidade na marcha há 3 meses. Hemograma: Hb 7,5 g/dL, VCM 118 fL (macrocitose). O esfregaço de sangue periférico demonstra neutrófilos hipersegmentados (pleocitose).",
-    "respostas_esperadas": {
-      "diagnostico": ["anemia megaloblastica", "deficiencia de b12", "deficiencia de vitamina b12", "anemia perniciosa"],
-      "exames": ["vitamina b12", "acido metilmalonico", "homocisteina", "esfregaco"],
-      "conduta": ["vitamina b12", "cianocobalamina", "b12 im", "reposicao de b12"]
-    },
-    "feedback_tecnico": "A deficiência de Vitamina B12 causa um defeito na síntese de DNA resultando em assincronismo núcleo-citoplasma (Anemia Megaloblástica). Caracteriza-se por VCM muito elevado (> 110 fL) e presença de neutrófilos hipersegmentados no sangue periférico. Diferente da deficiência de folato, a falta de B12 causa acometimento neurológico (desmielinização dos cordões posteriores da medula) e elevação isolada do Ácido Metilmalônico."
+    "discussao_clinica_final": {
+      "takeaway_message": "Ao contrário da deficiência de folato, a falta de Vitamina B12 cursa com dano neurológico progressivo e elevação do Ácido Metilmalônico sérico.",
+      "fisiopatologia": "O defeito na síntese de DNA gera assincronismo núcleo-citoplasma (macrocitose). A falta de B12 impede a conversão de metilmalonil-CoA em succinil-CoA, acumulando ácidos tóxicos que destroem a mielina dos cordões posteriores."
+    }
   },
   {
-    "id": "anemia_falciforme_crise_vaso_oclusiva",
-    "nome": "Anemia Falciforme (Crise Vaso-Oclusiva / Síndrome Torácica Aguda)",
-    "prevalencia_base": 20,
-    "01_campo_modulador": {
-      "pesos": { "homozigoto_hbs_conhecido": 4.0 }
+    "id_caso": "hemato_falciforme_01",
+    "patologia_alvo": "Anemia Falciforme (Crise Vaso-Oclusiva / Síndrome Torácica Aguda)",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Jovem de 18 anos, portador de Anemia Falciforme (HbSS), dá entrada na emergência com dor óssea intensa e refratária em MMII e dorso desencadeada após episódio febril. Evolui nas últimas horas com dor torácica, tosse, taquipneia e surgimento de novo infiltrado pulmonar à radiografia de tórax.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["rx de torax", "raio-x de torax", "hemograma", "reticulocitos", "gasometria"],
+      "achado_sucesso": "O Raio-X de tórax confirmou um novo infiltrado pulmonar extenso. O hemograma mostra anemia basal mantida sem reticulocitopenia aguda.",
+      "resposta_preceptor_erro": "Doutor, paciente falcêmico com crise álgica que evolui com taquipneia e dor torácica aguda precisa de imagem pulmonar imediata para descartar a complicação mais temida."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "crise_algica_ossea": 35, "infiltrado_pulmonar_novo_sta": 35, "dactilite_em_lactentes": 30, "ictericia_hemolitica": 20 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["sindrome toracica aguda", "sta", "crise vaso-oclusiva pulmonar", "anemia falciforme com sta"],
+      "distrator_comum": ["crise aplasica", "sequestro esplenico", "pneumonia adquirida na comunidade"],
+      "feedback_distrator": "Não é crise aplásica porque não houve queda abrupta de reticulócitos, e não é sequestro esplênico porque ele tem 18 anos (o baço já infartou/autossplenectomia na infância). É uma emergência pulmonar típica da doença.",
+      "achado_sucesso": "Correto! Trata-se de uma Crise Vaso-Oclusiva complicada com Síndrome Torácica Aguda (STA)."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["eletroforese_de_hemoglobina_com_hbs_maior_85_porcento"],
-      "exclusao_ativa": ["corpusculos_howell_jolly_presentes_em_maiores_5_anos"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["analgesia", "opioide", "morfina", "hidratacao", "transfusao", "oxigenio", "antibiotico"],
+      "red_flag_mortal": ["hidratacao hipervolemica", "analgesia simples", "dipirona isolada"],
+      "feedback_sucesso": "Conduta perfeita! Você iniciou oxigênio, analgesia plena com opioides sem restrição, hiper-hidratação cautelosa, cobertura antibiótica e acionou a hemoterapia.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você hiper-hidratou o paciente sem controle (gerando edema pulmonar) ou usou apenas analgésicos fracos, perpetuando o estresse adrenérgico, a vasoconstrição e a oclusão alveolar fatal."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "ALTO",
-      "conduta_emergencial": "Hidratação venosa, Analgesia otimizada (Opioide sem poupar), Oxigenoterapia e Transfusão se STA/AVE"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Eletroforese de Hemoglobina", "Raio-X de Tórax (STA)", "Hemograma com Reticulócitos"]
-    },
-    "vigneta": "Jovem de 18 anos, portador de Anemia Falciforme (HbSS), dá entrada na emergência com dor óssea intensa e refratária em MMII e dorso desencadeada após episódio febril. Evolui nas últimas horas com dor torácica, tosse, taquipneia e surgimento de novo infiltrado pulmonar à radiografia de tórax (Síndrome Torácica Aguda).",
-    "respostas_esperadas": {
-      "diagnostico": ["anemia falciforme", "sindrome toracica aguda", "crise vaso oclusiva", "falciforme"],
-      "exames": ["eletroforese de hemoglobina", "rx de torax", "reticulocitos"],
-      "conduta": ["analgesia", "opioide", "morfina", "hidratacao", "transfusao", "oxigenio"]
-    },
-    "feedback_tecnico": "A Anemia Falciforme resulta da mutação pontual da cadeia beta da globina (HbS), que se polimeriza em situações de hipóxia/deidratação formando 'plugs' vasculares e isquemia tecidual. A Síndrome Torácica Aguda (STA) é uma complicação grave definida por novo infiltrado radiológico associado a febre, dor torácica ou taquipneia. O tratamento das crises exige analgesia rigorosa com opioides, hidratação parcimoniosa, O2 e transfusão de hemácias nos casos graves."
+    "discussao_clinica_final": {
+      "takeaway_message": "A Síndrome Torácica Aguda (novo infiltrado pulmonar + clínica respiratória/febre) é uma emergência letal na Anemia Falciforme. O manejo inclui analgesia rigorosa com opioides e transfusão precoce.",
+      "fisiopatologia": "A hemoglobina S polimeriza-se em situações de hipóxia e desidratação, alterando o formato da hemácia para foice, formando microtrombos (plugs) que causam isquemia e infarto tecidual progressivo."
+    }
   },
   {
-    "id": "leucemia_mieloide_aguda_lma",
-    "nome": "Leucemia Mieloide Aguda (LMA / LMA M3 Promielocítica)",
-    "prevalencia_base": 15,
-    "01_campo_modulador": {
-      "pesos": { "adulto_idoso": 2.0, "exposicao_quimioterapia_benzeno": 2.5 }
+    "id_caso": "hemato_lma_01",
+    "patologia_alvo": "Leucemia Mieloide Aguda (LMA M3 Promielocítica)",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Homem de 42 anos dá entrada com sangramento gengival abundante, petéquias e febre. Hemograma: Hb 6,5 g/dL, Plaquetas 18.000/mm³ e Leucócitos 35.000/mm³ com 45% de blastos na circulação. Exames de coagulação mostram alargamento do TP/TPAE e consumo de fibrinogênio (CIVD).",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["mielograma", "aspirado de medula", "imunofenotipagem", "citometria de fluxo"],
+      "achado_sucesso": "O mielograma revela > 20% de mieloblastos contendo os clássicos Bastonetes de Auer no citoplasma, confirmando LMA.",
+      "resposta_preceptor_erro": "Doutor, pancitopenia com excesso de blastos e distúrbio de coagulação agudo. Precisamos de aspirado de medula óssea imediato para classificar a leucemia."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "pancitopenia_com_blastos": 35, "bastonetes_de_auer": 40, "coagulopatia_civd_m3": 35, "hiperplasia_gengival_m4_m5": 25 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["lma", "leucemia mieloide aguda", "lma m3", "leucemia promielocitica"],
+      "distrator_comum": ["leucemia linfoide aguda", "lla", "leucemia mieloide cronica", "lmc"],
+      "feedback_distrator": "LLA não possui Bastonetes de Auer (são patognomônicos da linha mieloide). A LMC é crônica, sem pancitopenia explosiva ou blastos tão altos inicialmente.",
+      "achado_sucesso": "Exato! Leucemia Mieloide Aguda (suspeita altíssima para subtipo M3 - Promielocítica pelo quadro de CIVD)."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["blastos_maior_igual_20_porcento_medula_ossea"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["atra", "acido trans-retinoico", "transfusao", "plasma", "suporte transfusional"],
+      "red_flag_mortal": ["alta", "esperar citogenetica", "cirurgia hemostatica", "heparina plena"],
+      "feedback_sucesso": "Conduta irretocável! Você iniciou suporte transfusional hemoderivado urgente e começou o ATRA (Ácido Trans-Retinoico) imediatamente diante da suspeita clínica da M3.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você aguardou os testes moleculares demorados para agir. A LMA M3 apresenta coagulopatia severa (CIVD); o atraso no uso do ATRA levou a um sangramento intracraniano maciço fatal."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "ALTO",
-      "conduta_emergencial": "Suporte transfusional/ATB e início imediato de ATRA (Ácido Trans-Retinoico) se subtipo M3"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Mielograma (Aspirado de MO)", "Imunofenotipagem por Citometria de Fluxo", "Cariótipo / Citogenética"]
-    },
-    "vigneta": "Homem de 42 anos dá entrada com sangramento gengival abundante, petéquias e febre. Hemograma: Hb 6,5 g/dL, Plaquetas 18.000/mm³ e Leucócitos 35.000/mm³ com 45% de blastos na circulação. Mielograma revela > 20% de mieloblastos contendo os clássicos Bastonetes de Auer no citoplasma. Exames de coagulação mostram alargamento do TP/TPAE e consumo de fibrinogênio (CIVD).",
-    "respostas_esperadas": {
-      "diagnostico": ["lma", "leucemia mieloide aguda", "lma m3", "leucemia promielocitica"],
-      "exames": ["mielograma", "aspirado de medula", "imunofenotipagem", "citometria de fluxo"],
-      "conduta": ["atra", "acido trans-retinoico", "quimioterapia", "transfusao"]
-    },
-    "feedback_tecnico": "A LMA é caracterizada pela proliferação clonal de blastos mieloides na medula óssea ($\ge 20\%$). A presença de Bastonetes de Auer na microscopia é o achado patognomônico de linhagem mieloide. O subtipo LMA Promielocítica Aguda (M3) associa-se frequentemente a quadro severo de Coagulação Intravascular Disseminada (CIVD) e tem cura > 90% com o uso do Ácido Trans-Retinoico (ATRA)."
+    "discussao_clinica_final": {
+      "takeaway_message": "Bastonetes de Auer no citoplasma dos blastos fecham o diagnóstico de linha mieloide. Se houver CIVD associada (LMA M3), inicie o ATRA (Ácido Trans-Retinoico) IMEDIATAMENTE.",
+      "fisiopatologia": "A mutação (geralmente t(15;17)) bloqueia a diferenciação dos promielócitos. O ATRA reverte esse bloqueio molecular, forçando os blastos malignos a amadurecerem e morrerem por apoptose celular natural."
+    }
   },
   {
-    "id": "aplasia_de_medula_ossea",
-    "nome": "Aplasia de Medula Óssea (Anemia Aplásica)",
-    "prevalencia_base": 10,
-    "01_campo_modulador": {
-      "pesos": { "exposicao_toxica_farmacos_radiacao": 2.5 }
+    "id_caso": "hemato_aplasia_01",
+    "patologia_alvo": "Aplasia de Medula Óssea (Anemia Aplásica)",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Jovem de 22 anos apresenta quadro de palidez progressiva, sufusões hemorrágicas na pele e febre. Exame físico: ausência de linfonodomegalias e ausência de hepatoesplenomegalia (sem visceromegalias). Hemograma: Hb 5,2 g/dL, Leucócitos 1.200/mm³ (Neutrófilos 300/mm³) e Plaquetas 8.000/mm³.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["biopsia de medula", "biopsia de medula ossea", "mielograma"],
+      "achado_sucesso": "Excelente. O mielograma veio 'seco' e a Biópsia de Medula Óssea (padrão-ouro) mostrou hipocelularidade drástica com substituição por tecido adiposo.",
+      "resposta_preceptor_erro": "Doutor, pancitopenia franca sem visceromegalias no exame físico. Precisamos avaliar o parênquima medular com o exame padrão-ouro: a biópsia de medula óssea."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "pancitopenia_grave": 35, "ausencia_de_visceromegalias": 35, "reticulocitopenia_severa": 30 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["aplasia de medula", "anemia aplasica", "aplasia medular"],
+      "distrator_comum": ["leucemia mieloide aguda", "lma", "mielofibrose", "linfoma"],
+      "feedback_distrator": "Leucemias agudas costumam ter blastos circulantes; a mielofibrose e os linfomas teriam hepatoesplenomegalia e/ou adenomegalia proeminentes. Na aplasia, a medula está vazia.",
+      "achado_sucesso": "Exato! Diagnóstico de Aplasia de Medula Óssea confirmada."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["biopsia_de_medula_hipocelular_substituicao_gordurosa"],
-      "exclusao_ativa": ["sem_esplenomegalia", "sem_adenomegalia"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["transplante de medula", "tmo", "imunossupressao", "suporte hemoterapico", "isolamento"],
+      "red_flag_mortal": ["alta", "corticoide isolado sem suporte", "esplenectomia"],
+      "feedback_sucesso": "Conduta excelente! Você isolou o paciente neutropênico grave, garantiu suporte de sangue e iniciou protocolo para Imunossupressão ou Transplante de Medula Óssea (TMO).",
+      "feedback_red_flag": "ERRO CRÍTICO! Você deu alta ou retardou as precauções de neutropenia. O paciente neutropênico febril chocou e faleceu em horas por sepse fulminante por germes gram-negativos ou fungos."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "ALTO",
-      "conduta_emergencial": "Isolamento, suporte hemoterápico e Imunossupressão ou Transplante de Medula Óssea (TMO)"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Biópsia de Medula Óssea (Padrão-Ouro)", "Mielograma (Aspirado Seco)", "Hemograma Completo"]
-    },
-    "vigneta": "Jovem de 22 anos apresenta quadro de palidez progressiva, sufusões hemorrágicas na pele e febre. Exame físico: ausência de linfonodomegalias e ausência de hepatoesplenomegalia (sem visceromegalias). Hemograma: Hb 5,2 g/dL, Leucócitos 1.200/mm³ (Neutrófilos 300/mm³) e Plaquetas 8.000/mm³. Biópsia de medula mostra hipocelularidade drástica com substituição por tecido adiposo.",
-    "respostas_esperadas": {
-      "diagnostico": ["aplasia de medula", "anemia aplasica", "aplasia medular"],
-      "exames": ["biopsia de medula", "biopsia", "mielograma"],
-      "conduta": ["transplante de medula", "tmo", "imunossupressao", "ciclosporina"]
-    },
-    "feedback_tecnico": "A Aplasia de Medula Óssea é uma falência medular primária caracterizada por desordem autoimune da célula-tronco (stem cell), gerando pancitopenia grave com reticulocitopenia. Por não haver recrutamento extramedular, caracteristicamente NÃO há esplenomegalia ou linfonodomegalia (diferencial crucial com leucemias e mielofibrose). O diagnóstico exige biópsia de medula evidenciando hipocelularidade e tecido gorduroso. O tratamento em < 45 anos é o Transplante de Medula Óssea (TMO)."
+    "discussao_clinica_final": {
+      "takeaway_message": "Pancitopenia grave SEM esplenomegalia ou linfonodomegalia sugere falência medular primária. O diagnóstico exige biópsia mostrando medula substituída por gordura.",
+      "fisiopatologia": "Uma desordem autoimune ataca e destrói diretamente as células-tronco pluripotentes (stem cells) da medula, cessando a produção de todas as 3 linhagens sanguíneas (glóbulos vermelhos, brancos e plaquetas)."
+    }
   },
   {
-    "id": "leucemia_mieloide_cronica_lmc",
-    "nome": "Leucemia Mieloide Crônica (LMC)",
-    "prevalencia_base": 15,
-    "01_campo_modulador": {
-      "pesos": { "faixa_etaria_40_a_60_anos": 2.0 }
+    "id_caso": "hemato_lmc_01",
+    "patologia_alvo": "Leucemia Mieloide Crônica (LMC)",
+    "dificuldade": "Intermediária",
+    "vinheta_admissao": "Homem de 50 anos realiza exames admissionais e apresenta leucocitose maciça de 180.000/mm³ com desvio à esquerda escalonado até mieloblastos, mas com predomínio de mielócitos e metamielócitos maduros. Ao exame: esplenomegalia gigante (baço ultrapassando a cicatriz umbilical).",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["cariotipo", "fish", "cromossomo philadelphia", "bcr-abl", "fosfatase alcalina leucocitaria"],
+      "achado_sucesso": "Brilhante! A fosfatase alcalina leucocitária estava baixa. O teste genético (Cariótipo/PCR) identificou a presença marcante da translocação t(9;22).",
+      "resposta_preceptor_erro": "Doutor, leucocitose absurda, baço gigante e desvio maturativo escalonado. Qual a alteração citogenética chave (ou o teste molecular) que diagnostica essa síndrome mieloproliferativa?"
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "leucocitose_acentuada_com_desvio": 35, "esplenomegalia_de_monta": 35, "fosfatase_alcalina_leucocitaria_baixa": 30 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["lmc", "leucemia mieloide cronica"],
+      "distrator_comum": ["reacao leucemoide", "sepse", "leucemia mieloide aguda", "lma"],
+      "feedback_distrator": "Na LMA, a medula é tomada por blastos (>20%) sem amadurecimento celular. Na reação leucemoide (por infecção), a fosfatase alcalina leucocitária estaria ALTA, não baixa como na LMC.",
+      "achado_sucesso": "Exato! Leucemia Mieloide Crônica (LMC)."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["presenca_do_cromossomo_philadelphia_t9_22"],
-      "exclusao_ativa": ["blastos_menores_que_20_porcento_fase_cronica"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["imatinibe", "mesilato de imatinibe", "glivec", "inibidor de tirosina quinase", "itk"],
+      "red_flag_mortal": ["quimioterapia de inducao intensa padrao", "esplenectomia de urgencia"],
+      "feedback_sucesso": "Conduta perfeita! O uso revolucionário do Inibidor de Tirosina Quinase (Mesilato de Imatinibe) bloqueou a proliferação celular, garantindo ao paciente uma sobrevida igual à da população geral.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você tentou fazer cirurgia de urgência em um baço gigante leucêmico ou prescreveu quimioterapia agressiva padrão de LMA em fase crônica, expondo o paciente a mortalidade desnecessária."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "MEDIO",
-      "conduta_emergencial": "Inibidor de Tirosina Quinase (Mesilato de Imatinibe)"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Cariótipo / FISH para Cromossomo Philadelphia t(9;22)", "PCR para gene BCR-ABL", "Mielograma"]
-    },
-    "vigneta": "Homem de 50 anos realiza exames admissionais e apresenta leucocitose maciça de 180.000/mm³ com desvio à esquerda escalonado até mieloblastos, mas com predomínio de mielócitos e metamielócitos maduros. Ao exame: esplenomegalia gigante (baço ultrapassando a cicatriz umbilical). A fosfatase alcalina leucocitária é baixa e o teste genético identifica a translocação t(9;22).",
-    "respostas_esperadas": {
-      "diagnostico": ["lmc", "leucemia mieloide cronica"],
-      "exames": ["cromossomo philadelphia", "bcr-abl", "cariotipo", "fish"],
-      "conduta": ["imatinibe", "mesilato de imatinibe", "glivec", "inibidor de tirosina quinase"]
-    },
-    "feedback_tecnico": "A LMC é uma síndrome mieloproliferativa crônica caracterizada pela presença do Cromossomo Philadelphia $t(9;22)$, que origina a proteína fusão BCR-ABL com atividade tirosina quinase constitutiva. Cursa com leucocitose extrema com escalonamento maturativo mieloide mantido e esplenomegalia de grande monta. A Fosfatase Alcalina Leucocitária (FAL) é baixa (diferencial com reação leucemoide de infecções). O tratamento de escolha é o Mesilato de Imatinibe."
+    "discussao_clinica_final": {
+      "takeaway_message": "A Leucemia Mieloide Crônica é marcada pelo Cromossomo Philadelphia (translocação t9;22). O tratamento é o alvo molecular direto com inibidores da tirosina quinase (ex: Imatinibe).",
+      "fisiopatologia": "A fusão genética BCR-ABL produz uma proteína tirosina quinase permanentemente ativa, que estimula a proliferação descontrolada dos progenitores mieloides de forma crônica, gerando leucocitose maciça e esplenomegalia secundária."
+    }
   }
 ]
