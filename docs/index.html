@@ -327,17 +327,44 @@
   // ==========================================
   // 1. MANIFESTO DO CONHECIMENTO (O Mapa)
   // ==========================================
-  // Adicione aqui os nomes dos arquivos que já estão no formato Schema v3.0
   const manifestoConhecimento = {
-    "Cardiologia": {
-      pasta: "knowledge_base/",
-      arquivos: ["cardiologia.json"] // Exemplo: arquivo que já tem o caso v3.0 do IAM
+    "Clínica Médica": {
+      pasta: "docs/knowledge_base/sindromes_clinicas/",
+      arquivos: [
+        "cardiologia.json",
+        "cefaleias.json",
+        "cirrose.json",
+        "dispneia.json",
+        "disturbios_hidroeletroliticos.json",
+        "endocrinologia.json",
+        "epilepsia.json",
+        "geriatria.json",
+        "hematologia.json",
+        "hemostasia.json",
+        "hiv.json",
+        "ictericia.json",
+        "linfonodomegalia.json",
+        "nefrologia.json",
+        "neurologia.json",
+        "pcr.json",
+        "pneumonia.json",
+        "reumatologia.json",
+        "semiologia_osteoarticular.json",
+        "semiologia_respiratoria.json",
+        "sindrome_diarreica.json",
+        "sindrome_metabolica_diabe...", // Nota: ajuste este nome para o nome exato do arquivo sem os '...'
+        "sindrome_metabolica_has.js...", // Nota: ajuste este nome para o nome exato do arquivo sem os '...'
+        "sindrome_uremica.json",
+        "sindromes_bacterianas.json",
+        "sindromes_febris.json",
+        "terapia_intensiva.json",
+        "tosse_cronica.json",
+        "toxicologia.json",
+        "valvopatias.json"
+      ]
     }
-    // Vá adicionando as outras pastas conforme for atualizando os JSONs
   };
 
-  let bancoDeDadosMestre = [];
-  let casoAtual = null;
 
   // ==========================================
   // 2. ESTADO DO JOGO
