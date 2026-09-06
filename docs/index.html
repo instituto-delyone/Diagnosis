@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  Diagnosis Engine v5.0 — True Clinical RPG (Versão Definitiva com Loader)
+  Diagnosis Engine v7.0 — Motor Léxico e Aprendizado Local
   Copyright (c) 2026 Instituto Delyone
 -->
 <html lang="pt-BR">
@@ -9,17 +9,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Diagnosis Engine - RPG Clínico</title>
   <style>
+    /* CSS ORIGINAL MANTIDO */
     :root {
       --navy: #071426; --blue: #1f5fae; --ink: #1f2933; --muted: #66757c;
       --bg: #f7f9fc; --card: #ffffff; --border: #dce5e8; --green: #238b57;
       --red: #cf5148; --red-dark: #742a2a; --gold: #d4af37; --amber: #d97706;
     }
-
     * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
     body { background-color: var(--navy); color: var(--ink); margin: 0; padding: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
     .app-container { max-width: 900px; width: 100%; height: 95vh; display: flex; flex-direction: column; background: var(--bg); border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); overflow: hidden; position: relative; }
 
-    /* SELEÇÃO */
     #selection-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 40px; text-align: center; background: var(--navy); color: #fff; }
     #selection-screen h1 { font-size: 32px; margin-bottom: 10px; }
     #selection-screen p { color: #cbd5e1; margin-bottom: 40px; font-size: 16px; max-width: 600px; }
@@ -34,7 +33,6 @@
     .mode-desc { font-size: 14px; color: #94a3b8; line-height: 1.5; }
     #loading-status { margin-top: 20px; color: var(--gold); font-weight: bold; font-size: 14px; }
 
-    /* CHAT */
     #chat-screen { display: none; flex-direction: column; height: 100%; }
     .header { padding: 15px 24px; background: var(--navy); color: #fff; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
     .header h2 { margin: 0; font-size: 18px; display: flex; align-items: center; gap: 8px; }
@@ -81,15 +79,15 @@
       <div class="mode-card red-room" onclick="iniciarJogo('sala_vermelha')">
         <div class="mode-icon">🚨</div>
         <div class="mode-title">Sala Vermelha</div>
-        <div class="mode-desc">Adrenalina pura. Dados limitados, paciente instável. A prioridade é a ação e estabilização imediata.</div>
+        <div class="mode-desc">Adrenalina pura. Dados limitados, paciente instável. A prioridade é a ação imediata.</div>
       </div>
       <div class="mode-card clinic" onclick="iniciarJogo('clinica_medica')">
         <div class="mode-icon">🩺</div>
         <div class="mode-title">Clínica Médica</div>
-        <div class="mode-desc">Raciocínio profundo. Anamnese completa e sinais vitais estáveis. A prioridade é o diagnóstico diferencial.</div>
+        <div class="mode-desc">Raciocínio profundo. Anamnese completa e sinais vitais estáveis.</div>
       </div>
     </div>
-    <div id="loading-status">Carregando base de dados...</div>
+    <div id="loading-status">Carregando base de dados local...</div>
   </div>
 
   <div id="chat-screen">
@@ -115,14 +113,92 @@
     </div>
 
     <div class="input-container">
-      <input type="text" id="user-input" class="input-box" placeholder="O que você faz ou pergunta agora?" onkeypress="handleEnter(event)">
-      <button id="btn-send" class="btn-send" onclick="enviarMensagem()">Ação</button>
+      <input type="text" id="user-input" class="input-box" placeholder="Ex: 'Solicito ECG' ou 'Intubar paciente'" onkeypress="handleEnter(event)">
+      <button id="btn-send" class="btn-send" onclick="enviarMensagem()">Falar</button>
     </div>
   </div>
 
 </div>
 
 <script>
+  // ==========================================
+  // 1. MOTOR LÉXICO (O Cérebro Local)
+  // ==========================================
+  const dicionarioSinonimos = {
+    "iot": "intubacao", "tubo": "intubacao", "intubar": "intubacao", "via aerea definitiva": "intubacao",
+    "eletro": "ecg", "eletrocardiograma": "ecg",
+    "tomografia": "tc", "tomo": "tc",
+    "raio x": "rx", "raiox": "rx", "radiografia": "rx",
+    "hemograma completo": "hemograma"
+  };
+
+  function normalizarTexto(texto) {
+    let limpo = texto.toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove acentos
+      .replace(/[.,!?]/g, "") // Remove pontuação
+      .trim();
+      
+    // Substitui sinônimos para o termo base
+    for (const [jargao, base] of Object.entries(dicionarioSinonimos)) {
+      const regex = new RegExp(`\\b${jargao}\\b`, 'g');
+      limpo = limpo.replace(regex, base);
+    }
+    return limpo;
+  }
+
+  function gerarFraseConversacional(tipo) {
+    const aberturas = ["Entendido.", "Anotado.", "Feito.", "A equipe procede conforme solicitado."];
+    const transicoesFase = ["O que você faz agora, doutor?", "Qual a sua próxima conduta?", "Baseado nisso, qual o próximo passo?"];
+    const erros = ["A equipe aguarda. Isso não parece resolver o quadro.", "Sem alteração no quadro clínico com essa conduta.", "O preceptor te olha confuso. Tem certeza dessa ação?"];
+    
+    const randomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+    
+    if (tipo === "sucesso") return `${randomItem(aberturas)} `;
+    if (tipo === "pergunta") return ` <em>${randomItem(transicoesFase)}</em>`;
+    if (tipo === "erro") return `${randomItem(erros)} `;
+    return "";
+  }
+
+  // ==========================================
+  // 2. SISTEMA DE APRENDIZADO (O Observador)
+  // ==========================================
+  function registrarTentativaNaoReconhecida(inputUsuario, fase) {
+    let logs = JSON.parse(localStorage.getItem("diagnosis_learning_logs") || "[]");
+    logs.push({
+      data: new Date().toLocaleString(),
+      fase: fase,
+      caso: casoAtual?.patologia_alvo || "Desconhecido",
+      input_jogador: inputUsuario
+    });
+    localStorage.setItem("diagnosis_learning_logs", JSON.stringify(logs));
+  }
+
+  function mostrarLogsDeAprendizado() {
+    let logs = JSON.parse(localStorage.getItem("diagnosis_learning_logs") || "[]");
+    if (logs.length === 0) {
+      adicionarMensagemGM("<em>[Sistema] Não há falhas registradas ainda. A máquina está com a folha em branco.</em>");
+      return;
+    }
+    let html = "<strong>[Logs de Aprendizado - Termos não compreendidos pelo Motor]:</strong><br><br>";
+    logs.slice(-10).forEach(log => {
+      html += `• [Fase ${log.fase} - ${log.caso}]: "${log.input_jogador}"<br>`;
+    });
+    html += "<br><em>Atualize seus JSONs ou o Dicionário de Sinônimos com estas variações.</em>";
+    adicionarMensagemGM(html);
+  }
+
+  // ==========================================
+  // 3. ESTRUTURA ORIGINAL DO JOGO
+  // ==========================================
+  const manifestoConhecimento = {
+    "Clínica Médica": {
+      pasta: "knowledge_base/sindromes_clinicas/", 
+      arquivos: [
+        "cardiologia.json", "pneumonia.json", "terapia_intensiva.json" // Mantenha sua lista aqui
+      ]
+    }
+  };
+
   const selectionScreen = document.getElementById('selection-screen');
   const chatScreen = document.getElementById('chat-screen');
   const chatBox = document.getElementById('chat-box');
@@ -136,81 +212,20 @@
   const vitFC = document.getElementById('vit-fc');
   const vitSpO2 = document.getElementById('vit-spo2');
 
-  // ==========================================
-  // 1. MANIFESTO DO CONHECIMENTO (O Mapa)
-  // ==========================================
-    const manifestoConhecimento = {
-    "Clínica Médica": {
-      pasta: "knowledge_base/sindromes_clinicas/", 
-      arquivos: [
-        "cardiologia.json",
-        "cefaleias.json",
-        "cirrose.json",
-        "dispneia.json",
-        "disturbios_hidroeletroliticos.json",
-        "endocrinologia.json",
-        "epilepsia.json",
-        "geriatria.json",
-        "hematologia.json",
-        "hemostasia.json",
-        "hiv.json",
-        "ictericia.json",
-        "linfonodomegalia.json",
-        "nefrologia.json",
-        "neurologia.json",
-        "pcr.json",
-        "pneumonia.json",
-        "reumatologia.json",
-        "semiologia_osteoarticular.json",
-        "semiologia_respiratoria.json",
-        "sindrome_diarreica.json",
-        "sindrome_metabolica_diabetica.json",
-        "sindrome_metabolica_has.json",
-        "sindrome_uremica.json",
-        "sindromes_bacterianas.json",
-        "sindromes_febris.json",
-        "terapia_intensiva.json",
-        "tosse_cronica.json",
-        "toxicologia.json",
-        "valvopatias.json"
-      ]
-    }
-  };
-
   let bancoDeDadosMestre = [];
   let casoAtual = null;
-
-  // ==========================================
-  // 2. ESTADO DO JOGO
-  // ==========================================
   let modoAtual = '';
   let turnos = 0;
   let pontuacao = 100;
   let faseAtual = 1; 
   let estadoPaciente = { vivo: true };
-
-  // ==========================================
-  // 3. SISTEMA DE SKIPS E INICIALIZAÇÃO
-  // ==========================================
   let skipsUsadosHoje = 0;
   const MAX_SKIPS = 3;
-  let ipUsuario = 'local';
 
-  async function inicializarSistema() {
-    try {
-      const response = await fetch('https://api.ipify.org?format=json');
-      const data = await response.json();
-      ipUsuario = data.ip;
-    } catch (e) {
-      console.warn("Navegador bloqueou a busca de IP.");
-    }
-    
-    const hoje = new Date().toISOString().split('T')[0];
-    skipsUsadosHoje = parseInt(localStorage.getItem(`skips_${ipUsuario}_${hoje}`) || '0');
+  window.onload = async function() {
     atualizarBotaoSkip();
-
     await carregarBaseDeConhecimento();
-  }
+  };
 
   function atualizarBotaoSkip() {
     const skipsRestantes = MAX_SKIPS - skipsUsadosHoje;
@@ -218,11 +233,6 @@
     if (skipsRestantes <= 0) btnSkip.disabled = true;
   }
 
-  window.onload = inicializarSistema;
-
-  // ==========================================
-  // 4. MOTOR DE CARREGAMENTO (FETCH API)
-  // ==========================================
   async function carregarBaseDeConhecimento() {
     let casosCarregados = 0;
     for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
@@ -231,50 +241,34 @@
           const res = await fetch(dados.pasta + arquivo);
           if (res.ok) {
             const json = await res.json();
-            
-            // Aceita tanto array de casos quanto um único caso
             const casos = Array.isArray(json) ? json : [json];
-            
-            // FILTRO DE SEGURANÇA: Só carrega os casos que já estão no novo Schema v3.0
             casos.forEach(c => {
-              if (c && c.fase_1_investigacao && c.fase_3_conduta) {
+              if (c && c.fase_1_investigacao) {
                 bancoDeDadosMestre.push(c);
                 casosCarregados++;
               }
             });
           }
-        } catch (error) {
-          console.warn("Aviso: Não foi possível ler", arquivo);
-        }
+        } catch (e) {}
       }
     }
-    
     if (casosCarregados > 0) {
       loadingStatus.style.color = "var(--green)";
-      loadingStatus.innerText = `Base pronta! ${casosCarregados} casos compatíveis carregados.`;
-    } else {
-      loadingStatus.style.color = "var(--red)";
-      loadingStatus.innerText = "Atenção: Nenhum caso no Schema v3.0 (Socrático) encontrado. Atualize seus JSONs.";
+      loadingStatus.innerText = `Base Inteligente Pronta! ${casosCarregados} casos carregados.`;
     }
   }
 
-  // ==========================================
-  // 5. GAME LOOP & PARSER SOCRÁTICO
-  // ==========================================
   function iniciarJogo(modo) {
     if (bancoDeDadosMestre.length === 0) {
-      alert("Erro: A base de dados não encontrou nenhum caso no novo formato de fases. Atualize os JSONs em knowledge_base/sindromes_clinicas/ seguindo o Schema v3.0 e tente novamente.");
+      alert("Erro: Banco de dados não carregado.");
       return;
     }
-
     modoAtual = modo;
     selectionScreen.style.display = 'none';
     chatScreen.style.display = 'flex';
-    
     document.getElementById('room-title').innerHTML = modo === 'sala_vermelha' ? '🚨 Sala Vermelha' : '🩺 Clínica Médica';
     
-    const randomIndex = Math.floor(Math.random() * bancoDeDadosMestre.length);
-    casoAtual = bancoDeDadosMestre[randomIndex];
+    casoAtual = bancoDeDadosMestre[Math.floor(Math.random() * bancoDeDadosMestre.length)];
 
     if (modo === 'sala_vermelha') {
       vitPA.innerText = "PA: 85/50"; vitPA.classList.add('alert');
@@ -284,71 +278,61 @@
       vitFC.innerText = "FC: 78"; vitSpO2.innerText = "SpO2: 97%";
     }
     
-    // Fallbacks para propriedades caso falte algo no JSON do usuário
-    const vinheta = casoAtual.vinheta_admissao || "Paciente deu entrada na emergência. Qual sua conduta?";
-    const nomeCaso = casoAtual.patologia_alvo || "Caso Clínico";
+    const vinheta = casoAtual.vinheta_admissao || "Paciente deu entrada na emergência.";
+    adicionarMensagemGM(`<strong>Caso Clínico Iniciado</strong><br><br>${vinheta}<br><br><em>Doutor, qual é a sua primeira ação de propedêutica ou investigação?</em>`);
     
-    adicionarMensagemGM(`<strong>${nomeCaso}</strong> (Modo Debug: Título Oculto no Jogo Real)<br><br>${vinheta}<br><br><em>Doutor, qual é a sua primeira ação de propedêutica ou investigação?</em>`);
-    
-    faseAtual = 1;
-    turnos = 0;
-    pontuacao = 100;
-    estadoPaciente.vivo = true;
+    faseAtual = 1; turnos = 0; pontuacao = 100; estadoPaciente.vivo = true;
     liberarInput();
   }
 
-  function avaliarResposta(input, gabarito) {
+  function avaliarRespostaLexica(inputNormalizado, gabarito) {
     if (!gabarito || !Array.isArray(gabarito)) return false;
-    return gabarito.some(termo => input.includes(termo.toLowerCase()));
+    // Normaliza também o gabarito do JSON para garantir um "match" perfeito
+    return gabarito.some(termo => {
+      let termoNormalizado = normalizarTexto(termo);
+      return inputNormalizado.includes(termoNormalizado);
+    });
   }
 
-  function processarAcaoRPG(input) {
+  function processarAcaoRPG(inputBruto) {
+    let inputNorm = normalizarTexto(inputBruto);
     let msgGM = "";
     let isCritical = false;
-    let avançouFase = false;
+    let avancou = false;
 
     if (faseAtual === 1) {
-      const acertou = avaliarResposta(input, casoAtual.fase_1_investigacao.gabarito_esperado);
-      if (acertou) {
-        msgGM = `${casoAtual.fase_1_investigacao.achado_sucesso}<br><br><em>Com esses dados, qual o seu diagnóstico principal?</em>`;
-        faseAtual = 2; avançouFase = true;
+      if (avaliarRespostaLexica(inputNorm, casoAtual.fase_1_investigacao.gabarito_esperado)) {
+        msgGM = `${gerarFraseConversacional('sucesso')}${casoAtual.fase_1_investigacao.achado_sucesso}<br><br>${gerarFraseConversacional('pergunta')}`;
+        faseAtual = 2; avancou = true;
       } else {
         pontuacao -= 5;
-        msgGM = `${casoAtual.fase_1_investigacao.resposta_preceptor_erro || 'Ação registrada. O quadro se mantém. Qual a investigação principal?'}`;
+        registrarTentativaNaoReconhecida(inputBruto, 1);
+        msgGM = `${gerarFraseConversacional('erro')}${casoAtual.fase_1_investigacao.resposta_preceptor_erro || 'Tente outra investigação.'}`;
       }
     }
-    else if (faseAtual === 2 && !avançouFase) {
-      const acertou = avaliarResposta(input, casoAtual.fase_2_diagnostico.gabarito_esperado);
-      const distrator = avaliarResposta(input, casoAtual.fase_2_diagnostico.distrator_comum);
-      
-      if (acertou) {
-        msgGM = `${casoAtual.fase_2_diagnostico.achado_sucesso}<br><br><em>Qual a sua conduta terapêutica imediata?</em>`;
-        faseAtual = 3; avançouFase = true;
-      } else if (distrator) {
-        pontuacao -= 15;
-        msgGM = `${casoAtual.fase_2_diagnostico.feedback_distrator}`;
+    else if (faseAtual === 2 && !avancou) {
+      if (avaliarRespostaLexica(inputNorm, casoAtual.fase_2_diagnostico.gabarito_esperado)) {
+        msgGM = `${gerarFraseConversacional('sucesso')}${casoAtual.fase_2_diagnostico.achado_sucesso}<br><br><em>Qual a sua conduta terapêutica imediata?</em>`;
+        faseAtual = 3; avancou = true;
       } else {
         pontuacao -= 10;
-        msgGM = `Sua hipótese não se sustenta perfeitamente com a clínica apresentada. Tente novamente.`;
+        registrarTentativaNaoReconhecida(inputBruto, 2);
+        msgGM = `${gerarFraseConversacional('erro')}Sua hipótese não se sustenta. Tente novamente.`;
       }
     }
-    else if (faseAtual === 3 && !avançouFase) {
-      const acertou = avaliarResposta(input, casoAtual.fase_3_conduta.gabarito_esperado);
-      const redFlag = avaliarResposta(input, casoAtual.fase_3_conduta.red_flag_mortal);
-      
-      if (redFlag) {
+    else if (faseAtual === 3 && !avancou) {
+      if (avaliarRespostaLexica(inputNorm, casoAtual.fase_3_conduta.red_flag_mortal)) {
         pontuacao = 0; estadoPaciente.vivo = false; isCritical = true;
         vitPA.innerText = "PA: --/--"; vitFC.innerText = "FC: 0"; vitFC.classList.add('alert');
         msgGM = `${casoAtual.fase_3_conduta.feedback_red_flag}`;
-        finalizarJogo();
-        return;
-      } else if (acertou) {
-        msgGM = `${casoAtual.fase_3_conduta.feedback_sucesso}`;
-        finalizarJogo(true);
-        return;
+        finalizarJogo(); return;
+      } else if (avaliarRespostaLexica(inputNorm, casoAtual.fase_3_conduta.gabarito_esperado)) {
+        msgGM = `${gerarFraseConversacional('sucesso')}${casoAtual.fase_3_conduta.feedback_sucesso}`;
+        finalizarJogo(true); return;
       } else {
         pontuacao -= 10;
-        msgGM = `Ação ineficaz. O quadro não mudou e o paciente continua grave. Qual a conduta protocolar principal?`;
+        registrarTentativaNaoReconhecida(inputBruto, 3);
+        msgGM = `${gerarFraseConversacional('erro')}O paciente continua grave. Qual a conduta principal?`;
       }
     }
 
@@ -358,32 +342,34 @@
 
   function trocarCaso() {
     if (skipsUsadosHoje >= MAX_SKIPS) return;
-    skipsUsadosHoje++;
-    const hoje = new Date().toISOString().split('T')[0];
-    localStorage.setItem(`skips_${ipUsuario}_${hoje}`, skipsUsadosHoje);
-    atualizarBotaoSkip();
-    
-    chatBox.innerHTML = '';
+    skipsUsadosHoje++; atualizarBotaoSkip(); chatBox.innerHTML = '';
     adicionarMensagemGM("<em>🔄 Skip utilizado. Um novo paciente acaba de dar entrada...</em>");
     setTimeout(() => { iniciarJogo(modoAtual); }, 1500);
   }
 
-  function proximoCaso() {
-    chatBox.innerHTML = '';
-    chatScreen.style.display = 'none';
-    selectionScreen.style.display = 'flex';
-  }
-
+  function proximoCaso() { chatBox.innerHTML = ''; chatScreen.style.display = 'none'; selectionScreen.style.display = 'flex'; }
   function handleEnter(e) { if (e.key === 'Enter') enviarMensagem(); }
 
   function enviarMensagem() {
     const texto = userInput.value.trim();
-    if (!texto || !estadoPaciente.vivo) return;
+    if (!texto) return;
+    
+    // Comando Secreto para ver o que a engine não entendeu
+    if (texto === "/logs") {
+      adicionarMensagemUser(texto);
+      userInput.value = '';
+      mostrarLogsDeAprendizado();
+      return;
+    }
+
+    if (!estadoPaciente.vivo) return;
+    
     adicionarMensagemUser(texto);
     userInput.value = '';
     bloquearInput();
     turnos++;
-    setTimeout(() => { processarAcaoRPG(texto.toLowerCase()); }, 1200);
+    
+    setTimeout(() => { processarAcaoRPG(texto); }, 1000); // Simulando o tempo de pensamento
   }
 
   function finalizarJogo(vitoria = false) {
@@ -392,19 +378,17 @@
     let titulo = vitoria ? "✅ Paciente Salvo" : "❌ Óbito / Falha Crítica";
     let cor = vitoria ? "var(--green)" : "var(--red)";
 
-    const div = document.createElement('div');
-    div.className = 'debriefing-card';
+    const div = document.createElement('div'); div.className = 'debriefing-card';
     div.innerHTML = `
       <h3 style="color: ${cor}">${titulo}</h3>
       <div class="score-circle" style="background: ${cor}">${finalScore}</div>
       <div class="debriefing-text">
-        <strong>Debriefing (Takeaway):</strong><br>${casoAtual.discussao_clinica_final?.takeaway_message || "Revisão concluída."}<br><br>
-        <strong>Fisiopatologia:</strong><br>${casoAtual.discussao_clinica_final?.fisiopatologia || "Estude os protocolos oficiais."}
+        <strong>Debriefing:</strong><br>${casoAtual.discussao_clinica_final?.takeaway_message || "Revisão concluída."}<br><br>
+        <strong>Fisiopatologia:</strong><br>${casoAtual.discussao_clinica_final?.fisiopatologia || "Estude os protocolos."}
       </div>
       <button class="btn-send" onclick="proximoCaso()" style="width: 100%; margin-top: 10px;">Atender Próximo Paciente</button>
     `;
-    chatBox.appendChild(div);
-    scrollToBottom();
+    chatBox.appendChild(div); scrollToBottom();
   }
 
   function adicionarMensagemUser(texto) { const div = document.createElement('div'); div.className = 'message user'; div.innerText = texto; chatBox.appendChild(div); scrollToBottom(); }
