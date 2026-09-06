@@ -312,7 +312,7 @@
 </div>
 
 <script>
-  const selectionScreen = document.getElementById('selection-screen');
+    const selectionScreen = document.getElementById('selection-screen');
   const chatScreen = document.getElementById('chat-screen');
   const chatBox = document.getElementById('chat-box');
   const userInput = document.getElementById('user-input');
@@ -324,95 +324,209 @@
   const vitFC = document.getElementById('vit-fc');
   const vitSpO2 = document.getElementById('vit-spo2');
 
+  // ==========================================
+  // 1. MANIFESTO DO CONHECIMENTO (O Mapa)
+  // ==========================================
+  // Adicione aqui os nomes dos arquivos que já estão no formato Schema v3.0
+  const manifestoConhecimento = {
+    "Cardiologia": {
+      pasta: "knowledge_base/",
+      arquivos: ["cardiologia.json"] // Exemplo: arquivo que já tem o caso v3.0 do IAM
+    }
+    // Vá adicionando as outras pastas conforme for atualizando os JSONs
+  };
+
+  let bancoDeDadosMestre = [];
+  let casoAtual = null;
+
+  // ==========================================
+  // 2. ESTADO DO JOGO
+  // ==========================================
   let modoAtual = '';
   let turnos = 0;
   let pontuacao = 100;
-  let estadoPaciente = { vivo: true, diagnosticoFeito: false, examePedido: false, complica_nitrato: false };
-  
+  let faseAtual = 1; // 1: Investigação, 2: Diagnóstico, 3: Conduta
+  let estadoPaciente = { vivo: true };
+
   // ==========================================
-  // LÓGICA DE LIMITE POR IP (3x ao dia)
+  // 3. SISTEMA DE SKIPS (IP)
   // ==========================================
   let skipsUsadosHoje = 0;
   const MAX_SKIPS = 3;
   let ipUsuario = 'local';
 
-  async function inicializarSistemaSkips() {
+  async function inicializarSistema() {
     try {
       const response = await fetch('https://api.ipify.org?format=json');
       const data = await response.json();
       ipUsuario = data.ip;
     } catch (e) {
-      console.warn("Navegador bloqueou a busca de IP. Usando fallback local.");
+      console.warn("Navegador bloqueou a busca de IP.");
     }
     
-    const hoje = new Date().toISOString().split('T')[0]; // Ex: 2026-09-06
-    const chaveStorage = `skips_${ipUsuario}_${hoje}`;
-    
-    skipsUsadosHoje = parseInt(localStorage.getItem(chaveStorage) || '0');
+    const hoje = new Date().toISOString().split('T')[0];
+    skipsUsadosHoje = parseInt(localStorage.getItem(`skips_${ipUsuario}_${hoje}`) || '0');
     atualizarBotaoSkip();
+
+    // Carrega a base de dados
+    await carregarBaseDeConhecimento();
   }
 
   function atualizarBotaoSkip() {
     const skipsRestantes = MAX_SKIPS - skipsUsadosHoje;
     btnSkip.innerText = `Trocar Caso (${skipsRestantes}/${MAX_SKIPS})`;
-    if (skipsRestantes <= 0) {
-      btnSkip.disabled = true;
-    }
+    if (skipsRestantes <= 0) btnSkip.disabled = true;
   }
 
-  function trocarCaso() {
-    if (skipsUsadosHoje >= MAX_SKIPS) return;
+  window.onload = inicializarSistema;
 
-    // Registra o uso
-    skipsUsadosHoje++;
-    const hoje = new Date().toISOString().split('T')[0];
-    localStorage.setItem(`skips_${ipUsuario}_${hoje}`, skipsUsadosHoje);
-    atualizarBotaoSkip();
-
-    // Lógica para trocar de caso
-    chatBox.innerHTML = '';
-    turnos = 0;
-    pontuacao = 100;
-    estadoPaciente = { vivo: true, diagnosticoFeito: false, examePedido: false, complica_nitrato: false };
-    
-    adicionarMensagemGM("<em>🔄 Você utilizou um Skip. O plantão virou. Um novo paciente acaba de dar entrada...</em>");
-    
-    // Aqui você conectaria com o seu JSON para puxar um NOVO caso. 
-    // Como estamos no mockup fixo do IAM, vamos apenas re-renderizar o texto inicial:
-    setTimeout(() => {
-      iniciarJogo(modoAtual, true); 
-    }, 1500);
-  }
-  
-  // Chama a inicialização de IP assim que a página carrega
-  window.onload = inicializarSistemaSkips;
   // ==========================================
+  // 4. MOTOR DE CARREGAMENTO (FETCH API)
+  // ==========================================
+  async function carregarBaseDeConhecimento() {
+    btnSend.disabled = true;
+    btnSend.innerText = "Carregando...";
+    
+    for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
+      for (const arquivo of dados.arquivos) {
+        try {
+          // Em ambiente local, isso pode dar erro de CORS sem um servidor. No GitHub Pages roda perfeito.
+          const res = await fetch(dados.pasta + arquivo);
+          if (res.ok) {
+            const json = await res.json();
+            // Verifica se é uma lista de casos e adiciona ao banco mestre
+            if (Array.isArray(json)) {
+              bancoDeDadosMestre.push(...json);
+            } else {
+              bancoDeDadosMestre.push(json);
+            }
+          }
+        } catch (error) {
+          console.error("Erro ao carregar:", arquivo, error);
+        }
+      }
+    }
+    
+    btnSend.innerText = "Ação";
+    console.log(`Base carregada: ${bancoDeDadosMestre.length} casos prontos.`);
+  }
 
-  const cenario = {
-    sala_vermelha: "O SAMU acaba de deixar um paciente masculino, 60 anos, na maca. Pálido, muito sudoreico, com a mão no peito (sinal de Levine). O monitor acabou de ser ligado. <br><br>Doutor, qual a sua conduta inicial imediata?",
-    clinica_medica: "Homem de 60 anos, hipertenso, internado na enfermaria. Queixa-se de dor retroesternal em aperto há 2 horas. <br><br>Sinais vitais preliminares: PA 110/70, FC 88, SpO2 96%. <br><br>Qual sua linha de investigação e conduta primária?",
-    debriefing: "<strong>IAM de Ventrículo Direito.</strong><br>No IAM de VD, o ventrículo perde força e depende de volume. Nitrato/Morfina reduz o retorno venoso, causando choque. O tratamento exige expansão volêmica e reperfusão."
-  };
+  // ==========================================
+  // 5. GAME LOOP & PARSER SOCRÁTICO
+  // ==========================================
+  function iniciarJogo(modo) {
+    if (bancoDeDadosMestre.length === 0) {
+      alert("A base de dados ainda está vazia ou carregando. Atualize seus JSONs.");
+      return;
+    }
 
-  function iniciarJogo(modo, isTroca = false) {
     modoAtual = modo;
     selectionScreen.style.display = 'none';
     chatScreen.style.display = 'flex';
     
-    if (!isTroca) {
-      document.getElementById('room-title').innerHTML = modo === 'sala_vermelha' ? '🚨 Sala Vermelha' : '🩺 Clínica Médica';
+    document.getElementById('room-title').innerHTML = modo === 'sala_vermelha' ? '🚨 Sala Vermelha' : '🩺 Clínica Médica';
+    
+    // Sorteia um caso aleatório da base mestre
+    const randomIndex = Math.floor(Math.random() * bancoDeDadosMestre.length);
+    casoAtual = bancoDeDadosMestre[randomIndex];
+
+    // Configura os vitais iniciais
+    if (modo === 'sala_vermelha') {
+      vitPA.innerText = "PA: 85/50"; vitPA.classList.add('alert');
+      vitFC.innerText = "FC: 115"; vitSpO2.innerText = "SpO2: 89%";
+    } else {
+      vitPA.innerText = "PA: 120/80"; vitPA.classList.remove('alert');
+      vitFC.innerText = "FC: 78"; vitSpO2.innerText = "SpO2: 97%";
     }
     
-    if (modo === 'sala_vermelha') {
-      vitPA.innerText = "PA: 90/60"; vitPA.classList.add('alert');
-      vitFC.innerText = "FC: 110"; vitSpO2.innerText = "SpO2: 92%";
-      adicionarMensagemGM(cenario.sala_vermelha);
-    } else {
-      vitPA.innerText = "PA: 110/70"; vitPA.classList.remove('alert');
-      vitFC.innerText = "FC: 88"; vitSpO2.innerText = "SpO2: 96%";
-      adicionarMensagemGM(cenario.clinica_medica);
+    adicionarMensagemGM(`<strong>${casoAtual.patologia_alvo}</strong> (Modo Debug: Título Oculto no Jogo Real)<br><br>${casoAtual.vinheta_admissao}<br><br><em>Doutor, qual é a sua primeira ação de propedêutica ou investigação?</em>`);
+    
+    faseAtual = 1;
+    turnos = 0;
+    pontuacao = 100;
+    estadoPaciente.vivo = true;
+    liberarInput();
+  }
+
+  function avaliarResposta(input, gabarito) {
+    if (!gabarito) return false;
+    return gabarito.some(termo => input.includes(termo.toLowerCase()));
+  }
+
+  function processarAcaoRPG(input) {
+    let msgGM = "";
+    let isCritical = false;
+    let avançouFase = false;
+
+    // AVALIAÇÃO FASE 1: INVESTIGAÇÃO
+    if (faseAtual === 1) {
+      const acertou = avaliarResposta(input, casoAtual.fase_1_investigacao.gabarito_esperado);
+      if (acertou) {
+        msgGM = `${casoAtual.fase_1_investigacao.achado_sucesso}<br><br><em>Com esses dados, qual o seu diagnóstico principal?</em>`;
+        faseAtual = 2; avançouFase = true;
+      } else {
+        pontuacao -= 5;
+        msgGM = `${casoAtual.fase_1_investigacao.resposta_preceptor_erro}`;
+      }
     }
-    userInput.focus();
+    // AVALIAÇÃO FASE 2: DIAGNÓSTICO
+    else if (faseAtual === 2 && !avançouFase) {
+      const acertou = avaliarResposta(input, casoAtual.fase_2_diagnostico.gabarito_esperado);
+      const distrator = avaliarResposta(input, casoAtual.fase_2_diagnostico.distrator_comum);
+      
+      if (acertou) {
+        msgGM = `${casoAtual.fase_2_diagnostico.achado_sucesso}<br><br><em>Qual a sua conduta terapêutica imediata?</em>`;
+        faseAtual = 3; avançouFase = true;
+      } else if (distrator) {
+        pontuacao -= 15;
+        msgGM = `${casoAtual.fase_2_diagnostico.feedback_distrator}`;
+      } else {
+        pontuacao -= 10;
+        msgGM = `Sua hipótese não se sustenta com a clínica apresentada. Tente novamente.`;
+      }
+    }
+    // AVALIAÇÃO FASE 3: CONDUTA
+    else if (faseAtual === 3 && !avançouFase) {
+      const acertou = avaliarResposta(input, casoAtual.fase_3_conduta.gabarito_esperado);
+      const redFlag = avaliarResposta(input, casoAtual.fase_3_conduta.red_flag_mortal);
+      
+      if (redFlag) {
+        pontuacao = 0; estadoPaciente.vivo = false; isCritical = true;
+        vitPA.innerText = "PA: --/--"; vitFC.innerText = "FC: 0"; vitFC.classList.add('alert');
+        msgGM = `${casoAtual.fase_3_conduta.feedback_red_flag}`;
+        finalizarJogo();
+        return; // Interrompe aqui
+      } else if (acertou) {
+        msgGM = `${casoAtual.fase_3_conduta.feedback_sucesso}`;
+        finalizarJogo(true);
+        return; // Interrompe aqui
+      } else {
+        pontuacao -= 10;
+        msgGM = `Ação ineficaz. O quadro não mudou e o paciente continua grave. Qual a conduta protocolar correta?`;
+      }
+    }
+
+    adicionarMensagemGM(msgGM, isCritical);
+    liberarInput();
+  }
+
+  // --- FUNÇÕES DE INTERFACE (MANTER AS MESMAS) ---
+  function trocarCaso() {
+    if (skipsUsadosHoje >= MAX_SKIPS) return;
+    skipsUsadosHoje++;
+    const hoje = new Date().toISOString().split('T')[0];
+    localStorage.setItem(`skips_${ipUsuario}_${hoje}`, skipsUsadosHoje);
+    atualizarBotaoSkip();
+    
+    chatBox.innerHTML = '';
+    adicionarMensagemGM("<em>🔄 Skip utilizado. Um novo paciente acaba de dar entrada...</em>");
+    setTimeout(() => { iniciarJogo(modoAtual); }, 1500);
+  }
+
+  function proximoCaso() {
+    chatBox.innerHTML = '';
+    chatScreen.style.display = 'none';
+    selectionScreen.style.display = 'flex';
   }
 
   function handleEnter(e) { if (e.key === 'Enter') enviarMensagem(); }
@@ -420,60 +534,11 @@
   function enviarMensagem() {
     const texto = userInput.value.trim();
     if (!texto || !estadoPaciente.vivo) return;
-
     adicionarMensagemUser(texto);
     userInput.value = '';
     bloquearInput();
     turnos++;
-    setTimeout(() => { processarAcaoRPG(texto.toLowerCase()); }, 1500);
-  }
-
-  function processarAcaoRPG(input) {
-    let msgGM = "";
-    let isCritical = false;
-
-    if (input.includes("nitrato") || input.includes("morfina")) {
-      estadoPaciente.complica_nitrato = true;
-      pontuacao -= 50; isCritical = true;
-      vitPA.innerText = "PA: 60/40"; vitPA.classList.add('alert');
-      vitFC.innerText = "FC: 130"; vitFC.classList.add('alert');
-      msgGM = "⚠️ ALARME! A pressão arterial despencou para 60x40 mmHg. Ele rebaixa o nível de consciência. <br><br><em>O que você faz agora, rápido!</em>";
-    }
-    else if (estadoPaciente.complica_nitrato && (input.includes("volume") || input.includes("soro"))) {
-      estadoPaciente.complica_nitrato = false;
-      pontuacao += 10;
-      vitPA.innerText = "PA: 95/60"; vitPA.classList.remove('alert');
-      vitFC.innerText = "FC: 100"; vitFC.classList.remove('alert');
-      msgGM = "Expansão volêmica vigorosa iniciada. A pressão subiu para 95x60 e ele recobrou a consciência. <br><br><em>E agora, como fechamos esse diagnóstico e tratamento?</em>";
-    }
-    else if (estadoPaciente.complica_nitrato) {
-      estadoPaciente.vivo = false; isCritical = true;
-      vitPA.innerText = "PA: --/--"; vitFC.innerText = "FC: 0 (FV)";
-      msgGM = "O paciente evoluiu com choque cardiogênico irreversível e foi a óbito na sala.";
-      finalizarJogo();
-    }
-    else if (input.includes("ecg") || input.includes("eletrocardiograma")) {
-      estadoPaciente.examePedido = true;
-      msgGM = "ECG rodado. <strong>Achado:</strong> Supra de ST em DII, DIII, aVF e V4R. <br><br><em>Qual o diagnóstico? E a conduta?</em>";
-    }
-    else if (input.includes("iam") || input.includes("infarto")) {
-      estadoPaciente.diagnosticoFeito = true;
-      if (input.includes("vd") || input.includes("ventriculo direito")) { pontuacao += 20; msgGM = "Exato. IAM de VD. <br><br><em>Qual a sua conduta definitiva?</em>"; } 
-      else { msgGM = "IAM inferior, sim. Mas e o V4R? Independente disso, qual a conduta?"; }
-    }
-    else if (input.includes("cateterismo") || input.includes("angioplastia") || input.includes("aas")) {
-      if (!estadoPaciente.examePedido) pontuacao -= 20; 
-      vitPA.innerText = "PA: 110/70"; vitPA.classList.remove('alert'); vitFC.innerText = "FC: 85";
-      msgGM = "Conduta registrada e Hemodinâmica acionada. O paciente estabilizou.";
-      finalizarJogo(true);
-    }
-    else {
-      pontuacao -= 5;
-      msgGM = `Ação "${input}" anotada. O quadro não mudou.<br><br><em>Qual a conduta principal?</em>`;
-    }
-
-    adicionarMensagemGM(msgGM, isCritical);
-    if (estadoPaciente.vivo) liberarInput();
+    setTimeout(() => { processarAcaoRPG(texto.toLowerCase()); }, 1200);
   }
 
   function finalizarJogo(vitoria = false) {
@@ -487,30 +552,20 @@
     div.innerHTML = `
       <h3 style="color: ${cor}">${titulo}</h3>
       <div class="score-circle" style="background: ${cor}">${finalScore}</div>
-      <div class="debriefing-text"><strong>Debriefing Técnico:</strong><br>${cenario.debriefing}</div>
-      <button class="btn-send" onclick="location.reload()">Voltar ao Início</button>
+      <div class="debriefing-text">
+        <strong>Debriefing (Takeaway):</strong><br>${casoAtual.discussao_clinica_final.takeaway_message}<br><br>
+        <strong>Fisiopatologia:</strong><br>${casoAtual.discussao_clinica_final.fisiopatologia}
+      </div>
+      <button class="btn-send" onclick="proximoCaso()" style="width: 100%; margin-top: 10px;">Atender Próximo Paciente</button>
     `;
     chatBox.appendChild(div);
     scrollToBottom();
   }
 
-  function adicionarMensagemUser(texto) {
-    const div = document.createElement('div'); div.className = 'message user'; div.innerText = texto;
-    chatBox.appendChild(div); scrollToBottom();
-  }
-
-  function adicionarMensagemGM(htmlTexto, isCritical = false) {
-    esconderTyping();
-    const div = document.createElement('div'); div.className = `message gm ${isCritical ? 'critical' : ''}`; div.innerHTML = htmlTexto;
-    chatBox.appendChild(div); scrollToBottom();
-  }
-
+  function adicionarMensagemUser(texto) { const div = document.createElement('div'); div.className = 'message user'; div.innerText = texto; chatBox.appendChild(div); scrollToBottom(); }
+  function adicionarMensagemGM(htmlTexto, isCritical = false) { esconderTyping(); const div = document.createElement('div'); div.className = `message gm ${isCritical ? 'critical' : ''}`; div.innerHTML = htmlTexto; chatBox.appendChild(div); scrollToBottom(); }
   function mostrarTyping() { chatBox.appendChild(typingIndicator); typingIndicator.style.display = 'flex'; scrollToBottom(); }
   function esconderTyping() { typingIndicator.style.display = 'none'; }
   function bloquearInput() { userInput.disabled = true; btnSend.disabled = true; mostrarTyping(); }
   function liberarInput() { userInput.disabled = false; btnSend.disabled = false; userInput.focus(); }
   function scrollToBottom() { chatBox.scrollTop = chatBox.scrollHeight; }
-
-</script>
-</body>
-</html>
