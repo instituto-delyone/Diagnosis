@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <!--
-  MedUnity Delyone — Clinical Document Engine
+  MedUnity Delyone — Clinical Document Engine (Conversational)
   Copyright (c) 2025-2026 Dr. Delyone de Paula Canedo Filho / Instituto Delyone
-  Licenciado sob a Licença Creative Commons Atribuição-NãoComercial 4.0 Internacional (CC BY-NC 4.0).
 -->
 
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diagnosis Engine - Instituto Delyone</title>
+  <title>AIGAR ENGINE - Preceptor Virtual</title>
   <style>
     :root {
       --navy: #071426;
@@ -22,12 +21,8 @@
       --border: #dce5e8;
       --green: #238b57;
       --green-soft: #ecf8f1;
-      --red: #cf5148;
-      --red-soft: #fdf2f1;
-      --amber: #b7791f;
-      --amber-soft: #fefcbf;
-      --gold: #d4af37;
-      --gold-soft: #fffbeb;
+      --user-msg: #e5f2fc;
+      --bot-msg: #ffffff;
     }
 
     * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
@@ -35,1189 +30,348 @@
       background-color: var(--bg);
       color: var(--ink);
       margin: 0;
-      padding: 40px 20px;
+      padding: 0;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 30px;
     }
 
-    .arena-container, .modules-container, .trophy-container, .leaderboard-container {
+    .app-container {
       max-width: 800px;
       width: 100%;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 36px;
-      box-shadow: 0 12px 36px rgba(7, 20, 38, 0.04);
-      transition: all 0.3s ease;
-    }
-
-    .header {
-      text-align: center;
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border);
-    }
-    .header .badge {
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--blue);
-      background: var(--light-blue);
-      padding: 6px 14px;
-      border-radius: 99px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .header h1 { margin: 14px 0 8px; color: var(--navy); font-size: 28px; letter-spacing: -0.02em; }
-    .header p { margin: 0; color: var(--muted); font-size: 15px; }
-
-    .translate-wrapper {
+      height: 100%;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 14px;
+      flex-direction: column;
+      background: var(--card);
+      box-shadow: 0 12px 36px rgba(7, 20, 38, 0.04);
+      position: relative;
     }
-    .goog-te-gadget-simple {
-      background-color: #fafbfc !important;
-      border: 1px solid var(--border) !important;
-      padding: 6px 12px !important;
-      border-radius: 8px !important;
-      font-size: 13px !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      cursor: pointer !important;
-    }
-    .goog-te-gadget-simple span { color: var(--navy) !important; font-weight: 600 !important; }
-    .goog-te-banner-frame.skiptranslate { display: none !important; }
-    body { top: 0px !important; }
 
-    .bayes-tracker {
-      display: none;
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 24px;
-      animation: fadeIn 0.4s ease;
-    }
-    .bayes-header {
+    /* HEADER */
+    .header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 8px;
-    }
-    .progress-bar-container {
-      width: 100%;
-      height: 10px;
-      background: #e2e8f0;
-      border-radius: 99px;
-      overflow: hidden;
-    }
-    .progress-bar-fill {
-      height: 100%;
-      width: 0%;
-      background: var(--blue);
-      border-radius: 99px;
-      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease;
-    }
-
-    .case-box {
-      background: #fafbfc;
-      border-left: 4px solid var(--blue);
-      padding: 22px;
-      border-radius: 0 12px 12px 0;
-      margin-bottom: 24px;
-      font-size: 16px;
-      line-height: 1.6;
-      display: none;
-      animation: fadeIn 0.4s ease;
-    }
-    .interaction-area { display: none; animation: fadeIn 0.4s ease; }
-    .question { font-weight: 700; margin-bottom: 12px; color: var(--navy); font-size: 16px; }
-
-    .confidence-box {
-      margin-bottom: 16px;
-      background: #f0f4f8;
-      padding: 12px 16px;
-      border-radius: 10px;
-      font-size: 13.5px;
-      display: none;
-    }
-    .confidence-options {
-      display: flex;
-      gap: 10px;
-      margin-top: 8px;
-    }
-    .conf-btn {
-      flex: 1;
-      padding: 8px;
-      border: 1px solid var(--border);
+      align-items: center;
       background: #fff;
-      border-radius: 8px;
-      font-size: 12.5px;
-      font-weight: 700;
-      cursor: pointer;
-      color: var(--ink);
-      transition: all 0.2s;
+      z-index: 10;
     }
-    .conf-btn.selected {
+    .header-info h1 { margin: 0 0 4px; color: var(--navy); font-size: 18px; font-weight: 800; }
+    .header-info p { margin: 0; color: var(--green); font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+    .status-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; display: inline-block; }
+    
+    .btn-new-case {
       background: var(--navy);
       color: #fff;
-      border-color: var(--navy);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-new-case:hover { background: var(--blue); }
+
+    /* CHAT AREA */
+    .chat-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: #fafbfc;
     }
 
+    .message {
+      max-width: 85%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-size: 15px;
+      line-height: 1.5;
+      animation: fadeIn 0.3s ease;
+      position: relative;
+    }
+
+    .message.bot {
+      background: var(--bot-msg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--blue);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+
+    .message.bot.feedback-success {
+      border-left-color: var(--green);
+      background: var(--green-soft);
+    }
+    
+    .message.bot.feedback-error {
+      border-left-color: #cf5148;
+      background: #fdf2f1;
+    }
+    
+    .message.bot.feedback-partial {
+      border-left-color: #b7791f;
+      background: #fffbeb;
+    }
+
+    .message.user {
+      background: var(--user-msg);
+      color: var(--navy);
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+      font-weight: 500;
+    }
+
+    /* BAYES TRACKER MINI */
+    .bayes-mini {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-top: 1px dashed var(--border);
+      padding-top: 8px;
+    }
+    .bayes-bar { height: 4px; background: #e2e8f0; flex: 1; border-radius: 4px; overflow: hidden; }
+    .bayes-fill { height: 100%; background: var(--blue); transition: width 0.5s ease; }
+
+    /* INPUT AREA */
+    .input-container {
+      padding: 20px;
+      background: #fff;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+    }
     .input-box {
-      width: 100%;
+      flex: 1;
       padding: 14px 16px;
       border: 2px solid var(--border);
       border-radius: 10px;
       font-size: 15px;
-      margin-bottom: 12px;
       outline: none;
       transition: border-color 0.2s;
     }
     .input-box:focus { border-color: var(--blue); }
-
-    .btn {
-      background: var(--navy);
+    .btn-send {
+      background: var(--blue);
       color: #fff;
       border: none;
-      padding: 14px 28px;
+      padding: 0 24px;
       border-radius: 10px;
-      font-size: 14px;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s ease;
-      width: 100%;
-      box-shadow: 0 4px 12px rgba(7, 20, 38, 0.1);
+      transition: background 0.2s;
     }
-    .btn:hover:not(:disabled) { background: var(--blue); transform: translateY(-1px); }
-    .btn:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; box-shadow: none; }
-    
-    .btn-secondary {
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      margin-top: 10px;
-      box-shadow: none;
-    }
-    .btn-secondary:hover {
-      background: #f0f4f8;
-      color: var(--navy);
-      border-color: var(--blue);
-    }
+    .btn-send:hover { background: var(--navy); }
 
-    .log-area { margin-top: 24px; font-size: 14px; line-height: 1.6; }
-    .preceptor-card {
-      padding: 18px;
-      border-radius: 12px;
-      margin-bottom: 14px;
-      border-left: 5px solid;
-      animation: slideDown 0.3s ease;
-    }
-    .preceptor-card.correct { background: var(--green-soft); border-color: var(--green); color: #1e4620; }
-    .preceptor-card.incorrect { background: var(--red-soft); border-color: var(--red); color: #742a2a; }
-    .preceptor-card.summary { background: #f0f4f8; border-color: var(--blue); color: var(--navy); }
-    
-    .badge-conquest-card {
-      background: var(--gold-soft);
-      border: 1px solid var(--gold);
-      border-left: 5px solid var(--gold);
-      color: #744210;
-      padding: 16px;
-      border-radius: 12px;
-      margin-top: 14px;
-      display: flex;
+    .typing-indicator {
+      display: none;
       align-items: center;
-      gap: 12px;
-      animation: slideDown 0.4s ease;
-    }
-
-    .discussion-card {
-      background: #ffffff;
+      gap: 4px;
+      padding: 12px 18px;
+      background: #fff;
       border: 1px solid var(--border);
-      border-left: 5px solid var(--blue);
-      box-shadow: 0 8px 24px rgba(7, 20, 38, 0.05);
-      margin-top: 20px;
-      animation: slideDown 0.4s ease;
-    }
-    .discussion-card h3 {
-      margin: 0 0 14px 0;
-      color: var(--navy);
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .discussion-topic {
-      font-size: 14px;
-      line-height: 1.5;
+      border-radius: 12px;
+      align-self: flex-start;
       margin-bottom: 10px;
     }
-    .discussion-topic strong { color: var(--navy); }
+    .dot { width: 6px; height: 6px; background: var(--muted); border-radius: 50%; animation: bounce 1.4s infinite ease-in-out; }
+    .dot:nth-child(1) { animation-delay: -0.32s; }
+    .dot:nth-child(2) { animation-delay: -0.16s; }
 
-    .score-board {
-      text-align: center;
-      margin-top: 30px;
-      padding-top: 20px;
-      border-top: 1px dashed var(--border);
-      font-size: 24px;
-      font-weight: 800;
-      color: var(--navy);
-      display: none;
-      animation: fadeIn 0.5s ease;
-    }
-
-    /* === PAINEL DE TROFÉUS / BADGES === */
-    .trophy-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-    .trophy-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--gold-soft);
-      border: 1px solid var(--gold);
-      color: #744210;
-      padding: 6px 12px;
-      border-radius: 99px;
-      font-size: 13px;
-      font-weight: 700;
-      box-shadow: 0 2px 6px rgba(212, 175, 55, 0.15);
-    }
-    .daily-badge-counter {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
-    /* === MURAL TOP 10 === */
-    .leaderboard-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 16px;
-      font-size: 13.5px;
-    }
-    .leaderboard-table th {
-      text-align: left;
-      padding: 10px 12px;
-      background: #f8fafc;
-      color: var(--navy);
-      font-weight: 800;
-      border-bottom: 2px solid var(--border);
-    }
-    .leaderboard-table td {
-      padding: 12px;
-      border-bottom: 1px solid var(--border);
-      color: var(--ink);
-    }
-    .leaderboard-table tr:nth-child(even) { background-color: #fafbfc; }
-    .rank-pill {
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 6px;
-      display: inline-block;
-    }
-    .rank-1 { background: #fef08a; color: #854d0e; }
-    .rank-2 { background: #e2e8f0; color: #475569; }
-    .rank-3 { background: #ffedd5; color: #9a3412; }
-
-    /* === MODAL HALL OF FAME === */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(7, 20, 38, 0.7);
-      backdrop-filter: blur(4px);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      animation: fadeIn 0.3s ease;
-    }
-    .modal-card {
-      background: #fff;
-      padding: 32px;
-      border-radius: 18px;
-      max-width: 480px;
-      width: 90%;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-      text-align: center;
-    }
-
-    .module-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-      margin-top: 20px;
-    }
-    .module-card {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px;
-      background: #fafbfc;
-      transition: transform 0.2s;
-      position: relative;
-    }
-    .module-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.03); }
-    .module-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-    .module-title { font-weight: 800; color: var(--navy); font-size: 15px; }
-    
-    .status-badge { font-size: 10px; font-weight: 800; padding: 5px 10px; border-radius: 6px; }
-    .status-badge.active { background: var(--green-soft); color: var(--green); border: 1px solid #c9ead8; }
-    .status-badge.empty { background: #f4f7f8; color: var(--muted); border: 1px solid var(--border); }
-    
-    .file-list { margin: 0 0 16px 0; padding-left: 20px; font-size: 13px; color: var(--muted); min-height: 40px; }
-    .file-list li { margin-bottom: 6px; }
-
-    .toggle-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid var(--border);
-      padding-top: 12px;
-    }
-    .toggle-label { font-size: 12px; font-weight: 800; color: var(--navy); text-transform: uppercase; }
-    
-    .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
-    .switch input { opacity: 0; width: 0; height: 0; }
-    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--border); transition: .4s; border-radius: 24px; }
-    .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
-    
-    input:checked + .slider { background-color: var(--green); }
-    input:checked + .slider:before { transform: translateX(20px); }
-    input:disabled + .slider { background-color: #e2e8f0; cursor: not-allowed; }
-    input:disabled:checked + .slider { background-color: #8ccba8; cursor: not-allowed; }
-
-    .footer-note {
-      max-width: 800px;
-      width: 100%;
-      text-align: center;
-      font-size: 12.5px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
   </style>
 </head>
 <body>
 
-<div class="arena-container">
+<div class="app-container">
   <div class="header">
-    <div class="translate-wrapper">
-      <div id="google_translate_element"></div>
+    <div class="header-info">
+      <h1>Dr. Aigar (Preceptor)</h1>
+      <p><span class="status-dot"></span> Sincronizado com IDMT Knowledge Base</p>
     </div>
-    <span class="badge">AIGAR ENGINE - V4.2 CONQUEST EDITION</span>
-    <h1>Simulador de Raciocínio Clínico</h1>
-    <p id="status-engine">Sincronizando com a base de conhecimento do Instituto Delyone...</p>
+    <button class="btn-new-case" onclick="iniciarNovoCaso()">Novo Paciente</button>
   </div>
 
-  <button id="btn-start" class="btn" onclick="iniciarJogo()" disabled>Carregando Módulos...</button>
-
-  <div id="bayes-tracker" class="bayes-tracker">
-    <div class="bayes-header">
-      <span>Probabilidade Diagnóstica Pós-Teste</span>
-      <span id="prob-percent">25%</span>
-    </div>
-    <div class="progress-bar-container">
-      <div id="prob-bar" class="progress-bar-fill"></div>
-    </div>
+  <div class="chat-container" id="chat-box">
+    <!-- Messages will be injected here -->
+  </div>
+  
+  <div class="typing-indicator" id="typing">
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
   </div>
 
-  <div id="case-display" class="case-box"></div>
-
-  <div id="interaction" class="interaction-area">
-    <div id="step-indicator" style="font-size: 12px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em;"></div>
-    <div id="question-text" class="question"></div>
-
-    <div id="confidence-box" class="confidence-box">
-      <strong>Qual o seu nível de certeza nesta hipótese?</strong>
-      <div class="confidence-options">
-        <button type="button" class="conf-btn" onclick="setConfianca(0.5, this)">50% (Dúvida)</button>
-        <button type="button" class="conf-btn selected" onclick="setConfianca(0.8, this)">80% (Provável)</button>
-        <button type="button" class="conf-btn" onclick="setConfianca(0.99, this)">99% (Certeza)</button>
-      </div>
-    </div>
-
-    <input type="text" id="user-input" class="input-box" placeholder="Digite sua conduta e pressione Enter..." onkeypress="handleEnter(event)">
-    <button class="btn" onclick="processarResposta()" style="background: var(--blue);">Submeter Decisão Clínica</button>
-    <button class="btn btn-secondary" onclick="iniciarJogo()">🔀 Sortear Outro Cenário</button>
-  </div>
-
-  <div id="log" class="log-area"></div>
-  <div id="final-score" class="score-board"></div>
-</div>
-
-<!-- GALERIA DE TROFÉUS / BADGES -->
-<div class="trophy-container">
-  <div style="display: flex; justify-content: space-between; align-items: center;">
-    <h2 style="margin: 0; font-size: 18px; color: var(--navy); font-weight: 800;">🏆 Galeria de Badges de Maestria</h2>
-    <span id="badge-daily-status" class="daily-badge-counter">Badges hoje: 0/3</span>
-  </div>
-  <p style="margin: 6px 0 0; font-size: 13px; color: var(--muted);">Acertos com 100% de calibração desbloqueiam badges nominais da patologia (máximo 3 por dia por dispositivo).</p>
-  <div class="trophy-grid" id="trophy-grid"></div>
-</div>
-
-<!-- MURAL DOS 10 PRIMEIROS DO DIA -->
-<div class="leaderboard-container">
-  <div style="display: flex; justify-content: space-between; align-items: center;">
-    <h2 style="margin: 0; font-size: 18px; color: var(--navy); font-weight: 800;">Hall Doutores</h2>
-    <span style="font-size: 12px; color: var(--muted);">Atualizado Diariamente</span>
-  </div>
-  <p style="margin: 6px 0 0; font-size: 13px; color: var(--muted);"> 10 menções de honra diárias.</p>
-  <table class="leaderboard-table">
-    <thead>
-      <tr>
-        <th style="width: 60px;">Pos.</th>
-        <th>Doutor</th>
-        <th>Horário</th>
-        <th>Conteúdo</th>
-      </tr>
-    </thead>
-    <tbody id="leaderboard-body">
-      <tr><td colspan="4" style="text-align: center; color: var(--muted); padding: 18px;">-</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- MODAL DE REGISTRO DO 3º TROFÉU -->
-<div id="hall-of-fame-modal" class="modal-overlay">
-  <div class="modal-card">
-    <span style="font-size: 44px;">👑</span>
-    <h2 style="color: var(--navy); margin: 10px 0 6px;">Maestria Diária Concluída!</h2>
-    <p style="font-size: 14px; color: var(--muted); margin: 0 0 20px;">Você alcançou o 3º troféu com 100% de acerto hoje! Como deseja registrar seu nome no Hall dos Mestres?</p>
-    <input type="text" id="hof-username" class="input-box" placeholder="Ex: Dr. Delyone ou Dra. Beatriz..." style="text-align: center;">
-    <button class="btn" onclick="LeaderboardSystem.submeterAoHall()" style="background: var(--green); margin-bottom: 8px;">Registrar no Mural</button>
-    <button class="btn btn-secondary" onclick="LeaderboardSystem.submeterComIp()">Usar apenas meu IP público</button>
+  <div class="input-container">
+    <input type="text" id="user-input" class="input-box" placeholder="Digite sua resposta..." onkeypress="handleEnter(event)" disabled>
+    <button id="btn-send" class="btn-send" onclick="enviarMensagem()" disabled>Enviar</button>
   </div>
 </div>
-
-<div class="modules-container">
-  <h2 style="margin: 0 0 6px; font-size: 20px; color: var(--navy); font-weight: 800;">Módulos de Raciocínio (On/Off)</h2>
-  <p style="margin: 0 0 16px; font-size: 14px; color: var(--muted);">Ative ou desative especialidades. O motor seleciona casos ponderando prevalência e histórico de acertos.</p>
-  <div class="module-grid" id="module-grid"></div>
-</div>
-
-<footer class="footer-note">
-  <p>ℹ️ <strong>Nota Técnica:</strong> Motor adaptativo estocástico com calibração pós-teste bayesiana e sistema de progressão. Registrado sob titularidade do Instituto Delyone de Medicina e Tecnologia.</p>
-</footer>
-
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'pt',
-      includedLanguages: 'en,es,pt',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-      autoDisplay: false
-    }, 'google_translate_element');
-  }
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script>
-  /**
-   * ==========================================
-   * 1. MANIFESTO DO CONHECIMENTO
-   * ==========================================
-   */
-  const manifestoConhecimento = {
-    "Clínica Médica": {
-      pasta: "knowledge_base/sindromes_clinicas/",
-      arquivos: [
-        "cardiologia.json", "cefaleias.json", "cirrose.json", "dispneia.json",
-        "disturbios_hidroeletroliticos.json", "endocrinologia.json", "epilepsia.json",
-        "geriatria.json", "hematologia.json", "hemostasia.json", "hiv.json",
-        "ictericia.json", "linfonodomegalia.json", "mordeduras_profilaxias.json",
-        "nefrologia.json", "neurologia.json", "pcr.json", "pneumonia.json",
-        "reumatologia.json", "semiologia_osteoarticular.json", "semiologia_respiratoria.json",
-        "sindrome_diarreica.json", "sindrome_metabolica_diabetes.json",
-        "sindrome_metabolica_has.json", "sindrome_uremica.json", "sindromes_bacterianas.json",
-        "sindromes_febris.json", "terapia_intensiva.json", "tosse_cronica.json",
-        "toxicologia.json", "valvopatias.json"
-      ]
-    },
-    "Ginecologia e Obstetrícia": {
-      pasta: "knowledge_base/ginecologia_obstetricia/",
-      arquivos: [
-        "00_diretrizes_gerais.json", "avaliacao_inicial_de_gravidez.json",
-        "cenarios-uroginecologia.json", "doencas_clinicas_gravidez.json",
-        "hemorragia_pos_parto_e_sofrimento.json", "onco_mamas.json",
-        "onco_utero_endometrio_vulva.json", "sangramento-ginecologico.json",
-        "sangramentos_gravidez.json", "sindromes_transmissao_sexual.json"
-      ]
-    },
-        "Pediatria": { 
-      pasta: "knowledge_base/pediatria/", 
-      arquivos: [
-        "pediatriaI.json",
-        "pediatriaII.json",
-        "pediatriaIII.json",
-        "pediatriaIV.json",
-        "pediatriaV.json",
-        "pediatriaVI.json"
-      ]
-    },
+  const chatBox = document.getElementById('chat-box');
+  const userInput = document.getElementById('user-input');
+  const btnSend = document.getElementById('btn-send');
+  const typingIndicator = document.getElementById('typing');
 
-    "Cirurgia Geral": { 
-      pasta: "knowledge_base/cirurgia/", 
-      arquivos: [] 
+  // Variáveis de estado do jogo
+  let estagioAtual = 0; 
+  let probabilidadeBayesiana = 35;
+  let diagnosticoUsuario = "";
+
+  const casoSimulado = {
+    vinheta: "Paciente masculino, 54 anos, hipertenso, chega à emergência sudoreico, com queixa de 'aperto no peito' irradiado para mandíbula há 40 minutos.",
+    respostas: {
+      investigacao: ["ecg", "eletrocardiograma"],
+      diagnostico: ["iam", "infarto", "sca", "sindrome coronariana"],
+      conduta: ["aspirina", "aas", "clopidogrel", "mov", "cateterismo", "angioplastia"]
     }
   };
 
-  let modulosAtivos = {
-    "Clínica Médica": true,
-    "Ginecologia e Obstetrícia": true,
-    "Pediatria": true,
-    "Cirurgia Geral": true
+  window.onload = () => {
+    setTimeout(() => {
+      iniciarNovoCaso();
+    }, 500);
   };
 
-  let bancoDeDadosMestre = [];
-  let materialComplementar = {};
-
-  /**
-   * ==========================================
-   * 2. SISTEMA DE TROFÉUS / BADGES DIÁRIAS
-   * ==========================================
-   */
-  class BadgeSystem {
-    static getHojeStr() {
-      const d = new Date();
-      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-    }
-
-    static getDados() {
-      try {
-        return JSON.parse(localStorage.getItem("medunity_badges_db") || '{"badges":[], "daily":{}}');
-      } catch (e) {
-        return { badges: [], daily: {} };
-      }
-    }
-
-    static salvarDados(dados) {
-      localStorage.setItem("medunity_badges_db", JSON.stringify(dados));
-    }
-
-    static getBadgesHoje() {
-      const dados = this.getDados();
-      const hoje = this.getHojeStr();
-      return dados.daily[hoje] || 0;
-    }
-
-    static tentarConcederBadge(nomeDoenca) {
-      const dados = this.getDados();
-      const hoje = this.getHojeStr();
-      const countHoje = dados.daily[hoje] || 0;
-
-      if (countHoje >= 3) {
-        return { concedida: false, motivo: "Limite diário de 3 badges atingido para este dispositivo." };
-      }
-
-      if (!dados.badges.includes(nomeDoenca)) {
-        dados.badges.push(nomeDoenca);
-      }
-      dados.daily[hoje] = countHoje + 1;
-      this.salvarDados(dados);
-      this.renderizarGaleria();
-
-      // Checa se completou o 3º troféu
-      if (dados.daily[hoje] === 3) {
-        LeaderboardSystem.abrirModalRegistro(dados.badges.slice(-3));
-      }
-
-      return { concedida: true, totalHoje: dados.daily[hoje] };
-    }
-
-    static renderizarGaleria() {
-      const dados = this.getDados();
-      const countHoje = this.getBadgesHoje();
-      const statusEl = document.getElementById("badge-daily-status");
-      const gridEl = document.getElementById("trophy-grid");
-
-      if (statusEl) statusEl.innerText = `Badges hoje: ${countHoje}/3`;
-      if (!gridEl) return;
-
-      if (dados.badges.length === 0) {
-        gridEl.innerHTML = `<span style="font-size: 13px; color: var(--muted);">Nenhuma badge desbloqueada ainda. Alcance 100% de pontuação em um caso.</span>`;
-        return;
-      }
-
-      gridEl.innerHTML = dados.badges.map(b => `<div class="trophy-badge">🏆 ${b}</div>`).join('');
-    }
-  }
-
-/**
-   * ==========================================
-   * 2.1 MURAL TOP 10 (LEADERBOARD GLOBAL - NUVEM)
-   * ==========================================
-   */
-  class LeaderboardSystem {
-    static badgesParaSubmissao = [];
+  function iniciarNovoCaso() {
+    chatBox.innerHTML = '';
+    estagioAtual = 1;
+    probabilidadeBayesiana = 35;
+    diagnosticoUsuario = "";
     
-    // COLE O SEU LINK ENTRE AS ASPAS ABAIXO:
-    static API_URL = "https://script.google.com/macros/s/AKfycbz5oOsjVrkLdJJmqKTiV6pZTtrN3v6P83QTrE7UBBjW4x6S9Kk1WWLGJuqJZX7TzwJo/exec";
+    adicionarMensagemBot(`<strong>Plantão iniciado. Paciente na sala vermelha.</strong><br><br>${casoSimulado.vinheta}<br><br><em>Doutor, qual é a sua primeira ação de propedêutica ou exame a ser solicitado imediatamente?</em>`, probabilidadeBayesiana);
+    liberarInput();
+  }
 
-    static abrirModalRegistro(badgesRecentes) {
-      this.badgesParaSubmissao = badgesRecentes;
-      const modal = document.getElementById("hall-of-fame-modal");
-      if (modal) modal.style.display = "flex";
-    }
+  function handleEnter(e) {
+    if (e.key === 'Enter') enviarMensagem();
+  }
 
-    static fecharModal() {
-      const modal = document.getElementById("hall-of-fame-modal");
-      if (modal) modal.style.display = "none";
-    }
+  function enviarMensagem() {
+    const texto = userInput.value.trim();
+    if (!texto) return;
 
-    static async obterIpPublico() {
-      try {
-        const resp = await fetch("https://api.ipify.org?format=json");
-        const data = await resp.json();
-        return data.ip || "127.0.0.1";
-      } catch (e) {
-        return "IP Anônimo";
-      }
-    }
+    adicionarMensagemUser(texto);
+    userInput.value = '';
+    bloquearInput();
+    
+    setTimeout(() => {
+      processarLogicaSocratica(texto.toLowerCase(), texto);
+    }, 1200);
+  }
 
-    static async submeterComIp() {
-      const ip = await this.obterIpPublico();
-      this.submeterNaNuvem(`Dr(a). Anônimo (${ip})`);
-    }
+  function processarLogicaSocratica(input, rawInput) {
+    let respostaBot = "";
+    let classeFeedback = "";
 
-    static submeterAoHall() {
-      const nomeInput = document.getElementById("hof-username").value.trim();
-      const nomeFinal = nomeInput ? (nomeInput.toLowerCase().startsWith("dr") ? nomeInput : `Dr(a). ${nomeInput}`) : "Dr(a). Anônimo";
-      this.submeterNaNuvem(nomeFinal);
-    }
-
-    static async submeterNaNuvem(nomeIdentificador) {
-      this.fecharModal();
-      const tbody = document.getElementById("leaderboard-body");
-      if (tbody) tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--muted); padding: 18px;">Salvando no Hall Global...</td></tr>`;
-
-      const badgesStr = this.badgesParaSubmissao.length > 0 ? this.badgesParaSubmissao.join(", ") : "Clínica Avançada";
+    if (estagioAtual === 1) {
+      // Fase 1: Exames. A vida segue mesmo se errar.
+      const acertouExame = casoSimulado.respostas.investigacao.some(r => input.includes(r));
       
-      try {
-        // Envia os dados para a Planilha do Google
-        const urlSalvar = `${this.API_URL}?action=salvar&nome=${encodeURIComponent(nomeIdentificador)}&badges=${encodeURIComponent(badgesStr)}`;
-        await fetch(urlSalvar, { mode: 'no-cors' }); 
-        
-        // Dá um pequeno tempo para a planilha processar e atualiza a lista
-        setTimeout(() => this.renderizarLeaderboard(), 1500);
-      } catch (error) {
-        console.error("Erro ao salvar:", error);
-        if (tbody) tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--red); padding: 18px;">Erro ao conectar com a nuvem.</td></tr>`;
+      if (acertouExame) {
+        probabilidadeBayesiana += 20;
+        respostaBot = `Ótima conduta. O ECG em até 10 minutos é mandatório e foi realizado. <br><br><strong>Achado:</strong> Supradesnivelamento de segmento ST em parede inferior (DII, DIII e aVF).<br><br><em>Diante desse traçado e do quadro clínico, qual a sua principal hipótese diagnóstica?</em>`;
+      } else {
+        probabilidadeBayesiana -= 10;
+        respostaBot = `Anotado: "${rawInput}". O resultado desse exame/conduta não trouxe alterações que justifiquem a clínica. O paciente continua com muita dor. Pelo protocolo da instituição, a enfermagem rodou um ECG, que revelou <strong>Supradesnivelamento de segmento ST inferior</strong>.<br><br><em>Com esse novo dado, qual a sua hipótese diagnóstica?</em>`;
       }
-    }
-
-    static async renderizarLeaderboard() {
-      const tbody = document.getElementById("leaderboard-body");
-      if (!tbody) return;
-
-      try {
-        // Busca os dados atualizados da Planilha do Google
-        const urlListar = `${this.API_URL}?action=listar`;
-        const resp = await fetch(urlListar);
-        const top10 = await resp.json();
-
-        if (!top10 || top10.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--muted); padding: 18px;">Aguardando os primeiros mestres de hoje...</td></tr>`;
-          return;
-        }
-
-        tbody.innerHTML = top10.map((item, index) => {
-          let rankBadge = `<span class="rank-pill">${index + 1}º</span>`;
-          if (index === 0) rankBadge = `<span class="rank-pill rank-1">🥇 1º</span>`;
-          if (index === 1) rankBadge = `<span class="rank-pill rank-2">🥈 2º</span>`;
-          if (index === 2) rankBadge = `<span class="rank-pill rank-3">🥉 3º</span>`;
-
-          return `
-            <tr>
-              <td>${rankBadge}</td>
-              <td><strong>${item.nome}</strong></td>
-              <td style="color: var(--muted); font-weight: 600;">${item.horario}</td>
-              <td style="color: var(--navy);">${item.badges}</td>
-            </tr>
-          `;
-        }).join('');
-      } catch (error) {
-        console.error("Erro ao buscar top 10:", error);
-        tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--muted); padding: 18px;">Conectando com o servidor...</td></tr>`;
-      }
-    }
-  }
-
-  /**
-   * ==========================================
-   * 3. MOTOR PROCEDURAL & ADAPTATIVO
-   * ==========================================
-   */
-  class ClinicalEngineAdapter {
-    static getHistorico() {
-      try {
-        return JSON.parse(localStorage.getItem("diagnosis_user_stats") || "{}");
-      } catch (e) {
-        return {};
-      }
-    }
-
-    static registrarDesfecho(idCaso, acertou) {
-      if (!idCaso) return;
-      const stats = this.getHistorico();
-      if (!stats[idCaso]) stats[idCaso] = { erros: 0, total: 0 };
-      stats[idCaso].total += 1;
-      if (!acertou) stats[idCaso].erros += 1;
-      localStorage.setItem("diagnosis_user_stats", JSON.stringify(stats));
-    }
-
-    static selecionarCasoPonderado(casosDisponiveis) {
-      const stats = this.getHistorico();
-      const pesos = casosDisponiveis.map(c => {
-        const id = c.id || c.vigneta?.substring(0, 30) || "default";
-        const dado = stats[id] || { erros: 0, total: 0 };
-        const taxaErro = dado.total > 0 ? (dado.erros / dado.total) : 0.5;
-        const prevBase = (c.prevalencia_base || 25) / 100;
-        return prevBase * (1.0 + 1.8 * taxaErro);
-      });
-
-      const somaPesos = pesos.reduce((a, b) => a + b, 0);
-      let random = Math.random() * somaPesos;
-
-      for (let i = 0; i < casosDisponiveis.length; i++) {
-        if (random < pesos[i]) return casosDisponiveis[i];
-        random -= pesos[i];
-      }
-      return casosDisponiveis[0];
-    }
-
-    static sintetizarVinhetaProcedural(matriz) {
-      if (matriz.vigneta) return matriz;
-
-      const sexo = Math.random() > 0.5 ? "masculino" : "feminino";
-      const minM = matriz.faixa_etaria_meses ? matriz.faixa_etaria_meses[0] : 1;
-      const maxM = matriz.faixa_etaria_meses ? matriz.faixa_etaria_meses[1] : 24;
-      const idadeMeses = Math.floor(Math.random() * (maxM - minM + 1)) + minM;
-
-      let fr;
-      if (idadeMeses < 2) fr = Math.floor(Math.random() * 20) + 60;
-      else if (idadeMeses < 12) fr = Math.floor(Math.random() * 25) + 50;
-      else fr = Math.floor(Math.random() * 20) + 40;
-
-      const sintomas = [...(matriz.slots_sintomas?.obrigatorios || [])];
-      if (matriz.slots_sintomas?.variaveis_gravidade) {
-        matriz.slots_sintomas.variaveis_gravidade.forEach(v => {
-          if (Math.random() > 0.4) sintomas.push(v.sinal);
-        });
-      }
-
-      const idadeFormatada = idadeMeses >= 12 ? `${Math.floor(idadeMeses / 12)} ano(s)` : `${idadeMeses} meses`;
-      const vinhetaGerada = `Paciente de ${idadeFormatada}, sexo ${sexo}, admitido na emergência com história de ${sintomas.join(", ")}. Ao exame físico: FR ${fr} irpm.`;
-
-      return {
-        id: matriz.id,
-        _moduloOrigem: matriz._moduloOrigem,
-        vigneta: vinhetaGerada,
-        prevalencia_base: (matriz.prevalencia_base ? matriz.prevalencia_base * 100 : 35),
-        respostas_esperadas: matriz.gabarito_dinamico || matriz.respostas_esperadas,
-        feedback_tecnico: matriz.feedback_tecnico || "Discussão clínica baseada nas variáveis fisiológicas simuladas."
-      };
-    }
-  }
-
-  /**
-   * ==========================================
-   * 4. CARREGAMENTO ASSÍNCRONO & NORMALIZAÇÃO
-   * ==========================================
-   */
-  function normalizarCasoCustom(c) {
-    if (!c) return null;
-    const vigneta = c.vigneta || c.vinheta;
-    if (!vigneta) return null;
-
-    let respostas = c.respostas_esperadas;
-    if (!respostas) {
-      respostas = {
-        diagnostico: c.diagnosticoCorreto ? [c.diagnosticoCorreto, c.badgeName || ""] : [c.badgeName || "Diagnóstico"],
-        exames: Array.isArray(c.criteriosDiagnosticos) ? c.criteriosDiagnosticos : ["Avaliação Clínica"],
-        conduta: Array.isArray(c.condutaImediata) ? c.condutaImediata : ["Manejo Terapêutico"]
-      };
-    }
-
-    let moduloOrigem = c._moduloOrigem || c.modulo || "Clínica Médica";
-    if (c.categoria && (c.categoria.includes("Cirúrgica") || c.categoria.includes("Cirurgia"))) {
-      moduloOrigem = "Cirurgia Geral";
-    }
-
-    return {
-      id: c.id || "caso_" + Math.random().toString(36).substr(2, 9),
-      _moduloOrigem: moduloOrigem,
-      vigneta: vigneta,
-      prevalencia_base: c.prevalencia_base || 30,
-      respostas_esperadas: respostas,
-      feedback_tecnico: c.feedback_tecnico || (c.condutaImediata ? c.condutaImediata.join(". ") : "Conduta baseada nas diretrizes institucionais.")
-    };
-  }
-
-  async function carregarConhecimento() {
-    renderizarPainelModulos();
-    BadgeSystem.renderizarGaleria();
-    LeaderboardSystem.renderizarLeaderboard();
-    let totalCarregado = 0;
-
-    try {
-      const respMat = await fetch("knowledge_base/material_complementar.json");
-      if (respMat.ok) {
-        const dadosMat = await respMat.json();
-        if (Array.isArray(dadosMat)) {
-          dadosMat.forEach(item => {
-            const casoPronto = normalizarCasoCustom(item);
-            if (casoPronto) {
-              bancoDeDadosMestre.push(casoPronto);
-              totalCarregado++;
-            }
-          });
-        } else if (typeof dadosMat === "object" && dadosMat !== null) {
-          materialComplementar = dadosMat;
-          if (Array.isArray(dadosMat.casos)) {
-            dadosMat.casos.forEach(item => {
-              const casoPronto = normalizarCasoCustom(item);
-              if (casoPronto) {
-                bancoDeDadosMestre.push(casoPronto);
-                totalCarregado++;
-              }
-            });
-          }
-        }
-      }
-    } catch (error) {}
-
-    for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
-      for (const arquivo of dados.arquivos) {
-        const caminhoCompleto = dados.pasta + arquivo;
-        try {
-          const response = await fetch(caminhoCompleto);
-          if (response.ok) {
-            const casoJson = await response.json();
-            if (Array.isArray(casoJson)) {
-              casoJson.forEach(c => {
-                const casoPronto = normalizarCasoCustom(c) || c;
-                casoPronto._moduloOrigem = materia;
-                bancoDeDadosMestre.push(casoPronto);
-              });
-              totalCarregado += casoJson.length;
-            } else if (casoJson.vigneta || casoJson.vinheta || casoJson.slots_sintomas) {
-              const casoPronto = normalizarCasoCustom(casoJson) || casoJson;
-              casoPronto._moduloOrigem = materia;
-              bancoDeDadosMestre.push(casoPronto);
-              totalCarregado += 1;
-            }
-          }
-        } catch (error) {}
-      }
-    }
-
-    atualizarBotaoStart();
-  }
-
-  function renderizarPainelModulos() {
-    const grid = document.getElementById('module-grid');
-    grid.innerHTML = '';
-
-    for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
-      const temArquivos = dados.arquivos.length > 0;
-      const badgeClass = temArquivos ? 'active' : 'empty';
-      const badgeText = temArquivos ? `${dados.arquivos.length} ARQUIVOS` : 'EM OPERAÇÃO';
+      estagioAtual = 2;
+    } 
+    else if (estagioAtual === 2) {
+      // Fase 2: Diagnóstico. Ele aceita o que o usuário disser e pede a conduta baseada nisso.
+      diagnosticoUsuario = rawInput;
+      const acertouDiag = casoSimulado.respostas.diagnostico.some(r => input.includes(r));
       
-      const isCM = (materia === "Clínica Médica");
-      const isLocked = isCM;
-      const isChecked = modulosAtivos[materia] ? "checked" : "";
-      const labelId = `lbl-toggle-${materia.replace(/\s+/g, '')}`;
+      if (acertouDiag) {
+        probabilidadeBayesiana += 25;
+      } else {
+        probabilidadeBayesiana -= 15;
+      }
+      
+      respostaBot = `Entendido. Hipótese registrada: <strong>"${rawInput}"</strong>.<br><br><em>Seguindo essa sua linha de raciocínio, qual a conduta terapêutica imediata você prescreve na sala de emergência? Cite os fármacos iniciais.</em>`;
+      estagioAtual = 3;
+    }
+    else if (estagioAtual === 3) {
+      // Fase 3: Desfecho Final. Aqui ele revela os acertos e erros.
+      const acertouConduta = casoSimulado.respostas.conduta.some(r => input.includes(r));
+      const acertouDiag = casoSimulado.respostas.diagnostico.some(r => diagnosticoUsuario.toLowerCase().includes(r));
 
-      let listaHtml = temArquivos 
-        ? `<ul class="file-list">${dados.arquivos.map(arq => `<li>${arq}</li>`).join('')}</ul>`
-        : `<div class="file-list" style="display:flex;align-items:center;">Integrado via Base Dinâmica.</div>`;
+      if (acertouConduta) probabilidadeBayesiana += 20;
+      else probabilidadeBayesiana -= 20;
 
-      grid.innerHTML += `
-        <div class="module-card">
-          <div class="module-header">
-            <span class="module-title">${materia}</span>
-            <span class="status-badge ${badgeClass}">${badgeText}</span>
-          </div>
-          ${listaHtml}
-          <div class="toggle-wrapper">
-            <span class="toggle-label">STATUS: <span id="${labelId}" style="color: ${modulosAtivos[materia] ? 'var(--green)' : 'var(--muted)'};">${modulosAtivos[materia] ? 'ON' : 'OFF'}</span></span>
-            <label class="switch">
-              <input type="checkbox" onchange="toggleModulo('${materia}', this.checked)" ${isChecked} ${isLocked ? 'disabled' : ''}>
-              <span class="slider"></span>
-            </label>
-          </div>
+      // Cálculo do desfecho
+      if (acertouDiag && acertouConduta) {
+        classeFeedback = "feedback-success";
+        respostaBot = `<strong>✅ Plantão Encerrado com Sucesso!</strong><br>O caso era um Infarto Agudo do Miocárdio. Sua conduta ("${rawInput}") foi impecável. Dupla agregação plaquetária administrada e hemodinâmica acionada a tempo.<br><br><strong>Calibração Final: ${probabilidadeBayesiana}%</strong>.`;
+      } 
+      else if (!acertouDiag && acertouConduta) {
+        classeFeedback = "feedback-partial";
+        respostaBot = `<strong>⚠️ Desfecho Parcial (Nota Razoável)</strong><br>Você errou o diagnóstico exato (pensou em "${diagnosticoUsuario}", mas era um IAM), PORÉM a sua prescrição empírica ("${rawInput}") incluiu as medidas salvadoras corretas.<br><br>O paciente estabilizou, mas o raciocínio diagnóstico requer ajuste.<br><strong>Calibração Final: ${Math.max(50, probabilidadeBayesiana)}%</strong>.`;
+      } 
+      else if (acertouDiag && !acertouConduta) {
+        classeFeedback = "feedback-error";
+        respostaBot = `<strong>🚨 Falha Terapêutica</strong><br>Você acertou brilhantemente o diagnóstico de IAM, mas a sua conduta ("${rawInput}") falhou em seguir o protocolo de Síndrome Coronariana Aguda. O atraso na terapia adequada agravou o quadro.<br><br><strong>Calibração Final: ${probabilidadeBayesiana}%</strong>.`;
+      } 
+      else {
+        classeFeedback = "feedback-error";
+        respostaBot = `<strong>❌ Desfecho Crítico</strong><br>O caso era um Infarto Agudo do Miocárdio. Sua hipótese ("${diagnosticoUsuario}") e conduta ("${rawInput}") não seguiram o protocolo de dor torácica, resultando em deterioração clínica grave do paciente.<br><br><strong>Calibração Final: ${Math.max(0, probabilidadeBayesiana)}%</strong>. Revise os protocolos de SCA.`;
+      }
+      
+      estagioAtual = 4; // Fim
+    }
+    else {
+      respostaBot = `O caso já foi encerrado. Clique em "Novo Paciente" no menu superior.`;
+    }
+
+    adicionarMensagemBot(respostaBot, probabilidadeBayesiana, classeFeedback);
+    if (estagioAtual !== 4) liberarInput();
+  }
+
+  function adicionarMensagemUser(texto) {
+    const div = document.createElement('div');
+    div.className = 'message user';
+    div.innerText = texto;
+    chatBox.appendChild(div);
+    scrollToBottom();
+  }
+
+  function adicionarMensagemBot(htmlTexto, bayes = null, classeExtra = "") {
+    esconderTyping();
+    const div = document.createElement('div');
+    div.className = `message bot ${classeExtra}`;
+    
+    let htmlContent = htmlTexto;
+    
+    // Mostra a barra bayesiana sutil em todas as mensagens
+    if (bayes !== null) {
+      htmlContent += `
+        <div class="bayes-mini">
+          <span>Calibração: ${Math.max(0, bayes)}%</span>
+          <div class="bayes-bar"><div class="bayes-fill" style="width: ${Math.max(0, Math.min(100, bayes))}%"></div></div>
         </div>
       `;
     }
-  }
-
-  function toggleModulo(materia, status) {
-    if (materia === "Clínica Médica") return;
-    modulosAtivos[materia] = status;
-    const label = document.getElementById(`lbl-toggle-${materia.replace(/\s+/g, '')}`);
-    if (label) {
-      label.innerText = status ? 'ON' : 'OFF';
-      label.style.color = status ? 'var(--green)' : 'var(--muted)';
-    }
-    atualizarBotaoStart();
-  }
-
-  function atualizarBotaoStart() {
-    const btnStart = document.getElementById('btn-start');
-    const statusEl = document.getElementById('status-engine');
-    const casosAtivos = bancoDeDadosMestre.filter(c => modulosAtivos[c._moduloOrigem]).length;
     
-    if (casosAtivos > 0) {
-      statusEl.innerHTML = `<span style="color: var(--green); font-weight: 600;">✓ Sistema Operacional. ${casosAtivos} nós decisórios ativos.</span>`;
-      btnStart.innerText = "Gerar Novo Caso Clínico";
-      btnStart.disabled = false;
-    } else {
-      statusEl.innerHTML = `<span style="color: var(--red); font-weight: 600;">⚠️ Nenhum caso localizado. Ligue algum módulo.</span>`;
-      btnStart.innerText = "Módulos Desligados";
-      btnStart.disabled = true;
-    }
+    div.innerHTML = htmlContent;
+    chatBox.appendChild(div);
+    scrollToBottom();
   }
 
-  /**
-   * ==========================================
-   * 5. ALGORITMOS DE NLP & FUZZY MATCHING
-   * ==========================================
-   */
-  function normalizar(texto) {
-    return String(texto).toLowerCase()
-      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^a-z0-9\s]/g, " ")
-      .trim();
-  }
+  function mostrarTyping() { chatBox.appendChild(typingIndicator); typingIndicator.style.display = 'flex'; scrollToBottom(); }
+  function esconderTyping() { typingIndicator.style.display = 'none'; }
+  function bloquearInput() { userInput.disabled = true; btnSend.disabled = true; mostrarTyping(); }
+  function liberarInput() { userInput.disabled = false; btnSend.disabled = false; userInput.focus(); }
+  function scrollToBottom() { chatBox.scrollTop = chatBox.scrollHeight; }
 
-  function distanciaLevenshtein(a, b) {
-    const matrix = Array.from({ length: a.length + 1 }, () => []);
-    for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
-    for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
-
-    for (let i = 1; i <= a.length; i++) {
-      for (let j = 1; j <= b.length; j++) {
-        const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-        matrix[i][j] = Math.min(
-          matrix[i - 1][j] + 1,
-          matrix[i][j - 1] + 1,
-          matrix[i - 1][j - 1] + cost
-        );
-      }
-    }
-    return matrix[a.length][b.length];
-  }
-
-  function avaliarSimilaridadeFuzzy(input, alvos) {
-    if (!alvos || !Array.isArray(alvos)) return { score: 0.0, matchedTarget: "Erro: Alvos Indefinidos" };
-    
-    const inputNorm = normalizar(input);
-    const tokensInput = inputNorm.split(/\s+/);
-
-    for (const alvo of alvos) {
-      const alvoNorm = normalizar(alvo);
-      if (!alvoNorm) continue;
-      if (inputNorm.includes(alvoNorm) || alvoNorm.includes(inputNorm)) return { score: 1.0, matchedTarget: alvo };
-
-      const tokensAlvo = alvoNorm.split(/\s+/);
-      for (const tIn of tokensInput) {
-        if (tIn.length < 4) continue;
-        for (const tAlvo of tokensAlvo) {
-          const dist = distanciaLevenshtein(tIn, tAlvo);
-          const limiar = tAlvo.length > 6 ? 2 : 1;
-          if (dist <= limiar) return { score: 0.85, matchedTarget: alvo };
-        }
-      }
-    }
-    return { score: 0.0, matchedTarget: alvos[0] };
-  }
-
-  function encontrarMaterialComplementar(caso) {
-    if (!caso || !caso.respostas_esperadas || !caso.respostas_esperadas.diagnostico) return null;
-    const diagnosticosNorm = caso.respostas_esperadas.diagnostico.map(d => normalizar(d)).filter(d => d.length > 0);
-    
-    for (const [doenca, dados] of Object.entries(materialComplementar)) {
-      if (typeof dados !== "object" || !dados) continue;
-      const doencaNorm = normalizar(doenca);
-      if (diagnosticosNorm.some(d => d === doencaNorm || d.includes(doencaNorm) || doencaNorm.includes(d))) {
-        return { nome: doenca, dados: dados };
-      }
-    }
-    return null;
-  }
-
-  /**
-   * ==========================================
-   * 6. GAME LOOP & GESTÃO DE PONTUAÇÃO
-   * ==========================================
-   */
-  let casoAtual = null;
-  let etapa = 0;
-  let pontuacao = 0;
-  let probabilidadeBayesiana = 25;
-  let nivelConfianca = 0.8;
-  let casoTeveErro = false;
-
-  const etapasJogo = [
-    { label: "PASSO 1: HIPÓTESE DIAGNÓSTICA", pergunta: "Qual a sua principal hipótese diagnóstica para este quadro?", chave: "diagnostico", peso: 50 },
-    { label: "PASSO 2: PROPEDÊUTICA COMPLEMENTAR", pergunta: "Cite 1 exame fundamental para solicitar e confirmar esta hipótese:", chave: "exames", peso: 20 },
-    { label: "PASSO 3: CONDUTA TERAPÊUTICA", pergunta: "Qual a intervenção prioritária, antídoto ou conduta indicada?", chave: "conduta", peso: 30 }
-  ];
-
-  function setConfianca(val, btn) {
-    nivelConfianca = val;
-    document.querySelectorAll('.conf-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-  }
-
-  function atualizarBarraBayes(prob) {
-    probabilidadeBayesiana = Math.min(Math.max(prob, 5), 98);
-    const bar = document.getElementById('prob-bar');
-    const txt = document.getElementById('prob-percent');
-    txt.innerText = `${Math.round(probabilidadeBayesiana)}%`;
-    bar.style.width = `${probabilidadeBayesiana}%`;
-    if (probabilidadeBayesiana >= 80) bar.style.backgroundColor = 'var(--green)';
-    else if (probabilidadeBayesiana >= 50) bar.style.backgroundColor = 'var(--blue)';
-    else bar.style.backgroundColor = 'var(--red)';
-  }
-
-  function iniciarJogo() {
-    const bancoDeDadosAtivo = bancoDeDadosMestre.filter(caso => modulosAtivos[caso._moduloOrigem]);
-    
-    if (bancoDeDadosAtivo.length === 0) {
-      alert("Ative ao menos um módulo para prosseguir.");
-      return;
-    }
-    
-    const casoSelecionado = ClinicalEngineAdapter.selecionarCasoPonderado(bancoDeDadosAtivo);
-    casoAtual = ClinicalEngineAdapter.sintetizarVinhetaProcedural(casoSelecionado);
-
-    etapa = 0;
-    pontuacao = 0;
-    casoTeveErro = false;
-    probabilidadeBayesiana = casoAtual.prevalencia_base || 25;
-
-    document.getElementById('btn-start').style.display = 'none';
-    document.getElementById('bayes-tracker').style.display = 'block';
-    atualizarBarraBayes(probabilidadeBayesiana);
-
-    document.getElementById('case-display').style.display = 'block';
-    const tagModulo = `<span style="font-size:10px; font-weight:800; color:#fff; background:var(--blue); padding:3px 8px; border-radius:4px; margin-bottom:8px; display:inline-block;">${casoAtual._moduloOrigem}</span><br>`;
-    document.getElementById('case-display').innerHTML = `${tagModulo}<strong style="color: var(--navy); font-size: 16px;">Vigneta Clínica de Admissão:</strong><br><p style="margin: 8px 0 0;">${casoAtual.vigneta}</p>`;
-    
-    document.getElementById('interaction').style.display = 'block';
-    document.getElementById('log').innerHTML = '';
-    document.getElementById('final-score').style.display = 'none';
-    
-    carregarEtapa();
-  }
-
-  function carregarEtapa() {
-    if (etapa < etapasJogo.length) {
-      document.getElementById('step-indicator').innerText = etapasJogo[etapa].label;
-      document.getElementById('question-text').innerText = etapasJogo[etapa].pergunta;
-      document.getElementById('user-input').value = '';
-      document.getElementById('confidence-box').style.display = (etapa === 0) ? 'block' : 'none';
-      document.getElementById('user-input').focus();
-    } else {
-      finalizarCaso();
-    }
-  }
-
-  function handleEnter(e) { if (e.key === 'Enter') processarResposta(); }
-
-  function processarResposta() {
-    const inputUsuario = document.getElementById('user-input').value.trim();
-    if (!inputUsuario) return;
-
-    const regraAtual = etapasJogo[etapa];
-    const respostasAceitas = casoAtual.respostas_esperadas[regraAtual.chave];
-    const resultadoFuzzy = avaliarSimilaridadeFuzzy(inputUsuario, respostasAceitas);
-    const logDiv = document.getElementById('log');
-
-    if (resultadoFuzzy.score >= 0.8) {
-      if (etapa === 0) {
-        const bonusConfianca = nivelConfianca === 0.99 ? 1.1 : (nivelConfianca === 0.8 ? 1.0 : 0.85);
-        pontuacao += Math.round(regraAtual.peso * bonusConfianca);
-        atualizarBarraBayes(probabilidadeBayesiana + 45);
-      } else {
-        pontuacao += regraAtual.peso;
-        atualizarBarraBayes(probabilidadeBayesiana + 15);
-      }
-      logDiv.innerHTML += `<div class="preceptor-card correct"><strong>✓ Decisão Validada:</strong> Resposta [<em>${inputUsuario}</em>] congruente com (<em>${resultadoFuzzy.matchedTarget}</em>).</div>`;
-    } else {
-      casoTeveErro = true;
-      if (etapa === 0 && nivelConfianca === 0.99) pontuacao = Math.max(0, pontuacao - 10);
-      atualizarBarraBayes(probabilidadeBayesiana - 15);
-      logDiv.innerHTML += `<div class="preceptor-card incorrect"><strong>✕ Divergência Diagnóstica:</strong> Proposição [<em>${inputUsuario}</em>] incorreta. Esperado: <strong>${respostasAceitas ? respostasAceitas[0] : 'N/A'}</strong>.</div>`;
-    }
-
-    etapa++;
-    carregarEtapa();
-  }
-
-  function finalizarCaso() {
-    document.getElementById('interaction').style.display = 'none';
-    const logDiv = document.getElementById('log');
-    const scoreDiv = document.getElementById('final-score');
-
-    const idCaso = casoAtual.id || casoAtual.vigneta.substring(0, 30);
-    ClinicalEngineAdapter.registrarDesfecho(idCaso, !casoTeveErro);
-
-    logDiv.innerHTML += `<div class="preceptor-card summary"><strong>📋 Discussão do Preceptor:</strong><br><p style="margin: 8px 0 0;">${casoAtual.feedback_tecnico}</p></div>`;
-    
-    // GESTÃO DE BADGE (Troféu por 100% de Acerto)
-    if (pontuacao >= 100 && !casoTeveErro) {
-      const nomeDoenca = (casoAtual.respostas_esperadas.diagnostico && casoAtual.respostas_esperadas.diagnostico[0]) || "Patologia Clínica";
-      const resultadoBadge = BadgeSystem.tentarConcederBadge(nomeDoenca);
-
-      if (resultadoBadge.concedida) {
-        logDiv.innerHTML += `
-          <div class="badge-conquest-card">
-            <span style="font-size: 28px;">🏆</span>
-            <div>
-              <strong style="font-size: 15px;">Troféu Desbloqueado: ${nomeDoenca}!</strong><br>
-              <span style="font-size: 12.5px;">Parabéns! Você alcançou calibração perfeita neste caso. Badge registrada na sua galeria diária (${resultadoBadge.totalHoje}/3).</span>
-            </div>
-          </div>
-        `;
-      } else {
-        logDiv.innerHTML += `
-          <div class="preceptor-card summary" style="border-left-color: var(--amber);">
-            <strong>ℹ️ Desempenho Impecável (100%):</strong> Você dominou o quadro de <em>${nomeDoenca}</em>. O limite de 3 badges diárias para este dispositivo já foi completado hoje.
-          </div>
-        `;
-      }
-    }
-
-    const material = encontrarMaterialComplementar(casoAtual);
-    if (material) {
-      const m = material.dados;
-      let htmlDiscussao = `<div class="preceptor-card discussion-card"><h3>📖 Revisão Estruturada: ${material.nome}</h3><div style="display: flex; flex-direction: column; gap: 6px;">`;
-      if (m.etiologia) htmlDiscussao += `<div class="discussion-topic"><strong>Etiologia:</strong> ${m.etiologia}</div>`;
-      if (m.fisiopatologia) htmlDiscussao += `<div class="discussion-topic"><strong>Fisiopatologia / Resumo Clínico:</strong> ${m.fisiopatologia}</div>`;
-      if (m.diagnostico) htmlDiscussao += `<div class="discussion-topic"><strong>Diagnóstico:</strong> ${m.diagnostico}</div>`;
-      if (m.tratamento) htmlDiscussao += `<div class="discussion-topic"><strong>Tratamento:</strong> ${m.tratamento}</div>`;
-      if (m.particularidades) htmlDiscussao += `<div class="discussion-topic"><strong style="color: var(--amber);">Dica Clínica:</strong> ${m.particularidades}</div>`;
-      htmlDiscussao += `</div></div>`;
-      logDiv.innerHTML += htmlDiscussao;
-    }
-    
-    scoreDiv.style.display = 'block';
-    scoreDiv.innerHTML = `Calibração Diagnóstica: ${pontuacao}/100<br><button class="btn" style="margin-top: 20px; max-width: 280px;" onclick="iniciarJogo()">↻ Simular Próximo Cenário</button>`;
-  }
-
-  window.onload = carregarConhecimento;
 </script>
 </body>
 </html>
