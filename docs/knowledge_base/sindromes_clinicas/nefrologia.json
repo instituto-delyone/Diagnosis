@@ -1,146 +1,137 @@
 [
   {
-    "id": "glomerulonefrite_pos_estreptococica",
-    "nome": "Glomerulonefrite Pós-Estreptocócica (GNPE)",
-    "prevalencia_base": 25,
-    "01_campo_modulador": {
-      "pesos": { "faringite_previa_1_a_3_semanas": 3.0, "piodermite_previa_2_a_6_semanas": 3.0, "crianca_5_a_12_anos": 2.0 }
+    "id_caso": "nefro_gnpe_01",
+    "patologia_alvo": "Glomerulonefrite Pós-Estreptocócica (GNPE)",
+    "dificuldade": "Básica",
+    "vinheta_admissao": "Menino de 8 anos apresenta hematúria maciça (urina cor de 'coca-cola'), edema facial ao acordar e hipertensão arterial (140x90 mmHg) há 2 dias. A mãe relata quadro de amigdalite tratada há 2 semanas.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["eas", "complemento", "c3", "aslo", "dismorfismo eritrocitario"],
+      "achado_sucesso": "Excelente. O EAS revelou hematúria com dismorfismo eritrocitário e cilindros hemáticos. A dosagem do complemento mostrou queda expressiva da fração C3 e o ASLO veio alto.",
+      "resposta_preceptor_erro": "Doutor, criança com a tríade nefrítica clássica pós-infecção. Precisamos confirmar se a hematúria é de origem glomerular (EAS) e dosar a fração do complemento típica dessa doença."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "hematuria_dismorfica": 35, "edema_facial_matutino": 25, "hipertensao_arterial": 25, "oliguria": 20 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["gnpe", "glomerulonefrite pos-estreptococica", "sindrome nefritica", "gnda"],
+      "distrator_comum": ["doenca de berger", "nefropatia por iga", "sindrome nefrotica"],
+      "feedback_distrator": "Na Doença de Berger o evento (infecção de orofaringe) ocorre ao mesmo tempo da hematúria (sem período de incubação) e o complemento C3 é NORMAL. A síndrome nefrótica não teria hematúria maciça.",
+      "achado_sucesso": "Exato! Diagnóstico de Síndrome Nefrítica por Glomerulonefrite Pós-Estreptocócica (GNPE)."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["queda_transitoria_complemento_c3"],
-      "exclusao_ativa": ["sem_proteinuria_nefrotica_macica"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["furosemida", "restricao hidrossalina", "anti-hipertensivo", "diuretico de alca"],
+      "red_flag_mortal": ["corticoide", "pulsoterapia", "imunossupressao"],
+      "feedback_sucesso": "Conduta irretocável! Você focou na base do problema: tratar a hipervolemia com restrição hidrossalina e Furosemida para controlar o edema e a pressão arterial.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você usou corticoide em uma doença autolimitada e hipervolêmica severa. O corticoide exacerbou a retenção de sódio, gerando edema agudo de pulmão e pico hipertensivo com encefalopatia fatal."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "MEDIO",
-      "conduta_emergencial": "Restrição hidrossalina, Diurético de alça (Furosemida) e Anti-hipertensivos"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["EAS com Dismorfismo Eritrocitário", "Dosagem de C3", "ASLO ou Anti-DNAse B"]
-    },
-    "vigneta": "Menino de 8 anos apresenta hematúria maciça (urina cor de 'coca-cola'), edema facial ao acordar e hipertensão arterial (140x90 mmHg) há 2 dias. A mãe relata quadro de amigdalite tratada há 2 semanas. Exame de urina revela hematúria com dismorfismo eritrocitário positivo e cilindros hemáticos. Complemento C3 encontra-se reduzido.",
-    "respostas_esperadas": {
-      "diagnostico": ["gnpe", "glomerulonefrite pos-estreptococica", "sindrome nefritica", "gnda"],
-      "exames": ["eas", "complemento", "c3", "aslo", "dismorfismo eritrocitario"],
-      "conduta": ["furosemida", "restricao hidrossalina", "anti-hipertensivo", "hidralazina"]
-    },
-    "feedback_tecnico": "A GNPE é a causa clássica de Síndrome Nefrítica (tríade: hematúria dismórfica + hipertensão + edema por hipervolemia) em crianças após infecção por estreptococo do grupo A[span_2](start_span)[span_2](end_span). O período de incubação é de 1-3 semanas para faringite e 2-6 semanas para piodermite[span_3](start_span)[span_3](end_span). O dado laboratorial marcante é a queda transitória do complemento C3 (que deve normalizar em até 8 semanas)[span_4](start_span)[span_4](end_span). O tratamento baseia-se em suporte, restrição hídrica e Furosemida[span_5](start_span)[span_5](end_span)."
+    "discussao_clinica_final": {
+      "takeaway_message": "GNPE manifesta-se 1-3 semanas após faringite (ou 2-6 após piodermite) com a tríade Nefrítica: hematúria, hipertensão e edema. O complemento C3 cai.",
+      "fisiopatologia": "Deposição de imunocomplexos circulantes (antígenos estreptocócicos + IgG) na membrana basal glomerular que ativam o complemento, deflagrando intensa inflamação proliferativa exsudativa capilar."
+    }
   },
   {
-    "id": "sindrome_nefrotica_lesao_minima",
-    "nome": "Síndrome Nefrótica por Lesão Mínima",
-    "prevalencia_base": 20,
-    "01_campo_modulador": {
-      "pesos": { "faixa_etaria_pediatrica": 3.0, "uso_aines_ou_linfoma": 2.0 }
+    "id_caso": "nefro_lesao_minima_01",
+    "patologia_alvo": "Síndrome Nefrótica por Lesão Mínima",
+    "dificuldade": "Intermediária",
+    "vinheta_admissao": "Criança de 4 anos é levada ao pronto-socorro com edema periorbitário grave e anasarca de início recente. Função renal mantida e sem hematúria. Não possui queixas sistêmicas além do inchaço maciço.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["proteinuria", "proteinuria de 24h", "albumina", "lipidograma", "complemento"],
+      "achado_sucesso": "Exames laboratoriais revelam proteinúria maciça (4,5g/24h), albumina sérica baixíssima (1,8 g/dL), colesterol total elevado e complemento C3 normal.",
+      "resposta_preceptor_erro": "Doutor, criança com anasarca idiopática pura. Precisamos confirmar perda de proteínas na urina e checar como estão os níveis de albumina no sangue."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "edema_ansarca": 35, "hipoalbuminemia_severa": 35, "proteinuria_nefrotica": 35, "dislipidemia": 20 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["lesao minima", "sindrome nefrotica", "doenca de lesoes minimas"],
+      "distrator_comum": ["sindrome nefritica", "glomerulosclerose focal e segmentar", "gesf"],
+      "feedback_distrator": "O quadro é nefrótico puro (sem hematúria). A GESF e outras glomerulopatias são mais comuns em adultos e têm pior evolução. A idade (4 anos) sugere Lesão Mínima.",
+      "achado_sucesso": "Correto! Síndrome Nefrótica pura, altíssima suspeita de Doença de Lesões Mínimas."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["fusao_e_retracao_podocitaria_microscopia_eletronica"],
-      "exclusao_ativa": ["complemento_c3_normal", "sem_hematuria_significativa"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["prednisona", "corticoide", "corticoterapia", "restricao de sodio"],
+      "red_flag_mortal": ["biopsia renal de rotina", "furosemida venosa em alta dose isolada"],
+      "feedback_sucesso": "Conduta perfeita! Você iniciou Corticoterapia oral empírica (Prednisona), que na lesão mínima costuma ter resposta drámatica e curativa (90-95% de remissão).",
+      "feedback_red_flag": "ERRO CRÍTICO! Você fez furosemida venosa pesada em um paciente com hipoalbuminemia grave e baixo volume circulante efetivo, precipitando choque hipovolêmico e trombose venosa renal fulminante por hemoconcentração."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "BAIXO",
-      "conduta_emergencial": "Corticoterapia oral (Prednisona) com resposta dramática"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Proteinúria de 24h ou Relação Proteína/Creatinina", "Albumina Sérica", "Perfil Lipídico"]
-    },
-    "vigneta": "Criança de 4 anos é levada ao pronto-socorro com edema periorbitário grave e anasarca de início recente. Exames laboratoriais revelam proteinúria maciça (4,5g/24h), albumina sérica de 1,8 g/dL, colesterol total elevado e complemento C3 normal. Função renal mantida e sem hematúria.",
-    "respostas_esperadas": {
-      "diagnostico": ["lesao minima", "sindrome nefrotica", "doenca de lesoes minimas"],
-      "exames": ["proteinuria", "proteinuria de 24h", "albumina", "lipidograma"],
-      "conduta": ["prednisona", "corticoide", "corticoterapia"]
-    },
-    "feedback_tecnico": "A Doença de Lesões Mínimas é a causa mais comum de Síndrome Nefrótica em crianças[span_6](start_span)[span_6](end_span). Ocorre por perda da barreira de carga da membrana basal glomerular devido à fusão podocitária[span_7](start_span)[span_7](end_span). Cursa com a tétrade nefrotica: Proteinúria maciça (> 3,5g/dia ou > 50mg/kg/dia), Hipoalbuminemia, Edema/Anasarca e Dislipidemia[span_8](start_span)[span_8](end_span). O complemento é NORMAL e a resposta à Prednisona é dramática (90-95% de remissão)[span_9](start_span)[span_9](end_span)."
+    "discussao_clinica_final": {
+      "takeaway_message": "Doença de Lesões Mínimas é a causa número 1 de síndrome nefrótica em crianças. O diagnóstico é presuntivo e a resposta ao corticoide é dramática, não sendo necessária biópsia renal de rotina.",
+      "fisiopatologia": "Perda da 'barreira de carga' (poliânions) da membrana basal e fusão e retração dos pedicelos dos podócitos (visível apenas na microscopia eletrônica), gerando perda maciça e isolada de albumina."
+    }
   },
   {
-    "id": "nefrite_intersticial_aguda",
-    "nome": "Nefrite Intersticial Aguda (NIA)",
-    "prevalencia_base": 15,
-    "01_campo_modulador": {
-      "pesos": { "uso_beta_lactamicos_ou_aines": 3.5, "uso_rifampicina_ou_sulfa": 2.5 }
+    "id_caso": "nefro_nia_01",
+    "patologia_alvo": "Nefrite Intersticial Aguda (NIA)",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Paciente de 52 anos em tratamento para infecção de pele com Amoxicilina/Clavulanato há 10 dias evolui com febre, exantema maculopapular (rash) pelo corpo e dor lombar macia. Urina sem alteração visual evidente.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["eas", "eosinofiluria", "metodo de hansel", "creatinina", "funcao renal"],
+      "achado_sucesso": "Boa. Exames mostram aumento agudo de creatinina (2,9 mg/dL). O EAS e a coloração de Hansel confirmam a presença marcante de eosinofilúria e cilindros leucocitários.",
+      "resposta_preceptor_erro": "Doutor, paciente com tríade alérgica (febre, rash, artralgia/lombalgia) após uso de beta-lactâmico. Solicite uréia/creatinina e pesquise especificamente a urina."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "ira_oligurica": 30, "rash_cutaneo": 30, "febre": 25, "eosinofilia_eosinofiluria": 35 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["nia", "nefrite intersticial aguda", "nefrite alergica"],
+      "distrator_comum": ["pielonefrite", "necrose tubular aguda", "nta"],
+      "feedback_distrator": "A NTA cursa com cilindros granulosos e não com eosinofilúria alérgica ou rash. A pielonefrite teria urocultura fortemente positiva e febre com calafrios em picos, sem exantema medicamentoso.",
+      "achado_sucesso": "Perfeito. Trata-se de uma Nefrite Intersticial Aguda (NIA) imuno-alérgica."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["infiltrado_intersticial_eosinofilico"],
-      "exclusao_ativa": ["cilindros_leucocitarios_presentes"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["suspender medicamento", "suspender amoxicilina", "prednisona", "corticoide", "suspender droga"],
+      "red_flag_mortal": ["trocar por outra penicilina", "hidratacao rigorosa e manter atb"],
+      "feedback_sucesso": "Conduta irretocável! Você reconheceu a hipersensibilidade e fez o básico que salva o rim: SUSPENDEU IMEDIATAMENTE a amoxicilina, iniciando corticoide pela gravidade funcional.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você interpretou o quadro como piora infecciosa da pielonefrite e aumentou a dose ou mudou para Cefalosporina (que tem reação cruzada). A inflamação intersticial evoluiu para necrose cortical e fibrose irreversível."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "MEDIO",
-      "conduta_emergencial": "Suspensão imediata do fármaco causador e Corticoide se ausência de melhora"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["EAS com Eosinofilúria (Método de Hansel)", "Ureia e Creatinina", "Hemograma (Eosinofilia)"]
-    },
-    "vigneta": "Paciente de 52 anos em tratamento para infecção de pele com Amoxicilina/Clavulanato há 10 dias evolui com febre, exantema maculopapular (rash) pelo corpo e dor lombar macia. Exames mostram aumento agudo de creatinina (2,9 mg/dL), eosinofilia no hemograma e piúria com eosinofilúria no EAS.",
-    "respostas_esperadas": {
-      "diagnostico": ["nia", "nefrite intersticial aguda", "nefrite alergica"],
-      "exames": ["eas", "eosinofiluria", "metodo de hansel", "creatinina"],
-      "conduta": ["suspender medicamento", "suspender droga", "prednisona", "corticoide"]
-    },
-    "feedback_tecnico": "A NIA é uma reação de hipersensibilidade medicamentosa (frequentemente por beta-lactâmicos, AINEs ou sulfas) que afeta o interstício renal[span_10](start_span)[span_10](end_span). A tríade clássica é composta por Febre + Rash Cutâneo + Eosinofilia/Eosinofilúria[span_11](start_span)[span_11](end_span). O sedimento urinário pode revelar cilindros leucocitários[span_12](start_span)[span_12](end_span). A conduta primária e mais importante é a suspensão imediata do agente causal[span_13](start_span)[span_13](end_span)."
+    "discussao_clinica_final": {
+      "takeaway_message": "Febre, rash cutâneo e oligúria em uso de antibióticos/AINEs fecham o raciocínio para NIA alérgica. A presença de Eosinofilúria (Coloração de Hansel) apoia muito o diagnóstico.",
+      "fisiopatologia": "Reação de hipersensibilidade mediada por linfócitos T (frequentemente por beta-lactâmicos, AINEs ou sulfas), que invadem e inflamam o interstício renal, poupando os glomérulos e poupando os vasos."
+    }
   },
   {
-    "id": "doenca_de_berger_iga",
-    "nome": "Doença de Berger (Nefropatia por IgA)",
-    "prevalencia_base": 20,
-    "01_campo_modulador": {
-      "pesos": { "homem_jovem_15_a_40_anos": 2.5, "origem_asiatica": 1.5 }
+    "id_caso": "nefro_berger_01",
+    "patologia_alvo": "Doença de Berger (Nefropatia por IgA)",
+    "dificuldade": "Intermediária",
+    "vinheta_admissao": "Homem de 24 anos apresenta episódio de hematúria macroscópica no mesmo dia em que iniciou um quadro de IVAS (resfriado comum/faringite). Nega edema ou hipertensão. Refere episódios semelhantes no passado coincidindo com infecções.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["eas", "complemento", "iga serica", "urina i"],
+      "achado_sucesso": "O EAS confirma hematúria, e os exames laboratoriais, de forma crucial, mostram frações do complemento (C3 e C4) absolutamente normais, com aumento da IgA sérica.",
+      "resposta_preceptor_erro": "Doutor, surto de sangue vivo na urina coincidindo com infecção. É o padrão de surto-remissão clássico. Qual o exame da urina e a dosagem no sangue que ajudam a excluir outras síndromes?"
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "hematuria_macro_sincronica_infeccao": 40, "hematuria_micro_persistente": 30, "sem_periodo_latencia": 30 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["doenca de berger", "nefropatia por iga", "berger", "iga"],
+      "distrator_comum": ["gnpe", "glomerulonefrite pos-estreptococica", "litiasis renal"],
+      "feedback_distrator": "Atenção: A GNPE exige 'PÓS' estreptocócica (período de incubação de 1-3 semanas) e o C3 cai. Na nossa doença, o quadro é SINCRÔNICO e o C3 é normal.",
+      "achado_sucesso": "Exato! Diagnóstico clínico clássico de Doença de Berger (Nefropatia por IgA)."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["depositos_mesangiais_de_iga"],
-      "exclusao_ativa": ["complemento_c3_normal"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["ieca", "bra", "enalapril", "losartana", "conservador", "observacao"],
+      "red_flag_mortal": ["biopsia renal de emergencia", "pulsoterapia", "imunossupressao agressiva inicial"],
+      "feedback_sucesso": "Conduta correta! Você optou pelo manejo nefroprotetor conservador usando IECA/BRA, sabendo que a maioria dos casos leves tem evolução benigna.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você submeteu o paciente a imunossupressores pesados sem indicação (pois não havia insuficiência renal ou proteinúria maciça). A medicação causou sepse e aplasia de medula."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "BAIXO",
-      "conduta_emergencial": "Controle pressórico com IECA/BRA e acompanhamento da função renal"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["EAS", "IgA Sérica", "Biópsia Renal (se proteinúria > 1g/dia ou IRA)"]
-    },
-    "vigneta": "Homem de 24 anos apresenta episódio de hematúria macroscópica no mesmo dia em que iniciou um quadro de IVAS (resfriado comum/faringite). Nega edema ou hipertensão. Refere episódios semelhantes no passado coincidindo com infecções. Exames laboratoriais mostram C3 e C4 com níveis absolutamente normais.",
-    "respostas_esperadas": {
-      "diagnostico": ["doenca de berger", "nefropatia por iga", "berger", "iga"],
-      "exames": ["eas", "biopsia renal", "iga serica"],
-      "conduta": ["ieca", "bra", "enalapril", "losartana", "conservador"]
-    },
-    "feedback_tecnico": "A Doença de Berger (Nefropatia por IgA) é a glomerulopatia primária mais comum do mundo[span_14](start_span)[span_14](end_span). Caracteriza-se por episódios recorrentes de hematúria macroscópica SINCRÔNICA (contemporânea/sem latência) a infecções do trato respiratório superior[span_15](start_span)[span_15](end_span). Diferente da GNPE, a IgA cursa com COMPLEMENTO NORMAL[span_16](start_span)[span_16](end_span). Casos leves são tratados profilaticamente com IECA/BRA para nefroproteção[span_17](start_span)[span_17](end_span)."
+    "discussao_clinica_final": {
+      "takeaway_message": "A Doença de Berger apresenta surtos de hematúria SINCRÔNICOS (ao mesmo tempo) à infecções de orofaringe e o COMPLEMENTO C3 É NORMAL.",
+      "fisiopatologia": "Glicolisação anômala da IgA1. Anticorpos atacam essa IgA modificada formando imunocomplexos que se depositam exclusivamente no mesângio glomerular, ativando proliferação focal."
+    }
   },
   {
-    "id": "estenose_de_arteria_renal",
-    "nome": "Estenose de Artéria Renal (Hipertensão Renovascular)",
-    "prevalencia_base": 15,
-    "01_campo_modulador": {
-      "pesos": { "idoso_com_aterosclerose": 2.5, "mulher_jovem_displasia_fibromuscular": 2.5 }
+    "id_caso": "nefro_estenose_renal_01",
+    "patologia_alvo": "Estenose de Artéria Renal (Hipertensão Renovascular)",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Mulher de 62 anos, hipertensa de difícil controle em uso de 4 anti-hipertensivos, inicia Enalapril (IECA). Após 1 semana, desenvolve aumento agudo da creatinina em 40% acima do basal e oligúria.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["usg doppler", "doppler renal", "angiotc", "arteriografia", "ultrassom das arterias renais"],
+      "achado_sucesso": "Ótima conduta. O USG com Doppler de artérias renais revela assimetria acentuada no tamanho dos rins e fluxo turbulento proximal severo na artéria renal direita.",
+      "resposta_preceptor_erro": "Doutora, mulher hipertensa grave que destrói o rim logo após usar um IECA. A causa é claramente macrovascular. Solicite um estudo de fluxo renal."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "has_resistente_refrataria": 35, "assimetria_renal_usg": 30, "piora_funcao_renal_com_ieca": 35, "sopro_abdominal": 20 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["estenose de arteria renal", "hipertensao renovascular", "nefropatia isquemica"],
+      "distrator_comum": ["nia", "nefrite intersticial alergica", "nefroesclerose hipertensiva benigna"],
+      "feedback_distrator": "A NIA cursaria com rash e febre. A piora catastrófica após IECA é assinatura de uma doença onde a filtração renal dependia da constrição gerada pela angiotensina.",
+      "achado_sucesso": "Correto! Hipertensão Renovascular por Estenose de Artéria Renal isquemiando o rim."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["estenose_demonstrada_em_angiotc_ou_arteriografia"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["angioplastia", "revascularizacao", "suspender ieca", "stent"],
+      "red_flag_mortal": ["manter ieca", "aumentar dose do ieca"],
+      "feedback_sucesso": "Conduta perfeita! Você SUSPENDEU o IECA, recuperando a função renal basal, e planejou angioplastia com stent da artéria acometida.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você aumentou a dose do Enalapril achando que a hipertensão estava piorando. O IECA dilatou a arteríola eferente ao limite, e sem sangue entrando pela estenose, a pressão de filtração glomerular zerou, levando a anúria permanente e falência dialítica total."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "MEDIO",
-      "conduta_emergencial": "Controle pressórico (evitar IECA se bilateral) ou Angioplastia/Revascularização"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["USG Renal com Doppler", "AngioTC ou AngioRM de Artérias Renais", "Arteriografia Renal (Padrão-Ouro)"]
-    },
-    "vigneta": "Mulher de 62 anos, hipertensa de difícil controle em uso de 4 anti-hipertensivos, inicia Enalapril. Após 1 semana, desenvolve aumento agudo da creatinina em 40% acima do basal e oligúria. USG com Doppler de artérias reais revela assimetria acentuada no tamanho dos rins e fluxo turbulento proximal na artéria renal direita.",
-    "respostas_esperadas": {
-      "diagnostico": ["estenose de arteria renal", "hipertensao renovascular", "nefropatia isquemica"],
-      "exames": ["usg doppler", "doppler renal", "angiotc", "arteriografia"],
-      "conduta": ["angioplastia", "revascularizacao", "suspender ieca", "stent"]
-    },
-    "feedback_tecnico": "A Estenose de Artéria Renal pode ser causada por Aterosclerose (70-90%, mais em idosos) ou Displasia Fibromuscular (mulheres jovens)[span_18](start_span)[span_18](end_span). O hipofluxo ativa o sistema renina-angiotensina-aldosterona[span_19](start_span)[span_19](end_span). O uso de IECA/BRA retira a vasoconstrição da arteríola eferente mantida pela Angiotensina II, levando à queda drástica da filtração glomerular e IRA na estenose bilateral ou de rim único[span_20](start_span)[span_20](end_span). O diagnóstico confirmatório é feito por AngioTC/AngioRM ou Arteriografia[span_21](start_span)[span_21](end_span)."
+    "discussao_clinica_final": {
+      "takeaway_message": "Piora aguda e grave da função renal após introdução de IECA ou BRA em paciente idoso ou de difícil controle aponta para Estenose Bilateral ou em Rim Único de Artéria Renal.",
+      "fisiopatologia": "O hipofluxo renal crônico hiperativa o SRAA. A Angiotensina II faz intensa vasoconstrição da arteríola eferente para manter a pressão intraglomerular de filtração. Quando bloqueamos a angiotensina, a pressão despenca e o rim para de filtrar."
+    }
   }
 ]
