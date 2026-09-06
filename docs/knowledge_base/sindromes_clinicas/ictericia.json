@@ -1,87 +1,83 @@
 [
   {
-    "id": "colangite_aguda",
-    "nome": "Colangite Aguda",
-    "prevalencia_base": 15,
-    "01_campo_modulador": {
-      "pesos": { "coledocolitiase": 3.0, "manipulacao_biliar": 2.5 }
+    "id_caso": "gastro_colangite_01",
+    "patologia_alvo": "Colangite Aguda",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Paciente de 65 anos, com histórico prévio de coledocolitíase. Dá entrada no PS apresentando quadro de icterícia colestática associada a febre com calafrios e dor intensa em hipocôndrio direito. PA: 120x80 mmHg, sem confusão mental.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["usg", "ultrassom", "ultrassonografia", "bilirrubinas", "hemograma", "tgo", "tgp"],
+      "achado_sucesso": "Excelente! O USG confirma dilatação de vias biliares. Os exames laboratoriais revelam hiperbilirrubinemia direta e leucocitose significativa.",
+      "resposta_preceptor_erro": "Doutor, estamos diante de um paciente ictérico com febre e dor abdominal. Precisamos avaliar a via biliar com um exame de imagem e pedir provas laboratoriais urgentes."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "ictericia": 30, "febre": 30, "dor_abdominal": 30, "hipotensao": 20, "confusao_mental": 20 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["colangite", "colangite aguda"],
+      "distrator_comum": ["colecistite aguda", "pancreatite aguda", "hepatite"],
+      "feedback_distrator": "A colecistite isolada geralmente não causa icterícia franca. A presença da Tríade de Charcot apresentada pelo paciente é o marco clássico da infecção da via biliar principal, e não de outros órgãos.",
+      "achado_sucesso": "Perfeito. Trata-se de Colangite Aguda não grave (ausência de choque)."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["ictericia", "febre", "dor_abdominal"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["antibiotico", "antibioticoterapia", "drenagem", "cpre", "cirurgia"],
+      "red_flag_mortal": ["alta", "analgesia simples", "aguardar cultura"],
+      "feedback_sucesso": "Conduta perfeita! Você iniciou antibioticoterapia empírica precoce e programou a desobstrução da via biliar (CPRE), salvando o paciente da sepse.",
+      "feedback_red_flag": "ERRO CRÍTICO! A colangite é uma infecção de espaço fechado sob alta pressão. Tratar apenas a dor ou dar alta evolui rapidamente para translocação bacteriana maciça, choque séptico e óbito."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "ALTO",
-      "conduta_emergencial": "Drenagem biliar e ATB"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["USG Abdominal", "Bilirrubinas", "Leucograma"]
-    },
-    "vigneta": "Paciente de 65 anos, com histórico prévio de coledocolitíase. Dá entrada no PS apresentando quadro de icterícia colestática associada a febre com calafrios e dor intensa em hipocôndrio direito. PA: 120x80 mmHg, sem confusão mental.",
-    "respostas_esperadas": {
-      "diagnostico": ["colangite", "colangite aguda"],
-      "exames": ["usg", "ultrassom", "ultrassonografia", "hemograma", "bilirrubinas", "tgo", "tgp"],
-      "conduta": ["antibiotico", "antibioticoterapia", "drenagem", "cpre", "cirurgia"]
-    },
-    "feedback_tecnico": "A Colangite Aguda exige identificação rápida da Tríade de Charcot (Icterícia, Febre e Dor). A conduta emergencial com ATB e preparo para drenagem biliar (CPRE) é o fator crítico."
+    "discussao_clinica_final": {
+      "takeaway_message": "A Tríade de Charcot (Icterícia, Febre e Dor) define Colangite Aguda. A descompressão biliar de urgência (geralmente por CPRE) associada a antibióticos é o tratamento salvador.",
+      "fisiopatologia": "A obstrução do colédoco (geralmente por litiase) gera estase biliar e aumento da pressão intraductal, favorecendo proliferação bacteriana e translocação maciça para a circulação sistêmica."
+    }
   },
   {
-    "id": "hepatite_alcoolica",
-    "nome": "Hepatite Alcoólica",
-    "prevalencia_base": 20,
-    "01_campo_modulador": {
-      "pesos": { "etilismo_cronico": 3.0 }
+    "id_caso": "gastro_hepatite_alcoolica_01",
+    "patologia_alvo": "Hepatite Alcoólica",
+    "dificuldade": "Intermediária",
+    "vinheta_admissao": "Paciente de 50 anos, etilista crônico de longa data. Apresenta-se com icterícia progressiva há 1 semana, febre baixa e dor abdominal leve. Exames iniciais mostram TGO > TGP (relação maior que 2) e transaminases em torno de 300 U/L, além de leucocitose importante.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["tempo de protrombina", "tap", "inr", "bilirrubinas", "funcao hepatica"],
+      "achado_sucesso": "Excelente. Você solicitou os exames de função hepática, permitindo calcular o escore de Maddrey, que indicou doença severa (Maddrey > 32).",
+      "resposta_preceptor_erro": "Doutor, em quadros de lesão hepática alcoólica suspeita, precisamos avaliar a verdadeira função de síntese do fígado para calcular a gravidade. Solicite TAP/INR e bilirrubinas totais."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "ictericia": 30, "febre_baixa": 20, "dor_abdominal": 20 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["hepatite alcoolica", "hepatite alcoólica"],
+      "distrator_comum": ["hepatite viral", "cirrose biliar", "coledocolitiase"],
+      "feedback_distrator": "Hepatites virais agudas cursam classicamente com TGP > TGO e valores acima de 500-1000 U/L. O padrão TGO maior que TGP e em torno de 300 U/L, somado à leucocitose, é a assinatura laboratorial do dano alcoólico grave.",
+      "achado_sucesso": "Correto! Hepatite Alcoólica em fase aguda e descompensada."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["tgo_maior_tgp", "transaminases_menor_400"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["corticoide", "prednisolona", "pentoxifilina", "abstinencia", "suporte"],
+      "red_flag_mortal": ["paracetamol", "alta sem suporte", "antibiotico empirico isolado sem investigar infeccao"],
+      "feedback_sucesso": "Conduta perfeita! Você identificou a gravidade e indicou corticoterapia sistêmica (Prednisolona) visando reduzir o processo inflamatório letal, associada à abstinência e suporte nutricional.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você deu alta, usou drogas hepatotóxicas ou negligenciou a inflamação fulminante. Sem o tratamento imunossupressor adequado e suporte, o paciente evoluiu rapidamente para falência hepática irreversível."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "ALTO",
-      "conduta_emergencial": "Avaliar escore de Maddrey > 32 para uso de corticoide"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["TGO", "TGP", "Leucograma", "Tempo de Protrombina"]
-    },
-    "vigneta": "Paciente de 50 anos, etilista crônico de longa data. Apresenta-se com icterícia progressiva há 1 semana, febre baixa e dor abdominal leve. Exames iniciais mostram TGO > TGP (relação maior que 2) e transaminases em torno de 300 U/L, além de leucocitose importante.",
-    "respostas_esperadas": {
-      "diagnostico": ["hepatite alcoolica", "hepatite alcoólica", "hepatite"],
-      "exames": ["funcao hepatica", "tempo de protrombina", "tap", "tgo", "tgp", "hemograma", "leucograma"],
-      "conduta": ["corticoide", "prednisolona", "pentoxifilina", "suporte", "abstinencia"]
-    },
-    "feedback_tecnico": "Na Hepatite Alcoólica, a inversão TGO/TGP > 2 (AST > ALT) e a reação leucemoide são moduladores chaves no laboratório. O tratamento de formas graves (Maddrey > 32) envolve corticoide."
+    "discussao_clinica_final": {
+      "takeaway_message": "Na Hepatite Alcoólica, a inversão da relação TGO > TGP (> 2) associada a reação leucemoide é o padrão típico. Casos graves (Maddrey > 32) exigem uso de corticoide (Prednisolona).",
+      "fisiopatologia": "O metabolismo abusivo do álcool depletou vitaminas (como a B6, necessária para síntese de TGP) e induziu severo dano oxidativo mitocondrial que destrói o fígado, causando liberação preferencial de TGO e inflamação maciça com esteatonecrose."
+    }
   },
   {
-    "id": "colangite_biliar_primaria",
-    "nome": "Colangite Biliar Primária",
-    "prevalencia_base": 5,
-    "01_campo_modulador": {
-      "pesos": { "mulher_meia_idade": 2.5, "doencas_autoimunes": 2.0 }
+    "id_caso": "gastro_cbp_01",
+    "patologia_alvo": "Colangite Biliar Primária (CBP)",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Mulher de 45 anos, com histórico de Tireoidite de Hashimoto, procura ambulatório com queixa de prurido intenso há meses e icterícia recente. Exame físico revela hiperpigmentação e xantelasmas. USG de vias biliares sem dilatações.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["antimitocondria", "anti-mitocondria", "fosfatase alcalina", "fa", "ggt"],
+      "achado_sucesso": "Ótimo. O sangue demonstra elevação expressiva de Fosfatase Alcalina e GGT. A pesquisa do anticorpo Antimitocôndria (AMA) retornou positiva em altos títulos.",
+      "resposta_preceptor_erro": "Doutora, mulher de meia idade com quadro de colestase clínica clássica (prurido, icterícia, xantelasmas) mas com ultrassom sem dilatação. Precisamos buscar marcadores de colestase celular e o autoanticorpo específico dessa doença."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "prurido": 30, "ictericia": 20, "hiperpigmentacao": 15, "xantelasmas": 15 }
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["colangite biliar primaria", "cbp", "cirrose biliar primaria"],
+      "distrator_comum": ["colangite esclerosante primaria", "cep", "coledocolitiase", "hepatite autoimune"],
+      "feedback_distrator": "A Colangite Esclerosante Primária (CEP) acomete mais homens jovens e afeta vias de maior calibre (estenoses). Coledocolitíase teria USG alterado. A autoimunidade com AMA positivo fecha a nossa hipótese.",
+      "achado_sucesso": "Correto! Diagnóstico de Colangite Biliar Primária (CBP) firmado."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["anti_mitocondria_positivo"]
+    "fase_3_conduta": {
+      "gabarito_esperado": ["acido ursodesoxicolico", "ursodesoxicolico", "udca", "acompanhamento"],
+      "red_flag_mortal": ["cpre", "cirurgia biliar", "colecistectomia"],
+      "feedback_sucesso": "Conduta perfeita! O Ácido Ursodesoxicólico (UDCA) é a terapia padrão. Ele modifica a história natural da doença, atrasando a cirrose e a necessidade de transplante hepático.",
+      "feedback_red_flag": "ERRO CRÍTICO! O processo destrutivo dessa doença é microscópico, lá nos dúctulos intra-hepáticos. Você submeteu a paciente a CPRE ou cirurgia biliar de grande porte desnecessariamente, expondo-a a graves complicações e pancreatite iatrogênica."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "BAIXO",
-      "conduta_emergencial": "Acompanhamento ambulatorial"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Anticorpo Antimitocôndria", "Fosfatase Alcalina", "GGT"]
-    },
-    "vigneta": "Mulher de 45 anos, com histórico de Tireoidite de Hashimoto, procura ambulatório com queixa de prurido intenso há meses e icterícia recente. Exame físico revela hiperpigmentação e xantelasmas. USG de vias biliares sem dilatações.",
-    "respostas_esperadas": {
-      "diagnostico": ["colangite biliar primaria", "cbp", "cirrose biliar primaria"],
-      "exames": ["antimitocondria", "anti-mitocondria", "fan", "fosfatase alcalina", "fa", "ggt"],
-      "conduta": ["acido ursodesoxicolico", "ursodesoxicolico", "udca", "acompanhamento"]
-    },
-    "feedback_tecnico": "O anticorpo anti-mitocôndria é o critério de confirmação necessária (sine qua non). O tratamento padrão para retardar a evolução para cirrose é o Ácido Ursodesoxicólico (UDCA)."
+    "discussao_clinica_final": {
+      "takeaway_message": "Prurido, icterícia e xantelasmas em mulher de meia-idade sem dilatação biliar no USG sugerem CBP. A positividade do anticorpo antimitocôndria sela o diagnóstico.",
+      "fisiopatologia": "Trata-se de uma colangite destrutiva não supurativa crônica, na qual linfócitos autoimunes atacam e destroem gradativamente os pequenos ductos biliares dentro do fígado, gerando acúmulo tóxico de bile."
+    }
   }
 ]
-
