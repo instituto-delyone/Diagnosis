@@ -1,115 +1,126 @@
 [
   {
-    "id": "meningite_bacteriana_aguda",
-    "nome": "Meningite Bacteriana Aguda",
-    "prevalencia_base": 20,
-    "01_campo_modulador": {
-      "pesos": { "extremos_de_idade": 2.0, "fistula_liquorica": 2.5 }
+    "id_caso": "cefaleia_meningite_01",
+    "patologia_alvo": "Meningite Bacteriana Aguda",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Paciente de 22 anos dá entrada na emergência com febre alta (39,5ºC), cefaleia holocraniana intensa e rebaixamento do nível de consciência há 12 horas. Ao exame físico: sinais de Brudzinski e Kernig positivos, além de lesões petequiais em membros inferiores.",
+    
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["puncao lombar", "liquor", "analise do liquor", "hemocultura"],
+      "achado_sucesso": "Excelente raciocínio. A punção lombar revela líquor purulento, pleocitose com predomínio de polimorfonucleares (PMN), hiperproteinorraquia e hipoglicorraquia.",
+      "resposta_preceptor_erro": "Doutor, o paciente está febril, rebaixado e com rigidez de nuca franca. Precisamos avaliar o espaço subaracnóide e o perfil infeccioso urgente. Peça a punção lombar!"
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "fevere_alta": 30, "rigidez_de_nuca": 35, "cefaleia": 25, "petequias_purpura": 20 }
+
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["meningite bacteriana", "meningite", "meningite meningococica", "meningococcemia"],
+      "distrator_comum": ["meningite viral", "encefalite herpetica", "cefaleia tensional"],
+      "feedback_distrator": "Cuidado! Meningites virais costumam cursar com glicose normal e predomínio linfomononuclear, além de uma evolução menos fulminante. As petéquias aqui apontam para uma etiologia bacteriana grave (meningocócica).",
+      "achado_sucesso": "Exato. Trata-se de uma Meningite Bacteriana Aguda (com forte suspeita de meningococcemia pelas lesões cutâneas)."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["sinais_kernig_brudzinski"],
-      "exclusao_ativa": ["liquor_purulento_pmn_alto_glicose_baixa"]
+
+    "fase_3_conduta": {
+      "gabarito_esperado": ["ceftriaxone", "vancomicina", "dexametasona", "antibioticoterapia"],
+      "red_flag_mortal": ["alta", "analgesia simples", "observacao", "esperar liquor"],
+      "feedback_sucesso": "Conduta irretocável! Você iniciou os antibióticos empíricos (Ceftriaxone + Vancomicina) e a Dexametasona em menos de 60 minutos. O paciente foi estabilizado para a UTI.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você atrasou a antibioticoterapia aguardando exames demorados. Na meningite bacteriana, o tempo porta-antibiótico é < 60 min; o atraso eleva drasticamente a mortalidade e sequelas neurológicas irreversíveis."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "ALTO",
-      "conduta_emergencial": "Antibioticoterapia empírica emergencial em < 60 min (Ceftriaxone + Vancomicina) + Dexametasona"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Punção Lombar (Análise do Líquor)", "Hemoculturas", "TC de Crânio (se indicação de risco)"]
-    },
-    "vigneta": "Paciente de 22 anos dá entrada na emergência com febre alta (39,5ºC), cefaleia holocraniana intensa e rebaixamento do nível de consciência há 12 horas. Ao exame físico: sinais de Brudzinski e Kernig positivos, além de lesões petequiais em membros inferiores.",
-    "respostas_esperadas": {
-      "diagnostico": ["meningite", "meningite bacteriana", "meningite meningococica", "meningococcemia"],
-      "exames": ["puncao lombar", "liquor", "hemocultura"],
-      "conduta": ["ceftriaxone", "vancomicina", "dexametasona", "ampicilina"]
-    },
-    "feedback_tecnico": "A Meningite Bacteriana Aguda apresenta a clássica tríade de febre, cefaleia e rigidez de nuca (com sinais de Kernig e Brudzinski)[span_5](start_span)[span_5](end_span). O tempo porta-antibiótico deve ser < 60 minutos[span_6](start_span)[span_6](end_span). O esquema empírico padrão para adultos jovens é Ceftriaxone + Vancomicina, associado à Dexametasona antes/junto com o ATB[span_7](start_span)[span_7](end_span). O líquor tipicamente revela pleocitose com predomínio de PMN, hiperproteinorraquia e hipoglicorraquia[span_8](start_span)[span_8](end_span)."
+
+    "discussao_clinica_final": {
+      "takeaway_message": "A tríade clássica (febre, cefaleia e rigidez de nuca) exige ação rápida. O tempo porta-antibiótico na meningite bacteriana deve ser inferior a 60 minutos.",
+      "fisiopatologia": "A invasão bacteriana do espaço subaracnóideo desencadeia intensa cascata inflamatória mediada por citocinas, gerando edema cerebral citotóxico/vasogênico, aumento da PIC e exsudato purulento."
+    }
   },
   {
-    "id": "hemorragia_subaracnoide",
-    "nome": "Hemorragia Subaracnóide (HSA)",
-    "prevalencia_base": 15,
-    "01_campo_modulador": {
-      "pesos": { "aneurisma_cerebral_previo": 3.0, "hipertensao_arterial": 2.0 }
+    "id_caso": "cefaleia_hsa_01",
+    "patologia_alvo": "Hemorragia Subaracnóidea (HSA)",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Mulher de 45 anos apresenta cefaleia de início súbito há 2 horas, descrita pela própria como 'a pior dor de cabeça da minha vida' (thunderclap), seguida de vômitos profusos e um episódio de síncope. Ao exame físico: confusa, com discreta rigidez de nuca.",
+    
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["tc de cranio", "tomografia de cranio", "tc sem contraste", "puncao lombar"],
+      "achado_sucesso": "Ótimo. A Tomografia de Crânio sem contraste evidenciou hiperdensidade nos sulcos e cisternas basais compatível com sangue no espaço subaracnóideo.",
+      "resposta_preceptor_erro": "Doutor, cefaleia em 'thunderclap' (explosiva e pior da vida) é HSA até prova em contrário. Precisamos de imagem cerebral imediata sem contraste!"
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "cefaleia_subita_pior_da_vida": 40, "rebaixamento_consciencia": 25, "rigidez_de_nuca_tardia": 20 }
+
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["hemorragia subaracnoide", "hsa", "ruptura de aneurisma"],
+      "distrator_comum": ["enxaqueca", "cefaleia tensional", "avc isquemico"],
+      "feedback_distrator": "Enxaqueca ou cefaleia tensional não iniciam de forma súbita e explosiva com pico imediato ('thunderclap') e rebaixamento. Pense em sangramento agudo!",
+      "achado_sucesso": "Correto. Diagnóstico de Hemorragia Subaracnóidea (HSA), habitualmente secundária à ruptura de aneurisma sacular."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["sangue_espaco_subaracnoide_tc"]
+
+    "fase_3_conduta": {
+      "gabarito_esperado": ["nimodipina", "neurocirurgia", "embolizacao", "clipagem", "avaliacao neurocirurgica"],
+      "red_flag_mortal": ["puncao lombar sem tc previa", "alta", "analgesia simples"],
+      "feedback_sucesso": "Conduta excelente! Você protegeu o neurônio com Nimodipina e acionou a equipe de neurocirurgia/endovascular para exclusão do aneurisma.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você liberou a paciente ou negligenciou a avaliação vascular de urgência. O aneurisma roto tem alto risco de re-sangramento nas primeiras 24 horas, o que costuma ser fatal."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "ALTO",
-      "conduta_emergencial": "TC de Crânio sem contraste e avaliação neurocirúrgica/endovascular imediata"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["TC de Crânio sem contraste", "Punção Lombar (Xantocromia)", "Angiografia/AngioTC"]
-    },
-    "vigneta": "Mulher de 45 anos apresenta cefaleia de início súbito há 2 horas, descrita pela própria como 'a pior dor de cabeça da minha vida' (thunderclap), seguida de vômitos profusos e um episódio de síncope. Ao exame físico: confusa, com discreta rigidez de nuca.",
-    "respostas_esperadas": {
-      "diagnostico": ["hsa", "hemorragia subaracnoide", "ruptura de aneurisma"],
-      "exames": ["tc", "tc de cranio", "tomografia", "puncao lombar", "angiotc"],
-      "conduta": ["nimodipina", "neurocirurgia", "embolizacao", "clipagem"]
-    },
-    "feedback_tecnico": "A HSA decorre habitualmente da ruptura de aneurisma sacular[span_9](start_span)[span_9](end_span). Manifesta-se classicamente como cefaleia súbita de intensidade máxima instantânea ('a pior da vida')[span_10](start_span)[span_10](end_span). A TC de crânio sem contraste é o exame inicial de escolha[span_11](start_span)[span_11](end_span). Se a TC for normal e a suspeita mantida, a punção lombar deve buscar xantocromia no líquor[span_12](start_span)[span_12](end_span)."
+
+    "discussao_clinica_final": {
+      "takeaway_message": "Toda cefaleia súbita de intensidade máxima instantânea ('pior dor da vida') deve ser investigada ativamente para HSA com TC de crânio sem contraste.",
+      "fisiopatologia": "O extravasamento arterial no espaço subaracnóideo causa irritação meníngea imediata, aumento súbito da PIC e risco severo de vasoespasmo cerebral tardio."
+    }
   },
   {
-    "id": "arterite_de_celulas_gigantes",
-    "nome": "Arterite Temporal / de Células Gigantes",
-    "prevalencia_base": 10,
-    "01_campo_modulador": {
-      "pesos": { "idade_maior_50_anos": 3.0, "polimialgia_reumatica": 2.5 }
+    "id_caso": "cefaleia_arterite_temporal_01",
+    "patologia_alvo": "Arterite de Células Gigantes (Arterite Temporal)",
+    "dificuldade": "Intermediária",
+    "vinheta_admissao": "Mulher de 68 anos queixa-se de cefaleia holocraniana contínua com dor à palpação na região temporal direita há 3 semanas. Refere dor na mandíbula ao mastigar (claudicação mandibular) e relata episódios de embaçamento visual passageiro. Exame de sangue revela VHS de 95 mm/h.",
+    
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["vhs", "pcr", "biopsia de arteria temporal", "biopsia"],
+      "achado_sucesso": "Exames laboratoriais confirmam VHS marcadamente elevado (95 mm/h) e PCR positiva.",
+      "resposta_preceptor_erro": "Doutor, paciente idosa com cefaleia temporal, claudicação de mandíbula e risco visual. Precisamos de marcadores inflamatórios (VHS/PCR) urgentemente."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "cefaleia_temporal": 30, "claudicacao_mandibular": 35, "amaurose_fuga_perda_visual": 30, "vhs_elevado": 25 }
+
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["arterite de celulas gigantes", "arterite temporal", "vasculite"],
+      "distrator_comum": ["enxaqueca cronica", "disfuncao de articulacao temporomandibular", "atm"],
+      "feedback_distrator": "Disfunção de ATM não cursa com VHS de 95 mm/h, idade avançada e risco de perda visual súbita. O quadro é uma vasculite sistêmica.",
+      "achado_sucesso": "Exato. Trata-se de Arterite de Células Gigantes (Arterite Temporal)."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["biopsia_arteria_temporal_positiva"]
+
+    "fase_3_conduta": {
+      "gabarito_esperado": ["prednisona", "corticoide", "corticoterapia", "pulsoterapia"],
+      "red_flag_mortal": ["aguardar biopsia", "ainf", "analgesia simples", "observacao"],
+      "feedback_sucesso": "Conduta perfeita! Você iniciou corticoterapia em dose alta imediatamente, prevenindo a perda visual irreversível.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você esperou o resultado da biópsia para iniciar o tratamento. A doença pode causar cegueira bilateral definitiva enquanto o laudo não sai; o corticoide deve ser iniciado imediatamente frente à forte suspeita clínica."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "MEDIO",
-      "conduta_emergencial": "Corticoterapia em dose alta (Prednisona) imediata para prevenir cegueira irreversível"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["VHS / PCR", "Biópsia de Artéria Temporal"]
-    },
-    "vigneta": "Mulher de 68 anos queixa-se de cefaleia holocraniana contínua com dor à palpação na região temporal direita há 3 semanas. Refere dor na mandíbula ao mastigar (claudicação mandibular) e relata episódios de embaçamento visual passageiro. Exame de sangue revela VHS de 95 mm/h.",
-    "respostas_esperadas": {
-      "diagnostico": ["arterite temporal", "arterite de celulas gigantes", "vasculite"],
-      "exames": ["vhs", "pcr", "biopsia", "biopsia de arteria temporal"],
-      "conduta": ["prednisona", "pulsoterapia", "corticoide", "corticoterapia"]
-    },
-    "feedback_tecnico": "A Arterite Temporal é uma vasculite de médios e grandes vasos em pacientes > 50 anos, altamente associada à Polimialgia Reumática[span_13](start_span)[span_13](end_span). A claudicação de mandíbula é o sintoma mais específico[span_14](start_span)[span_14](end_span). O grande risco é a cegueira por neuropatia óptica isquêmica[span_15](start_span)[span_15](end_span). Diante de forte suspeita e VHS elevado, DEVE-SE iniciar corticoterapia em dose alta imediatamente, antes mesmo do resultado da biópsia de artéria temporal[span_16](start_span)[span_16](end_span)."
+
+    "discussao_clinica_final": {
+      "takeaway_message": "A claudicação mandibular é o sintoma mais específico da Arterite Temporal. Na sospeita com VHS alto, inicie corticoide IMEDIATAMENTE para evitar cegueira.",
+      "fisiopatologia": "Processo inflamatório granulomatoso crônico acometendo preferencialmente ramos da artéria carótida externa, levando a isquemia tecidual e óptica."
+    }
   },
   {
-    "id": "cefaleia_em_salvas",
-    "nome": "Cefaleia em Salvas (Cluster Headache)",
-    "prevalencia_base": 10,
-    "01_campo_modulador": {
-      "pesos": { "homem_jovem_adulto": 2.0, "etilismo_fator_gatilho": 2.0 }
+    "id_caso": "cefaleia_salvas_01",
+    "patologia_alvo": "Cefaleia em Salvas (Cluster Headache)",
+    "dificuldade": "Intermediária",
+    "vinheta_admissao": "Homem de 35 anos procura o PS durante a madrugada com crise de dor insuportável, em 'facada', localizada ao redor do olho esquerdo, durando cerca de 45 minutos. Durante a crise, apresenta lacrimejamento e congestão nasal do mesmo lado e fica extremamente agitado, sem conseguir deitar.",
+    
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["exame clinico", "anamnese", "rm de cranio", "ressonancia"],
+      "achado_sucesso": "Avaliação clínica identifica o padrão estrito de cefaleia trigêmino-disautonômica com agitação psicomotora.",
+      "resposta_preceptor_erro": "Doutor, o diagnóstico desta dor excruciante com sinais autonômicos é eminentemente clínico, mas exclua lesões secundárias com neuroimagem se for o primeiro episódio."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "dor_periorbitaria_em_facada": 35, "lacrimejamento_homolateral": 30, "hemicongestao_nasal": 30, "agitacao_psicomotora": 25 }
+
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["cefaleia em salvas", "cluster headache", "salvas"],
+      "distrator_comum": ["enxaqueca", "nevralgia do trigemeo", "sinusite aguda"],
+      "feedback_distrator": "Embora latejante ou em facada, a enxaqueca não costuma vir acompanhada de intensa agitação psicomotora e proeminentes sinais autonômicos ipsilaterais tão marcados (lacrimejamento/congestão).",
+      "achado_sucesso": "Exato! Cefaleia em Salvas (Cluster Headache)."
     },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["cefaleia_trigemino_disautonomica"]
+
+    "fase_3_conduta": {
+      "gabarito_esperado": ["oxigenio", "oxigenoterapia", "sumatriptano", "triptano"],
+      "red_flag_mortal": ["morfina", "opioides", "antibiotico"],
+      "feedback_sucesso": "Conduta excelente! O uso de Oxigênio a 100% sob máscara e/ou Sumatriptano subcutâneo abortou a crise rapidamente.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você prescreveu opioides fortes de forma repetida. Eles não funcionam bem nas salvas, geram dependência e atrasam o uso do oxigênio e triptanos específicos."
     },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "BAIXO",
-      "conduta_emergencial": "Oxigenoterapia a 100% sob máscara (10-12 L/min) e Sumatriptano Subcutâneo"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Diagnóstico Clínico", "RM de Crânio (no 1º episódio para exclusão)"]
-    },
-    "vigneta": "Homem de 35 anos procura o PS durante a madrugada com crise de dor insuportável, em 'facada', localizada ao redor do olho esquerdo, durando cerca de 45 minutos. Durante a crise, apresenta lacrimejamento e congestão nasal do mesmo lado e fica extremamente agitado, sem conseguir deitar.",
-    "respostas_esperadas": {
-      "diagnostico": ["cefaleia em salvas", "cluster headache", "salvas"],
-      "exames": ["clinico", "rm", "ressonancia"],
-      "conduta": ["oxigenio", "oxigenoterapia", "sumatriptano", "verapamil"]
-    },
-    "feedback_tecnico": "A Cefaleia em Salvas é uma cefaleia trigêmino-disautonômica caracterizada por dor unilateral, excruciante, periorbitária, acompanhada de fenômenos autonômicos ipsilaterais (lacrimejamento, congestão nasal, miose/ptose) e agitação[span_17](start_span)[span_17](end_span). O tratamento da crise aguda é feito com Oxigênio a 100% em máscara de alto fluxo (10-12 L/min) e Sumatriptano SC[span_18](start_span)[span_18](end_span). A profilaxia de escolha é o Verapamil[span_19](start_span)[span_19](end_span)."
+
+    "discussao_clinica_final": {
+      "takeaway_message": "A Cefaleia em Salvas é a 'dor de cabeça mais forte que o ser humano pode sentir'. O tratamento de resgate padrão ouro da crise é Oxigênio a 100% (10-12 L/min) e Sumatriptano SC.",
+      "fisiopatologia": "Ativação do complexo trigêmino-autonômico associada a disfunção do marca-passo circadiano no hipotálamo."
+    }
   }
 ]
