@@ -1,44 +1,50 @@
-# Diagnosis Engine: Schema v4.0 (Hemodinâmico + ECG)
-
-Este documento define a estrutura JSON oficial (Canônica) para inserção de síndromes e cenários clínicos no **Diagnosis Engine v11.0 (Offline Standalone)**.
-
-Para que o Motor Hemodinâmico, o Painel de ECG e o Sistema Socrático de Fluência funcionem perfeitamente, **todo novo caso clínico deve seguir exatamente a estrutura abaixo**.
-
----
-
-## 1. Estrutura Canônica V4.0 (Copiar e Preencher para Novos Casos)
-
-```json
 {
-  "id_caso": "especialidade_nome_doenca_01",
-  "patologia_alvo": "Nome da Doença",
-  "dificuldade": "Básica / Intermediária / Avançada",
+  "id_doenca": "cardio_tamponamento_01",
+  "nome_doenca": "Tamponamento Cardíaco",
+  "especialidade": "Cardiologia / Trauma",
   
-  "ritmo_cardiaco": "Ritmo que aparecerá no monitor (ex: Taquicardia Sinusal, Fibrilação Atrial)",
-  "vinheta_admissao": "Texto detalhado do caso clínico de admissão (sintomas, dados vitais, exame físico inicial).",
+  "gerador_demografico": [
+    "Jovem de 25 anos vítima de colisão frontal de carro",
+    "Homem de 40 anos com ferimento por arma branca no tórax",
+    "Mulher de 60 anos em pós-operatório de cirurgia cardíaca"
+  ],
   
-  "fase_1_investigacao": {
-    "gabarito_esperado": ["exame1", "exame2", "sinonimo"],
-    "achado_sucesso": "Mensagem informando o resultado do exame correto.",
-    "resposta_preceptor_erro": "Dica socrática se o usuário errar o exame inicial."
+  "gerador_clinico": {
+    "queixas_principais": [
+      "intensa falta de ar e dor torácica",
+      "sensação de morte iminente e confusão mental",
+      "dispneia severa com agitação psicomotora"
+    ],
+    "achados_exame_fisico": [
+      "turgência jugular patológica a 90 graus",
+      "bulhas cardíacas hipofonéticas e abafadas",
+      "pulso paradoxal (queda da PA na inspiração)"
+    ]
   },
-
-  "fase_2_diagnostico": {
-    "gabarito_esperado": ["diagnostico_principal", "sinonimo", "sigla"],
-    "distrator_comum": ["diagnostico_errado_parecido"],
-    "feedback_distrator": "Bronca construtiva explicando por que o distrator não se encaixa.",
-    "achado_sucesso": "Validação positiva do diagnóstico correto."
+  
+  "hemodinamica_base": {
+    "pa_sistolica_range": [70, 90],
+    "pa_diastolica_range": [40, 60],
+    "fc_range": [110, 140],
+    "spo2_range": [85, 92],
+    "ritmo_monitor": "Taquicardia Sinusal com Alternância Elétrica"
   },
-
-  "fase_3_conduta": {
-    "gabarito_esperado": ["tratamento_prioritario", "medicamento"],
-    "red_flag_mortal": ["medicamento_contraindicado", "conduta_proibida"],
-    "feedback_sucesso": "Mensagem final de sucesso, paciente salvo.",
-    "feedback_red_flag": "ERRO CRÍTICO! Explicação de como a conduta piorou ou matou o paciente."
+  
+  "mapa_exames": {
+    "ecg": "Taquicardia sinusal com baixa voltagem e alternância elétrica dos complexos QRS.",
+    "raio_x": "Alargamento global da área cardíaca (aspecto em moringa). Pulmões sem congestão.",
+    "ultrassom": "POCUS revela grande derrame pericárdico circunferencial com colapso diastólico do ventrículo direito.",
+    "pocus": "POCUS revela grande derrame pericárdico circunferencial com colapso diastólico do ventrículo direito."
   },
-
-  "discussao_clinica_final": {
-    "takeaway_message": "Pérola clínica de 1 ou 2 frases que o aluno deve levar para a vida.",
-    "fisiopatologia": "Mecanismo fisiopatológico conciso para revisão."
+  
+  "criterios_resolucao": {
+    "diagnosticos_aceitos": ["tamponamento", "tamponamento cardiaco", "triade de beck"],
+    "tratamentos_salvadores": ["pericardiocentese", "puncao de marfan", "janela pericardica", "toracotomia"],
+    "condutas_letais": ["diuretico", "furosemida", "vni", "intubacao com pressao positiva", "drenagem de torax"]
+  },
+  
+  "debriefing": {
+    "takeaway": "Tamponamento cardíaco (Tríade de Beck) cursa com choque obstrutivo. O tratamento salvador é mecânico: Pericardiocentese. Diuréticos são estritamente contraindicados.",
+    "fisiopatologia": "O acúmulo de líquido no pericárdio inelástico aumenta a pressão no saco pericárdico, impedindo o enchimento diastólico das câmaras direitas e gerando choque obstrutivo."
   }
 }
