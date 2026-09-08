@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  Diagnosis Engine v10.0 — Standalone CSI + Motor Hemodinâmico
+  Diagnosis Engine v11.0 — Standalone CSI + Schema V3.0 + ECG
   Copyright (c) 2026 Instituto Delyone
 -->
 <html lang="pt-BR">
@@ -23,29 +23,6 @@
     #selection-screen p { color: #cbd5e1; margin-bottom: 40px; font-size: 16px; max-width: 600px; }
     .mode-cards { display: flex; gap: 20px; width: 100%; max-width: 700px; }
     @media(max-width: 600px) { .mode-cards { flex-direction: column; } }
-    .monitor-card {
-  background-color: #05100c;
-  color: #10b981; /* Verde digital */
-  font-family: 'Courier New', Courier, monospace;
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 15px;
-  display: none; /* Começa oculto */
-  border: 2px solid #1f2933;
-  text-align: center;
-  font-weight: bold;
-  letter-spacing: 1px;
-  box-shadow: inset 0 0 15px rgba(16, 185, 129, 0.1);
-  animation: crtFlicker 0.15s infinite;
-}
-.monitor-title { font-size: 11px; color: #66757c; margin-bottom: 5px; text-transform: uppercase; }
-.monitor-rhythm { font-size: 18px; }
-@keyframes crtFlicker {
-  0% { opacity: 0.98; }
-  50% { opacity: 1; }
-  100% { opacity: 0.99; }
-}
-
     .mode-card { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 30px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; }
     .mode-card:hover { transform: translateY(-5px); }
     .mode-card.red-room:hover { background: rgba(207, 81, 72, 0.15); border-color: var(--red); }
@@ -64,10 +41,17 @@
     .btn-skip { background: var(--amber); border-color: var(--amber); }
     .btn-skip:hover { background: #b45309; border-color: #b45309; }
     .btn-skip:disabled { background: #78350f; color: #d6d3d1; border-color: #78350f; cursor: not-allowed; }
+    
     .vital-sign-bar { display: flex; gap: 15px; font-size: 13px; font-weight: 600; color: #cbd5e1; }
     .vital { background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 6px; transition: all 0.3s ease; }
     .vital.alert { color: #fca5a5; background: rgba(207,81,72,0.2); animation: pulse 1.5s infinite; }
     .vital.critical { color: #fff; background: var(--red); animation: fastPulse 0.8s infinite; }
+    
+    /* NOVO: Monitor ECG estilo CRT */
+    .monitor-card { background-color: #05100c; color: #10b981; font-family: 'Courier New', Courier, monospace; padding: 12px 15px; border-radius: 8px; margin-top: 15px; display: none; border: 2px solid #1f2933; text-align: center; font-weight: bold; letter-spacing: 1px; box-shadow: inset 0 0 15px rgba(16, 185, 129, 0.1); animation: crtFlicker 0.15s infinite; }
+    .monitor-title { font-size: 11px; color: #66757c; margin-bottom: 5px; text-transform: uppercase; }
+    .monitor-rhythm { font-size: 16px; }
+
     .chat-container { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; background: var(--bg); }
     .message { max-width: 85%; padding: 14px 18px; border-radius: 12px; font-size: 15px; line-height: 1.5; animation: fadeIn 0.3s ease; }
     .message.gm { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--navy); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
@@ -85,11 +69,13 @@
     .typing-indicator { display: none; align-items: center; gap: 4px; padding: 12px 18px; background: #fff; border: 1px solid var(--border); border-radius: 12px; align-self: flex-start; margin-bottom: 10px; }
     .dot { width: 6px; height: 6px; background: var(--muted); border-radius: 50%; animation: bounce 1.4s infinite ease-in-out; }
     .dot:nth-child(1) { animation-delay: -0.32s; } .dot:nth-child(2) { animation-delay: -0.16s; }
+    
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
     @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
     @keyframes fastPulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
     @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+    @keyframes crtFlicker { 0% { opacity: 0.98; } 50% { opacity: 1; } 100% { opacity: 0.99; } }
   </style>
 </head>
 <body>
@@ -119,14 +105,14 @@
       <div>
         <h2 id="room-title">🚨 Sala Vermelha</h2>
         <div class="vital-sign-bar" style="margin-top: 5px;">
-          <div class="monitor-card" id="painel-monitor">
-  <div class="monitor-title">ECG CONTÍNUO (DII)</div>
-  <div class="monitor-rhythm" id="texto-ritmo">〰️ LENDO...</div>
-</div>
-
           <span class="vital" id="vit-pa">PA: --/--</span>
           <span class="vital" id="vit-fc">FC: --</span>
           <span class="vital" id="vit-spo2">SpO2: --%</span>
+        </div>
+        <!-- Painel ECG Oculto -->
+        <div class="monitor-card" id="painel-monitor">
+          <div class="monitor-title">ECG CONTÍNUO (DII)</div>
+          <div class="monitor-rhythm" id="texto-ritmo">〰️ LENDO...</div>
         </div>
       </div>
       <div class="header-actions">
@@ -165,6 +151,8 @@
   const vitPA = document.getElementById('vit-pa');
   const vitFC = document.getElementById('vit-fc');
   const vitSpO2 = document.getElementById('vit-spo2');
+  const painelMonitor = document.getElementById('painel-monitor');
+  const textoRitmo = document.getElementById('texto-ritmo');
 
   const manifestoConhecimento = {
     "Clínica Médica": {
@@ -187,63 +175,40 @@
   const MAX_SKIPS = 3;
 
   // ==========================================
-  // MOTOR HEMODINÂMICO
+  // ESTADO DO PACIENTE (MOTOR HEMODINÂMICO)
   // ==========================================
   let hemodinamica = {
     estabilidade: 100,
     estagio: 'estavel', // estavel, choque, pcr, obito, salvo
     ciclos_pcr: 0
   };
+  let monitorLigado = false;
 
   // ==========================================
   // MATRIZ NLG (Natural Language Generation)
   // ==========================================
   const matrizNLG = {
-    acerto: {
-      introducao: [
-        "Conduta precisa, doutor.", "Excelente leitura do quadro clínico.", 
-        "Perfeito. O raciocínio está correto.", "Boa abordagem inicial."
-      ],
-      validacao: [
-        "Sua avaliação focou corretamente em {termo}.",
-        "A propedêutica confirmou {termo}.",
-        "Excelente, conseguimos avançar isolando {termo}."
-      ],
-      gancho_fase2: [
-        "Com esses achados em mãos, qual é a sua principal hipótese diagnóstica?",
-        "Qual o diagnóstico sindrômico que melhor explica esse cenário?",
-        "Juntando as peças, o que você suspeita que está acontecendo?"
-      ],
-      gancho_fase3: [
-        "Hipótese confirmada. Qual será a conduta terapêutica imediata?",
-        "Diagnóstico fechado. Como vamos estabilizar esse paciente agora?",
-        "Precisamos agir no tratamento. O que você prescreve?"
-      ]
-    },
-    erro: {
-      leve: [
-        "Essa não parece ser a prioridade clínica agora.",
-        "O paciente não apresentou mudança com essa abordagem.",
-        "Não encontramos alterações significativas com essa conduta."
-      ],
-      choque: [
-        "Atenção: a pressão arterial despencou. O choque é iminente!",
-        "A perfusão capilar está lentificada. O paciente está rebaixando!",
-        "O quadro hemodinâmico está desabando rapidamente!"
-      ]
-    },
+    erro_generico: [
+      "Não houve impacto clínico positivo com essa conduta.",
+      "A abordagem não alterou o quadro clínico.",
+      "Isso não parece ser a prioridade clínica agora."
+    ],
+    choque: [
+      "Atenção: a pressão arterial despencou. O choque é iminente!",
+      "A perfusão capilar está lentificada. O paciente está rebaixando!",
+      "O quadro hemodinâmico está desabando rapidamente! Aja!"
+    ],
     pcr: {
       entrada: [
         "Ele parou! Sem pulso central. Parada cardiorrespiratória!",
-        "Fibrilação ventricular no monitor! O paciente está em PCR!",
-        "Assistolia confirmada. Perda total de consciência e pulso."
+        "O monitor acusa assistolia/FV! O paciente está em PCR!"
       ],
       durante: [
-        "Manobras em andamento. O paciente continua sem pulso. Próximo passo?",
-        "RCP rolando. O que mais, doutor? Precisamos reverter!"
+        "Manobras de reanimação em andamento. O paciente continua sem pulso. Próximo passo?",
+        "RCP rolando. Acesso garantido. O que mais, doutor? Precisamos reverter!"
       ],
       rce: [
-        "RCE! Retorno da circulação espontânea. Temos pulso, mas ele segue grave."
+        "RCE! Retorno da circulação espontânea. O pulso voltou, mas ele segue grave e instável."
       ]
     }
   };
@@ -254,7 +219,7 @@
   }
 
   // ==========================================
-  // INICIALIZAÇÃO
+  // INICIALIZAÇÃO E CARREGAMENTO
   // ==========================================
   window.onload = async function inicializarSistema() {
     atualizarBotaoSkip();
@@ -317,6 +282,9 @@
     faseAtual = 1;
     turnos = 0;
     pontuacao = 100;
+    monitorLigado = false;
+    painelMonitor.style.display = 'none';
+    
     hemodinamica = {
       estabilidade: modo === 'sala_vermelha' ? 65 : 100,
       estagio: 'estavel',
@@ -333,7 +301,7 @@
   }
 
   // ==========================================
-  // INFERÊNCIA E LÓGICA CORE
+  // INFERÊNCIA E LÓGICA CORE (CSI)
   // ==========================================
   function normalizarTexto(texto) {
     if (!texto) return "";
@@ -341,18 +309,19 @@
   }
 
   function atualizarSinaisVitais() {
-    // Remove classes de alerta antigas
     vitPA.className = 'vital'; vitFC.className = 'vital'; vitSpO2.className = 'vital';
 
     if (hemodinamica.estagio === 'pcr' || hemodinamica.estagio === 'obito') {
       vitPA.innerText = "PA: --/--"; vitFC.innerText = "FC: 0"; vitSpO2.innerText = "SpO2: --%";
       vitPA.classList.add('critical'); vitFC.classList.add('critical');
+      if (monitorLigado) textoRitmo.innerText = "〰️ ASISTOLIA / FV";
       return;
     }
     
     if (hemodinamica.estabilidade <= 40) {
       vitPA.innerText = "PA: 70/40"; vitFC.innerText = "FC: 135"; vitSpO2.innerText = "SpO2: 85%";
       vitPA.classList.add('alert'); vitFC.classList.add('alert');
+      if (monitorLigado) textoRitmo.innerText = "〰️ TAQUICARDIA SINUSAL EXTREMA";
     } else if (hemodinamica.estabilidade <= 70 && modoAtual === 'sala_vermelha') {
       vitPA.innerText = "PA: 90/60"; vitFC.innerText = "FC: 115"; vitSpO2.innerText = "SpO2: 90%";
       vitPA.classList.add('alert');
@@ -366,7 +335,28 @@
     let msgRetorno = "";
     let isCriticalMsg = false;
 
-    // 1. MECÂNICA DE PARADA (PCR)
+    // 0. INTERCEPTADOR DE AÇÕES LIVRES (MOV: Monitor/ECG)
+    const termosMonitor = ["monitor", "monitorizacao", "ecg", "eletro", "monitorizar", "eletrocardiograma"];
+    if (!monitorLigado && termosMonitor.some(t => inputNorm.includes(t)) && hemodinamica.estagio !== 'pcr' && hemodinamica.estagio !== 'obito') {
+        monitorLigado = true;
+        
+        // Puxa o ritmo do JSON ou joga o padrão
+        const ritmoDetectado = casoAtual.ritmo_cardiaco || "Ritmo Sinusal Regular";
+        
+        painelMonitor.style.display = 'block';
+        textoRitmo.innerText = `〰️ ${ritmoDetectado.toUpperCase()}`;
+        
+        // Bônus sutil por lembrar do MOV
+        hemodinamica.estabilidade = Math.min(100, hemodinamica.estabilidade + 5);
+        
+        msgRetorno = `Você instalou a monitorização multiparâmetros. O traçado contínuo revela: <strong>${ritmoDetectado}</strong>.<br><br>Qual a sua próxima conduta?`;
+        
+        await new Promise(resolve => setTimeout(resolve, 800));
+        processarDecisaoIA(msgRetorno, false, false);
+        return; 
+    }
+
+    // 1. MECÂNICA DE PCR (Ressuscitação)
     if (hemodinamica.estagio === 'pcr') {
         const termosRCP = ["massagem", "rcp", "reanimacao", "adrenalina", "desfibrilar", "choque", "compressao", "intubar"];
         if (termosRCP.some(t => inputNorm.includes(t))) {
@@ -374,7 +364,7 @@
             if (hemodinamica.ciclos_pcr >= 2) {
                 hemodinamica.estagio = 'choque';
                 hemodinamica.estabilidade = 35;
-                msgRetorno = `⚡ ${tecerDialogo(matrizNLG.pcr.rce)}<br><br>Qual a sua conduta base para tratar a causa agora?`;
+                msgRetorno = `⚡ ${tecerDialogo(matrizNLG.pcr.rce)}<br><br>Retome o raciocínio da causa base.`;
             } else {
                 msgRetorno = tecerDialogo(matrizNLG.pcr.durante);
                 isCriticalMsg = true;
@@ -384,56 +374,87 @@
             processarDecisaoIA("Manobras ausentes ou incorretas. O paciente evoluiu para óbito.", true, true);
             return;
         }
+        await new Promise(resolve => setTimeout(resolve, 800));
         processarDecisaoIA(msgRetorno, false, isCriticalMsg);
         return;
     }
 
-    // 2. BUSCA NO GABARITO DO JSON
-    let gabaritoAtual = (faseAtual === 1) ? casoAtual.fase_1_investigacao.gabarito_esperado :
-                        (faseAtual === 2) ? casoAtual.fase_2_diagnostico.gabarito_esperado : 
-                        casoAtual.fase_3_conduta.gabarito_esperado;
+    // 2. EXTRAÇÃO DOS DADOS DA FASE ATUAL DO SCHEMA V3.0
+    let faseDados;
+    if (faseAtual === 1) faseDados = casoAtual.fase_1_investigacao;
+    else if (faseAtual === 2) faseDados = casoAtual.fase_2_diagnostico;
+    else faseDados = casoAtual.fase_3_conduta;
 
-    let termosEsperados = typeof gabaritoAtual === 'string' ? normalizarTexto(gabaritoAtual).split(" ") : gabaritoAtual.map(t => normalizarTexto(String(t)));
-    const matches = termosEsperados.filter(termo => termo.length > 3 && inputNorm.includes(termo));
+    // Normaliza gabaritos e checa matches
+    const gabarito = Array.isArray(faseDados.gabarito_esperado) 
+        ? faseDados.gabarito_esperado.map(t => normalizarTexto(t))
+        : normalizarTexto(faseDados.gabarito_esperado).split(" ");
     
-    // 3. APLICAÇÃO DA FLUÊNCIA (NLG)
-    if (matches.length > 0) {
-        hemodinamica.estabilidade = Math.min(100, hemodinamica.estabilidade + 20);
+    const acertou = gabarito.some(termo => termo.length > 3 && inputNorm.includes(termo));
+
+    // Verificações específicas do Schema V3.0 (Distratores e Red Flags)
+    const bateuDistrator = (faseAtual === 2 && faseDados.distrator_comum) ? 
+        (Array.isArray(faseDados.distrator_comum) ? faseDados.distrator_comum : [faseDados.distrator_comum])
+        .map(t => normalizarTexto(t)).some(t => t.length > 3 && inputNorm.includes(t)) : false;
+        
+    const bateuRedFlag = (faseAtual === 3 && faseDados.red_flag_mortal) ? 
+        (Array.isArray(faseDados.red_flag_mortal) ? faseDados.red_flag_mortal : [faseDados.red_flag_mortal])
+        .map(t => normalizarTexto(t)).some(t => t.length > 3 && inputNorm.includes(t)) : false;
+
+    // 3. RESOLUÇÃO DA AÇÃO E CONSEQUÊNCIAS
+    if (bateuRedFlag) {
+        // Morte súbita por erro médico grave
+        hemodinamica.estabilidade = 0;
+        hemodinamica.estagio = 'pcr';
+        msgRetorno = `🚨 ${faseDados.feedback_red_flag || "Conduta contraindicada letal executada."}`;
+        isCriticalMsg = true;
+    } 
+    else if (bateuDistrator) {
+        // Caiu na pegadinha da Fase 2
+        hemodinamica.estabilidade -= 20;
+        pontuacao -= 15;
+        msgRetorno = `⚠️ ${faseDados.feedback_distrator || "Esse distrator clínico não se alinha ao quadro."}`;
+        if (hemodinamica.estabilidade <= 40) hemodinamica.estagio = 'choque';
+    }
+    else if (acertou) {
+        // Sucesso: Usa o texto rico do próprio JSON Schema V3.0
+        hemodinamica.estabilidade = Math.min(100, hemodinamica.estabilidade + 25);
         faseAtual++;
         
-        let intro = tecerDialogo(matrizNLG.acerto.introducao);
-        let validacao = tecerDialogo(matrizNLG.acerto.validacao).replace('{termo}', `<strong>${matches[0]}</strong>`);
-        let gancho = "";
-
-        if (faseAtual === 2) gancho = tecerDialogo(matrizNLG.acerto.gancho_fase2);
-        else if (faseAtual === 3) gancho = tecerDialogo(matrizNLG.acerto.gancho_fase3);
-        else {
+        if (faseAtual === 2) {
+            msgRetorno = `${faseDados.achado_sucesso}<br><br><em>Com base nisso, qual o seu diagnóstico principal?</em>`;
+        } else if (faseAtual === 3) {
+            msgRetorno = `${faseDados.achado_sucesso}<br><br><em>Diagnóstico provável fechado. Qual a conduta imediata?</em>`;
+        } else {
             hemodinamica.estagio = 'salvo';
-            gancho = "O paciente foi estabilizado. Você assumiu o controle da situação.";
+            msgRetorno = faseDados.feedback_sucesso || "Paciente estabilizado com sucesso.";
+            return processarDecisaoIA(msgRetorno, true, false);
         }
-
-        msgRetorno = `${intro} ${validacao}<br><br><em>${gancho}</em>`;
-        if (faseAtual > 3) return processarDecisaoIA(msgRetorno, true, false);
-        
-    } else {
-        const dano = (modoAtual === 'sala_vermelha') ? 35 : 15;
+    } 
+    else {
+        // Errou (Fuga do gabarito)
+        const dano = (modoAtual === 'sala_vermelha') ? 30 : 15;
         hemodinamica.estabilidade -= dano;
         pontuacao -= 10;
         
+        if (faseAtual === 1 && faseDados.resposta_preceptor_erro) {
+            msgRetorno = faseDados.resposta_preceptor_erro;
+        } else {
+            msgRetorno = tecerDialogo(matrizNLG.erro_generico) + " Tente outra abordagem.";
+        }
+
         if (hemodinamica.estabilidade <= 10) {
             hemodinamica.estagio = 'pcr';
-            msgRetorno = `🚨 ${tecerDialogo(matrizNLG.pcr.entrada)}`;
+            msgRetorno += `<br><br>🚨 ${tecerDialogo(matrizNLG.pcr.entrada)}`;
             isCriticalMsg = true;
         } else if (hemodinamica.estabilidade <= 40) {
             hemodinamica.estagio = 'choque';
-            msgRetorno = `⚠️ ${tecerDialogo(matrizNLG.erro.choque)}`;
+            msgRetorno += `<br><br>⚠️ ${tecerDialogo(matrizNLG.choque)}`;
             isCriticalMsg = true;
-        } else {
-            msgRetorno = `${tecerDialogo(matrizNLG.erro.leve)} Tente uma nova abordagem.`;
         }
     }
 
-    await new Promise(resolve => setTimeout(resolve, 800));
+    await new Promise(resolve => setTimeout(resolve, 800)); // Latência humana
     processarDecisaoIA(msgRetorno, false, isCriticalMsg);
   }
 
@@ -501,8 +522,8 @@
       <h3 style="color: ${cor}">${titulo}</h3>
       <div class="score-circle" style="background: ${cor}">${finalScore}</div>
       <div class="debriefing-text">
-        <strong>Debriefing:</strong><br>${casoAtual.discussao_clinica_final?.takeaway_message || "Revisão concluída."}<br><br>
-        <strong>Fisiopatologia:</strong><br>${casoAtual.discussao_clinica_final?.fisiopatologia || "Estude os protocolos."}
+        <strong>Debriefing (Takeaway):</strong><br>${casoAtual.discussao_clinica_final?.takeaway_message || "Revisão concluída."}<br><br>
+        <strong>Fisiopatologia:</strong><br>${casoAtual.discussao_clinica_final?.fisiopatologia || "Revise a teoria nas diretrizes."}
       </div>
       <button class="btn-send" onclick="proximoCaso()" style="width: 100%; margin-top: 10px;">Atender Próximo Paciente</button>
     `;
