@@ -121,13 +121,8 @@
 
 <script>
   // ==========================================
-  // CONFIGURAÇÃO DA API DIRETA NO FRONT-END
+  // CONFIGURAÇÃO GERAL
   // ==========================================
-  const GEMINI_API_KEY = "AQ.Ab8RN6JOyCKCgwbsk9sN6WTP45okOELK5vp8Taq2QlDw09d90Q";
-  const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
-
-
-
   const selectionScreen = document.getElementById('selection-screen');
   const chatScreen = document.getElementById('chat-screen');
   const chatBox = document.getElementById('chat-box');
@@ -199,7 +194,7 @@
     
     if (casosCarregados > 0) {
       loadingStatus.style.color = "var(--green)";
-      loadingStatus.innerText = `Base pronta! ${casosCarregados} casos conectados à IA.`;
+      loadingStatus.innerText = `Base pronta! ${casosCarregados} casos carregados localmente.`;
     } else {
       loadingStatus.style.color = "var(--red)";
       loadingStatus.innerText = "Atenção: Nenhum caso no Schema v3.0 encontrado.";
@@ -242,73 +237,86 @@
   }
 
   // ==========================================
-  // MOTOR DE IA DIRETO DO NAVEGADOR
+  // MOTOR CSI - INFERÊNCIA LOCAL (OFFLINE)
   // ==========================================
+
+  // Utilitário para limpar texto (remove acentos, pontuação e joga pra minúscula)
+  function normalizarTexto(texto) {
+    if (!texto) return "";
+    return texto.toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "") // Remove acentos
+                .replace(/[^\w\s]/gi, ' ')       // Remove pontuação
+                .trim();
+  }
+
   async function processarAcaoComIA(inputUsuario) {
     let dadosDaFase;
-    let objetivoDaFase = "";
     
     if (faseAtual === 1) {
         dadosDaFase = casoAtual.fase_1_investigacao;
-        objetivoDaFase = "Avaliar se o médico pediu os exames ou propedêutica correta.";
     } else if (faseAtual === 2) {
         dadosDaFase = casoAtual.fase_2_diagnostico;
-        objetivoDaFase = "Avaliar se o médico deu o diagnóstico correto.";
     } else {
         dadosDaFase = casoAtual.fase_3_conduta;
-        objetivoDaFase = "Avaliar se o médico indicou o tratamento correto.";
     }
 
-    const promptSistema = `
-      Você é o "Game Master" de um RPG clínico médico. 
-      O jogador é o médico de plantão atendendo um paciente.
-      
-      DADOS DO CASO:
-      - Fase Atual do Jogo: ${faseAtual}
-      - Objetivo desta fase: ${objetivoDaFase}
-      - Gabarito Esperado: ${JSON.stringify(dadosDaFase.gabarito_esperado)}
-      - Ação do jogador: "${inputUsuario}"
-      
-      Sua tarefa: Avalie semanticamente se ele acertou.
-      
-      RESPONDA OBRIGATORIAMENTE EM FORMATO JSON ESTRITAMENTE VÁLIDO:
-      {
-        "resposta_narrativa": "Sua resposta formatada com <br> ou <strong>",
-        "avancou_fase": true ou false,
-        "ativou_red_flag": ${faseAtual === 3 ? "true se foi uma red flag mortal, senão false" : "false"},
-        "penalidade_pontos": 0, 10 ou 15
-      }
-    `;
+    const inputNorm = normalizarTexto(inputUsuario);
+    let acertou = false;
+    let msgRetorno = "";
+    let ativou_red_flag = false;
+    let penalidade_pontos = 0;
 
-    try {
-      const resposta = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: promptSistema }] }],
-          generationConfig: { response_mime_type: "application/json" }
-        })
-      });
+    // 1. Extração do Gabarito do JSON
+    let gabarito = dadosDaFase.gabarito_esperado;
+    let termosGabarito = [];
 
-      const data = await resposta.json();
-      
-      if(data.error) {
-        console.error("Erro da API do Google:", data.error);
-        adicionarMensagemGM(`<em>[Erro na API: ${data.error.message}]</em>`);
-        liberarInput();
-        return;
-      }
-
-      const respostaIA = JSON.parse(data.candidates[0].content.parts[0].text);
-      processarDecisaoIA(respostaIA);
-
-    } catch (erro) {
-      console.error(erro);
-      adicionarMensagemGM("<em>[Erro de comunicação. Verifique a sua chave e conexão.]</em>");
-      liberarInput();
+    // O motor se adapta caso o seu gabarito seja uma String única ou um Array de termos
+    if (typeof gabarito === 'string') {
+        termosGabarito = normalizarTexto(gabarito).split(" ").filter(t => t.length > 3);
+    } else if (Array.isArray(gabarito)) {
+        termosGabarito = gabarito.map(t => normalizarTexto(String(t)));
+    } else {
+        termosGabarito = normalizarTexto(JSON.stringify(gabarito)).split(" ").filter(t => t.length > 3);
     }
+
+    // 2. Lógica de Match (Interseção semântica)
+    const matches = termosGabarito.filter(termo => inputNorm.includes(termo));
+    
+    // Condição de sucesso: Se encontrou pelo menos um termo chave forte
+    if (matches.length > 0) {
+        acertou = true;
+    }
+
+    // 3. Montagem da Resposta e Árvore de Decisão
+    if (acertou) {
+        msgRetorno = `Excelente. Sua conduta atingiu o alvo principal esperado: <strong>${matches.join(", ")}</strong>.<br><br>Você estabilizou esse critério.`;
+    } else {
+        if (faseAtual === 3 && modoAtual === 'sala_vermelha') {
+            ativou_red_flag = true;
+            msgRetorno = "A conduta foi insuficiente. O paciente descompensou rapidamente na Sala Vermelha devido à falta da ação ideal.";
+        } else {
+            penalidade_pontos = 15;
+            msgRetorno = "Essa não parece ser a melhor abordagem no momento. Reveja os sinais vitais e os achados. Tente novamente.";
+        }
+    }
+
+    // Simula o tempo de latência de uma IA para manter a imersão visual
+    await new Promise(resolve => setTimeout(resolve, 800));
+
+    const decisaoLocal = {
+      resposta_narrativa: msgRetorno,
+      avancou_fase: acertou,
+      ativou_red_flag: ativou_red_flag,
+      penalidade_pontos: penalidade_pontos
+    };
+
+    processarDecisaoIA(decisaoLocal);
   }
 
+  // ==========================================
+  // CONTROLE DE FLUXO DA UI
+  // ==========================================
   function processarDecisaoIA(decisao) {
     let msgFinal = decisao.resposta_narrativa;
     let isCritical = decisao.ativou_red_flag;
