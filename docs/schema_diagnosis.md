@@ -97,3 +97,10 @@
     await new Promise(resolve => setTimeout(resolve, 800));
     processarDecisaoIA(msgRetorno, false, isCriticalMsg);
   }
+  {
+  "id_caso": "cardio_iam_01",
+  "patologia_alvo": "IAM com Supra de ST",
+  "ritmo_cardiaco": "Taquicardia Sinusal com Supra de ST", 
+  "vinheta_admissao": "..."
+}
+
