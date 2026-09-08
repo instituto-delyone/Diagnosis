@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  Diagnosis Engine v11.0 — Standalone CSI + Schema V3.0 + ECG
+  Diagnosis Engine v12.0 — Standalone CSI + Schema V4.0 + ECG + ACLS
   Copyright (c) 2026 Instituto Delyone
 -->
 <html lang="pt-BR">
@@ -47,7 +47,7 @@
     .vital.alert { color: #fca5a5; background: rgba(207,81,72,0.2); animation: pulse 1.5s infinite; }
     .vital.critical { color: #fff; background: var(--red); animation: fastPulse 0.8s infinite; }
     
-    /* NOVO: Monitor ECG estilo CRT */
+    /* Monitor ECG estilo CRT */
     .monitor-card { background-color: #05100c; color: #10b981; font-family: 'Courier New', Courier, monospace; padding: 12px 15px; border-radius: 8px; margin-top: 15px; display: none; border: 2px solid #1f2933; text-align: center; font-weight: bold; letter-spacing: 1px; box-shadow: inset 0 0 15px rgba(16, 185, 129, 0.1); animation: crtFlicker 0.15s infinite; }
     .monitor-title { font-size: 11px; color: #66757c; margin-bottom: 5px; text-transform: uppercase; }
     .monitor-rhythm { font-size: 16px; }
@@ -175,12 +175,13 @@
   const MAX_SKIPS = 3;
 
   // ==========================================
-  // ESTADO DO PACIENTE (MOTOR HEMODINÂMICO)
+  // ESTADO DO PACIENTE E HEMODINÂMICA
   // ==========================================
   let hemodinamica = {
     estabilidade: 100,
     estagio: 'estavel', // estavel, choque, pcr, obito, salvo
-    ciclos_pcr: 0
+    ciclos_pcr: 0,
+    ritmo_pcr: 'ASSISTOLIA' // Será sorteado no início do caso
   };
   let monitorLigado = false;
 
@@ -197,20 +198,7 @@
       "Atenção: a pressão arterial despencou. O choque é iminente!",
       "A perfusão capilar está lentificada. O paciente está rebaixando!",
       "O quadro hemodinâmico está desabando rapidamente! Aja!"
-    ],
-    pcr: {
-      entrada: [
-        "Ele parou! Sem pulso central. Parada cardiorrespiratória!",
-        "O monitor acusa assistolia/FV! O paciente está em PCR!"
-      ],
-      durante: [
-        "Manobras de reanimação em andamento. O paciente continua sem pulso. Próximo passo?",
-        "RCP rolando. Acesso garantido. O que mais, doutor? Precisamos reverter!"
-      ],
-      rce: [
-        "RCE! Retorno da circulação espontânea. O pulso voltou, mas ele segue grave e instável."
-      ]
-    }
+    ]
   };
 
   function tecerDialogo(arrayDeFrases) {
@@ -219,7 +207,7 @@
   }
 
   // ==========================================
-  // INICIALIZAÇÃO E CARREGAMENTO
+  // INICIALIZAÇÃO
   // ==========================================
   window.onload = async function inicializarSistema() {
     atualizarBotaoSkip();
@@ -288,7 +276,8 @@
     hemodinamica = {
       estabilidade: modo === 'sala_vermelha' ? 65 : 100,
       estagio: 'estavel',
-      ciclos_pcr: 0
+      ciclos_pcr: 0,
+      ritmo_pcr: Math.random() > 0.5 ? 'FIBRILAÇÃO VENTRICULAR' : 'ASSISTOLIA'
     };
     
     atualizarSinaisVitais();
@@ -314,7 +303,7 @@
     if (hemodinamica.estagio === 'pcr' || hemodinamica.estagio === 'obito') {
       vitPA.innerText = "PA: --/--"; vitFC.innerText = "FC: 0"; vitSpO2.innerText = "SpO2: --%";
       vitPA.classList.add('critical'); vitFC.classList.add('critical');
-      if (monitorLigado) textoRitmo.innerText = "〰️ ASISTOLIA / FV";
+      if (monitorLigado) textoRitmo.innerText = `〰️ ${hemodinamica.ritmo_pcr}`;
       return;
     }
     
@@ -339,14 +328,10 @@
     const termosMonitor = ["monitor", "monitorizacao", "ecg", "eletro", "monitorizar", "eletrocardiograma"];
     if (!monitorLigado && termosMonitor.some(t => inputNorm.includes(t)) && hemodinamica.estagio !== 'pcr' && hemodinamica.estagio !== 'obito') {
         monitorLigado = true;
-        
-        // Puxa o ritmo do JSON ou joga o padrão
         const ritmoDetectado = casoAtual.ritmo_cardiaco || "Ritmo Sinusal Regular";
         
         painelMonitor.style.display = 'block';
         textoRitmo.innerText = `〰️ ${ritmoDetectado.toUpperCase()}`;
-        
-        // Bônus sutil por lembrar do MOV
         hemodinamica.estabilidade = Math.min(100, hemodinamica.estabilidade + 5);
         
         msgRetorno = `Você instalou a monitorização multiparâmetros. O traçado contínuo revela: <strong>${ritmoDetectado}</strong>.<br><br>Qual a sua próxima conduta?`;
@@ -356,43 +341,69 @@
         return; 
     }
 
-    // 1. MECÂNICA DE PCR (Ressuscitação)
+    // 1. MECÂNICA DE PCR (Ressuscitação ACLS)
     if (hemodinamica.estagio === 'pcr') {
-        const termosRCP = ["massagem", "rcp", "reanimacao", "adrenalina", "desfibrilar", "choque", "compressao", "intubar"];
-        if (termosRCP.some(t => inputNorm.includes(t))) {
-            hemodinamica.ciclos_pcr++;
+        const querChoque = ["choque", "desfibrilar", "desfibrilador", "desfibrilacao", "chocar"].some(t => inputNorm.includes(t));
+        const querCprEpi = ["massagem", "rcp", "reanimacao", "adrenalina", "compressao", "epinefrina"].some(t => inputNorm.includes(t));
+        
+        let acaoCorreta = false;
+        let msgAcao = "";
+        
+        if (hemodinamica.ritmo_pcr === 'FIBRILAÇÃO VENTRICULAR') {
+            if (querChoque) {
+                acaoCorreta = true;
+                msgAcao = "Choque administrado! ";
+                hemodinamica.ciclos_pcr += 2; // Choque reverte rápido
+            } else if (querCprEpi) {
+                acaoCorreta = true;
+                msgAcao = "RCP iniciada. Mas lembre-se: ritmo chocável exige desfibrilação precoce! ";
+                hemodinamica.ciclos_pcr += 1;
+            }
+        } else {
+            // ASSISTOLIA
+            if (querChoque) {
+                acaoCorreta = false;
+                msgAcao = "ERRO CRÍTICO: Você chocou um ritmo não-chocável (Assistolia)! ";
+            } else if (querCprEpi) {
+                acaoCorreta = true;
+                msgAcao = "Protocolo correto (Compressões + Adrenalina). ";
+                hemodinamica.ciclos_pcr += 1;
+            }
+        }
+
+        if (acaoCorreta) {
             if (hemodinamica.ciclos_pcr >= 2) {
                 hemodinamica.estagio = 'choque';
                 hemodinamica.estabilidade = 35;
-                msgRetorno = `⚡ ${tecerDialogo(matrizNLG.pcr.rce)}<br><br>Retome o raciocínio da causa base.`;
+                msgRetorno = `⚡ ${msgAcao} RCE! Retorno da circulação espontânea. O pulso voltou, mas o paciente está instável. Qual a conduta base agora?`;
+                isCriticalMsg = false;
             } else {
-                msgRetorno = tecerDialogo(matrizNLG.pcr.durante);
+                msgRetorno = `${msgAcao}O paciente segue sem pulso. Qual o próximo passo do protocolo?`;
                 isCriticalMsg = true;
             }
         } else {
             hemodinamica.estagio = 'obito';
-            processarDecisaoIA("Manobras ausentes ou incorretas. O paciente evoluiu para óbito.", true, true);
+            processarDecisaoIA(`${msgAcao}Conduta incompatível com o ACLS. O paciente evoluiu para óbito.`, true, true);
             return;
         }
+        
         await new Promise(resolve => setTimeout(resolve, 800));
         processarDecisaoIA(msgRetorno, false, isCriticalMsg);
         return;
     }
 
-    // 2. EXTRAÇÃO DOS DADOS DA FASE ATUAL DO SCHEMA V3.0
+    // 2. EXTRAÇÃO DOS DADOS DA FASE ATUAL DO SCHEMA V4.0
     let faseDados;
     if (faseAtual === 1) faseDados = casoAtual.fase_1_investigacao;
     else if (faseAtual === 2) faseDados = casoAtual.fase_2_diagnostico;
     else faseDados = casoAtual.fase_3_conduta;
 
-    // Normaliza gabaritos e checa matches
     const gabarito = Array.isArray(faseDados.gabarito_esperado) 
         ? faseDados.gabarito_esperado.map(t => normalizarTexto(t))
         : normalizarTexto(faseDados.gabarito_esperado).split(" ");
     
     const acertou = gabarito.some(termo => termo.length > 3 && inputNorm.includes(termo));
 
-    // Verificações específicas do Schema V3.0 (Distratores e Red Flags)
     const bateuDistrator = (faseAtual === 2 && faseDados.distrator_comum) ? 
         (Array.isArray(faseDados.distrator_comum) ? faseDados.distrator_comum : [faseDados.distrator_comum])
         .map(t => normalizarTexto(t)).some(t => t.length > 3 && inputNorm.includes(t)) : false;
@@ -403,21 +414,18 @@
 
     // 3. RESOLUÇÃO DA AÇÃO E CONSEQUÊNCIAS
     if (bateuRedFlag) {
-        // Morte súbita por erro médico grave
         hemodinamica.estabilidade = 0;
         hemodinamica.estagio = 'pcr';
         msgRetorno = `🚨 ${faseDados.feedback_red_flag || "Conduta contraindicada letal executada."}`;
         isCriticalMsg = true;
     } 
     else if (bateuDistrator) {
-        // Caiu na pegadinha da Fase 2
         hemodinamica.estabilidade -= 20;
         pontuacao -= 15;
         msgRetorno = `⚠️ ${faseDados.feedback_distrator || "Esse distrator clínico não se alinha ao quadro."}`;
         if (hemodinamica.estabilidade <= 40) hemodinamica.estagio = 'choque';
     }
     else if (acertou) {
-        // Sucesso: Usa o texto rico do próprio JSON Schema V3.0
         hemodinamica.estabilidade = Math.min(100, hemodinamica.estabilidade + 25);
         faseAtual++;
         
@@ -432,7 +440,6 @@
         }
     } 
     else {
-        // Errou (Fuga do gabarito)
         const dano = (modoAtual === 'sala_vermelha') ? 30 : 15;
         hemodinamica.estabilidade -= dano;
         pontuacao -= 10;
@@ -445,7 +452,7 @@
 
         if (hemodinamica.estabilidade <= 10) {
             hemodinamica.estagio = 'pcr';
-            msgRetorno += `<br><br>🚨 ${tecerDialogo(matrizNLG.pcr.entrada)}`;
+            msgRetorno += `<br><br>🚨 O alarme do monitor disparou! Perda total de pulso, o paciente está em PCR!`;
             isCriticalMsg = true;
         } else if (hemodinamica.estabilidade <= 40) {
             hemodinamica.estagio = 'choque';
@@ -454,7 +461,7 @@
         }
     }
 
-    await new Promise(resolve => setTimeout(resolve, 800)); // Latência humana
+    await new Promise(resolve => setTimeout(resolve, 800)); 
     processarDecisaoIA(msgRetorno, false, isCriticalMsg);
   }
 
