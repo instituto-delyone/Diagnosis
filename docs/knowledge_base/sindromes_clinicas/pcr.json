@@ -3,6 +3,7 @@
     "id_caso": "pcr_fv_01",
     "patologia_alvo": "Parada Cardiorrespiratória - Fibrilação Ventricular (FV)",
     "dificuldade": "Avançada",
+    "ritmo_cardiaco": "Fibrilação Ventricular (FV)",
     "vinheta_admissao": "Paciente de 58 anos em monitorização na sala vermelha apresenta perda súbita da consciência e respiração agônica (gasping). Ao exame: ausência de pulso central carotídeo. O monitor cardíaco exibe padrão ondulatório totalmente caótico e desorganizado, sem complexos QRS identificáveis.",
     "fase_1_investigacao": {
       "gabarito_esperado": ["monitor", "capnografia", "etco2", "ritmo", "checagem de pulso", "checar ritmo"],
@@ -30,6 +31,7 @@
     "id_caso": "pcr_tvsp_01",
     "patologia_alvo": "Parada Cardiorrespiratória - Taquicardia Ventricular sem Pulso (TVSP)",
     "dificuldade": "Intermediária",
+    "ritmo_cardiaco": "Taquicardia Ventricular (QRS Largo)",
     "vinheta_admissao": "Homem de 64 anos, com antecedente de cardiopatia isquêmica, perde a consciência subitamente. Não responde ao chamado e não possui pulso femoral ou carotídeo. O monitor mostra ritmo taquicárdico regular com complexos QRS largos (> 120ms) e frequência de 190 bpm.",
     "fase_1_investigacao": {
       "gabarito_esperado": ["monitor", "capnografia", "etco2", "checagem de pulso carotideo", "checar pulso"],
@@ -57,6 +59,7 @@
     "id_caso": "pcr_assistolia_01",
     "patologia_alvo": "Parada Cardiorrespiratória - Assistolia",
     "dificuldade": "Avançada",
+    "ritmo_cardiaco": "Assistolia (Linha Isoelétrica)",
     "vinheta_admissao": "Paciente em insuficiência respiratória grave evolui para parada cardiorrespiratória. Sem pulso central. O monitor mostra uma linha reta (isoolétrica).",
     "fase_1_investigacao": {
       "gabarito_esperado": ["protocolo cagada", "cabos", "ganho", "derivacao", "capnografia"],
@@ -84,6 +87,7 @@
     "id_caso": "pcr_aesp_01",
     "patologia_alvo": "Parada Cardiorrespiratória - Atividade Elétrica sem Pulso (AESP)",
     "dificuldade": "Avançada",
+    "ritmo_cardiaco": "Ritmo Sinusal (Sem Pulso)",
     "vinheta_admissao": "Paciente vítima de trauma torácico dá entrada inconsciente e sem pulso central palpável. No monitor, observa-se ritmo sinusal organizado com frequência de 75 bpm, porém sem qualquer correspondência mecânica no paciente (ausência de pulso).",
     "fase_1_investigacao": {
       "gabarito_esperado": ["pocus", "ultrassom", "capnografia", "etco2", "pesquisa de 5h e 5t", "5h e 5t"],
