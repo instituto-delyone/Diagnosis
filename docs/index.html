@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  Diagnosis Engine v12.0 — Standalone CSI + Schema V4.0 + ECG + ACLS
+  Diagnosis Engine v13.0 — CSI + Hemodinâmica + ECG + ADAPTADOR UNIVERSAL
   Copyright (c) 2026 Instituto Delyone
 -->
 <html lang="pt-BR">
@@ -155,12 +155,14 @@
   const textoRitmo = document.getElementById('texto-ritmo');
 
   const manifestoConhecimento = {
-    "Clínica Médica": {
+    "Emergencia": {
       pasta: "knowledge_base/sindromes_clinicas/", 
       arquivos: [
         "cardiologia.json",
         "pneumonia.json",
-        "terapia_intensiva.json" 
+        "pcr.json",
+        "reumatologia.json",
+        "sindrome_uremica.json"
       ]
     }
   };
@@ -179,9 +181,9 @@
   // ==========================================
   let hemodinamica = {
     estabilidade: 100,
-    estagio: 'estavel', // estavel, choque, pcr, obito, salvo
+    estagio: 'estavel',
     ciclos_pcr: 0,
-    ritmo_pcr: 'ASSISTOLIA' // Será sorteado no início do caso
+    ritmo_pcr: 'ASSISTOLIA'
   };
   let monitorLigado = false;
 
@@ -204,6 +206,62 @@
   function tecerDialogo(arrayDeFrases) {
     if (!arrayDeFrases || arrayDeFrases.length === 0) return "";
     return arrayDeFrases[Math.floor(Math.random() * arrayDeFrases.length)];
+  }
+
+  // ==========================================
+  // ADAPTADOR UNIVERSAL (PEDRA DE ROSETA)
+  // ==========================================
+  function normalizarCasoClinico(casoBruto) {
+    // 1. Já está no formato V4.0 (Cardio/Pneumo/PCR)
+    if (casoBruto && casoBruto.fase_1_investigacao && casoBruto.fase_3_conduta) {
+      return casoBruto;
+    }
+
+    // 2. Adaptação do formato V5.0 Procedural (Legado Reumato/Nefro)
+    if (casoBruto && casoBruto.respostas_esperadas) {
+      const resp = casoBruto.respostas_esperadas;
+      const risco = casoBruto["04_campo_avaliacao_risco_T"] || {};
+      const filtragem = casoBruto["03_campo_busca_ativa_filtragem"] || {};
+
+      let distratores = [];
+      if (filtragem.exclusao_ativa && Array.isArray(filtragem.exclusao_ativa)) {
+        distratores = filtragem.exclusao_ativa;
+      }
+
+      return {
+        id_caso: casoBruto.id || "caso_adaptado",
+        patologia_alvo: casoBruto.nome || "Síndrome Clínica",
+        dificuldade: "Adaptativa",
+        ritmo_cardiaco: "Ritmo Sinusal (Padrão)",
+        vinheta_admissao: casoBruto.vigneta || "Paciente admitido na emergência.",
+        
+        fase_1_investigacao: {
+          gabarito_esperado: resp.exames || [],
+          achado_sucesso: "Os exames foram solicitados e confirmam suspeitas baseadas nos preditores clínicos.",
+          resposta_preceptor_erro: "Doutor, avalie os sinais vitais e a clínica. Precisamos de exames para confirmar a hipótese e excluir os diagnósticos diferenciais."
+        },
+        
+        fase_2_diagnostico: {
+          gabarito_esperado: resp.diagnostico || [],
+          distrator_comum: distratores,
+          feedback_distrator: "Cuidado! Essa hipótese recai na nossa chave de exclusão ativa. Revise os dados e o quadro clínico.",
+          achado_sucesso: "Diagnóstico correto! Avançamos na elucidação desta síndrome."
+        },
+        
+        fase_3_conduta: {
+          gabarito_esperado: resp.conduta || [],
+          red_flag_mortal: ["alta", "analgesia simples", "observacao"], // Genéricas salvadoras
+          feedback_sucesso: `Conduta irretocável! Tratamento emergencial estabelecido: ${risco.conduta_emergencial || "Paciente estabilizado"}.`,
+          feedback_red_flag: "ERRO CRÍTICO FATAL! Conduta negligenciada ou letal considerando o alto potencial de risco da síndrome."
+        },
+        
+        discussao_clinica_final: {
+          takeaway_message: casoBruto.feedback_tecnico || "Revisão do caso concluída.",
+          fisiopatologia: "O quadro se manifesta através dos vetores preditivos e da patogênese específica desta síndrome, requerendo intervenção focada."
+        }
+      };
+    }
+    return null;
   }
 
   // ==========================================
@@ -230,8 +288,10 @@
             const json = await res.json();
             const casos = Array.isArray(json) ? json : [json];
             casos.forEach(c => {
-              if (c && c.fase_1_investigacao && c.fase_3_conduta) {
-                bancoDeDadosMestre.push(c);
+              // Aplica o Adaptador Universal antes de salvar no Banco
+              const casoNormalizado = normalizarCasoClinico(c);
+              if (casoNormalizado) {
+                bancoDeDadosMestre.push(casoNormalizado);
                 casosCarregados++;
               }
             });
@@ -244,7 +304,7 @@
     
     if (casosCarregados > 0) {
       loadingStatus.style.color = "var(--green)";
-      loadingStatus.innerText = `Base pronta! ${casosCarregados} casos carregados localmente.`;
+      loadingStatus.innerText = `Motor Online! ${casosCarregados} casos integrados localmente.`;
     } else {
       loadingStatus.style.color = "var(--red)";
       loadingStatus.innerText = "Atenção: Nenhum caso compatível encontrado.";
@@ -253,7 +313,7 @@
 
   function iniciarJogo(modo) {
     if (bancoDeDadosMestre.length === 0) {
-      alert("Erro: A base de dados não encontrou casos.");
+      alert("Erro: A base de dados não encontrou casos. Verifique as rotas dos JSONs.");
       return;
     }
 
@@ -266,7 +326,6 @@
     const randomIndex = Math.floor(Math.random() * bancoDeDadosMestre.length);
     casoAtual = bancoDeDadosMestre[randomIndex];
 
-    // Reseta estado do jogador e do paciente
     faseAtual = 1;
     turnos = 0;
     pontuacao = 100;
@@ -353,14 +412,13 @@
             if (querChoque) {
                 acaoCorreta = true;
                 msgAcao = "Choque administrado! ";
-                hemodinamica.ciclos_pcr += 2; // Choque reverte rápido
+                hemodinamica.ciclos_pcr += 2;
             } else if (querCprEpi) {
                 acaoCorreta = true;
                 msgAcao = "RCP iniciada. Mas lembre-se: ritmo chocável exige desfibrilação precoce! ";
                 hemodinamica.ciclos_pcr += 1;
             }
         } else {
-            // ASSISTOLIA
             if (querChoque) {
                 acaoCorreta = false;
                 msgAcao = "ERRO CRÍTICO: Você chocou um ritmo não-chocável (Assistolia)! ";
@@ -392,7 +450,7 @@
         return;
     }
 
-    // 2. EXTRAÇÃO DOS DADOS DA FASE ATUAL DO SCHEMA V4.0
+    // 2. EXTRAÇÃO DOS DADOS DA FASE (V4.0 - Nativo ou Adaptado)
     let faseDados;
     if (faseAtual === 1) faseDados = casoAtual.fase_1_investigacao;
     else if (faseAtual === 2) faseDados = casoAtual.fase_2_diagnostico;
