@@ -103,4 +103,28 @@
   "ritmo_cardiaco": "Taquicardia Sinusal com Supra de ST", 
   "vinheta_admissao": "..."
 }
+    // VARIÁVEL GLOBAL NECESSÁRIA (coloque junto com a 'hemodinamica' no topo do arquivo):
+    // let monitorLigado = false;
+
+    // 0. INTERCEPTADOR DE AÇÕES LIVRES (MOV: Monitor, Oxigênio, Veia)
+    const termosMonitor = ["monitor", "monitorizacao", "ecg", "eletro", "monitorizar"];
+    
+    if (!monitorLigado && termosMonitor.some(t => inputNorm.includes(t))) {
+        monitorLigado = true;
+        
+        // Puxa o ritmo do JSON ou joga o padrão
+        const ritmoDetectado = casoAtual.ritmo_cardiaco || "Ritmo Sinusal Regular";
+        
+        document.getElementById('painel-monitor').style.display = 'block';
+        document.getElementById('texto-ritmo').innerText = `〰️ ${ritmoDetectado.toUpperCase()}`;
+        
+        // Dá um pequeno bônus por seguir o protocolo de trauma/emergência
+        hemodinamica.estabilidade = Math.min(100, hemodinamica.estabilidade + 5);
+        
+        const msgMonitor = `Você instalou a monitorização multiparâmetros. O traçado contínuo revela: <strong>${ritmoDetectado}</strong>.<br><br>Qual a sua próxima conduta?`;
+        
+        processarDecisaoIA(msgMonitor, false, false);
+        return; // Interrompe a função aqui para não gastar a ação principal da fase
+    }
+
 
