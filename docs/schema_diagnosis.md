@@ -1,130 +1,44 @@
-#  async function processarAcaoComIA(inputUsuario) {
-    const inputNorm = normalizarTexto(inputUsuario);
-    let msgRetorno = "";
-    let isCriticalMsg = false;
+# Diagnosis Engine: Schema v4.0 (Hemodinâmico + ECG)
 
-    // 1. MECÂNICA DE PCR (Ressuscitação)
-    if (hemodinamica.estagio === 'pcr') {
-        const termosRCP = ["massagem", "rcp", "reanimacao", "adrenalina", "desfibrilar", "choque", "compressao", "intubar"];
-        if (termosRCP.some(t => inputNorm.includes(t))) {
-            hemodinamica.ciclos_pcr++;
-            if (hemodinamica.ciclos_pcr >= 2) {
-                hemodinamica.estagio = 'choque';
-                hemodinamica.estabilidade = 35;
-                msgRetorno = "⚡ RCE! Retorno da circulação espontânea. O pulso voltou, mas o paciente está em choque profundo. Retome o raciocínio da causa base.";
-            } else {
-                msgRetorno = "RCP em andamento. Paciente segue sem pulso. Qual o próximo passo do protocolo?";
-                isCriticalMsg = true;
-            }
-        } else {
-            hemodinamica.estagio = 'obito';
-            processarDecisaoIA("Manobras ausentes ou incorretas. O paciente evoluiu para óbito.", true, true);
-            return;
-        }
-        processarDecisaoIA(msgRetorno, false, isCriticalMsg);
-        return;
-    }
+Este documento define a estrutura JSON oficial (Canônica) para inserção de síndromes e cenários clínicos no **Diagnosis Engine v11.0 (Offline Standalone)**.
 
-    // 2. EXTRAÇÃO DOS DADOS DA FASE ATUAL DO SCHEMA V3.0
-    let faseDados;
-    if (faseAtual === 1) faseDados = casoAtual.fase_1_investigacao;
-    else if (faseAtual === 2) faseDados = casoAtual.fase_2_diagnostico;
-    else faseDados = casoAtual.fase_3_conduta;
+Para que o Motor Hemodinâmico, o Painel de ECG e o Sistema Socrático de Fluência funcionem perfeitamente, **todo novo caso clínico deve seguir exatamente a estrutura abaixo**.
 
-    const gabarito = faseDados.gabarito_esperado.map(t => normalizarTexto(t));
-    const acertou = gabarito.some(termo => inputNorm.includes(termo));
+---
 
-    // Verificações específicas do Schema V3.0 (Distratores e Red Flags)
-    const bateuDistrator = (faseAtual === 2 && faseDados.distrator_comum) ? 
-        faseDados.distrator_comum.map(t => normalizarTexto(t)).some(t => inputNorm.includes(t)) : false;
-        
-    const bateuRedFlag = (faseAtual === 3 && faseDados.red_flag_mortal) ? 
-        faseDados.red_flag_mortal.map(t => normalizarTexto(t)).some(t => inputNorm.includes(t)) : false;
+## 1. Estrutura Canônica V4.0 (Copiar e Preencher para Novos Casos)
 
-    // 3. RESOLUÇÃO DA AÇÃO
-    if (bateuRedFlag) {
-        // Morte súbita por erro médico grave
-        hemodinamica.estabilidade = 0;
-        hemodinamica.estagio = 'pcr';
-        msgRetorno = `🚨 ${faseDados.feedback_red_flag}`;
-        isCriticalMsg = true;
-    } 
-    else if (bateuDistrator) {
-        // Caiu na pegadinha da Fase 2
-        hemodinamica.estabilidade -= 20;
-        pontuacao -= 15;
-        msgRetorno = `⚠️ ${faseDados.feedback_distrator}`;
-        if (hemodinamica.estabilidade <= 40) hemodinamica.estagio = 'choque';
-    }
-    else if (acertou) {
-        // Sucesso: Usa o texto rico do próprio JSON
-        hemodinamica.estabilidade = Math.min(100, hemodinamica.estabilidade + 25);
-        faseAtual++;
-        
-        if (faseAtual === 2) {
-            msgRetorno = `${faseDados.achado_sucesso}<br><br><em>Com esses dados, qual o seu diagnóstico?</em>`;
-        } else if (faseAtual === 3) {
-            msgRetorno = `${faseDados.achado_sucesso}<br><br><em>Diagnóstico fechado. Qual a conduta imediata?</em>`;
-        } else {
-            hemodinamica.estagio = 'salvo';
-            msgRetorno = faseDados.feedback_sucesso;
-            return processarDecisaoIA(msgRetorno, true, false);
-        }
-    } 
-    else {
-        // Errou, mas não foi distrator nem red flag
-        const dano = (modoAtual === 'sala_vermelha') ? 30 : 15;
-        hemodinamica.estabilidade -= dano;
-        pontuacao -= 10;
-        
-        if (faseAtual === 1 && faseDados.resposta_preceptor_erro) {
-            msgRetorno = faseDados.resposta_preceptor_erro; // Usa dica socrática da fase 1
-        } else {
-            msgRetorno = "Não houve impacto clínico positivo. Tente outra abordagem.";
-        }
+```json
+{
+  "id_caso": "especialidade_nome_doenca_01",
+  "patologia_alvo": "Nome da Doença",
+  "dificuldade": "Básica / Intermediária / Avançada",
+  
+  "ritmo_cardiaco": "Ritmo que aparecerá no monitor (ex: Taquicardia Sinusal, Fibrilação Atrial)",
+  "vinheta_admissao": "Texto detalhado do caso clínico de admissão (sintomas, dados vitais, exame físico inicial).",
+  
+  "fase_1_investigacao": {
+    "gabarito_esperado": ["exame1", "exame2", "sinonimo"],
+    "achado_sucesso": "Mensagem informando o resultado do exame correto.",
+    "resposta_preceptor_erro": "Dica socrática se o usuário errar o exame inicial."
+  },
 
-        if (hemodinamica.estabilidade <= 10) {
-            hemodinamica.estagio = 'pcr';
-            msgRetorno += "<br><br>🚨 O paciente não resistiu e evoluiu para PCR! Inicie RCP!";
-            isCriticalMsg = true;
-        } else if (hemodinamica.estabilidade <= 40) {
-            hemodinamica.estagio = 'choque';
-            msgRetorno += "<br><br>⚠️ A pressão está despencando! Aja rápido!";
-            isCriticalMsg = true;
-        }
-    }
+  "fase_2_diagnostico": {
+    "gabarito_esperado": ["diagnostico_principal", "sinonimo", "sigla"],
+    "distrator_comum": ["diagnostico_errado_parecido"],
+    "feedback_distrator": "Bronca construtiva explicando por que o distrator não se encaixa.",
+    "achado_sucesso": "Validação positiva do diagnóstico correto."
+  },
 
-    await new Promise(resolve => setTimeout(resolve, 800));
-    processarDecisaoIA(msgRetorno, false, isCriticalMsg);
+  "fase_3_conduta": {
+    "gabarito_esperado": ["tratamento_prioritario", "medicamento"],
+    "red_flag_mortal": ["medicamento_contraindicado", "conduta_proibida"],
+    "feedback_sucesso": "Mensagem final de sucesso, paciente salvo.",
+    "feedback_red_flag": "ERRO CRÍTICO! Explicação de como a conduta piorou ou matou o paciente."
+  },
+
+  "discussao_clinica_final": {
+    "takeaway_message": "Pérola clínica de 1 ou 2 frases que o aluno deve levar para a vida.",
+    "fisiopatologia": "Mecanismo fisiopatológico conciso para revisão."
   }
-  {
-  "id_caso": "cardio_iam_01",
-  "patologia_alvo": "IAM com Supra de ST",
-  "ritmo_cardiaco": "Taquicardia Sinusal com Supra de ST", 
-  "vinheta_admissao": "..."
 }
-    // VARIÁVEL GLOBAL NECESSÁRIA (coloque junto com a 'hemodinamica' no topo do arquivo):
-    // let monitorLigado = false;
-
-    // 0. INTERCEPTADOR DE AÇÕES LIVRES (MOV: Monitor, Oxigênio, Veia)
-    const termosMonitor = ["monitor", "monitorizacao", "ecg", "eletro", "monitorizar"];
-    
-    if (!monitorLigado && termosMonitor.some(t => inputNorm.includes(t))) {
-        monitorLigado = true;
-        
-        // Puxa o ritmo do JSON ou joga o padrão
-        const ritmoDetectado = casoAtual.ritmo_cardiaco || "Ritmo Sinusal Regular";
-        
-        document.getElementById('painel-monitor').style.display = 'block';
-        document.getElementById('texto-ritmo').innerText = `〰️ ${ritmoDetectado.toUpperCase()}`;
-        
-        // Dá um pequeno bônus por seguir o protocolo de trauma/emergência
-        hemodinamica.estabilidade = Math.min(100, hemodinamica.estabilidade + 5);
-        
-        const msgMonitor = `Você instalou a monitorização multiparâmetros. O traçado contínuo revela: <strong>${ritmoDetectado}</strong>.<br><br>Qual a sua próxima conduta?`;
-        
-        processarDecisaoIA(msgMonitor, false, false);
-        return; // Interrompe a função aqui para não gastar a ação principal da fase
-    }
-
-
