@@ -23,6 +23,29 @@
     #selection-screen p { color: #cbd5e1; margin-bottom: 40px; font-size: 16px; max-width: 600px; }
     .mode-cards { display: flex; gap: 20px; width: 100%; max-width: 700px; }
     @media(max-width: 600px) { .mode-cards { flex-direction: column; } }
+    .monitor-card {
+  background-color: #05100c;
+  color: #10b981; /* Verde digital */
+  font-family: 'Courier New', Courier, monospace;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+  display: none; /* Começa oculto */
+  border: 2px solid #1f2933;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 1px;
+  box-shadow: inset 0 0 15px rgba(16, 185, 129, 0.1);
+  animation: crtFlicker 0.15s infinite;
+}
+.monitor-title { font-size: 11px; color: #66757c; margin-bottom: 5px; text-transform: uppercase; }
+.monitor-rhythm { font-size: 18px; }
+@keyframes crtFlicker {
+  0% { opacity: 0.98; }
+  50% { opacity: 1; }
+  100% { opacity: 0.99; }
+}
+
     .mode-card { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 30px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; }
     .mode-card:hover { transform: translateY(-5px); }
     .mode-card.red-room:hover { background: rgba(207, 81, 72, 0.15); border-color: var(--red); }
