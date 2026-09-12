@@ -100,5 +100,73 @@
       "takeaway_message": "O manejo do edema agudo de pulmão hipertenso baseia-se na tríade: suporte ventilatório (VNI), redução da pré-carga (diuréticos) e redução da pós-carga (vasodilatadores potentes).",
       "fisiopatologia": "Aumento súbito da pressão de enchimento do ventrículo esquerdo (pressão capilar pulmonar > 25 mmHg), forçando o transudado plasmático para o interstício e alvéolos pulmonares, prejudicação severa da troca gasosa."
     }
+  },
+  {
+    "id": "cardio_scagssst_04",
+    "nome": "Síndrome Coronariana Aguda sem Supra de ST (SCAGSSST)",
+    "arquitetura": "v13_dinamica",
+    "dificuldade": "Intermediária / Sala Vermelha",
+    "ritmo_cardiaco": "Ritmo Sinusal com Inversão de Onda T em V4-V6",
+    "vigneta": "Homem de 62 anos, diabético e dislipidêmico, procura o pronto-socorro com dor torácica em aperto aos esforços moderados que progrediu para repouso nas últimas 12 horas. Ao exame físico: corado, hidratado, eupneico em ar ambiente. PA: 130/85 mmHg, FC: 82 bpm, SatO2: 96%. Sem estertores pulmonares.",
+    "instrucao_gerador_ia": "Apresentação de isquemia miocárdica sem supra de ST. O estudante deve solicitar ECG e marcadores seriados, estratificar o risco e iniciar antiagregação e anticoagulação sem pressa de cateterismo de emergência absoluta, mas com programação precoce.",
+    
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["ecg", "eletrocardiograma", "troponina", "glicemia", "perfil lipidico", "gasometria"],
+      "achado_sucesso": "Eletrocardiograma revela inversão simétrica de ondas T de V4 a V6. Curva de Troponina seriada em ascensão na segunda dosagem.",
+      "resposta_preceptor_erro": "Doutor, dor precordial progressiva em repouso com fator de risco vascular exige avaliação eletrocardiográfica e enzimática detalhada. Quais exames você solicita?"
+    },
+
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["scagssst", "infarto sem supra", "angina instavel", "iam sem supra"],
+      "distrator_comum": ["IAMCSST", "ansiedade", "refluxo", "costocondrite"],
+      "feedback_distrator": "Atenção: o eletrocardiograma não mostra supradesnivelamento de ST, mas há alteração de repolarização e curva de troponina positiva, caracterizando a forma sem supra.",
+      "achado_sucesso": "Diagnóstico preciso estabelecido: Síndrome Coronariana Aguda sem Supradesnivelamento do Segmento ST (SCAGSSST)."
+    },
+
+    "fase_3_conduta": {
+      "gabarito_esperado": ["aas", "clopidogrel", "heparina", "estatina", "betabloqueador", "cateterismo eletivo"],
+      "red_flag_mortal": ["trombolitico", "alta direta", "analgesia simples", "furosemida"],
+      "feedback_sucesso": "Conduta perfeita! Antiagregação dupla iniciada, anticoagulação plena com enoxaparina ou heparina, controle da frequência cardíaca e estratificação para cateterismo em tempo oportuno.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Administrar agentes trombolíticos em SCAGSSST é formalmente contraindicado e aumenta o risco de sangramentos graves sem benefício de reperfusão."
+    },
+
+    "discussao_clinica_final": {
+      "takeaway_message": "Na SCAGSSST, o vaso não está totalmente ocluído de forma crônica/aguda como no IAMCSST. A conduta baseia-se em estabilização clínica, antiagregação dupla, anticoagulação e estratificação de risco para cateterismo.",
+      "fisiopatologia": "Placa aterosclerótica ulcerada ou com fissura gerando trombo mural não oclusivo ou vasoespasmo, provocando isquemia subendocárdica."
+    }
+  },
+  {
+    "id": "cardio_tep_05",
+    "nome": "Embolia Pulmonar Aguda (TEP Massivo / Submassivo)",
+    "arquitetura": "v13_dinamica",
+    "dificuldade": "Avançada / Sala Vermelha",
+    "ritmo_cardiaco": "Taquicardia Sinusal com P Pulmonale",
+    "vigneta": "Mulher de 50 anos, usuária de anticoncepcional oral e tabagista, no 4º pós-operatório de cirurgia ortopédica de joelho, apresenta dispneia súbita e intensa acompanhada de dor pleurítica à direita e lipotimia. Ao exame: taquipneica (FR 28 irpm), sudoreica, PA 90/60 mmHg, FC 120 bpm, SatO2 86% em ar ambiente. Turgência jugular leve presente.",
+    "instrucao_gerador_ia": "Quadro de tromboembolismo pulmonar agudo de alto risco (instabilidade hemodinâmica limítrofe). Exige suspeita clínica baseada em fatores de risco (Tríade de Virchow), gasometria e angiotomografia ou ecocardiograma à beira do leito.",
+    
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["angiotomografia", "ecocardiograma", "gasometria", "d-dimero", "ultrassom de membros inferiores", "ecg"],
+      "achado_sucesso": "Angiotomografia de artérias pulmonares (Angio-TC) evidencia volumosa falha de enchimento em artéria pulmonar principal direita e ramos lobares, com sinais de sobrecarga de ventrículo direito.",
+      "resposta_preceptor_erro": "Doutor, paciente no pós-operatório com dispneia súbita, taquicardia e queda de saturação tem forte suspeita de evento embólico pulmonar. Quais exames de imagem e suporte você solicita?"
+    },
+
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["tep", "embolia pulmonar", "tromboembolismo pulmonar", "tep massivo"],
+      "distrator_comum": ["pneumonia", "infarto", "asma", "edema agudo de pulmao"],
+      "feedback_distrator": "Cuidado com o distrador respiratório puro: a história de cirurgia recente, imobilização e o colapso hemodinâmico súbito com hipoxemia refratária apontam para obstrução vascular pulmonar.",
+      "achado_sucesso": "Diagnóstico confirmado: Embolia Pulmonar Aguda (TEP)."
+    },
+
+    "fase_3_conduta": {
+      "gabarito_esperado": ["anticoagulacao", "heparina", "oxigenio", "noradrenalina", "suporte", "trombolitico"],
+      "red_flag_mortal": ["puncao lombar", "alta", "furosemida isolada", "hidratacao excessiva"],
+      "feedback_sucesso": "Conduta de excelência na emergência! Oxigenoterapia de suporte, anticoagulação plena imediata com heparina e rigorosa monitorização hemodinâmica.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Deixar de anticoagular um TEP agudo confirmado ou suspeito de alto risco expõe a doente a uma nova embolia fatal por falência ventricular direita."
+    },
+
+    "discussao_clinica_final": {
+      "takeaway_message": "O TEP é uma emergência cardiovascular letal. O escore de probabilidade clínica combinado com Angio-TC ou Ecocardiograma à beira do leito sela o diagnóstico. Anticoagulação precoce salva vidas.",
+      "fisiopatologia": "Desprendimento de trombo venoso profundo (geralmente de membros inferiores) que migra pelo sistema venoso, ocluindo o leito arterial pulmonar, elevando bruscamente a pós-carga do ventrículo direito e gerando choque obstrutivo."
+    }
   }
 ]
