@@ -1,83 +1,134 @@
 [
   {
     "id_caso": "pneumo_pac_uti_01",
-    "patologia_alvo": "Pneumonia Adquirida na Comunidade (PAC Grave)",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Paciente de 68 anos trazido ao PS por familiares devido a febre, tosse produtiva e confusão mental iniciada há 24h. Sinais vitais: FR 32 irpm, PA 100x60 mmHg. Exames mostram Ureia de 55 mg/dL. RX de tórax evidencia infiltrado pulmonar novo[span_1](start_span)[span_1](end_span).",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["curb-65", "curb", "escore de risco", "hemocultura", "gasometria"],
-      "achado_sucesso": "Excelente! O cálculo rápido na admissão revela um escore CURB-65 igual a 4 (Confusão, Ureia >= 43, FR >= 30, Idade >= 65)[span_2](start_span)[span_2](end_span).",
-      "resposta_preceptor_erro": "Doutor, paciente idoso com clínica respiratória, confusão mental e taquipneia. Para decidirmos o local de internação, precisamos calcular o escore de risco clássico da pneumonia."
+    "patologia": "Pneumonia Adquirida na Comunidade (PAC Grave)",
+    "modo_sugerido": "Sala Vermelha",
+    "peso_dificuldade": 2.2,
+    
+    "cenario_inicial": {
+      "fala_preceptor": "Paciente idoso trazido ao pronto-socorro devido a febre alta, tosse e confusão mental súbita nas últimas 24h. Qual a sua conduta inicial, Doutor?",
+      "fala_paciente": "Doutor, o peito dele tá roncando muito, ele tá confuso, não sabe onde tá e puxando o ar com muita força!"
     },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["pac", "pneumonia", "pneumonia adquirida na comunidade", "pac grave"],
-      "distrator_comum": ["tuberculose pulmonar", "tep", "bronquite aguda"],
-      "feedback_distrator": "Bronquite não causa infiltrado pulmonar novo nem tamanha instabilidade. O início agudo (24h) com febre e secreção afasta a cronologia arrastada da tuberculose. Trata-se de infecção bacteriana aguda do parênquima[span_3](start_span)[span_3](end_span).",
-      "achado_sucesso": "Exato! O diagnóstico clínico-radiológico fecha para Pneumonia Adquirida na Comunidade (PAC)[span_4](start_span)[span_4](end_span)."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["uti", "internacao em uti", "macrolideo", "quinolona respiratoria", "ceftriaxone e azitromicina", "suporte respiratorio"],
-      "red_flag_mortal": ["alta", "enfermaria", "amoxicilina oral"],
-      "feedback_sucesso": "Conduta irretocável! Com CURB-65 >= 3, a internação em UTI é mandatória. Você iniciou suporte precoce e antibioticoterapia venosa ampla de UTI (Cefalosporina de 3ª + Macrolídeo ou Quinolona)[span_5](start_span)[span_5](end_span).",
-      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você mandou o paciente para a enfermaria comum ou deu alta com antibiótico oral. O paciente rapidamente rebaixou o sensório, entrou em falência respiratória e sofreu parada cardíaca sem o monitoramento contínuo e o suporte avançado da UTI."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "O diagnóstico da PAC é clínico-radiológico (clínica + infiltrado novo)[span_6](start_span)[span_6](end_span). O CURB-65 guia o local de internação: escores >= 3 indicam UTI com terapia dupla intravenosa[span_7](start_span)[span_7](end_span).",
-      "fisiopatologia": "A invasão e proliferação bacteriana no espaço alveolar desencadeiam uma resposta inflamatória exsudativa. O acúmulo de líquido purulento prejudica a troca gasosa, e a resposta inflamatória sistêmica gera vasodilatação (hipotensão), taquipneia e disfunção neurológica."
-    }
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: Pacientes idosos com quadro respiratório agudo, taquipneia (FR >= 30) e alteração do sensório exigem o cálculo imediato de escores de gravidade como o CURB-65 para definir a internação precoce em UTI.",
+
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["curb", "escore", "gasometria", "hemocultura", "oxigenio", "monitor"],
+        "resposta_preceptor": "Excelente raciocínio! O escore CURB-65 é igual a 4, indicando alto risco. Exames e suporte inicial garantidos. Qual a conduta definitiva de internação e terapia?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["uti", "internacao em uti", "macrolideo", "quinolona", "ceftriaxone", "azitromicina"],
+        "resposta_preceptor": "Conduta irretocável! Com CURB-65 >= 3, a internação em UTI e a antibioticoterapia venosa ampla foram instituídas com sucesso. Caso resolvido.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
+      }
+    ],
+
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["alta", "enfermaria", "amoxicilina oral", "enviar para casa"],
+        "resposta_preceptor": "ERRO CRÍTICO FATAL! Enviar um paciente com CURB-65 elevado para a enfermaria ou com antibiótico oral gerou rápida falência respiratória e parada cardíaca sem suporte avançado.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["pocus", "eletrocardiograma", "ecg"],
+        "resposta_preceptor": "Exame complementar secundário realizado, mas o tempo corre na Sala Vermelha sem o suporte ventilatório e a estratificação de gravidade adequadas.",
+        "impacto_estabilidade": -10
+      }
+    ]
   },
   {
     "id_caso": "pneumo_empiema_01",
-    "patologia_alvo": "Derrame Pleural Complicado (Empiema)",
-    "dificuldade": "Intermediária",
-    "vinheta_admissao": "Paciente internado por PAC evolui no 4º dia com piora clínica, febre e opacidade em base direita no RX. Realizada toracocentese diagnóstica que mostra líquido pleural com Relação Proteína Pleural/Sérica > 0,5, pH de 7.1, Glicose de 40 mg/dL e LDH > 1000[span_8](start_span)[span_8](end_span).",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["criterios de light", "light", "analise do liquido", "gram", "cultura pleural"],
-      "achado_sucesso": "Boa análise. Pelos Critérios de Light, o aumento de proteínas e LDH já caracterizava um exsudato[span_9](start_span)[span_9](end_span). O Gram e a cultura confirmam a infecção secundária do espaço pleural.",
-      "resposta_preceptor_erro": "Doutora, temos os dados da bioquímica do líquido pleural. Qual é o conjunto de critérios clássico que precisamos calcular para definir se é um transudato ou exsudato?"
+    "patologia": "Derrame Pleural Complicado (Empiema)",
+    "modo_sugerido": "Clínica Médica / Enfermaria",
+    "peso_dificuldade": 2.0,
+    
+    "cenario_inicial": {
+      "fala_preceptor": "Paciente internado por PAC evolui no 4º dia com piora clínica, febre persistente e opacidade à direita. A toracocentese diagnóstica revelou líquido exsudativo com pH 7.1, Glicose 40 e LDH > 1000.",
+      "fala_paciente": "Doutor, a dor nas costas piorou muito quando respiro fundo e a febre não passa de jeito nenhum."
     },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["empiema", "derrame complicado", "derrame pleural complicado", "exsudato"],
-      "distrator_comum": ["derrame parapneumonico simples", "transudato", "insuficiencia cardiaca"],
-      "feedback_distrator": "O derrame parapneumônico simples não teria o pH ácido nem a glicose tão consumida. Além disso, a relação de proteínas > 0,5 afasta totalmente a possibilidade de transudato[span_10](start_span)[span_10](end_span).",
-      "achado_sucesso": "Correto! É um Derrame Pleural Complicado (Empiema)[span_11](start_span)[span_11](end_span)."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["drenagem", "drenagem toracica", "dreno", "tubo toracico"],
-      "red_flag_mortal": ["apenas antibiotico", "diuretico", "furosemida", "toracocentese de alivio repetida"],
-      "feedback_sucesso": "Conduta perfeita! Identificados os critérios de complicação (pH < 7,2, Glicose < 60, LDH > 1000), você indicou a drenagem torácica imediata, removendo a loja de pus fechada[span_12](start_span)[span_12](end_span).",
-      "feedback_red_flag": "ERRO CRÍTICO! Você tentou tratar um derrame pleural infectado (pus) apenas com aumento do antibiótico venoso. O espaço pleural infectado atua como um abscesso fechado; sem o dreno tubular, a febre continuou, o pus organizou (loculações severas) e o pulmão foi encarcerado, necessitando de toracotomia extensa (cirurgia aberta)."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "Um derrame pleural exsudativo exige DRENAGEM obrigatória se apresentar: pus macroscópico, bactérias no Gram, pH < 7,2, Glicose < 60 ou LDH > 1000[span_13](start_span)[span_13](end_span).",
-      "fisiopatologia": "A proximidade do parênquima pulmonar infectado inflama a pleura, aumentando sua permeabilidade capilar (exsudato fase exsudativa). Bactérias invadem o espaço pleural, consumindo a glicose local (glicólise anaeróbia) e gerando excesso de ácido lático, o que reduz drasticamente o pH (fase fibropurulenta)[span_14](start_span)[span_14](end_span)."
-    }
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: Diante de um derrame pleural com critérios de infecção complicada (pH < 7,2, Glicose < 60 ou LDH > 1000), o espaço pleural atua como um abscesso fechado que exige drenagem tubular imediata.",
+
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["analise", "light", "gram", "cultura"],
+        "resposta_preceptor": "Análise bioquímica confirmada. Trata-se de um exsudato infectado. Qual a conduta invasiva imediata para esvaziar o espaço pleural?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["drenagem", "dreno", "tubo toracico", "drenagem toracica"],
+        "resposta_preceptor": "Conduta perfeita! Identificados os critérios de complicação, a drenagem torácica imediata removeu o pus e evitou o encarceramento pulmonar. Caso resolvido.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
+      }
+    ],
+
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["apenas antibiotico", "diuretico", "furosemida", "alta"],
+        "resposta_preceptor": "ERRO CRÍTICO! Tratar um empiema apenas com antibiótico sem dreno faz o pus organizar lóculos e o pulmão sofrer fibrose severa.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["toracocentese repetida", "ultrassom simples"],
+        "resposta_preceptor": "Repetir punções pontuais não resolve cavidades loculadas com pus espesso. O quadro clínico continua se deteriorando.",
+        "impacto_estabilidade": -10
+      }
+    ]
   },
   {
     "id_caso": "pneumo_pavm_01",
-    "patologia_alvo": "Pneumonia Nosocomial (PAVM)",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Paciente intubado em ventilação mecânica há 5 dias na UTI. Apresenta novo pico febril, aumento da secreção traqueal purulenta e necessidade de elevação da FiO2. Radiografia de hoje mostra novo infiltrado em lobo inferior direito[span_15](start_span)[span_15](end_span).",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["cultura", "aspirado traqueal", "hemocultura", "cultura de secrecao", "mini-bal"],
-      "achado_sucesso": "Excelente. Você coletou a cultura quantitativa do aspirado traqueal ANTES de iniciar a troca do antibiótico. Não podemos esperar o resultado do laboratório para agir[span_16](start_span)[span_16](end_span).",
-      "resposta_preceptor_erro": "Doutor, paciente grave intubado apresentando piora infecciosa pulmonar. Antes de disparar o antimicrobiano empírico, precisamos de amostras para o laboratório direcionar a terapia em 48-72h."
+    "patologia": "Pneumonia Associada à Ventilação Mecânica (PAVM)",
+    "modo_sugerido": "Sala Vermelha / UTI",
+    "peso_dificuldade": 2.5,
+    
+    "cenario_inicial": {
+      "fala_preceptor": "Paciente entubado em ventilação mecânica há 5 dias na UTI apresenta novo pico febril, secreção purulenta abundante pelo tubo e piora da oxigenação.",
+      "fala_paciente": "[Paciente sedado e em ventilação mecânica invasiva]"
     },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["pavm", "pneumonia nosocomial", "pneumonia associada a ventilacao"],
-      "distrator_comum": ["pac", "atelectasia", "tep"],
-      "feedback_distrator": "Atelectasia causaria hipoxemia e opacidade no raio-X, mas dificilmente geraria febre alta com secreção purulenta abundante pelo tubo endotraqueal. Como ocorreu há mais de 48h da intubação, não é PAC[span_17](start_span)[span_17](end_span).",
-      "achado_sucesso": "Exato. Diagnóstico claro de Pneumonia Associada à Ventilação Mecânica (PAVM)[span_18](start_span)[span_18](end_span)."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["cefepime", "piperacilina", "tazobactam", "meropenem", "vancomicina", "linezolida", "pseudomonas", "mrsa", "antibioticoterapia de amplo espectro"],
-      "red_flag_mortal": ["ceftriaxone", "amoxicilina", "macrolideo", "aguardar cultura"],
-      "feedback_sucesso": "Conduta irretocável! Você iniciou cobertura antibiótica empírica de amplo espectro para os germes mais mortais da UTI: gram-negativos multirresistentes (ex: *Pseudomonas aeruginosa*) e cocos gram-positivos (MRSA)[span_19](start_span)[span_19](end_span).",
-      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você prescreveu esquemas de pneumonia comunitária (Ceftriaxone ou Amoxicilina) para uma infecção adquirida após 5 dias de UTI. Os patógenos hospitalares (Pseudomonas/MRSA) destruíram o pulmão em questão de horas, levando ao choque séptico irreversível."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "PAVM é a pneumonia que surge >= 48h após a intubação[span_20](start_span)[span_20](end_span). O tratamento exige cobertura imediata e agressiva de amplo espectro contra germes multirresistentes (*Pseudomonas* e MRSA) logo após a coleta do aspirado traqueal[span_21](start_span)[span_21](end_span).",
-      "fisiopatologia": "O tubo endotraqueal anula as defesas naturais das vias aéreas superiores (glote/cílios). O biofilme bacteriano que se forma na parede interna do tubo é microaspirado continuamente para as vias aéreas inferiores, introduzindo patógenos altamente selecionados e resistentes diretamente no parênquima."
-    }
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: Na suspeita de PAVM (surgida após 48h de intubação), colete culturas quantitativas imediatas e inicie cobertura empírica agressiva de largo espectro contra Pseudomonas e MRSA.",
+
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["cultura", "aspirado", "coletar"],
+        "resposta_preceptor": "Amostra microbiológica coletada com sucesso antes da mudança antimicrobiana. Qual a antibioticoterapia empírica imediata?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["cefepime", "piperacilina", "meropenem", "vancomicina", "amplo espectro"],
+        "resposta_preceptor": "Conduta irretocável! Cobertura ampla iniciada para germes multirresistentes da UTI. Paciente estabilizado.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
+      }
+    ],
+
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["ceftriaxone", "amoxicilina", "aguardar cultura", "alta"],
+        "resposta_preceptor": "ERRO CRÍTICO FATAL! Prescrever antibiótico comunitário ou aguardar o resultado da cultura em infecção por germes hospitalares levou ao choque séptico fulminante.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["fisioterapia respiratoria", "mudanca de decuito"],
+        "resposta_preceptor": "Medidas de higiene postural são importantes, mas secundárias frente a um quadro franco de infecção hospitalar instalada.",
+        "impacto_estabilidade": -10
+      }
+    ]
   }
 ]
