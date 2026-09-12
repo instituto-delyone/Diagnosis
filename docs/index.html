@@ -183,18 +183,41 @@
   const painelMonitor = document.getElementById('painel-monitor');
   const textoRitmo = document.getElementById('texto-ritmo');
 
-  // Manifesto Enxuto e Seguro para Carregamento Rápido no GitHub Pages
+  // Manifesto Completo de Clínica Médica para o GitHub Pages
   const manifestoConhecimento = {
-    "ResumosPrincipais": {
+    "SindromesClinicas": {
       pasta: "knowledge_base/sindromes_clinicas/", 
       arquivos: [
-        "cardiologia.json", 
-        "pneumonia.json", 
-        "pcr.json", 
-        "reumatologia.json", 
-        "sindrome_uremica.json", 
-        "hematologia.json", 
-        "sepse_e_choque_septico.json"
+        "cardiologia.json",
+        "cefaleias.json",
+        "cirrose.json",
+        "dispneia.json",
+        "disturbios_hidroeletroliticos.json",
+        "endocrinologia.json",
+        "epilepsia.json",
+        "geriatria.json",
+        "hematologia.json",
+        "hemostasia.json",
+        "hiv.json",
+        "ictericia.json",
+        "linfonodomegalia.json",
+        "nefrologia.json",
+        "neurologia.json",
+        "pcr.json",
+        "pneumonia.json",
+        "reumatologia.json",
+        "semiologia_osteoarticular.json",
+        "semiologia_respiratoria.json",
+        "sindrome_diarreica.json",
+        "sindrome_metabolica_diabetes.json",
+        "sindrome_metabolica_has.json",
+        "sindrome_uremica.json",
+        "sindromes_bacterianas.json",
+        "sindromes_febris.json",
+        "terapia_intensiva.json",
+        "tosse_cronica.json",
+        "toxicologia.json",
+        "valvopatias.json"
       ]
     }
   };
@@ -231,13 +254,13 @@
       "Ótima escolha terapêutica e diagnóstica."
     ],
     erro_generico: [
-      "Doutor, essa abordagem não alterou significativamente o quadro clínico atual. Vamos repensar?",
-      "Compreendo o seu raciocínio, mas essa não parece ser a prioridade absoluta neste momento.",
-      "Ainda não atingimos o alvo terapêutico principal. Avalie os dados com cautela."
+      "Doutor, o quadro clínico permanece o mesmo. precisamos raciocinar mais",
+      "Compreendo o seu raciocínio, podemos seguir, mas tem certeza que não há prioridades mais importantes nesse momento?.",
+      "talvez tenhamos deixado passar algo, existe algum diagnostico diferencial que a senhorita tenha em mente? vamos avaliar os dados juntos, você tem alguma dúvida?"
     ],
     choque_suave: [
-      "Atenção, doutor: o paciente apresenta sinais de instabilidade progressiva. Precisamos reverter esse quadro.",
-      "A perfusão periférica está limítrofe e a pressão arterial cedeu um pouco. Vamos ajustar a estratégia."
+      "doutor (a) : as funções vitais do paciente estão deteriorando rapidamente, o paciente apresentará sinais de instabilidade progressiva. Precisamos reverter esse quadro.",
+      "A perfusão periférica está limítrofe e a pressão arterial cedeu um pouco. O que podemos fazer?."
     ]
   };
 
@@ -340,9 +363,9 @@
 
       fase_3_conduta: {
         gabarito_esperado: condutaGabarito,
-        red_flag_mortal: ["alta precoce", "negligencia", "conduta letal"],
+        red_flag: ["alta precoce sem emcaminhamento", "negligencia", "conduta letal"],
         feedback_sucesso: "Conduta terapêutica e manejo alinhados rigorosamente ao padrão exigido na prova.",
-        feedback_red_flag: "ERRO CRÍTICO! Conduta inadequada frente ao risco clínico do resumo."
+        feedback_red_flag: "infelizmente conduta incorreta! Conduta inadequada frente ao risco clínico do resumo."
       },
 
       discussao_clinica_final: {
