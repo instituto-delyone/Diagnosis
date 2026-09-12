@@ -1,95 +1,134 @@
 [
   {
     "id_caso": "endocrino_graves_01",
-    "patologia_alvo": "Doença de Graves",
-    "dificuldade": "Básica",
-    "vinheta_admissao": "Mulher de 35 anos queixa-se de palpitações, irritabilidade e perda de peso nos últimos 2 meses, apesar de aumento do apetite. Ao exame físico: taquicárdica (110 bpm), presença de bócio difuso indolor e exoftalmia. Laboratório inicial mostra TSH suprimido e T4 livre elevado.",
+    "patologia": "Doença de Graves",
+    "modo_sugerido": "Ambulatório / Enfermaria",
+    "peso_dificuldade": 1.5,
     
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["anti-trab", "trab"],
-      "achado_sucesso": "Excelente! O anticorpo Anti-TRAB (anticorpo antirreceptor de TSH) retornou fortemente positivo.",
-      "resposta_preceptor_erro": "Doutora, a paciente tem hipertireoidismo clínico e laboratorial clássico com exoftalmia. Qual o anticorpo específico que sela a etiologia autoimune desta doença?"
+    "cenario_inicial": {
+      "fala_preceptor": "Mulher de 35 anos queixa-se de palpitações, irritabilidade e perda de peso. Ao exame: taquicárdica (110 bpm), bócio difuso e exoftalmia. TSH suprimido e T4 livre elevado.",
+      "fala_paciente": "Doutor, meu coração dispara o tempo todo, tô muito irritada, comendo bem mas derretendo de magra, e meus olhos tão saltados!"
     },
 
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["graves", "doenca de graves"],
-      "distrator_comum": ["tireoidite de hashimoto", "bocio multinodular toxico", "adenoma toxico"],
-      "feedback_distrator": "O bócio multinodular não costuma cursar com exoftalmia e o Hashimoto em fase de tireotoxicose (Hashitoxicose) teria anticorpos Anti-TPO positivos sem o quadro ocular clássico.",
-      "achado_sucesso": "Exato. Trata-se de Hipertireoidismo primário por Doença de Graves."
-    },
+    "ajuda_preceptor": "AJUDA CLÍNICA: Hipertireoidismo primário associado a exoftalmia sugere etiologia autoimune por Doença de Graves. Pesquise o anticorpo específico estimulador.",
 
-    "fase_3_conduta": {
-      "gabarito_esperado": ["antitireoidiano", "metimazol", "propiltiouracil", "beta-bloqueador"],
-      "red_flag_mortal": ["cirurgia imediata sem controle", "iodo radioativo sem preparo"],
-      "feedback_sucesso": "Conduta irretocável! Você iniciou o controle sintomático rápido com beta-bloqueador e bloqueou a síntese hormonal com drogas antitireoidianas (Metimazol/PTU).",
-      "feedback_red_flag": "ERRO CRÍTICO! Você indicou tireoidectomia ou radioiodo em uma paciente tóxica sem preparo prévio, desencadeando uma crise tireotóxica fulminante fatal na mesa."
-    },
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["anti-trab", "trab", "anticorpo"],
+        "resposta_preceptor": "Excelente! O anticorpo Anti-TRAB retornou fortemente positivo, confirmando a etiologia. Qual a conduta terapêutica inicial para controle?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["antitireoidiano", "metimazol", "propiltiouracil", "beta-bloqueador"],
+        "resposta_preceptor": "Conduta irretocável! Controle sintomático com beta-bloqueador e bloqueio de síntese com drogas antitireoidianas instituídos com sucesso.",
+        "impacto_estabilidade": 20,
+        "vitoria": true
+      }
+    ],
 
-    "discussao_clinica_final": {
-      "takeaway_message": "O diagnóstico etiológico do hipertireoidismo por Doença de Graves é selado pela positividade do anticorpo Anti-TRAB (presente em 100% dos doentes).",
-      "fisiopatologia": "O Anti-TRAB é um autoanticorpo estimulador que se liga ao receptor do TSH nas células foliculares, mimetizando a ação do TSH e gerando hiperprodução hormonal autônoma e bócio difuso."
-    }
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["cirurgia imediata", "iodo radioativo sem preparo", "alta"],
+        "resposta_preceptor": "ERRO CRÍTICO! Indicar cirurgia ou radioiodo sem o preparo clínico prévio desencadeou uma crise tireotóxica fulminante e fatal na mesa.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["puncao aspirativa", "puncao de nodulo", "paf"],
+        "resposta_preceptor": "Punção de tireoide não é indicada em bócio difuso homogêneo com padrão clássico de Graves.",
+        "impacto_estabilidade": -10
+      }
+    ]
   },
   {
     "id_caso": "endocrino_hipotireoidismo_01",
-    "patologia_alvo": "Hipotireoidismo no Coronariopata",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Homem de 72 anos, com história de infarto agudo do miocárdio prévio e angina estável (coronariopata). Traz exames de rotina evidenciando TSH de 35 mUI/L e T4 livre baixo. Queixa-se apenas de lentidão e constipação. A equipe planeja iniciar levotiroxina.",
+    "patologia": "Hipotireoidismo no Coronariopata",
+    "modo_sugerido": "Clínica Médica",
+    "peso_dificuldade": 2.2,
     
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["ecg", "eletrocardiograma", "risco cardiovascular"],
-      "achado_sucesso": "ECG basal não demonstra isquemia aguda, confirmando estabilidade momentânea da doença isquêmica.",
-      "resposta_preceptor_erro": "Doutor, este paciente tem isquemia coronariana prévia e nós vamos mexer no metabolismo basal dele. Antes de começar remédio, precisamos de um traçado cardíaco para segurança."
+    "cenario_inicial": {
+      "fala_preceptor": "Homem de 72 anos com histórico de IAM e angina estável apresenta TSH de 35 e T4 livre baixo. Equipe planeja iniciar reposição hormonal.",
+      "fala_paciente": "Doutor, eu tô me sentindo muito lento, com o intestino preso, mas meu peito já foi infartado no passado, tenho medo de mexer nisso."
     },
 
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["hipotireoidismo", "hipotireoidismo primario"],
-      "distrator_comum": ["hipotireoidismo subclinico", "sindrome do eutireoideo doente"],
-      "feedback_distrator": "O T4 livre baixo associado a TSH muito elevado e sintomas clássicos confirma a falência tireoidiana franca, não sendo apenas um quadro subclínico.",
-      "achado_sucesso": "Exato. Trata-se de um Hipotireoidismo Primário franco em paciente de alto risco cardiovascular."
-    },
+    "ajuda_preceptor": "AJUDA CLÍNICA: Pacientes coronariopatas não toleram aumentos súbitos da demanda miocárdica. Avalie a estabilidade elétrica e inicie a reposição de forma extremamente lenta.",
 
-    "fase_3_conduta": {
-      "gabarito_esperado": ["t4 lento", "dose baixa", "reposicao lenta", "iniciar lentamente", "titulacao lenta"],
-      "red_flag_mortal": ["dose plena", "reposicao rapida", "1.6 mcg/kg"],
-      "feedback_sucesso": "Conduta perfeita! Você iniciou a levotiroxina em doses muito baixas (ex: 12,5 a 25 mcg/dia) e titulará lentamente, protegendo o coração.",
-      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você iniciou a levotiroxina em dose plena de reposição (1.6 mcg/kg). O metabolismo acelerou de uma vez, aumentando o consumo de oxigênio do miocárdio e causando um infarto fulminante irreversível."
-    },
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["ecg", "eletrocardiograma", "risco cardiovascular"],
+        "resposta_preceptor": "ECG basal sem isquemia aguda. Como proceder com a introdução da levotiroxina em paciente com coronariopatia?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["t4 lento", "dose baixa", "reposicao lenta", "iniciar lentamente", "titulacao lenta"],
+        "resposta_preceptor": "Conduta perfeita! Levotiroxina iniciada em doses baixas (12,5 a 25 mcg) com titulação cautelosa, protegendo o miocárdio.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
+      }
+    ],
 
-    "discussao_clinica_final": {
-      "takeaway_message": "O paciente coronariopata não tolera aumentos súbitos de demanda miocárdica. O tratamento do hipotireoidismo deve ser iniciado de forma extremamente cautelosa e lenta.",
-      "fisiopatologia": "A reposição tireoidiana aumenta a sensibilidade aos receptores adrenérgicos e acelera o metabolismo basal, elevando dramaticamente o consumo de O2 do miocárdio, o que precipita isquemia em vasos já estenosados."
-    }
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["dose plena", "reposicao rapida", "1.6 mcg/kg", "alta"],
+        "resposta_preceptor": "ERRO CRÍTICO FATAL! Iniciar dose plena acelerou bruscamente o metabolismo e o consumo de O2 do miocárdio, precipitando um infarto fulminante irreversível.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["cateterismo eletivo", "coronariografia"],
+        "resposta_preceptor": "Exame invasivo desnecessário neste momento sem sinais de instabilidade coronariana aguda.",
+        "impacto_estabilidade": -10
+      }
+    ]
   },
   {
     "id_caso": "endocrino_addison_01",
-    "patologia_alvo": "Insuficiência Adrenal Primária (Doença de Addison)",
-    "dificuldade": "Intermediária",
-    "vinheta_admissao": "Paciente de 40 anos chega à emergência com fadiga extrema, perda de peso inexplicada e tontura ao levantar-se. Ao exame físico: PA 85x50 mmHg e hiperpigmentação difusa da pele e mucosas. Laboratório inicial: hiponatremia (Na 128) e hipercalemia (K 5.8).",
+    "patologia": "Insuficiência Adrenal Primária (Doença de Addison)",
+    "modo_sugerido": "Sala Vermelha",
+    "peso_dificuldade": 2.3,
     
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["cortisol", "acth", "aldosterona", "cortisol basal"],
-      "achado_sucesso": "Os testes confirmam Cortisol basal marcadamente reduzido, Aldosterona indetectável e níveis elevados de ACTH endógeno.",
-      "resposta_preceptor_erro": "Paciente hipotenso com hiperpigmentação e o clássico padrão Na baixo / K alto. Qual o eixo hormonal básico que precisamos investigar?"
+    "cenario_inicial": {
+      "fala_preceptor": "Paciente de 40 anos chega à emergência com fadiga extrema, perda de peso e tontura. Ao exame: PA 85x50 mmHg, hiperpigmentação difusa, Na 128 e K 5.8.",
+      "fala_paciente": "Doutor, eu não consigo parar em pé, sinto uma fraqueza que não passa e minha pele escureceu muito nos últimos meses."
     },
 
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["addison", "insuficiencia adrenal primaria", "insuficiência suprarrenal"],
-      "distrator_comum": ["insuficiencia adrenal secundaria", "crise tireotoxica"],
-      "feedback_distrator": "Cuidado. Na insuficiência adrenal secundária (falha na hipófise), o ACTH cai e não há hiperpigmentação. Além disso, a aldosterona é poupada. O quadro aqui é primário da glândula.",
-      "achado_sucesso": "Correto! Trata-se de Doença de Addison (Insuficiência Adrenal Primária)."
-    },
+    "ajuda_preceptor": "AJUDA CLÍNICA: Hipotensão com hiperpigmentação, hiponatremia e hipercalemia indicam falência do córtex adrenal (Doença de Addison). O choque exige reposição imediata de glicocorticoide.",
 
-    "fase_3_conduta": {
-      "gabarito_esperado": ["glicocorticoide", "hidrocortisona", "corticoide", "mineralocorticoide", "suporte volemico", "fludrocortisona"],
-      "red_flag_mortal": ["alta", "noradrenalina sem corticoide", "reposicao de sodio isolada"],
-      "feedback_sucesso": "Conduta excelente! Você entrou com hidratação venosa vigorosa e hidrocortisona imediata, revertendo o choque endocrinológico.",
-      "feedback_red_flag": "ERRO CRÍTICO! Você tentou reverter o choque apenas com vasopressores (Noradrenalina) ou volume. Sem o glicocorticoide, os receptores vasculares não respondem à catecolamina e o paciente evolui a óbito refratário."
-    },
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["cortisol", "acth", "aldosterona", "dosagem"],
+        "resposta_preceptor": "Cortisol basal reduzido, aldosterona indetectável e ACTH elevado. Qual a conduta de suporte e reversão do choque endocrinológico?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["hidrocortisona", "glicocorticoide", "hidratacao", "suporte volemico"],
+        "resposta_preceptor": "Conduta excelente! Hidratação vigorosa e hidrocortisona venosa imediata instituídas, revertendo o quadro de choque com sucesso.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
+      }
+    ],
 
-    "discussao_clinica_final": {
-      "takeaway_message": "Na insuficiência adrenal primária (Addison), tanto o cortisol quanto a aldosterona caem. Isso gera hiperpigmentação (excesso de ACTH), hiponatremia e hipercalemia.",
-      "fisiopatologia": "A destruição autoimune ou infecciosa da córtex adrenal elimina a produção de mineralocorticoides (causando perda de Na+ e retenção de K+) e de glicocorticoides (causando choque vasoplégico refratário e liberação compensatória de ACTH/MSH pela hipófise)."
-    }
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["noradrenalina isolada", "apenas soro", "alta"],
+        "resposta_preceptor": "ERRO CRÍTICO! Tentar reverter o choque apenas com vasopressores falhou, pois sem glicocorticoide os receptores vasculares não respondem às catecolaminas.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["puncao lombar", "tomografia de cranio"],
+        "resposta_preceptor": "Investigação neurológica inútil frente a um quadro franco de colapso endócrino mineralocorticoide e glicocorticoide.",
+        "impacto_estabilidade": -10
+      }
+    ]
   }
 ]
