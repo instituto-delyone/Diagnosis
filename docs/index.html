@@ -102,12 +102,12 @@
         <div class="mode-card red-room" onclick="iniciarJogo('sala_vermelha')">
           <div class="mode-icon">🚨</div>
           <div class="mode-title">Sala Vermelha</div>
-          <div class="mode-desc">Adrenalina pura. Dados limitados, paciente instável. A prioridade é a ação e estabilização imediata.</div>
+          <div class="mode-desc">Decisões mais rápidas. Dados limitados, paciente pode instabilizar. A prioridade é a ação e estabilização imediata.</div>
         </div>
         <div class="mode-card clinic" onclick="iniciarJogo('clinica_medica')">
           <div class="mode-icon">🩺</div>
           <div class="mode-title">Clínica Médica</div>
-          <div class="mode-desc">Raciocínio profundo. Anamnese completa e sinais vitais estáveis. A prioridade é o diagnóstico diferencial.</div>
+          <div class="mode-desc">Raciocínio profundo. Anamnese completa e sinais vitais estáveis, ou não. A prioridade é o diagnóstico diferencial.</div>
         </div>
       </div>
       <div id="loading-status">Carregando Biblioteca Mestre Teórica (IDMT)...</div>
@@ -509,6 +509,41 @@
       vitPA.innerText = "PA: 120/80"; vitFC.innerText = "FC: 78"; vitSpO2.innerText = "SpO2: 98%";
     }
   }
+  // Função para injetar o perfil hemodinâmico específico da doença no painel
+  function aplicarPerfilHemodinamicoDoCaso(caso) {
+    if (caso && caso.perfil_hemodinamico) {
+      const perfil = caso.perfil_hemodinamico;
+      
+      vitPA.innerText = `PA: ${perfil.pa || "--/--"}`;
+      vitFC.innerText = `FC: ${perfil.fc || "--"}`;
+      vitSpO2.innerText = `SpO2: ${perfil.spo2 || "--"}%`;
+
+      // Aplica classes visuais dinâmicas se houver alteração de gravidade
+      if (perfil.gravidade === 'alerta') {
+        vitPA.className = 'vital alert';
+        vitFC.className = 'vital alert';
+        vitSpO2.className = 'vital alert';
+      } else if (perfil.gravidade === 'critico') {
+        vitPA.className = 'vital critical';
+        vitFC.className = 'vital critical';
+        vitSpO2.className = 'vital critical';
+      } else {
+        vitPA.className = 'vital';
+        vitFC.className = 'vital';
+        vitSpO2.className = 'vital';
+      }
+    } else {
+      // Padrão caso o resumo não especifique valores próprios
+      vitPA.innerText = "PA: 120/80";
+      vitFC.innerText = "FC: 78";
+      vitSpO2.innerText = "SpO2: 98%";
+      vitPA.className = 'vital';
+      vitFC.className = 'vital';
+      vitSpO2.className = 'vital';
+    }
+  }
+casoAtual = bancoDeDadosMestre[randomIndex];
+aplicarPerfilHemodinamicoDoCaso(casoAtual); // <-- Insere os vitais específicos da doença aqui
 
   async function processarAcaoComIA(inputUsuario) {
     const inputNorm = normalizarTexto(inputUsuario);
