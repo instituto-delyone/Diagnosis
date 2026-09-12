@@ -465,11 +465,15 @@
     } catch(e) {}
   }
 
-  function iniciarJogo(modo) {
+    function iniciarJogo(modo) {
     if (bancoDeDadosMestre.length === 0) {
       alert("Erro: A base teórica está vazia ou inacessível.");
       return;
     }
+
+    const randomIndex = Math.floor(Math.random() * bancoDeDadosMestre.length);
+    casoAtual = bancoDeDadosMestre[randomIndex];
+    aplicarPerfilHemodinamicoDoCaso(casoAtual);
 
     modoAtual = modo;
     selectionScreen.style.display = 'none';
@@ -477,9 +481,6 @@
     
     document.getElementById('room-title').innerHTML = modo === 'sala_vermelha' ? '🚨 Sala Vermelha' : '🩺 Clínica Médica';
     
-    const randomIndex = Math.floor(Math.random() * bancoDeDadosMestre.length);
-    casoAtual = bancoDeDadosMestre[randomIndex];
-
     faseAtual = 1;
     turnos = 0;
     pontuacao = 100;
@@ -506,6 +507,7 @@
     adicionarMensagemGM(`<strong>${nomeCaso}</strong><br><br>${vinheta}<br><br><em>Doutor, qual é a sua primeira ação?</em>`);
     liberarInput();
   }
+
 
   function normalizarTexto(texto) {
     if (!texto) return "";
@@ -565,8 +567,6 @@
       vitSpO2.className = 'vital';
     }
   }
-casoAtual = bancoDeDadosMestre[randomIndex];
-aplicarPerfilHemodinamicoDoCaso(casoAtual); // <-- Insere os vitais específicos da doença aqui
 
   async function processarAcaoComIA(inputUsuario) {
     const inputNorm = normalizarTexto(inputUsuario);
