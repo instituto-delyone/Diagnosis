@@ -184,10 +184,9 @@
   const painelMonitor = document.getElementById('painel-monitor');
   const textoRitmo = document.getElementById('texto-ritmo');
 
-  // Manifesto Completo de Clínica Médica para o GitHub Pages
   const manifestoConhecimento = {
     "SindromesClinicas": {
-      pasta: "/knowledge_base/sindromes_clinicas/", 
+      pasta: "knowledge_base/sindromes_clinicas/", 
       arquivos: [
         "cardiologia.json",
         "cefaleias.json",
@@ -209,6 +208,8 @@
         "reumatologia.json",
         "semiologia_osteoarticular.json",
         "semiologia_respiratoria.json",
+        "sepse_e_choque_septico.json",
+        "sepsis.json",
         "sindrome_diarreica.json",
         "sindrome_metabolica_diabetes.json",
         "sindrome_metabolica_has.json",
@@ -222,7 +223,7 @@
       ]
     }
   };
-
+  
   let bancoDeDadosMestre = [];
   let casoAtual = null;
   let modoAtual = '';
