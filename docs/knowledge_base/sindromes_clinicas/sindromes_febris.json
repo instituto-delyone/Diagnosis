@@ -1,86 +1,134 @@
 [
   {
-    "id": "dengue_grupo_c",
-    "nome": "Dengue com Sinais de Alarme (Grupo C)",
-    "prevalencia_base": 30,
-    "01_campo_modulador": {
-      "pesos": { "epidemia_local": 4.0, "terceiro_ao_quarto_dia": 3.0 }
+    "id_caso": "sind_febril_dengue_01",
+    "patologia": "Dengue com Sinais de Alarme (Grupo C)",
+    "modo_sugerido": "Sala Vermelha / Enfermaria",
+    "peso_dificuldade": 2.0,
+    
+    "cenario_inicial": {
+      "fala_preceptor": "Paciente de 25 anos no 4º dia de quadro febril agudo com mialgia e dor retro-orbital. A febre cedeu hoje, mas iniciou dor abdominal contínua e vômitos persistentes.",
+      "fala_paciente": "Doutor, minha febre passou hoje, mas meu estômago tá doendo demais, não pára nada dentro e sinto muita tontura quando tento levantar."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "dor_retroorbital": 15, "mialgia": 15, "vomitos_persistentes": 25, "dor_abdominal_continua": 25, "hepatomegalia": 20 }
-    },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["sinais_de_alarme"]
-    },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "MEDIO",
-      "conduta_emergencial": "Internação em enfermaria e hidratação IV imediata"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Hematócrito", "Sorologia ou NS1 (depende do dia)"]
-    },
-    "vigneta": "Paciente de 25 anos no 4º dia de quadro febril agudo (com mialgia e dor retro-orbital). Refere que a febre cedeu hoje, mas iniciou quadro de dor abdominal contínua à palpação e vômitos persistentes. Exame físico: lipotimia postural e hepatomegalia dolorosa (3 cm).",
-    "respostas_esperadas": {
-      "diagnostico": ["dengue", "dengue com sinais de alarme", "grupo c"],
-      "exames": ["hematocrito", "hemograma", "ns1", "sorologia"],
-      "conduta": ["internacao", "enfermaria", "hidratacao iv", "20ml/kg", "soro na veia"]
-    },
-    "feedback_tecnico": "Qualquer quadro febril agudo no Brasil deve levantar a suspeita de Dengue[span_0](start_span)[span_0](end_span). O paciente apresenta os clássicos Sinais de Alarme (dor abdominal, vômitos, hepatomegalia e lipotimia), que costumam surgir no 3º ao 4º dia, quando a febre cede e ocorre o aumento da permeabilidade vascular[span_1](start_span)[span_1](end_span). O aumento do hematócrito é o marcador laboratorial de gravidade[span_2](start_span)[span_2](end_span). A conduta para o Grupo C exige notificação, internação em enfermaria e hidratação venosa (20mL/kg em 2h)[span_3](start_span)[span_3](end_span)."
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: A queda da febre entre o 3º e 4º dia associada a dor abdominal, vômitos e lipotimia sugere o extravasamento plasmático da Dengue com Sinais de Alarme (Grupo C).",
+
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["hematocrito", "hemograma", "ns1", "sorologia"],
+        "resposta_preceptor": "Exames realizados. O aumento do hematócrito confirma hemoconcentração e gravidade. Qual a conduta imediata para este grupo?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["internacao", "enfermaria", "hidratacao iv", "20ml/kg", "soro na veia"],
+        "resposta_preceptor": "Conduta perfeita! Notificação feita, internação em enfermaria e hidratação venosa rigorosa instituídas com sucesso.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
+      }
+    ],
+
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["alta", "liberar para casa", "anti-inflamatorio", "ibuprofeno"],
+        "resposta_preceptor": "ERRO CRÍTICO FATAL! Dar alta a um paciente no período crítico com sinais de alarme ou prescrever AINEs levou ao choque hipovolêmico grave e hemorragias fatais.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["antibiotico", "azitromicina", "ceftriaxone"],
+        "resposta_preceptor": "Infecções virais agudas não respondem a antibioticoterapia empírica. O tempo corre contra a estabilização volêmica.",
+        "impacto_estabilidade": -10
+      }
+    ]
   },
   {
-    "id": "leptospirose_weil",
-    "nome": "Leptospirose Ictero-hemorrágica (Doença de Weil)",
-    "prevalencia_base": 10,
-    "01_campo_modulador": {
-      "pesos": { "contato_enchente_esgoto": 4.0, "profissionais_risco": 2.0 }
+    "id_caso": "sind_febril_leptospirose_01",
+    "patologia": "Leptospirose Ictero-hemorrágica (Doença de Weil)",
+    "modo_sugerido": "Sala Vermelha / UTI",
+    "peso_dificuldade": 2.4,
+    
+    "cenario_inicial": {
+      "fala_preceptor": "Paciente gari, febril há 6 dias com mialgia em panturrilhas, evoluiu com icterícia rubínica, oligúria, tosse com laivos de sangue e sufusão conjuntival.",
+      "fala_paciente": "Doutor, trabalhei na enchente semana passada, minhas pernas doem demais, meus olhos tão amarelos e tô cuspindo sangue."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "febre": 20, "mialgia_panturrilha": 25, "sufusao_conjuntival": 25, "ictericia_rubinica": 30 }
-    },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["ictericia", "lesao_renal_aguda"]
-    },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "ALTO",
-      "conduta_emergencial": "Penicilina G Cristalina e suporte em UTI (risco de hemorragia alveolar)"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Microaglutinação", "Ureia e Creatinina", "CPK"]
-    },
-    "vigneta": "Paciente de 40 anos, gari, apresenta quadro febril há 6 dias com mialgia intensa em panturrilhas. Evoluiu nas últimas 24h com icterícia intensa (tom alaranjado/rubínico), oligúria e tosse com laivos de sangue (hemoptise). Exame físico revela sufusão conjuntival bilateral.",
-    "respostas_esperadas": {
-      "diagnostico": ["leptospirose", "doenca de weil", "weil", "forma ictero-hemorragica"],
-      "exames": ["microaglutinacao", "funcao renal", "cpk", "elisa"],
-      "conduta": ["penicilina g", "penicilina cristalina", "ceftriaxone", "internacao"]
-    },
-    "feedback_tecnico": "O contato com esgotos ou urina de roedores (ratos) aponta para Leptospirose[span_4](start_span)[span_4](end_span). A forma grave (Doença de Weil) acomete 10% dos pacientes, cursando com tríade: icterícia rubínica (combinação de icterícia + hemorragia da sufusão), hemorragia alveolar (hemoptise) e lesão renal aguda com hipocalemia[span_5](start_span)[span_5](end_span). O diagnóstico específico padrão-ouro é a microaglutinação[span_6](start_span)[span_6](end_span). A conduta para as formas graves exige notificação e tratamento com Penicilina G Cristalina ou Ceftriaxone[span_7](start_span)[span_7](end_span)."
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: A tríade de icterícia rubínica, hemorragia alveolar e lesão renal aguda após contato com enchentes define a Doença de Weil. Exige suporte intensivo e antibioticoterapia precoce.",
+
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["microaglutinacao", "funcao renal", "cpk", "ureia", "creatinina"],
+        "resposta_preceptor": "Exames confirmam alteração renal severa e CPK elevada. Qual a conduta antimicrobiana específica para a forma grave?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["penicilina g", "penicilina cristalina", "ceftriaxone", "internacao uti"],
+        "resposta_preceptor": "Conduta irretocável! Penicilina Cristalina/Ceftriaxone e suporte intensivo iniciados, evitando o colapso por hemorragia alveolar.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
+      }
+    ],
+
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["alta", "analgesia simples", "observacao sem antibiotico"],
+        "resposta_preceptor": "ERRO CRÍTICO FATAL! Deixar de tratar a leptospirose grave com antibiótico específico resultou em insuficiência renal dialítica e hemorragia pulmonar fatal.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["ultrassom abdominal", "endoscopia"],
+        "resposta_preceptor": "Exames de imagem abdominais não trazem conduta imediata frente ao quadro infeccioso sistêmico com acometimento renal.",
+        "impacto_estabilidade": -10
+      }
+    ]
   },
   {
-    "id": "malaria_falciparum",
-    "nome": "Malária Grave (Plasmodium falciparum)",
-    "prevalencia_base": 15,
-    "01_campo_modulador": {
-      "pesos": { "viagem_regiao_endemica": 4.0, "exposicao_mata": 2.0 }
+    "id_caso": "sind_febril_malaria_01",
+    "patologia": "Malária Grave (Plasmodium falciparum)",
+    "modo_sugerido": "Sala Vermelha / UTI",
+    "peso_dificuldade": 2.5,
+    
+    "cenario_inicial": {
+      "fala_preceptor": "Paciente de 32 anos com retorno recente do Amazonas apresenta crises febris intensas, icterícia leve, anemia (Hb 8.0) e sinais de prostração com hipoglicemia severa.",
+      "fala_paciente": "Doutor, voltei da mata do Amazonas semana passada e comecei com calafrios fortíssimos, suores e uma fraqueza que não consigo nem levantar."
     },
-    "02_campo_predicao_inicial": {
-      "pesos": { "crises_febris": 30, "anemia_hemolitica": 30, "ictericia": 20 }
-    },
-    "03_campo_busca_ativa_filtragem": {
-      "sine_qua_non": ["parasitismo_eritrocitario"]
-    },
-    "04_campo_avaliacao_risco_T": {
-      "potencial_letalidade": "ALTO",
-      "conduta_emergencial": "Artesunato e Clindamicina"
-    },
-    "05_campo_confirmacao_necessaria": {
-      "exames": ["Gota Espessa", "Teste Rápido"]
-    },
-    "vigneta": "Paciente de 32 anos relata retorno há 10 dias de viagem ao interior do Amazonas. Apresenta crises febris intensas, calafrios, sudorese, icterícia leve e anemia (Hemoglobina: 8.0 g/dL). Exames indicam hemólise e presença de Plasmodium falciparum. O paciente está prostrado e com sinais de hipoglicemia severa.",
-    "respostas_esperadas": {
-      "diagnostico": ["malaria", "malaria grave", "malaria falciparum"],
-      "exames": ["gota espessa", "esfraco de sangue"],
-      "conduta": ["artesunato", "clindamicina", "artesunato + clindamicina"]
-    },
-    "feedback_tecnico": "A malária caracteriza-se por um parasitismo eritrocitário com posterior hemólise (crises febris por lesão eritrocitária)[span_8](start_span)[span_8](end_span). A infecção pelo *P. falciparum* é a mais grave, pois causa maior parasitemia (acomete hemácias jovens) e gera proteínas de aderência que causam obstrução, disfunção e hipoglicemia severa[span_9](start_span)[span_9](end_span). O exame de escolha é a gota espessa[span_10](start_span)[span_10](end_span). Por se tratar de forma grave, o tratamento de escolha é Artesunato (6 dias) + Clindamicina (7 dias)[span_11](start_span)[span_11](end_span)."
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: Viagem a área endêmica com febre intermitente, hemólise e acometimento sistêmico grave aponta para Malária por *Plasmodium falciparum*. O teste de escolha é a gota espessa.",
+
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["gota espessa", "esfregaço", "teste rapido"],
+        "resposta_preceptor": "Gota espessa positiva confirmando alta parasitemia por *Plasmodium falciparum*[span_3](start_span)[span_3](end_span). Qual o tratamento antiparasitário de escolha para a forma grave?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["artesunato", "clindamicina", "artesunato + clindamicina"],
+        "resposta_preceptor": "Conduta perfeita! Esquema com Artesunato e Clindamicina instituído imediatamente, revertendo a parasitemia e o quadro grave. Caso resolvido.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
+      }
+    ],
+
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["cloroquina", "primaquina isolada", "alta"],
+        "resposta_preceptor": "ERRO CRÍTICO FATAL! Prescrever apenas esquemas para formas brandas em um *Plasmodium falciparum* grave gerou obstrução microvascular cerebral, hipoglicemia refratária e óbito.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["puncao lombar", "tomografia de cranio"],
+        "resposta_preceptor": "Investigação neurológica invasiva secundária que atrasa o tratamento antiparasitário específico na malária grave.",
+        "impacto_estabilidade": -10
+      }
+    ]
   }
 ]
