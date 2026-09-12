@@ -143,6 +143,9 @@
     </div>
 </div>
 
+<!-- INCLUSÃO DA CHAMADA DO ENGINE SEMÂNTICO DO IDMT -->
+<script src="js/engine.js"></script>
+
 <script>
     // --- ESTADO DO SISTEMA ---
     let pontuacao = 0;
@@ -157,8 +160,6 @@
     const scoreDisplay = document.getElementById('score-display');
 
     // --- INICIALIZAÇÃO E CARREGAMENTO DE DADOS ---
-    // Você pode plugar o fetch do manifesto aqui no futuro. 
-    // Para teste imediato, vamos injetar o caso manualmente.
     function iniciarPlantao(casoDados) {
         casoAtual = casoDados;
         estabilidade = 85;
@@ -171,19 +172,24 @@
         atualizarDashboard();
     }
 
-    // --- LÓGICA DE SIMULAÇÃO CLÍNICA ---
+    // --- LÓGICA DE SIMULAÇÃO CLÍNICA COM IDMT ENGINE (SEMÂNTICA ATIVA) ---
     function processarAcao() {
-        const inputAluno = userInput.value.trim().toLowerCase();
+        const inputAluno = userInput.value.trim();
         if (!inputAluno || !casoAtual) return;
 
         turnos++;
         adicionarMensagem("user", "Conduta: " + inputAluno);
         let acaoReconhecida = false;
 
-        // 1. Checagem de Red Flags (Morte Instantânea)
+        // 1. Checagem de Red Flags via Motor Semântico do IDMT
         if (casoAtual.red_flags) {
             for (let flag of casoAtual.red_flags) {
-                if (flag.gatilhos_fatais.some(g => inputAluno.includes(g))) {
+                // Utiliza a verificação inteligente do idmtEngine se disponível, ou fallback de includes
+                const flagAcionada = typeof idmtEngine !== 'undefined' 
+                    ? idmtEngine.verificarRedFlag(inputAluno, flag.gatilhos_fatais)
+                    : flag.gatilhos_fatais.some(g => inputAluno.toLowerCase().includes(g.toLowerCase()));
+
+                if (flagAcionada) {
                     adicionarMensagem("preceptor", flag.resposta_preceptor);
                     estabilidade += flag.impacto_estabilidade; 
                     pontuacao -= 30;
@@ -193,10 +199,14 @@
             }
         }
 
-        // 2. Checagem de Ações Esperadas (Gabarito)
+        // 2. Checagem de Ações Esperadas (Gabarito com Flexibilidade Semântica / Sinônimos)
         if (!acaoReconhecida && casoAtual.acoes_esperadas) {
             for (let acao of casoAtual.acoes_esperadas) {
-                if (acao.gatilhos_validos.some(g => inputAluno.includes(g))) {
+                const validacao = typeof idmtEngine !== 'undefined'
+                    ? idmtEngine.validarResposta(inputAluno, acao.gatilhos_validos)
+                    : { valido: acao.gatilhos_validos.some(g => inputAluno.toLowerCase().includes(g.toLowerCase())) };
+
+                if (validacao.valido) {
                     adicionarMensagem("preceptor", acao.resposta_preceptor);
                     
                     let ganho = (20 / turnos) * casoAtual.peso_dificuldade;
@@ -215,7 +225,11 @@
         // 3. Checagem de Distratores (Perda de Tempo)
         if (!acaoReconhecida && casoAtual.distratores) {
             for (let distrator of casoAtual.distratores) {
-                if (distrator.gatilhos_distratores.some(g => inputAluno.includes(g))) {
+                const validacaoDistrator = typeof idmtEngine !== 'undefined'
+                    ? idmtEngine.validarResposta(inputAluno, distrator.gatilhos_distratores)
+                    : { valido: distrator.gatilhos_distratores.some(g => inputAluno.toLowerCase().includes(g.toLowerCase())) };
+
+                if (validacaoDistrator.valido) {
                     adicionarMensagem("preceptor", distrator.resposta_preceptor);
                     estabilidade += distrator.impacto_estabilidade;
                     acaoReconhecida = true;
@@ -274,7 +288,6 @@
     }
 
     // --- TESTE RÁPIDO DO MOTOR ---
-    // Assim que a página carrega, ele puxa este caso de exemplo para você testar.
     window.onload = () => {
         iniciarPlantao({
             "id_caso": "hematologia_sta_01",
