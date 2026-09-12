@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnosis Engine | IDMT Pró</title>
+    <style>
+        :root {
+            --idmt-navy: #071426;
+            --idmt-blue: #1f5fae;
+            --idmt-green: #238b57;
+            --idmt-bg: #f7f9fc;
+            --idmt-ink: #1f2933;
+        }
+
+        body {
+            background-color: var(--idmt-navy);
+            color: var(--idmt-bg);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .engine-container {
+            width: 100%;
+            max-width: 900px;
+            background-color: var(--idmt-bg);
+            color: var(--idmt-ink);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            height: 95vh;
+        }
+
+        .header {
+            background-color: var(--idmt-navy);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 3px solid var(--idmt-blue);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* Barra de Sinais Vitais Compacta para Mobile */
+        .vitals-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background-color: #cbd5e1;
+            padding: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            gap: 4px;
+            color: var(--idmt-navy);
+            border-bottom: 1px solid #94a3b8;
+        }
+
+        .vital-item {
+            background: white;
+            padding: 4px;
+            border-radius: 4px;
+        }
+
+        .dashboard {
+            display: flex;
+            justify-content: space-between;
+            background-color: #e2e8f0;
+            padding: 10px 15px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .status-bar {
+            flex-grow: 1;
+            margin: 0 10px;
+            background-color: #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 12px;
+        }
+
+        .status-fill {
+            height: 100%;
+            background-color: var(--idmt-green);
+            width: 85%;
+            transition: width 0.3s ease, background-color 0.3s;
+        }
+
+        .clinical-area {
+            flex-grow: 1;
+            padding: 20px;
+            font-family: "Georgia", serif;
+            font-size: 1rem;
+            line-height: 1.5;
+            overflow-y: auto;
+            background-color: #ffffff;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .mensagem { margin-bottom: 15px; }
+        .paciente { color: #b91c1c; font-weight: bold; }
+        .preceptor { color: var(--idmt-blue); font-style: italic; }
+        .user { color: var(--idmt-ink); font-weight: bold; background: #f1f5f9; padding: 8px; border-radius: 6px; border-left: 3px solid var(--idmt-blue); }
+
+        /* Controles Inferiores Otimizados para Mobile (Nunca mais cortam) */
+        .controls {
+            padding: 15px;
+            background-color: #f1f5f9;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .btn-action { background-color: var(--idmt-blue); color: white; padding: 10px 16px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+        }
+
+        button {
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-help { background-color: #f59e0b; color: white; }
+        .btn-science { background-color: var(--idmt-navy); color: white; }
+        .btn-back { background-color: #64748b; color: white; }
+        button:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+<div class="engine-container">
+    <div class="header">
+        <h1>DIAGNOSIS ENGINE | IDMT PRÓ</h1>
+    </div>
+
+    <!-- Sinais Vitais Dinâmicos -->
+    <div class="vitals-bar">
+        <div class="vital-item">FC: <span id="val-fc">110</span> bpm</div>
+        <div class="vital-item">SpO2: <span id="val-spo2">93</span>%</div>
+        <div class="vital-item">PA: <span id="val-pa">98/60</span></div>
+        <div class="vital-item">GLI: <span id="val-gli">110</span> mg/dL</div>
+    </div>
+
+    <div class="dashboard">
+        <span>Pts: <span id="score-display">0</span></span>
+        <div class="status-bar">
+            <div id="health-bar" class="status-fill"></div>
+        </div>
+        <span>Estabilidade: <span id="health-display">85</span>%</span>
+    </div>
+
+    <!-- Área de Exibição do Caso Clínico (Omitindo o nome do diagnóstico final) -->
+    <div class="clinical-area" id="clinical-log">
+        <!-- Injetado via script -->
+    </div>
+
+    <div class="controls">
+        <div class="input-row">
+            <input type="text" id="user-input" placeholder="Digite sua conduta (ex: oxigenio, eletro, AAS)..." onkeypress="if(event.key === 'Enter') processarAcao()">
+            <button class="btn-action" onclick="processarAcao()">Agir</button>
+        </div>
+        <div class="action-buttons">
+            <button class="btn-help" onclick="pedirAjuda()">💡 Dica / Ajuda</button>
+            <button class="btn-science" onclick="scientificBoost()">🔬 PubMed</button>
+            <button class="btn-back" onclick="window.location.href='index.html'">⬅ Voltar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Importação do Motor Pró Estendido -->
+<script src="js/engine.js"></script>
+
+<script>
+    let pontuacao = 0;
+    let estabilidade = 85; 
+    let turnos = 0;
+    let casoAtual = null;
+
+    const clinicalLog = document.getElementById('clinical-log');
+    const userInput = document.getElementById('user-input');
+    const healthBar = document.getElementById('health-bar');
+    const healthDisplay = document.getElementById('health-display');
+    const scoreDisplay = document.getElementById('score-display');
+    
+    const valFc = document.getElementById('val-fc');
+    const valSpo2 = document.getElementById('val-spo2');
+    const valPa = document.getElementById('val-pa');
+
+    window.onload = () => {
+        // Caso clínico inicial de teste (Foco em raciocínio, sem entregar o diagnóstico)
+        iniciarCaso({
+            "id_caso": "iam_sala_vermelha_01",
+            "patologia": "Síndrome Coronariana Aguda",
+            "peso_dificuldade": 2.5,
+            "cenario_inicial": {
+                "fala_preceptor": "Paciente admitido na Sala Vermelha. Como colega de plantão, qual sua conduta inicial de suporte e investigação?",
+                "fala_paciente": "Doutor, meu peito tá apertando muito, dor forte que irradia pro braço esquerdo e sudorese intensa há 45 minutos..."
+            },
+            "ajuda_preceptor": "DIREÇÃO: Garanta monitorização, oxigênio se saturação baixa, ECG em até 10 minutos e antiagregação.",
+            "acoes_esperadas": [
+                { 
+                    "gatilhos_validos": ["eletro", "ecg", "monitorizacao"], 
+                    "resposta_preceptor": "Boa! ECG na mão em tempo recorde. Excluiu falhas maiores, mas o supra tá evidente. Vamos tratar.", 
+                    "impacto_estabilidade": 5, 
+                    "vitoria": false 
+                },
+                { 
+                    "gatilhos_validos": ["aas", "aspirina", "nitrato", "monabiche"], 
+                    "resposta_preceptor": "Perfeito, antiagregação e alívio isquêmico iniciados. O paciente aliviou um pouco a dor.", 
+                    "impacto_estabilidade": 15, 
+                    "vitoria": true 
+                }
+            ],
+            "red_flags": [
+                { 
+                    "gatilhos_fatais": ["alta", "liberar", "enviar para casa"], 
+                    "resposta_preceptor": "ALERTA VERMELHO! Liberar um infartado da Sala Vermelha é iatrogenia pura. O paciente piorou gravemente!", 
+                    "impacto_estabilidade": -40 
+                }
+            ],
+            "distratores": [
+                { 
+                    "gatilhos_distratores": ["ultrassom", "pocus", "endoscopia"], 
+                    "resposta_preceptor": "Perda de tempo precioso com exame não prioritário neste momento.", 
+                    "impacto_estabilidade": -10 
+                }
+            ]
+        });
+    };
+
+    function iniciarCaso(caso) {
+        casoAtual = caso;
+        estabilidade = 85;
+        pontuacao = 0;
+        turnos = 0;
+        clinicalLog.innerHTML = '';
+        
+        adicionarMensagem("preceptor", casoAtual.cenario_inicial.fala_preceptor);
+        adicionarMensagem("paciente", "Paciente: " + casoAtual.cenario_inicial.fala_paciente);
+        atualizarDashboard();
+    }
+
+    function processarAcao() {
+        const inputAluno = userInput.value.trim();
+        if (!inputAluno || !casoAtual) return;
+
+        turnos++;
+        adicionarMensagem("user", "Conduta: " + inputAluno);
+        let acaoReconhecida = false;
+
+        // 1. Red Flags
+        if (casoAtual.red_flags) {
+            for (let flag of casoAtual.red_flags) {
+                if (idmtEngine.verificarRedFlag(inputAluno, flag.gatilhos_fatais)) {
+                    adicionarMensagem("preceptor", flag.resposta_preceptor);
+                    const res = idmtEngine.calcularDesempenho(turnos, casoAtual.peso_dificuldade, 'red_flag');
+                    estabilidade += res.estabilidadeDelta;
+                    pontuacao += res.pontos;
+                    acaoReconhecida = true;
+                    break;
+                }
+            }
+        }
+
+        // 2. Ações Esperadas via IDMT Pró Engine
+        if (!acaoReconhecida && casoAtual.acoes_esperadas) {
+            for (let acao of casoAtual.acoes_esperadas) {
+                const validacao = idmtEngine.validarResposta(inputAluno, acao.gatilhos_validos);
+                if (validacao.valido) {
+                    adicionarMensagem("preceptor", acao.resposta_preceptor);
+                    const res = idmtEngine.calcularDesempenho(turnos, casoAtual.peso_dificuldade, 'acerto');
+                    pontuacao += res.pontos;
+                    estabilidade = Math.min(100, estabilidade + res.estabilidadeDelta);
+                    
+                    if (acao.vitoria) {
+                        adicionarMensagem("preceptor", "✅ Conduta de excelência! Caso estabilizado com sucesso.");
+                    }
+                    acaoReconhecida = true;
+                    break;
+                }
+            }
+        }
+
+        // 3. Distratores
+        if (!acaoReconhecida && casoAtual.distratores) {
+            for (let distrator of casoAtual.distratores) {
+                const valDistrator = idmtEngine.validarResposta(inputAluno, distrator.gatilhos_distratores);
+                if (valDistrator.valido) {
+                    adicionarMensagem("preceptor", distrator.resposta_preceptor);
+                    const res = idmtEngine.calcularDesempenho(turnos, casoAtual.peso_dificuldade, 'distrator');
+                    estabilidade += res.estabilidadeDelta;
+                    pontuacao += res.pontos;
+                    acaoReconhecida = true;
+                    break;
+                }
+            }
+        }
+
+        // 4. Ação genérica / Fora do protocolo imediato
+        if (!acaoReconhecida) {
+            adicionarMensagem("preceptor", "Opa, essa não é a prioridade agora no plantão. Vamos focar no essencial.");
+            const res = idmtEngine.calcularDesempenho(turnos, casoAtual.peso_dificuldade, 'generico');
+            estabilidade += res.estabilidadeDelta;
+            pontuacao += res.pontos;
+        }
+
+        atualizarDashboard();
+        userInput.value = '';
+        clinicalLog.scrollTop = clinicalLog.scrollHeight;
+    }
+
+    function atualizarDashboard() {
+        if (estabilidade <= 0) {
+            estabilidade = 0;
+            adicionarMensagem("preceptor", "🚨 ALERTA CRÍTICO: Perda de estabilidade hemodinâmica grave!");
+        }
+
+        healthDisplay.innerText = estabilidade;
+        healthBar.style.width = estabilidade + '%';
+        scoreDisplay.innerText = Math.max(0, Math.floor(pontuacao));
+
+        // Atualização visual dos sinais vitais simulados baseada na estabilidade
+        if (estabilidade < 50) {
+            valFc.innerText = "140";
+            valSpo2.innerText = "85";
+            valPa.innerText = "70/40";
+        }
+
+        if (estabilidade > 60) healthBar.style.backgroundColor = 'var(--idmt-green)';
+        else if (estabilidade > 30) healthBar.style.backgroundColor = '#f59e0b';
+        else healthBar.style.backgroundColor = '#dc2626';
+    }
+
+    function pedirAjuda() {
+        if(!casoAtual) return;
+        pontuacao = Math.max(0, pontuacao - 10);
+        adicionarMensagem("preceptor", casoAtual.ajuda_preceptor);
+        atualizarDashboard();
+    }
+
+    function scientificBoost() {
+        if(!casoAtual) return;
+        adicionarMensagem("preceptor", `🔬 Buscando diretrizes atualizadas sobre "${casoAtual.patologia}" no repositório...`);
+        setTimeout(() => {
+            adicionarMensagem("preceptor", "✅ Diretriz carregada. Foco na prioridade clínica.");
+            clinicalLog.scrollTop = clinicalLog.scrollHeight;
+        }, 1000);
+    }
+
+    function adicionarMensagem(classe, texto) {
+        const div = document.createElement('div');
+        div.className = 'mensagem ' + classe;
+        div.innerText = texto;
+        clinicalLog.appendChild(div);
+    }
+</script>
+</body>
+</html>
