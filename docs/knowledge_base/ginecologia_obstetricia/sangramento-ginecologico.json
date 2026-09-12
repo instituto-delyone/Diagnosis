@@ -1,153 +1,89 @@
 [
   {
-    "modulo": "Ginecologia e Obstetricia",
-    "cenario_id": "GO_UROGIN_001",
-    "titulo": "Investigação de Perda Urinária aos Esforços",
-    "vinheta_clinica": "Paciente 48 anos, G3P3 (três partos vaginais), IMC 31. Queixa-se de perda involuntária de urina ao tossir, espirrar ou pegar peso na academia, causando grande constrangimento social. Nega urgência miccional, noctúria ou disúria. Exame físico: ausência de prolapsos visíveis, perda de urina observada à manobra de Valsalva.",
-    "sinais_vitais": {
-      "PA": "120/75 mmHg",
-      "FC": "78 bpm",
-      "Temperatura": "36.5 C"
-    },
+    "id_caso": "GO_UROGIN_001",
+    "patologia": "Incontinência Urinária de Esforço (IUE) por Hipermobilidade Vesical",
+    "modo_sugerido": "Ambulatório / Uroginecologia",
+    "peso_dificuldade": 1.8,
     
-    "hipoteses_concorrentes": [
+    "cenario_inicial": {
+      "fala_preceptor": "Paciente de 48 anos, G3P3 (partos vaginais), com perda involuntária de urina aos esforços físicos (tossir, espirrar, pegar peso). Exame físico sem prolapsos visíveis, mas com perda observada à manobra de Valsalva.",
+      "fala_paciente": "Doutor, toda vez que tusso, espirro ou pego peso na academia, escapa urina, o que me causa um constrangimento social terrível."
+    },
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: Perda urinária associada exclusivamente a esforços físicos sem sintomas de urgência sugere Incontinência Urinária de Esforço. Exclua infecção com EAS e confirme a pressão de perda com estudo urodinâmico.",
+
+    "acoes_esperadas": [
       {
-        "id": "H1",
-        "nome": "Incontinência Urinária de Esforço (IUE) por Hipermobilidade Vesical",
-        "prior_pre_teste": 0.65,
-        "verdadeira": true
+        "gatilhos_validos": ["eas", "urocultura", "estudo urodinamico", "cistometria"],
+        "resposta_preceptor": "Exames realizados. Urocultura negativa e estudo urodinâmico demonstrando Pressão de Perda ao Esforço (PPE) de 110 cmH2O. Qual a conduta cirúrgica e terapêutica definitiva?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
       },
       {
-        "id": "H2",
-        "nome": "Bexiga Hiperativa (Síndrome de Urgência)",
-        "prior_pre_teste": 0.15,
-        "verdadeira": false
-      },
-      {
-        "id": "H3",
-        "nome": "Infecção do Trato Urinário (ITU)",
-        "prior_pre_teste": 0.15,
-        "verdadeira": false
-      },
-      {
-        "id": "H4",
-        "nome": "Incontinência por Transbordamento",
-        "prior_pre_teste": 0.05,
-        "verdadeira": false
+        "gatilhos_validos": ["sling", "tvt", "tot", "fisioterapia pelvica", "cirurgia de sling"],
+        "resposta_preceptor": "Conduta perfeita! PPE > 90 cmH2O indicando hipermobilidade tratada com sucesso através da cirurgia de Sling e reabilitação pélvica. Caso resolvido.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
       }
     ],
 
-    "propedêutica_disponivel": [
+    "red_flags": [
       {
-        "acao": "EAS (Urina Tipo 1) e Urocultura",
-        "custo_iep": 1,
-        "resultados_esperados": {
-          "H1": {
-            "achado": "EAS normal, sem leucocitúria ou nitrito. Urocultura negativa.",
-            "LR_positivo": 2.0,
-            "LR_negativo": 0.1
-          }
-        }
-      },
-      {
-        "acao": "Estudo Urodinâmico (Fluxometria + Cistometria + Estudo Miccional)",
-        "custo_iep": 3,
-        "resultados_esperados": {
-          "H1": {
-            "achado": "Ausência de contrações não inibidas do detrusor na fase de enchimento. Perda de urina aos esforços com Pressão de Perda ao Esforço (PPE) de 110 cmH2O.",
-            "LR_positivo": 25.0,
-            "LR_negativo": 0.05
-          }
-        }
-      },
-      {
-        "acao": "Cistoscopia",
-        "custo_iep": 5,
-        "penalidade": "A cistoscopia não é o grande exame para incontinência. Está indicada para investigação de irritação súbita ou hematúria em maiores de 50 anos (pesquisa de neoplasia). Perda de IEP.",
-        "resultados_esperados": null
+        "gatilhos_fatais": ["anticolinergicos", "oxibutinina", "alta sem tratamento"],
+        "resposta_preceptor": "ERRO CRÍTICO! Prescrever anticolinérgicos para uma Incontinência de Esforço pura agrava o esvaziamento vesical sem resolver o defeito esfincteriano ou a hipermobilidade.",
+        "impacto_estabilidade": -100
       }
     ],
 
-    "condutas_terapeuticas": [
+    "distratores": [
       {
-        "acao": "Cirurgia de Sling (TVT ou TOT) + Fisioterapia Pélvica",
-        "correta_para": ["H1"],
-        "feedback": "Correto! O PPE > 90 cmH2O indica hipermobilidade vesical. A cirurgia de Sling é a técnica padrão-ouro atual tanto para hipermobilidade quanto para defeito esfincteriano."
-      },
-      {
-        "acao": "Prescrever Anticolinérgicos (Oxibutinina ou Tolterodina)",
-        "correta_para": ["H2"],
-        "feedback": "Incorreto. Anticolinérgicos relaxam o detrusor e são indicados para Bexiga Hiperativa (síndrome de urgência). Não resolvem a Incontinência de Esforço."
+        "gatilhos_distratores": ["cistoscopia", "ultrassom pélvico simples"],
+        "resposta_preceptor": "A cistoscopia e exames de imagem simples não são indicados para avaliação primária de IUE típica sem hematúria ou irritação refratária.",
+        "impacto_estabilidade": -10
       }
     ]
   },
   {
-    "modulo": "Ginecologia e Obstetricia",
-    "cenario_id": "GO_UROGIN_002",
-    "titulo": "Abordagem de Distopia Genital",
-    "vinheta_clinica": "Paciente 68 anos, G5P5 (partos domiciliares). Procura o serviço com queixa de 'bola na vagina' que piora ao fim do dia e sensação de peso pélvico. Relata vida sexual ativa com o parceiro. Ao exame físico na posição semi-elevada, observa-se eversão das paredes vaginais e exteriorização do colo uterino além do hímen durante a manobra de Valsalva.",
-    "sinais_vitais": {
-      "PA": "130/80 mmHg",
-      "FC": "74 bpm",
-      "Temperatura": "36.6 C"
-    },
+    "id_caso": "GO_UROGIN_002",
+    "patologia": "Prolapso Uterino Sintomático (Distopia Genital)",
+    "modo_sugerido": "Ambulatório / Uroginecologia",
+    "peso_dificuldade": 2.0,
     
-    "hipoteses_concorrentes": [
+    "cenario_inicial": {
+      "fala_preceptor": "Paciente de 68 anos, G5P5 (partos domiciliares), com sensação de 'bola na vagina' e peso pélvico que piora ao fim do dia. Vida sexual ativa. Exame físico com eversão das paredes e exteriorização do colo uterino além do hímen ao Valsalva.",
+      "fala_paciente": "Doutor, sinto uma bola pesada saindo pela vagina no fim do dia, e isso atrapalha até a minha relação com meu marido."
+    },
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: Sensação de peso e exteriorização uterina além do hímen caracterizam distopia genital avançada (prolapso uterino sintomático). O diagnóstico é eminentemente clínico por exame físico sistematizado (POP-Q).",
+
+    "acoes_esperadas": [
       {
-        "id": "H1",
-        "nome": "Prolapso Uterino Sintomático",
-        "prior_pre_teste": 0.70,
-        "verdadeira": true
+        "gatilhos_validos": ["pop-q", "exame fisico", "classificacao pop"],
+        "resposta_preceptor": "Exame físico com sistema POP-Q confirmando Ponto C positivo (+4) além do hímen. Qual a conduta cirúrgica adequada para paciente sintomática com vida sexual ativa e sem desejo de preservar a fertilidade?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
       },
       {
-        "id": "H2",
-        "nome": "Prolapso de Cúpula Vaginal",
-        "prior_pre_teste": 0.05,
-        "verdadeira": false
-      },
-      {
-        "id": "H3",
-        "nome": "Colo Hipertrófico sem Prolapso",
-        "prior_pre_teste": 0.25,
-        "verdadeira": false
+        "gatilhos_validos": ["histerectomia vaginal", "reconstrucao do assoalho", "cirurgia vaginal"],
+        "resposta_preceptor": "Conduta perfeita! Histerectomia vaginal com reconstrução do assoalho pélvico executada com sucesso, preservando a função sexual e corrigindo o defeito anatômico.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
       }
     ],
 
-    "propedêutica_disponivel": [
+    "red_flags": [
       {
-        "acao": "Exame Físico com Classificação POP-Q",
-        "custo_iep": 1,
-        "resultados_esperados": {
-          "H1": {
-            "achado": "Ponto C (colo do útero) com valor positivo (+4), estendendo-se além do hímen. Ausência de descida isolada de parede anterior ou posterior.",
-            "LR_positivo": 50.0,
-            "LR_negativo": 0.01
-          }
-        }
-      },
-      {
-        "acao": "Ultrassonografia Pélvica",
-        "custo_iep": 2,
-        "penalidade": "O diagnóstico de distopias é eminentemente clínico (visualização e palpação com sistema POP-Q). Exame de imagem desnecessário para firmar o diagnóstico.",
-        "resultados_esperados": null
+        "gatilhos_fatais": ["colpocleise", "operacao de le fort", "alta"],
+        "resposta_preceptor": "ERRO IATROGÊNICO GRAVÍSSIMO! A cirurgia de Colpocleise (Le Fort) fecha o canal vaginal e é formalmente contraindicada em pacientes que mantêm atividade sexual.",
+        "impacto_estabilidade": -100
       }
     ],
 
-    "condutas_terapeuticas": [
+    "distratores": [
       {
-        "acao": "Histerectomia Total Vaginal com Reconstrução do Assoalho Pélvico",
-        "correta_para": ["H1"],
-        "feedback": "Conduta Perfeita! Para pacientes sintomáticas com prolapso uterino sem desejo de preservação da fertilidade, a cirurgia de escolha é a histerectomia vaginal acompanhada do reparo dos defeitos do assoalho."
-      },
-      {
-        "acao": "Cirurgia de Colpocleise (Le Fort)",
-        "correta_para": [],
-        "feedback": "Erro iatrogênico gravíssimo. A colpocleise promove o fechamento da vagina e é formalmente contraindicada em pacientes que mantêm atividade sexual."
-      },
-      {
-        "acao": "Cirurgia de Manchester (Amputação parcial do colo e fixação no paramétrio)",
-        "correta_para": [],
-        "feedback": "Subótimo. A técnica de Manchester é reservada para mulheres nuligestas ou com desejo de manter o útero, o que não é o caso principal aqui."
+        "gatilhos_distratores": ["ultrassom pelvico", "ressonancia magnetica"],
+        "resposta_preceptor": "O diagnóstico de distopias é clínico por inspeção e toque (POP-Q); exames de imagem adicionais são desnecessários para fechar a conduta.",
+        "impacto_estabilidade": -10
       }
     ]
   }
