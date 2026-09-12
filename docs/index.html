@@ -367,15 +367,16 @@
     if (skipsRestantes <= 0) btnSkip.disabled = true;
   }
 
-  async function carregarBaseDeConhecimento() {
+    async function carregarBaseDeConhecimento() {
     let casosCarregados = 0;
     let modulosTrackers = []; 
 
     for (const [categoria, dados] of Object.entries(manifestoConhecimento)) {
       for (const arquivo of dados.arquivos) {
         try {
+          // Adicionamos um controle de fetch seguro com tratamento individual por arquivo
           const res = await fetch(dados.pasta + arquivo);
-          if (res.ok) {
+          if (res && res.ok) {
             const json = await res.json();
             const itens = Array.isArray(json) ? json : [json];
             
@@ -397,18 +398,20 @@
             }
           }
         } catch (error) {
-           console.log(`[Parser IDMT] Leitura adaptada aplicada em: ${arquivo}`);
+           // Ignora o arquivo ausente e continua o loop sem travar a aplicação
+           console.warn(`[Parser IDMT] Módulo ignorado ou indisponível: ${arquivo}`);
         }
       }
     }
     
+    // Garante que o status atualize mesmo se carregou apenas parte dos módulos
     if (casosCarregados > 0) {
       loadingStatus.style.color = "var(--green)";
       loadingStatus.innerText = `Biblioteca Mestre Online! ${casosCarregados} cenários clínicos carregados.`;
       renderizarTagsModulos(modulosTrackers);
     } else {
       loadingStatus.style.color = "var(--red)";
-      loadingStatus.innerText = "Atenção: Nenhum módulo compatível encontrado na pasta docs.";
+      loadingStatus.innerText = "Atenção: Verifique os caminhos dos arquivos na pasta docs.";
     }
   }
 
