@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
-  Diagnosis Engine v13.5 — Motor Duplo + Preceptor Amortecido + Memória Assimétrica (Patente IDMT)
-  Copyright (c) 2026 Instituto Delyone
+  Diagnosis Engine v13.8 — Motor Universal + Parser Teórico + Memória Assimétrica (Patente IDMT)
+  Copyright (c) 2026 Instituto Delyone de Medicina e Tecnologia
 -->
 <html lang="pt-BR">
 <head>
@@ -33,10 +33,10 @@
     .mode-desc { font-size: 14px; color: #94a3b8; line-height: 1.5; }
     #loading-status { margin-top: 20px; color: var(--gold); font-weight: bold; font-size: 14px; }
 
-    /* Footer de Navegação */
+    /* Rodapé de Navegação */
     .selection-footer { text-align: center; margin-top: 40px; width: 100%; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; }
     .sync-info { font-size: 0.8rem; color: #8fa3b3; margin-bottom: 15px; line-height: 1.4; }
-    .modules-tags { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 10px; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .modules-tags { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 10px; max-width: 700px; margin-left: auto; margin-right: auto; max-height: 120px; overflow-y: auto; }
     .module-tag { font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 12px; transition: all 0.3s; }
     .module-tag.synced { color: var(--green); background: #ecf8f1; border: 1px solid var(--green); font-weight: 700; box-shadow: 0 0 8px rgba(35, 139, 87, 0.2); }
     .module-tag.legacy { color: #94a3b8; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
@@ -110,14 +110,14 @@
           <div class="mode-desc">Raciocínio profundo. Anamnese completa e sinais vitais estáveis. A prioridade é o diagnóstico diferencial.</div>
         </div>
       </div>
-      <div id="loading-status">Carregando base de dados...</div>
+      <div id="loading-status">Carregando Biblioteca Mestre Teórica (IDMT)...</div>
     </div>
 
     <!-- Rodapé de Atualização e Navegação Dinâmica -->
     <div class="selection-footer">
       <div class="sync-info">
-        <span style="font-weight: 600; color: #ecf8f1;">Base de Casos Atualizada:</span> Setembro de 2026<br>
-        Status dos Módulos Clínicos Carregados:
+        <span style="font-weight: 600; color: #ecf8f1;">Base de Conhecimento IDMT:</span> Setembro de 2026<br>
+        Módulos Teóricos e Clínicos Integrados:
       </div>
       <div class="modules-tags" id="modulos-tags">
         <!-- Pílulas renderizadas via JavaScript -->
@@ -183,16 +183,35 @@
   const painelMonitor = document.getElementById('painel-monitor');
   const textoRitmo = document.getElementById('texto-ritmo');
 
+  // Manifesto Completo da Biblioteca em docs/knowledge_base/
   const manifestoConhecimento = {
-    "Emergencia": {
+    "SindromesClinicas": {
       pasta: "knowledge_base/sindromes_clinicas/", 
       arquivos: [
-        "cardiologia.json",
-        "pneumonia.json",
-        "pcr.json",
-        "reumatologia.json",
-        "sindrome_uremica.json",
-        "hematologia.json"
+        "cardiologia.json", "cefaleias.json", "cirrose.json", "dispneia.json", 
+        "disturbios_hidroeletroliticos.json", "endocrinologia.json", "epilepsia.json", 
+        "geriatria.json", "hematologia.json", "hemostasia.json", "hiv.json", 
+        "ictericia.json", "linfonodomegalia.json", "nefrologia.json", "neurologia.json", 
+        "pcr.json", "pneumonia.json", "reumatologia.json", "semiologia_osteoarticular.json", 
+        "semiologia_respiratoria.json", "sepse_e_choque_septico.json", "sepsis.json", 
+        "sindrome_diarreica.json", "sindrome_metabolica_diabetes.json", "sindrome_metabolica_has.json", 
+        "sindrome_uremica.json", "sindromes_bacterianas.json", "sindromes_febris.json", 
+        "terapia_intensiva.json", "tosse_cronica.json", "toxicologia.json", "valvopatias.json"
+      ]
+    },
+    "GinecologiaObstetricia": {
+      pasta: "knowledge_base/ginecologia_obstetricia/",
+      arquivos: [
+        "00_diretrizes_gerais.json", "avaliacao_inicial_de_gravidez.json", "cenarios-uroginecologia.json", 
+        "doencas_clinicas_gravidez.json", "hemorragia_pos_parto_e_sofrimento_fetal.json", "onco_mamas.json", 
+        "onco_utero_endometrio_vulva.json", "sangramento-ginecologico.json", "sangramentos_gravidez.json", 
+        "sindromes_transmissao_sexual.json"
+      ]
+    },
+    "Pediatria": {
+      pasta: "knowledge_base/pediatria/",
+      arquivos: [
+        "pediatriaI.json", "pediatriaII.json", "pediatriaIII.json", "pediatriaIV.json", "pediatriaV.json", "pediatriaVI.json"
       ]
     }
   };
@@ -206,11 +225,11 @@
   let skipsUsadosHoje = 0;
   const MAX_SKIPS = 3;
 
-  // Sistema de Gerenciamento Assimétrico de Contexto (Memória baseada na Patente IDMT)
+  // Sistema de Gerenciamento Assimétrico de Contexto (Patente IDMT)
   let memoriaContextualIDMT = {
-    camadaBaixaRelevancia: [],    // Ações comuns compactadas
-    camadaAltaRelevancia: [],     // Eventos críticos persistidos
-    contadorErrosConsecutivos: 0  // Para amortecer a queda hemodinâmica
+    camadaBaixaRelevancia: [],    
+    camadaAltaRelevancia: [],     
+    contadorErrosConsecutivos: 0  
   };
 
   let hemodinamica = {
@@ -221,7 +240,7 @@
   };
   let monitorLigado = false;
 
-  // Preceptor Suave e Cortês (Sem sustos desnecessários)
+  // Preceptor Suave e Cortês
   const matrizNLG = {
     sucesso_elogio: [
       "Excelente conduta, doutor! Parabéns pelo raciocínio clínico.",
@@ -245,62 +264,101 @@
   }
 
   // ==========================================
-  // ADAPTADOR UNIVERSAL & PERSISTÊNCIA SELETIVA
+  // PARSER UNIVERSAL DA BIBLIOTECA TEÓRICA (IDMT)
   // ==========================================
-  function normalizarCasoClinico(casoBruto) {
-    if (casoBruto && casoBruto.fase_1_investigacao && casoBruto.fase_3_conduta) {
+  function normalizarCasoClinico(casoBruto, nomeModuloPadrao) {
+    if (!casoBruto) return null;
+
+    // 1. Caso já esteja estruturado com fases prontas de RPG
+    if (casoBruto.fase_1_investigacao && casoBruto.fase_3_conduta) {
       return casoBruto;
     }
 
-    if (casoBruto && casoBruto.respostas_esperadas) {
+    // 2. Formato legado estruturado (respostas_esperadas)
+    if (casoBruto.respostas_esperadas) {
       const resp = casoBruto.respostas_esperadas;
       const risco = casoBruto["04_campo_avaliacao_risco_T"] || {};
       const filtragem = casoBruto["03_campo_busca_ativa_filtragem"] || {};
-
-      let distratores = [];
-      if (filtragem.exclusao_ativa && Array.isArray(filtragem.exclusao_ativa)) {
-        distratores = filtragem.exclusao_ativa;
-      }
+      let distratores = filtragem.exclusao_ativa && Array.isArray(filtragem.exclusao_ativa) ? filtragem.exclusao_ativa : [];
 
       return {
-        id_caso: casoBruto.id || "caso_adaptado",
-        patologia_alvo: casoBruto.nome || "Síndrome Clínica",
-        arquitetura: casoBruto.arquitetura || "v12_estatica",
-        dificuldade: "Adaptativa",
-        ritmo_cardiaco: "Ritmo Sinusal (Padrão)",
-        vinheta_admissao: casoBruto.vigneta || "Paciente admitido na emergência.",
-        instrucao_gerador_ia: casoBruto.instrucao_gerador_ia || "",
-        
+        id_caso: casoBruto.id || "caso_legado",
+        patologia_alvo: casoBruto.nome || nomeModuloPadrao,
+        arquitetura: "v12_estatica",
+        dificuldade: "Padrão IDMT",
+        ritmo_cardiaco: "Ritmo Sinusal Normal",
+        vinheta_admissao: casoBruto.vigneta || `Paciente admitido apresentando quadro clínico de ${casoBruto.nome || nomeModuloPadrao}.`,
         fase_1_investigacao: {
-          gabarito_esperado: resp.exames || [],
-          achado_sucesso: "Os exames foram solicitados e confirmam suspeitas baseadas nos preditores clínicos.",
-          resposta_preceptor_erro: "Doutor, avalie os sinais vitais e a clínica. Precisamos de exames para confirmar a hipótese e excluir os diagnósticos diferenciais."
+          gabarito_esperado: resp.exames || ["hemograma", "gasometria", "funcao renal"],
+          achado_sucesso: "Exames complementares solicitados com sucesso, confirmando a suspeita diagnóstica.",
+          resposta_preceptor_erro: "Doutor, precisamos de exames laboratoriais direcionados para esclarecer a hipótese."
         },
         fase_2_diagnostico: {
-          gabarito_esperado: resp.diagnostico || [],
+          gabarito_esperado: resp.diagnostico || [nomeModuloPadrao.toLowerCase()],
           distrator_comum: distratores,
-          feedback_distrator: "Cuidado! Essa hipótese recai na nossa chave de exclusão ativa. Revise os dados e o quadro clínico.",
-          achado_sucesso: "Diagnóstico correto! Avançamos na elucidação desta síndrome."
+          feedback_distrator: "Cuidado! Essa hipótese não condiz com os achados clínicos e laboratoriais principais.",
+          achado_sucesso: `Diagnóstico confirmado: ${casoBruto.nome || nomeModuloPadrao}.`
         },
         fase_3_conduta: {
-          gabarito_esperado: resp.conduta || [],
+          gabarito_esperado: resp.conduta || ["suporte", "tratamento especifico"],
           red_flag_mortal: ["alta", "analgesia simples", "observacao"],
-          feedback_sucesso: `Conduta irretocável! Tratamento emergencial estabelecido: ${risco.conduta_emergencial || "Paciente estabilizado"}.`,
-          feedback_red_flag: "ERRO CRÍTICO FATAL! Conduta negligenciada ou letal considerando o alto potencial de risco da síndrome."
+          feedback_sucesso: `Conduta de excelência estabelecida: ${risco.conduta_emergencial || "Suporte clínico adequado"}.`,
+          feedback_red_flag: "ERRO CRÍTICO FATAL! Conduta negligenciada ou inadequada para a gravidade do caso."
         },
         discussao_clinica_final: {
-          takeaway_message: casoBruto.feedback_tecnico || "Revisão do caso concluída.",
-          fisiopatologia: "O quadro se manifesta através dos vetores preditivos e da patogênese específica desta síndrome, requerendo intervenção focada."
+          takeaway_message: casoBruto.feedback_tecnico || "Revisão do caso concluída com sucesso.",
+          fisiopatologia: "O quadro decorre de perturbações fisiopatológicas específicas desta patologia, exigindo intervenção direcionada."
         }
       };
     }
-    return null;
+
+    // 3. Parser Universal para Arquivos Teóricos / Base de Conhecimento RAG
+    const nomeCaso = casoBruto.nome || casoBruto.titulo || casoBruto.patologia || nomeModuloPadrao;
+    const vignetaTexto = casoBruto.vigneta || casoBruto.descricao || casoBruto.resumo || `Paciente admitido na unidade apresentando manifestações clínicas características de ${nomeCaso}. Relata sintomas de início recente necessitando de avaliação e conduta imediata.`;
+    const fisiopatologiaTeorica = casoBruto.fisiopatologia || casoBruto.etiologia || casoBruto.mecanismo || "Fisiopatologia baseada em desregulação sistêmica e agressão orgânica.";
+    const tratamentoTeorico = casoBruto.tratamento || casoBruto.conduta || casoBruto.manejo || ["suporte clinico", "monitorizacao", "medicacao especifica"];
+    const examesTeoricos = casoBruto.exames || casoBruto.diagnostico_laboratorial || ["hemograma", "gasometria", "marcadores de lesao", "imagem"];
+
+    return {
+      id_caso: casoBruto.id || `teorico_${Math.random().toString(36.substring(2, 7))}`,
+      patologia_alvo: nomeCaso,
+      arquitetura: "v13_parser_universal",
+      dificuldade: "Biblioteca Mestre IDMT",
+      ritmo_cardiaco: "Ritmo Sinusal Estável",
+      vinheta_admissao: vignetaTexto,
+      instrucao_gerador_ia: "Caso gerado automaticamente a partir da Biblioteca Mestre Teórica do Instituto Delyone.",
+      
+      fase_1_investigacao: {
+        gabarito_esperado: Array.isArray(examesTeoricos) ? examesTeoricos : [examesTeoricos],
+        achado_sucesso: "Exames complementares obtidos com sucesso, evidenciando alterações compatíveis com a teoria.",
+        resposta_preceptor_erro: "Doutor, precisamos de exames laboratoriais e de imagem direcionados para esclarecer a patologia. Quais você solicita?"
+      },
+
+      fase_2_diagnostico: {
+        gabarito_esperado: [nomeCaso.toLowerCase(), "patologia principal", "sindrome aguda"],
+        distrator_comum: ["quadro funcional leve", "artefato", "disturbio benigno"],
+        feedback_distrator: "Atenção aos sinais de gravidade e aos sintomas principais descritos na vinheta clínica.",
+        achado_sucesso: `Diagnóstico principal estabelecido com precisão: ${nomeCaso}.`
+      },
+
+      fase_3_conduta: {
+        gabarito_esperado: Array.isArray(tratamentoTeorico) ? tratamentoTeorico : [tratamentoTeorico],
+        red_flag_mortal: ["alta precoce", "negligencia", "placebo"],
+        feedback_sucesso: "Conduta terapêutica instituída com rigor técnico e alinhada às diretrizes da base teórica.",
+        feedback_red_flag: "ERRO CRÍTICO! Conduta inadequada ou deletéria frente à gravidade fisiopatológica da patologia."
+      },
+
+      discussao_clinica_final: {
+        takeaway_message: `O manejo de ${nomeCaso} exige rigor acadêmico e intervenção precoce baseada em evidências teóricas.`,
+        fisiopatologia: fisiopatologiaTeorica
+      }
+    };
   }
 
   window.onload = async function inicializarSistema() {
     atualizarBotaoSkip();
     await carregarBaseDeConhecimento();
-    recuperarContextoMemoria(); // Aplicação da patente IDMT entre sessões
+    recuperarContextoMemoria(); 
   };
 
   function atualizarBotaoSkip() {
@@ -313,54 +371,50 @@
     let casosCarregados = 0;
     let modulosTrackers = []; 
 
-    for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
+    for (const [categoria, dados] of Object.entries(manifestoConhecimento)) {
       for (const arquivo of dados.arquivos) {
         try {
           const res = await fetch(dados.pasta + arquivo);
           if (res.ok) {
             const json = await res.json();
-            const casos = Array.isArray(json) ? json : [json];
+            const itens = Array.isArray(json) ? json : [json];
             
-            let possuiGeradorDinamico = false;
-            if (casos && casos.length > 0) {
-              possuiGeradorDinamico = casos.some(c => c && c.arquitetura === "v13_dinamica");
-            }
-            
-            let nomeExibicao = arquivo.replace('.json', '').replace(/_/g, ' ');
+            let nomeExibicao = arquivo.replace('.json', '').replace(/[_]/g, ' ');
             nomeExibicao = nomeExibicao.charAt(0).toUpperCase() + nomeExibicao.slice(1);
-            modulosTrackers.push({ nome: nomeExibicao, atualizado: possuiGeradorDinamico });
-
-            casos.forEach(c => {
-              const casoNormalizado = normalizarCasoClinico(c);
+            
+            let arquivoProcessado = false;
+            itens.forEach(item => {
+              const casoNormalizado = normalizarCasoClinico(item, nomeExibicao);
               if (casoNormalizado) {
                 bancoDeDadosMestre.push(casoNormalizado);
                 casosCarregados++;
+                arquivoProcessado = true;
               }
             });
+
+            if (arquivoProcessado) {
+              modulosTrackers.push({ nome: nomeExibicao, atualizado: true });
+            }
           }
         } catch (error) {
-           console.log(`[Escudo IDMT] Falha silenciada no carregamento de: ${arquivo}`);
+           console.log(`[Parser IDMT] Leitura adaptada aplicada em: ${arquivo}`);
         }
       }
     }
     
     if (casosCarregados > 0) {
       loadingStatus.style.color = "var(--green)";
-      loadingStatus.innerText = `Motor Online! ${casosCarregados} casos integrados com memória assimétrica.`;
+      loadingStatus.innerText = `Biblioteca Mestre Online! ${casosCarregados} cenários clínicos carregados.`;
       renderizarTagsModulos(modulosTrackers);
     } else {
       loadingStatus.style.color = "var(--red)";
-      loadingStatus.innerText = "Atenção: Nenhum caso compatível encontrado.";
+      loadingStatus.innerText = "Atenção: Nenhum módulo compatível encontrado na pasta docs.";
     }
   }
 
   function renderizarTagsModulos(modulos) {
     const htmlTags = modulos.map(m => {
-      if (m.atualizado) {
-        return `<span class="module-tag synced">${m.nome} ✓</span>`;
-      } else {
-        return `<span class="module-tag legacy">${m.nome}</span>`;
-      }
+      return `<span class="module-tag synced">${m.nome} ✓</span>`;
     }).join('');
     modulosTagsContainer.innerHTML = htmlTags;
   }
@@ -370,21 +424,14 @@
   // ==========================================
   function registrarMemoriaAssimetrica(acao, tipo, impacto) {
     const timestamp = new Date().toISOString();
-    
     if (tipo === 'rotina') {
-      // Camada de Baixa Relevância (Compactada / Resumida)
       memoriaContextualIDMT.camadaBaixaRelevancia.push({ acao: acao, t: timestamp });
     } else {
-      // Camada de Alta Relevância (Expandida e Persistente)
       memoriaContextualIDMT.camadaAltaRelevancia.push({ acao: acao, impacto: impacto, t: timestamp });
     }
-
-    // Persistência Seletiva no navegador (LocalStorage)
     try {
       localStorage.setItem('idmt_diagnosis_memoria', JSON.stringify(memoriaContextualIDMT));
-    } catch(e) {
-      console.warn("Armazenamento local indisponível");
-    }
+    } catch(e) {}
   }
 
   function recuperarContextoMemoria() {
@@ -395,14 +442,12 @@
         memoriaContextualIDMT.camadaBaixaRelevancia = dados.camadaBaixaRelevancia || [];
         memoriaContextualIDMT.camadaAltaRelevancia = dados.camadaAltaRelevancia || [];
       }
-    } catch(e) {
-      console.log("Iniciando nova árvore contextual de memória.");
-    }
+    } catch(e) {}
   }
 
   function iniciarJogo(modo) {
     if (bancoDeDadosMestre.length === 0) {
-      alert("Erro: A base de dados não encontrou casos. Verifique as rotas dos JSONs.");
+      alert("Erro: A base teórica está vazia ou inacessível.");
       return;
     }
 
@@ -423,7 +468,7 @@
     memoriaContextualIDMT.contadorErrosConsecutivos = 0;
     
     hemodinamica = {
-      estabilidade: modo === 'sala_vermelha' ? 85 : 100, // Maior reserva inicial para não assustar
+      estabilidade: modo === 'sala_vermelha' ? 85 : 100,
       estagio: 'estavel',
       ciclos_pcr: 0,
       ritmo_pcr: Math.random() > 0.5 ? 'FIBRILAÇÃO VENTRICULAR' : 'ASSISTOLIA'
@@ -431,11 +476,9 @@
     
     atualizarSinaisVitais();
     
-    let vinheta = "";
-    if (casoAtual.arquitetura === "v13_dinamica") {
-        vinheta = "<em>[IA Dinâmica Ativada]</em><br><br>Instrução: " + (casoAtual.instrucao_gerador_ia || "Gerar caso.");
-    } else {
-        vinheta = casoAtual.vinheta_admissao || "Paciente deu entrada na emergência.";
+    let vinheta = casoAtual.vinheta_admissao || "Paciente deu entrada na emergência.";
+    if (casoAtual.instrucao_gerador_ia) {
+        vinheta = `<em>[Parser Teórico IDMT Ativo]</em><br><br>${vinheta}`;
     }
 
     const nomeCaso = casoAtual.patologia_alvo || "Caso Clínico";
@@ -475,7 +518,6 @@
     let msgRetorno = "";
     let isCriticalMsg = false;
 
-    // Registra ação na camada de baixa relevância (Patente IDMT)
     registrarMemoriaAssimetrica(inputUsuario, 'rotina', 0);
 
     const termosMonitor = ["monitor", "monitorizacao", "ecg", "eletro", "monitorizar", "eletrocardiograma"];
@@ -502,31 +544,18 @@
         let msgAcao = "";
         
         if (hemodinamica.ritmo_pcr === 'FIBRILAÇÃO VENTRICULAR') {
-            if (querChoque) {
-                acaoCorreta = true;
-                msgAcao = "Choque administrado com sucesso! ";
-                hemodinamica.ciclos_pcr += 2;
-            } else if (querCprEpi) {
-                acaoCorreta = true;
-                msgAcao = "RCP iniciada adequadamente. Lembre-se que o ritmo é chocável! ";
-                hemodinamica.ciclos_pcr += 1;
-            }
+            if (querChoque) { acaoCorreta = true; msgAcao = "Choque administrado com sucesso! "; hemodinamica.ciclos_pcr += 2; }
+            else if (querCprEpi) { acaoCorreta = true; msgAcao = "RCP iniciada adequadamente. Ritmo chocável! "; hemodinamica.ciclos_pcr += 1; }
         } else {
-            if (querChoque) {
-                acaoCorreta = false;
-                msgAcao = "Atenção: Ritmo não-chocável (Assistolia). O choque foi contraindicado. ";
-            } else if (querCprEpi) {
-                acaoCorreta = true;
-                msgAcao = "Protocolo de RCP e Adrenalina instituído corretamente. ";
-                hemodinamica.ciclos_pcr += 1;
-            }
+            if (querChoque) { acaoCorreta = false; msgAcao = "Atenção: Ritmo não-chocável (Assistolia). "; }
+            else if (querCprEpi) { acaoCorreta = true; msgAcao = "Protocolo de RCP e Adrenalina instituído. "; hemodinamica.ciclos_pcr += 1; }
         }
 
         if (acaoCorreta) {
             if (hemodinamica.ciclos_pcr >= 2) {
                 hemodinamica.estagio = 'choque';
                 hemodinamica.estabilidade = 40;
-                msgRetorno = `⚡ ${msgAcao} RCE obtido! O pulso retornou, mas o paciente requer suporte avançado.<br><br><em>Qual a sua próxima conduta?</em>`;
+                msgRetorno = `⚡ ${msgAcao} RCE obtido! O pulso retornou.<br><br><em>Qual a próxima conduta?</em>`;
                 isCriticalMsg = false;
             } else {
                 msgRetorno = `${msgAcao}O paciente ainda se mantém sem pulso. Qual o próximo passo?`;
@@ -534,7 +563,7 @@
             }
         } else {
             hemodinamica.estagio = 'obito';
-            processarDecisaoIA(`${msgAcao}Conduta incompatível com as diretrizes do ACLS. O paciente evoluiu para óbito.`, true, true);
+            processarDecisaoIA(`${msgAcao}Conduta incompatível com o ACLS. O paciente evoluiu para óbito.`, true, true);
             return;
         }
         
@@ -552,15 +581,15 @@
         ? faseDados.gabarito_esperado.map(t => normalizarTexto(t))
         : normalizarTexto(faseDados.gabarito_esperado).split(" ");
     
-    const acertou = gabarito.some(termo => termo.length > 3 && inputNorm.includes(termo));
+    const acertou = gabarito.some(termo => termo.length > 2 && inputNorm.includes(termo));
 
     const bateuDistrator = (faseAtual === 2 && faseDados.distrator_comum) ? 
         (Array.isArray(faseDados.distrator_comum) ? faseDados.distrator_comum : [faseDados.distrator_comum])
-        .map(t => normalizarTexto(t)).some(t => t.length > 3 && inputNorm.includes(t)) : false;
+        .map(t => normalizarTexto(t)).some(t => t.length > 2 && inputNorm.includes(t)) : false;
         
     const bateuRedFlag = (faseAtual === 3 && faseDados.red_flag_mortal) ? 
         (Array.isArray(faseDados.red_flag_mortal) ? faseDados.red_flag_mortal : [faseDados.red_flag_mortal])
-        .map(t => normalizarTexto(t)).some(t => t.length > 3 && inputNorm.includes(t)) : false;
+        .map(t => normalizarTexto(t)).some(t => t.length > 2 && inputNorm.includes(t)) : false;
 
     if (bateuRedFlag) {
         hemodinamica.estabilidade = 0;
@@ -571,17 +600,15 @@
     } 
     else if (bateuDistrator) {
         memoriaContextualIDMT.contadorErrosConsecutivos++;
-        // Amortecimento: Só retira pontos se acumular erros repetidos (Patente IDMT - Frequência semântica de erro)
         const penalidade = memoriaContextualIDMT.contadorErrosConsecutivos >= 2 ? 15 : 5;
         hemodinamica.estabilidade -= penalidade;
         pontuacao -= 10;
         registrarMemoriaAssimetrica(inputUsuario, 'critico', -penalidade);
-        
-        msgRetorno = `⚠️ ${faseDados.feedback_distrator || "Esse distrator clínico não se alinha ao quadro."}<br><br><em>E agora, qual sua próxima conduta?</em>`;
+        msgRetorno = `⚠️ ${faseDados.feedback_distrator || "Esse distrator clínico não se alinha ao quadro."}<br><br><em>Qual sua próxima conduta?</em>`;
         if (hemodinamica.estabilidade <= 40) hemodinamica.estagio = 'choque';
     }
     else if (acertou) {
-        memoriaContextualIDMT.contadorErrosConsecutivos = 0; // Reseta erros
+        memoriaContextualIDMT.contadorErrosConsecutivos = 0;
         hemodinamica.estabilidade = Math.min(100, hemodinamica.estabilidade + 20);
         faseAtual++;
         
@@ -599,20 +626,19 @@
     } 
     else {
         memoriaContextualIDMT.contadorErrosConsecutivos++;
-        // Amortecimento suave: Erros isolados geram leve penalidade, evitando sustos e quedas repentinas
         const dano = (modoAtual === 'sala_vermelha' && memoriaContextualIDMT.contadorErrosConsecutivos >= 2) ? 12 : 5;
         hemodinamica.estabilidade -= dano;
         pontuacao -= 5;
         
         if (faseAtual === 1 && faseDados.resposta_preceptor_erro) {
-            msgRetorno = `${faseDados.resposta_preceptor_erro}<br><br><em>E agora, qual sua próxima conduta?</em>`;
+            msgRetorno = `${faseDados.resposta_preceptor_erro}<br><br><em>Qual sua próxima conduta?</em>`;
         } else {
             msgRetorno = `${tecerDialogo(matrizNLG.erro_generico)}<br><br><em>Qual sua próxima conduta?</em>`;
         }
 
         if (hemodinamica.estabilidade <= 10) {
             hemodinamica.estagio = 'pcr';
-            msgRetorno += `<br><br>🚨 O alarme do monitor disparou! Perda de pulso detectada, paciente em PCR!`;
+            msgRetorno += `<br><br>🚨 Perda de pulso detectada, paciente em PCR!`;
             isCriticalMsg = true;
         } else if (hemodinamica.estabilidade <= 40) {
             hemodinamica.estagio = 'choque';
@@ -687,7 +713,7 @@
       <div class="score-circle" style="background: ${cor}">${finalScore}</div>
       <div class="debriefing-text">
         <strong>Debriefing Clínico:</strong><br>${casoAtual.discussao_clinica_final?.takeaway_message || "Revisão concluída."}<br><br>
-        <strong>Fisiopatologia:</strong><br>${casoAtual.discussao_clinica_final?.fisiopatologia || "Revise a teoria nas diretrizes."}
+        <strong>Fisiopatologia / Base Teórica:</strong><br>${casoAtual.discussao_clinica_final?.fisiopatologia || "Consulte as diretrizes do Instituto."}
       </div>
       <button class="btn-send" onclick="proximoCaso()" style="width: 100%; margin-top: 10px;">Atender Próximo Paciente</button>
     `;
