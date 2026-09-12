@@ -1,142 +1,104 @@
 [
   {
-    "id_caso": "cardio_iam_supra_01",
-    "patologia_alvo": "Infarto Agudo do Miocárdio com Supra de ST (IAMCSST)",
-    "dificuldade": "Intermediária",
-    "ritmo_cardiaco": "Ritmo Sinusal com Supra de ST",
-    "vinheta_admissao": "Paciente masculino, 55 anos, diabético, chega à emergência sudoreico, pálido, com dor torácica opressiva retroesternal irradiada para mandíbula há 40 minutos.",
+    "id": "cardio_iamcsst_01",
+    "nome": "Infarto Agudo do Miocárdio com Supra de ST (IAMCSST)",
+    "arquitetura": "v13_dinamica",
+    "dificuldade": "Avançada / Sala Vermelha",
+    "ritmo_cardiaco": "Taquicardia Sinusal com Supra ST em V2-V6",
+    "vigneta": "Homem de 58 anos, tabagista crônico e hipertenso, admitido na Sala Vermelha com quadro de dor precordial opressiva de forte intensidade (9/10), irradiada para o membro superior esquerdo e mandíbula, associada a sudorese fria e náuseas há 2 horas. PA: 140/90 mmHg, FC: 105 bpm, SatO2: 94% em ar ambiente.",
+    "instrucao_gerador_ia": "Simulação de coronariopatia aguda obstrutiva total com necessidade de reperfusão precoce. O estudante deve solicitar ECG e marcadores, identificar o IAMCSST e acionar a conduta de reperfusão e antiagregação imediata.",
+    
     "fase_1_investigacao": {
-      "gabarito_esperado": ["ecg", "eletrocardiograma", "eletro", "ecg de 12 derivacoes"],
-      "achado_sucesso": "O ECG rodado em 5 minutos mostra supradesnivelamento do segmento ST > 2mm nas derivações V1 a V4.",
-      "resposta_preceptor_erro": "Tempo é miocárdio! Diante de dor torácica típica na sala de emergência, qual é o exame que obrigatoriamente deve ser feito na mão do médico em até 10 minutos?"
+      "gabarito_esperado": ["ecg", "eletrocardiograma", "eletro", "troponina", "gasometria", "acesso"],
+      "achado_sucesso": "Eletrocardiograma de 12 derivações realizado imediatamente: evidência de supradesnivelamento do segmento ST de V2 a V6 e DI-aVL. Troponina em andamento, mas conduta eletrocardiográfica é soberana.",
+      "resposta_preceptor_erro": "Doutor, diante de dor torácica típica em paciente de risco, o tempo é miocárdio. Precisamos de um exame gráfico elétrico imediato. Qual a sua conduta?"
     },
+
     "fase_2_diagnostico": {
-      "gabarito_esperado": ["iam com supra", "iam de parede anterior", "infarto", "iamcsst", "infarto com supra"],
-      "distrator_comum": ["angina estavel", "refluxo", "pericardite"],
-      "feedback_distrator": "O paciente tem fatores de risco cardiovasculares e dor típica irradiada associada a sudorese. Além disso, o ECG tem supra de ST localizado (V1-V4). Isso não é uma condição benigna.",
-      "achado_sucesso": "Perfeito. Trata-se de um Infarto Agudo do Miocárdio com Supra de ST em parede anterior."
+      "gabarito_esperado": ["iam", "infarto", "supra", "iamcsst", "coronariopatia"],
+      "distrator_comum": ["pericardite", "ansiedade", "refluxo", "espasmo esofagiano"],
+      "feedback_distrator": "Atenção ao padrão eletrocardiográfico e à clínica de dor opressiva com sudorese fria. Trata-se de um evento isquêmico agudo transmural, não de uma patologia gastrointestinal ou funcional.",
+      "achado_sucesso": "Diagnóstico confirmado: Infarto Agudo do Miocárdio com Supradesnivelamento do Segmento ST (IAMCSST) de parede anterior extensa."
     },
+
     "fase_3_conduta": {
-      "gabarito_esperado": ["angioplastia", "cateterismo", "cineangiocoronariografia", "trombolitico", "aas e clopidogrel", "hemodinamica"],
-      "red_flag_mortal": ["alta", "ibuprofeno", "antiacido", "observacao", "esperar troponina", "troponina"],
-      "feedback_sucesso": "Excelente! Você acionou a hemodinâmica para Angioplastia Primária (porta-balão < 90 min) e medicou o paciente com dupla antiagregação. A artéria foi aberta e o músculo salvo.",
-      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você decidiu esperar o resultado de biomarcadores (troponina) ou medicou para outra causa. No IAM com Supra, o ECG fecha o diagnóstico e dita a conduta imediata de reperfusão. Devido à demora, a necrose se estendeu, o paciente fez Fibrilação Ventricular e parou."
+      "gabarito_esperado": ["cateterismo", "angioplastia", "aas", "clopidogrel", "heparina", "reperfusao"],
+      "red_flag_mortal": ["alta", "analgesia simples", "observacao", "furosemida isolada"],
+      "feedback_sucesso": "Conduta de excelência! Dupla antiagregação plaquetária instituída, anticoagulação plena e acionamento imediato da hemodinâmica para angioplastia primária.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Atrasar a estratégia de reperfusão miocárdica em um IAMCSST aumenta exponencialmente a área de necrose e o risco de óbito por arritmia ou choque cardiogênico."
     },
+
     "discussao_clinica_final": {
-      "takeaway_message": "No IAM com Supra de ST, NÃO se espera a Troponina para definir a conduta. O diagnóstico é Clínico + ECG. A reperfusão (Angioplastia ou Trombolítico) deve ser imediata.",
-      "fisiopatologia": "A ruptura de uma placa de ateroma instável gera a formação de um trombo oclusivo total na artéria coronária, causando isquemia transmural (Supra de ST no ECG) e necrose irreversível se não houver rápida reperfusão."
+      "takeaway_message": "O IAMCSST exige estratégia agressiva e cronometrada (porta-balão). O ECG em até 10 minutos da admissão é obrigatório em toda dor torácica suspeita.",
+      "fisiopatologia": "Ruptura ou erosão de placa aterosclerótica com trombose luminal oclusiva aguda, gerando isquemia miocárdica transmural e risco iminente de instabilidade elétrica (fibrilação ventricular)."
     }
   },
   {
-    "id_caso": "cardio_iam_sem_supra_01",
-    "patologia_alvo": "Infarto Agudo do Miocárdio sem Supra de ST (IAMSSST)",
-    "dificuldade": "Avançada",
-    "ritmo_cardiaco": "Ritmo Sinusal com Infradesnivelamento de ST",
-    "vinheta_admissao": "Mulher, 68 anos, hipertensa, queixa-se de dor torácica em queimação que iniciou após esforço, com alívio parcial em repouso. O ECG de admissão não mostra supra de ST, mas há inversão simétrica de onda T e infra de ST em parede inferior.",
+    "id": "cardio_disseccao_02",
+    "nome": "Dissecção Aórtica Aguda (Tipo A de Stanford)",
+    "arquitetura": "v13_dinamica",
+    "dificuldade": "Crítica / Alta Complexidade",
+    "ritmo_cardiaco": "Ritmo Sinusal com Hipertensão Limítrofe",
+    vigneta: "Homem de 67 anos, histórico de hipertensão arterial sistêmica mal controlada, dá entrada na emergência referindo dor torácica súbita, de intensidade máxima desde o início ('em facada' ou 'rasgando'), com irradiação clássica para o dorso entre as escápulas. PA no MSE: 180/100 mmHg; PA no MSD: 130/80 mmHg (diferença pressórica significativa). Pulsos periféricos assimétricos.",
+    instrucao_gerador_ia": "Apresentação clínica de emergência vascular catastrófica. O aluno deve suspeitar de dissecção de aorta, controlar rigorosamente a frequência cardíaca e a pressão antes de qualquer medida equivocada de anticoagulação.",
+    
     "fase_1_investigacao": {
-      "gabarito_esperado": ["troponina", "marcadores de necrose", "biomarcadores", "curva de troponina"],
-      "achado_sucesso": "Boa conduta. O laboratório retorna Troponina ultrassensível francamente elevada (padrão de curva de ascensão típica).",
-      "resposta_preceptor_erro": "Sem Supra no ECG, precisamos provar se houve ou não morte celular (necrose). Qual exame de sangue é o padrão ouro cardíaco?"
+      "gabarito_esperado": ["angiotomografia", "tomografia", "eco", "ecocardiograma", "rx de torax", "raio x"],
+      "achado_sucesso": "Angiotomografia de aorta torácica e abdominal revela retalho de dissecção iniciando na raiz da aorta (Ascendente), caracterizando Stanford Tipo A.",
+      "resposta_preceptor_erro": "Doutor, assimetria de pulsos e dor dorsal transfixante exigem imagem vascular imediata da aorta. Quais exames de imagem você solicita?"
     },
+
     "fase_2_diagnostico": {
-      "gabarito_esperado": ["iam sem supra", "infarto sem supra", "iamssst", "sindrome coronariana aguda"],
-      "distrator_comum": ["angina instavel", "angina estavel", "iam com supra"],
-      "feedback_distrator": "Se a troponina está positiva com curva de ascensão, houve morte celular. Não pode ser apenas 'angina'. E o ECG não tem supra. Qual o nome correto da síndrome?",
-      "achado_sucesso": "Diagnóstico cirúrgico! Trata-se de um Infarto Agudo do Miocárdio SEM Supra de ST."
+      "gabarito_esperado": ["disseccao", "aorta", "stanford a", "aneurisma"],
+      "distrator_comum": ["infarto", "embolia pulmonar", "pancreatite", "colica biliar"],
+      "feedback_distrator": "Cuidado! Embora a dor torácica lembre o infarto, a irradiação dorsal, a diferença de pressão entre os braços e a assimetria de pulsos apontam diretamente para a patologia da parede aórtica.",
+      "achado_sucesso": "Diagnóstico preciso: Dissecção Aórtica Aguda Tipo A de Stanford."
     },
+
     "fase_3_conduta": {
-      "gabarito_esperado": ["aas e clopidogrel", "heparina", "enoxaparina", "cateterismo", "dupla antiagregacao", "heparinizacao plena"],
-      "red_flag_mortal": ["trombolitico", "alteplase", "tenecteplase", "estreptoquinase"],
-      "feedback_sucesso": "Você aplicou as condutas da Síndrome Coronariana Aguda perfeitamente: dupla antiagregação, heparinização plena (anticoagulação) e estratificação invasiva (cateterismo) nas próximas 2-24h.",
-      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você administrou TROMBOLÍTICO em um infarto SEM supra! A fibrinólise na placa não oclusiva rica em plaquetas aumenta o risco de sangramento intracraniano e piora o quadro isquêmico. Paciente fez um AVC hemorrágico e faleceu."
+      "gabarito_esperado": ["cirurgia", "cirurgiao", "betabloqueador", "nitroprussiato", "controle pressorico", "ctc"],
+      "red_flag_mortal": ["aas", "anticoagulante", "trombolitico", "alta"],
+      "feedback_sucesso": "Conduta cirúrgica de urgência acionada! Controle rigoroso de frequência cardíaca e pressão arterial com betabloqueador intravenoso para reduzir o estresse de cisalhamento na parede aórtica.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Administrar AAS ou anticoagulantes em uma dissecção aórtica pode ser catastrófico, facilitando o tamponamento cardíaco e a ruptura fatal."
     },
+
     "discussao_clinica_final": {
-      "takeaway_message": "NUNCA se faz trombolítico no Infarto SEM Supra de ST ou na Angina Instável. A base do tratamento é AAS, Inibidor P2Y12 (Clopidogrel/Ticagrelor) e Anticoagulação (Heparina).",
-      "fisiopatologia": "Diferente do trombo rico em fibrina (oclusivo) do IAM com supra, o IAM sem supra tem um trombo branco (rico em plaquetas) parcialmente oclusivo. O trombolítico não age bem na plaqueta e expõe o trombo à trombina livre, efeito pró-trombótico paradoxal."
+      "takeaway_message": "Na dissecção aórtica Tipo A, o tratamento cirúrgico de emergência é imperativo. O controle clínico visa baixar a FC (< 60 bpm) e a PA sistólica (100-120 mmHg) com betabloqueadores antes mesmo dos vasodilatadores.",
+      "fisiopatologia": "Fenda na íntima aórtica permitindo a entrada de sangue na camada média, criando um falso lúmen que se propaga e pode ocluir ramos arteriais principais ou romper para o pericárdio."
     }
   },
   {
-    "id_caso": "cardio_eap_01",
-    "patologia_alvo": "Edema Agudo de Pulmão (IC Perfil B)",
-    "dificuldade": "Intermediária",
-    "ritmo_cardiaco": "Taquicardia Sinusal (115 bpm)",
-    "vinheta_admissao": "Homem, 72 anos, portador de IC de fração de ejeção reduzida, chega à emergência com dispneia severa, ortopneia e tosse com secreção espumosa rósea. Ao exame: PA 180/100, FC 115, SpO2 85%. Estertores crepitantes até os ápices bilateralmente. Turgência jugular a 45º.",
+    "id": "cardio_ic_03",
+    "nome": "Insuficiência Cardíaca Descompensada (Edema Agudo de Pulmão)",
+    "arquitetura": "v13_dinamica",
+    "dificuldade": "Intermediária / Sala Vermelha",
+    "ritmo_cardiaco": "Taquicardia Sinusal com B3",
+    vigneta: "Mulher de 72 anos, com antecedente de miocardiopatia dilatada, procura a emergência com dispneia paroxística noturna progressiva, ortopneia intensa (necessita de 4 travesseiros) e tosse com escaruma rósea espumosa. Ao exame: dispneica, cianótica de extremidades, PA 170/100 mmHg, FC 110 bpm, SatO2 82% em ar ambiente. Ausculta pulmonar com estertores crepitantes até os ápices (refluxo hepatojugular presente).",
+    instrucao_gerador_ia": "Quadro clássico de insuficiência cardíaca congestiva descompensada com perfil úmido e quente (perfusão preservada, muita congestão). O foco é alívio rápido da pré-carga e pós-carga.",
+    
     "fase_1_investigacao": {
-      "gabarito_esperado": ["raio x de torax", "rx de torax", "ecocardiograma", "pocus", "bnp", "pro bnp"],
-      "achado_sucesso": "O Rx de tórax mostra cefalização da trama vascular, linhas B de Kerley, infiltrado alveolar peri-hilar (asa de borboleta) e área cardíaca aumentada.",
-      "resposta_preceptor_erro": "O paciente está 'afogando no próprio plasma'. Precisamos de uma imagem de tórax para confirmar a congestão venocapilar e/ou exames para avaliar sobrecarga ventricular."
+      "gabarito_esperado": ["rx", "gasometria", "ecg", "eletro", "pro bnp", "funcao renal"],
+      "achado_sucesso": "Radiografia de tórax demonstra cardiomegalia acentuada, redistribuição vascular, linhas B de Kerley e infiltrado alveolar bilateral em 'asa de borboleta'.",
+      5.resposta_preceptor_erro: "Doutor, a paciente apresenta franca congestão pulmonar aguda e desconforto respiratório. Precisamos avaliar a gravidade com exames rápidos de imagem e gasometria."
     },
+
     "fase_2_diagnostico": {
-      "gabarito_esperado": ["edema agudo de pulmao", "eap", "ic descompensada", "insuficiencia cardiaca perfil b"],
-      "distrator_comum": ["pneumonia", "dpoc", "asma", "tep"],
-      "feedback_distrator": "Paciente hipertenso, estertores crepitantes bilaterais e expectoração rósea espumosa... O RX tem padrão de 'asa de borboleta'. Isso é congestão puramente cardiogênica, não quadro pulmonar infeccioso ou broncoespasmo primário.",
-      "achado_sucesso": "Diagnóstico preciso. Edema Agudo de Pulmão Hipertensivo (IC descompensada Perfil B: Quente e Úmido)."
+      "gabarito_esperado": ["edema agudo", "ic", "insuficiencia cardiaca", "congestao", "perfil l"],
+      "distrator_comum": ["asma", "dpoc", "pneumonia", "TEP"],
+      "feedback_distrator": "Atentem-se aos estertores até os ápices, escarro rósea e história de cardiomiopatia. Trata-se de falência aguda de bomba com transudação alveolar severa, e não de broncoespasmo primário.",
+      "achado_sucesso": "Diagnóstico confirmado: Edema Agudo de Pulmão Cardiogênico (ICC descompensada)."
     },
+
     "fase_3_conduta": {
-      "gabarito_esperado": ["furosemida", "diuretico", "nitrato", "vasodilatador", "nipride", "vni", "cpap", "bipap"],
-      "red_flag_mortal": ["beta bloqueador", "propranolol", "carvedilol", "soro fisiologico", "hidratacao", "volume"],
-      "feedback_sucesso": "Conduta perfeita! Você iniciou suporte ventilatório não invasivo (VNI) para abrir os alvéolos e recrutou os pilares medicamentosos: Furosemida (diurético) e Nitrato (vasodilatador). O paciente 'secou' e estabilizou.",
-      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você fez volume (Soro Fisiológico) em um paciente encharcado, ou iniciou/aumentou o Beta-Bloqueador na fase aguda. O ventrículo sobrecarregado falhou definitivamente, o paciente afogou em líquido alveolar e evoluiu para AESP."
+      "gabarito_esperado": ["furosemida", "nitroglicerina", "veic", "vni", "oxigenio", "diuretico", "vasodilatador"],
+      "red_flag_mortal": ["beta bloqueador plenos", "hidratacao", "fluidos", "alta"],
+      "feedback_sucesso": "Conduta irretocável! Instituída VNI (Ventilação não invasiva) para suporte ventilatório, diurético de alça intravenoso (Furosemida) e vasodilatador (Nitroglicerina) para alívio imediato da congestão.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Iniciar betabloqueadores em altas doses na vigência de descompensação aguda grave ou sobrecarregar com volume agrava o choque cardiogênico."
     },
+
     "discussao_clinica_final": {
-      "takeaway_message": "IC Perfil B (Quente e Úmido): VNI, Diurético e Vasodilatador (se pressão permitir). NUNCA inicie ou aumente Beta-Bloqueador na fase aguda da descompensação, pois é inotrópico negativo.",
-      "fisiopatologia": "Aumento agudo da pressão diastólica final do Ventrículo Esquerdo reflete retrogradamente para o átrio esquerdo e capilares pulmonares. Quando a pressão capilar pulmonar supera a pressão oncótica, o líquido extravasa para o alvéolo (Edema Agudo)."
-    }
-  },
-  {
-    "id_caso": "cardio_fa_instavel_01",
-    "patologia_alvo": "Fibrilação Atrial com Alta Resposta (Instável)",
-    "dificuldade": "Avançada",
-    "ritmo_cardiaco": "Fibrilação Atrial (160 bpm)",
-    "vinheta_admissao": "Mulher, 55 anos, trazida ao PS com queixa de palpitações taquicárdicas intensas há 2 horas. Na admissão, apresenta-se rebaixada, confusa, com extremidades frias, tempo de enchimento capilar de 5 segundos e PA 70/40 mmHg. O monitor revela taquicardia de complexos estreitos e ritmo irregularmente irregular a 160 bpm.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["ecg", "eletro", "avaliar instabilidade", "checar pulso"],
-      "achado_sucesso": "O ECG confirma Fibrilação Atrial. Mais importante que o ritmo é a clínica: a paciente está francamente instável (hipotensa, mal perfundida e com alteração do nível de consciência).",
-      "resposta_preceptor_erro": "Paciente com taquiarritmia. A primeira coisa a se perguntar é: 'Ele está instável? Tem pulso?'. Qual exame consolida a leitura do monitor?"
-    },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["fibrilacao atrial instavel", "fa instavel", "taquiarritmia instavel"],
-      "distrator_comum": ["fibrilacao atrial estavel", "taquicardia sinusal", "taquicardia supraventricular"],
-      "feedback_distrator": "O ritmo é francamente irregular (exclui taqui sinusal e TSV clássica). E ela NÃO está estável: a pressão de 70/40 com rebaixamento indica colapso hemodinâmico.",
-      "achado_sucesso": "Isso aí. Trata-se de uma Taquiarritmia (Fibrilação Atrial) que está causando Instabilidade Hemodinâmica."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["cardioversao eletrica", "choque sincronizado", "cardioversao sincronizada", "sedacao e cardioversao"],
-      "red_flag_mortal": ["amiodarona", "beta bloqueador", "controle de frequencia", "desfibrilacao", "choque nao sincronizado"],
-      "feedback_sucesso": "Conduta irretocável! Taquiarritmia INSTÁVEL = Cardioversão Elétrica Sincronizada imediata (após sedação leve se possível). O ritmo voltou ao sinusal e a pressão subiu.",
-      "feedback_red_flag": "ERRO CRÍTICO! Você tentou cardioversão química (Amiodarona) ou controle de frequência (Beta-Bloqueador) em uma paciente hipotensa! A droga vasoplégica derrubou a pressão a zero. OU você deu um choque NÃO sincronizado, que caiu na onda T e gerou uma FV iatrogênica."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "Qualquer taquiarritmia (QRS estreito ou largo) que cause instabilidade (hipotensão, angina aguda, dispneia/EAP ou rebaixamento) tem uma única conduta: Cardioversão Elétrica Sincronizada.",
-      "fisiopatologia": "A frequência ventricular extremamente elevada (160 bpm) reduz drasticamente o tempo de diástole. O ventrículo não tem tempo para encher de sangue, o que leva à queda abrupta do volume sistólico e falência circulatória secundária (choque)."
-    }
-  },
-  {
-    "id_caso": "cardio_tamponamento_01",
-    "patologia_alvo": "Tamponamento Cardíaco",
-    "dificuldade": "Avançada",
-    "ritmo_cardiaco": "Taquicardia Sinusal (Alternância Elétrica)",
-    "vinheta_admissao": "Jovem de 25 anos dá entrada na sala vermelha após trauma torácico fechado contra o volante do carro (acidente automobilístico). Queixa-se de intensa falta de ar. Ao exame: PA 80/50, turgência jugular jugular a 90 graus, pulmões limpos e bulhas cardíacas hipofonéticas (abafadas). Pulso paradoxal presente.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["pocus", "ecocardiograma", "janela subxifoidea", "usg", "ultrassom", "fast", "e-fast"],
-      "achado_sucesso": "O FAST estendido / POCUS revela grande derrame pericárdico com colapso diastólico do ventrículo direito.",
-      "resposta_preceptor_erro": "O paciente tem a Tríade de Beck clássica. Qual exame de imagem feito à beira-leito diagnostica causas mortais reversíveis no trauma torácico em segundos?"
-    },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["tamponamento cardiaco", "tamponamento", "triade de beck"],
-      "distrator_comum": ["pneumotorax hipertensivo", "choque hipovolemico", "contusao miocardica"],
-      "feedback_distrator": "O pneumotórax hipertensivo faria murmúrio ausente e desvio de traqueia. A tríade de hipotensão + turgência jugular + bulhas abafadas com USG mostrando colapso do VD tem outro nome.",
-      "achado_sucesso": "Exatamente! Tamponamento Cardíaco agudo."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["pericardiocentese", "puncao de marfan", "janela pericardica", "toracotomia", "drenagem pericardica"],
-      "red_flag_mortal": ["diuretico", "furosemida", "drenagem de torax", "intubacao com pressao positiva", "vni"],
-      "feedback_sucesso": "Você foi direto ao ponto mecânico: indicou a Pericardiocentese (ou janela pericárdica) e esvaziou a cavidade. O ventrículo voltou a se expandir na diástole e o choque foi revertido.",
-      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você fez diurético e tirou a pré-carga de um coração que dependia exclusivamente do volume para vencer a pressão do líquido pericárdico. Ou intubou causando pressão positiva torácica, zerando o retorno venoso. O paciente parou em AESP."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "Tamponamento cardíaco (Tríade de Beck) cursa com choque obstrutivo. O tratamento salvador é mecânico: Pericardiocentese ou Toracotomia. Diuréticos e vasodilatadores são estritamente contraindicados.",
-      "fisiopatologia": "O acúmulo de líquido no pericárdio inelástico aumenta a pressão dentro do saco pericárdico, superando a pressão diastólica do átrio e ventrículo direito, impedindo o enchimento cardíaco (colapso diastólico) e gerando choque obstrutivo."
+      "takeaway_message": "O manejo do edema agudo de pulmão hipertenso baseia-se na tríade: suporte ventilatório (VNI), redução da pré-carga (diuréticos) e redução da pós-carga (vasodilatadores potentes).",
+      "fisiopatologia": "Aumento súbito da pressão de enchimento do ventrículo esquerdo (pressão capilar pulmonar > 25 mmHg), forçando o transudado plasmático para o interstício e alvéolos pulmonares, prejudicação severa da troca gasosa."
     }
   }
 ]
