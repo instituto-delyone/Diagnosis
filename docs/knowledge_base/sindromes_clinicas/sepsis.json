@@ -1,0 +1,36 @@
+[
+  {
+    "id": "sepse_choque_urinario_02",
+    "nome": "Pielonefrite Aguda Complicada com Choque Séptico",
+    "arquitetura": "v13_dinamica",
+    "dificuldade": "Avançada / Sala Vermelha",
+    "ritmo_cardiaco": "Taquicardia Sinusal Extrema (FC: 130 bpm)",
+    "vigneta": "Mulher de 74 anos, diabética mal controlada, é admitida na Sala Vermelha com história de febre alta, calafrios, dor lombar intensa à direita e oligúria nas últimas 12 horas. Evoluiu com confusão mental súbita e prostração. Ao exame: torpidamente confusa, T 39.1°C, PA 80/40 mmHg, FC 130 bpm, FR 28 irpm, SatO2 93% em ar ambiente. Extremidades frias, tempo de enchimento capilar de 5 segundos, livedo reticular leve em joelhos.",
+    "instrucao_gerador_ia": "Simulação de choque séptico de origem urinária (urossepse) com disfunção orgânica múltipla precoce (hipotensão refratária a volume inicial, alteração do nível de consciência e hiperlactatemia grave). O aluno deve executar o pacote de 1 hora, calcular volume guiado, solicitar gasometria, culturas e iniciar vasoativa.",
+    
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["lactato", "gasometria", "hemocultura", "urocultura", "hemograma", "creatinina", "ureia", "coagulograma"],
+      "achado_sucesso": "Exames laboratoriais colhidos: Leucocitose franca com desvio à esquerda. Gasometria arterial mostra acidose metabólica descompensada (pH 7.28, HCO3 16). Lactato arterial crítico: 4.8 mmol/L. Função renal já demonstra lesão renal aguda (Creatinina 2.4 mg/dL).",
+      "resposta_preceptor_erro": "Doutor, a paciente apresenta sinais evidentes de hipoperfusão tecidual sistêmica (choque). Precisamos quantificar a acidose, o lactato celular e coletar os focos infecciosos. Quais exames laboratoriais você solicita com urgência?"
+    },
+
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["choque septico", "urossepse", "pielonefrite aguda", "sepse grave", "lra sepse"],
+      "distrator_comum": ["cetoacidose diabetica", "choque hipovolemico", "infarto", "avc isquemico"],
+      "feedback_distrator": "Cuidado! Embora a paciente seja diabética e apresente rebaixamento, a febre de 39.1°C, a dor lombar, a leucocitose e a infecção urinária subjacente definem um quadro clássico de choque séptico de foco urológico, e não uma CAD isolada.",
+      "achado_sucesso": "Diagnóstico preciso estabelecido: Choque Séptico de foco urológico (Pielonefrite complicada) com Lesão Renal Aguda KDIGO 3."
+    },
+
+    "fase_3_conduta": {
+      "gabarito_esperado": ["noradrenalina", "vasopressor", "cristaloide", "soro", "antibiotico", "cultura", "atb", "catterismo vesical"],
+      "red_flag_mortal": ["alta", "analgesia simples", "furosemida", "bloqueador de canal de calcio", "observacao isolada"],
+      "feedback_sucesso": "Conduta de altíssimo nível! Expansão volêmica inicial comedida realizada com cristaloides (30 ml/kg), seguida pela imediata introdução de Noradrenalina via acesso venoso central para restaurar a PAM >= 65 mmHg, associada a antibioticoterapia de amplo espectro na primeira hora.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Apenas infundir volume ilimitado em um paciente idoso em choque séptico sem iniciar aminas vasoativas precocemente acentua o edema pulmonar e agrava a falência orgânica."
+    },
+
+    "discussao_clinica_final": {
+      "takeaway_message": "No choque séptico, a hipotensão não responsiva apenas a fluidos exige o início precoce de vasopressores (Noradrenalina). A meta de Pressão Arterial Média (PAM) deve ser mantida em pelo menos 65 mmHg para garantir a perfusão dos órgãos-alvo.",
+      "fisiopatologia": "A toxina bacteriana induz liberação maciça de óxido nítrico sintase induzível (iNOS), gerando profunda vasodilatação arterial refratária, perda da resistência periférica total, colapso da pressão de perfusão capilar e hipóxia citopática tissular."
+    }
+  }
+]
