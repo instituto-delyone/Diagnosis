@@ -138,10 +138,11 @@
           <span class="vital" id="vit-fc">FC: --</span>
           <span class="vital" id="vit-spo2">SpO2: --%</span>
         </div>
-        <div class="monitor-card" id="painel-monitor">
-          <div class="monitor-title">ECG CONTÍNUO (DII)</div>
-          <div class="monitor-rhythm" id="texto-ritmo">〰️ LENDO...</div>
+                <div class="monitor-card" id="painel-monitor">
+          <div class="monitor-title">ECG CONTÍNUO (DII) - <span id="texto-ritmo">SINUSAL</span></div>
+          <canvas id="ecgCanvas" width="350" height="80" style="width: 100%; height: 70px; background: #05100c; display: block;"></canvas>
         </div>
+
       </div>
       <div class="header-actions">
         <button class="btn-action btn-skip" id="btn-skip" onclick="trocarCaso()">Trocar Caso (3/3)</button>
@@ -523,7 +524,83 @@
       if (monitorLigado) textoRitmo.innerText = `〰️ ${hemodinamica.ritmo_pcr}`;
       return;
     }
+      let ecgAnimacaoId = null;
+
+  function iniciarAnimacaoECG(tipoRitmo) {
+    const canvas = document.getElementById('ecgCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
     
+    let largura = canvas.width;
+    let altura = canvas.height;
+    let x = 0;
+    let yBase = altura / 2;
+    
+    if (ecgAnimacaoId) cancelAnimationFrame(ecgAnimacaoId);
+    
+    ctx.fillStyle = '#05100c';
+    ctx.fillRect(0, 0, largura, altura);
+    
+    let pontosY = [];
+    for(let i = 0; i < largura; i++) {
+      pontosY[i] = yBase;
+    }
+
+    function desenhar() {
+      ctx.fillStyle = 'rgba(5, 16, 12, 0.2)'; 
+      ctx.fillRect(0, 0, largura, altura);
+      
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.08)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, yBase); ctx.lineTo(largura, yBase);
+      ctx.stroke();
+
+      x = (x + 2) % largura;
+      
+      ctx.fillStyle = '#05100c';
+      ctx.fillRect(x, 0, 15, altura);
+
+      let yOffset = yBase;
+      let normalizado = (x % 100); 
+      const ritmo = (tipoRitmo || "").toUpperCase();
+
+      if (ritmo.includes('ASSISTOLIA') || ritmo.includes('PARADA')) {
+        yOffset = yBase + (Math.random() * 2 - 1); 
+      } else if (ritmo.includes('FIBRILAÇÃO') || ritmo.includes('FV')) {
+        yOffset = yBase + (Math.random() * 24 - 12);
+      } else {
+        if (normalizado > 20 && normalizado < 25) yOffset = yBase - 4;      
+        else if (normalizado > 35 && normalizado < 38) yOffset = yBase + 6;  
+        else if (normalizado >= 38 && normalizado <= 42) yOffset = yBase - 35; 
+        else if (normalizado > 42 && normalizado < 46) yOffset = yBase + 12; 
+        else if (normalizado > 60 && normalizado < 72) yOffset = yBase - 8;  
+        else yOffset = yBase + (Math.random() * 2 - 1); 
+      }
+
+      pontosY[x] = yOffset;
+
+      ctx.strokeStyle = '#10b981';
+      ctx.lineWidth = 2;
+      ctx.shadowBlur = 6;
+      ctx.shadowColor = '#10b981';
+      ctx.beginPath();
+      
+      for (let i = 0; i < largura; i++) {
+        let px = i;
+        let py = pontosY[i] !== undefined ? pontosY[i] : yBase;
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+      ctx.shadowBlur = 0; 
+
+      ecgAnimacaoId = requestAnimationFrame(desenhar);
+    }
+
+    desenhar();
+  }
+
     if (hemodinamica.estabilidade <= 40) {
       vitPA.innerText = "PA: 80/50"; vitFC.innerText = "FC: 125"; vitSpO2.innerText = "SpO2: 88%";
       vitPA.classList.add('alert'); vitFC.classList.add('alert');
@@ -575,13 +652,14 @@
 
     registrarMemoriaAssimetrica(inputUsuario, 'rotina', 0);
 
-    const termosMonitor = ["monitor", "monitorizacao", "ecg", "eletro", "monitorizar", "eletrocardiograma"];
+        const termosMonitor = ["monitor", "monitorizacao", "ecg", "eletro", "monitorizar", "eletrocardiograma"];
     if (!monitorLigado && termosMonitor.some(t => inputNorm.includes(t)) && hemodinamica.estagio !== 'pcr' && hemodinamica.estagio !== 'obito') {
         monitorLigado = true;
         const ritmoDetectado = casoAtual.ritmo_cardiaco || "Ritmo Sinusal Regular";
         
         painelMonitor.style.display = 'block';
-        textoRitmo.innerText = `〰️ ${ritmoDetectado.toUpperCase()}`;
+        textoRitmo.innerText = ritmoDetectado.toUpperCase();
+        iniciarAnimacaoECG(ritmoDetectado);
         hemodinamica.estabilidade = Math.min(100, hemodinamica.estabilidade + 5);
         
         msgRetorno = `Você instalou a monitorização multiparâmetros. O traçado contínuo revela: <strong>${ritmoDetectado}</strong>.<br><br><em>E agora, qual sua próxima conduta?</em>`;
@@ -590,6 +668,7 @@
         processarDecisaoIA(msgRetorno, false, false);
         return; 
     }
+
 
     if (hemodinamica.estagio === 'pcr') {
         const querChoque = ["choque", "desfibrilar", "desfibrilador", "desfibrilacao", "chocar"].some(t => inputNorm.includes(t));
