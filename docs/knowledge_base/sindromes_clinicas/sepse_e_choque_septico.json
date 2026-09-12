@@ -1,0 +1,36 @@
+[
+  {
+    "id": "sepse_01",
+    "nome": "Sepse Pulmonar (Foco Inicial)",
+    "arquitetura": "v13_dinamica",
+    "dificuldade": "Iniciante / Guiado",
+    "ritmo_cardiaco": "Taquicardia Sinusal",
+    "vigneta": "Homem de 65 anos, hipertenso, trazido à emergência por familiares devido a confusão mental súbita e febre há 2 dias. Ao exame: T 38.5°C, FC 115 bpm, PA 95/60 mmHg, FR 24 irpm, SatO2 91 em ar ambiente. Extremidades mornas, mas com tempo de enchimento capilar lentificado (3 segundos).",
+    "instrucao_gerador_ia": "Paciente idoso com foco infeccioso pulmonar evoluindo com disfunção orgânica inicial (confusão mental e hipotensão leve respondente a volume). Enfatizar o reconhecimento precoce dos critérios qSOFA/SIRS e a importância do pacote de 1 hora.",
+    
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["lactato", "hemocultura", "gasometria", "exames", "hemograma", "creatinina"],
+      "achado_sucesso": "Os exames laboratoriais revelam leucocitose com desvio à esquerda e um Lactato Venoso de 3.2 mmol/L. Função renal e gasometria coletadas com sucesso.",
+      "resposta_preceptor_erro": "Doutor, diante de um paciente febril, taquicárdico e confuso, precisamos investigar marcadores de hipoperfusão tecidual e inflamação sistêmica. Quais exames laboratoriais iniciais você solicita?"
+    },
+
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["sepse", "choque septico", "foco pulmonar", "infeccao"],
+      "distrator_comum": ["avc", "infarto", "crise hipertensiva", "hipoglicemia"],
+      "feedback_distrator": "Cuidado! Embora haja confusão mental (que pode simular um AVE ou hipoglicemia), o quadro sistêmico de febre, taquicardia e hiperlactatemia aponta para uma disfunção orgânica induzida por infecção.",
+      "achado_sucesso": "Diagnóstico preciso estabelecido: Sepse de foco pulmonar (com hiperlactatemia moderada)."
+    },
+
+    "fase_3_conduta": {
+      "gabarito_esperado": ["cristalóide", "soro", "antibiótico", "oxigênio", "volume", "atb"],
+      "red_flag_mortal": ["alta", "analgesia simples", "observacao sem antibiotico", "furosemida"],
+      "feedback_sucesso": "Conduta irretocável! Você instituiu a expansão volêmica inicial com cristaloides, garantiu oxigenoterapia e iniciou antibioticoterapia de amplo espectro na primeira hora.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Atrasar a antibioticoterapia ou administrar diuréticos em um paciente séptico com hipotensão leve potencializa o colapso hemodinâmico."
+    },
+
+    "discussao_clinica_final": {
+      "takeaway_message": "A sepse é uma disfunção orgânica ameaçadora à vida causada por uma resposta desregulada do hospedeiro à infecção. O reconhecimento precoce (SIRS + disfunção) e o cumprimento do pacote de 1 hora (lactato, culturas, ATB e volume) reduzem drasticamente a mortalidade.",
+      "fisiopatologia": "A invasão patogênica desencadeia liberação maciça de citocinas inflamatórias, provocando vasodilatação sistêmica, aumento da permeabilidade vascular, extravasamento capilar e hipóxia tecidual citopática, culminando em hipoperfusão se não tratada precocemente."
+    }
+  }
+]
