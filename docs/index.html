@@ -1,868 +1,302 @@
 <!DOCTYPE html>
-<!--
-  Diagnosis Engine v13.9 — Parser Condicional Inteligente + Memória Assimétrica (Patente IDMT)
-  Copyright (c) 2026 Instituto Delyone de Medicina e Tecnologia
--->
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diagnosis Engine - Ensino e treinamento Clínico</title>
-  <style>
-    :root {
-      --navy: #071426; --blue: #1f5fae; --ink: #1f2933; --muted: #66757c;
-      --bg: #f7f9fc; --card: #ffffff; --border: #dce5e8; --green: #238b57;
-      --red: #cf5148; --red-dark: #742a2a; --gold: #d4af37; --amber: #d97706;
-    }
-    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    body { background-color: var(--navy); color: var(--ink); margin: 0; padding: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .app-container { max-width: 900px; width: 100%; height: 95vh; display: flex; flex-direction: column; background: var(--bg); border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); overflow: hidden; position: relative; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnosis Engine | IDMT</title>
+    <style>
+        :root {
+            --idmt-navy: #071426;
+            --idmt-blue: #1f5fae;
+            --idmt-green: #238b57;
+            --idmt-bg: #f7f9fc;
+            --idmt-ink: #1f2933;
+        }
 
-    #selection-screen { display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; padding: 40px 40px 20px 40px; text-align: center; background: var(--navy); color: #fff; overflow-y: auto; }
-    .selection-content { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; width: 100%; }
-    #selection-screen h1 { font-size: 32px; margin-bottom: 10px; }
-    #selection-screen p { color: #cbd5e1; margin-bottom: 40px; font-size: 16px; max-width: 600px; }
-    .mode-cards { display: flex; gap: 20px; width: 100%; max-width: 700px; }
-    @media(max-width: 600px) { .mode-cards { flex-direction: column; } }
-    .mode-card { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 30px 20px; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; }
-    .mode-card:hover { transform: translateY(-5px); }
-    .mode-card.red-room:hover { background: rgba(207, 81, 72, 0.15); border-color: var(--red); }
-    .mode-card.clinic:hover { background: rgba(31, 95, 174, 0.15); border-color: var(--blue); }
-    .mode-icon { font-size: 40px; margin-bottom: 15px; }
-    .mode-title { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
-    .mode-desc { font-size: 14px; color: #94a3b8; line-height: 1.5; }
-    #loading-status { margin-top: 20px; color: var(--gold); font-weight: bold; font-size: 14px; }
+        body {
+            background-color: var(--idmt-navy);
+            color: var(--idmt-bg);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
 
-    /* Rodapé de Navegação */
-    .selection-footer { text-align: center; margin-top: 40px; width: 100%; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; }
-    .sync-info { font-size: 0.8rem; color: #8fa3b3; margin-bottom: 15px; line-height: 1.4; }
-    .modules-tags { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 10px; max-width: 700px; margin-left: auto; margin-right: auto; max-height: 120px; overflow-y: auto; }
-    .module-tag { font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 12px; transition: all 0.3s; }
-    .module-tag.synced { color: var(--green); background: #ecf8f1; border: 1px solid var(--green); font-weight: 700; box-shadow: 0 0 8px rgba(35, 139, 87, 0.2); }
-    .module-tag.legacy { color: #94a3b8; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
-    .btn-institute { display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; background-color: rgba(31, 95, 174, 0.15); color: #ecf8f1; text-decoration: none; border-radius: 50px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(31, 95, 174, 0.4); backdrop-filter: blur(4px); transition: all 0.3s ease; }
-    .btn-institute:hover { background-color: rgba(31, 95, 174, 0.3); border-color: var(--blue); }
+        .engine-container {
+            width: 100%;
+            max-width: 900px;
+            background-color: var(--idmt-bg);
+            color: var(--idmt-ink);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
 
-    #chat-screen { display: none; flex-direction: column; height: 100%; }
-    .header { padding: 15px 24px; background: var(--navy); color: #fff; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid var(--blue); }
-    .header h2 { margin: 0; font-size: 18px; display: flex; align-items: center; gap: 8px; }
-    .header-actions { display: flex; gap: 10px; align-items: center; margin-left: auto; }
-    .btn-action { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
-    .btn-action:hover { background: rgba(255,255,255,0.2); }
-    .btn-skip { background: var(--amber); border-color: var(--amber); }
-    .btn-skip:hover { background: #b45309; border-color: #b45309; }
-    .btn-skip:disabled { background: #78350f; color: #d6d3d1; border-color: #78350f; cursor: not-allowed; }
-    .btn-close { background: transparent; border-color: rgba(255,255,255,0.4); }
-    .btn-close:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
-    
-    .vital-sign-bar { display: flex; gap: 15px; font-size: 13px; font-weight: 600; color: #cbd5e1; }
-    .vital { background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 6px; transition: all 0.3s ease; }
-    .vital.alert { color: #fca5a5; background: rgba(207,81,72,0.2); animation: pulse 1.5s infinite; }
-    .vital.critical { color: #fff; background: var(--red); animation: fastPulse 0.8s infinite; }
-    
-    .monitor-card { background-color: #05100c; color: #10b981; font-family: 'Courier New', Courier, monospace; padding: 12px 15px; border-radius: 8px; margin-top: 15px; display: none; border: 2px solid #1f2933; text-align: center; font-weight: bold; letter-spacing: 1px; box-shadow: inset 0 0 15px rgba(16, 185, 129, 0.1); animation: crtFlicker 0.15s infinite; }
-    .monitor-title { font-size: 11px; color: #66757c; margin-bottom: 5px; text-transform: uppercase; }
-    .monitor-rhythm { font-size: 16px; }
+        .header {
+            background-color: var(--idmt-navy);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--idmt-blue);
+        }
 
-    .chat-container { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; background: var(--bg); }
-    .message { max-width: 85%; padding: 14px 18px; border-radius: 12px; font-size: 15px; line-height: 1.5; animation: fadeIn 0.3s ease; }
-    .message.gm { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--navy); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
-    .message.gm.critical { border-left-color: var(--red); background: #fdf2f1; color: var(--red-dark); font-weight: 600; }
-    .message.user { background: var(--blue); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; box-shadow: 0 4px 12px rgba(31,95,174,0.2); }
-    .debriefing-card { background: #fff; border: 2px solid var(--gold); border-radius: 12px; padding: 24px; margin-top: 20px; text-align: center; animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-    .debriefing-card h3 { color: var(--navy); margin-top: 0; font-size: 22px; }
-    .score-circle { width: 80px; height: 80px; border-radius: 50%; background: var(--gold); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; margin: 0 auto 15px; }
-    .debriefing-text { text-align: left; font-size: 14.5px; color: var(--ink); line-height: 1.6; margin-bottom: 20px; }
-    .input-container { padding: 20px; background: #fff; border-top: 1px solid var(--border); display: flex; gap: 12px; }
-    .input-box { flex: 1; padding: 14px 16px; border: 2px solid var(--border); border-radius: 10px; font-size: 15px; outline: none; transition: border-color 0.2s; }
-    .input-box:focus { border-color: var(--blue); }
-    .btn-send { background: var(--navy); color: #fff; border: none; padding: 0 24px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
-    .btn-send:hover { background: var(--blue); }
-    .typing-indicator { display: none; align-items: center; gap: 4px; padding: 12px 18px; background: #fff; border: 1px solid var(--border); border-radius: 12px; align-self: flex-start; margin-bottom: 10px; }
-    .dot { width: 6px; height: 6px; background: var(--muted); border-radius: 50%; animation: bounce 1.4s infinite ease-in-out; }
-    .dot:nth-child(1) { animation-delay: -0.32s; } .dot:nth-child(2) { animation-delay: -0.16s; }
-    
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
-    @keyframes fastPulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-    @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
-    @keyframes crtFlicker { 0% { opacity: 0.98; } 50% { opacity: 1; } 100% { opacity: 0.99; } }
-  </style>
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .dashboard {
+            display: flex;
+            justify-content: space-between;
+            background-color: #e2e8f0;
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .status-bar {
+            flex-grow: 1;
+            margin: 0 15px;
+            background-color: #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .status-fill {
+            height: 100%;
+            background-color: var(--idmt-green);
+            width: 85%;
+            transition: width 0.3s ease, background-color 0.3s;
+        }
+
+        .clinical-area {
+            padding: 30px;
+            font-family: "Georgia", ui-serif, serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            height: 400px;
+            overflow-y: auto;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .mensagem { margin-bottom: 20px; }
+        .paciente { color: #b91c1c; font-weight: bold; }
+        .preceptor { color: var(--idmt-blue); font-style: italic; }
+        .user { color: var(--idmt-ink); font-weight: bold; background: #e2e8f0; padding: 10px; border-radius: 6px; }
+
+        .controls {
+            padding: 20px;
+            display: flex;
+            gap: 10px;
+            background-color: #f1f5f9;
+        }
+
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-action { background-color: var(--idmt-blue); color: white; }
+        .btn-help { background-color: #f59e0b; color: white; }
+        .btn-science { background-color: var(--idmt-navy); color: white; }
+        button:hover { opacity: 0.8; }
+    </style>
 </head>
 <body>
 
-<div class="app-container">
-  
-  <div id="selection-screen">
-    <div class="selection-content">
-      <h1>Curar quando possível, aliviar quando necessário.</h1>
-      <p>Escolha o cenário de simulação. Suas condutas alterarão o desfecho do paciente em tempo real.</p>
-      <div class="mode-cards">
-        <div class="mode-card red-room" onclick="iniciarJogo('sala_vermelha')">
-          <div class="mode-icon">🚨</div>
-          <div class="mode-title">Sala Vermelha</div>
-          <div class="mode-desc">Decisões mais rápidas. Dados limitados, paciente pode instabilizar. A prioridade é a ação e estabilização imediata.</div>
-        </div>
-        <div class="mode-card clinic" onclick="iniciarJogo('clinica_medica')">
-          <div class="mode-icon">🩺</div>
-          <div class="mode-title">Clínica Médica</div>
-          <div class="mode-desc">Raciocínio profundo. Anamnese completa e sinais vitais estáveis, ou não. A prioridade é o diagnóstico diferencial.</div>
-        </div>
-      </div>
-      <div id="loading-status">Carregando Biblioteca Mestre Teórica (IDMT)...</div>
-    </div>
-
-    <!-- Rodapé de Navegação e Status -->
-    <div class="selection-footer">
-      <div class="sync-info">
-        <span style="font-weight: 600; color: #ecf8f1;">Base de Conhecimento IDMT:</span> Setembro de 2026<br>
-        Módulos Teóricos e Resumos Integrados:
-      </div>
-      <div class="modules-tags" id="modulos-tags">
-        <!-- Pílulas renderizadas via JavaScript -->
-      </div>
-      <br>
-      <a href="https://www.delyone.com" class="btn-institute">
-        <span style="margin-right: 8px;">←</span> Voltar para o Instituto
-      </a>
-    </div>
-  </div>
-
-  <div id="chat-screen">
+<div class="engine-container">
     <div class="header">
-      <div>
-        <h2 id="room-title">🚨 Sala Vermelha</h2>
-        <div class="vital-sign-bar" style="margin-top: 5px;">
-          <span class="vital" id="vit-pa">PA: --/--</span>
-          <span class="vital" id="vit-fc">FC: --</span>
-          <span class="vital" id="vit-spo2">SpO2: --%</span>
+        <h1>DIAGNOSIS ENGINE | IDMT</h1>
+    </div>
+
+    <div class="dashboard">
+        <span>Pontuação: <span id="score-display">0</span>/100</span>
+        <div class="status-bar">
+            <div id="health-bar" class="status-fill"></div>
         </div>
-                <div class="monitor-card" id="painel-monitor">
-          <div class="monitor-title">ECG CONTÍNUO (DII) - <span id="texto-ritmo">SINUSAL</span></div>
-          <canvas id="ecgCanvas" width="350" height="80" style="width: 100%; height: 70px; background: #05100c; display: block;"></canvas>
-        </div>
-
-      </div>
-      <div class="header-actions">
-        <button class="btn-action btn-skip" id="btn-skip" onclick="trocarCaso()">Trocar Caso (3/3)</button>
-        <button class="btn-action btn-close" onclick="proximoCaso()">← Voltar</button>
-      </div>
+        <span>Estabilidade: <span id="health-display">85</span>%</span>
     </div>
 
-    <div class="chat-container" id="chat-box"></div>
-    
-    <div class="typing-indicator" id="typing">
-      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    <div class="clinical-area" id="clinical-log">
+        <!-- O caso será injetado aqui -->
     </div>
 
-    <div class="input-container">
-      <input type="text" id="user-input" class="input-box" placeholder="Fale ou aja diretamente..." onkeypress="handleEnter(event)">
-      <button id="btn-send" class="btn-send" onclick="enviarMensagem()">Ação</button>
+    <div class="controls">
+        <input type="text" id="user-input" placeholder="Digite sua conduta ou diagnóstico..." onkeypress="if(event.key === 'Enter') processarAcao()">
+        <button class="btn-action" onclick="processarAcao()">Agir</button>
+        <button class="btn-help" onclick="pedirAjuda()">Ajuda</button>
+        <button class="btn-science" onclick="scientificBoost()">PubMed Boost 🔬</button>
     </div>
-  </div>
-
 </div>
 
 <script>
-  // ==========================================
-  // CONFIGURAÇÃO GERAL E PATENTE (IDMT)
-  // ==========================================
-  const selectionScreen = document.getElementById('selection-screen');
-  const chatScreen = document.getElementById('chat-screen');
-  const chatBox = document.getElementById('chat-box');
-  const userInput = document.getElementById('user-input');
-  const btnSend = document.getElementById('btn-send');
-  const typingIndicator = document.getElementById('typing');
-  const btnSkip = document.getElementById('btn-skip');
-  const loadingStatus = document.getElementById('loading-status');
-  const modulosTagsContainer = document.getElementById('modulos-tags');
-  
-  const vitPA = document.getElementById('vit-pa');
-  const vitFC = document.getElementById('vit-fc');
-  const vitSpO2 = document.getElementById('vit-spo2');
-  const painelMonitor = document.getElementById('painel-monitor');
-  const textoRitmo = document.getElementById('texto-ritmo');
+    // --- ESTADO DO SISTEMA ---
+    let pontuacao = 0;
+    let estabilidade = 85; 
+    let turnos = 0;
+    let casoAtual = null;
 
-  const manifestoConhecimento = {
-    "SindromesClinicas": {
-      pasta: "knowledge_base/sindromes_clinicas/", 
-      arquivos: [
-        "cardiologia.json",
-        "cefaleias.json",
-        "cirrose.json",
-        "dispneia.json",
-        "disturbios_hidroeletroliticos.json",
-        "endocrinologia.json",
-        "epilepsia.json",
-        "geriatria.json",
-        "hematologia.json",
-        "hemostasia.json",
-        "hiv.json",
-        "ictericia.json",
-        "linfonodomegalia.json",
-        "nefrologia.json",
-        "neurologia.json",
-        "pcr.json",
-        "pneumonia.json",
-        "reumatologia.json",
-        "semiologia_osteoarticular.json",
-        "semiologia_respiratoria.json",
-        "sepse_e_choque_septico.json",
-        "sepsis.json",
-        "sindrome_diarreica.json",
-        "sindrome_metabolica_diabetes.json",
-        "sindrome_metabolica_has.json",
-        "sindrome_uremica.json",
-        "sindromes_bacterianas.json",
-        "sindromes_febris.json",
-        "terapia_intensiva.json",
-        "tosse_cronica.json",
-        "toxicologia.json",
-        "valvopatias.json"
-      ]
-    }
-  };
-  
-  let bancoDeDadosMestre = [];
-  let casoAtual = null;
-  let modoAtual = '';
-  let turnos = 0;
-  let pontuacao = 100;
-  let faseAtual = 1; 
-  let skipsUsadosHoje = 0;
-  const MAX_SKIPS = 3;
+    const clinicalLog = document.getElementById('clinical-log');
+    const userInput = document.getElementById('user-input');
+    const healthBar = document.getElementById('health-bar');
+    const healthDisplay = document.getElementById('health-display');
+    const scoreDisplay = document.getElementById('score-display');
 
-  // Sistema de Gerenciamento Assimétrico de Contexto (Patente IDMT)
-  let memoriaContextualIDMT = {
-    camadaBaixaRelevancia: [],    
-    camadaAltaRelevancia: [],     
-    contadorErrosConsecutivos: 0  
-  };
-
-  let hemodinamica = {
-    estabilidade: 100,
-    estagio: 'estavel',
-    ciclos_pcr: 0,
-    ritmo_pcr: 'ASSISTOLIA'
-  };
-  let monitorLigado = false;
-
-  // Preceptor Suave e Cortês
-  const matrizNLG = {
-    sucesso_elogio: [
-      "Excelente conduta, doutor! Parabéns pelo raciocínio clínico.",
-      "Perfeito! Conduta muito bem indicada.",
-      "Ótima escolha terapêutica e diagnóstica."
-    ],
-    erro_generico: [
-      "Doutor, o quadro clínico permanece o mesmo. precisamos raciocinar mais",
-      "Compreendo o seu raciocínio, podemos seguir, mas tem certeza que não há prioridades mais importantes nesse momento?.",
-      "talvez tenhamos deixado passar algo, existe algum diagnostico diferencial que a senhorita tenha em mente? vamos avaliar os dados juntos, você tem alguma dúvida?"
-    ],
-    choque_suave: [
-      "doutor (a) : as funções vitais do paciente estão deteriorando rapidamente, o paciente apresentará sinais de instabilidade progressiva. Precisamos reverter esse quadro.",
-      "A perfusão periférica está limítrofe e a pressão arterial cedeu um pouco. O que podemos fazer?."
-    ]
-  };
-
-  function tecerDialogo(arrayDeFrases) {
-    if (!arrayDeFrases || arrayDeFrases.length === 0) return "";
-    return arrayDeFrases[Math.floor(Math.random() * arrayDeFrases.length)];
-  }
-
-  // ==========================================
-  // PARSER CONDICIONAL INTELIGENTE (BASE DE PROVA)
-  // ==========================================
-  function normalizarCasoClinico(casoBruto, nomeModuloPadrao) {
-    if (!casoBruto) return null;
-
-    // Se já estiver formatado com fases completas de RPG
-    if (casoBruto.fase_1_investigacao && casoBruto.fase_3_conduta) {
-      return casoBruto;
+    // --- INICIALIZAÇÃO E CARREGAMENTO DE DADOS ---
+    // Você pode plugar o fetch do manifesto aqui no futuro. 
+    // Para teste imediato, vamos injetar o caso manualmente.
+    function iniciarPlantao(casoDados) {
+        casoAtual = casoDados;
+        estabilidade = 85;
+        pontuacao = 0;
+        turnos = 0;
+        clinicalLog.innerHTML = '';
+        
+        adicionarMensagem("preceptor", casoAtual.cenario_inicial.fala_preceptor);
+        adicionarMensagem("paciente", "Paciente: " + casoAtual.cenario_inicial.fala_paciente);
+        atualizarDashboard();
     }
 
-    // Se vier em formato legado estruturado
-    if (casoBruto.respostas_esperadas) {
-      const resp = casoBruto.respostas_esperadas;
-      return {
-        id_caso: casoBruto.id || "caso_legado",
-        patologia_alvo: casoBruto.nome || nomeModuloPadrao,
-        arquitetura: "v12_estatica",
-        dificuldade: "Padrão IDMT",
-        ritmo_cardiaco: "Ritmo Sinusal Normal",
-        vinheta_admissao: casoBruto.vigneta || `Paciente admitido apresentando quadro clínico de ${casoBruto.nome || nomeModuloPadrao}.`,
-        fase_1_investigacao: {
-          gabarito_esperado: resp.exames || ["hemograma", "gasometria"],
-          achado_sucesso: "Exames complementares solicitados com sucesso.",
-          resposta_preceptor_erro: "Doutor, precisamos de exames laboratoriais direcionados."
-        },
-        fase_2_diagnostico: {
-          gabarito_esperado: resp.diagnostico || [nomeModuloPadrao.toLowerCase()],
-          distrator_comum: ["artefato", "disturbio leve"],
-          feedback_distrator: "Cuidado! Essa hipótese não condiz com os achados principais.",
-          achado_sucesso: `Diagnóstico confirmado: ${casoBruto.nome || nomeModuloPadrao}.`
-        },
-        fase_3_conduta: {
-          gabarito_esperado: resp.conduta || ["suporte", "tratamento especifico"],
-          red_flag_mortal: ["alta", "analgesia simples"],
-          feedback_sucesso: "Conduta de excelência estabelecida.",
-          feedback_red_flag: "ERRO CRÍTICO! Conduta inadequada para a gravidade."
-        },
-        discussao_clinica_final: {
-          takeaway_message: casoBruto.feedback_tecnico || "Revisão concluída.",
-          fisiopatologia: "O quadro decorre de perturbações fisiopatológicas específicas."
-        }
-      };
-    }
+    // --- LÓGICA DE SIMULAÇÃO CLÍNICA ---
+    function processarAcao() {
+        const inputAluno = userInput.value.trim().toLowerCase();
+        if (!inputAluno || !casoAtual) return;
 
-    // PARSER CONDICIONAL (IF/ELSE dinâmico para resumos e dados parciais)
-    const nomeCaso = casoBruto.nome || casoBruto.tema || casoBruto.titulo || casoBruto.patologia || nomeModuloPadrao;
-    const vignetaTexto = casoBruto.vigneta || casoBruto.descricao || casoBruto.resumo || `Paciente com quadro clínico sugestivo de ${nomeCaso}. Avalie o caso com base nas diretrizes teóricas.`;
-    
-    // Condicionais dinâmicas SE/ENTÃO para extração de dados
-    let examesGabarito = ["hemograma", "gasometria", "avaliar exames complementares"];
-    if (casoBruto.exames || casoBruto.propeduetica || casoBruto.diagnostico_laboratorial) {
-      const ex = casoBruto.exames || casoBruto.propeduetica || casoBruto.diagnostico_laboratorial;
-      examesGabarito = Array.isArray(ex) ? ex : [ex];
-    }
+        turnos++;
+        adicionarMensagem("user", "Conduta: " + inputAluno);
+        let acaoReconhecida = false;
 
-    let diagGabarito = [nomeCaso.toLowerCase()];
-    if (casoBruto.diagnostico || casoBruto.hipotese) {
-      const d = casoBruto.diagnostico || casoBruto.hipotese;
-      diagGabarito = Array.isArray(d) ? d.map(x => x.toLowerCase()) : [d.toLowerCase()];
-    }
-
-    let condutaGabarito = ["suporte clinico", "tratamento direcionado", "monitorizacao"];
-    if (casoBruto.tratamento || casoBruto.conduta || casoBruto.manejo) {
-      const c = casoBruto.tratamento || casoBruto.conduta || casoBruto.manejo;
-      condutaGabarito = Array.isArray(c) ? c : [c];
-    }
-
-    const fisiopatologiaTexto = casoBruto.fisiopatologia || casoBruto.etiologia || casoBruto.mecanismo || "Mecanismo fisiopatológico baseado nos conceitos teóricos da matéria.";
-
-    return {
-      id_caso: casoBruto.id || `dinamico_${Math.random().toString(36).substring(2, 7)}`,
-      patologia_alvo: nomeCaso,
-      arquitetura: "v13_parser_condicional",
-      dificuldade: "Resumo de Prova IDMT",
-      ritmo_cardiaco: "Ritmo Sinusal Estável",
-      vinheta_admissao: vignetaTexto,
-      instrucao_gerador_ia: "Parser condicional ativo: adaptado a partir do resumo teórico.",
-      
-      fase_1_investigacao: {
-        gabarito_esperado: examesGabarito,
-        achado_sucesso: "Investigação conduzida com sucesso. Os dados coletados confirmam o raciocínio clínico.",
-        resposta_preceptor_erro: "Doutor, quais exames ou dados propedêuticos iniciais você solicita para esclarecer o quadro?"
-      },
-
-      fase_2_diagnostico: {
-        gabarito_esperado: diagGabarito,
-        distrator_comum: ["quadro secundario", "artefato", "disturbio leve"],
-        feedback_distrator: "Atenção ao enunciado e aos sinais principais descritos no resumo acadêmico.",
-        achado_sucesso: `Hipótese e diagnóstico estabelecidos com precisão: ${nomeCaso}.`
-      },
-
-      fase_3_conduta: {
-        gabarito_esperado: condutaGabarito,
-        red_flag: ["alta precoce sem emcaminhamento", "negligencia", "conduta letal"],
-        feedback_sucesso: "Conduta terapêutica e manejo alinhados rigorosamente ao padrão exigido na prova.",
-        feedback_red_flag: "infelizmente conduta incorreta! Conduta inadequada frente ao risco clínico do resumo."
-      },
-
-      discussao_clinica_final: {
-        takeaway_message: casoBruto.feedback_tecnico || `O estudo de ${nomeCaso} exige atenção estrita aos pontos cobrados pela banca.`,
-        fisiopatologia: fisiopatologiaTexto
-      }
-    };
-  }
-
-  window.onload = async function inicializarSistema() {
-    atualizarBotaoSkip();
-    await carregarBaseDeConhecimento();
-    recuperarContextoMemoria(); 
-  };
-
-  function atualizarBotaoSkip() {
-    const skipsRestantes = MAX_SKIPS - skipsUsadosHoje;
-    btnSkip.innerText = `Trocar Caso (${skipsRestantes}/${MAX_SKIPS})`;
-    if (skipsRestantes <= 0) btnSkip.disabled = true;
-  }
-
-  async function carregarBaseDeConhecimento() {
-    let casosCarregados = 0;
-    let modulosTrackers = []; 
-
-    for (const [categoria, dados] of Object.entries(manifestoConhecimento)) {
-      for (const arquivo of dados.arquivos) {
-        try {
-          const res = await fetch(dados.pasta + arquivo);
-          if (res && res.ok) {
-            const json = await res.json();
-            const itens = Array.isArray(json) ? json : [json];
-            
-            let nomeExibicao = arquivo.replace('.json', '').replace(/[_]/g, ' ');
-            nomeExibicao = nomeExibicao.charAt(0).toUpperCase() + nomeExibicao.slice(1);
-            
-            let arquivoProcessado = false;
-            itens.forEach(item => {
-              const casoNormalizado = normalizarCasoClinico(item, nomeExibicao);
-              if (casoNormalizado) {
-                bancoDeDadosMestre.push(casoNormalizado);
-                casosCarregados++;
-                arquivoProcessado = true;
-              }
-            });
-
-            if (arquivoProcessado) {
-              modulosTrackers.push({ nome: nomeExibicao, atualizado: true });
+        // 1. Checagem de Red Flags (Morte Instantânea)
+        if (casoAtual.red_flags) {
+            for (let flag of casoAtual.red_flags) {
+                if (flag.gatilhos_fatais.some(g => inputAluno.includes(g))) {
+                    adicionarMensagem("preceptor", flag.resposta_preceptor);
+                    estabilidade += flag.impacto_estabilidade; 
+                    pontuacao -= 30;
+                    acaoReconhecida = true;
+                    break;
+                }
             }
-          }
-        } catch (error) {
-           console.warn(`[Parser IDMT] Módulo ignorado ou indisponível: ${arquivo}`);
-        }
-      }
-    }
-    
-    if (casosCarregados > 0) {
-      loadingStatus.style.color = "var(--green)";
-      loadingStatus.innerText = `Motor Online! ${casosCarregados} cenários clínicos carregados.`;
-      renderizarTagsModulos(modulosTrackers);
-    } else {
-      loadingStatus.style.color = "var(--red)";
-      loadingStatus.innerText = "Atenção: Verifique os caminhos dos arquivos na pasta docs.";
-    }
-  }
-
-  function renderizarTagsModulos(modulos) {
-    const htmlTags = modulos.map(m => {
-      return `<span class="module-tag synced">${m.nome} ✓</span>`;
-    }).join('');
-    modulosTagsContainer.innerHTML = htmlTags;
-  }
-
-  // ==========================================
-  // FUNÇÕES DE MEMÓRIA DA PATENTE (IDMT)
-  // ==========================================
-  function registrarMemoriaAssimetrica(acao, tipo, impacto) {
-    const timestamp = new Date().toISOString();
-    if (tipo === 'rotina') {
-      memoriaContextualIDMT.camadaBaixaRelevancia.push({ acao: acao, t: timestamp });
-    } else {
-      memoriaContextualIDMT.camadaAltaRelevancia.push({ acao: acao, impacto: impacto, t: timestamp });
-    }
-    try {
-      localStorage.setItem('idmt_diagnosis_memoria', JSON.stringify(memoriaContextualIDMT));
-    } catch(e) {}
-  }
-
-  function recuperarContextoMemoria() {
-    try {
-      const salvo = localStorage.getItem('idmt_diagnosis_memoria');
-      if (salvo) {
-        const dados = JSON.parse(salvo);
-        memoriaContextualIDMT.camadaBaixaRelevancia = dados.camadaBaixaRelevancia || [];
-        memoriaContextualIDMT.camadaAltaRelevancia = dados.camadaAltaRelevancia || [];
-      }
-    } catch(e) {}
-  }
-
-    function iniciarJogo(modo) {
-    if (bancoDeDadosMestre.length === 0) {
-      alert("Erro: A base teórica está vazia ou inacessível.");
-      return;
-    }
-
-    const randomIndex = Math.floor(Math.random() * bancoDeDadosMestre.length);
-    casoAtual = bancoDeDadosMestre[randomIndex];
-    aplicarPerfilHemodinamicoDoCaso(casoAtual);
-
-    modoAtual = modo;
-    selectionScreen.style.display = 'none';
-    chatScreen.style.display = 'flex';
-    
-    document.getElementById('room-title').innerHTML = modo === 'sala_vermelha' ? '🚨 Sala Vermelha' : '🩺 Clínica Médica';
-    
-    faseAtual = 1;
-    turnos = 0;
-    pontuacao = 100;
-    monitorLigado = false;
-    painelMonitor.style.display = 'none';
-    memoriaContextualIDMT.contadorErrosConsecutivos = 0;
-    
-    hemodinamica = {
-      estabilidade: modo === 'sala_vermelha' ? 85 : 100,
-      estagio: 'estavel',
-      ciclos_pcr: 0,
-      ritmo_pcr: Math.random() > 0.5 ? 'FIBRILAÇÃO VENTRICULAR' : 'ASSISTOLIA'
-    };
-    
-    atualizarSinaisVitais();
-    
-    let vinheta = casoAtual.vinheta_admissao || "Paciente deu entrada na emergência.";
-    if (casoAtual.instrucao_gerador_ia) {
-        vinheta = `<em>[Parser Condicional IDMT Ativo]</em><br><br>${vinheta}`;
-    }
-
-    const nomeCaso = casoAtual.patologia_alvo || "Caso Clínico";
-    
-    adicionarMensagemGM(`<strong>${nomeCaso}</strong><br><br>${vinheta}<br><br><em>Doutor, qual é a sua primeira ação?</em>`);
-    liberarInput();
-  }
-
-
-  function normalizarTexto(texto) {
-    if (!texto) return "";
-    return texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w\s]/gi, ' ').trim();
-  }
-
-  function atualizarSinaisVitais() {
-    vitPA.className = 'vital'; vitFC.className = 'vital'; vitSpO2.className = 'vital';
-
-    if (hemodinamica.estagio === 'pcr' || hemodinamica.estagio === 'obito') {
-      vitPA.innerText = "PA: --/--"; vitFC.innerText = "FC: 0"; vitSpO2.innerText = "SpO2: --%";
-      vitPA.classList.add('critical'); vitFC.classList.add('critical');
-      if (monitorLigado) textoRitmo.innerText = `〰️ ${hemodinamica.ritmo_pcr}`;
-      return;
-    }
-      let ecgAnimacaoId = null;
-
-  function iniciarAnimacaoECG(tipoRitmo) {
-    const canvas = document.getElementById('ecgCanvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    
-    let largura = canvas.width;
-    let altura = canvas.height;
-    let x = 0;
-    let yBase = altura / 2;
-    
-    if (ecgAnimacaoId) cancelAnimationFrame(ecgAnimacaoId);
-    
-    ctx.fillStyle = '#05100c';
-    ctx.fillRect(0, 0, largura, altura);
-    
-    let pontosY = [];
-    for(let i = 0; i < largura; i++) {
-      pontosY[i] = yBase;
-    }
-
-    function desenhar() {
-      ctx.fillStyle = 'rgba(5, 16, 12, 0.2)'; 
-      ctx.fillRect(0, 0, largura, altura);
-      
-      ctx.strokeStyle = 'rgba(16, 185, 129, 0.08)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(0, yBase); ctx.lineTo(largura, yBase);
-      ctx.stroke();
-
-      x = (x + 2) % largura;
-      
-      ctx.fillStyle = '#05100c';
-      ctx.fillRect(x, 0, 15, altura);
-
-      let yOffset = yBase;
-      let normalizado = (x % 100); 
-      const ritmo = (tipoRitmo || "").toUpperCase();
-
-      if (ritmo.includes('ASSISTOLIA') || ritmo.includes('PARADA')) {
-        yOffset = yBase + (Math.random() * 2 - 1); 
-      } else if (ritmo.includes('FIBRILAÇÃO') || ritmo.includes('FV')) {
-        yOffset = yBase + (Math.random() * 24 - 12);
-      } else {
-        if (normalizado > 20 && normalizado < 25) yOffset = yBase - 4;      
-        else if (normalizado > 35 && normalizado < 38) yOffset = yBase + 6;  
-        else if (normalizado >= 38 && normalizado <= 42) yOffset = yBase - 35; 
-        else if (normalizado > 42 && normalizado < 46) yOffset = yBase + 12; 
-        else if (normalizado > 60 && normalizado < 72) yOffset = yBase - 8;  
-        else yOffset = yBase + (Math.random() * 2 - 1); 
-      }
-
-      pontosY[x] = yOffset;
-
-      ctx.strokeStyle = '#10b981';
-      ctx.lineWidth = 2;
-      ctx.shadowBlur = 6;
-      ctx.shadowColor = '#10b981';
-      ctx.beginPath();
-      
-      for (let i = 0; i < largura; i++) {
-        let px = i;
-        let py = pontosY[i] !== undefined ? pontosY[i] : yBase;
-        if (i === 0) ctx.moveTo(px, py);
-        else ctx.lineTo(px, py);
-      }
-      ctx.stroke();
-      ctx.shadowBlur = 0; 
-
-      ecgAnimacaoId = requestAnimationFrame(desenhar);
-    }
-
-    desenhar();
-  }
-
-    if (hemodinamica.estabilidade <= 40) {
-      vitPA.innerText = "PA: 80/50"; vitFC.innerText = "FC: 125"; vitSpO2.innerText = "SpO2: 88%";
-      vitPA.classList.add('alert'); vitFC.classList.add('alert');
-      if (monitorLigado) textoRitmo.innerText = "〰️ TAQUICARDIA SINUSAL";
-    } else if (hemodinamica.estabilidade <= 70 && modoAtual === 'sala_vermelha') {
-      vitPA.innerText = "PA: 100/70"; vitFC.innerText = "FC: 100"; vitSpO2.innerText = "SpO2: 93%";
-    } else {
-      vitPA.innerText = "PA: 120/80"; vitFC.innerText = "FC: 78"; vitSpO2.innerText = "SpO2: 98%";
-    }
-  }
-  // Função para injetar o perfil hemodinâmico específico da doença no painel
-  function aplicarPerfilHemodinamicoDoCaso(caso) {
-    if (caso && caso.perfil_hemodinamico) {
-      const perfil = caso.perfil_hemodinamico;
-      
-      vitPA.innerText = `PA: ${perfil.pa || "--/--"}`;
-      vitFC.innerText = `FC: ${perfil.fc || "--"}`;
-      vitSpO2.innerText = `SpO2: ${perfil.spo2 || "--"}%`;
-
-      // Aplica classes visuais dinâmicas se houver alteração de gravidade
-      if (perfil.gravidade === 'alerta') {
-        vitPA.className = 'vital alert';
-        vitFC.className = 'vital alert';
-        vitSpO2.className = 'vital alert';
-      } else if (perfil.gravidade === 'critico') {
-        vitPA.className = 'vital critical';
-        vitFC.className = 'vital critical';
-        vitSpO2.className = 'vital critical';
-      } else {
-        vitPA.className = 'vital';
-        vitFC.className = 'vital';
-        vitSpO2.className = 'vital';
-      }
-    } else {
-      // Padrão caso o resumo não especifique valores próprios
-      vitPA.innerText = "PA: 120/80";
-      vitFC.innerText = "FC: 78";
-      vitSpO2.innerText = "SpO2: 98%";
-      vitPA.className = 'vital';
-      vitFC.className = 'vital';
-      vitSpO2.className = 'vital';
-    }
-  }
-
-  async function processarAcaoComIA(inputUsuario) {
-    const inputNorm = normalizarTexto(inputUsuario);
-    let msgRetorno = "";
-    let isCriticalMsg = false;
-
-    registrarMemoriaAssimetrica(inputUsuario, 'rotina', 0);
-
-        const termosMonitor = ["monitor", "monitorizacao", "ecg", "eletro", "monitorizar", "eletrocardiograma"];
-    if (!monitorLigado && termosMonitor.some(t => inputNorm.includes(t)) && hemodinamica.estagio !== 'pcr' && hemodinamica.estagio !== 'obito') {
-        monitorLigado = true;
-        const ritmoDetectado = casoAtual.ritmo_cardiaco || "Ritmo Sinusal Regular";
-        
-        painelMonitor.style.display = 'block';
-        textoRitmo.innerText = ritmoDetectado.toUpperCase();
-        iniciarAnimacaoECG(ritmoDetectado);
-        hemodinamica.estabilidade = Math.min(100, hemodinamica.estabilidade + 5);
-        
-        msgRetorno = `Você instalou a monitorização multiparâmetros. O traçado contínuo revela: <strong>${ritmoDetectado}</strong>.<br><br><em>E agora, qual sua próxima conduta?</em>`;
-        
-        await new Promise(resolve => setTimeout(resolve, 800));
-        processarDecisaoIA(msgRetorno, false, false);
-        return; 
-    }
-
-
-    if (hemodinamica.estagio === 'pcr') {
-        const querChoque = ["choque", "desfibrilar", "desfibrilador", "desfibrilacao", "chocar"].some(t => inputNorm.includes(t));
-        const querCprEpi = ["massagem", "rcp", "reanimacao", "adrenalina", "compressao", "epinefrina"].some(t => inputNorm.includes(t));
-        
-        let acaoCorreta = false;
-        let msgAcao = "";
-        
-        if (hemodinamica.ritmo_pcr === 'FIBRILAÇÃO VENTRICULAR') {
-            if (querChoque) { acaoCorreta = true; msgAcao = "Choque administrado com sucesso! "; hemodinamica.ciclos_pcr += 2; }
-            else if (querCprEpi) { acaoCorreta = true; msgAcao = "RCP iniciada adequadamente. Ritmo chocável! "; hemodinamica.ciclos_pcr += 1; }
-        } else {
-            if (querChoque) { acaoCorreta = false; msgAcao = "Atenção: Ritmo não-chocável (Assistolia). "; }
-            else if (querCprEpi) { acaoCorreta = true; msgAcao = "Protocolo de RCP e Adrenalina instituído. "; hemodinamica.ciclos_pcr += 1; }
         }
 
-        if (acaoCorreta) {
-            if (hemodinamica.ciclos_pcr >= 2) {
-                hemodinamica.estagio = 'choque';
-                hemodinamica.estabilidade = 40;
-                msgRetorno = `⚡ ${msgAcao} RCE obtido! O pulso retornou.<br><br><em>Qual a próxima conduta?</em>`;
-                isCriticalMsg = false;
-            } else {
-                msgRetorno = `${msgAcao}O paciente ainda se mantém sem pulso. Qual o próximo passo?`;
-                isCriticalMsg = true;
+        // 2. Checagem de Ações Esperadas (Gabarito)
+        if (!acaoReconhecida && casoAtual.acoes_esperadas) {
+            for (let acao of casoAtual.acoes_esperadas) {
+                if (acao.gatilhos_validos.some(g => inputAluno.includes(g))) {
+                    adicionarMensagem("preceptor", acao.resposta_preceptor);
+                    
+                    let ganho = (20 / turnos) * casoAtual.peso_dificuldade;
+                    pontuacao += ganho;
+                    estabilidade = Math.min(100, estabilidade + acao.impacto_estabilidade);
+                    
+                    if (acao.vitoria) {
+                        adicionarMensagem("preceptor", "✅ CASO ENCERRADO. Raciocínio clínico de excelência.");
+                    }
+                    acaoReconhecida = true;
+                    break;
+                }
             }
-        } else {
-            hemodinamica.estagio = 'obito';
-            processarDecisaoIA(`${msgAcao}Conduta incompatível com o ACLS. O paciente evoluiu para óbito.`, true, true);
-            return;
-        }
-        
-        await new Promise(resolve => setTimeout(resolve, 800));
-        processarDecisaoIA(msgRetorno, false, isCriticalMsg);
-        return;
-    }
-
-    let faseDados;
-    if (faseAtual === 1) faseDados = casoAtual.fase_1_investigacao;
-    else if (faseAtual === 2) faseDados = casoAtual.fase_2_diagnostico;
-    else faseDados = casoAtual.fase_3_conduta;
-
-    const gabarito = Array.isArray(faseDados.gabarito_esperado) 
-        ? faseDados.gabarito_esperado.map(t => normalizarTexto(t))
-        : normalizarTexto(faseDados.gabarito_esperado).split(" ");
-    
-    const acertou = gabarito.some(termo => termo.length > 2 && inputNorm.includes(termo));
-
-    const bateuDistrator = (faseAtual === 2 && faseDados.distrator_comum) ? 
-        (Array.isArray(faseDados.distrator_comum) ? faseDados.distrator_comum : [faseDados.distrator_comum])
-        .map(t => normalizarTexto(t)).some(t => t.length > 2 && inputNorm.includes(t)) : false;
-        
-    const bateuRedFlag = (faseAtual === 3 && faseDados.red_flag_mortal) ? 
-        (Array.isArray(faseDados.red_flag_mortal) ? faseDados.red_flag_mortal : [faseDados.red_flag_mortal])
-        .map(t => normalizarTexto(t)).some(t => t.length > 2 && inputNorm.includes(t)) : false;
-
-    if (bateuRedFlag) {
-        hemodinamica.estabilidade = 0;
-        hemodinamica.estagio = 'pcr';
-        registrarMemoriaAssimetrica(inputUsuario, 'critico', -100);
-        msgRetorno = `🚨 ${faseDados.feedback_red_flag || "Conduta contraindicada letal executada."}`;
-        isCriticalMsg = true;
-    } 
-    else if (bateuDistrator) {
-        memoriaContextualIDMT.contadorErrosConsecutivos++;
-        const penalidade = memoriaContextualIDMT.contadorErrosConsecutivos >= 2 ? 15 : 5;
-        hemodinamica.estabilidade -= penalidade;
-        pontuacao -= 10;
-        registrarMemoriaAssimetrica(inputUsuario, 'critico', -penalidade);
-        msgRetorno = `⚠️ ${faseDados.feedback_distrator || "Esse distrator clínico não se alinha ao quadro."}<br><br><em>Qual sua próxima conduta?</em>`;
-        if (hemodinamica.estabilidade <= 40) hemodinamica.estagio = 'choque';
-    }
-    else if (acertou) {
-        memoriaContextualIDMT.contadorErrosConsecutivos = 0;
-        hemodinamica.estabilidade = Math.min(100, hemodinamica.estabilidade + 20);
-        faseAtual++;
-        
-        const elogio = tecerDialogo(matrizNLG.sucesso_elogio);
-        
-        if (faseAtual === 2) {
-            msgRetorno = `${elogio} ${faseDados.achado_sucesso}<br><br><em>Com base nisso, qual o seu diagnóstico principal?</em>`;
-        } else if (faseAtual === 3) {
-            msgRetorno = `${elogio} ${faseDados.achado_sucesso}<br><br><em>Diagnóstico provável estabelecido. Qual a conduta imediata?</em>`;
-        } else {
-            hemodinamica.estagio = 'salvo';
-            msgRetorno = `${elogio} ${faseDados.feedback_sucesso || "Paciente estabilizado com sucesso."}`;
-            return processarDecisaoIA(msgRetorno, true, false);
-        }
-    } 
-    else {
-        memoriaContextualIDMT.contadorErrosConsecutivos++;
-        const dano = (modoAtual === 'sala_vermelha' && memoriaContextualIDMT.contadorErrosConsecutivos >= 2) ? 12 : 5;
-        hemodinamica.estabilidade -= dano;
-        pontuacao -= 5;
-        
-        if (faseAtual === 1 && faseDados.resposta_preceptor_erro) {
-            msgRetorno = `${faseDados.resposta_preceptor_erro}<br><br><em>Qual sua próxima conduta?</em>`;
-        } else {
-            msgRetorno = `${tecerDialogo(matrizNLG.erro_generico)}<br><br><em>Qual sua próxima conduta?</em>`;
         }
 
-        if (hemodinamica.estabilidade <= 10) {
-            hemodinamica.estagio = 'pcr';
-            msgRetorno += `<br><br>🚨 Perda de pulso detectada, paciente em PCR!`;
-            isCriticalMsg = true;
-        } else if (hemodinamica.estabilidade <= 40) {
-            hemodinamica.estagio = 'choque';
-            msgRetorno += `<br><br>⚠️ ${tecerDialogo(matrizNLG.choque_suave)}`;
-            isCriticalMsg = true;
+        // 3. Checagem de Distratores (Perda de Tempo)
+        if (!acaoReconhecida && casoAtual.distratores) {
+            for (let distrator of casoAtual.distratores) {
+                if (distrator.gatilhos_distratores.some(g => inputAluno.includes(g))) {
+                    adicionarMensagem("preceptor", distrator.resposta_preceptor);
+                    estabilidade += distrator.impacto_estabilidade;
+                    acaoReconhecida = true;
+                    break;
+                }
+            }
         }
+
+        // 4. Ação Genérica / Não Reconhecida
+        if (!acaoReconhecida) {
+            adicionarMensagem("preceptor", "Conduta não reconhecida como prioritária ou fora do protocolo. O paciente aguarda.");
+            estabilidade -= 5;
+        }
+
+        atualizarDashboard();
+        userInput.value = '';
+        clinicalLog.scrollTop = clinicalLog.scrollHeight;
     }
 
-    await new Promise(resolve => setTimeout(resolve, 800)); 
-    processarDecisaoIA(msgRetorno, false, isCriticalMsg);
-  }
+    function atualizarDashboard() {
+        if (estabilidade <= 0) {
+            estabilidade = 0;
+            adicionarMensagem("preceptor", "ALERTA: Perda de pulso detectada. Paciente em PCR!");
+        }
 
-  function processarDecisaoIA(msgFinal, fimDeJogo, isCritical) {
-    atualizarSinaisVitais();
+        healthDisplay.innerText = estabilidade;
+        healthBar.style.width = estabilidade + '%';
+        scoreDisplay.innerText = Math.floor(pontuacao);
 
-    if (hemodinamica.estagio === 'obito') {
-        pontuacao = 0; 
-        adicionarMensagemGM(msgFinal, true);
-        finalizarJogo(false);
-        return;
+        if (estabilidade > 60) healthBar.style.backgroundColor = 'var(--idmt-green)';
+        else if (estabilidade > 30) healthBar.style.backgroundColor = '#f59e0b';
+        else healthBar.style.backgroundColor = '#dc2626';
     }
 
-    adicionarMensagemGM(msgFinal, isCritical);
-
-    if (fimDeJogo && hemodinamica.estagio === 'salvo') {
-        finalizarJogo(true);
-    } else {
-        liberarInput();
+    function pedirAjuda() {
+        if(!casoAtual) return;
+        pontuacao = Math.max(0, pontuacao - 10);
+        adicionarMensagem("preceptor", casoAtual.ajuda_preceptor);
+        atualizarDashboard();
     }
-  }
 
-  function trocarCaso() {
-    if (skipsUsadosHoje >= MAX_SKIPS) return;
-    skipsUsadosHoje++;
-    atualizarBotaoSkip();
-    
-    chatBox.innerHTML = '';
-    adicionarMensagemGM("<em>🔄 Passando o plantão. Um novo caso acaba de ser admitido...</em>");
-    setTimeout(() => { iniciarJogo(modoAtual); }, 1500);
-  }
+    function scientificBoost() {
+        if(!casoAtual) return;
+        adicionarMensagem("preceptor", `🔬 BUSCA ATIVA: Levantando artigos sobre "${casoAtual.patologia}" no PubMed...`);
+        setTimeout(() => {
+            adicionarMensagem("preceptor", "✅ Artigos recentes localizados e enviados para a curadoria do IDMT.");
+            clinicalLog.scrollTop = clinicalLog.scrollHeight;
+        }, 1500);
+    }
 
-  function proximoCaso() {
-    chatBox.innerHTML = '';
-    chatScreen.style.display = 'none';
-    selectionScreen.style.display = 'flex';
-  }
+    function adicionarMensagem(classe, texto) {
+        const div = document.createElement('div');
+        div.className = 'mensagem ' + classe;
+        div.innerText = texto;
+        clinicalLog.appendChild(div);
+    }
 
-  function handleEnter(e) { if (e.key === 'Enter') enviarMensagem(); }
-
-  function enviarMensagem() {
-    const texto = userInput.value.trim();
-    if (!texto || hemodinamica.estagio === 'obito' || hemodinamica.estagio === 'salvo') return;
-    
-    adicionarMensagemUser(texto);
-    userInput.value = '';
-    bloquearInput();
-    turnos++;
-    
-    processarAcaoComIA(texto);
-  }
-
-  function finalizarJogo(vitoria = false) {
-    esconderTyping();
-    const finalScore = Math.max(0, pontuacao - (turnos * 2)); 
-    let titulo = vitoria ? "✅ Paciente Salvo" : "❌ Óbito / Falha Crítica";
-    let cor = vitoria ? "var(--green)" : "var(--red)";
-
-    const div = document.createElement('div');
-    div.className = 'debriefing-card';
-    div.innerHTML = `
-      <h3 style="color: ${cor}">${titulo}</h3>
-      <div class="score-circle" style="background: ${cor}">${finalScore}</div>
-      <div class="debriefing-text">
-        <strong>Debriefing Clínico:</strong><br>${casoAtual.discussao_clinica_final?.takeaway_message || "Revisão concluída."}<br><br>
-        <strong>Base Teórica / Prova:</strong><br>${casoAtual.discussao_clinica_final?.fisiopatologia || "Consulte as diretrizes do Instituto."}
-      </div>
-      <button class="btn-send" onclick="proximoCaso()" style="width: 100%; margin-top: 10px;">Atender Próximo Paciente</button>
-    `;
-    chatBox.appendChild(div);
-    scrollToBottom();
-  }
-
-  function adicionarMensagemUser(texto) { const div = document.createElement('div'); div.className = 'message user'; div.innerText = texto; chatBox.appendChild(div); scrollToBottom(); }
-  function adicionarMensagemGM(htmlTexto, isCritical = false) { esconderTyping(); const div = document.createElement('div'); div.className = `message gm ${isCritical ? 'critical' : ''}`; div.innerHTML = htmlTexto; chatBox.appendChild(div); scrollToBottom(); }
-  function mostrarTyping() { chatBox.appendChild(typingIndicator); typingIndicator.style.display = 'flex'; scrollToBottom(); }
-  function esconderTyping() { typingIndicator.style.display = 'none'; }
-  function bloquearInput() { userInput.disabled = true; btnSend.disabled = true; mostrarTyping(); }
-  function liberarInput() { userInput.disabled = false; btnSend.disabled = false; userInput.focus(); }
-  function scrollToBottom() { chatBox.scrollTop = chatBox.scrollHeight; }
+    // --- TESTE RÁPIDO DO MOTOR ---
+    // Assim que a página carrega, ele puxa este caso de exemplo para você testar.
+    window.onload = () => {
+        iniciarPlantao({
+            "id_caso": "hematologia_sta_01",
+            "patologia": "Síndrome Torácica Aguda",
+            "peso_dificuldade": 2.5,
+            "cenario_inicial": {
+                "fala_preceptor": "Admissão na Sala Vermelha. Qual a sua conduta imediata, Doutor?",
+                "fala_paciente": "Doutor, meu peito tá apertando muito, tá ruim pra respirar..."
+            },
+            "ajuda_preceptor": "AJUDA: Priorize oxigênio, analgesia e hidratação antes da imagem.",
+            "acoes_esperadas": [
+                { "gatilhos_validos": ["oxigenio", "monitor"], "resposta_preceptor": "Suporte vital estabelecido.", "impacto_estabilidade": 5, "vitoria": false },
+                { "gatilhos_validos": ["transfusao"], "resposta_preceptor": "Conduta perfeita. Terapia iniciada.", "impacto_estabilidade": 20, "vitoria": true }
+            ],
+            "red_flags": [
+                { "gatilhos_fatais": ["alta", "liberar"], "resposta_preceptor": "ERRO CRÍTICO! Conduta médica inadequada.", "impacto_estabilidade": -100 }
+            ],
+            "distratores": [
+                { "gatilhos_distratores": ["pocus", "ecg"], "resposta_preceptor": "Exame realizado sem achados agudos. Tempo perdido.", "impacto_estabilidade": -10 }
+            ]
+        });
+    };
 </script>
 </body>
 </html>
