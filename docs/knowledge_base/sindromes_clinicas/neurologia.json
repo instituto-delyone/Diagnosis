@@ -1,191 +1,310 @@
 [
   {
     "id_caso": "neuro_cushing_01",
-    "patologia_alvo": "Hipertensão Intracraniana Aguda (Tríade de Cushing)",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Paciente de 42 anos admitido após trauma cranioencefálico apresenta rebaixamento agudo da consciência e vômitos em jato. Sinais vitais: PA 190x110 mmHg, FC 42 bpm e padrão respiratório irregular e atáxico. A fundoscopia revela edema de papila bilateral e há paralisia do VI par craniano (estrabismo convergente).",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["tc de cranio", "tomografia", "pic", "fundoscopia", "imagem de cranio"],
-      "achado_sucesso": "Excelente. A TC de crânio urgente revelou hematoma subdural volumoso com desvio de linha média e apagamento de cisternas basais.",
-      "resposta_preceptor_erro": "Doutor, paciente traumatizado com grave instabilidade autonômica e neurológica. Precisamos visualizar o encéfalo imediatamente com o exame de imagem padrão da emergência."
+    "patologia": "Hipertensão Intracraniana Aguda (Tríade de Cushing)",
+    "modo_sugerido": "Sala Vermelha",
+    "peso_dificuldade": 2.5,
+    
+    "cenario_inicial": {
+      "fala_preceptor": "Paciente de 42 anos admitido após trauma cranioencefálico com rebaixamento agudo da consciência e vômitos em jato. Qual a conduta inicial?",
+      "fala_paciente": "Doutor, a cabeça dele tá estourando, ele tá gemendo muito e respirando de um jeito muito estranho, me ajuda!"
     },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["hipertensao intracraniana", "hic", "triade de cushing", "herniacao cerebral"],
-      "distrator_comum": ["choque neurogenico", "crise hipertensiva", "encefalopatia hipertensiva"],
-      "feedback_distrator": "O choque neurogênico causaria hipotensão com bradicardia. Aqui temos hipertensão com bradicardia e respiração atáxica (Tríade de Cushing), que é o reflexo da iminência de herniação cerebral.",
-      "achado_sucesso": "Perfeito! A Tríade de Cushing indica Hipertensão Intracraniana grave."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["manitol", "salina hipertonica", "cabeceira elevada", "iot", "hiperventilacao", "osmoterapia"],
-      "red_flag_mortal": ["puncao lombar", "hipotensores potentes", "nitroprussiato"],
-      "feedback_sucesso": "Conduta salvadora! Você implementou medidas de neuroproteção: elevou a cabeceira a 30°, sedou e acionou a osmoterapia com Manitol ou NaCl 3% enquanto preparava para o bloco cirúrgico.",
-      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você solicitou uma Punção Lombar para 'investigar' ou reduziu a pressão abruptamente. A queda de pressão no compartimento espinhal ou a vasoplegia causou a herniação amigdaliana imediata e morte encefálica do paciente no leito."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "Hipertensão, Bradicardia e Respiração Irregular = Tríade de Cushing (HIC com iminência de herniação). Exige neuroproteção e TC de crânio urgentes.",
-      "fisiopatologia": "O aumento maciço da Pressão Intracraniana (PIC) comprime as arteríolas cerebrais, gerando isquemia vasomotora. O bulbo dispara uma descarga simpática intensa para elevar a PA e manter a perfusão (hipertensão). Os barorreceptores aórticos reagem a essa pressão induzindo bradicardia vagal, enquanto a compressão do centro respiratório bulbar gera o ritmo atáxico."
-    }
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: Hipertensão, bradicardia e respiração irregular compõem a Tríade de Cushing, sinalizando HIC grave com iminência de herniação. Exige imagem urgente e medidas imediatas de neuroproteção.",
+
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["tc de cranio", "tomografia", "pic", "fundoscopia", "imagem de cranio"],
+        "resposta_preceptor": "Excelente. TC de crânio urgente revelou hematoma subdural volumoso com desvio de linha média. Qual a conduta imediata de neuroproteção?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["manitol", "salina hipertonica", "cabeceira", "iot", "osmoterapia"],
+        "resposta_preceptor": "Conduta salvadora! Medidas de neuroproteção estabelecidas e paciente encaminhado ao bloco cirúrgico com sucesso.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
+      }
+    ],
+
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["puncao lombar", "hipotensores potentes", "nitroprussiato", "alta"],
+        "resposta_preceptor": "ERRO CRÍTICO FATAL! Realizar punção lombar ou baixar a pressão de forma abrupta na hipertensão intracraniana grave causou herniação amigdaliana imediata e morte encefálica.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["eletrocardiograma", "ecg", "glicemia capilar"],
+        "resposta_preceptor": "Exames secundários realizados, mas o tempo corre contra o parênquima cerebral sob hipertensão crítica.",
+        "impacto_estabilidade": -10
+      }
+    ]
   },
   {
     "id_caso": "neuro_weber_01",
-    "patologia_alvo": "Síndrome de Weber (Síndrome Cruzada do Mesencéfalo)",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Homem de 65 anos, diabético e hipertenso, desenvolve déficit neurológico súbito. Ao exame físico: ptose palpebral, midríase e olho desviado para fora no olho direito, associados à hemiplegia completa proporcionada à esquerda em face, braço e perna.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["tc de cranio", "rm de cranio", "ressonancia", "angiotc"],
-      "achado_sucesso": "A TC de crânio sem contraste descartou hemorragia e a RM de Encéfalo evidenciou restrição à difusão restrita ao pedúnculo cerebral direito, confirmando isquemia aguda.",
-      "resposta_preceptor_erro": "Doutor, paciente com déficit neurológico súbito de etiologia vascular provável. Nosso relógio está correndo contra a zona de penumbra. Peça os exames de imagem encefálica urgentes."
+    "patologia": "Síndrome de Weber (Síndrome Cruzada do Mesencéfalo)",
+    "modo_sugerido": "Sala Vermelha",
+    "peso_dificuldade": 2.4,
+    
+    "cenario_inicial": {
+      "fala_preceptor": "Homem de 65 anos com déficit neurológico súbito. Apresenta ptose palpebral, midríase e estrabismo divergente à direita, com hemiplegia contralateral à esquerda.",
+      "fala_paciente": "Doutor, meu olho direito fechou e não mexe, e meu lado esquerdo do corpo parou de funcionar de uma hora pra outra!"
     },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["sindrome de weber", "avc de mesencefalo", "sindrome de tronco", "avc isquemico"],
-      "distrator_comum": ["avc de capsula interna", "sindrome de wallenberg", "sindrome de millard gubler"],
-      "feedback_distrator": "Um AVC cortical ou capsular puro não acometeria o nervo oculomotor (III par). A presença de déficit de III par ipsilateral (ptose e estrabismo divergente) e hemiplegia contralateral aponta com exatidão matemática para o mesencéfalo.",
-      "achado_sucesso": "Exato! É a Síndrome de Weber, a clássica síndrome cruzada do mesencéfalo."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["trombolise", "alteplase", "trombolitico", "trombectomia", "protocolo avc"],
-      "red_flag_mortal": ["esperar ressonancia para tratar", "aas antes de excluir sangramento", "heparina plena imediata"],
-      "feedback_sucesso": "Conduta perfeita! Sendo uma janela inferior a 4,5h e sem hemorragia na TC, você ativou o protocolo de AVC e indicou a Trombólise química imediata.",
-      "feedback_red_flag": "ERRO CRÍTICO! Você administrou AAS e Clopidogrel sem antes obter uma tomografia. Se a lesão fosse hemorrágica, você teria expandido o sangramento de forma fatal no tronco encefálico do paciente."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "Déficit motor contralateral com lesão do III par craniano homolateral (ipsilateral) é o marco da Síndrome de Weber (AVC de Mesencéfalo).",
-      "fisiopatologia": "A oclusão de ramos das artérias basilar ou cerebral posterior lesiona simultaneamente o fascículo do III par craniano (causando déficit ocular no mesmo lado) e a via piramidal no pedúnculo cerebral antes de sua decussação nas pirâmides bulbares (causando paralisia do lado oposto do corpo)."
-    }
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: Déficit de III par homolateral associado a hemiplegia contralateral aponta para lesão no mesencéfalo (Síndrome de Weber). Ative o protocolo vascular rápido.",
+
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["tc de cranio", "rm de cranio", "ressonancia", "angiotc"],
+        "resposta_preceptor": "TC descartou hemorragia e RM confirmou isquemia aguda restrita ao pedúnculo cerebral. Qual a conduta terapêutica na janela?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["trombolise", "alteplase", "trombolitico", "trombectomia", "protocolo avc"],
+        "resposta_preceptor": "Conduta perfeita! Protocolo de AVC ativado e trombólise química realizada com sucesso dentro da janela terapêutica.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
+      }
+    ],
+
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["aas antes de imagem", "heparina plena", "alta"],
+        "resposta_preceptor": "ERRO CRÍTICO! Administrar antiagregantes antes de afastar sangramento por imagem pode expandir uma lesão vascular de forma fatal no tronco encefálico.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["puncao lombar", "eletroencefalograma", "eeg"],
+        "resposta_preceptor": "Exames sem utilidade imediata para o foco vascular isquêmico agudo de tronco.",
+        "impacto_estabilidade": -10
+      }
+    ]
   },
   {
     "id_caso": "neuro_cerebelar_01",
-    "patologia_alvo": "Síndrome Cerebelar (Ataxia Cerebelar)",
-    "dificuldade": "Intermediária",
-    "vinheta_admissao": "Paciente de 54 anos apresenta instabilidade para caminhar há 2 semanas. Exame neurológico: força motora grau 5/5 preservada em todos os membros, porém marcha com base alargada e zigue-zague. Ao teste índice-nariz apresenta tremor cinético de intenção e dismetria, sendo incapaz de realizar movimentos alternados rápidos nas mãos.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["rm de cranio", "ressonancia", "tc de cranio", "imagem de fossa posterior"],
-      "achado_sucesso": "Perfeito. Você solicitou imagem neuroaxial. A RM direcionada evidenciou atrofia marcante do vérmis e hemisférios cerebelares, sem lesões agudas.",
-      "resposta_preceptor_erro": "Doutor, paciente com incoordenação motora clássica e preservação da força motora. Precisamos olhar a região da fossa posterior com exames de imagem detalhados."
+    "patologia": "Síndrome Cerebelar (Ataxia Cerebelar)",
+    "modo_sugerido": "Clínica Médica / Ambulatório",
+    "peso_dificuldade": 1.8,
+    
+    "cenario_inicial": {
+      "fala_preceptor": "Paciente de 54 anos com instabilidade para caminhar há 2 semanas. Força motora 5/5, mas apresenta marcha de base alargada, tremor cinético e dismetria.",
+      "fala_paciente": "Doutor, eu tô andando parecendo bêbado, não consigo firmar o passo e minhas mãos tremem quando tento pegar as coisas."
     },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["sindrome cerebelar", "ataxia cerebelar", "lesao cerebelar"],
-      "distrator_comum": ["ataxia sensitiva", "tabes dorsalis", "doenca de parkinson"],
-      "feedback_distrator": "O Parkinson causa tremor de repouso, não tremor de intenção/cinético. A ataxia sensitiva teria prova de Romberg positiva, pois piora com olhos fechados. Na lesão cerebelar a ataxia independe da visão (Romberg inconclusivo/negativo).",
-      "achado_sucesso": "Correto! Todos os sinais semiológicos indicam Síndrome Cerebelar."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["investigar causa", "afastar avc", "suporte", "reabilitacao", "imagem", "neuroimagem"],
-      "red_flag_mortal": ["alta sem investigar fossa posterior", "prescrever levodopa"],
-      "feedback_sucesso": "Conduta correta. Você procedeu com imagem detalhada e reabilitação, ciente de que é necessário afastar AVC de fossa posterior e investigar causas toxico-metabólicas (como etilismo).",
-      "feedback_red_flag": "ERRO CRÍTICO! Você deu alta achando ser um quadro 'labiríntico'. Tratava-se de um tumor ou AVC em expansão na fossa posterior, que comprimiu agudamente o tronco encefálico (compressão bulbar) levando o paciente a parada respiratória em casa."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "Incoordenação (marcha ébria, dismetria, disdiadococinesia) com força normal = Síndrome Cerebelar. Diferente das ataxias sensitivas, na cerebelar o paciente cambaleia mesmo com os olhos abertos.",
-      "fisiopatologia": "O cerebelo modula e refina o movimento originado no córtex motor. A lesão interrompe os circuitos de correção de erros de trajeto (dismetria/tremor intencional) e sequenciamento muscular rápido (disdiadococinesia)."
-    }
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: Incoordenação com força preservada indica alteração cerebelar. É mandatória a neuroimagem para afastar lesões expansivas ou vasculares de fossa posterior.",
+
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["rm de cranio", "ressonancia", "tc de cranio", "imagem"],
+        "resposta_preceptor": "Neuroimagem realizada evidenciando atrofia de vérmis e hemisférios cerebelares sem agudizações. Qual a conduta de seguimento?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["investigar", "reabilitacao", "neurologia", "suporte"],
+        "resposta_preceptor": "Conduta correta. Afastadas urgências cirúrgicas, o paciente foi encaminhado para investigação metabólica/toxicológica e reabilitação.",
+        "impacto_estabilidade": 20,
+        "vitoria": true
+      }
+    ],
+
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["alta sem investigar", "prescrever levodopa"],
+        "resposta_preceptor": "ERRO CRÍTICO! Liberar o paciente sem imagem da fossa posterior permitiu que um tumor ou AVC cerebelar em expansão comprimisse o bulbo, levando ao óbito em domicílio.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["puncao lombar", "pantoprazol"],
+        "resposta_preceptor": "Conduta inespecífica para o quadro de ataxia cerebelar instalada.",
+        "impacto_estabilidade": -10
+      }
+    ]
   },
   {
     "id_caso": "neuro_b12_01",
-    "patologia_alvo": "Degeneração Combinada Subaguda da Medula (Deficiência de Vitamina B12)",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Mulher de 59 anos, gastrectomizada há 4 anos sem acompanhamento, queixa-se de dormência e quedas frequentes ao fechar os olhos no banho (Romberg positivo). Exame neurológico: abolição do tato vibratório e propriocepção consciente, associada à hiperreflexia patelar e sinal de Babinski bilateral.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["vitamina b12", "acido metilmalonico", "rm de coluna", "hemograma"],
-      "achado_sucesso": "Muito bem. A dosagem de Vitamina B12 veio marcadamente reduzida, enquanto o Ácido Metilmalônico encontrava-se elevado no soro.",
-      "resposta_preceptor_erro": "Doutora, estamos diante de um paciente sem estômago funcional, manifestando lesão de cordão posterior e via piramidal. Solicite as dosagens das vitaminas metabólicas pertinentes."
+    "patologia": "Degeneração Combinada Subaguda da Medula (Deficiência de Vitamina B12)",
+    "modo_sugerido": "Clínica Médica / Enfermaria",
+    "peso_dificuldade": 2.2,
+    
+    "cenario_inicial": {
+      "fala_preceptor": "Mulher gastrectomizada há 4 anos queixa-se de dormência e quedas ao fechar os olhos no banho. Ao exame: Romberg positivo, abolição de vibração, hiperreflexia e Babinski bilateral.",
+      "fala_paciente": "Doutor, minhas pernas estão dormentes e eu perco o equilíbrio no escuro ou quando fecho os olhos para tomar banho."
     },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["degeneracao combinada da medula", "degeneracao combinada subaguda", "deficiencia de b12", "mielopatia por b12"],
-      "distrator_comum": ["neurossifilis", "tabes dorsalis", "esclerose multipla"],
-      "feedback_distrator": "A Tabes Dorsalis (sífilis) destrói a coluna posterior (causando propriocepção nula), mas poupa as vias piramidais (não teria hiperreflexia nem Babinski). O envolvimento dos dois tratos com passado de cirurgia gástrica é chave para B12.",
-      "achado_sucesso": "Perfeito. Trata-se da Degeneração Combinada Subaguda da Medula."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["vitamina b12", "cianocobalamina", "b12 parenteral", "reposicao de b12", "vitamina b12 intramuscular"],
-      "red_flag_mortal": ["acido folico isolado", "reposicao de folato", "alta com b12 oral exclusiva"],
-      "feedback_sucesso": "Conduta irretocável! Você iniciou a reposição imediata de Cianocobalamina INTRAMUSCULAR em altas doses para frear e reverter a progressão dos déficits.",
-      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você encontrou macrocitose no hemograma e prescreveu apenas Ácido Fólico. O folato consertou a anemia, você achou que curou o paciente, mas a doença medular continuou progredindo silenciosamente até deixá-la irreversivelmente paraplégica."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "Lesão concomitante do Cordão Posterior (perda de vibração/propriocepção) e do Trato Piramidal (hiperreflexia/Babinski) = Deficiência de Vitamina B12. Reposição IM imediata é mandatória.",
-      "fisiopatologia": "A carência crônica de B12 impede a conversão de metilmalonil-CoA. O acúmulo de ácido metilmalônico promove uma desmielinização tóxica progressiva e seletiva, destruindo os axônios do funículo posterior e do trato corticoespinhal lateral da medula."
-    }
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: O acometimento concomitante do cordão posterior (propriocepção) e do trato piramidal (hiperreflexia/Babinski) em pacientes com cirurgia gástrica aponta para deficiência severa de Vitamina B12.",
+
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["vitamina b12", "metilmalonico", "dosagem", "hemograma"],
+        "resposta_preceptor": "Dosagem confirmada: Vitamina B12 marcadamente reduzida e ácido metilmalônico elevado. Qual a conduta terapêutica parenteral?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["cianocobalamina", "b12 intramuscular", "reposicao de b12", "b12 parenteral"],
+        "resposta_preceptor": "Conduta irretocável! Reposição intramuscular em altas doses iniciada para frear a desmielinização medular. Caso resolvido.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
+      }
+    ],
+
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["acido folico isolado", "b12 oral exclusiva", "alta"],
+        "resposta_preceptor": "ERRO CRÍTICO FATAL! Prescrever apenas ácido fólico mascarou a anemia megaloblástica, mas permitiu que a mielopatia avançasse até deixar a paciente paraplégica irreversivelmente.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["eletroencefalograma", "tomografia de cranio"],
+        "resposta_preceptor": "Exame neurológico central alto sem indicação prioritária frente à deficiência metabólica medular.",
+        "impacto_estabilidade": -10
+      }
+    ]
   },
   {
     "id_caso": "neuro_guillain_barre_01",
-    "patologia_alvo": "Síndrome de Guillain-Barré (GBS)",
-    "dificuldade": "Intermediária",
-    "vinheta_admissao": "Paciente de 29 anos refere que há 2 semanas teve quadro de diarreia aquosa. Há 3 dias iniciou com dormência nos pés que evoluiu para fraqueza muscular flácida, simétrica e ascendente. Exame físico: força grau 2/5 em MMII, ausência de reflexos (arreflexia) e sensibilidade preservada.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["liquor", "puncao liquorica", "eletroneuromiografia", "enmg"],
-      "achado_sucesso": "O Líquor evidenciou proteínas elevadas (120 mg/dL) com celularidade perfeitamente normal (2 células). A ENMG demonstrou lentificação difusa da condução motora.",
-      "resposta_preceptor_erro": "Doutor, paciente jovem com paralisia arreflexa e simétrica pós-infecção gastrointestinal. Precisamos do exame de neurocondução (ENMG) e de uma análise lombar para buscar o padrão clássico do líquor."
+    "patologia": "Síndrome de Guillain-Barré (GBS)",
+    "modo_sugerido": "Sala Vermelha / UTI",
+    "peso_dificuldade": 2.3,
+    
+    "cenario_inicial": {
+      "fala_preceptor": "Paciente de 29 anos com história de diarreia há 2 semanas, evoluindo há 3 dias com dormência nos pés e fraqueza simétrica ascendente. Ao exame: arreflexia e força grau 2/5 em membros inferiores.",
+      "fala_paciente": "Doutor, começou com formigamento nos pés e agora minhas pernas estão tão fracas que mal consigo ficar em pé."
     },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["guillain barre", "sindrome de guillain barre", "gbs", "polineuropatia desmielinizante"],
-      "distrator_comum": ["botulismo", "poliomielite", "miastenia gravis"],
-      "feedback_distrator": "O botulismo tem um padrão de paralisia DESCENDENTE (começa nos olhos/bulbo e desce). A poliomielite tem paralisia ASSIMÉTRICA com líquor inflamatório (pleocitose). A simetria ascendente e a dissociação líquórica isolam nosso diagnóstico.",
-      "achado_sucesso": "Exato! Você confirmou Síndrome de Guillain-Barré pela clínica e pela clássica Dissociação Proteíno-Citológica no líquor."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["imunoglobulina", "plasmaferese", "imunoglobulina iv", "suporte ventilatorio"],
-      "red_flag_mortal": ["corticoide", "prednisona", "alta", "fisioterapia sem suporte"],
-      "feedback_sucesso": "Conduta perfeita! Você internou o paciente em leito monitorizado (risco de falência ventilatória/autonômica) e administrou Imunoglobulina IV ou Plasmaférese.",
-      "feedback_red_flag": "ERRO CRÍTICO! Você administrou corticoide sistêmico, que as evidências mostram ser ineficaz ou deletério no GBS, ou desconsiderou a monitorização da capacidade vital respiratória. O paciente fez parada respiratória por fadiga diafragmática não notada na enfermaria comum."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "Fraqueza flácida ASCENDENTE + Arreflexia após infecção entérica ou respiratória = Guillain-Barré. O tratamento é Imunoglobulina ou Plasmaférese (nunca Corticoide).",
-      "fisiopatologia": "Mimetismo molecular: anticorpos criados para atacar patógenos prévios (como o *Campylobacter jejuni*) reagem de forma cruzada contra os gangliosídeos das bainhas de mielina dos nervos periféricos motores e autonômicos, gerando desmielinização segmentar aguda."
-    }
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: Fraqueza flácida ascendente com arreflexia pós-infecção sugere Guillain-Barré. Monitore a função respiratória de perto e confirme com líquor/ENMG.",
+
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["liquor", "puncao", "eletroneuromiografia", "enmg"],
+        "resposta_preceptor": "Líquor com dissociação proteíno-citológica confirmada e ENMG com padrão desmielinizante. Qual a conduta imunológica específica?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["imunoglobulina", "plasmaferese", "ivig", "suporte"],
+        "resposta_preceptor": "Conduta perfeita! Paciente monitorizado em leito de suporte com administração de Imunoglobulina IV. Estabilizado com sucesso.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
+      }
+    ],
+
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["corticoide", "prednisona", "alta", "enfermaria comum sem monitor"],
+        "resposta_preceptor": "ERRO CRÍTICO! O uso de corticoide no GBS é ineficaz/deletério, e a falta de monitorização ventilatória levou a uma parada respiratória por fadiga diafragmática não detectada.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["tomografia de cranio", "ressonancia encefalica"],
+        "resposta_preceptor": "O sistema nervoso central está preservado; trata-se de uma polirradiculoneuropatia periférica.",
+        "impacto_estabilidade": -10
+      }
+    ]
   },
   {
     "id_caso": "neuro_ela_01",
-    "patologia_alvo": "Esclerose Lateral Amiotrófica (ELA)",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Homem de 62 anos é avaliado por fraqueza progressiva no pé direito há 1 ano (arrastando o pé). Ao exame físico, nota-se nítida atrofia e miofasciculações em panturrilha e língua, associadas a hiperreflexia generalizada e sinal de Babinski bilateral. A sensibilidade é absolutamente preservada.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["enmg", "eletroneuromiografia", "ressonancia de coluna", "rm de coluna"],
-      "achado_sucesso": "Boa. A RM de coluna descartou compressão radicular/medular mecânica. A ENMG confirmou sinais de denervação ativa crônica disseminada por múltiplos segmentos do corpo.",
-      "resposta_preceptor_erro": "Doutor, paciente com comprometimento misto de via motora superior e inferior sem alteração sensitiva. Solicite imagem de coluna para exclusão e o estudo neurofisiológico com agulha nos músculos."
+    "patologia": "Esclerose Lateral Amiotrófica (ELA)",
+    "modo_sugerido": "Clínica Médica / Ambulatório",
+    "peso_dificuldade": 2.5,
+    
+    "cenario_inicial": {
+      "fala_preceptor": "Homem de 62 anos com fraqueza progressiva em pé direito há 1 ano. Ao exame: atrofia e fasciculações em panturrilha e língua, com hiperreflexia generalizada e Babinski bilateral. Sensibilidade intacta.",
+      "fala_paciente": "Doutor, minha perna tá arrastando, sinto uns tremores esquisitos nos músculos e minha fala tá meio 'presa'."
     },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["ela", "esclerose lateral amiotrofica", "doenca do neuronio motor"],
-      "distrator_comum": ["esclerose multipla", "mielopatia cervical espondilotica", "siringomielia"],
-      "feedback_distrator": "A Esclerose Múltipla cursa com surtos e lesa principalmente o SNC (1º neurônio) e feixes sensitivos/visuais. Apenas uma doença causa a combinação inexorável de 1º neurônio motor e 2º neurônio motor, totalmente sem déficits sensitivos ou esfincterianos.",
-      "achado_sucesso": "Correto! É a devastadora Esclerose Lateral Amiotrófica (ELA)."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["riluzol", "suporte", "suporte ventilatorio", "equipe multidisciplinar"],
-      "red_flag_mortal": ["cirurgia de coluna isolada", "imunossupressao"],
-      "feedback_sucesso": "Conduta compassiva e correta. Você acolheu o paciente, mobilizou equipe multidisciplinar para planejamento ventilatório/nutricional e introduziu o Riluzol para lentificar minimamente a progressão bulbar.",
-      "feedback_red_flag": "ERRO CRÍTICO! Você interpretou mal os achados hiperreflexos da perna e indicou uma cirurgia de laminectomia descompressiva de coluna inútil para uma doença degenerativa cerebral sistêmica, piorando radicalmente a sobrevida motora e qualidade de vida."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "Sinais de 1º neurônio (espasticidade, Babinski, hiperreflexia) + Sinais de 2º Neurônio (fasciculação, atrofia) + Sensibilidade e esfíncteres intactos = ELA.",
-      "fisiopatologia": "Degeneração letal e implacável primariamente dos neurônios motores do córtex cerebral (células de Betz - 1º neurônio motor) e dos cornos anteriores da medula espinhal (2º neurônio motor). O trato corticoespinhal lateral fibrosa (esclerose lateral) e o músculo atrofia por desuso (amiotrófica)."
-    }
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: A associação simultânea de sinais de primeiro e segundo neurônio motor sem alterações sensitivas caracteriza a Esclerose Lateral Amiotrófica.",
+
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["enmg", "eletroneuromiografia", "ressonancia de coluna", "rm"],
+        "resposta_preceptor": "RM descartou compressão medular mecânica e ENMG confirmou denervação ativa crônica disseminada. Qual a conduta terapêutica de suporte e modificadora?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["riluzol", "multidisciplinar", "suporte", "paliativo"],
+        "resposta_preceptor": "Conduta correta e compassiva. Introduzido Riluzol e suporte multidisciplinar para preservação da qualidade de vida.",
+        "impacto_estabilidade": 20,
+        "vitoria": true
+      }
+    ],
+
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["cirurgia de coluna", "laminectomia", "imunossupressao"],
+        "resposta_preceptor": "ERRO CRÍTICO! Indicar cirurgia descompressiva inútil para uma doença degenerativa sistêmica acelerou a perda motora e comprometeu gravemente o prognóstico.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["puncao lombar", "biopsia muscular"],
+        "resposta_preceptor": "Exames invasivos secundários que não substituem o diagnóstico clínico-eletrofisiológico padrão.",
+        "impacto_estabilidade": -10
+      }
+    ]
   },
   {
     "id_caso": "neuro_brown_sequard_01",
-    "patologia_alvo": "Síndrome de Brown-Séquard (Hemissecção Medular)",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Paciente de 25 anos, vítima de ferimento por arma branca na região dorsal esquerda. Exame neurológico revela: perda da força motora e da propriocepção/vibração na perna esquerda, associada à perda da sensibilidade dolorosa e térmica na perna direita.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["rm de coluna", "rm", "ressonancia", "tc de coluna", "imagem medular"],
-      "achado_sucesso": "A RM da coluna torácica evidencia laceração e edema no antímero esquerdo da medula espinhal, condizente com a trajetória da faca.",
-      "resposta_preceptor_erro": "Doutora, trauma penetrante no eixo espinhal com déficit cruzado. Nós precisamos avaliar o grau da lesão anatômica do parênquima medular com ressonância magnética urgente."
+    "patologia": "Síndrome de Brown-Séquard (Hemissecção Medular)",
+    "modo_sugerido": "Sala Vermelha / Trauma",
+    "peso_dificuldade": 2.4,
+    
+    "cenario_inicial": {
+      "fala_preceptor": "Paciente de 25 anos vítima de ferimento por arma branca em dorso esquerdo. Exame mostra perda motora e proprioceptiva à esquerda, e perda termoalgésica à direita.",
+      "fala_paciente": "Doutor, levei uma facada nas costas e agora não consigo mexer nem sentir o lado esquerdo da perna direito, e o outro lado não sente calor!"
     },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["brown sequard", "sindrome de brown sequard", "hemisseccao medular"],
-      "distrator_comum": ["sindrome medular anterior", "sindrome medular central", "sindrome de cauda equina"],
-      "feedback_distrator": "A síndrome medular anterior cursa com perda motora e termoalgésica BILATERAL, poupando a propriocepção. A dissociação em lados opostos (motor/propriocepção homolateral e térmica/dolorosa contralateral) é única da hemissecção.",
-      "achado_sucesso": "Perfeito. Trata-se da clássica Síndrome de Brown-Séquard."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["estabilizacao", "cirurgia", "neurocirurgia", "descompressao", "avaliacao neurocirurgica"],
-      "red_flag_mortal": ["mobilizar sem colar", "retirar a faca no local", "alta"],
-      "feedback_sucesso": "Conduta padrão! Você manteve restrição do movimento da coluna, estabilizou hemodinamicamente e acionou a Neurocirurgia imediatamente para manejo da lesão.",
-      "feedback_red_flag": "ERRO CRÍTICO! Você mobilizou o paciente no leito sem controle em bloco da coluna torácica. O corpo estranho instável ou o fragmento ósseo terminaram de cortar o restante da medula, transformando uma hemissecção em transecção medular completa irreversível."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "A Síndrome de Brown-Séquard causa perda motora e proprioceptiva no MESMO LADO da lesão, e perda termoalgésica no LADO OPOSTO.",
-      "fisiopatologia": "A hemissecção da medula corta: 1) Trato corticoespinhal (motor) e Funículo Posterior (propriocepção), que decussam APENAS NO BULBO cerebral, gerando sintomas homolaterais; 2) Trato espinotalâmico (dor e temperatura), que decussa 1 a 2 níveis ACIMA DA ENTRADA NA MEDULA, gerando sintomas contralaterais abaixo da lesão."
-    }
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: Trauma penetrante com déficit motor/proprioceptivo homolateral e termoalgésico contralateral define a Síndrome de Brown-Séquard (hemissecção medular).",
+
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["rm de coluna", "ressonancia", "tc de coluna", "imagem medular"],
+        "resposta_preceptor": "RM da coluna evidencia laceração e edema no antímero esquerdo da medula. Qual a conduta de estabilização e suporte cirúrgico?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["estabilizacao", "cirurgia", "neurocirurgia", "colar"],
+        "resposta_preceptor": "Conduta adequada! Coluna estabilizada em bloco e neurocirurgia acionada para avaliação e manejo da lesão medular.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
+      }
+    ],
+
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["mobilizar sem cuidado", "retirar objeto no leito", "alta"],
+        "resposta_preceptor": "ERRO CRÍTICO! A mobilização inadequada da coluna sem controle em bloco completou a secção medular, tornando o déficit neurológico irreversível.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["puncao lombar", "eletroencefalograma"],
+        "resposta_preceptor": "Procedimento desnecessário e perigoso frente à instabilidade de um trauma raquimedular agudo.",
+        "impacto_estabilidade": -10
+      }
+    ]
   }
 ]
