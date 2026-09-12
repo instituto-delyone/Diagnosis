@@ -111,7 +111,7 @@
         .preceptor { color: var(--idmt-blue); font-style: italic; }
         .user { color: var(--idmt-ink); font-weight: bold; background: #f1f5f9; padding: 8px; border-radius: 6px; border-left: 3px solid var(--idmt-blue); }
 
-        /* Controles Inferiores Otimizados para Mobile (Nunca mais cortam) */
+        /* Controles Inferiores Otimizados para Mobile (Grid Responsivo Perfeito) */
         .controls {
             padding: 15px;
             background-color: #f1f5f9;
@@ -137,22 +137,30 @@
         
         .action-buttons {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 6px;
         }
 
+        @media (max-width: 600px) {
+            .action-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         button {
-            padding: 8px;
+            padding: 10px 6px;
             border: none;
             border-radius: 6px;
             font-weight: bold;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             cursor: pointer;
             transition: opacity 0.2s;
+            text-align: center;
         }
 
         .btn-help { background-color: #f59e0b; color: white; }
         .btn-science { background-color: var(--idmt-navy); color: white; }
+        .btn-next { background-color: var(--idmt-green); color: white; }
         .btn-back { background-color: #64748b; color: white; }
         button:hover { opacity: 0.8; }
     </style>
@@ -180,19 +188,18 @@
         <span>Estabilidade: <span id="health-display">85</span>%</span>
     </div>
 
-    <!-- Área de Exibição do Caso Clínico (Omitindo o nome do diagnóstico final) -->
-    <div class="clinical-area" id="clinical-log">
-        <!-- Injetado via script -->
-    </div>
+    <!-- Área de Exibição do Caso Clínico -->
+    <div class="clinical-area" id="clinical-log"></div>
 
     <div class="controls">
         <div class="input-row">
-            <input type="text" id="user-input" placeholder="Digite sua conduta (ex: oxigenio, eletro, AAS)..." onkeypress="if(event.key === 'Enter') processarAcao()">
+            <input type="text" id="user-input" placeholder="Digite sua conduta (ex: o2, eletro, AAS)..." onkeypress="if(event.key === 'Enter') processarAcao()">
             <button class="btn-action" onclick="processarAcao()">Agir</button>
         </div>
         <div class="action-buttons">
-            <button class="btn-help" onclick="pedirAjuda()">💡 Dica / Ajuda</button>
+            <button class="btn-help" onclick="pedirAjuda()">💡 Dica</button>
             <button class="btn-science" onclick="scientificBoost()">🔬 PubMed</button>
+            <button class="btn-next" onclick="proximoCaso()">Próximo ➡</button>
             <button class="btn-back" onclick="window.location.href='index.html'">⬅ Voltar</button>
         </div>
     </div>
@@ -206,6 +213,7 @@
     let estabilidade = 85; 
     let turnos = 0;
     let casoAtual = null;
+    let indiceCasoAtual = 0;
 
     const clinicalLog = document.getElementById('clinical-log');
     const userInput = document.getElementById('user-input');
@@ -217,46 +225,44 @@
     const valSpo2 = document.getElementById('val-spo2');
     const valPa = document.getElementById('val-pa');
 
-    window.onload = () => {
-        // Caso clínico inicial de teste (Foco em raciocínio, sem entregar o diagnóstico)
-        iniciarCaso({
-            "id_caso": "iam_sala_vermelha_01",
+    // Banco de Casos para Flashcards de Treinamento
+    const bancoDeCasos = [
+        {
+            "id_caso": "iam_01",
             "patologia": "Síndrome Coronariana Aguda",
             "peso_dificuldade": 2.5,
             "cenario_inicial": {
-                "fala_preceptor": "Paciente admitido na Sala Vermelha. Como colega de plantão, qual sua conduta inicial de suporte e investigação?",
-                "fala_paciente": "Doutor, meu peito tá apertando muito, dor forte que irradia pro braço esquerdo e sudorese intensa há 45 minutos..."
+                "fala_preceptor": "Admissão na Sala Vermelha. Como colega de plantão, qual sua conduta inicial?",
+                "fala_paciente": "Doutor, dor forte no peito irradiando para o braço esquerdo há 45 minutos..."
             },
-            "ajuda_preceptor": "DIREÇÃO: Garanta monitorização, oxigênio se saturação baixa, ECG em até 10 minutos e antiagregação.",
+            "ajuda_preceptor": "DIREÇÃO: Monitore, faça ECG em até 10 min e inicie antiagregação.",
             "acoes_esperadas": [
-                { 
-                    "gatilhos_validos": ["eletro", "ecg", "monitorizacao"], 
-                    "resposta_preceptor": "Boa! ECG na mão em tempo recorde. Excluiu falhas maiores, mas o supra tá evidente. Vamos tratar.", 
-                    "impacto_estabilidade": 5, 
-                    "vitoria": false 
-                },
-                { 
-                    "gatilhos_validos": ["aas", "aspirina", "nitrato", "monabiche"], 
-                    "resposta_preceptor": "Perfeito, antiagregação e alívio isquêmico iniciados. O paciente aliviou um pouco a dor.", 
-                    "impacto_estabilidade": 15, 
-                    "vitoria": true 
-                }
+                { "gatilhos_validos": ["eletro", "ecg"], "resposta_preceptor": "Boa! ECG na mão. Supra de ST evidente.", "impacto_estabilidade": 5, "vitoria": false },
+                { "gatilhos_validos": ["aas", "monabiche", "nitrato"], "resposta_preceptor": "Perfeito, antiagregação iniciada. Paciente aliviando.", "impacto_estabilidade": 25, "vitoria": true }
             ],
-            "red_flags": [
-                { 
-                    "gatilhos_fatais": ["alta", "liberar", "enviar para casa"], 
-                    "resposta_preceptor": "ALERTA VERMELHO! Liberar um infartado da Sala Vermelha é iatrogenia pura. O paciente piorou gravemente!", 
-                    "impacto_estabilidade": -40 
-                }
+            "red_flags": [{ "gatilhos_fatais": ["alta", "liberar"], "resposta_preceptor": "ERRO GRAVE! Liberar paciente infartado.", "impacto_estabilidade": -50 }],
+            "distratores": [{ "gatilhos_distratores": ["ultrassom", "pocus"], "resposta_preceptor": "Exame secundário sem prioridade agora.", "impacto_estabilidade": -10 }]
+        },
+        {
+            "id_caso": "tep_01",
+            "patologia": "Tromboembolismo Pulmonar Agudo",
+            "peso_dificuldade": 3.0,
+            "cenario_inicial": {
+                "fala_preceptor": "Paciente com dispnéia súbita na emergência. Como procede?",
+                "fala_paciente": "Falta de ar súbita, doutor! Sinto meu peito travado e muita falta de ar..."
+            },
+            "ajuda_preceptor": "DIREÇÃO: Oxigênio imediato e pensar em anticoagulação se estável/compatível.",
+            "acoes_esperadas": [
+                { "gatilhos_validos": ["oxigenio", "o2"], "resposta_preceptor": "Suporte de O2 instalado. SatO2 subindo.", "impacto_estabilidade": 10, "vitoria": false },
+                { "gatilhos_validos": ["anticoagulacao", "heparina"], "resposta_preceptor": "Anticoagulação plena iniciada com sucesso. Raciocínio exemplar!", "impacto_estabilidade": 25, "vitoria": true }
             ],
-            "distratores": [
-                { 
-                    "gatilhos_distratores": ["ultrassom", "pocus", "endoscopia"], 
-                    "resposta_preceptor": "Perda de tempo precioso com exame não prioritário neste momento.", 
-                    "impacto_estabilidade": -10 
-                }
-            ]
-        });
+            "red_flags": [{ "gatilhos_fatais": ["broncodilatador", "inalacao"], "resposta_preceptor": "Não é crise asmática! Conduta ineficaz.", "impacto_estabilidade": -20 }],
+            "distratores": [{ "gatilhos_distratores": ["puncao lombar"], "resposta_preceptor": "Exame totalmente fora do contexto clínico.", "impacto_estabilidade": -15 }]
+        }
+    ];
+
+    window.onload = () => {
+        iniciarCaso(bancoDeCasos[indiceCasoAtual]);
     };
 
     function iniciarCaso(caso) {
@@ -271,6 +277,11 @@
         atualizarDashboard();
     }
 
+    function proximoCaso() {
+        indiceCasoAtual = (indiceCasoAtual + 1) % bancoDeCasos.length;
+        iniciarCaso(bancoDeCasos[indiceCasoAtual]);
+    }
+
     function processarAcao() {
         const inputAluno = userInput.value.trim();
         if (!inputAluno || !casoAtual) return;
@@ -279,7 +290,6 @@
         adicionarMensagem("user", "Conduta: " + inputAluno);
         let acaoReconhecida = false;
 
-        // 1. Red Flags
         if (casoAtual.red_flags) {
             for (let flag of casoAtual.red_flags) {
                 if (idmtEngine.verificarRedFlag(inputAluno, flag.gatilhos_fatais)) {
@@ -293,7 +303,6 @@
             }
         }
 
-        // 2. Ações Esperadas via IDMT Pró Engine
         if (!acaoReconhecida && casoAtual.acoes_esperadas) {
             for (let acao of casoAtual.acoes_esperadas) {
                 const validacao = idmtEngine.validarResposta(inputAluno, acao.gatilhos_validos);
@@ -304,7 +313,7 @@
                     estabilidade = Math.min(100, estabilidade + res.estabilidadeDelta);
                     
                     if (acao.vitoria) {
-                        adicionarMensagem("preceptor", "✅ Conduta de excelência! Caso estabilizado com sucesso.");
+                        adicionarMensagem("preceptor", "✅ Conduta de excelência! Caso estabilizado.");
                     }
                     acaoReconhecida = true;
                     break;
@@ -312,7 +321,6 @@
             }
         }
 
-        // 3. Distratores
         if (!acaoReconhecida && casoAtual.distratores) {
             for (let distrator of casoAtual.distratores) {
                 const valDistrator = idmtEngine.validarResposta(inputAluno, distrator.gatilhos_distratores);
@@ -327,7 +335,6 @@
             }
         }
 
-        // 4. Ação genérica / Fora do protocolo imediato
         if (!acaoReconhecida) {
             adicionarMensagem("preceptor", "Opa, essa não é a prioridade agora no plantão. Vamos focar no essencial.");
             const res = idmtEngine.calcularDesempenho(turnos, casoAtual.peso_dificuldade, 'generico');
@@ -350,11 +357,14 @@
         healthBar.style.width = estabilidade + '%';
         scoreDisplay.innerText = Math.max(0, Math.floor(pontuacao));
 
-        // Atualização visual dos sinais vitais simulados baseada na estabilidade
         if (estabilidade < 50) {
             valFc.innerText = "140";
             valSpo2.innerText = "85";
             valPa.innerText = "70/40";
+        } else {
+            valFc.innerText = "110";
+            valSpo2.innerText = "93";
+            valPa.innerText = "98/60";
         }
 
         if (estabilidade > 60) healthBar.style.backgroundColor = 'var(--idmt-green)';
@@ -371,7 +381,7 @@
 
     function scientificBoost() {
         if(!casoAtual) return;
-        adicionarMensagem("preceptor", `🔬 Buscando diretrizes atualizadas sobre "${casoAtual.patologia}" no repositório...`);
+        adicionarMensagem("preceptor", `🔬 Buscando diretrizes sobre "${casoAtual.patologia}" no repositório...`);
         setTimeout(() => {
             adicionarMensagem("preceptor", "✅ Diretriz carregada. Foco na prioridade clínica.");
             clinicalLog.scrollTop = clinicalLog.scrollHeight;
