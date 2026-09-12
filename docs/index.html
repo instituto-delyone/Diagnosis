@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  Diagnosis Engine v13.8 — Motor Universal + Parser Teórico + Memória Assimétrica (Patente IDMT)
+  Diagnosis Engine v13.9 — Parser Condicional Inteligente + Memória Assimétrica (Patente IDMT)
   Copyright (c) 2026 Instituto Delyone de Medicina e Tecnologia
 -->
 <html lang="pt-BR">
@@ -113,11 +113,11 @@
       <div id="loading-status">Carregando Biblioteca Mestre Teórica (IDMT)...</div>
     </div>
 
-    <!-- Rodapé de Atualização e Navegação Dinâmica -->
+    <!-- Rodapé de Navegação e Status -->
     <div class="selection-footer">
       <div class="sync-info">
         <span style="font-weight: 600; color: #ecf8f1;">Base de Conhecimento IDMT:</span> Setembro de 2026<br>
-        Módulos Teóricos e Clínicos Integrados:
+        Módulos Teóricos e Resumos Integrados:
       </div>
       <div class="modules-tags" id="modulos-tags">
         <!-- Pílulas renderizadas via JavaScript -->
@@ -183,35 +183,18 @@
   const painelMonitor = document.getElementById('painel-monitor');
   const textoRitmo = document.getElementById('texto-ritmo');
 
-  // Manifesto Completo da Biblioteca em docs/knowledge_base/
+  // Manifesto Enxuto e Seguro para Carregamento Rápido no GitHub Pages
   const manifestoConhecimento = {
-    "SindromesClinicas": {
+    "ResumosPrincipais": {
       pasta: "knowledge_base/sindromes_clinicas/", 
       arquivos: [
-        "cardiologia.json", "cefaleias.json", "cirrose.json", "dispneia.json", 
-        "disturbios_hidroeletroliticos.json", "endocrinologia.json", "epilepsia.json", 
-        "geriatria.json", "hematologia.json", "hemostasia.json", "hiv.json", 
-        "ictericia.json", "linfonodomegalia.json", "nefrologia.json", "neurologia.json", 
-        "pcr.json", "pneumonia.json", "reumatologia.json", "semiologia_osteoarticular.json", 
-        "semiologia_respiratoria.json", "sepse_e_choque_septico.json", "sepsis.json", 
-        "sindrome_diarreica.json", "sindrome_metabolica_diabetes.json", "sindrome_metabolica_has.json", 
-        "sindrome_uremica.json", "sindromes_bacterianas.json", "sindromes_febris.json", 
-        "terapia_intensiva.json", "tosse_cronica.json", "toxicologia.json", "valvopatias.json"
-      ]
-    },
-    "GinecologiaObstetricia": {
-      pasta: "knowledge_base/ginecologia_obstetricia/",
-      arquivos: [
-        "00_diretrizes_gerais.json", "avaliacao_inicial_de_gravidez.json", "cenarios-uroginecologia.json", 
-        "doencas_clinicas_gravidez.json", "hemorragia_pos_parto_e_sofrimento_fetal.json", "onco_mamas.json", 
-        "onco_utero_endometrio_vulva.json", "sangramento-ginecologico.json", "sangramentos_gravidez.json", 
-        "sindromes_transmissao_sexual.json"
-      ]
-    },
-    "Pediatria": {
-      pasta: "knowledge_base/pediatria/",
-      arquivos: [
-        "pediatriaI.json", "pediatriaII.json", "pediatriaIII.json", "pediatriaIV.json", "pediatriaV.json", "pediatriaVI.json"
+        "cardiologia.json", 
+        "pneumonia.json", 
+        "pcr.json", 
+        "reumatologia.json", 
+        "sindrome_uremica.json", 
+        "hematologia.json", 
+        "sepse_e_choque_septico.json"
       ]
     }
   };
@@ -264,23 +247,19 @@
   }
 
   // ==========================================
-  // PARSER UNIVERSAL DA BIBLIOTECA TEÓRICA (IDMT)
+  // PARSER CONDICIONAL INTELIGENTE (BASE DE PROVA)
   // ==========================================
   function normalizarCasoClinico(casoBruto, nomeModuloPadrao) {
     if (!casoBruto) return null;
 
-    // 1. Caso já esteja estruturado com fases prontas de RPG
+    // Se já estiver formatado com fases completas de RPG
     if (casoBruto.fase_1_investigacao && casoBruto.fase_3_conduta) {
       return casoBruto;
     }
 
-    // 2. Formato legado estruturado (respostas_esperadas)
+    // Se vier em formato legado estruturado
     if (casoBruto.respostas_esperadas) {
       const resp = casoBruto.respostas_esperadas;
-      const risco = casoBruto["04_campo_avaliacao_risco_T"] || {};
-      const filtragem = casoBruto["03_campo_busca_ativa_filtragem"] || {};
-      let distratores = filtragem.exclusao_ativa && Array.isArray(filtragem.exclusao_ativa) ? filtragem.exclusao_ativa : [];
-
       return {
         id_caso: casoBruto.id || "caso_legado",
         patologia_alvo: casoBruto.nome || nomeModuloPadrao,
@@ -289,68 +268,86 @@
         ritmo_cardiaco: "Ritmo Sinusal Normal",
         vinheta_admissao: casoBruto.vigneta || `Paciente admitido apresentando quadro clínico de ${casoBruto.nome || nomeModuloPadrao}.`,
         fase_1_investigacao: {
-          gabarito_esperado: resp.exames || ["hemograma", "gasometria", "funcao renal"],
-          achado_sucesso: "Exames complementares solicitados com sucesso, confirmando a suspeita diagnóstica.",
-          resposta_preceptor_erro: "Doutor, precisamos de exames laboratoriais direcionados para esclarecer a hipótese."
+          gabarito_esperado: resp.exames || ["hemograma", "gasometria"],
+          achado_sucesso: "Exames complementares solicitados com sucesso.",
+          resposta_preceptor_erro: "Doutor, precisamos de exames laboratoriais direcionados."
         },
         fase_2_diagnostico: {
           gabarito_esperado: resp.diagnostico || [nomeModuloPadrao.toLowerCase()],
-          distrator_comum: distratores,
-          feedback_distrator: "Cuidado! Essa hipótese não condiz com os achados clínicos e laboratoriais principais.",
+          distrator_comum: ["artefato", "disturbio leve"],
+          feedback_distrator: "Cuidado! Essa hipótese não condiz com os achados principais.",
           achado_sucesso: `Diagnóstico confirmado: ${casoBruto.nome || nomeModuloPadrao}.`
         },
         fase_3_conduta: {
           gabarito_esperado: resp.conduta || ["suporte", "tratamento especifico"],
-          red_flag_mortal: ["alta", "analgesia simples", "observacao"],
-          feedback_sucesso: `Conduta de excelência estabelecida: ${risco.conduta_emergencial || "Suporte clínico adequado"}.`,
-          feedback_red_flag: "ERRO CRÍTICO FATAL! Conduta negligenciada ou inadequada para a gravidade do caso."
+          red_flag_mortal: ["alta", "analgesia simples"],
+          feedback_sucesso: "Conduta de excelência estabelecida.",
+          feedback_red_flag: "ERRO CRÍTICO! Conduta inadequada para a gravidade."
         },
         discussao_clinica_final: {
-          takeaway_message: casoBruto.feedback_tecnico || "Revisão do caso concluída com sucesso.",
-          fisiopatologia: "O quadro decorre de perturbações fisiopatológicas específicas desta patologia, exigindo intervenção direcionada."
+          takeaway_message: casoBruto.feedback_tecnico || "Revisão concluída.",
+          fisiopatologia: "O quadro decorre de perturbações fisiopatológicas específicas."
         }
       };
     }
 
-    // 3. Parser Universal para Arquivos Teóricos / Base de Conhecimento RAG
-    const nomeCaso = casoBruto.nome || casoBruto.titulo || casoBruto.patologia || nomeModuloPadrao;
-    const vignetaTexto = casoBruto.vigneta || casoBruto.descricao || casoBruto.resumo || `Paciente admitido na unidade apresentando manifestações clínicas características de ${nomeCaso}. Relata sintomas de início recente necessitando de avaliação e conduta imediata.`;
-    const fisiopatologiaTeorica = casoBruto.fisiopatologia || casoBruto.etiologia || casoBruto.mecanismo || "Fisiopatologia baseada em desregulação sistêmica e agressão orgânica.";
-    const tratamentoTeorico = casoBruto.tratamento || casoBruto.conduta || casoBruto.manejo || ["suporte clinico", "monitorizacao", "medicacao especifica"];
-    const examesTeoricos = casoBruto.exames || casoBruto.diagnostico_laboratorial || ["hemograma", "gasometria", "marcadores de lesao", "imagem"];
+    // PARSER CONDICIONAL (IF/ELSE dinâmico para resumos e dados parciais)
+    const nomeCaso = casoBruto.nome || casoBruto.tema || casoBruto.titulo || casoBruto.patologia || nomeModuloPadrao;
+    const vignetaTexto = casoBruto.vigneta || casoBruto.descricao || casoBruto.resumo || `Paciente com quadro clínico sugestivo de ${nomeCaso}. Avalie o caso com base nas diretrizes teóricas.`;
+    
+    // Condicionais dinâmicas SE/ENTÃO para extração de dados
+    let examesGabarito = ["hemograma", "gasometria", "avaliar exames complementares"];
+    if (casoBruto.exames || casoBruto.propeduetica || casoBruto.diagnostico_laboratorial) {
+      const ex = casoBruto.exames || casoBruto.propeduetica || casoBruto.diagnostico_laboratorial;
+      examesGabarito = Array.isArray(ex) ? ex : [ex];
+    }
+
+    let diagGabarito = [nomeCaso.toLowerCase()];
+    if (casoBruto.diagnostico || casoBruto.hipotese) {
+      const d = casoBruto.diagnostico || casoBruto.hipotese;
+      diagGabarito = Array.isArray(d) ? d.map(x => x.toLowerCase()) : [d.toLowerCase()];
+    }
+
+    let condutaGabarito = ["suporte clinico", "tratamento direcionado", "monitorizacao"];
+    if (casoBruto.tratamento || casoBruto.conduta || casoBruto.manejo) {
+      const c = casoBruto.tratamento || casoBruto.conduta || casoBruto.manejo;
+      condutaGabarito = Array.isArray(c) ? c : [c];
+    }
+
+    const fisiopatologiaTexto = casoBruto.fisiopatologia || casoBruto.etiologia || casoBruto.mecanismo || "Mecanismo fisiopatológico baseado nos conceitos teóricos da matéria.";
 
     return {
-      id_caso: casoBruto.id || `teorico_${Math.random().toString(36.substring(2, 7))}`,
+      id_caso: casoBruto.id || `dinamico_${Math.random().toString(36).substring(2, 7)}`,
       patologia_alvo: nomeCaso,
-      arquitetura: "v13_parser_universal",
-      dificuldade: "Biblioteca Mestre IDMT",
+      arquitetura: "v13_parser_condicional",
+      dificuldade: "Resumo de Prova IDMT",
       ritmo_cardiaco: "Ritmo Sinusal Estável",
       vinheta_admissao: vignetaTexto,
-      instrucao_gerador_ia: "Caso gerado automaticamente a partir da Biblioteca Mestre Teórica do Instituto Delyone.",
+      instrucao_gerador_ia: "Parser condicional ativo: adaptado a partir do resumo teórico.",
       
       fase_1_investigacao: {
-        gabarito_esperado: Array.isArray(examesTeoricos) ? examesTeoricos : [examesTeoricos],
-        achado_sucesso: "Exames complementares obtidos com sucesso, evidenciando alterações compatíveis com a teoria.",
-        resposta_preceptor_erro: "Doutor, precisamos de exames laboratoriais e de imagem direcionados para esclarecer a patologia. Quais você solicita?"
+        gabarito_esperado: examesGabarito,
+        achado_sucesso: "Investigação conduzida com sucesso. Os dados coletados confirmam o raciocínio clínico.",
+        resposta_preceptor_erro: "Doutor, quais exames ou dados propedêuticos iniciais você solicita para esclarecer o quadro?"
       },
 
       fase_2_diagnostico: {
-        gabarito_esperado: [nomeCaso.toLowerCase(), "patologia principal", "sindrome aguda"],
-        distrator_comum: ["quadro funcional leve", "artefato", "disturbio benigno"],
-        feedback_distrator: "Atenção aos sinais de gravidade e aos sintomas principais descritos na vinheta clínica.",
-        achado_sucesso: `Diagnóstico principal estabelecido com precisão: ${nomeCaso}.`
+        gabarito_esperado: diagGabarito,
+        distrator_comum: ["quadro secundario", "artefato", "disturbio leve"],
+        feedback_distrator: "Atenção ao enunciado e aos sinais principais descritos no resumo acadêmico.",
+        achado_sucesso: `Hipótese e diagnóstico estabelecidos com precisão: ${nomeCaso}.`
       },
 
       fase_3_conduta: {
-        gabarito_esperado: Array.isArray(tratamentoTeorico) ? tratamentoTeorico : [tratamentoTeorico],
-        red_flag_mortal: ["alta precoce", "negligencia", "placebo"],
-        feedback_sucesso: "Conduta terapêutica instituída com rigor técnico e alinhada às diretrizes da base teórica.",
-        feedback_red_flag: "ERRO CRÍTICO! Conduta inadequada ou deletéria frente à gravidade fisiopatológica da patologia."
+        gabarito_esperado: condutaGabarito,
+        red_flag_mortal: ["alta precoce", "negligencia", "conduta letal"],
+        feedback_sucesso: "Conduta terapêutica e manejo alinhados rigorosamente ao padrão exigido na prova.",
+        feedback_red_flag: "ERRO CRÍTICO! Conduta inadequada frente ao risco clínico do resumo."
       },
 
       discussao_clinica_final: {
-        takeaway_message: `O manejo de ${nomeCaso} exige rigor acadêmico e intervenção precoce baseada em evidências teóricas.`,
-        fisiopatologia: fisiopatologiaTeorica
+        takeaway_message: casoBruto.feedback_tecnico || `O estudo de ${nomeCaso} exige atenção estrita aos pontos cobrados pela banca.`,
+        fisiopatologia: fisiopatologiaTexto
       }
     };
   }
@@ -367,14 +364,13 @@
     if (skipsRestantes <= 0) btnSkip.disabled = true;
   }
 
-    async function carregarBaseDeConhecimento() {
+  async function carregarBaseDeConhecimento() {
     let casosCarregados = 0;
     let modulosTrackers = []; 
 
     for (const [categoria, dados] of Object.entries(manifestoConhecimento)) {
       for (const arquivo of dados.arquivos) {
         try {
-          // Adicionamos um controle de fetch seguro com tratamento individual por arquivo
           const res = await fetch(dados.pasta + arquivo);
           if (res && res.ok) {
             const json = await res.json();
@@ -398,16 +394,14 @@
             }
           }
         } catch (error) {
-           // Ignora o arquivo ausente e continua o loop sem travar a aplicação
            console.warn(`[Parser IDMT] Módulo ignorado ou indisponível: ${arquivo}`);
         }
       }
     }
     
-    // Garante que o status atualize mesmo se carregou apenas parte dos módulos
     if (casosCarregados > 0) {
       loadingStatus.style.color = "var(--green)";
-      loadingStatus.innerText = `Biblioteca Mestre Online! ${casosCarregados} cenários clínicos carregados.`;
+      loadingStatus.innerText = `Motor Online! ${casosCarregados} cenários clínicos carregados.`;
       renderizarTagsModulos(modulosTrackers);
     } else {
       loadingStatus.style.color = "var(--red)";
@@ -481,7 +475,7 @@
     
     let vinheta = casoAtual.vinheta_admissao || "Paciente deu entrada na emergência.";
     if (casoAtual.instrucao_gerador_ia) {
-        vinheta = `<em>[Parser Teórico IDMT Ativo]</em><br><br>${vinheta}`;
+        vinheta = `<em>[Parser Condicional IDMT Ativo]</em><br><br>${vinheta}`;
     }
 
     const nomeCaso = casoAtual.patologia_alvo || "Caso Clínico";
@@ -716,7 +710,7 @@
       <div class="score-circle" style="background: ${cor}">${finalScore}</div>
       <div class="debriefing-text">
         <strong>Debriefing Clínico:</strong><br>${casoAtual.discussao_clinica_final?.takeaway_message || "Revisão concluída."}<br><br>
-        <strong>Fisiopatologia / Base Teórica:</strong><br>${casoAtual.discussao_clinica_final?.fisiopatologia || "Consulte as diretrizes do Instituto."}
+        <strong>Base Teórica / Prova:</strong><br>${casoAtual.discussao_clinica_final?.fisiopatologia || "Consulte as diretrizes do Instituto."}
       </div>
       <button class="btn-send" onclick="proximoCaso()" style="width: 100%; margin-top: 10px;">Atender Próximo Paciente</button>
     `;
