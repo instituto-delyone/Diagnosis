@@ -1,146 +1,89 @@
 [
   {
-    "modulo": "Ginecologia e Obstetricia",
-    "cenario_id": "GO_OBSTETRICIA_002",
-    "titulo": "Manejo de Hemorragia Pós-Parto (HPP) em Paciente Hipertensa",
-    "vinheta_clinica": "Secundigesta, 38 semanas, com diagnóstico de Pré-eclâmpsia leve. Evoluiu para parto vaginal de feto macrossômico (4.100g). Cerca de 15 minutos após a dequitação placentária completa, a paciente apresenta sangramento vaginal profuso (estimado > 800 ml). Exame físico: palidez cutaneomucosa, útero amolecido e palpável acima da cicatriz umbilical.",
-    "sinais_vitais": {
-      "PA": "150/100 mmHg",
-      "FC": "112 bpm",
-      "Temperatura": "36.5 C"
-    },
+    "id_caso": "GO_OBSTETRICIA_002",
+    "patologia": "Hemorragia Pós-Parto (HPP) por Atonia Uterina em Gestante Hipertensa",
+    "modo_sugerido": "Sala Vermelha / Centro Obstétrico",
+    "peso_dificuldade": 2.4,
     
-    "hipoteses_concorrentes": [
+    "cenario_inicial": {
+      "fala_preceptor": "Secundigesta, 38 semanas, com pré-eclâmpsia leve, evoluiu para parto vaginal de feto macrossômico (4.100g). Cerca de 15 minutos após a dequitação, apresenta sangramento vaginal profuso (> 800 ml). Útero amolecido.",
+      "fala_paciente": "Doutor, estou sentindo uma tontura muito forte, visão escurecida e o sangramento embaixo não para!"
+    },
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: A atonia uterina é a principal causa de HPP, agravada pela macrossomia. O manejo imediato exige estímulo do tônus com massagem bimanual e uterotônicos seguros (Oxitocina), evitando drogas que causem picos hipertensivos.",
+
+    "acoes_esperadas": [
       {
-        "id": "H1",
-        "nome": "Atonia Uterina",
-        "prior_pre_teste": 0.85,
-        "verdadeira": true
+        "gatilhos_validos": ["revisao do canal", "inspecao vaginal", "revisao"],
+        "resposta_preceptor": "Revisão do canal de parto realizada sem lacerações ativas, confirmando origem uterina por atonia. Qual a conduta inicial de suporte e uterotonia?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
       },
       {
-        "id": "H2",
-        "nome": "Laceração de Trajeto",
-        "prior_pre_teste": 0.10,
-        "verdadeira": false
-      },
-      {
-        "id": "H3",
-        "nome": "Retenção de Restos Placentários",
-        "prior_pre_teste": 0.05,
-        "verdadeira": false
+        "gatilhos_validos": ["massagem uterina", "manobra de hamilton", "oxitocina", "oxitocina iv", "oxitocina im"],
+        "resposta_preceptor": "Conduta perfeita! Massagem bimanual e oxitocina instituídas com sucesso, recuperando o tônus miometrial e contendo a hemorragia. Caso resolvido.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
       }
     ],
 
-    "propedêutica_disponivel": [
+    "red_flags": [
       {
-        "acao": "Revisão do Canal de Parto (Inspeção Vaginal e Cervical)",
-        "custo_iep": 1,
-        "resultados_esperados": {
-          "H1": {
-            "achado": "Ausência de lacerações ativas no canal vaginal ou colo uterino. Confirma sangramento de origem uterina.",
-            "LR_positivo": 5.0,
-            "LR_negativo": 0.1
-          }
-        }
-      },
-      {
-        "acao": "Revisão Manual da Cavidade Uterina (Curetagem de Urgência)",
-        "custo_iep": 3,
-        "penalidade": "A placenta já foi dequitada completa. Submeter a paciente a procedimento invasivo sem antes tratar o tônus uterino (principal causa de HPP) atrasa a estabilização. Perda de IEP.",
-        "resultados_esperados": null
+        "gatilhos_fatais": ["ergometrina", "metilergometrina", "alta"],
+        "resposta_preceptor": "ERRO CRÍTICO IATROGÊNICO! Administrar ergometrina em paciente com pré-eclâmpsia desencadeou uma crise hipertensiva severa e AVE hemorrágico fulminante.",
+        "impacto_estabilidade": -100
       }
     ],
 
-    "condutas_terapeuticas": [
+    "distratores": [
       {
-        "acao": "Massagem Uterina Bimanual (Manobra de Hamilton) + Oxitocina IV/IM",
-        "correta_para": ["H1"],
-        "feedback": "Conduta Correta! A atonia uterina é a principal causa de HPP (associada à macrossomia). O manejo inicial exige massagem para estimular a contração e administração de uterotônicos seguros como a Oxitocina."
-      },
-      {
-        "acao": "Administração de Ergometrina 0,2 mg IM",
-        "correta_para": [],
-        "feedback": "Erro Crítico Iatrogênico! Embora seja um uterotônico potente, a Ergometrina é estritamente CONTRAINDICADA em pacientes hipertensas (como esta paciente com pré-eclâmpsia), pois pode causar crise hipertensiva severa e AVE."
-      },
-      {
-        "acao": "Inserção Imediata de Balão de Bakri",
-        "correta_para": [],
-        "feedback": "Incorreto como primeira linha. O tamponamento mecânico com Balão de Bakri é indicado quando há falha do tratamento medicamentoso (uterotônicos e massagem) inicial."
+        "gatilhos_distratores": ["curetagem", "revisao manual imediata", "balao de bakri"],
+        "resposta_preceptor": "Procedimento invasivo ou tamponamento mecânico precoce sem antes esgotar a primeira linha de uterotônicos e massagem atrasa a estabilização.",
+        "impacto_estabilidade": -10
       }
     ]
   },
   {
-    "modulo": "Ginecologia e Obstetricia",
-    "cenario_id": "GO_OBSTETRICIA_003",
-    "titulo": "Avaliação de Vitalidade Fetal em CIUR",
-    "vinheta_clinica": "Gestante 31 semanas, portadora de Hipertensão Crônica. Encaminhada para avaliação de vitalidade fetal devido a diagnóstico de Crescimento Intrauterino Restrito (CIUR) assimétrico na ultrassonografia. A paciente relata diminuição da movimentação fetal nas últimas 24 horas.",
-    "sinais_vitais": {
-      "PA": "140/90 mmHg",
-      "FC": "80 bpm",
-      "Temperatura": "36.6 C"
-    },
+    "id_caso": "GO_OBSTETRICIA_003",
+    "patologia": "Insuficiência Placentária com Hipóxia Grave (Sofrimento Fetal Agudo no CIUR)",
+    "modo_sugerido": "Sala Vermelha / Centro Cirúrgico Obstétrico",
+    "peso_dificuldade": 2.6,
     
-    "hipoteses_concorrentes": [
+    "cenario_inicial": {
+      "fala_preceptor": "Gestante de 31 semanas com hipertensão crônica e CIUR assimétrico relata diminuição da movimentação fetal nas últimas 24h. CTG com desacelerações tardias (DIP II) e Doppler com onda A negativa no ducto venoso.",
+      "fala_paciente": "Doutor, não sinto o bebê mexer desde ontem o dia todo, estou muito preocupada!"
+    },
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: A presença de onda A negativa no ducto venoso e DIP II na cardiotocografia indicam falência miocárdica e acidose grave iminente. A interrupção imediata é salva-vidas.",
+
+    "acoes_esperadas": [
       {
-        "id": "H1",
-        "nome": "Insuficiência Placentária com Hipóxia Grave (Sofrimento Fetal Agudo)",
-        "prior_pre_teste": 0.80,
-        "verdadeira": true
+        "gatilhos_validos": ["cardiotocografia", "ctg", "doppler", "perfil biofisico", "pbf"],
+        "resposta_preceptor": "Exames de vitalidade confirmam sofrimento fetal grave com centralização e alteração de ducto venoso. Qual a conduta obstétrica salvadora?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
       },
       {
-        "id": "H2",
-        "nome": "Vitalidade Fetal Preservada",
-        "prior_pre_teste": 0.20,
-        "verdadeira": false
+        "gatilhos_validos": ["interrupcao", "parto", "cesariana", "cesarea de urgencia", "cesariana imediata"],
+        "resposta_preceptor": "Conduta salva-vidas de excelência! Cesariana de urgência realizada prontamente, salvando o concepto da acidose letal. Caso resolvido.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
       }
     ],
 
-    "propedêutica_disponivel": [
+    "red_flags": [
       {
-        "acao": "Cardiotocografia (CTG)",
-        "custo_iep": 1,
-        "resultados_esperados": {
-          "H1": {
-            "achado": "Linha de base em 150 bpm, variabilidade ausente (< 6 bpm), presença de desacelerações tardias repetidas após as contrações (DIP II).",
-            "LR_positivo": 15.0,
-            "LR_negativo": 0.1
-          }
-        }
-      },
-      {
-        "acao": "Dopplerfluxometria (Umbilical, Cerebral Média e Ducto Venoso)",
-        "custo_iep": 2,
-        "resultados_esperados": {
-          "H1": {
-            "achado": "Artéria Umbilical com diástole zero. Artéria Cerebral Média com redução do IP (centralização). Ducto Venoso apresentando Onda A negativa.",
-            "LR_positivo": 50.0,
-            "LR_negativo": 0.01
-          }
-        }
-      },
-      {
-        "acao": "Perfil Biofísico Fetal (PBF)",
-        "custo_iep": 2,
-        "resultados_esperados": {
-          "H1": {
-            "achado": "Pontuação 2/10 (Apenas volume de líquido amniótico presente, porém oligodrâmnio). Ausência de movimentos respiratórios e tônus fetal alterado.",
-            "LR_positivo": 10.0,
-            "LR_negativo": 0.2
-          }
-        }
+        "gatilhos_fatais": ["corticoterapia e aguardar 48h", "esperar maturacao pulmonar", "alta"],
+        "resposta_preceptor": "ERRO FATAL! Aguardar 48 horas para maturação pulmonar na vigência de onda A negativa no ducto venoso resultou em óbito fetal intrauterino por acidose e hipóxia terminal.",
+        "impacto_estabilidade": -100
       }
     ],
 
-    "condutas_terapeuticas": [
+    "distratores": [
       {
-        "acao": "Interrupção Imediata da Gestação (PARTO)",
-        "correta_para": ["H1"],
-        "feedback": "Conduta Salva-Vidas! A presença de Onda A negativa no ducto venoso e DIP II na cardiotocografia indicam risco iminente de morte fetal e acidose grave. A via de parto deve ser a mais rápida, geralmente cesariana."
-      },
-      {
-        "acao": "Administrar Corticoterapia (Betametasona) e aguardar 48 horas",
-        "correta_para": [],
-        "feedback": "Erro Fatal! Embora o feto seja prematuro (< 32 semanas), a onda A negativa significa falência miocárdica iminente. Não há tempo hábil para maturação pulmonar. Aguardar resultará em óbito fetal."
+        "gatilhos_distratores": ["perfil de coagulacao", "amniocentese"],
+        "resposta_preceptor": "Exames laboratoriais sistêmicos secundários que não substituem a urgência cirúrgica diante do colapso da vitalidade fetal.",
+        "impacto_estabilidade": -10
       }
     ]
   }
