@@ -1,27 +1,31 @@
 /**
  * =====================================================================
- * IDMT DIAGNOSIS ENGINE (AIGAR) - SEMANTIC VALIDATION CORE
+ * IDMT DIAGNOSIS ENGINE (AIGAR) - PRÓ ESTENDIDO (CORE SEMÂNTICO & BAYESIANO)
  * Instituto Delyone de Medicina e Tecnologia (IDMT)
- * Finalidade: Processamento semântico, normalização de texto e 
- * flexibilização de condutas para simulações clínicas de Sala Vermelha.
  * =====================================================================
+ * Desenvolvido para simulações de alta performance em Sala Vermelha 
+ * e atendimento ambulatorial, integrando flexibilidade semântica, 
+ * sinônimos estendidos de plantão e rastreabilidade de condutas.
  */
 
-class IDMTEngine {
+class IDMTEnginePró {
     constructor() {
-        // Dicionário de equivalências clínicas e sinônimos estendidos
+        // Dicionário avançado de equivalências clínicas, sinônimos e termos de plantão
         this.sinonimos = {
             "angiotc": ["angio tc", "angiotomografia", "angio-tc", "tomografia computadorizada com contraste", "angio tc de torax", "tomografia vascular"],
-            "gasometria": ["gasometria arterial", "gaso", "gasometria venosa", "perfil gasoso"],
-            "eletro": ["eletrocardiograma", "ecg", "eletrocardiografia", "traz um eletro"],
-            "anticoagulacao": ["heparina", "rivaroxaban", "enoxaparina", "anticoagulante", "inibidor de xfa", "NOAC", "iniciar anticoagulante"],
-            "monabiche": ["morfina", "nitrato", "aas", "aspirina", "beta bloqueador", "estatina", "monabi"],
-            "troponina": ["enzimas miocardicas", "marcador de necrose miocardica", "ckmb", "troponina t", "troponina i", "dosagem de troponina"]
+            "gasometria": ["gasometria arterial", "gaso", "gasometria venosa", "perfil gasoso", "gaso arterial", "gasometria com acidose"],
+            "eletro": ["eletrocardiograma", "ecg", "eletrocardiografia", "traz um eletro", "fazer eletro", "ecg de 12 derivacoes"],
+            "anticoagulacao": ["heparina", "rivaroxaban", "enoxaparina", "anticoagulante", "inibidor de xfa", "NOAC", "iniciar anticoagulante", "heparinizacao"],
+            "monabiche": ["morfina", "nitrato", "aas", "aspirina", "beta bloqueador", "estatina", "monabi", "dupla antiagregacao"],
+            "troponina": ["enzimas miocardicas", "marcador de necrose miocardica", "ckmb", "troponina t", "troponina i", "dosagem de troponina"],
+            "oxigenio": ["o2", "cateter nasal", "mascara de oxigenio", "suporte de oxigenio", "oxigenioterapia", "ventilar"],
+            "acesso": ["acesso venoso", "puncao", "veia periferica", "cateter venoso", "acesso venoso periferico"]
         };
     }
 
     /**
-     * Normaliza a string do usuário (remove acentos, pontuação, joga para minúsculas e limpa espaços)
+     * Normalização profunda: remove acentos, pontuações, converte para minúsculas 
+     * e limpa espaços excedentes para garantir tolerância a digitação de plantão.
      */
     normalizar(texto) {
         if (!texto) return "";
@@ -29,14 +33,14 @@ class IDMTEngine {
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "") // Remove acentos
             .toLowerCase()
-            .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'<>@\[\]{}]/g, " ") // Remove pontuações
+            .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'<>@\[\]{}]/g, " ") // Remove pontuação
             .replace(/\s+/g, " ") // Normaliza espaços múltiplos
             .trim();
     }
 
     /**
-     * Valida se a resposta do usuário corresponde ao gabarito esperado, 
-     * considerando sinônimos, substrings e normalização semântica.
+     * Valida a resposta do usuário contra o gabarito estruturado,
+     * avaliando correspondência exata, sinônimos de plantão e proximidade de tokens.
      */
     validarResposta(inputUsuario, gabaritoEsperadoArray) {
         const textoLimpo = this.normalizar(inputUsuario);
@@ -45,16 +49,15 @@ class IDMTEngine {
             return { valido: false, matchEncontrado: null };
         }
 
-        // Verifica cada termo esperado no gabarito
         for (let gabarito of gabaritoEsperadoArray) {
             const gabaritoNormalizado = this.normalizar(gabarito);
 
-            // 1. Verificação direta de inclusão de substring ou igualdade
+            // 1. Verificação direta de substring ou igualdade
             if (textoLimpo.includes(gabaritoNormalizado) || gabaritoNormalizado.includes(textoLimpo)) {
                 return { valido: true, matchEncontrado: gabarito };
             }
 
-            // 2. Verificação de sinônimos conhecidos
+            // 2. Verificação via Dicionário de Sinônimos Estendidos
             for (let [termoBase, listaSinonimos] of Object.entries(this.sinonimos)) {
                 const atingeBase = gabaritoNormalizado.includes(termoBase) || 
                                    listaSinonimos.some(s => gabaritoNormalizado.includes(this.normalizar(s)));
@@ -68,7 +71,7 @@ class IDMTEngine {
                 }
             }
 
-            // 3. Verificação por proximidade de palavras-chave individuais (Token Match)
+            // 3. Verificação por proximidade de palavras-chave individuais (Token Match / 70% de similaridade)
             const palavrasGabarito = gabaritoNormalizado.split(" ").filter(p => p.length > 2);
             const palavrasUsuario = textoLimpo.split(" ");
             
@@ -86,7 +89,7 @@ class IDMTEngine {
     }
 
     /**
-     * Verifica se o input acionou alguma Red Flag mortal
+     * Identifica gatilhos de Red Flags (condutas iatrogênicas ou letais)
      */
     verificarRedFlag(inputUsuario, redFlagsArray) {
         const textoLimpo = this.normalizar(inputUsuario);
@@ -100,7 +103,28 @@ class IDMTEngine {
         }
         return false;
     }
+
+    /**
+     * Calcula o impacto dinâmico na estabilidade e pontuação do estudante
+     */
+    calcularDesempenho(turnoAtual, pesoDificuldade, tipoAcao) {
+        // tipoAcao pode ser: 'acerto', 'distrator', 'red_flag', 'ajuda'
+        let penalidadeTurno = Math.max(0.5, 1 - (turnoAtual * 0.05));
+        
+        switch(tipoAcao) {
+            case 'acerto':
+                return { pontos: Math.floor(25 * pesoDificuldade * penalidadeTurno), estabilidadeDelta: +10 };
+            case 'distrator':
+                return { pontos: -5, estabilidadeDelta: -10 };
+            case 'red_flag':
+                return { pontos: -30, estabilidadeDelta: -35 };
+            case 'ajuda':
+                return { pontos: -10, estabilidadeDelta: 0 };
+            default:
+                return { pontos: -2, estabilidadeDelta: -5 }; // Ação genérica fora do protocolo
+        }
+    }
 }
 
-// Instância global pronta para uso no motor AIGAR / IDMT
-const idmtEngine = new IDMTEngine();
+// Instância global do Pró Estendido pronta para integração no IDMT
+const idmtEngine = new IDMTEnginePró();
