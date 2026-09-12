@@ -1,83 +1,134 @@
 [
   {
     "id_caso": "hiv_neurotoxoplasmose_01",
-    "patologia_alvo": "Neurotoxoplasmose (Neuroinfecção no HIV)",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Paciente com HIV, em abandono de TARV (CD4 = 80 cels/mm³). Trazido ao PS com cefaleia intensa, febre e hemiparesia à direita. TC de crânio revela múltiplas lesões hipodensas com edema perilesional e captação de contraste em forma de anel[span_1](start_span)[span_1](end_span).",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["tc de cranio", "rm de cranio", "tomografia", "ressonancia"],
-      "achado_sucesso": "Excelente. A imagem cerebral já foi realizada e confirma múltiplas lesões com realce anelar, comumente nos núcleos da base[span_2](start_span)[span_2](end_span).",
-      "resposta_preceptor_erro": "Doutor, paciente imunossuprimido severo com clínica de febre, cefaleia e déficit neurológico focal (hemiparesia). A primeira atitude é olhar a imagem do cérebro (TC/RM) com contraste."
+    "patologia": "Neurotoxoplasmose (Neuroinfecção no HIV)",
+    "modo_sugerido": "Sala Vermelha / UTI",
+    "peso_dificuldade": 2.5,
+    
+    "cenario_inicial": {
+      "fala_preceptor": "Paciente com HIV em abandono de TARV (CD4 = 80 cels/mm³) trazido ao PS com cefaleia intensa, febre e hemiparesia à direita. A TC de crânio revela múltiplas lesões com realce em anel.",
+      "fala_paciente": "Doutor, minha cabeça tá explodindo de dor, tive febre e meu braço e perna direita perderam a força de repente!"
     },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["neurotoxoplasmose", "toxoplasmose", "neurotoxo"],
-      "distrator_comum": ["linfoma primario do snc", "tuberculose do snc", "meningite criptococica"],
-      "feedback_distrator": "O Linfoma Primário do SNC (associado ao EBV) pode causar imagem semelhante, mas tipicamente se apresenta como lesão ÚNICA (não múltipla) e costuma ser afebril. Criptococose causa meningite basal sem déficit focal no parênquima[span_3](start_span)[span_3](end_span).",
-      "achado_sucesso": "Correto! Suspeita altíssima de Neurotoxoplasmose, a lesão expansiva mais comum no HIV[span_4](start_span)[span_4](end_span)."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["sulfadiazina", "pirimetamina", "acido folinico", "tratamento empirico"],
-      "red_flag_mortal": ["esperar biopsia", "biopsia cerebral", "alta", "apenas corticoide"],
-      "feedback_sucesso": "Conduta perfeita! Na suspeita de Neurotoxoplasmose no HIV, o tratamento (Sulfadiazina + Pirimetamina) deve ser iniciado PRESUNTIVAMENTE. Aguardaremos resposta em 14 dias[span_5](start_span)[span_5](end_span).",
-      "feedback_red_flag": "ERRO CRÍTICO! Você adiou o tratamento aguardando exames confirmatórios invasivos (biópsia/punção). O paciente desenvolveu hipertensão intracraniana grave pelo edema e evoluiu com herniação cerebral irreversível."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "Lesões com realce anelar múltiplas em CD4 < 100 sugerem Neurotoxo. O tratamento é presuntivo (imediato)[span_6](start_span)[span_6](end_span). Se não houver melhora em 14 dias de sulfadiazina + pirimetamina, suspeite de Linfoma Primário[span_7](start_span)[span_7](end_span).",
-      "fisiopatologia": "A reativação dos bradizoítos latentes de Toxoplasma gondii no SNC decorre da depleção de células T-CD4+, levando a áreas focais de necrose e abscesso cerebral com forte reação inflamatória ao redor (realce em anel)."
-    }
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: Imunossuprimido grave com déficit focal e lesões múltiplas em anel na TC aponta para Neurotoxoplasmose. O tratamento deve ser instituído presuntivamente sem aguardar biópsia.",
+
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["tc de cranio", "rm de cranio", "tomografia", "ressonancia"],
+        "resposta_preceptor": "Imagem cerebral já avaliada confirmando múltiplas lesões nos núcleos da base. Qual a conduta terapêutica empírica imediata?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["sulfadiazina", "pirimetamina", "acido folinico", "tratamento empirico"],
+        "resposta_preceptor": "Conduta perfeita! Tratamento presuntivo iniciado com sucesso. Aguardaremos resposta clínica em 14 dias.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
+      }
+    ],
+
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["esperar biopsia", "biopsia cerebral", "alta", "apenas corticoide"],
+        "resposta_preceptor": "ERRO CRÍTICO! Adiar o tratamento aguardando biópsia fez o edema intracraniano progredir rapidamente, levando o paciente à herniação cerebral irreversível.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["eletroencefalograma", "eeg"],
+        "resposta_preceptor": "Exame secundário que não aborda o processo inflamatório expansivo central instalado.",
+        "impacto_estabilidade": -10
+      }
+    ]
   },
   {
     "id_caso": "hiv_pneumocistose_01",
-    "patologia_alvo": "Pneumocistose (PCP)",
-    "dificuldade": "Intermediária",
-    "vinheta_admissao": "Paciente de 35 anos, sabidamente HIV positivo (CD4 atual 150), queixa-se de tosse seca há 3 semanas e dispneia progressiva. Gasometria em ar ambiente: PaO2 de 60 mmHg. Radiografia de tórax evidencia infiltrado reticulonodular bilateral difuso[span_8](start_span)[span_8](end_span).",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["gasometria", "ldh", "escarro", "broncoscopia"],
-      "achado_sucesso": "Boa solicitação. O LDH encontra-se fortemente elevado (> 500) e a gasometria confirma hipoxemia severa[span_9](start_span)[span_9](end_span).",
-      "resposta_preceptor_erro": "Doutor, paciente imunosuprimido com tosse subaguda arrastada, dispneia e RX com infiltrado difuso. Precisamos avaliar o grau de hipoxemia (gasometria) e solicitar o marcador laboratorial inespecífico (LDH) para orientar o diagnóstico."
+    "patologia": "Pneumocistose (PCP)",
+    "modo_sugerido": "Sala Vermelha",
+    "peso_dificuldade": 2.3,
+    
+    "cenario_inicial": {
+      "fala_preceptor": "Paciente HIV positivo (CD4 150) com tosse seca há 3 semanas e dispneia progressiva. Gasometria com PaO2 de 60 mmHg e RX com infiltrado reticulonodular difuso.",
+      "fala_paciente": "Doutor, eu não consigo puxar o ar direito há semanas, tosse seca que não passa e sinto um cansaço horrível."
     },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["pneumocistose", "pcp", "pneumocystis", "pneumocystis jirovecii"],
-      "distrator_comum": ["tuberculose pulmonar", "pneumonia pneumococica", "sarcoma de kaposi pulmonar"],
-      "feedback_distrator": "A pneumonia bacteriana típica (pneumococo) teria um início súbito (dias) com condensação lobar e escarro purulento, e não quadro arrastado de 3 semanas com tosse seca e RX difuso bilateral sem linfonodomegalias[span_10](start_span)[span_10](end_span).",
-      "achado_sucesso": "Exato! Quadro clássico de Pneumocistose (PCP)[span_11](start_span)[span_11](end_span)."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["sulfametoxazol", "trimetoprima", "corticoide", "corticoterapia", "smz", "tmp", "bactrim e corticoide"],
-      "red_flag_mortal": ["apenas sulfametoxazol", "nao fazer corticoide", "ceftriaxone", "azitromicina"],
-      "feedback_sucesso": "Conduta irretocável! Você prescreveu Sulfametoxazol-Trimetoprima e ATIVOU A CONDUTA CRÍTICA de adicionar CORTICOIDE, pois a PaO2 estava < 70 mmHg[span_12](start_span)[span_12](end_span).",
-      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você prescreveu apenas o antibiótico sem o corticoide. A morte dos fungos nos alvéolos deflagrou uma tempestade inflamatória brutal, agravando a hipoxemia a níveis letais e levando o paciente ao óbito por SARA (Síndrome do Desconforto Respiratório Agudo)."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "Nunca esqueça: em pacientes com PCP e hipoxemia severa (PaO2 < 70 mmHg no sangue arterial), a adição de CORTICOIDE ao esquema antibiótico (SMZ-TMP) é obrigatória para prevenir morte por inflamação[span_13](start_span)[span_13](end_span).",
-      "fisiopatologia": "O fungo *Pneumocystis jirovecii* prolifera aderido aos pneumócitos tipo I, induzindo um exsudato alveolar denso que bloqueia a troca gasosa alveolar (hipoxemia), elevando o LDH pelo dano celular intenso."
-    }
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: Quadro subagudo com hipoxemia severa (PaO2 < 70) e infiltrado difuso sugere PCP. Lembre-se de associar corticoide ao antibiótico específico para evitar a tempestade inflamatória.",
+
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["gasometria", "ldh", "escarro", "broncoscopia"],
+        "resposta_preceptor": "LDH elevado (> 500) e gasometria confirmando hipoxemia grave. Qual a dupla terapêutica essencial agora?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["sulfametoxazol", "trimetoprima", "corticoide", "corticoterapia", "bactrim"],
+        "resposta_preceptor": "Conduta irretocável! SMZ-TMP associado ao corticoide para prevenir falência respiratória por inflamação alveolar. Caso resolvido.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
+      }
+    ],
+
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["apenas sulfametoxazol", "nao fazer corticoide", "ceftriaxone", "alta"],
+        "resposta_preceptor": "ERRO CRÍTICO FATAL! Prescrever apenas o antibiótico sem corticoide gerou uma tempestade inflamatória letal após a lise dos fungos, levando a SARA e óbito.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["fisioterapia respiratoria", "inalacao com broncodilatador"],
+        "resposta_preceptor": "Broncodilatadores não revertem o bloqueio alveolar inflamatório da pneumocistose.",
+        "impacto_estabilidade": -10
+      }
+    ]
   },
   {
     "id_caso": "hiv_transmissao_vertical_01",
-    "patologia_alvo": "Prevenção de Transmissão Vertical (Gestante HIV+ no Parto)",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Gestante de 38 semanas, HIV positiva, chega à maternidade em fase inicial de trabalho de parto (dilatação 3 cm, bolsa íntegra). Refere uso irregular da TARV e a sua última Carga Viral (realizada com 35 semanas) não está disponível. O plantonista precisa definir a via de parto e a profilaxia para a mãe e o bebê[span_14](start_span)[span_14](end_span).",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["carga viral", "teste rapido", "cv", "estado da bolsa"],
-      "achado_sucesso": "Verificou-se que não há como recuperar o resultado da carga viral neste momento e a bolsa amniótica continua íntegra. A decisão terá que ser tomada com dados clínicos[span_15](start_span)[span_15](end_span).",
-      "resposta_preceptor_erro": "Doutora, precisamos da última carga viral e do status da bolsa (íntegra ou rota) para tomar a decisão correta."
+    "patologia": "Prevenção de Transmissão Vertical (Gestante HIV+ no Parto)",
+    "modo_sugerido": "Centro Obstétrico / Sala Vermelha",
+    "peso_dificuldade": 2.4,
+    
+    "cenario_inicial": {
+      "fala_preceptor": "Gestante de 38 semanas, HIV+, chega em trabalho de parto com dilatação de 3 cm e bolsa íntegra. Uso irregular de TARV e carga viral desconhecida.",
+      "fala_paciente": "Doutor, minha bolsa tá íntegra mas as contrações tão apertando forte, me ajudem com o neném!"
     },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["transmissao vertical", "exposicao hiv", "risco de transmissao"],
-      "distrator_comum": ["risco de toxoplasmose congenita", "risco de sifilis congenita"],
-      "feedback_distrator": "O problema imediato no pré-parto de uma paciente sem controle de carga viral é bloquear o contato do sangue materno com o neonato.",
-      "achado_sucesso": "Certo. Trata-se de uma situação de Alto Risco para Transmissão Vertical do HIV no periparto[span_16](start_span)[span_16](end_span)."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["cesarea", "azt venoso", "zidovudina", "azt ev", "azt + 3tc + ral", "terapia tripla pro bebe"],
-      "red_flag_mortal": ["parto normal", "apenas azt pro bebe", "nao fazer azt na mae"],
-      "feedback_sucesso": "Conduta perfeita de alto nível! Como a CV era desconhecida e a dilatação era < 4cm, você indicou Cesárea eletiva, fez AZT venoso na mãe e protegeu o bebê de alto risco com terapia tripla (AZT + 3TC + Raltegravir)[span_17](start_span)[span_17](end_span).",
-      "feedback_red_flag": "ERRO CRÍTICO! Você permitiu o parto normal sem bloqueio adequado ou deu apenas AZT (monoterapia) profilático para o recém-nascido de alto risco. O bebê se infectou maciçamente com a carga viral materna desconhecida, adquirindo HIV congênito irreversível."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "Gestante com CV desconhecida ou > 1000 próximo ao parto (após 34s) = Indicar Cesárea eletiva + AZT EV intraparto[span_18](start_span)[span_18](end_span). Nesses casos (alto risco), o bebê TEM QUE RECEBER terapia tripla (AZT + 3TC + RAL) por 28 dias[span_19](start_span)[span_19](end_span).",
-      "fisiopatologia": "A maioria absoluta (cerca de 65-70%) da transmissão vertical do HIV ocorre no momento do parto (via canal ou rotura da bolsa e contato com microtransfusões de sangue), o que faz o bloqueio medicamentoso no periparto e a proteção precoce do RN cruciais."
-    }
+
+    "ajuda_preceptor": "AJUDA CLÍNICA: Gestante com carga viral desconhecida em trabalho de parto inicial exige bloqueio do periparto via cesárea eletiva, AZT venoso e profilaxia antirretroviral tripla para o recém-nascido de alto risco.",
+
+    "acoes_esperadas": [
+      {
+        "gatilhos_validos": ["carga viral", "teste rapido", "cv", "estado da bolsa"],
+        "resposta_preceptor": "CV indisponível no momento e bolsa íntegra. Qual a conduta obstétrica e farmacológica de urgência?",
+        "impacto_estabilidade": 5,
+        "vitoria": false
+      },
+      {
+        "gatilhos_validos": ["cesarea", "azt venoso", "zidovudina", "terapia tripla", "raltegravir"],
+        "resposta_preceptor": "Conduta perfeita de alto nível! Cesárea indicada, AZT venoso na mãe e terapia tripla instituída para o recém-nascido de alto risco.",
+        "impacto_estabilidade": 25,
+        "vitoria": true
+      }
+    ],
+
+    "red_flags": [
+      {
+        "gatilhos_fatais": ["parto normal", "apenas azt pro bebe", "nao fazer azt na mae", "alta"],
+        "resposta_preceptor": "ERRO CRÍTICO! Permitir parto normal sem bloqueio ou monoterapia no recém-nascido expôs a criança a uma infecção maciça pelo HIV.",
+        "impacto_estabilidade": -100
+      }
+    ],
+
+    "distratores": [
+      {
+        "gatilhos_distratores": ["amniocentese", "ultrassom morfologico"],
+        "resposta_preceptor": "Exames de imagem e propedêutica fetal tardia não alteram a conduta profilática imediata no periparto.",
+        "impacto_estabilidade": -10
+      }
+    ]
   }
 ]
