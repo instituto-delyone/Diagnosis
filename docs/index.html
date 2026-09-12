@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagnosis Engine | IDMT</title>
+    <title>Instituto Delyone | Diagnosis Engine</title>
     <style>
         :root {
             --idmt-navy: #071426;
@@ -23,7 +23,7 @@
             justify-content: center;
         }
 
-        .engine-container {
+        .container {
             width: 100%;
             max-width: 900px;
             background-color: var(--idmt-bg);
@@ -31,285 +31,116 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 30px;
         }
 
         .header {
-            background-color: var(--idmt-navy);
-            color: white;
-            padding: 20px;
             text-align: center;
-            border-bottom: 4px solid var(--idmt-blue);
+            border-bottom: 3px solid var(--idmt-blue);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 1.5rem;
-            letter-spacing: 0.1em;
+            font-size: 1.6rem;
+            color: var(--idmt-navy);
+            letter-spacing: 0.05em;
         }
 
-        .dashboard {
-            display: flex;
-            justify-content: space-between;
+        .tutorial-box {
             background-color: #e2e8f0;
-            padding: 15px 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .status-bar {
-            flex-grow: 1;
-            margin: 0 15px;
-            background-color: #ccc;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .status-fill {
-            height: 100%;
-            background-color: var(--idmt-green);
-            width: 85%;
-            transition: width 0.3s ease, background-color 0.3s;
-        }
-
-        .clinical-area {
-            padding: 30px;
-            font-family: "Georgia", ui-serif, serif;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            height: 400px;
-            overflow-y: auto;
-            border-bottom: 1px solid #cbd5e1;
-        }
-
-        .mensagem { margin-bottom: 20px; }
-        .paciente { color: #b91c1c; font-weight: bold; }
-        .preceptor { color: var(--idmt-blue); font-style: italic; }
-        .user { color: var(--idmt-ink); font-weight: bold; background: #e2e8f0; padding: 10px; border-radius: 6px; }
-
-        .controls {
             padding: 20px;
-            display: flex;
-            gap: 10px;
-            background-color: #f1f5f9;
-        }
-
-        input[type="text"] {
-            flex-grow: 1;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
+            border-radius: 8px;
+            font-family: "Georgia", serif;
             font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--idmt-blue);
         }
 
-        button {
-            padding: 12px 20px;
+        .modules-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .modules-grid { grid-template-columns: 1fr; }
+        }
+
+        .module-card {
+            background-color: white;
+            border: 1px solid #cbd5e1;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .module-card h3 {
+            color: var(--idmt-navy);
+            margin-top: 0;
+        }
+
+        .btn-module {
+            background-color: var(--idmt-blue);
+            color: white;
             border: none;
+            padding: 12px 20px;
             border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
             transition: opacity 0.2s;
         }
 
-        .btn-action { background-color: var(--idmt-blue); color: white; }
-        .btn-help { background-color: #f59e0b; color: white; }
-        .btn-science { background-color: var(--idmt-navy); color: white; }
-        button:hover { opacity: 0.8; }
+        .btn-module:hover { opacity: 0.85; }
+
+        .disclaimer {
+            font-size: 0.85rem;
+            color: #64748b;
+            text-align: center;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 15px;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
 
-<div class="engine-container">
+<div class="container">
     <div class="header">
-        <h1>DIAGNOSIS ENGINE | IDMT</h1>
+        <h1>INSTITUTO DELYONE | PLATAFORMA DE TREINAMENTO MÉDICO</h1>
     </div>
 
-    <div class="dashboard">
-        <span>Pontuação: <span id="score-display">0</span>/100</span>
-        <div class="status-bar">
-            <div id="health-bar" class="status-fill"></div>
+    <div class="tutorial-box">
+        <strong>Tutorial & Instruções:</strong><br>
+        • A plataforma atua como sistema de <em>flashcards</em>; o objetivo é estudar e relembrar as questões apresentadas.<br>
+        • O sistema avalia suas condutas de forma objetiva com base em lógica semântica e critérios de Sala Vermelha.<br>
+        • Raciocine como um colega de plantão: priorize a estabilização antes de exames secundários.
+    </div>
+
+    <div class="modules-grid">
+        <div class="module-card">
+            <h3>Emergência & Sala Vermelha</h3>
+            <p>Casos agudos, urgências críticas e suporte de vida avançado.</p>
+            <a href="engine.html?modo=emergencia" class="btn-module">Iniciar Módulo</a>
         </div>
-        <span>Estabilidade: <span id="health-display">85</span>%</span>
+        <div class="module-card">
+            <h3>Ambulatorial & Condutas</h3>
+            <p>Investigação diagnóstica, ambulatorial e seguimento clínico.</p>
+            <a href="engine.html?modo=ambulatorial" class="btn-module">Iniciar Módulo</a>
+        </div>
     </div>
 
-    <div class="clinical-area" id="clinical-log">
-        <!-- O caso será injetado aqui -->
-    </div>
-
-    <div class="controls">
-        <input type="text" id="user-input" placeholder="Digite sua conduta ou diagnóstico..." onkeypress="if(event.key === 'Enter') processarAcao()">
-        <button class="btn-action" onclick="processarAcao()">Agir</button>
-        <button class="btn-help" onclick="pedirAjuda()">Ajuda</button>
-        <button class="btn-science" onclick="scientificBoost()">PubMed Boost 🔬</button>
+    <div class="disclaimer">
+        * Plataforma em desenvolvimento. Pode haver erros. Não substitui avaliação médica profissional.
     </div>
 </div>
 
-<!-- INCLUSÃO DA CHAMADA DO ENGINE SEMÂNTICO DO IDMT -->
-<script src="js/engine.js"></script>
-
-<script>
-    // --- ESTADO DO SISTEMA ---
-    let pontuacao = 0;
-    let estabilidade = 85; 
-    let turnos = 0;
-    let casoAtual = null;
-
-    const clinicalLog = document.getElementById('clinical-log');
-    const userInput = document.getElementById('user-input');
-    const healthBar = document.getElementById('health-bar');
-    const healthDisplay = document.getElementById('health-display');
-    const scoreDisplay = document.getElementById('score-display');
-
-    // --- INICIALIZAÇÃO E CARREGAMENTO DE DADOS ---
-    function iniciarPlantao(casoDados) {
-        casoAtual = casoDados;
-        estabilidade = 85;
-        pontuacao = 0;
-        turnos = 0;
-        clinicalLog.innerHTML = '';
-        
-        adicionarMensagem("preceptor", casoAtual.cenario_inicial.fala_preceptor);
-        adicionarMensagem("paciente", "Paciente: " + casoAtual.cenario_inicial.fala_paciente);
-        atualizarDashboard();
-    }
-
-    // --- LÓGICA DE SIMULAÇÃO CLÍNICA COM IDMT ENGINE (SEMÂNTICA ATIVA) ---
-    function processarAcao() {
-        const inputAluno = userInput.value.trim();
-        if (!inputAluno || !casoAtual) return;
-
-        turnos++;
-        adicionarMensagem("user", "Conduta: " + inputAluno);
-        let acaoReconhecida = false;
-
-        // 1. Checagem de Red Flags via Motor Semântico do IDMT
-        if (casoAtual.red_flags) {
-            for (let flag of casoAtual.red_flags) {
-                // Utiliza a verificação inteligente do idmtEngine se disponível, ou fallback de includes
-                const flagAcionada = typeof idmtEngine !== 'undefined' 
-                    ? idmtEngine.verificarRedFlag(inputAluno, flag.gatilhos_fatais)
-                    : flag.gatilhos_fatais.some(g => inputAluno.toLowerCase().includes(g.toLowerCase()));
-
-                if (flagAcionada) {
-                    adicionarMensagem("preceptor", flag.resposta_preceptor);
-                    estabilidade += flag.impacto_estabilidade; 
-                    pontuacao -= 30;
-                    acaoReconhecida = true;
-                    break;
-                }
-            }
-        }
-
-        // 2. Checagem de Ações Esperadas (Gabarito com Flexibilidade Semântica / Sinônimos)
-        if (!acaoReconhecida && casoAtual.acoes_esperadas) {
-            for (let acao of casoAtual.acoes_esperadas) {
-                const validacao = typeof idmtEngine !== 'undefined'
-                    ? idmtEngine.validarResposta(inputAluno, acao.gatilhos_validos)
-                    : { valido: acao.gatilhos_validos.some(g => inputAluno.toLowerCase().includes(g.toLowerCase())) };
-
-                if (validacao.valido) {
-                    adicionarMensagem("preceptor", acao.resposta_preceptor);
-                    
-                    let ganho = (20 / turnos) * casoAtual.peso_dificuldade;
-                    pontuacao += ganho;
-                    estabilidade = Math.min(100, estabilidade + acao.impacto_estabilidade);
-                    
-                    if (acao.vitoria) {
-                        adicionarMensagem("preceptor", "✅ CASO ENCERRADO. Raciocínio clínico de excelência.");
-                    }
-                    acaoReconhecida = true;
-                    break;
-                }
-            }
-        }
-
-        // 3. Checagem de Distratores (Perda de Tempo)
-        if (!acaoReconhecida && casoAtual.distratores) {
-            for (let distrator of casoAtual.distratores) {
-                const validacaoDistrator = typeof idmtEngine !== 'undefined'
-                    ? idmtEngine.validarResposta(inputAluno, distrator.gatilhos_distratores)
-                    : { valido: distrator.gatilhos_distratores.some(g => inputAluno.toLowerCase().includes(g.toLowerCase())) };
-
-                if (validacaoDistrator.valido) {
-                    adicionarMensagem("preceptor", distrator.resposta_preceptor);
-                    estabilidade += distrator.impacto_estabilidade;
-                    acaoReconhecida = true;
-                    break;
-                }
-            }
-        }
-
-        // 4. Ação Genérica / Não Reconhecida
-        if (!acaoReconhecida) {
-            adicionarMensagem("preceptor", "Conduta não reconhecida como prioritária ou fora do protocolo. O paciente aguarda.");
-            estabilidade -= 5;
-        }
-
-        atualizarDashboard();
-        userInput.value = '';
-        clinicalLog.scrollTop = clinicalLog.scrollHeight;
-    }
-
-    function atualizarDashboard() {
-        if (estabilidade <= 0) {
-            estabilidade = 0;
-            adicionarMensagem("preceptor", "ALERTA: Perda de pulso detectada. Paciente em PCR!");
-        }
-
-        healthDisplay.innerText = estabilidade;
-        healthBar.style.width = estabilidade + '%';
-        scoreDisplay.innerText = Math.floor(pontuacao);
-
-        if (estabilidade > 60) healthBar.style.backgroundColor = 'var(--idmt-green)';
-        else if (estabilidade > 30) healthBar.style.backgroundColor = '#f59e0b';
-        else healthBar.style.backgroundColor = '#dc2626';
-    }
-
-    function pedirAjuda() {
-        if(!casoAtual) return;
-        pontuacao = Math.max(0, pontuacao - 10);
-        adicionarMensagem("preceptor", casoAtual.ajuda_preceptor);
-        atualizarDashboard();
-    }
-
-    function scientificBoost() {
-        if(!casoAtual) return;
-        adicionarMensagem("preceptor", `🔬 BUSCA ATIVA: Levantando artigos sobre "${casoAtual.patologia}" no PubMed...`);
-        setTimeout(() => {
-            adicionarMensagem("preceptor", "✅ Artigos recentes localizados e enviados para a curadoria do IDMT.");
-            clinicalLog.scrollTop = clinicalLog.scrollHeight;
-        }, 1500);
-    }
-
-    function adicionarMensagem(classe, texto) {
-        const div = document.createElement('div');
-        div.className = 'mensagem ' + classe;
-        div.innerText = texto;
-        clinicalLog.appendChild(div);
-    }
-
-    // --- TESTE RÁPIDO DO MOTOR ---
-    window.onload = () => {
-        iniciarPlantao({
-            "id_caso": "hematologia_sta_01",
-            "patologia": "Síndrome Torácica Aguda",
-            "peso_dificuldade": 2.5,
-            "cenario_inicial": {
-                "fala_preceptor": "Admissão na Sala Vermelha. Qual a sua conduta imediata, Doutor?",
-                "fala_paciente": "Doutor, meu peito tá apertando muito, tá ruim pra respirar..."
-            },
-            "ajuda_preceptor": "AJUDA: Priorize oxigênio, analgesia e hidratação antes da imagem.",
-            "acoes_esperadas": [
-                { "gatilhos_validos": ["oxigenio", "monitor"], "resposta_preceptor": "Suporte vital estabelecido.", "impacto_estabilidade": 5, "vitoria": false },
-                { "gatilhos_validos": ["transfusao"], "resposta_preceptor": "Conduta perfeita. Terapia iniciada.", "impacto_estabilidade": 20, "vitoria": true }
-            ],
-            "red_flags": [
-                { "gatilhos_fatais": ["alta", "liberar"], "resposta_preceptor": "ERRO CRÍTICO! Conduta médica inadequada.", "impacto_estabilidade": -100 }
-            ],
-            "distratores": [
-                { "gatilhos_distratores": ["pocus", "ecg"], "resposta_preceptor": "Exame realizado sem achados agudos. Tempo perdido.", "impacto_estabilidade": -10 }
-            ]
-        });
-    };
-</script>
 </body>
 </html>
