@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  Diagnosis Engine v13.0 — Motor Duplo (Estático + Dinâmico)
+  Diagnosis Engine v13.5 — Motor Duplo + Preceptor Amortecido + Memória Assimétrica (Patente IDMT)
   Copyright (c) 2026 Instituto Delyone
 -->
 <html lang="pt-BR">
@@ -165,7 +165,7 @@
 
 <script>
   // ==========================================
-  // CONFIGURAÇÃO GERAL
+  // CONFIGURAÇÃO GERAL E PATENTE (IDMT)
   // ==========================================
   const selectionScreen = document.getElementById('selection-screen');
   const chatScreen = document.getElementById('chat-screen');
@@ -206,6 +206,13 @@
   let skipsUsadosHoje = 0;
   const MAX_SKIPS = 3;
 
+  // Sistema de Gerenciamento Assimétrico de Contexto (Memória baseada na Patente IDMT)
+  let memoriaContextualIDMT = {
+    camadaBaixaRelevancia: [],    // Ações comuns compactadas
+    camadaAltaRelevancia: [],     // Eventos críticos persistidos
+    contadorErrosConsecutivos: 0  // Para amortecer a queda hemodinâmica
+  };
+
   let hemodinamica = {
     estabilidade: 100,
     estagio: 'estavel',
@@ -214,16 +221,21 @@
   };
   let monitorLigado = false;
 
+  // Preceptor Suave e Cortês (Sem sustos desnecessários)
   const matrizNLG = {
-    erro_generico: [
-      "Não houve impacto clínico positivo com essa conduta.",
-      "A abordagem não alterou o quadro clínico.",
-      "Isso não parece ser a prioridade clínica agora."
+    sucesso_elogio: [
+      "Excelente conduta, doutor! Parabéns pelo raciocínio clínico.",
+      "Perfeito! Conduta muito bem indicada.",
+      "Ótima escolha terapêutica e diagnóstica."
     ],
-    choque: [
-      "Atenção: a pressão arterial despencou. O choque é iminente!",
-      "A perfusão capilar está lentificada. O paciente está rebaixando!",
-      "O quadro hemodinâmico está desabando rapidamente! Aja!"
+    erro_generico: [
+      "Doutor, essa abordagem não alterou significativamente o quadro clínico atual. Vamos repensar?",
+      "Compreendo o seu raciocínio, mas essa não parece ser a prioridade absoluta neste momento.",
+      "Ainda não atingimos o alvo terapêutico principal. Avalie os dados com cautela."
+    ],
+    choque_suave: [
+      "Atenção, doutor: o paciente apresenta sinais de instabilidade progressiva. Precisamos reverter esse quadro.",
+      "A perfusão periférica está limítrofe e a pressão arterial cedeu um pouco. Vamos ajustar a estratégia."
     ]
   };
 
@@ -232,6 +244,9 @@
     return arrayDeFrases[Math.floor(Math.random() * arrayDeFrases.length)];
   }
 
+  // ==========================================
+  // ADAPTADOR UNIVERSAL & PERSISTÊNCIA SELETIVA
+  // ==========================================
   function normalizarCasoClinico(casoBruto) {
     if (casoBruto && casoBruto.fase_1_investigacao && casoBruto.fase_3_conduta) {
       return casoBruto;
@@ -250,7 +265,7 @@
       return {
         id_caso: casoBruto.id || "caso_adaptado",
         patologia_alvo: casoBruto.nome || "Síndrome Clínica",
-        arquitetura: casoBruto.arquitetura || "v12_estatica", // Tag que define o motor
+        arquitetura: casoBruto.arquitetura || "v12_estatica",
         dificuldade: "Adaptativa",
         ritmo_cardiaco: "Ritmo Sinusal (Padrão)",
         vinheta_admissao: casoBruto.vigneta || "Paciente admitido na emergência.",
@@ -285,6 +300,7 @@
   window.onload = async function inicializarSistema() {
     atualizarBotaoSkip();
     await carregarBaseDeConhecimento();
+    recuperarContextoMemoria(); // Aplicação da patente IDMT entre sessões
   };
 
   function atualizarBotaoSkip() {
@@ -301,13 +317,10 @@
       for (const arquivo of dados.arquivos) {
         try {
           const res = await fetch(dados.pasta + arquivo);
-          
-          // Escudo Anti-Travamento: Se o arquivo não existir, pula sem quebrar o código
           if (res.ok) {
             const json = await res.json();
             const casos = Array.isArray(json) ? json : [json];
             
-            // Verificação Segura (Evita falha se o JSON estiver mal formatado)
             let possuiGeradorDinamico = false;
             if (casos && casos.length > 0) {
               possuiGeradorDinamico = casos.some(c => c && c.arquitetura === "v13_dinamica");
@@ -324,22 +337,20 @@
                 casosCarregados++;
               }
             });
-          } else {
-             console.log(`[Escudo] Arquivo ${arquivo} ignorado ou não encontrado.`);
           }
         } catch (error) {
-           console.log(`[Escudo] Proteção ativada. Falha silenciada no carregamento de: ${arquivo}`);
+           console.log(`[Escudo IDMT] Falha silenciada no carregamento de: ${arquivo}`);
         }
       }
     }
     
     if (casosCarregados > 0) {
       loadingStatus.style.color = "var(--green)";
-      loadingStatus.innerText = `Motor Online! ${casosCarregados} casos integrados localmente.`;
+      loadingStatus.innerText = `Motor Online! ${casosCarregados} casos integrados com memória assimétrica.`;
       renderizarTagsModulos(modulosTrackers);
     } else {
       loadingStatus.style.color = "var(--red)";
-      loadingStatus.innerText = "Atenção: Nenhum caso compatível encontrado. Verifique sua pasta local.";
+      loadingStatus.innerText = "Atenção: Nenhum caso compatível encontrado.";
     }
   }
 
@@ -351,8 +362,42 @@
         return `<span class="module-tag legacy">${m.nome}</span>`;
       }
     }).join('');
-    
     modulosTagsContainer.innerHTML = htmlTags;
+  }
+
+  // ==========================================
+  // FUNÇÕES DE MEMÓRIA DA PATENTE (IDMT)
+  // ==========================================
+  function registrarMemoriaAssimetrica(acao, tipo, impacto) {
+    const timestamp = new Date().toISOString();
+    
+    if (tipo === 'rotina') {
+      // Camada de Baixa Relevância (Compactada / Resumida)
+      memoriaContextualIDMT.camadaBaixaRelevancia.push({ acao: acao, t: timestamp });
+    } else {
+      // Camada de Alta Relevância (Expandida e Persistente)
+      memoriaContextualIDMT.camadaAltaRelevancia.push({ acao: acao, impacto: impacto, t: timestamp });
+    }
+
+    // Persistência Seletiva no navegador (LocalStorage)
+    try {
+      localStorage.setItem('idmt_diagnosis_memoria', JSON.stringify(memoriaContextualIDMT));
+    } catch(e) {
+      console.warn("Armazenamento local indisponível");
+    }
+  }
+
+  function recuperarContextoMemoria() {
+    try {
+      const salvo = localStorage.getItem('idmt_diagnosis_memoria');
+      if (salvo) {
+        const dados = JSON.parse(salvo);
+        memoriaContextualIDMT.camadaBaixaRelevancia = dados.camadaBaixaRelevancia || [];
+        memoriaContextualIDMT.camadaAltaRelevancia = dados.camadaAltaRelevancia || [];
+      }
+    } catch(e) {
+      console.log("Iniciando nova árvore contextual de memória.");
+    }
   }
 
   function iniciarJogo(modo) {
@@ -375,9 +420,10 @@
     pontuacao = 100;
     monitorLigado = false;
     painelMonitor.style.display = 'none';
+    memoriaContextualIDMT.contadorErrosConsecutivos = 0;
     
     hemodinamica = {
-      estabilidade: modo === 'sala_vermelha' ? 65 : 100,
+      estabilidade: modo === 'sala_vermelha' ? 85 : 100, // Maior reserva inicial para não assustar
       estagio: 'estavel',
       ciclos_pcr: 0,
       ritmo_pcr: Math.random() > 0.5 ? 'FIBRILAÇÃO VENTRICULAR' : 'ASSISTOLIA'
@@ -385,18 +431,16 @@
     
     atualizarSinaisVitais();
     
-    // Roteador de Motor Duplo
     let vinheta = "";
     if (casoAtual.arquitetura === "v13_dinamica") {
-        vinheta = "<em>[IA Dinâmica Ativada: Aguardando geração de vinheta...]</em><br><br>Instrução de Background: " + (casoAtual.instrucao_gerador_ia || "Gerar caso.");
+        vinheta = "<em>[IA Dinâmica Ativada]</em><br><br>Instrução: " + (casoAtual.instrucao_gerador_ia || "Gerar caso.");
     } else {
-        // Motor Clássico Procedural (Não muda nada nos casos antigos)
         vinheta = casoAtual.vinheta_admissao || "Paciente deu entrada na emergência.";
     }
 
     const nomeCaso = casoAtual.patologia_alvo || "Caso Clínico";
     
-    adicionarMensagemGM(`<strong>${nomeCaso}</strong> (Modo Debug)<br><br>${vinheta}<br><br><em>Doutor, qual é a sua primeira ação?</em>`);
+    adicionarMensagemGM(`<strong>${nomeCaso}</strong><br><br>${vinheta}<br><br><em>Doutor, qual é a sua primeira ação?</em>`);
     liberarInput();
   }
 
@@ -416,14 +460,13 @@
     }
     
     if (hemodinamica.estabilidade <= 40) {
-      vitPA.innerText = "PA: 70/40"; vitFC.innerText = "FC: 135"; vitSpO2.innerText = "SpO2: 85%";
+      vitPA.innerText = "PA: 80/50"; vitFC.innerText = "FC: 125"; vitSpO2.innerText = "SpO2: 88%";
       vitPA.classList.add('alert'); vitFC.classList.add('alert');
-      if (monitorLigado) textoRitmo.innerText = "〰️ TAQUICARDIA SINUSAL EXTREMA";
+      if (monitorLigado) textoRitmo.innerText = "〰️ TAQUICARDIA SINUSAL";
     } else if (hemodinamica.estabilidade <= 70 && modoAtual === 'sala_vermelha') {
-      vitPA.innerText = "PA: 90/60"; vitFC.innerText = "FC: 115"; vitSpO2.innerText = "SpO2: 90%";
-      vitPA.classList.add('alert');
+      vitPA.innerText = "PA: 100/70"; vitFC.innerText = "FC: 100"; vitSpO2.innerText = "SpO2: 93%";
     } else {
-      vitPA.innerText = "PA: 120/80"; vitFC.innerText = "FC: 80"; vitSpO2.innerText = "SpO2: 98%";
+      vitPA.innerText = "PA: 120/80"; vitFC.innerText = "FC: 78"; vitSpO2.innerText = "SpO2: 98%";
     }
   }
 
@@ -431,6 +474,9 @@
     const inputNorm = normalizarTexto(inputUsuario);
     let msgRetorno = "";
     let isCriticalMsg = false;
+
+    // Registra ação na camada de baixa relevância (Patente IDMT)
+    registrarMemoriaAssimetrica(inputUsuario, 'rotina', 0);
 
     const termosMonitor = ["monitor", "monitorizacao", "ecg", "eletro", "monitorizar", "eletrocardiograma"];
     if (!monitorLigado && termosMonitor.some(t => inputNorm.includes(t)) && hemodinamica.estagio !== 'pcr' && hemodinamica.estagio !== 'obito') {
@@ -441,7 +487,7 @@
         textoRitmo.innerText = `〰️ ${ritmoDetectado.toUpperCase()}`;
         hemodinamica.estabilidade = Math.min(100, hemodinamica.estabilidade + 5);
         
-        msgRetorno = `Você instalou a monitorização multiparâmetros. O traçado contínuo revela: <strong>${ritmoDetectado}</strong>.<br><br>Qual a sua próxima conduta?`;
+        msgRetorno = `Você instalou a monitorização multiparâmetros. O traçado contínuo revela: <strong>${ritmoDetectado}</strong>.<br><br><em>E agora, qual sua próxima conduta?</em>`;
         
         await new Promise(resolve => setTimeout(resolve, 800));
         processarDecisaoIA(msgRetorno, false, false);
@@ -458,20 +504,20 @@
         if (hemodinamica.ritmo_pcr === 'FIBRILAÇÃO VENTRICULAR') {
             if (querChoque) {
                 acaoCorreta = true;
-                msgAcao = "Choque administrado! ";
+                msgAcao = "Choque administrado com sucesso! ";
                 hemodinamica.ciclos_pcr += 2;
             } else if (querCprEpi) {
                 acaoCorreta = true;
-                msgAcao = "RCP iniciada. Mas lembre-se: ritmo chocável exige desfibrilação precoce! ";
+                msgAcao = "RCP iniciada adequadamente. Lembre-se que o ritmo é chocável! ";
                 hemodinamica.ciclos_pcr += 1;
             }
         } else {
             if (querChoque) {
                 acaoCorreta = false;
-                msgAcao = "ERRO CRÍTICO: Você chocou um ritmo não-chocável (Assistolia)! ";
+                msgAcao = "Atenção: Ritmo não-chocável (Assistolia). O choque foi contraindicado. ";
             } else if (querCprEpi) {
                 acaoCorreta = true;
-                msgAcao = "Protocolo correto (Compressões + Adrenalina). ";
+                msgAcao = "Protocolo de RCP e Adrenalina instituído corretamente. ";
                 hemodinamica.ciclos_pcr += 1;
             }
         }
@@ -479,16 +525,16 @@
         if (acaoCorreta) {
             if (hemodinamica.ciclos_pcr >= 2) {
                 hemodinamica.estagio = 'choque';
-                hemodinamica.estabilidade = 35;
-                msgRetorno = `⚡ ${msgAcao} RCE! Retorno da circulação espontânea. O pulso voltou, mas o paciente está instável. Qual a conduta base agora?`;
+                hemodinamica.estabilidade = 40;
+                msgRetorno = `⚡ ${msgAcao} RCE obtido! O pulso retornou, mas o paciente requer suporte avançado.<br><br><em>Qual a sua próxima conduta?</em>`;
                 isCriticalMsg = false;
             } else {
-                msgRetorno = `${msgAcao}O paciente segue sem pulso. Qual o próximo passo do protocolo?`;
+                msgRetorno = `${msgAcao}O paciente ainda se mantém sem pulso. Qual o próximo passo?`;
                 isCriticalMsg = true;
             }
         } else {
             hemodinamica.estagio = 'obito';
-            processarDecisaoIA(`${msgAcao}Conduta incompatível com o ACLS. O paciente evoluiu para óbito.`, true, true);
+            processarDecisaoIA(`${msgAcao}Conduta incompatível com as diretrizes do ACLS. O paciente evoluiu para óbito.`, true, true);
             return;
         }
         
@@ -519,47 +565,58 @@
     if (bateuRedFlag) {
         hemodinamica.estabilidade = 0;
         hemodinamica.estagio = 'pcr';
+        registrarMemoriaAssimetrica(inputUsuario, 'critico', -100);
         msgRetorno = `🚨 ${faseDados.feedback_red_flag || "Conduta contraindicada letal executada."}`;
         isCriticalMsg = true;
     } 
     else if (bateuDistrator) {
-        hemodinamica.estabilidade -= 20;
-        pontuacao -= 15;
-        msgRetorno = `⚠️ ${faseDados.feedback_distrator || "Esse distrator clínico não se alinha ao quadro."}`;
+        memoriaContextualIDMT.contadorErrosConsecutivos++;
+        // Amortecimento: Só retira pontos se acumular erros repetidos (Patente IDMT - Frequência semântica de erro)
+        const penalidade = memoriaContextualIDMT.contadorErrosConsecutivos >= 2 ? 15 : 5;
+        hemodinamica.estabilidade -= penalidade;
+        pontuacao -= 10;
+        registrarMemoriaAssimetrica(inputUsuario, 'critico', -penalidade);
+        
+        msgRetorno = `⚠️ ${faseDados.feedback_distrator || "Esse distrator clínico não se alinha ao quadro."}<br><br><em>E agora, qual sua próxima conduta?</em>`;
         if (hemodinamica.estabilidade <= 40) hemodinamica.estagio = 'choque';
     }
     else if (acertou) {
-        hemodinamica.estabilidade = Math.min(100, hemodinamica.estabilidade + 25);
+        memoriaContextualIDMT.contadorErrosConsecutivos = 0; // Reseta erros
+        hemodinamica.estabilidade = Math.min(100, hemodinamica.estabilidade + 20);
         faseAtual++;
         
+        const elogio = tecerDialogo(matrizNLG.sucesso_elogio);
+        
         if (faseAtual === 2) {
-            msgRetorno = `${faseDados.achado_sucesso}<br><br><em>Com base nisso, qual o seu diagnóstico principal?</em>`;
+            msgRetorno = `${elogio} ${faseDados.achado_sucesso}<br><br><em>Com base nisso, qual o seu diagnóstico principal?</em>`;
         } else if (faseAtual === 3) {
-            msgRetorno = `${faseDados.achado_sucesso}<br><br><em>Diagnóstico provável fechado. Qual a conduta imediata?</em>`;
+            msgRetorno = `${elogio} ${faseDados.achado_sucesso}<br><br><em>Diagnóstico provável estabelecido. Qual a conduta imediata?</em>`;
         } else {
             hemodinamica.estagio = 'salvo';
-            msgRetorno = faseDados.feedback_sucesso || "Paciente estabilizado com sucesso.";
+            msgRetorno = `${elogio} ${faseDados.feedback_sucesso || "Paciente estabilizado com sucesso."}`;
             return processarDecisaoIA(msgRetorno, true, false);
         }
     } 
     else {
-        const dano = (modoAtual === 'sala_vermelha') ? 30 : 15;
+        memoriaContextualIDMT.contadorErrosConsecutivos++;
+        // Amortecimento suave: Erros isolados geram leve penalidade, evitando sustos e quedas repentinas
+        const dano = (modoAtual === 'sala_vermelha' && memoriaContextualIDMT.contadorErrosConsecutivos >= 2) ? 12 : 5;
         hemodinamica.estabilidade -= dano;
-        pontuacao -= 10;
+        pontuacao -= 5;
         
         if (faseAtual === 1 && faseDados.resposta_preceptor_erro) {
-            msgRetorno = faseDados.resposta_preceptor_erro;
+            msgRetorno = `${faseDados.resposta_preceptor_erro}<br><br><em>E agora, qual sua próxima conduta?</em>`;
         } else {
-            msgRetorno = tecerDialogo(matrizNLG.erro_generico) + " Tente outra abordagem.";
+            msgRetorno = `${tecerDialogo(matrizNLG.erro_generico)}<br><br><em>Qual sua próxima conduta?</em>`;
         }
 
         if (hemodinamica.estabilidade <= 10) {
             hemodinamica.estagio = 'pcr';
-            msgRetorno += `<br><br>🚨 O alarme do monitor disparou! Perda total de pulso, o paciente está em PCR!`;
+            msgRetorno += `<br><br>🚨 O alarme do monitor disparou! Perda de pulso detectada, paciente em PCR!`;
             isCriticalMsg = true;
         } else if (hemodinamica.estabilidade <= 40) {
             hemodinamica.estagio = 'choque';
-            msgRetorno += `<br><br>⚠️ ${tecerDialogo(matrizNLG.choque)}`;
+            msgRetorno += `<br><br>⚠️ ${tecerDialogo(matrizNLG.choque_suave)}`;
             isCriticalMsg = true;
         }
     }
@@ -593,7 +650,7 @@
     atualizarBotaoSkip();
     
     chatBox.innerHTML = '';
-    adicionarMensagemGM("<em>🔄 Passando o plantão. Um novo paciente acaba de dar entrada...</em>");
+    adicionarMensagemGM("<em>🔄 Passando o plantão. Um novo caso acaba de ser admitido...</em>");
     setTimeout(() => { iniciarJogo(modoAtual); }, 1500);
   }
 
@@ -629,7 +686,7 @@
       <h3 style="color: ${cor}">${titulo}</h3>
       <div class="score-circle" style="background: ${cor}">${finalScore}</div>
       <div class="debriefing-text">
-        <strong>Debriefing (Takeaway):</strong><br>${casoAtual.discussao_clinica_final?.takeaway_message || "Revisão concluída."}<br><br>
+        <strong>Debriefing Clínico:</strong><br>${casoAtual.discussao_clinica_final?.takeaway_message || "Revisão concluída."}<br><br>
         <strong>Fisiopatologia:</strong><br>${casoAtual.discussao_clinica_final?.fisiopatologia || "Revise a teoria nas diretrizes."}
       </div>
       <button class="btn-send" onclick="proximoCaso()" style="width: 100%; margin-top: 10px;">Atender Próximo Paciente</button>
