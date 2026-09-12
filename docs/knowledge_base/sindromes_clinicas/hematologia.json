@@ -1,25 +1,45 @@
 [
   {
-    "id_caso": "hemato_ferropriva_01",
+    "id_caso": "hemato_ferropriva_gerador",
     "patologia_alvo": "Anemia Ferropriva (Carencial)",
-    "dificuldade": "Básica",
-    "vinheta_admissao": "Homem de 58 anos refere fadiga, palidez e astenia há 4 meses. Nega sangramentos visíveis, mas relata vontade incomum de mastigar gelo (pagofagia). Hemograma: Hemoglobina 8,1 g/dL, VCM 68 fL (microcitose), HCM 22 pg (hipocromia) e RDW de 18,5% (anisocitose).",
+    "dificuldade": "Dinâmica",
+    "instrucao_gerador_ia": "Sorteie um dos perfis epidemiológicos abaixo. Crie a vinheta de admissão baseada no fator de risco sorteado, mas garanta que o hemograma mostre anemia microcítica (VCM < 80 fL), hipocrômica (HCM < 27 pg) e anisocitose (RDW > 15%).",
+    "perfil_epidemiologico": {
+      "apresentacao_classica": {
+        "probabilidade": 0.70,
+        "sexo": "Feminino",
+        "idade_range": [15, 45],
+        "fator_risco_gerador": "Sangramento uterino anormal (hipermenorreia) ou múltiplas gestações."
+      },
+      "apresentacao_comum_secundaria": {
+        "probabilidade": 0.25,
+        "sexo": "Ambos",
+        "idade_range": [50, 80],
+        "fator_risco_gerador": "Sangramento gastrointestinal oculto (pesquisa obrigatória de neoplasia de cólon/pólipo)."
+      },
+      "apresentacao_rara": {
+        "probabilidade": 0.05,
+        "sexo": "Ambos",
+        "idade_range": [20, 60],
+        "fator_risco_gerador": "Síndrome de má absorção (Doença Celíaca, pós-cirurgia bariátrica ou infecção por H. pylori)."
+      }
+    },
     "fase_1_investigacao": {
       "gabarito_esperado": ["ferritina", "cinetica de ferro", "ferritina serica", "saturacao de transferrina"],
-      "achado_sucesso": "A cinética de ferro confirmou o diagnóstico: a ferritina sérica (marcador mais sensível) retornou muito baixa (8 ng/mL).",
+      "achado_sucesso": "A cinética de ferro confirmou o diagnóstico: a ferritina sérica (marcador mais sensível) retornou muito baixa (< 15 ng/mL) e a saturação de transferrina < 20%.",
       "resposta_preceptor_erro": "Doutor, estamos diante de uma anemia microcítica, hipocrômica e com anisocitose (RDW alto). Precisamos avaliar o estoque corporal de ferro com urgência."
     },
     "fase_2_diagnostico": {
       "gabarito_esperado": ["anemia ferropriva", "ferropriva", "deficiencia de ferro"],
       "distrator_comum": ["talassemia", "anemia de doenca cronica", "anemia sideroblastica"],
       "feedback_distrator": "Na talassemia menor, a microcitose costuma ser muito mais acentuada que a anemia, o RDW é normal (sem anisocitose) e a ferritina não cai. O quadro aqui é puramente carencial.",
-      "achado_sucesso": "Exato! Diagnóstico de Anemia Ferropriva confirmada."
+      "achado_sucesso": "Exato! Diagnóstico de Anemia Ferropriva confirmado."
     },
     "fase_3_conduta": {
       "gabarito_esperado": ["sulfato ferroso", "ferro oral", "reposicao de ferro", "colonoscopia", "eda"],
       "red_flag_mortal": ["transfusao de hemacias", "alta sem investigar"],
-      "feedback_sucesso": "Conduta perfeita! Você prescreveu reposição oral de ferro e, muito bem, indicou endoscopia e colonoscopia para investigar a causa da perda, já que o paciente tem mais de 50 anos.",
-      "feedback_red_flag": "ERRO CRÍTICO! Você deu alta com ferro e não investigou o trato gastrointestinal. O paciente tinha um câncer de cólon oculto que evoluiu para metástase disseminada por atraso no diagnóstico."
+      "feedback_sucesso": "Conduta perfeita! Você prescreveu reposição de ferro (oral ou venosa) e, muito bem, indicou investigação do trato gastrointestinal caso o perfil seja o de paciente > 50 anos ou pós-menopausa.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você deu alta com ferro e não considerou investigar a causa base. Se este paciente estiver no grupo de risco, um câncer de cólon oculto evoluirá para metástase por atraso no diagnóstico."
     },
     "discussao_clinica_final": {
       "takeaway_message": "A Ferritina sérica baixa (< 30 ng/mL) é o marcador mais sensível para depleção de ferro. Em homens ou mulheres pós-menopausa, anemia ferropriva exige investigação do trato gastrointestinal para afastar neoplasias.",
@@ -27,26 +47,46 @@
     }
   },
   {
-    "id_caso": "hemato_megaloblastica_01",
+    "id_caso": "hemato_megaloblastica_gerador",
     "patologia_alvo": "Anemia Megaloblástica por Deficiência de Vitamina B12",
-    "dificuldade": "Intermediária",
-    "vinheta_admissao": "Mulher de 64 anos, com antecedentes de hipotireoidismo, queixa-se de fraqueza, queimação na língua (glossite) e dormente constante nas mãos e pés (parestesia), associada a instabilidade na marcha há 3 meses. Hemograma: Hb 7,5 g/dL, VCM 118 fL (macrocitose).",
+    "dificuldade": "Dinâmica",
+    "instrucao_gerador_ia": "Sorteie um dos perfis. Crie a vinheta relatando quadro de anemia, fadiga e sintomas neurológicos (parestesia, ataxia). O hemograma deve revelar anemia com VCM > 115 fL (macrocitose expressiva).",
+    "perfil_epidemiologico": {
+      "apresentacao_classica": {
+        "probabilidade": 0.60,
+        "sexo": "Ambos",
+        "idade_range": [60, 85],
+        "fator_risco_gerador": "Gastrite atrófica autoimune (Anemia Perniciosa), associada a outras doenças autoimunes (ex: hipotireoidismo)."
+      },
+      "apresentacao_comum_secundaria": {
+        "probabilidade": 0.30,
+        "sexo": "Ambos",
+        "idade_range": [40, 70],
+        "fator_risco_gerador": "Pós-operatório tardio de cirurgia bariátrica ou gastrectomia total, com má adesão à suplementação."
+      },
+      "apresentacao_rara": {
+        "probabilidade": 0.10,
+        "sexo": "Ambos",
+        "idade_range": [20, 40],
+        "fator_risco_gerador": "Dieta vegana estrita prolongada (anos) sem suplementação de B12."
+      }
+    },
     "fase_1_investigacao": {
       "gabarito_esperado": ["vitamina b12", "esfregaco", "acido metilmalonico", "b12"],
-      "achado_sucesso": "O esfregaço de sangue periférico demonstra neutrófilos hipersegmentados (pleocariócitos). A Vitamina B12 e o Ácido Metilmalônico retornaram alterados.",
+      "achado_sucesso": "O esfregaço de sangue periférico demonstra neutrófilos hipersegmentados (pleocariócitos). A Vitamina B12 e o Ácido Metilmalônico (elevado) retornaram alterados.",
       "resposta_preceptor_erro": "Doutor, paciente com anemia severamente macrocítica associada a quadro neurológico (parestesias/marcha). Precisamos avaliar o esfregaço e os níveis da vitamina que protege a bainha de mielina."
     },
     "fase_2_diagnostico": {
       "gabarito_esperado": ["anemia megaloblastica", "deficiencia de b12", "deficiencia de vitamina b12", "anemia perniciosa"],
       "distrator_comum": ["deficiencia de acido folico", "hipotireoidismo descompensado", "sindrome mielodisplasica"],
       "feedback_distrator": "A deficiência de ácido fólico (folato) pode causar macrocitose, mas NUNCA causa sintomas neurológicos, pois não afeta a desmielinização dos cordões posteriores da medula.",
-      "achado_sucesso": "Correto! Anemia Megaloblástica por deficiência de Vitamina B12."
+      "achado_sucesso": "Correto! Anemia Megaloblástica por deficiência de Vitamina B12 confirmada."
     },
     "fase_3_conduta": {
       "gabarito_esperado": ["vitamina b12 im", "cianocobalamina im", "b12 intramuscular", "reposicao parenteral de b12"],
       "red_flag_mortal": ["acido folico", "reposicao de folato", "alta sem reposicao"],
-      "feedback_sucesso": "Excelente! Você iniciou a reposição parenteral de Vitamina B12 urgente, revertendo o quadro hematológico e prevenindo sequelas neurológicas.",
-      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você prescreveu Ácido Fólico para uma deficiência de B12. O folato corrige a anemia no hemograma, mascarando a doença, enquanto a degeneração da medula espinhal continua, deixando a paciente paraplégica."
+      "feedback_sucesso": "Excelente! Você iniciou a reposição parenteral de Vitamina B12 urgente, revertendo o quadro hematológico e prevenindo sequelas neurológicas irreversíveis.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Você prescreveu Ácido Fólico isolado para uma suspeita de deficiência de B12. O folato corrige a anemia no hemograma, mascarando a doença, enquanto a degeneração da medula espinhal continua, podendo deixar o paciente paraplégico."
     },
     "discussao_clinica_final": {
       "takeaway_message": "Ao contrário da deficiência de folato, a falta de Vitamina B12 cursa com dano neurológico progressivo e elevação do Ácido Metilmalônico sérico.",
@@ -54,25 +94,45 @@
     }
   },
   {
-    "id_caso": "hemato_falciforme_01",
-    "patologia_alvo": "Anemia Falciforme (Crise Vaso-Oclusiva / Síndrome Torácica Aguda)",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Jovem de 18 anos, portador de Anemia Falciforme (HbSS), dá entrada na emergência com dor óssea intensa e refratária em MMII e dorso desencadeada após episódio febril. Evolui nas últimas horas com dor torácica, tosse, taquipneia e surgimento de novo infiltrado pulmonar à radiografia de tórax.",
+    "id_caso": "hemato_falciforme_gerador",
+    "patologia_alvo": "Anemia Falciforme (Síndrome Torácica Aguda)",
+    "dificuldade": "Dinâmica",
+    "instrucao_gerador_ia": "Sorteie um perfil. A vinheta deve focar em um paciente falcêmico prévio (HbSS) admitido com crise álgica aguda que evolui nas primeiras horas com dor torácica, tosse, taquipneia e febre.",
+    "perfil_epidemiologico": {
+      "apresentacao_classica": {
+        "probabilidade": 0.60,
+        "sexo": "Ambos",
+        "idade_range": [15, 35],
+        "fator_risco_gerador": "Crise vaso-oclusiva óssea refratária que evolui para Síndrome Torácica Aguda pós-infecção viral/bacteriana incipiente."
+      },
+      "apresentacao_comum_secundaria": {
+        "probabilidade": 0.30,
+        "sexo": "Ambos",
+        "idade_range": [5, 15],
+        "fator_risco_gerador": "Síndrome Torácica Aguda precipitada por exacerbação de asma brônquica (broncoespasmo severo)."
+      },
+      "apresentacao_rara": {
+        "probabilidade": 0.10,
+        "sexo": "Feminino",
+        "idade_range": [20, 35],
+        "fator_risco_gerador": "Pacientes gestantes no 3º trimestre ou puérperas com embolia gordurosa medular evoluindo para infarto pulmonar falcêmico."
+      }
+    },
     "fase_1_investigacao": {
       "gabarito_esperado": ["rx de torax", "raio-x de torax", "hemograma", "reticulocitos", "gasometria"],
-      "achado_sucesso": "O Raio-X de tórax confirmou um novo infiltrado pulmonar extenso. O hemograma mostra anemia basal mantida sem reticulocitopenia aguda.",
-      "resposta_preceptor_erro": "Doutor, paciente falcêmico com crise álgica que evolui com taquipneia e dor torácica aguda precisa de imagem pulmonar imediata para descartar a complicação mais temida."
+      "achado_sucesso": "O Raio-X de tórax confirmou um novo infiltrado pulmonar extenso (frequentemente lobo inferior). O hemograma mostra anemia basal mantida sem reticulocitopenia aguda.",
+      "resposta_preceptor_erro": "Doutor, paciente falcêmico com crise álgica que evolui com taquipneia e dor torácica aguda precisa de imagem pulmonar imediata para descartar a complicação mais letal no adulto jovem."
     },
     "fase_2_diagnostico": {
       "gabarito_esperado": ["sindrome toracica aguda", "sta", "crise vaso-oclusiva pulmonar", "anemia falciforme com sta"],
       "distrator_comum": ["crise aplasica", "sequestro esplenico", "pneumonia adquirida na comunidade"],
-      "feedback_distrator": "Não é crise aplásica porque não houve queda abrupta de reticulócitos, e não é sequestro esplênico porque ele tem 18 anos (o baço já infartou/autossplenectomia na infância). É uma emergência pulmonar típica da doença.",
+      "feedback_distrator": "Não é crise aplásica porque não houve queda abrupta de reticulócitos, e não é sequestro esplênico porque ele já deve ter autossplenectomia. É uma emergência pulmonar típica e fulminante da doença.",
       "achado_sucesso": "Correto! Trata-se de uma Crise Vaso-Oclusiva complicada com Síndrome Torácica Aguda (STA)."
     },
     "fase_3_conduta": {
       "gabarito_esperado": ["analgesia", "opioide", "morfina", "hidratacao", "transfusao", "oxigenio", "antibiotico"],
       "red_flag_mortal": ["hidratacao hipervolemica", "analgesia simples", "dipirona isolada"],
-      "feedback_sucesso": "Conduta perfeita! Você iniciou oxigênio, analgesia plena com opioides sem restrição, hiper-hidratação cautelosa, cobertura antibiótica e acionou a hemoterapia.",
+      "feedback_sucesso": "Conduta perfeita! Você iniciou oxigênio, analgesia plena com opioides sem restrição, hiper-hidratação cautelosa, cobertura antibiótica (para atípicos) e acionou a hemoterapia para transfusão/exsanguíneotransfusão.",
       "feedback_red_flag": "ERRO CRÍTICO! Você hiper-hidratou o paciente sem controle (gerando edema pulmonar) ou usou apenas analgésicos fracos, perpetuando o estresse adrenérgico, a vasoconstrição e a oclusão alveolar fatal."
     },
     "discussao_clinica_final": {
@@ -81,14 +141,34 @@
     }
   },
   {
-    "id_caso": "hemato_lma_01",
+    "id_caso": "hemato_lma_gerador",
     "patologia_alvo": "Leucemia Mieloide Aguda (LMA M3 Promielocítica)",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Homem de 42 anos dá entrada com sangramento gengival abundante, petéquias e febre. Hemograma: Hb 6,5 g/dL, Plaquetas 18.000/mm³ e Leucócitos 35.000/mm³ com 45% de blastos na circulação. Exames de coagulação mostram alargamento do TP/TPAE e consumo de fibrinogênio (CIVD).",
+    "dificuldade": "Dinâmica",
+    "instrucao_gerador_ia": "Sorteie um perfil. A vinheta deve trazer pancitopenia explosiva e blastos periféricos, com forte destaque para quadro de coagulopatia severa (sangramentos espontâneos, petéquias).",
+    "perfil_epidemiologico": {
+      "apresentacao_classica": {
+        "probabilidade": 0.70,
+        "sexo": "Ambos",
+        "idade_range": [30, 50],
+        "fator_risco_gerador": "Início agudo com sangramento gengival abundante, petéquias e febre associados à CIVD."
+      },
+      "apresentacao_comum_secundaria": {
+        "probabilidade": 0.20,
+        "sexo": "Feminino",
+        "idade_range": [15, 30],
+        "fator_risco_gerador": "Menorragia severa (sangramento menstrual excessivo incontrolável) e equimoses ao mínimo trauma."
+      },
+      "apresentacao_rara": {
+        "probabilidade": 0.10,
+        "sexo": "Ambos",
+        "idade_range": [60, 75],
+        "fator_risco_gerador": "Apresentação microangiopática simulando Púrpura Trombocitopênica Trombótica (PTT) com sangramento em SNC precoce."
+      }
+    },
     "fase_1_investigacao": {
       "gabarito_esperado": ["mielograma", "aspirado de medula", "imunofenotipagem", "citometria de fluxo"],
       "achado_sucesso": "O mielograma revela > 20% de mieloblastos contendo os clássicos Bastonetes de Auer no citoplasma, confirmando LMA.",
-      "resposta_preceptor_erro": "Doutor, pancitopenia com excesso de blastos e distúrbio de coagulação agudo. Precisamos de aspirado de medula óssea imediato para classificar a leucemia."
+      "resposta_preceptor_erro": "Doutor, pancitopenia com excesso de blastos e distúrbio de coagulação agudo. Precisamos de aspirado de medula óssea (mielograma) imediato para classificar a leucemia."
     },
     "fase_2_diagnostico": {
       "gabarito_esperado": ["lma", "leucemia mieloide aguda", "lma m3", "leucemia promielocitica"],
@@ -99,66 +179,106 @@
     "fase_3_conduta": {
       "gabarito_esperado": ["atra", "acido trans-retinoico", "transfusao", "plasma", "suporte transfusional"],
       "red_flag_mortal": ["alta", "esperar citogenetica", "cirurgia hemostatica", "heparina plena"],
-      "feedback_sucesso": "Conduta irretocável! Você iniciou suporte transfusional hemoderivado urgente e começou o ATRA (Ácido Trans-Retinoico) imediatamente diante da suspeita clínica da M3.",
+      "feedback_sucesso": "Conduta irretocável! Você iniciou suporte transfusional hemoderivado urgente e começou o ATRA (Ácido Trans-Retinoico) IMEDIATAMENTE diante da suspeita clínica da M3.",
       "feedback_red_flag": "ERRO CRÍTICO! Você aguardou os testes moleculares demorados para agir. A LMA M3 apresenta coagulopatia severa (CIVD); o atraso no uso do ATRA levou a um sangramento intracraniano maciço fatal."
     },
     "discussao_clinica_final": {
-      "takeaway_message": "Bastonetes de Auer no citoplasma dos blastos fecham o diagnóstico de linha mieloide. Se houver CIVD associada (LMA M3), inicie o ATRA (Ácido Trans-Retinoico) IMEDIATAMENTE.",
-      "fisiopatologia": "A mutação (geralmente t(15;17)) bloqueia a diferenciação dos promielócitos. O ATRA reverte esse bloqueio molecular, forçando os blastos malignos a amadurecerem e morrerem por apoptose celular natural."
+      "takeaway_message": "Bastonetes de Auer no citoplasma dos blastos fecham o diagnóstico de linha mieloide. Se houver CIVD associada (LMA M3), inicie o ATRA (Ácido Trans-Retinoico) IMEDIATAMENTE sem esperar o teste genético.",
+      "fisiopatologia": "A mutação (translocação t(15;17)) bloqueia a diferenciação dos promielócitos. O ATRA reverte esse bloqueio molecular, forçando os blastos malignos a amadurecerem e morrerem por apoptose."
     }
   },
   {
-    "id_caso": "hemato_aplasia_01",
+    "id_caso": "hemato_aplasia_gerador",
     "patologia_alvo": "Aplasia de Medula Óssea (Anemia Aplásica)",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Jovem de 22 anos apresenta quadro de palidez progressiva, sufusões hemorrágicas na pele e febre. Exame físico: ausência de linfonodomegalias e ausência de hepatoesplenomegalia (sem visceromegalias). Hemograma: Hb 5,2 g/dL, Leucócitos 1.200/mm³ (Neutrófilos 300/mm³) e Plaquetas 8.000/mm³.",
+    "dificuldade": "Dinâmica",
+    "instrucao_gerador_ia": "Sorteie um perfil. A vinheta deve apresentar pancitopenia grave, infecções e sangramentos, enfatizando a AUSÊNCIA de visceromegalias (sem hepatoesplenomegalia ou linfonodos).",
+    "perfil_epidemiologico": {
+      "apresentacao_classica": {
+        "probabilidade": 0.50,
+        "sexo": "Ambos",
+        "idade_range": [15, 25],
+        "fator_risco_gerador": "Idiopática primária (ataque autoimune) típica do 1º pico bimodal, apresentando-se com febre, fadiga extrema e petéquias."
+      },
+      "apresentacao_comum_secundaria": {
+        "probabilidade": 0.30,
+        "sexo": "Ambos",
+        "idade_range": [60, 75],
+        "fator_risco_gerador": "2º pico bimodal (Idosos) ou sequela subaguda pós-hepatite aguda soronegativa (Aplasia pós-Hepatite)."
+      },
+      "apresentacao_rara": {
+        "probabilidade": 0.20,
+        "sexo": "Ambos",
+        "idade_range": [20, 50],
+        "fator_risco_gerador": "Reação idiossincrática a drogas (ex: Cloranfenicol, Sais de Ouro, Antitireoidianos) ou exposição a benzeno agrotóxico."
+      }
+    },
     "fase_1_investigacao": {
       "gabarito_esperado": ["biopsia de medula", "biopsia de medula ossea", "mielograma"],
-      "achado_sucesso": "Excelente. O mielograma veio 'seco' e a Biópsia de Medula Óssea (padrão-ouro) mostrou hipocelularidade drástica com substituição por tecido adiposo.",
-      "resposta_preceptor_erro": "Doutor, pancitopenia franca sem visceromegalias no exame físico. Precisamos avaliar o parênquima medular com o exame padrão-ouro: a biópsia de medula óssea."
+      "achado_sucesso": "Excelente. O mielograma veio 'seco' (dry tap) e a Biópsia de Medula Óssea (padrão-ouro) mostrou hipocelularidade drástica (< 10%) com substituição por tecido adiposo.",
+      "resposta_preceptor_erro": "Doutor, pancitopenia franca sem visceromegalias no exame físico. Precisamos avaliar a arquitetura do parênquima medular com o exame padrão-ouro (biópsia)."
     },
     "fase_2_diagnostico": {
       "gabarito_esperado": ["aplasia de medula", "anemia aplasica", "aplasia medular"],
       "distrator_comum": ["leucemia mieloide aguda", "lma", "mielofibrose", "linfoma"],
-      "feedback_distrator": "Leucemias agudas costumam ter blastos circulantes; a mielofibrose e os linfomas teriam hepatoesplenomegalia e/ou adenomegalia proeminentes. Na aplasia, a medula está vazia.",
-      "achado_sucesso": "Exato! Diagnóstico de Aplasia de Medula Óssea confirmada."
+      "feedback_distrator": "Leucemias agudas costumam ter blastos circulantes; a mielofibrose e os linfomas teriam hepatoesplenomegalia e/ou adenomegalia proeminentes. Na aplasia primária, a medula está vazia.",
+      "achado_sucesso": "Exato! Diagnóstico de Aplasia de Medula Óssea confirmado."
     },
     "fase_3_conduta": {
-      "gabarito_esperado": ["transplante de medula", "tmo", "imunossupressao", "suporte hemoterapico", "isolamento"],
+      "gabarito_esperado": ["transplante de medula", "tmo", "imunossupressao", "suporte hemoterapico", "isolamento", "atg", "ciclosporina"],
       "red_flag_mortal": ["alta", "corticoide isolado sem suporte", "esplenectomia"],
-      "feedback_sucesso": "Conduta excelente! Você isolou o paciente neutropênico grave, garantiu suporte de sangue e iniciou protocolo para Imunossupressão ou Transplante de Medula Óssea (TMO).",
-      "feedback_red_flag": "ERRO CRÍTICO! Você deu alta ou retardou as precauções de neutropenia. O paciente neutropênico febril chocou e faleceu em horas por sepse fulminante por germes gram-negativos ou fungos."
+      "feedback_sucesso": "Conduta excelente! Você isolou o paciente neutropênico grave, garantiu suporte hematológico e iniciou protocolo para Imunossupressão (ATG + Ciclosporina) ou Transplante de Medula Óssea (TMO) se o paciente for jovem e com doador.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você deu alta ou retardou as precauções de neutropenia. O paciente neutropênico febril chocou e faleceu em horas por sepse fulminante por germes oportunistas."
     },
     "discussao_clinica_final": {
       "takeaway_message": "Pancitopenia grave SEM esplenomegalia ou linfonodomegalia sugere falência medular primária. O diagnóstico exige biópsia mostrando medula substituída por gordura.",
-      "fisiopatologia": "Uma desordem autoimune ataca e destrói diretamente as células-tronco pluripotentes (stem cells) da medula, cessando a produção de todas as 3 linhagens sanguíneas (glóbulos vermelhos, brancos e plaquetas)."
+      "fisiopatologia": "Uma desordem autoimune ataca e destrói diretamente as células-tronco pluripotentes (stem cells) da medula, cessando a produção das linhagens eritroide, mieloide e megacariocítica."
     }
   },
   {
-    "id_caso": "hemato_lmc_01",
+    "id_caso": "hemato_lmc_gerador",
     "patologia_alvo": "Leucemia Mieloide Crônica (LMC)",
-    "dificuldade": "Intermediária",
-    "vinheta_admissao": "Homem de 50 anos realiza exames admissionais e apresenta leucocitose maciça de 180.000/mm³ com desvio à esquerda escalonado até mieloblastos, mas com predomínio de mielócitos e metamielócitos maduros. Ao exame: esplenomegalia gigante (baço ultrapassando a cicatriz umbilical).",
+    "dificuldade": "Dinâmica",
+    "instrucao_gerador_ia": "Sorteie um perfil. A vinheta deve descrever leucocitose maciça (>100.000) com desvio escalonado (sem hiato leucêmico) e basofilia, acompanhada de esplenomegalia de grande monta.",
+    "perfil_epidemiologico": {
+      "apresentacao_classica": {
+        "probabilidade": 0.60,
+        "sexo": "Masculino",
+        "idade_range": [40, 60],
+        "fator_risco_gerador": "Quadro quase assintomático, descoberto por acaso em exame de rotina que detecta leucocitose absurda e baço gigante indolor."
+      },
+      "apresentacao_comum_secundaria": {
+        "probabilidade": 0.30,
+        "sexo": "Ambos",
+        "idade_range": [30, 50],
+        "fator_risco_gerador": "Sintomas B clássicos de arrasto (fadiga, perda de peso) e saciedade precoce devido à compressão gástrica pelo baço gigante."
+      },
+      "apresentacao_rara": {
+        "probabilidade": 0.10,
+        "sexo": "Masculino",
+        "idade_range": [20, 40],
+        "fator_risco_gerador": "Emergência de hiperleucocitose/leucostase com priapismo isquêmico doloroso prolongado ou visão turva aguda (retinopatia leucêmica)."
+      }
+    },
     "fase_1_investigacao": {
       "gabarito_esperado": ["cariotipo", "fish", "cromossomo philadelphia", "bcr-abl", "fosfatase alcalina leucocitaria"],
-      "achado_sucesso": "Brilhante! A fosfatase alcalina leucocitária estava baixa. O teste genético (Cariótipo/PCR) identificou a presença marcante da translocação t(9;22).",
-      "resposta_preceptor_erro": "Doutor, leucocitose absurda, baço gigante e desvio maturativo escalonado. Qual a alteração citogenética chave (ou o teste molecular) que diagnostica essa síndrome mieloproliferativa?"
+      "achado_sucesso": "Brilhante! A fosfatase alcalina leucocitária estava extremamente baixa. O teste genético (Cariótipo/PCR) identificou a translocação t(9;22).",
+      "resposta_preceptor_erro": "Doutor, leucocitose absurda, baço gigante e desvio maturativo escalonado até blastos. Qual o teste genético chave ou alteração citogenética que confirma essa síndrome mieloproliferativa?"
     },
     "fase_2_diagnostico": {
       "gabarito_esperado": ["lmc", "leucemia mieloide cronica"],
       "distrator_comum": ["reacao leucemoide", "sepse", "leucemia mieloide aguda", "lma"],
-      "feedback_distrator": "Na LMA, a medula é tomada por blastos (>20%) sem amadurecimento celular. Na reação leucemoide (por infecção), a fosfatase alcalina leucocitária estaria ALTA, não baixa como na LMC.",
-      "achado_sucesso": "Exato! Leucemia Mieloide Crônica (LMC)."
+      "feedback_distrator": "Na LMA, a medula é tomada por blastos (>20%) com hiato leucêmico. Na reação leucemoide (por infecção severa), a fosfatase alcalina leucocitária estaria ALTA, e não haveria basofilia exuberante.",
+      "achado_sucesso": "Exato! Leucemia Mieloide Crônica (LMC) confirmada pela presença do Cromossomo Philadelphia."
     },
     "fase_3_conduta": {
-      "gabarito_esperado": ["imatinibe", "mesilato de imatinibe", "glivec", "inibidor de tirosina quinase", "itk"],
-      "red_flag_mortal": ["quimioterapia de inducao intensa padrao", "esplenectomia de urgencia"],
-      "feedback_sucesso": "Conduta perfeita! O uso revolucionário do Inibidor de Tirosina Quinase (Mesilato de Imatinibe) bloqueou a proliferação celular, garantindo ao paciente uma sobrevida igual à da população geral.",
-      "feedback_red_flag": "ERRO CRÍTICO! Você tentou fazer cirurgia de urgência em um baço gigante leucêmico ou prescreveu quimioterapia agressiva padrão de LMA em fase crônica, expondo o paciente a mortalidade desnecessária."
+      "gabarito_esperado": ["imatinibe", "mesilato de imatinibe", "glivec", "inibidor de tirosina quinase", "itk", "dasatinibe"],
+      "red_flag_mortal": ["quimioterapia de inducao intensa padrao", "esplenectomia de urgencia", "radioterapia"],
+      "feedback_sucesso": "Conduta perfeita! O uso revolucionário da Terapia Alvo com Inibidor de Tirosina Quinase (ITK - Mesilato de Imatinibe) bloqueia a oncoproteína BCR-ABL, garantindo ao paciente remissão profunda.",
+      "feedback_red_flag": "ERRO CRÍTICO! Você indicou esplenectomia de urgência em baço leucêmico (risco de sangramento letal) ou prescreveu quimioterapia agressiva padrão de LMA, o que não ataca o alvo molecular e traz mortalidade desnecessária."
     },
     "discussao_clinica_final": {
-      "takeaway_message": "A Leucemia Mieloide Crônica é marcada pelo Cromossomo Philadelphia (translocação t9;22). O tratamento é o alvo molecular direto com inibidores da tirosina quinase (ex: Imatinibe).",
-      "fisiopatologia": "A fusão genética BCR-ABL produz uma proteína tirosina quinase permanentemente ativa, que estimula a proliferação descontrolada dos progenitores mieloides de forma crônica, gerando leucocitose maciça e esplenomegalia secundária."
+      "takeaway_message": "A Leucemia Mieloide Crônica é marcada pelo Cromossomo Philadelphia (translocação t9;22). O tratamento padrão-ouro é o alvo molecular direto com Inibidores de Tirosina Quinase (ex: Imatinibe).",
+      "fisiopatologia": "A fusão genética BCR-ABL produz uma tirosina quinase permanentemente ativa, que estimula a proliferação descontrolada dos progenitores mieloides maduros, gerando leucocitose escalonada e sequestro esplênico reativo."
     }
   }
 ]
