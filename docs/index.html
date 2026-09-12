@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  Diagnosis Engine v13.0 — CSI + Hemodinâmica + ECG + ADAPTADOR UNIVERSAL + UI Dinâmica
+  Diagnosis Engine v13.0 — Motor Duplo (Estático + Dinâmico)
   Copyright (c) 2026 Instituto Delyone
 -->
 <html lang="pt-BR">
@@ -60,7 +60,6 @@
     .vital.alert { color: #fca5a5; background: rgba(207,81,72,0.2); animation: pulse 1.5s infinite; }
     .vital.critical { color: #fff; background: var(--red); animation: fastPulse 0.8s infinite; }
     
-    /* Monitor ECG estilo CRT */
     .monitor-card { background-color: #05100c; color: #10b981; font-family: 'Courier New', Courier, monospace; padding: 12px 15px; border-radius: 8px; margin-top: 15px; display: none; border: 2px solid #1f2933; text-align: center; font-weight: bold; letter-spacing: 1px; box-shadow: inset 0 0 15px rgba(16, 185, 129, 0.1); animation: crtFlicker 0.15s infinite; }
     .monitor-title { font-size: 11px; color: #66757c; margin-bottom: 5px; text-transform: uppercase; }
     .monitor-rhythm { font-size: 16px; }
@@ -114,7 +113,7 @@
       <div id="loading-status">Carregando base de dados...</div>
     </div>
 
-    <!-- Novo Rodapé de Atualização e Navegação Dinâmica -->
+    <!-- Rodapé de Atualização e Navegação Dinâmica -->
     <div class="selection-footer">
       <div class="sync-info">
         <span style="font-weight: 600; color: #ecf8f1;">Base de Casos Atualizada:</span> Setembro de 2026<br>
@@ -139,7 +138,6 @@
           <span class="vital" id="vit-fc">FC: --</span>
           <span class="vital" id="vit-spo2">SpO2: --%</span>
         </div>
-        <!-- Painel ECG Oculto -->
         <div class="monitor-card" id="painel-monitor">
           <div class="monitor-title">ECG CONTÍNUO (DII)</div>
           <div class="monitor-rhythm" id="texto-ritmo">〰️ LENDO...</div>
@@ -147,7 +145,6 @@
       </div>
       <div class="header-actions">
         <button class="btn-action btn-skip" id="btn-skip" onclick="trocarCaso()">Trocar Caso (3/3)</button>
-        <!-- Novo Botão de Voltar perfeitamente alinhado -->
         <button class="btn-action btn-close" onclick="proximoCaso()">← Voltar</button>
       </div>
     </div>
@@ -186,7 +183,6 @@
   const painelMonitor = document.getElementById('painel-monitor');
   const textoRitmo = document.getElementById('texto-ritmo');
 
-  // Adicionado o hematologia.json para testarmos o novo sistema
   const manifestoConhecimento = {
     "Emergencia": {
       pasta: "knowledge_base/sindromes_clinicas/", 
@@ -210,9 +206,6 @@
   let skipsUsadosHoje = 0;
   const MAX_SKIPS = 3;
 
-  // ==========================================
-  // ESTADO DO PACIENTE E HEMODINÂMICA
-  // ==========================================
   let hemodinamica = {
     estabilidade: 100,
     estagio: 'estavel',
@@ -221,9 +214,6 @@
   };
   let monitorLigado = false;
 
-  // ==========================================
-  // MATRIZ NLG (Natural Language Generation)
-  // ==========================================
   const matrizNLG = {
     erro_generico: [
       "Não houve impacto clínico positivo com essa conduta.",
@@ -242,9 +232,6 @@
     return arrayDeFrases[Math.floor(Math.random() * arrayDeFrases.length)];
   }
 
-  // ==========================================
-  // ADAPTADOR UNIVERSAL E RENDERIZADOR DE STATUS
-  // ==========================================
   function normalizarCasoClinico(casoBruto) {
     if (casoBruto && casoBruto.fase_1_investigacao && casoBruto.fase_3_conduta) {
       return casoBruto;
@@ -263,30 +250,29 @@
       return {
         id_caso: casoBruto.id || "caso_adaptado",
         patologia_alvo: casoBruto.nome || "Síndrome Clínica",
+        arquitetura: casoBruto.arquitetura || "v12_estatica", // Tag que define o motor
         dificuldade: "Adaptativa",
         ritmo_cardiaco: "Ritmo Sinusal (Padrão)",
         vinheta_admissao: casoBruto.vigneta || "Paciente admitido na emergência.",
+        instrucao_gerador_ia: casoBruto.instrucao_gerador_ia || "",
         
         fase_1_investigacao: {
           gabarito_esperado: resp.exames || [],
           achado_sucesso: "Os exames foram solicitados e confirmam suspeitas baseadas nos preditores clínicos.",
           resposta_preceptor_erro: "Doutor, avalie os sinais vitais e a clínica. Precisamos de exames para confirmar a hipótese e excluir os diagnósticos diferenciais."
         },
-        
         fase_2_diagnostico: {
           gabarito_esperado: resp.diagnostico || [],
           distrator_comum: distratores,
           feedback_distrator: "Cuidado! Essa hipótese recai na nossa chave de exclusão ativa. Revise os dados e o quadro clínico.",
           achado_sucesso: "Diagnóstico correto! Avançamos na elucidação desta síndrome."
         },
-        
         fase_3_conduta: {
           gabarito_esperado: resp.conduta || [],
           red_flag_mortal: ["alta", "analgesia simples", "observacao"],
           feedback_sucesso: `Conduta irretocável! Tratamento emergencial estabelecido: ${risco.conduta_emergencial || "Paciente estabilizado"}.`,
           feedback_red_flag: "ERRO CRÍTICO FATAL! Conduta negligenciada ou letal considerando o alto potencial de risco da síndrome."
         },
-        
         discussao_clinica_final: {
           takeaway_message: casoBruto.feedback_tecnico || "Revisão do caso concluída.",
           fisiopatologia: "O quadro se manifesta através dos vetores preditivos e da patogênese específica desta síndrome, requerendo intervenção focada."
@@ -296,9 +282,6 @@
     return null;
   }
 
-  // ==========================================
-  // INICIALIZAÇÃO E VERIFICAÇÃO DE STATUS UI
-  // ==========================================
   window.onload = async function inicializarSistema() {
     atualizarBotaoSkip();
     await carregarBaseDeConhecimento();
@@ -312,23 +295,26 @@
 
   async function carregarBaseDeConhecimento() {
     let casosCarregados = 0;
-    let modulosTrackers = []; // Para armazenar o status UI de cada módulo
+    let modulosTrackers = []; 
 
     for (const [materia, dados] of Object.entries(manifestoConhecimento)) {
       for (const arquivo of dados.arquivos) {
         try {
           const res = await fetch(dados.pasta + arquivo);
+          
+          // Escudo Anti-Travamento: Se o arquivo não existir, pula sem quebrar o código
           if (res.ok) {
             const json = await res.json();
             const casos = Array.isArray(json) ? json : [json];
             
-            // Verifica se o módulo possui a arquitetura Dinâmica/Bayesiana
-            const possuiGeradorDinamico = casos.some(c => c.instrucao_gerador_ia || c.perfil_epidemiologico);
+            // Verificação Segura (Evita falha se o JSON estiver mal formatado)
+            let possuiGeradorDinamico = false;
+            if (casos && casos.length > 0) {
+              possuiGeradorDinamico = casos.some(c => c && c.arquitetura === "v13_dinamica");
+            }
             
-            // Formata o nome de exibição (ex: pneumonia.json -> Pneumonia)
             let nomeExibicao = arquivo.replace('.json', '').replace(/_/g, ' ');
             nomeExibicao = nomeExibicao.charAt(0).toUpperCase() + nomeExibicao.slice(1);
-            
             modulosTrackers.push({ nome: nomeExibicao, atualizado: possuiGeradorDinamico });
 
             casos.forEach(c => {
@@ -338,9 +324,11 @@
                 casosCarregados++;
               }
             });
+          } else {
+             console.log(`[Escudo] Arquivo ${arquivo} ignorado ou não encontrado.`);
           }
         } catch (error) {
-          console.warn("Aviso: Não foi possível ler", arquivo);
+           console.log(`[Escudo] Proteção ativada. Falha silenciada no carregamento de: ${arquivo}`);
         }
       }
     }
@@ -351,7 +339,7 @@
       renderizarTagsModulos(modulosTrackers);
     } else {
       loadingStatus.style.color = "var(--red)";
-      loadingStatus.innerText = "Atenção: Nenhum caso compatível encontrado.";
+      loadingStatus.innerText = "Atenção: Nenhum caso compatível encontrado. Verifique sua pasta local.";
     }
   }
 
@@ -397,12 +385,12 @@
     
     atualizarSinaisVitais();
     
-    // Lógica IF/ELSE para suportar a arquitetura antiga estática ou a nova dinâmica
+    // Roteador de Motor Duplo
     let vinheta = "";
-    if (casoAtual.instrucao_gerador_ia && casoAtual.perfil_epidemiologico) {
-        // No futuro, isso será conectado ao LLM. Por agora, passamos um texto placeholder indicando a IA.
-        vinheta = "<em>[Aguardando LLM: Gerar vinheta dinâmica com base no perfil epidemiológico da patologia]</em><br><br>Instrução de Background: " + casoAtual.instrucao_gerador_ia;
+    if (casoAtual.arquitetura === "v13_dinamica") {
+        vinheta = "<em>[IA Dinâmica Ativada: Aguardando geração de vinheta...]</em><br><br>Instrução de Background: " + (casoAtual.instrucao_gerador_ia || "Gerar caso.");
     } else {
+        // Motor Clássico Procedural (Não muda nada nos casos antigos)
         vinheta = casoAtual.vinheta_admissao || "Paciente deu entrada na emergência.";
     }
 
@@ -412,9 +400,6 @@
     liberarInput();
   }
 
-  // ==========================================
-  // INFERÊNCIA E LÓGICA CORE (CSI)
-  // ==========================================
   function normalizarTexto(texto) {
     if (!texto) return "";
     return texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w\s]/gi, ' ').trim();
@@ -447,7 +432,6 @@
     let msgRetorno = "";
     let isCriticalMsg = false;
 
-    // 0. INTERCEPTADOR DE AÇÕES LIVRES (MOV: Monitor/ECG)
     const termosMonitor = ["monitor", "monitorizacao", "ecg", "eletro", "monitorizar", "eletrocardiograma"];
     if (!monitorLigado && termosMonitor.some(t => inputNorm.includes(t)) && hemodinamica.estagio !== 'pcr' && hemodinamica.estagio !== 'obito') {
         monitorLigado = true;
@@ -464,7 +448,6 @@
         return; 
     }
 
-    // 1. MECÂNICA DE PCR (Ressuscitação ACLS)
     if (hemodinamica.estagio === 'pcr') {
         const querChoque = ["choque", "desfibrilar", "desfibrilador", "desfibrilacao", "chocar"].some(t => inputNorm.includes(t));
         const querCprEpi = ["massagem", "rcp", "reanimacao", "adrenalina", "compressao", "epinefrina"].some(t => inputNorm.includes(t));
@@ -514,7 +497,6 @@
         return;
     }
 
-    // 2. EXTRAÇÃO DOS DADOS DA FASE
     let faseDados;
     if (faseAtual === 1) faseDados = casoAtual.fase_1_investigacao;
     else if (faseAtual === 2) faseDados = casoAtual.fase_2_diagnostico;
@@ -534,7 +516,6 @@
         (Array.isArray(faseDados.red_flag_mortal) ? faseDados.red_flag_mortal : [faseDados.red_flag_mortal])
         .map(t => normalizarTexto(t)).some(t => t.length > 3 && inputNorm.includes(t)) : false;
 
-    // 3. RESOLUÇÃO DA AÇÃO E CONSEQUÊNCIAS
     if (bateuRedFlag) {
         hemodinamica.estabilidade = 0;
         hemodinamica.estagio = 'pcr';
@@ -587,9 +568,6 @@
     processarDecisaoIA(msgRetorno, false, isCriticalMsg);
   }
 
-  // ==========================================
-  // CONTROLES DE INTERFACE
-  // ==========================================
   function processarDecisaoIA(msgFinal, fimDeJogo, isCritical) {
     atualizarSinaisVitais();
 
@@ -659,21 +637,6 @@
     chatBox.appendChild(div);
     scrollToBottom();
   }
-<!-- Rodapé de Atualização e Navegação -->
-<div style="text-align: center; margin-top: 40px; padding-bottom: 30px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-  
-  <!-- Informação de Atualização da Base -->
-  <div style="font-size: 0.8rem; color: #8fa3b3; margin-bottom: 20px; line-height: 1.4;">
-    <span style="font-weight: 600; color: #ecf8f1;">Base de Casos Atualizada:</span> Setembro de 2026<br>
-    <span style="font-size: 0.75rem;">Último upload: Hematologia Dinâmica (v2.1)</span>
-  </div>
-
-  <!-- Botão de Voltar para o Instituto -->
-  <a href="https://www.delyone.com" style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; background-color: rgba(31, 95, 174, 0.15); color: #ecf8f1; text-decoration: none; border-radius: 50px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(31, 95, 174, 0.4); backdrop-filter: blur(4px); transition: all 0.3s ease;">
-    <span style="margin-right: 8px;">←</span> Voltar para o Instituto
-  </a>
-
-</div>
 
   function adicionarMensagemUser(texto) { const div = document.createElement('div'); div.className = 'message user'; div.innerText = texto; chatBox.appendChild(div); scrollToBottom(); }
   function adicionarMensagemGM(htmlTexto, isCritical = false) { esconderTyping(); const div = document.createElement('div'); div.className = `message gm ${isCritical ? 'critical' : ''}`; div.innerHTML = htmlTexto; chatBox.appendChild(div); scrollToBottom(); }
