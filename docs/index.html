@@ -3,298 +3,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador Clínico Dinâmico</title>
+    <title>Motor Clínico v2.0 - Propedêutica</title>
     <style>
         :root {
-            --bg-color: #121212;
-            --panel-bg: #1e1e1e;
-            --text-main: #e0e0e0;
-            --accent: #4fc3f7;
-            --success: #66bb6a;
-            --warning: #ffa726;
-            --danger: #ef5350;
-            --border-radius: 8px;
+            --bg-dark: #0f172a;
+            --panel-bg: #1e293b;
+            --text-main: #f8fafc;
+            --accent: #38bdf8;
+            --success: #4ade80;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --sys-msg: #94a3b8;
+            --border-radius: 12px;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
             color: var(--text-main);
             margin: 0;
-            padding: 20px;
+            padding: 2vh 2vw;
             display: flex;
             justify-content: center;
+            height: 96vh;
+            box-sizing: border-box;
         }
 
-        .container {
+        .engine-container {
             width: 100%;
-            max-width: 600px;
+            max-width: 800px;
             background-color: var(--panel-bg);
-            padding: 20px;
             border-radius: var(--border-radius);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            overflow: hidden;
+            border: 1px solid #334155;
         }
 
-        .header {
+        .hud-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
+            padding: 20px;
+            background: #0f172a;
+            border-bottom: 1px solid #334155;
         }
 
-        .vital-signs {
-            font-family: monospace;
-            color: var(--accent);
+        .patient-info h2 { margin: 0; font-size: 1.4em; color: #fff; }
+        .patient-info span { color: var(--sys-msg); font-size: 0.9em; }
+
+        .vitals-hud {
+            display: flex;
+            gap: 15px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: bold;
             font-size: 1.1em;
         }
+        
+        .vital-time { color: var(--danger); }
+        .vital-score { color: var(--success); }
 
-        .clinical-area {
-            height: 300px;
+        .terminal-log {
+            flex-grow: 1;
+            padding: 20px;
             overflow-y: auto;
-            background-color: #000;
-            padding: 15px;
-            border-radius: var(--border-radius);
-            font-size: 0.95em;
-            line-height: 1.5;
+            background-color: #0b0f19;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
+            font-size: 1.05em;
+            line-height: 1.6;
         }
 
-        .clinical-area p { margin: 0; }
-        .log-sys { color: #888; font-style: italic; }
-        .log-success { color: var(--success); }
-        .log-warning { color: var(--warning); }
-        .log-danger { color: var(--danger); }
-        .log-action { color: var(--accent); font-weight: bold; }
+        .terminal-log p { margin: 0; padding: 8px 12px; border-radius: 6px; }
+        .log-scene { background-color: rgba(255,255,255,0.05); border-left: 4px solid var(--sys-msg); }
+        .log-action { color: var(--accent); font-family: monospace; text-align: right; }
+        .log-clinical { background-color: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent); }
+        .log-success { background-color: rgba(74, 222, 128, 0.1); border-left: 4px solid var(--success); }
+        .log-warning { background-color: rgba(251, 191, 36, 0.1); border-left: 4px solid var(--warning); color: #fef3c7;}
+        .log-danger { background-color: rgba(248, 113, 113, 0.1); border-left: 4px solid var(--danger); color: #fee2e2;}
 
-        .controls {
+        .control-deck {
+            padding: 20px;
+            background: #1e293b;
+            border-top: 1px solid #334155;
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
 
-        .input-row {
-            display: flex;
-            gap: 10px;
-        }
-
-        input[type="text"] {
+        .input-wrapper { display: flex; gap: 10px; }
+        
+        input {
             flex: 1;
-            padding: 12px;
-            border: 1px solid #444;
-            background-color: #2a2a2a;
-            color: white;
-            border-radius: var(--border-radius);
+            padding: 15px;
+            background: #0f172a;
+            border: 1px solid #475569;
+            color: #fff;
+            border-radius: 8px;
             font-size: 1em;
+            transition: all 0.2s ease;
         }
-
-        input[type="text"]:focus { outline: none; border-color: var(--accent); }
+        input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2); }
 
         button {
-            padding: 10px 15px;
+            padding: 15px 25px;
             border: none;
-            border-radius: var(--border-radius);
-            cursor: pointer;
+            border-radius: 8px;
             font-weight: bold;
-            transition: opacity 0.2s;
+            font-size: 1em;
+            cursor: pointer;
+            transition: transform 0.1s, filter 0.2s;
         }
-
-        button:hover { opacity: 0.8; }
+        button:active { transform: scale(0.98); }
+        button:hover { filter: brightness(1.1); }
         
-        .btn-action { background-color: var(--accent); color: #000; }
-        .btn-help { background-color: #fbc02d; color: #000; }
-        .btn-science { background-color: #9c27b0; color: #fff; }
-        .btn-next { background-color: var(--success); color: #000; }
-        .btn-back { background-color: #555; color: #fff; }
-
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+        .btn-act { background: var(--accent); color: #000; }
+        
+        /* Scrollbar customizada */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0b0f19; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <h2 id="patient-name" style="margin: 0; font-size: 1.2em;">Carregando...</h2>
-        <div class="vital-signs" id="vital-signs">Reserva: 100% | Nota: 100</div>
+<div class="engine-container">
+    <div class="hud-header">
+        <div class="patient-info">
+            <h2 id="ui-nome">Iniciando Motor...</h2>
+            <span id="ui-fase">Fase: Inspeção Inicial</span>
+        </div>
+        <div class="vitals-hud">
+            <div class="vital-time">⏳ Reserva: <span id="ui-reserva">100</span>%</div>
+            <div class="vital-score">🏆 Nota: <span id="ui-nota">100</span></div>
+        </div>
     </div>
 
-    <!-- Área de Exibição do Caso Clínico -->
-    <div class="clinical-area" id="clinical-log"></div>
+    <div class="terminal-log" id="log-screen"></div>
 
-    <div class="controls">
-        <div class="input-row">
-            <input type="text" id="user-input" placeholder="Digite sua conduta (ex: o2, eletro, AAS)..." onkeypress="if(event.key === 'Enter') processarAcao()">
-            <button class="btn-action" onclick="processarAcao()">Agir</button>
-        </div>
-        <div class="action-buttons">
-            <button class="btn-help" onclick="pedirAjuda()">💡 Dica (-10 pts)</button>
-            <button class="btn-science" onclick="scientificBoost()">🔬 PubMed</button>
-            <button class="btn-next" onclick="proximoCaso()">Próximo ➡</button>
+    <div class="control-deck">
+        <div class="input-wrapper">
+            <input type="text" id="command-input" placeholder="O que você faz? (ex: 'perguntar da dor', 'ausculta', 'pedir eletro')" autocomplete="off" onkeypress="if(event.key === 'Enter') engineAcao()">
+            <button class="btn-act" onclick="engineAcao()">Executar</button>
         </div>
     </div>
 </div>
 
 <script>
-    // --- 1. O MOLDE (Doenças e Regras Biológicas) ---
-    const BancoDeDoencas = {
+    // ==========================================
+    // 1. O MOLDE (Motor de Propedêutica Médica)
+    // ==========================================
+    const DicionarioMedico = {
         IAM_INFERIOR: {
-            nome: "IAM de Parede Inferior",
-            exigencias: {
-                suporte: ["mov", "monitor", "monitorizacao", "oxigenio", "o2", "acesso", "veia"],
-                diagnostico: ["ecg", "eletro", "eletrocardiograma", "troponina"],
-                tratamento: ["aas", "aspirina", "clopidogrel", "ticagrelor", "heparina", "angioplastia"]
+            nomeTecnico: "IAM de Parede Inferior",
+            // Dicionário de sinônimos para o input do usuário
+            gatilhos: {
+                anamnese: ["perguntar", "dor", "historia", "sintomas", "irradia", "começou", "azia", "feijoada"],
+                exameFisico: ["ausculta", "palpar", "maca", "pressao", "sinais vitais", "exame fisico", "abdome"],
+                exameComplementar: ["eletro", "ecg", "eletrocardiograma", "enzimas", "troponina"],
+                tratamento: ["aas", "aspirina", "clopidogrel", "mov", "oxigenio", "cateterismo"]
             },
+            // O que o sistema devolve quando o gatilho é acionado
             achados: {
-                suporte: "Paciente monitorizado. O2 suplementar instalado. Acesso venoso pérvio.",
-                diagnostico: "ECG revela Supra de ST em DII, DIII e aVF. Ritmo sinusal.",
-                tratamento: "Dupla antiagregação iniciada. Paciente refere leve melhora da dor."
+                anamnese: "O paciente relata que a 'azia' começou há 2 horas, tem um peso no estômago que parece subir para o pescoço e braço esquerdo. Nega alergias.",
+                exameFisico: "PA 90x60 mmHg, FC 55 bpm. Ausculta cardíaca rítmica, sem sopros. Pulmões limpos. Abdome indolor à palpação profunda.",
+                exameComplementar: "ECG revela Supra de ST de 4mm em DII, DIII e aVF. Ritmo sinusal bradicárdico.",
+                tratamento: "Protocolo de isquemia iniciado. Dupla antiagregação. Paciente estabilizando para transferência à hemodinâmica."
             },
-            danoPorTurno: 15
+            // Custo na "Reserva Vital" do paciente (Tempo)
+            custoTempo: {
+                anamnese: 2,
+                exameFisico: 3,
+                exameComplementar: 15, // Custa muito tempo!
+                erroGeral: 10
+            }
         }
     };
 
-    // --- 2. A INSTÂNCIA (Os Casos Clínicos Epidemiológicos) ---
-    const CasosClinicos = [
+    // ==========================================
+    // 2. A INSTÂNCIA (Cenário Epidemiológico)
+    // ==========================================
+    const Instancias = [
         {
-            id: 0,
-            paciente: "Seu João, 55 anos",
-            historia: "Chega ao PS pálido e sudoreico. Relata que comeu uma feijoada pesada e está com uma 'azia terrível' que sobe para a mandíbula.",
-            patologiaOculta: BancoDeDoencas.IAM_INFERIOR,
-            // Estado isolado da instância
-            reservaVital: 100,
-            notaFinal: 100,
+            id: "caso_01",
+            nome: "Seu João, 55 anos",
+            inspecaoVisual: "Paciente entra caminhando com dificuldade, pálido, com a mão espalmada sobre o estômago. Senta na maca curvado para frente, com leve sudorese no rosto.",
+            doencaBase: DicionarioMedico.IAM_INFERIOR,
             estado: {
-                suporte: false,
-                diagnosticado: false,
-                tratado: false,
-                finalizado: false
+                reservaVital: 100,
+                notaFinal: 100,
+                fasesConcluidas: {
+                    anamnese: false,
+                    exameFisico: false,
+                    diagnostico: false,
+                    tratamento: false
+                }
             }
         }
     ];
 
-    // --- 3. O MOTOR DE REGRAS ---
-    let casoAtualIndex = 0;
+    // ==========================================
+    // 3. MOTOR DE PROCESSAMENTO (CORE)
+    // ==========================================
     let casoAtivo = null;
+    const logScreen = document.getElementById('log-screen');
+    const inputCmd = document.getElementById('command-input');
 
-    function iniciarCaso(index) {
-        if (index >= CasosClinicos.length) {
-            document.getElementById('clinical-log').innerHTML = "<p class='log-success'>🏆 Todos os casos finalizados. Excelente plantão!</p>";
-            return;
-        }
+    function bootEngine() {
+        // Clona a instância para isolar estado
+        casoAtivo = JSON.parse(JSON.stringify(Instancias[0])); 
+        document.getElementById('ui-nome').innerText = casoAtivo.nome;
+        updateHUD();
         
-        // Clona o caso para não sujar o banco de dados original (boa prática JS)
-        casoAtivo = JSON.parse(JSON.stringify(CasosClinicos[index])); 
+        printLog(`[Fase 1: Inspeção] ${casoAtivo.inspecaoVisual}`, "log-scene");
+    }
+
+    function updateHUD() {
+        document.getElementById('ui-reserva').innerText = casoAtivo.estado.reservaVital;
+        document.getElementById('ui-nota').innerText = casoAtivo.estado.notaFinal;
         
-        document.getElementById('patient-name').innerText = casoAtivo.paciente;
-        document.getElementById('clinical-log').innerHTML = `<p>${casoAtivo.historia}</p>`;
-        atualizarPlacar();
+        let faseStr = "Inspeção";
+        if (casoAtivo.estado.fasesConcluidas.tratamento) faseStr = "Resolvido";
+        else if (casoAtivo.estado.fasesConcluidas.diagnostico) faseStr = "Diagnóstico";
+        else if (casoAtivo.estado.fasesConcluidas.exameFisico) faseStr = "Exame Físico";
+        else if (casoAtivo.estado.fasesConcluidas.anamnese) faseStr = "Anamnese";
+        
+        document.getElementById('ui-fase').innerText = `Fase: ${faseStr}`;
     }
 
-    function atualizarPlacar() {
-        document.getElementById('vital-signs').innerText = `Reserva: ${casoAtivo.reservaVital}% | Nota: ${casoAtivo.notaFinal}`;
+    function printLog(msg, cssClass) {
+        logScreen.innerHTML += `<p class="${cssClass}">${msg}</p>`;
+        logScreen.scrollTop = logScreen.scrollHeight;
     }
 
-    function imprimirNoLog(mensagem, classe = "") {
-        const log = document.getElementById('clinical-log');
-        log.innerHTML += `<p class="${classe}">${mensagem}</p>`;
-        log.scrollTop = log.scrollHeight; // Rola para o fim automaticamente
-    }
+    function engineAcao() {
+        if (casoAtivo.estado.fasesConcluidas.tratamento || casoAtivo.estado.reservaVital <= 0) return;
 
-    function processarAcao() {
-        if (casoAtivo.estado.finalizado) return;
+        let cmd = inputCmd.value.toLowerCase().trim();
+        inputCmd.value = "";
+        if (!cmd) return;
 
-        const inputEl = document.getElementById('user-input');
-        const inputStr = inputEl.value.toLowerCase().trim();
-        inputEl.value = ""; // limpa o campo
+        printLog(`> ${cmd}`, "log-action");
+        const doenca = casoAtivo.doencaBase;
+        const estado = casoAtivo.estado;
+        let acaoReconhecida = false;
 
-        if (!inputStr) return;
-
-        const patologia = casoAtivo.patologiaOculta;
-        imprimirNoLog(`> Conduta: ${inputStr}`, "log-action");
-
-        let acaoValida = false;
-
-        // 1. Verificando Suporte Básico (MOV)
-        if (!casoAtivo.estado.suporte && patologia.exigencias.suporte.some(t => inputStr.includes(t))) {
-            casoAtivo.estado.suporte = true;
-            imprimirNoLog(`✅ ${patologia.achados.suporte}`, "log-success");
-            acaoValida = true;
-        }
-        // 2. Verificando Diagnóstico
-        else if (!casoAtivo.estado.diagnosticado && patologia.exigencias.diagnostico.some(t => inputStr.includes(t))) {
-            casoAtivo.estado.diagnosticado = true;
-            imprimirNoLog(`📋 ${patologia.achados.diagnostico}`, "log-success");
-            acaoValida = true;
-        }
-        // 3. Verificando Tratamento
-        else if (!casoAtivo.estado.tratado && patologia.exigencias.tratamento.some(t => inputStr.includes(t))) {
-            if (!casoAtivo.estado.diagnosticado) {
-                // Punição por tratar sem diagnosticar (iatrogenia)
-                casoAtivo.notaFinal -= 30;
-                imprimirNoLog("⚠️ Você iniciou tratamento sem confirmar o diagnóstico. Risco de iatrogenia!", "log-warning");
+        // 1. Tenta Anamnese
+        if (doenca.gatilhos.anamnese.some(t => cmd.includes(t))) {
+            if (!estado.fasesConcluidas.anamnese) {
+                estado.fasesConcluidas.anamnese = true;
+                estado.reservaVital -= doenca.custoTempo.anamnese;
+                printLog(`🗣️ Entrevista: ${doenca.achados.anamnese}`, "log-clinical");
+            } else {
+                printLog("Você já extraiu a história principal.", "log-sys");
             }
-            casoAtivo.estado.tratado = true;
-            imprimirNoLog(`💊 ${patologia.achados.tratamento}`, "log-success");
-            acaoValida = true;
+            acaoReconhecida = true;
+        }
+        
+        // 2. Tenta Exame Físico
+        else if (doenca.gatilhos.exameFisico.some(t => cmd.includes(t))) {
+            if (!estado.fasesConcluidas.exameFisico) {
+                estado.fasesConcluidas.exameFisico = true;
+                estado.reservaVital -= doenca.custoTempo.exameFisico;
+                printLog(`🩺 Maca: ${doenca.achados.exameFisico}`, "log-clinical");
+            } else {
+                printLog("Exame físico já realizado.", "log-sys");
+            }
+            acaoReconhecida = true;
         }
 
-        // Consequências do Turno
-        if (!acaoValida) {
-            casoAtivo.reservaVital -= patologia.danoPorTurno;
-            casoAtivo.notaFinal -= 5; // Perde nota por conduta ineficiente
-            imprimirNoLog("Conduta sem efeito significativo. O paciente continua deteriorando...", "log-warning");
+        // 3. Tenta Exames Complementares (MECÂNICA DE PUNIÇÃO AQUI)
+        else if (doenca.gatilhos.exameComplementar.some(t => cmd.includes(t))) {
+            // Regra do Motor: Médico inseguro
+            if (!estado.fasesConcluidas.anamnese || !estado.fasesConcluidas.exameFisico) {
+                estado.notaFinal -= 30; // Punição por pular a clínica
+                printLog("⚠️ PENALIDADE DE INSEGURANÇA: Você pediu exames complementares sem concluir a anamnese e o exame físico básico. A clínica é soberana. (-30 pts)", "log-warning");
+            }
+            
+            if (!estado.fasesConcluidas.diagnostico) {
+                estado.fasesConcluidas.diagnostico = true;
+                estado.reservaVital -= doenca.custoTempo.exameComplementar; // Gasta muito tempo!
+                printLog(`📋 Laudo: ${doenca.achados.exameComplementar}`, "log-success");
+            } else {
+                printLog("Exame já realizado.", "log-sys");
+            }
+            acaoReconhecida = true;
         }
 
-        verificarFimDeCaso();
-        atualizarPlacar();
-    }
+        // 4. Tenta Conduta/Tratamento
+        else if (doenca.gatilhos.tratamento.some(t => cmd.includes(t))) {
+            if (!estado.fasesConcluidas.diagnostico) {
+                estado.notaFinal -= 40;
+                printLog("☢️ IATROGENIA: Você iniciou tratamento sem confirmação diagnóstica sólida! O risco de matar o paciente era alto. (-40 pts)", "log-danger");
+            }
+            estado.fasesConcluidas.tratamento = true;
+            printLog(`💊 Intervenção: ${doenca.achados.tratamento}`, "log-success");
+            acaoReconhecida = true;
+        }
 
-    function verificarFimDeCaso() {
-        if (casoAtivo.reservaVital <= 0) {
-            casoAtivo.estado.finalizado = true;
-            casoAtivo.notaFinal = 0;
-            imprimirNoLog("💀 O paciente entrou em parada cardiorrespiratória. Tempo esgotado.", "log-danger");
+        // 5. Fallback (Comando não reconhecido ou inútil)
+        if (!acaoReconhecida) {
+            estado.reservaVital -= doenca.custoTempo.erroGeral;
+            printLog("O relógio corre. Sua conduta não gerou mudança no quadro.", "log-warning");
+        }
+
+        // Validação de Morte por Atraso Fatal
+        if (estado.reservaVital <= 0) {
+            estado.reservaVital = 0;
+            printLog("💀 ATRASO FATAL: O paciente não suportou o tempo de espera e faleceu antes da conduta definitiva.", "log-danger");
         } 
-        else if (casoAtivo.estado.diagnosticado && casoAtivo.estado.tratado) {
-            casoAtivo.estado.finalizado = true;
-            imprimirNoLog(`🏆 Paciente estabilizado! Nota final do atendimento: ${casoAtivo.notaFinal}/100.`, "log-success");
+        else if (estado.fasesConcluidas.tratamento) {
+            printLog(`🏁 CASO ENCERRADO. Score de Eficiência: ${estado.notaFinal}/100.`, "log-success");
         }
+
+        updateHUD();
     }
 
-    function pedirAjuda() {
-        if (casoAtivo.estado.finalizado) return;
-        casoAtivo.notaFinal -= 10;
-        
-        let dica = "";
-        if (!casoAtivo.estado.suporte) dica = "Pense nos passos iniciais de qualquer sala de emergência (suporte de vida).";
-        else if (!casoAtivo.estado.diagnosticado) dica = "Esse sintoma que parece gástrico pode ter origem cardíaca. Que exame tira essa dúvida?";
-        else if (!casoAtivo.estado.tratado) dica = "Qual a medicação padrão ouro inicial para isquemia coronariana confirmada?";
-        
-        imprimirNoLog(`💡 Dica do Residente: ${dica}`, "log-sys");
-        atualizarPlacar();
-    }
-
-    function scientificBoost() {
-        imprimirNoLog("🔬 PubMed: 'Apresentações atípicas de IAM, como dor epigástrica e sintomas autonômicos, são mais comuns em idosos, diabéticos e mulheres.'", "log-sys");
-    }
-
-    function proximoCaso() {
-        casoAtualIndex++;
-        iniciarCaso(casoAtualIndex);
-    }
-
-    // Inicia o jogo ao carregar
-    window.onload = () => iniciarCaso(casoAtualIndex);
-
+    // Inicializa
+    window.onload = bootEngine;
 </script>
 </body>
 </html>
