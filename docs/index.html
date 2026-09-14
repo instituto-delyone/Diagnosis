@@ -3,326 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Motor Clínico v2.0 - Propedêutica</title>
+    <title>Diagnosis | IDMT</title>
     <style>
-        :root {
-            --bg-dark: #0f172a;
-            --panel-bg: #1e293b;
-            --text-main: #f8fafc;
-            --accent: #38bdf8;
-            --success: #4ade80;
-            --warning: #fbbf24;
-            --danger: #f87171;
-            --sys-msg: #94a3b8;
-            --border-radius: 12px;
-        }
-
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            margin: 0;
-            padding: 2vh 2vw;
+            background-color: #071426;
+            color: #f7f9fc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             display: flex;
             justify-content: center;
-            height: 96vh;
-            box-sizing: border-box;
-        }
-
-        .engine-container {
-            width: 100%;
-            max-width: 800px;
-            background-color: var(--panel-bg);
-            border-radius: var(--border-radius);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            border: 1px solid #334155;
-        }
-
-        .hud-header {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 20px;
-            background: #0f172a;
-            border-bottom: 1px solid #334155;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
         }
-
-        .patient-info h2 { margin: 0; font-size: 1.4em; color: #fff; }
-        .patient-info span { color: var(--sys-msg); font-size: 0.9em; }
-
-        .vitals-hud {
-            display: flex;
-            gap: 15px;
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: bold;
-            font-size: 1.1em;
+        .container {
+            background: #1f2933;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 400px;
+            width: 90%;
         }
-        
-        .vital-time { color: var(--danger); }
-        .vital-score { color: var(--success); }
-
-        .terminal-log {
-            flex-grow: 1;
-            padding: 20px;
-            overflow-y: auto;
-            background-color: #0b0f19;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            font-size: 1.05em;
-            line-height: 1.6;
-        }
-
-        .terminal-log p { margin: 0; padding: 8px 12px; border-radius: 6px; }
-        .log-scene { background-color: rgba(255,255,255,0.05); border-left: 4px solid var(--sys-msg); }
-        .log-action { color: var(--accent); font-family: monospace; text-align: right; }
-        .log-clinical { background-color: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent); }
-        .log-success { background-color: rgba(74, 222, 128, 0.1); border-left: 4px solid var(--success); }
-        .log-warning { background-color: rgba(251, 191, 36, 0.1); border-left: 4px solid var(--warning); color: #fef3c7;}
-        .log-danger { background-color: rgba(248, 113, 113, 0.1); border-left: 4px solid var(--danger); color: #fee2e2;}
-
-        .control-deck {
-            padding: 20px;
-            background: #1e293b;
-            border-top: 1px solid #334155;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .input-wrapper { display: flex; gap: 10px; }
-        
-        input {
-            flex: 1;
-            padding: 15px;
-            background: #0f172a;
-            border: 1px solid #475569;
-            color: #fff;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: all 0.2s ease;
-        }
-        input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2); }
-
+        h1 { color: #fff; margin-bottom: 10px; }
+        p { color: #94a3b8; margin-bottom: 30px; }
         button {
-            padding: 15px 25px;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 15px;
             border: none;
             border-radius: 8px;
-            font-weight: bold;
-            font-size: 1em;
             cursor: pointer;
-            transition: transform 0.1s, filter 0.2s;
+            color: white;
+            transition: opacity 0.2s;
         }
-        button:active { transform: scale(0.98); }
-        button:hover { filter: brightness(1.1); }
-        
-        .btn-act { background: var(--accent); color: #000; }
-        
-        /* Scrollbar customizada */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0b0f19; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        button:hover { opacity: 0.9; }
+        .btn-vermelha { background-color: #dc2626; } /* Vermelho Emergência */
+        .btn-clinica { background-color: #1f5fae; } /* Azul Investigação */
     </style>
 </head>
 <body>
-
-<div class="engine-container">
-    <div class="hud-header">
-        <div class="patient-info">
-            <h2 id="ui-nome">Iniciando Motor...</h2>
-            <span id="ui-fase">Fase: Inspeção Inicial</span>
-        </div>
-        <div class="vitals-hud">
-            <div class="vital-time">⏳ Reserva: <span id="ui-reserva">100</span>%</div>
-            <div class="vital-score">🏆 Nota: <span id="ui-nota">100</span></div>
-        </div>
+    <div class="container">
+        <h1>DIAGNOSIS ENGINE</h1>
+        <p>Selecione seu plantão de hoje:</p>
+        
+        <!-- Ao clicar, enviamos a variável 'sala' pela URL -->
+        <button class="btn-vermelha" onclick="window.location.href='engine.html?sala=vermelha'">
+            🚑 Sala Vermelha
+        </button>
+        <button class="btn-clinica" onclick="window.location.href='engine.html?sala=clinica'">
+            🩺 Clínica Médica
+        </button>
     </div>
-
-    <div class="terminal-log" id="log-screen"></div>
-
-    <div class="control-deck">
-        <div class="input-wrapper">
-            <input type="text" id="command-input" placeholder="O que você faz? (ex: 'perguntar da dor', 'ausculta', 'pedir eletro')" autocomplete="off" onkeypress="if(event.key === 'Enter') engineAcao()">
-            <button class="btn-act" onclick="engineAcao()">Executar</button>
-        </div>
-    </div>
-</div>
-
-<script>
-    // ==========================================
-    // 1. O MOLDE (Motor de Propedêutica Médica)
-    // ==========================================
-    const DicionarioMedico = {
-        IAM_INFERIOR: {
-            nomeTecnico: "IAM de Parede Inferior",
-            // Dicionário de sinônimos para o input do usuário
-            gatilhos: {
-                anamnese: ["perguntar", "dor", "historia", "sintomas", "irradia", "começou", "azia", "feijoada"],
-                exameFisico: ["ausculta", "palpar", "maca", "pressao", "sinais vitais", "exame fisico", "abdome"],
-                exameComplementar: ["eletro", "ecg", "eletrocardiograma", "enzimas", "troponina"],
-                tratamento: ["aas", "aspirina", "clopidogrel", "mov", "oxigenio", "cateterismo"]
-            },
-            // O que o sistema devolve quando o gatilho é acionado
-            achados: {
-                anamnese: "O paciente relata que a 'azia' começou há 2 horas, tem um peso no estômago que parece subir para o pescoço e braço esquerdo. Nega alergias.",
-                exameFisico: "PA 90x60 mmHg, FC 55 bpm. Ausculta cardíaca rítmica, sem sopros. Pulmões limpos. Abdome indolor à palpação profunda.",
-                exameComplementar: "ECG revela Supra de ST de 4mm em DII, DIII e aVF. Ritmo sinusal bradicárdico.",
-                tratamento: "Protocolo de isquemia iniciado. Dupla antiagregação. Paciente estabilizando para transferência à hemodinâmica."
-            },
-            // Custo na "Reserva Vital" do paciente (Tempo)
-            custoTempo: {
-                anamnese: 2,
-                exameFisico: 3,
-                exameComplementar: 15, // Custa muito tempo!
-                erroGeral: 10
-            }
-        }
-    };
-
-    // ==========================================
-    // 2. A INSTÂNCIA (Cenário Epidemiológico)
-    // ==========================================
-    const Instancias = [
-        {
-            id: "caso_01",
-            nome: "Seu João, 55 anos",
-            inspecaoVisual: "Paciente entra caminhando com dificuldade, pálido, com a mão espalmada sobre o estômago. Senta na maca curvado para frente, com leve sudorese no rosto.",
-            doencaBase: DicionarioMedico.IAM_INFERIOR,
-            estado: {
-                reservaVital: 100,
-                notaFinal: 100,
-                fasesConcluidas: {
-                    anamnese: false,
-                    exameFisico: false,
-                    diagnostico: false,
-                    tratamento: false
-                }
-            }
-        }
-    ];
-
-    // ==========================================
-    // 3. MOTOR DE PROCESSAMENTO (CORE)
-    // ==========================================
-    let casoAtivo = null;
-    const logScreen = document.getElementById('log-screen');
-    const inputCmd = document.getElementById('command-input');
-
-    function bootEngine() {
-        // Clona a instância para isolar estado
-        casoAtivo = JSON.parse(JSON.stringify(Instancias[0])); 
-        document.getElementById('ui-nome').innerText = casoAtivo.nome;
-        updateHUD();
-        
-        printLog(`[Fase 1: Inspeção] ${casoAtivo.inspecaoVisual}`, "log-scene");
-    }
-
-    function updateHUD() {
-        document.getElementById('ui-reserva').innerText = casoAtivo.estado.reservaVital;
-        document.getElementById('ui-nota').innerText = casoAtivo.estado.notaFinal;
-        
-        let faseStr = "Inspeção";
-        if (casoAtivo.estado.fasesConcluidas.tratamento) faseStr = "Resolvido";
-        else if (casoAtivo.estado.fasesConcluidas.diagnostico) faseStr = "Diagnóstico";
-        else if (casoAtivo.estado.fasesConcluidas.exameFisico) faseStr = "Exame Físico";
-        else if (casoAtivo.estado.fasesConcluidas.anamnese) faseStr = "Anamnese";
-        
-        document.getElementById('ui-fase').innerText = `Fase: ${faseStr}`;
-    }
-
-    function printLog(msg, cssClass) {
-        logScreen.innerHTML += `<p class="${cssClass}">${msg}</p>`;
-        logScreen.scrollTop = logScreen.scrollHeight;
-    }
-
-    function engineAcao() {
-        if (casoAtivo.estado.fasesConcluidas.tratamento || casoAtivo.estado.reservaVital <= 0) return;
-
-        let cmd = inputCmd.value.toLowerCase().trim();
-        inputCmd.value = "";
-        if (!cmd) return;
-
-        printLog(`> ${cmd}`, "log-action");
-        const doenca = casoAtivo.doencaBase;
-        const estado = casoAtivo.estado;
-        let acaoReconhecida = false;
-
-        // 1. Tenta Anamnese
-        if (doenca.gatilhos.anamnese.some(t => cmd.includes(t))) {
-            if (!estado.fasesConcluidas.anamnese) {
-                estado.fasesConcluidas.anamnese = true;
-                estado.reservaVital -= doenca.custoTempo.anamnese;
-                printLog(`🗣️ Entrevista: ${doenca.achados.anamnese}`, "log-clinical");
-            } else {
-                printLog("Você já extraiu a história principal.", "log-sys");
-            }
-            acaoReconhecida = true;
-        }
-        
-        // 2. Tenta Exame Físico
-        else if (doenca.gatilhos.exameFisico.some(t => cmd.includes(t))) {
-            if (!estado.fasesConcluidas.exameFisico) {
-                estado.fasesConcluidas.exameFisico = true;
-                estado.reservaVital -= doenca.custoTempo.exameFisico;
-                printLog(`🩺 Maca: ${doenca.achados.exameFisico}`, "log-clinical");
-            } else {
-                printLog("Exame físico já realizado.", "log-sys");
-            }
-            acaoReconhecida = true;
-        }
-
-        // 3. Tenta Exames Complementares (MECÂNICA DE PUNIÇÃO AQUI)
-        else if (doenca.gatilhos.exameComplementar.some(t => cmd.includes(t))) {
-            // Regra do Motor: Médico inseguro
-            if (!estado.fasesConcluidas.anamnese || !estado.fasesConcluidas.exameFisico) {
-                estado.notaFinal -= 30; // Punição por pular a clínica
-                printLog("⚠️ PENALIDADE DE INSEGURANÇA: Você pediu exames complementares sem concluir a anamnese e o exame físico básico. A clínica é soberana. (-30 pts)", "log-warning");
-            }
-            
-            if (!estado.fasesConcluidas.diagnostico) {
-                estado.fasesConcluidas.diagnostico = true;
-                estado.reservaVital -= doenca.custoTempo.exameComplementar; // Gasta muito tempo!
-                printLog(`📋 Laudo: ${doenca.achados.exameComplementar}`, "log-success");
-            } else {
-                printLog("Exame já realizado.", "log-sys");
-            }
-            acaoReconhecida = true;
-        }
-
-        // 4. Tenta Conduta/Tratamento
-        else if (doenca.gatilhos.tratamento.some(t => cmd.includes(t))) {
-            if (!estado.fasesConcluidas.diagnostico) {
-                estado.notaFinal -= 40;
-                printLog("☢️ IATROGENIA: Você iniciou tratamento sem confirmação diagnóstica sólida! O risco de matar o paciente era alto. (-40 pts)", "log-danger");
-            }
-            estado.fasesConcluidas.tratamento = true;
-            printLog(`💊 Intervenção: ${doenca.achados.tratamento}`, "log-success");
-            acaoReconhecida = true;
-        }
-
-        // 5. Fallback (Comando não reconhecido ou inútil)
-        if (!acaoReconhecida) {
-            estado.reservaVital -= doenca.custoTempo.erroGeral;
-            printLog("O relógio corre. Sua conduta não gerou mudança no quadro.", "log-warning");
-        }
-
-        // Validação de Morte por Atraso Fatal
-        if (estado.reservaVital <= 0) {
-            estado.reservaVital = 0;
-            printLog("💀 ATRASO FATAL: O paciente não suportou o tempo de espera e faleceu antes da conduta definitiva.", "log-danger");
-        } 
-        else if (estado.fasesConcluidas.tratamento) {
-            printLog(`🏁 CASO ENCERRADO. Score de Eficiência: ${estado.notaFinal}/100.`, "log-success");
-        }
-
-        updateHUD();
-    }
-
-    // Inicializa
-    window.onload = bootEngine;
-</script>
 </body>
 </html>
