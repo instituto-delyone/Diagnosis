@@ -69,3 +69,20 @@ Este projeto é protegido. O uso acadêmico e de pesquisa é incentivado para a 
 
 ---
 *Desenvolvido por Instituto Delyone.*
+
+# IDMT App: MedUnity e Diagnosis
+
+## 📄 Informações de Propriedade Intelectual
+* **Registro INPI:** BR512026006823-1[span_0](start_span)[span_0](end_span)
+* **Titular e Autor:** Delyone de Paula Canedo Filho[span_1](start_span)[span_1](end_span)
+* **Campo de Aplicação:** ED-04; SD-02; SD-05; SD-07[span_2](start_span)[span_2](end_span)
+* **Tecnologia:** HTML, JavaScript, CSS[span_3](start_span)[span_3](end_span)
+
+---
+
+## 🏗️ Arquitetura do Sistema
+O **Diagnosis Engine** opera sob uma arquitetura modular de alta performance, utilizando uma base de conhecimento estruturada em JSON (Padrão Ouro de 3 fases: Investigação, Diagnóstico e Conduta) acoplada a um sistema de processamento semântico de linguagem natural inspirado no CSI (Código de Antenas e Âncoras Semiológicas).
+
+* **Co-engenharia de Arquitetura:** Desenvolvido por Delyone de Paula Canedo Filho em colaboração com IA avançada de engenharia de software.
+
+
