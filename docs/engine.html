@@ -203,7 +203,6 @@
 
 <script src="Js/engine.js"></script>
 
-
 <script>
     let pontuacao = 0;
     let estabilidade = 85; 
@@ -221,14 +220,10 @@
     const valSpo2 = document.getElementById('val-spo2');
     const valPa = document.getElementById('val-pa');
 
-    // Mapeie aqui o arquivo de teste ou todos os seus JSONs
-        const arquivosPorSala = {
-    vermelha: ['knowledge_base/endocrinologia.json', 'knowledge_base/cardiopatias.json'],
-    clinica: ['knowledge_base/endocrinologia.json', 'knowledge_base/cardiopatias.json']
-};
-
-    };
-
+    // Array corrigida sem as chaves perdidas
+    const arquivosPorSala = {
+        vermelha: ['knowledge_base/endocrinologia.json', 'knowledge_base/cardiopatias.json'],
+        clinica: ['knowledge_base/endocrinologia.json', 'knowledge_base/cardiopatias.json']
     };
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -246,7 +241,8 @@
             const listaArquivos = arquivosPorSala[salaEscolhida];
             const arquivoSorteado = listaArquivos[Math.floor(Math.random() * listaArquivos.length)];
             
-            const response = await fetch(`./knowledge_base/${arquivoSorteado}`); 
+            // Rota corrigida para evitar a duplicação da pasta
+            const response = await fetch(`./${arquivoSorteado}`); 
             if (!response.ok) throw new Error(`Arquivo não encontrado (${response.status})`);
             
             const casosDoArquivo = await response.json();
