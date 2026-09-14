@@ -50,7 +50,6 @@
             letter-spacing: 0.1em;
         }
 
-        /* Barra de Sinais Vitais Compacta para Mobile */
         .vitals-bar {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -106,12 +105,11 @@
             border-bottom: 1px solid #cbd5e1;
         }
 
-        .mensagem { margin-bottom: 15px; }
+        .mensagem { margin-bottom: 15px; white-space: pre-wrap; }
         .paciente { color: #b91c1c; font-weight: bold; }
         .preceptor { color: var(--idmt-blue); font-style: italic; }
         .user { color: var(--idmt-ink); font-weight: bold; background: #f1f5f9; padding: 8px; border-radius: 6px; border-left: 3px solid var(--idmt-blue); }
 
-        /* Controles Inferiores Otimizados para Mobile (Grid Responsivo Perfeito) */
         .controls {
             padding: 15px;
             background-color: #f1f5f9;
@@ -172,7 +170,6 @@
         <h1>DIAGNOSIS ENGINE | IDMT PRÓ</h1>
     </div>
 
-    <!-- Sinais Vitais Dinâmicos -->
     <div class="vitals-bar">
         <div class="vital-item">FC: <span id="val-fc">110</span> bpm</div>
         <div class="vital-item">SpO2: <span id="val-spo2">93</span>%</div>
@@ -188,7 +185,6 @@
         <span>Estabilidade: <span id="health-display">85</span>%</span>
     </div>
 
-    <!-- Área de Exibição do Caso Clínico -->
     <div class="clinical-area" id="clinical-log"></div>
 
     <div class="controls">
@@ -205,34 +201,31 @@
     </div>
 </div>
 
-<!-- Importação do Motor Pró Estendido -->
 <script src="js/engine.js"></script>
 
 <script>
-    // Variáveis de Estado
     let pontuacao = 0;
     let estabilidade = 85; 
     let turnos = 0;
     let casoAtual = null;
     let faseAtual = 1;
 
-    // Elementos da UI
     const clinicalLog = document.getElementById('clinical-log');
     const userInput = document.getElementById('user-input');
     const healthBar = document.getElementById('health-bar');
     const healthDisplay = document.getElementById('health-display');
     const scoreDisplay = document.getElementById('score-display');
+    
     const valFc = document.getElementById('val-fc');
     const valSpo2 = document.getElementById('val-spo2');
     const valPa = document.getElementById('val-pa');
 
-    // 1. Catálogo de Arquivos JSON (Mapeie seus arquivos do GitHub aqui)
+    // Mapeie aqui o arquivo de teste ou todos os seus JSONs
     const arquivosPorSala = {
-        vermelha: ['pcr.json', 'sepse_e_choque_septico.json', 'cardiologia.json', 'toxicologia.json'],
-        clinica: ['nefrologia.json', 'dispneia.json', 'endocrinologia.json', 'reumatologia.json', 'neurologia.json']
+        vermelha: ['endocrinologia.json'],
+        clinica: ['endocrinologia.json']
     };
 
-    // 2. Descobrir em qual sala estamos pela URL (ex: engine.html?sala=vermelha)
     const urlParams = new URLSearchParams(window.location.search);
     const salaEscolhida = urlParams.get('sala') || 'clinica';
 
@@ -240,7 +233,6 @@
         carregarNovoCaso();
     };
 
-    // 3. Sorteia o arquivo, faz o fetch e inicia o caso
     async function carregarNovoCaso() {
         clinicalLog.innerHTML = '';
         adicionarMensagem("preceptor", "🔄 Conectando ao repositório de casos...");
@@ -249,16 +241,17 @@
             const listaArquivos = arquivosPorSala[salaEscolhida];
             const arquivoSorteado = listaArquivos[Math.floor(Math.random() * listaArquivos.length)];
             
-            // Ajuste o caminho se sua pasta chamar algo diferente de 'knowledge_base'
-            const response = await fetch(`knowledge_base/${arquivoSorteado}`); 
+            const response = await fetch(`./knowledge_base/${arquivoSorteado}`); 
+            if (!response.ok) throw new Error(`Arquivo não encontrado (${response.status})`);
+            
             const casosDoArquivo = await response.json();
-
             const casoSorteado = casosDoArquivo[Math.floor(Math.random() * casosDoArquivo.length)];
             
             iniciarCaso(casoSorteado);
 
         } catch (error) {
-            adicionarMensagem("preceptor", "❌ Erro ao carregar os casos. Verifique a conexão ou se o nome do arquivo JSON está correto no array.");
+            adicionarMensagem("preceptor", "❌ Erro ao carregar os casos da pasta knowledge_base.");
+            adicionarMensagem("preceptor", `🔍 Detalhe técnico: ${error.message}`);
             console.error(error);
         }
     }
@@ -287,7 +280,6 @@
         turnos++;
         adicionarMensagem("user", "Conduta: " + inputAluno);
 
-        // FASE 1: INVESTIGAÇÃO
         if (faseAtual === 1) {
             const validacao = idmtEngine.validarResposta(inputAluno, casoAtual.fase_1_investigacao.gabarito_esperado);
             
@@ -303,11 +295,14 @@
                 pontuacao -= 5;
             }
         } 
-        
-        // FASE 2: DIAGNÓSTICO
         else if (faseAtual === 2) {
             const validacao = idmtEngine.validarResposta(inputAluno, casoAtual.fase_2_diagnostico.gabarito_esperado);
-            const distrator = idmtEngine.validarResposta(inputAluno, casoAtual.fase_2_diagnostico.distrator_comum);
+            let distratorValido = false;
+            
+            if (casoAtual.fase_2_diagnostico.distrator_comum) {
+                const distrator = idmtEngine.validarResposta(inputAluno, casoAtual.fase_2_diagnostico.distrator_comum);
+                if (distrator && distrator.valido) distratorValido = true;
+            }
 
             if (validacao.valido) {
                 adicionarMensagem("preceptor", "✅ " + casoAtual.fase_2_diagnostico.achado_sucesso);
@@ -315,7 +310,7 @@
                 estabilidade = Math.min(100, estabilidade + 15);
                 pontuacao += 30;
                 adicionarMensagem("preceptor", "Diagnóstico confirmado. Qual a sua conduta terapêutica definitiva?");
-            } else if (distrator && distrator.valido) {
+            } else if (distratorValido) {
                 adicionarMensagem("preceptor", "⚠️ " + casoAtual.fase_2_diagnostico.feedback_distrator);
                 estabilidade -= 15;
                 pontuacao -= 10;
@@ -324,8 +319,6 @@
                 estabilidade -= 10;
             }
         } 
-        
-        // FASE 3: CONDUTA
         else if (faseAtual === 3) {
             const isRedFlag = idmtEngine.verificarRedFlag(inputAluno, casoAtual.fase_3_conduta.red_flag_mortal);
             const validacao = idmtEngine.validarResposta(inputAluno, casoAtual.fase_3_conduta.gabarito_esperado);
@@ -349,8 +342,6 @@
                 estabilidade -= 15;
             }
         }
-
-        // FASE 4: CASO ENCERRADO
         else if (faseAtual === 4) {
             adicionarMensagem("preceptor", "O caso já foi concluído. Clique em 'Próximo ➡' para um novo paciente.");
         }
@@ -407,7 +398,6 @@
         div.innerText = texto;
         clinicalLog.appendChild(div);
     }
-
 </script>
 </body>
 </html>
