@@ -20,7 +20,7 @@ class IDMTEnginePró {
             "anticoagulante": ["heparina", "anticoagulação", "enoxaparina", "clexane"],
             
             // Red Flags / Erros Fatais mapeados
-            "alta_precoce": ["alta", mandar para casa, liberar o paciente],
+            "alta_precoce": ["alta", "mandar para casa", "liberar o paciente"],
             "sedacao_indevida": ["sedativo", "morfina em excesso", "diazepam na crise"]
         };
     }
