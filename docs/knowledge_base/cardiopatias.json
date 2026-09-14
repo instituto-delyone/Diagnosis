@@ -277,6 +277,33 @@
     "discussao_clinica_final": {
       "takeaway_message": "A ICFEP é desafiadora, e o tratamento prioriza o controle de comorbidades e da pressão arterial.",
       "fisiopatologia": "A hipertrofia ventricular gera rigidez do músculo cardíaco, dificultando o relaxamento e enchimento ventricular adequado."
-    }
+    },
+    {
+  "id_doenca": "cardio_endocardite_01",
+  "nome_doenca": "Endocardite Infecciosa",
+  "especialidade": "Cardiologia / Infectologia",
+  "dificuldade": "Avançada",
+  "vinheta_admissao": "Homem de 55 anos, com sopro mitral prévio, refere febre persistente, perda de peso e surgimento de novas lesões cutâneas petéquias. Ao exame: PA 120/80 mmHg, FC 95 bpm, sopro sistólico regurgitante em foco mitral ++/6.",
+  "fase_1_investigacao": {
+    "gabarito_esperado": ["hemocultura", "ecocardiograma transesofagico"],
+    "achado_sucesso": "Hemoculturas positivas para Streptococcus viridans. Ecocardiograma revela vegetação em valva mitral.",
+    "resposta_preceptor_erro": "Doutor, febre e sopro em paciente com risco exigem exclusão de infecção valvular. Solicite hemoculturas e ecocardiograma."
+  },
+  "fase_2_diagnostico": {
+    "gabarito_esperado": ["endocardite infecciosa", "endocardite"],
+    "distrator_comum": ["febre reumatica", "septicemia"],
+    "feedback_distrator": "As hemoculturas e a vegetação na valva confirmam endocardite, não febre reumática.",
+    "achado_sucesso": "Correto. Diagnóstico de Endocardite Infecciosa."
+  },
+  "fase_3_conduta": {
+    "gabarito_esperado": ["antibioticoterapia", "penicilina", "gentamicina", "cirurgia de substituicao valvular"],
+    "red_flag_mortal": ["anticoagulacao", "corticoterapia"],
+    "feedback_sucesso": "Conduta irretocável. Você iniciou antibioticoterapia de amplo espectro e monitorou complicações.",
+    "feedback_red_flag": "Erro. Anticoagulação está contraindicada pelo risco de embolização séptica cerebral."
+  },
+  "discussao_clinica_final": {
+    "takeaway_message": "A suspeita de endocardite em pacientes com sopro e febre requer hemoculturas e ecocardiograma imediatos.",
+    "fisiopatologia": "Adesão bacteriana ao endocárdio lesado leva a uma vegetação que pode causar embolia e disfunção valvular."
   }
+},
 ]
