@@ -1,309 +1,1302 @@
-[
-  {
-    "id_doenca": "cardio_iam_01",
-    "nome_doenca": "Infarto Agudo do Miocárdio com Supra de ST",
-    "especialidade": "Cardiologia",
-    "dificuldade": "Intermediária",
-    "vinheta_admissao": "Homem de 62 anos, hipertenso e tabagista, chega ao pronto-socorro com dor retroesternal em aperto, irradiada para o membro superior esquerdo, com início há duas horas. Ao exame: sudoreico, PA 170/100 mmHg, FC 110 bpm.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["ecg", "eletrocardiograma", "troponina"],
-      "achado_sucesso": "O ECG revela supradesnivelamento do segmento ST nas derivações V1 a V4. Troponina positiva.",
-      "resposta_preceptor_erro": "Doutor, dor precordial típica em paciente de risco exige avaliação imediata da atividade elétrica. Solicite um eletrocardiograma."
-    },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["iam sst", "infarto", "iam com supra"],
-      "distrator_comum": ["angina instavel", "pericardite"],
-      "feedback_distrator": "O supra de ST no ECG confirma o infarto com supra, descartando angina instável.",
-      "achado_sucesso": "Correto. Diagnóstico de Infarto Agudo do Miocárdio com Supra de ST."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["aas", "clopidogrel", "heparina", "angioplastia"],
-      "red_flag_mortal": ["tromboliticos sem avaliacao", "diureticos"],
-      "feedback_sucesso": "Conduta perfeita. Você administrou dupla antiagregação, anticoagulação e indicou angioplastia primária.",
-      "feedback_red_flag": "Erro. Tratar essa condição com diuréticos é ineficaz e atrasa o tratamento definitivo."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "O supra de ST no ECG em paciente com dor típica é emergência médica. O tempo porta-balão é crucial.",
-      "fisiopatologia": "Oclusão coronariana aguda por ruptura de placa aterosclerótica gera isquemia transmural e necrose miocárdica."
-    }
+{
+  "schema_version": "3.0",
+  "knowledge_base": {
+    "id": "kb_cardiologia",
+    "name": "Knowledge Base de Cardiologia",
+    "description": "Base estruturada de conhecimento clínico cardiovascular para geração de pacientes, raciocínio clínico e simulação dinâmica.",
+    "status": "curated",
+    "version": "3.0.0",
+    "language": "pt-BR",
+    "scope": [
+      "síndromes coronarianas agudas",
+      "insuficiência cardíaca",
+      "arritmias",
+      "distúrbios da condução cardíaca",
+      "tromboembolismo pulmonar",
+      "síndromes aórticas agudas",
+      "parada cardiorrespiratória",
+      "endocardite infecciosa"
+    ],
+    "architecture_role": "clinical_knowledge"
   },
-  {
-    "id_doenca": "cardio_urgencia_hiper_01",
-    "nome_doenca": "Emergência Hipertensiva (Edema Agudo de Pulmão)",
-    "especialidade": "Cardiologia",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Mulher de 58 anos, hipertensa sem tratamento, refere dispneia progressiva e ortopneia há três dias. Hoje, apresentou piora súbita. Ao exame: PA 210/120 mmHg, FC 120 bpm, estertores crepitantes bilaterais e saturação de 85%.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["gasometria", "radiografia de torax", "ecg"],
-      "achado_sucesso": "Radiografia com congestão hilar e linhas B de Kerley. Gasometria mostra hipoxemia grave.",
-      "resposta_preceptor_erro": "Doutor, desconforto respiratório grave com hipertensão severa sugere falha ventricular aguda. Avalie a troca gasosa e congestão."
-    },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["edema agudo de pulmao", "eap", "insuficiencia cardiaca descompensada"],
-      "distrator_comum": ["asma', 'pneumonia"],
-      "feedback_distrator": "A hipertensão grave e os estertores pulmonares bilaterais apontam para o edema agudo, não asma ou pneumonia.",
-      "achado_sucesso": "Exato. Edema Agudo de Pulmão secundário à emergência hipertensiva."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["diuretico de alça", "nitrato", "oxigenio", "vni"],
-      "red_flag_mortal": ["beta bloqueador na fase aguda", "vasodilatador oral apenas"],
-      "feedback_sucesso": "Excelente. Você reduziu a pré e pós-carga com vasodilatadores e diuréticos, e iniciou ventilação não invasiva.",
-      "feedback_red_flag": "Erro. Betabloqueadores na fase aguda podem precipitar choque cardiogênico ao reduzir o inotropismo."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "Redução rápida e controlada da pressão arterial e melhora da congestão pulmonar salvam vidas no EAP.",
-      "fisiopatologia": "Aumento súbito da pós-carga eleva a pressão atrial esquerda e capilar, transudando líquido para os alvéolos."
-    }
-  },
-  {
-    "id_doenca": "cardio_ic_01",
-    "nome_doenca": "Insuficiência Cardíaca Crônica Descompensada",
-    "especialidade": "Cardiologia",
-    "dificuldade": "Intermediária",
-    "vinheta_admissao": "Homem de 75 anos com histórico de insuficiência cardíaca isquêmica, relata ganho de peso de 5 kg em uma semana, edema em membros inferiores e aumento do volume abdominal. Ao exame: PA 110/70 mmHg, jugulares distendidas e hepatomegalia.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["pro bnp", "ecocardiograma", "funcao renal"],
-      "achado_sucesso": "Pro-BNP elevado indica sobrecarga ventricular. Ecocardiograma revela fração de ejeção reduzida.",
-      "resposta_preceptor_erro": "Doutor, paciente com ICC e sinais de sobrecarga hídrica necessita de avaliação de função renal e marcadores de estresse."
-    },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["ic descompensada", "insuficiencia cardiaca", "congestao sistemica"],
-      "distrator_comum": ["cirrose hepatica", "doenca renal cronica"],
-      "feedback_distrator": "O quadro é de congestão sistêmica por ICC, não cirrose ou doença renal.",
-      "achado_sucesso": "Correto. Insuficiência Cardíaca Congestiva Descompensada."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["furosemida', 'restricao hidrica'],
-      "red_flag_mortal": ["hidratacao vigorosa", 'suspensao da medicacao de base'],
-      "feedback_sucesso": "Conduta correta. Diuréticos de alça e balanço hídrico negativo estabilizaram o paciente.",
-      "feedback_red_flag": "Erro. Hidratação pioraria a sobrecarga de volume, levando a um EAP."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "O manejo da ICC descompensada foca na remoção do excesso de volume e ajuste da medicação crônica.",
-      "fisiopatologia": "Retenção hidrossalina e remodelamento cardíaco levam à diminuição do débito e congestão retrógrada."
-    }
-  },
-  {
-    "id_doenca": "cardio_arritmia_01",
-    "nome_doenca": "Taquicardia Supraventricular com Instabilidade",
-    "especialidade": "Cardiologia",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Mulher de 45 anos, sem histórico prévio, chega ao pronto-socorro referindo palpitações intensas e tontura. Ao exame: pálida, PA 85/50 mmHg, FC 186 bpm. ECG mostra taquicardia de complexo estreito, sem ondas P visíveis.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["ecg", "acesso venoso"],
-      "achado_sucesso": "ECG confirma TPSV. Paciente apresenta sinais de hipoperfusão sistêmica.",
-      "resposta_preceptor_erro": "Doutor, taquicardia sintomática com hipotensão exige avaliação rápida do ritmo e preparo para intervenção."
-    },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["tpsv", "taquicardia supraventricular", "fibrilacao atrial com alta resposta"],
-      "distrator_comum": ["taquicardia sinusal", "flutter atrial"],
-      "feedback_distrator": "A frequência fixa e ausência de ondas P indicam TPSV, não taquicardia sinusal.",
-      "achado_sucesso": "Exato. Taquicardia Supraventricular com instabilidade hemodinâmica."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["cardioversao eletrica", "sedacao"],
-      "red_flag_mortal": ["adenosina em paciente instavel", "verapamil"],
-      "feedback_sucesso": "Conduta irretocável. Paciente instável, você optou pela cardioversão elétrica imediata.",
-      "feedback_red_flag": "Erro. Bloqueadores de nó AV como adenosina podem piorar a instabilidade em pacientes hipotensos."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "Estabilidade hemodinâmica dita a conduta na taquicardia. Hipotensão = cardioversão imediata.",
-      "fisiopatologia": "Mecanismo de reentrada nodal ou via acessória mantendo alta frequência ventricular e prejuízo do enchimento diastólico."
-    }
-  },
-  {
-    "id_doenca": "cardio_bradi_01",
-    "nome_doenca": "Bloqueio Atrioventricular Total",
-    "especialidade": "Cardiologia",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Homem de 80 anos é admitido com síncope e fraqueza intensa. Ao exame: PA 90/60 mmHg, bradicardia extrema, FC 34 bpm. ECG revela dissociação entre ondas P e complexos QRS.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["ecg", "transcutaneo", "marcapasso"],
-      "achado_sucesso": "ECG confirma BAV Total. Prepara-se marcapasso provisório.",
-      "resposta_preceptor_erro": "Doutor, síncope e FC abaixo de 40 demonstram falha grave na condução elétrica. Obtenha o eletro."
-    },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["bav total", "bloqueio atrioventriculo total", "bav t"],
-      "distrator_comum": ["bav 2 grau", "baixas voltagens"],
-      "feedback_distrator": "A dissociação total entre P e QRS confirma BAV Total.",
-      "achado_sucesso": "Correto. Diagnóstico de Bloqueio Atrioventricular Total."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["marcapasso transcutaneo", "atropina", "marcapasso provisorio"],
-      "red_flag_mortal": ["betabloqueador", "observacao"],
-      "feedback_sucesso": "Conduta heroica e precisa. Você iniciou suporte cronotrópico imediato com marcapasso transcutâneo.",
-      "feedback_red_flag": "Erro. Observar ou administrar betabloqueador causaria parada assistólica irreversível."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "BAV Total sintomático com bradicardia extrema requer marcapasso transcutâneo imediato e definitivo posterior.",
-      "fisiopatologia": "Falha total de condução do estímulo atrial ao ventrículo, resultando em ritmo de escape muito lento."
-    }
-  },
-  {
-    "id_doenca": "cardio_tep_01",
-    "nome_doenca": "Tromboembolismo Pulmonar Maciço",
-    "especialidade": "Cardiologia / Emergência",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Homem de 48 anos, em pós-operatório ortopédico, apresenta súbita dispneia, dor torácica pleurítica e síncope. Ao exame: taquipneico (30 irpm), taquicárdico (130 bpm), PA 85/50 mmHg e saturação de 82%.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["angiotc", "ecg", "ecocardiograma"],
-      "achado_sucesso": "Angiotomografia confirma falha de enchimento em artéria pulmonar principal. ECG mostra padrão S1Q3T3.",
-      "resposta_preceptor_erro": "Doutor, paciente em choque e hipoxemia pós-cirúrgica sugere obstrução do leito pulmonar. Solicite angiotomografia urgente."
-    },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["tep macico", "embolia pulmonar"],
-      "distrator_comum": ["tamponamento", "infarto"],
-      "feedback_distrator": "A hipoxemia severa e a taquicardia desproporcional apontam para TEP, não IAM.",
-      "achado_sucesso": "Correto. Diagnóstico de Tromboembolismo Pulmonar Maciço."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["trombolitico", "alteplase", "heparina"],
-      "red_flag_mortal": ["cirurgia eletiva", "suspensao de oxigenio"],
-      "feedback_sucesso": "Conduta perfeita. Paciente chocado, você indicou trombólise sistêmica imediata.",
-      "feedback_red_flag": "Erro. Sem trombólise em paciente instável, o colapso do ventrículo direito leva ao óbito."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "TEP maciço com instabilidade hemodinâmica é indicação absoluta de trombólise.",
-      "fisiopatologia": "Obstrução vascular aguda aumenta abruptamente a pós-carga ventricular direita, levando à dilatação e falha dessa câmara."
-    }
-  },
-  {
-    "id_doenca": "cardio_disseccao_01",
-    "nome_doenca": "Dissecção Aórtica Tipo A",
-    "especialidade": "Cardiologia / Cirurgia Vascular",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Mulher de 60 anos, hipertensa de longa data, refere dor torácica lancinante e súbita, com irradiação para as costas. Ao exame: PA 180/110 mmHg no braço direito e 140/90 mmHg no esquerdo. Pulso femoral diminuído à esquerda.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["angiotc", "tomografia", "radiografia de torax"],
-      "achado_sucesso": "AngioTC de aorta identifica flap intimal na aorta ascendente. Radiografia mostra alargamento do mediastino.",
-      "resposta_preceptor_erro": "Doutor, dor em facada irradiada para as costas e diferença de PA nos braços exigem exame de imagem da aorta."
-    },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["disseccao aortica", "disseccao de aorta"],
-      "distrator_comum": ["iam", "sindrome aortica aguda"],
-      "feedback_distrator": "A diferença de pulsos e a dor lancinante distinguem a dissecção do infarto típico.",
-      "achado_sucesso": "Exato. Dissecção Aguda de Aorta Tipo A."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["beta bloqueador", "nitroprussiato", "cirurgia de emergencia"],
-      "red_flag_mortal": ["anticoagulante", "trombolitico"],
-      "feedback_sucesso": "Conduta irretocável. Controle rápido de FC e PA com beta-bloqueador e encaminhamento cirúrgico imediato.",
-      "feedback_red_flag": "Erro. Administrar anticoagulantes aumentaria a expansão do falso lúmen, causando ruptura fatal."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "Dissecção de aorta tipo A é emergência cirúrgica. Controle inicial foca no estresse de cisalhamento.",
-      "fisiopatologia": "Ruptura da íntima aórtica permite que o sangue separe as camadas da parede arterial, criando um falso lúmen."
-    }
-  },
-  {
-    "id_doenca": "cardio_pcr_01",
-    "nome_doenca": "Parada Cardiorrespiratória em Fibrilação Ventricular",
-    "especialidade": "Cardiologia / Emergência",
-    "dificuldade": "Intermediária",
-    "vinheta_admissao": "Homem de 50 anos, durante exame de rotina, apresenta perda súbita de consciência e ausência de pulso carotídeo. O monitor mostra ritmo caótico e desorganizado sem ondas P, QRS ou T.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["monitor", "ecg"],
-      "achado_sucesso": "Ritmo visualizado no monitor é Fibrilação Ventricular. Inicia-se protocolo de RCP.",
-      "resposta_preceptor_erro": "Doutor, paciente sem pulso. Verifique o monitor imediatamente para identificar o ritmo da parada."
-    },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["fibrilacao ventricular", "fv", "ritmo chocavel"],
-      "distrator_comum": ["aesp", "assistolia"],
-      "feedback_distrator": "Ritmo caótico corresponde à FV, sendo um ritmo chocável.",
-      "achado_sucesso": "Correto. Parada Cardiorrespiratória em Fibrilação Ventricular."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["desfibrilacao", "adrenalina", "amiodarona"],
-      "red_flag_mortal": ["atropina isolada", "trombólise sem causa"],
-      "feedback_sucesso": "Excelente ressuscitação. Desfibrilação precoce seguida de compressões e drogas antiarrítmicas.",
-      "feedback_red_flag": "Erro. Demorar o choque para aplicar outras medidas reduz drasticamente a sobrevida."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "Choque rápido na FV e RCP de alta qualidade são os pilares da sobrevida no PCR.",
-      "fisiopatologia": "Atividade elétrica miocárdica fragmentada que impede a contração ventricular efetiva, resultando em ausência de débito cardíaco."
-    }
-  },
-  {
-    "id_doenca": "cardio_ic_fer_01",
-    "nome_doenca": "Insuficiência Cardíaca com Fração de Ejeção Reduzida",
-    "especialidade": "Cardiologia",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Homem de 68 anos, com histórico de IAM, refere dispneia progressiva aos médios esforços e ortopneia. Ao exame: PA 100/70 mmHg, FC 98 bpm, estase jugular, terceira bulha (B3) e edema de membros inferiores.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["ecocardiograma", "pro bnp", "radiografia de torax"],
-      "achado_sucesso": "Ecocardiograma revela fração de ejeção de 32% e dilatação das câmaras esquerdas. Radiografia mostra cardiomegalia e congestão.",
-      "resposta_preceptor_erro": "Doutor, paciente com dispneia e sinais de sobrecarga hídrica pós-infarto precisa de avaliação de contratilidade e volemia."
-    },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["ic com fracao de ejecao reduzida", "icfer", "insuficiencia cardiaca esquerda"],
-      "distrator_comum": ["ic com fracao preservada", "doenca pulmonar"],
-      "feedback_distrator": "O ecocardiograma confirma FE reduzida e o histórico de IAM aponta para IC por disfunção sistólica.",
-      "achado_sucesso": "Correto. Diagnóstico de IC com Fração de Ejeção Reduzida."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["betabloqueador", "ieca", "diuretico de alca"],
-      "red_flag_mortal": ["hidratacao vigorosa a 0 9", "verapamil"],
-      "feedback_sucesso": "Conduta excelente. Você iniciou o bloqueio neuro-hormonal com betabloqueador e IECA, associado a diuréticos para controle dos sintomas.",
-      "feedback_red_flag": "Erro. A hidratação sobrecarregaria o ventrículo falho, precipitando um edema agudo de pulmão."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "O tratamento da ICFER visa o bloqueio neuro-hormonal para melhorar o prognóstico.",
-      "fisiopatologia": "O remodelamento ventricular pós-infarto reduz a contratilidade, ativando sistemas que perpetuam a falência cardíaca."
-    }
-  },
-  {
-    "id_doenca": "cardio_ic_fep_01",
-    "nome_doenca": "Insuficiência Cardíaca com Fração de Ejeção Preservada",
-    "especialidade": "Cardiologia",
-    "dificuldade": "Avançada",
-    "vinheta_admissao": "Mulher de 75 anos, hipertensa de longa data, apresenta dispneia aos pequenos esforços e episódios de dispneia paroxística noturna. Ao exame: PA 150/90 mmHg, FC 88 bpm. Sem sopros ou B3 evidente.",
-    "fase_1_investigacao": {
-      "gabarito_esperado": ["ecocardiograma", "pro bnp"],
-      "achado_sucesso": "Ecocardiograma mostra hipertrofia concêntrica ventricular com função sistólica preservada (FE 58%) e disfunção diastólica. Pro-BNP moderadamente elevado.",
-      "resposta_preceptor_erro": "Doutor, paciente hipertensa com sinais de congestão necessita de avaliação da função diastólica."
-    },
-    "fase_2_diagnostico": {
-      "gabarito_esperado": ["ic com fracao de ejecao preservada", "icfep"],
-      "distrator_comum": ["icfer", "asfixia"],
-      "feedback_distrator": "Os exames confirmam função sistólica normal com alteração no enchimento ventricular, característico da ICFEP.",
-      "achado_sucesso": "Exato. Diagnóstico de IC com Fração de Ejeção Preservada."
-    },
-    "fase_3_conduta": {
-      "gabarito_esperado": ["diuretico", "controle da pressao arterial"],
-      "red_flag_mortal": ["inotrópico positivo", "digoxina"],
-      "feedback_sucesso": "Conduta ótima. Controle estrito da pressão arterial e uso de diuréticos para resolver a congestão pulmonar.",
-      "feedback_red_flag": "Erro. Inotrópicos não são benéficos e podem causar arritmias nesta condição de rigidez ventricular."
-    },
-    "discussao_clinica_final": {
-      "takeaway_message": "A ICFEP é desafiadora, e o tratamento prioriza o controle de comorbidades e da pressão arterial.",
-      "fisiopatologia": "A hipertrofia ventricular gera rigidez do músculo cardíaco, dificultando o relaxamento e enchimento ventricular adequado."
+
+  "domains": [
+    {
+      "id": "cardiologia",
+      "name": "Cardiologia",
+      "description": "Conhecimento clínico relacionado ao sistema cardiovascular."
     },
     {
-  "id_doenca": "cardio_endocardite_01",
-  "nome_doenca": "Endocardite Infecciosa",
-  "especialidade": "Cardiologia / Infectologia",
-  "dificuldade": "Avançada",
-  "vinheta_admissao": "Homem de 55 anos, com sopro mitral prévio, refere febre persistente, perda de peso e surgimento de novas lesões cutâneas petéquias. Ao exame: PA 120/80 mmHg, FC 95 bpm, sopro sistólico regurgitante em foco mitral ++/6.",
-  "fase_1_investigacao": {
-    "gabarito_esperado": ["hemocultura", "ecocardiograma transesofagico"],
-    "achado_sucesso": "Hemoculturas positivas para Streptococcus viridans. Ecocardiograma revela vegetação em valva mitral.",
-    "resposta_preceptor_erro": "Doutor, febre e sopro em paciente com risco exigem exclusão de infecção valvular. Solicite hemoculturas e ecocardiograma."
+      "id": "emergencias_cardiovasculares",
+      "name": "Emergências cardiovasculares",
+      "description": "Condições cardiovasculares potencialmente instáveis ou ameaçadoras à vida."
+    }
+  ],
+
+  "entities": [
+    {
+      "id": "doenca_arterial_coronariana",
+      "type": "disease",
+      "name": "Doença arterial coronariana",
+      "domain": "cardiologia",
+      "description": "Doença caracterizada por comprometimento das artérias coronárias, frequentemente relacionado à aterosclerose, podendo manifestar-se como doença crônica ou síndrome coronariana aguda.",
+      "risk_factors": [
+        "hipertensão arterial",
+        "diabetes mellitus",
+        "dislipidemia",
+        "tabagismo",
+        "idade avançada",
+        "história familiar de doença cardiovascular",
+        "obesidade",
+        "sedentarismo"
+      ],
+      "manifestations": [
+        "dor ou desconforto torácico",
+        "dispneia",
+        "fadiga",
+        "redução da tolerância ao esforço",
+        "eventos coronarianos agudos"
+      ]
+    },
+
+    {
+      "id": "sindrome_coronariana_aguda",
+      "type": "syndrome",
+      "name": "Síndrome coronariana aguda",
+      "domain": "cardiologia",
+      "description": "Conjunto de manifestações clínicas decorrentes de isquemia miocárdica aguda, incluindo infarto agudo do miocárdio com supradesnivelamento de ST, infarto sem supradesnivelamento de ST e angina instável.",
+      "subtypes": [
+        "IAM com supradesnivelamento do segmento ST",
+        "IAM sem supradesnivelamento do segmento ST",
+        "angina instável"
+      ],
+      "manifestations": [
+        "dor ou pressão torácica",
+        "dispneia",
+        "sudorese",
+        "náuseas",
+        "vômitos",
+        "mal-estar",
+        "síncope",
+        "dor epigástrica",
+        "irradiação para membro superior",
+        "irradiação para mandíbula",
+        "irradiação para dorso"
+      ]
+    },
+
+    {
+      "id": "iam_com_supra_st",
+      "type": "disease",
+      "name": "Infarto agudo do miocárdio com supradesnivelamento do segmento ST",
+      "domain": "cardiologia",
+      "description": "Forma de síndrome coronariana aguda associada a isquemia miocárdica aguda e padrão eletrocardiográfico compatível com supradesnivelamento persistente do segmento ST ou equivalente, no contexto clínico apropriado.",
+      "mechanisms": [
+        "ruptura ou erosão de placa aterosclerótica",
+        "formação de trombo coronariano",
+        "redução abrupta do fluxo coronariano",
+        "isquemia miocárdica",
+        "necrose miocárdica"
+      ],
+      "manifestations": [
+        "dor torácica",
+        "dispneia",
+        "sudorese",
+        "náusea",
+        "vômitos",
+        "alterações eletrocardiográficas",
+        "instabilidade hemodinâmica",
+        "arritmias"
+      ],
+      "complications": [
+        "choque cardiogênico",
+        "arritmias ventriculares",
+        "bloqueios de condução",
+        "insuficiência cardíaca",
+        "edema agudo de pulmão",
+        "complicações mecânicas",
+        "morte súbita"
+      ]
+    },
+
+    {
+      "id": "iam_sem_supra_st",
+      "type": "disease",
+      "name": "Infarto agudo do miocárdio sem supradesnivelamento do segmento ST",
+      "domain": "cardiologia",
+      "description": "Infarto agudo do miocárdio sem supradesnivelamento persistente do segmento ST, geralmente identificado pela combinação de quadro clínico compatível e evidência de lesão miocárdica.",
+      "manifestations": [
+        "dor torácica",
+        "dispneia",
+        "sudorese",
+        "náuseas",
+        "fadiga",
+        "alterações de ST ou onda T",
+        "elevação de troponina"
+      ]
+    },
+
+    {
+      "id": "angina_instavel",
+      "type": "syndrome",
+      "name": "Angina instável",
+      "domain": "cardiologia",
+      "description": "Síndrome coronariana aguda caracterizada por isquemia miocárdica sem evidência de necrose miocárdica suficiente para caracterização de infarto.",
+      "manifestations": [
+        "dor torácica em repouso",
+        "angina de início recente",
+        "piora progressiva do padrão anginoso",
+        "alterações eletrocardiográficas possíveis"
+      ]
+    },
+
+    {
+      "id": "insuficiencia_cardiaca",
+      "type": "syndrome",
+      "name": "Insuficiência cardíaca",
+      "domain": "cardiologia",
+      "description": "Síndrome clínica resultante de alteração estrutural ou funcional cardíaca que produz sintomas e sinais decorrentes de débito cardíaco inadequado e/ou aumento das pressões de enchimento.",
+      "subtypes": [
+        "insuficiência cardíaca com fração de ejeção reduzida",
+        "insuficiência cardíaca com fração de ejeção levemente reduzida",
+        "insuficiência cardíaca com fração de ejeção preservada",
+        "insuficiência cardíaca aguda",
+        "insuficiência cardíaca crônica"
+      ],
+      "manifestations": [
+        "dispneia",
+        "ortopneia",
+        "dispneia paroxística noturna",
+        "edema periférico",
+        "fadiga",
+        "intolerância ao esforço",
+        "estertores pulmonares",
+        "turgência jugular",
+        "ganho ponderal por retenção hídrica"
+      ]
+    },
+
+    {
+      "id": "ic_fr_reduzida",
+      "type": "disease",
+      "name": "Insuficiência cardíaca com fração de ejeção reduzida",
+      "domain": "cardiologia",
+      "description": "Fenótipo de insuficiência cardíaca associado a redução da função sistólica ventricular esquerda.",
+      "manifestations": [
+        "dispneia",
+        "fadiga",
+        "edema",
+        "ortopneia",
+        "congestão pulmonar",
+        "redução da tolerância ao exercício"
+      ],
+      "common_associations": [
+        "doença arterial coronariana",
+        "hipertensão arterial",
+        "miocardiopatias",
+        "valvopatias"
+      ]
+    },
+
+    {
+      "id": "ic_fr_preservada",
+      "type": "disease",
+      "name": "Insuficiência cardíaca com fração de ejeção preservada",
+      "domain": "cardiologia",
+      "description": "Fenótipo de insuficiência cardíaca em que a fração de ejeção do ventrículo esquerdo permanece preservada, geralmente associado a alterações de relaxamento, complacência ventricular ou pressões de enchimento.",
+      "common_associations": [
+        "hipertensão arterial",
+        "idade avançada",
+        "obesidade",
+        "diabetes mellitus",
+        "fibrilação atrial",
+        "doença renal crônica"
+      ]
+    },
+
+    {
+      "id": "edema_agudo_pulmao",
+      "type": "syndrome",
+      "name": "Edema agudo de pulmão cardiogênico",
+      "domain": "emergencias_cardiovasculares",
+      "description": "Síndrome de congestão pulmonar aguda decorrente de aumento das pressões de enchimento cardíaco, frequentemente associada à insuficiência cardíaca aguda.",
+      "manifestations": [
+        "dispneia intensa",
+        "ortopneia",
+        "hipoxemia",
+        "taquipneia",
+        "estertores pulmonares",
+        "sudorese",
+        "ansiedade",
+        "escarro espumoso em alguns casos"
+      ],
+      "precipitants": [
+        "crise hipertensiva",
+        "síndrome coronariana aguda",
+        "arritmia",
+        "descompensação de insuficiência cardíaca",
+        "valvopatia aguda",
+        "sobrecarga de volume"
+      ]
+    },
+
+    {
+      "id": "taquicardia_supraventricular_paroxistica",
+      "type": "arrhythmia",
+      "name": "Taquicardia supraventricular paroxística",
+      "domain": "cardiologia",
+      "description": "Taquicardia de origem supraventricular, frequentemente relacionada a mecanismos de reentrada, caracterizada por início e término geralmente abruptos.",
+      "manifestations": [
+        "palpitações",
+        "taquicardia regular",
+        "dispneia",
+        "tontura",
+        "desconforto torácico",
+        "síncope em casos selecionados"
+      ]
+    },
+
+    {
+      "id": "fibrilacao_atrial",
+      "type": "arrhythmia",
+      "name": "Fibrilação atrial",
+      "domain": "cardiologia",
+      "description": "Arritmia supraventricular caracterizada por atividade atrial desorganizada e resposta ventricular frequentemente irregular.",
+      "manifestations": [
+        "palpitações",
+        "pulso irregular",
+        "dispneia",
+        "fadiga",
+        "tontura",
+        "dor torácica",
+        "síncope ocasional"
+      ],
+      "complications": [
+        "acidente vascular cerebral",
+        "embolia sistêmica",
+        "insuficiência cardíaca",
+        "taquicardiomiopatia"
+      ]
+    },
+
+    {
+      "id": "taquicardia_ventricular",
+      "type": "arrhythmia",
+      "name": "Taquicardia ventricular",
+      "domain": "emergencias_cardiovasculares",
+      "description": "Arritmia originada nos ventrículos, potencialmente associada a instabilidade hemodinâmica e degeneração para fibrilação ventricular.",
+      "manifestations": [
+        "palpitações",
+        "hipotensão",
+        "alteração do nível de consciência",
+        "dor torácica",
+        "dispneia",
+        "síncope",
+        "parada cardiorrespiratória"
+      ]
+    },
+
+    {
+      "id": "fibrilacao_ventricular",
+      "type": "arrhythmia",
+      "name": "Fibrilação ventricular",
+      "domain": "emergencias_cardiovasculares",
+      "description": "Arritmia ventricular caótica associada à ausência de débito cardíaco efetivo e parada cardiorrespiratória.",
+      "manifestations": [
+        "inconsciência",
+        "ausência de pulso",
+        "ausência de respiração normal"
+      ]
+    },
+
+    {
+      "id": "bloqueio_av_total",
+      "type": "conduction_disorder",
+      "name": "Bloqueio atrioventricular de terceiro grau",
+      "domain": "cardiologia",
+      "description": "Distúrbio de condução no qual não há condução atrioventricular efetiva, produzindo dissociação entre atividade atrial e ventricular.",
+      "manifestations": [
+        "bradicardia",
+        "fadiga",
+        "tontura",
+        "síncope",
+        "hipotensão",
+        "alteração do nível de consciência",
+        "dor torácica"
+      ],
+      "complications": [
+        "instabilidade hemodinâmica",
+        "insuficiência cardíaca",
+        "assistolia",
+        "morte súbita"
+      ]
+    },
+
+    {
+      "id": "tromboembolismo_pulmonar",
+      "type": "disease",
+      "name": "Tromboembolismo pulmonar",
+      "domain": "emergencias_cardiovasculares",
+      "description": "Obstrução da circulação pulmonar por material tromboembólico, geralmente originado no sistema venoso profundo.",
+      "risk_factors": [
+        "imobilização",
+        "cirurgia recente",
+        "trauma",
+        "câncer",
+        "gestação",
+        "puerpério",
+        "história prévia de tromboembolismo venoso",
+        "trombofilia",
+        "uso de estrogênio"
+      ],
+      "manifestations": [
+        "dispneia súbita",
+        "dor torácica pleurítica",
+        "taquicardia",
+        "hipoxemia",
+        "síncope",
+        "hemoptise",
+        "hipotensão em casos de alto risco"
+      ],
+      "complications": [
+        "choque obstrutivo",
+        "insuficiência ventricular direita",
+        "parada cardiorrespiratória",
+        "morte"
+      ]
+    },
+
+    {
+      "id": "sindrome_aortica_aguda",
+      "type": "syndrome",
+      "name": "Síndrome aórtica aguda",
+      "domain": "emergencias_cardiovasculares",
+      "description": "Grupo de condições agudas da aorta, incluindo dissecção aórtica, hematoma intramural e úlcera aterosclerótica penetrante.",
+      "manifestations": [
+        "dor torácica súbita",
+        "dor dorsal",
+        "dor abdominal",
+        "déficit neurológico",
+        "assimetria de pulsos",
+        "assimetria de pressão arterial",
+        "insuficiência aórtica",
+        "choque"
+      ]
+    },
+
+    {
+      "id": "disseccao_aortica_tipo_a",
+      "type": "disease",
+      "name": "Dissecção aórtica tipo A",
+      "domain": "emergencias_cardiovasculares",
+      "description": "Dissecção envolvendo a aorta ascendente, com potencial comprometimento da válvula aórtica, coronárias, arco aórtico e outros ramos.",
+      "risk_factors": [
+        "hipertensão arterial",
+        "doença do tecido conjuntivo",
+        "válvula aórtica bicúspide",
+        "doença aórtica prévia",
+        "história familiar de doença aórtica"
+      ],
+      "manifestations": [
+        "dor torácica súbita e intensa",
+        "dor dorsal",
+        "déficit de pulso",
+        "diferença de pressão entre membros",
+        "sopro de insuficiência aórtica",
+        "déficit neurológico",
+        "síncope"
+      ],
+      "complications": [
+        "tamponamento cardíaco",
+        "insuficiência aórtica aguda",
+        "isquemia coronariana",
+        "acidente vascular cerebral",
+        "isquemia visceral",
+        "ruptura",
+        "morte"
+      ]
+    },
+
+    {
+      "id": "parada_cardiorrespiratoria",
+      "type": "syndrome",
+      "name": "Parada cardiorrespiratória",
+      "domain": "emergencias_cardiovasculares",
+      "description": "Cessação da circulação efetiva e da respiração normal, exigindo reconhecimento imediato e início de suporte básico e avançado de vida.",
+      "manifestations": [
+        "inconsciência",
+        "ausência de pulso central",
+        "ausência de respiração normal"
+      ],
+      "initial_rhythms": [
+        "fibrilação ventricular",
+        "taquicardia ventricular sem pulso",
+        "atividade elétrica sem pulso",
+        "assistolia"
+      ],
+      "reversible_causes": [
+        "hipovolemia",
+        "hipóxia",
+        "acidose",
+        "distúrbios de potássio",
+        "hipotermia",
+        "pneumotórax hipertensivo",
+        "tamponamento cardíaco",
+        "toxinas",
+        "trombose pulmonar",
+        "trombose coronariana"
+      ]
+    },
+
+    {
+      "id": "endocardite_infecciosa",
+      "type": "disease",
+      "name": "Endocardite infecciosa",
+      "domain": "cardiologia",
+      "description": "Infecção do endocárdio, frequentemente envolvendo as valvas cardíacas, causada principalmente por bactérias e, menos frequentemente, fungos.",
+      "risk_factors": [
+        "prótese valvar",
+        "material intracardíaco",
+        "endocardite prévia",
+        "determinadas cardiopatias",
+        "uso de drogas intravenosas",
+        "bacteremia"
+      ],
+      "manifestations": [
+        "febre",
+        "calafrios",
+        "sopro novo ou alteração de sopro preexistente",
+        "fadiga",
+        "perda ponderal",
+        "fenômenos embólicos",
+        "manifestações cutâneas",
+        "esplenomegalia"
+      ],
+      "complications": [
+        "insuficiência cardíaca",
+        "abscesso perivalvar",
+        "fenômenos embólicos",
+        "acidente vascular cerebral",
+        "insuficiência renal",
+        "choque séptico"
+      ]
+    }
+  ],
+
+  "relationships": [
+    {
+      "source": "hipertensao_arterial_sistemica",
+      "relation": "increases_risk_of",
+      "target": "doenca_arterial_coronariana"
+    },
+    {
+      "source": "hipertensao_arterial_sistemica",
+      "relation": "increases_risk_of",
+      "target": "insuficiencia_cardiaca"
+    },
+    {
+      "source": "hipertensao_arterial_sistemica",
+      "relation": "increases_risk_of",
+      "target": "disseccao_aortica_tipo_a"
+    },
+    {
+      "source": "doenca_arterial_coronariana",
+      "relation": "may_manifest_as",
+      "target": "sindrome_coronariana_aguda"
+    },
+    {
+      "source": "sindrome_coronariana_aguda",
+      "relation": "includes",
+      "target": "iam_com_supra_st"
+    },
+    {
+      "source": "sindrome_coronariana_aguda",
+      "relation": "includes",
+      "target": "iam_sem_supra_st"
+    },
+    {
+      "source": "sindrome_coronariana_aguda",
+      "relation": "includes",
+      "target": "angina_instavel"
+    },
+    {
+      "source": "iam_com_supra_st",
+      "relation": "may_cause",
+      "target": "insuficiencia_cardiaca"
+    },
+    {
+      "source": "iam_com_supra_st",
+      "relation": "may_cause",
+      "target": "edema_agudo_pulmao"
+    },
+    {
+      "source": "insuficiencia_cardiaca",
+      "relation": "may_manifest_as",
+      "target": "edema_agudo_pulmao"
+    },
+    {
+      "source": "fibrilacao_atrial",
+      "relation": "increases_risk_of",
+      "target": "acidente_vascular_cerebral"
+    },
+    {
+      "source": "fibrilacao_atrial",
+      "relation": "may_worsen",
+      "target": "insuficiencia_cardiaca"
+    },
+    {
+      "source": "tromboembolismo_pulmonar",
+      "relation": "may_cause",
+      "target": "insuficiencia_ventricular_direita"
+    },
+    {
+      "source": "tromboembolismo_pulmonar",
+      "relation": "may_cause",
+      "target": "choque_obstrutivo"
+    },
+    {
+      "source": "disseccao_aortica_tipo_a",
+      "relation": "may_cause",
+      "target": "insuficiencia_aortica"
+    },
+    {
+      "source": "disseccao_aortica_tipo_a",
+      "relation": "may_cause",
+      "target": "tamponamento_cardiaco"
+    },
+    {
+      "source": "parada_cardiorrespiratoria",
+      "relation": "may_result_from",
+      "target": "fibrilacao_ventricular"
+    },
+    {
+      "source": "parada_cardiorrespiratoria",
+      "relation": "may_result_from",
+      "target": "tromboembolismo_pulmonar"
+    },
+    {
+      "source": "endocardite_infecciosa",
+      "relation": "may_cause",
+      "target": "insuficiencia_cardiaca"
+    }
+  ],
+
+  "clinical_patterns": [
+    {
+      "id": "pattern_dor_toracica_aguda",
+      "name": "Dor torácica aguda",
+      "type": "syndrome_pattern",
+      "possible_conditions": [
+        "sindrome_coronariana_aguda",
+        "tromboembolismo_pulmonar",
+        "disseccao_aortica_tipo_a",
+        "pericardite",
+        "pneumotorax"
+      ],
+      "discriminating_features": [
+        "características da dor",
+        "início",
+        "duração",
+        "irradiação",
+        "relação com esforço",
+        "sintomas associados",
+        "sinais vitais",
+        "eletrocardiograma",
+        "marcadores de lesão miocárdica",
+        "imagem quando indicada"
+      ]
+    },
+    {
+      "id": "pattern_dispneia_aguda",
+      "name": "Dispneia aguda",
+      "type": "syndrome_pattern",
+      "possible_conditions": [
+        "edema_agudo_pulmao",
+        "tromboembolismo_pulmonar",
+        "síndrome coronariana aguda",
+        "arritmia",
+        "pneumonia",
+        "asma",
+        "DPOC"
+      ],
+      "discriminating_features": [
+        "saturação de oxigênio",
+        "frequência respiratória",
+        "ausculta pulmonar",
+        "sinais de congestão",
+        "dor torácica",
+        "ECG",
+        "radiografia de tórax",
+        "gasometria quando indicada"
+      ]
+    },
+    {
+      "id": "pattern_palpitacao",
+      "name": "Palpitação",
+      "type": "syndrome_pattern",
+      "possible_conditions": [
+        "taquicardia_supraventricular_paroxistica",
+        "fibrilacao_atrial",
+        "taquicardia_ventricular",
+        "extrassistolia",
+        "ansiedade"
+      ],
+      "discriminating_features": [
+        "regularidade do pulso",
+        "frequência cardíaca",
+        "início e término",
+        "duração",
+        "síncope",
+        "dor torácica",
+        "ECG"
+      ]
+    }
+  ],
+
+  "investigations": [
+    {
+      "id": "ecg",
+      "name": "Eletrocardiograma de 12 derivações",
+      "type": "diagnostic_test",
+      "indications": [
+        "dor torácica",
+        "suspeita de síndrome coronariana aguda",
+        "palpitações",
+        "síncope",
+        "arritmia",
+        "bradicardia",
+        "dispneia de causa potencialmente cardíaca"
+      ],
+      "possible_findings": [
+        "supradesnivelamento de ST",
+        "infradesnivelamento de ST",
+        "inversão de onda T",
+        "fibrilação atrial",
+        "taquicardia supraventricular",
+        "taquicardia ventricular",
+        "bloqueios atrioventriculares",
+        "bradicardia"
+      ]
+    },
+    {
+      "id": "troponina",
+      "name": "Troponina cardíaca",
+      "type": "laboratory_test",
+      "indications": [
+        "suspeita de síndrome coronariana aguda"
+      ],
+      "interpretation": "A elevação indica lesão miocárdica, mas não é específica isoladamente para infarto; deve ser interpretada no contexto clínico, eletrocardiográfico e temporal."
+    },
+    {
+      "id": "ecocardiograma",
+      "name": "Ecocardiograma",
+      "type": "imaging",
+      "applications": [
+        "avaliação da função ventricular",
+        "avaliação de valvopatias",
+        "avaliação de insuficiência cardíaca",
+        "avaliação de derrame pericárdico",
+        "avaliação de complicações mecânicas do infarto",
+        "investigação de endocardite"
+      ]
+    },
+    {
+      "id": "radiografia_torax",
+      "name": "Radiografia de tórax",
+      "type": "imaging",
+      "possible_findings": [
+        "congestão pulmonar",
+        "edema pulmonar",
+        "cardiomegalia",
+        "derrame pleural"
+      ]
+    },
+    {
+      "id": "angio_tc_torax",
+      "name": "Angiotomografia computadorizada de tórax",
+      "type": "imaging",
+      "applications": [
+        "investigação de tromboembolismo pulmonar",
+        "investigação de síndrome aórtica aguda"
+      ],
+      "note": "A indicação e o protocolo dependem da hipótese clínica e do contexto do paciente."
+    },
+    {
+      "id": "gasometria",
+      "name": "Gasometria",
+      "type": "laboratory_test",
+      "applications": [
+        "avaliação de insuficiência respiratória",
+        "distúrbios ácido-base",
+        "doença crítica"
+      ]
+    },
+    {
+      "id": "hemograma",
+      "name": "Hemograma",
+      "type": "laboratory_test",
+      "applications": [
+        "avaliação de anemia",
+        "infecção",
+        "sangramento",
+        "contexto pré-procedimento"
+      ]
+    },
+    {
+      "id": "funcao_renal",
+      "name": "Função renal e eletrólitos",
+      "type": "laboratory_test",
+      "parameters": [
+        "creatinina",
+        "ureia",
+        "sódio",
+        "potássio",
+        "magnésio"
+      ],
+      "applications": [
+        "insuficiência cardíaca",
+        "arritmias",
+        "uso de diuréticos",
+        "uso de medicamentos cardiovasculares",
+        "avaliação de risco"
+      ]
+    },
+    {
+      "id": "hemoculturas",
+      "name": "Hemoculturas",
+      "type": "microbiology",
+      "applications": [
+        "suspeita de endocardite infecciosa",
+        "bacteremia"
+      ]
+    }
+  ],
+
+  "treatments": [
+    {
+      "id": "reperfusao_coronariana",
+      "name": "Estratégia de reperfusão coronariana",
+      "type": "procedure",
+      "indication": "IAM com supradesnivelamento do segmento ST em contexto compatível",
+      "modalities": [
+        "intervenção coronariana percutânea primária",
+        "fibrinólise em contextos selecionados"
+      ],
+      "note": "A estratégia depende do tempo de apresentação, disponibilidade de intervenção, contraindicações e características clínicas."
+    },
+    {
+      "id": "antiagregacao",
+      "name": "Terapia antiplaquetária",
+      "type": "medication_class",
+      "applications": [
+        "síndrome coronariana aguda",
+        "doença arterial coronariana em contextos específicos"
+      ],
+      "classes": [
+        "ácido acetilsalicílico",
+        "inibidores P2Y12"
+      ]
+    },
+    {
+      "id": "anticoagulacao",
+      "name": "Anticoagulação",
+      "type": "medication_class",
+      "applications": [
+        "tromboembolismo venoso",
+        "fibrilação atrial em pacientes selecionados",
+        "síndromes coronarianas agudas em contextos específicos"
+      ],
+      "classes": [
+        "heparina não fracionada",
+        "heparinas de baixo peso molecular",
+        "anticoagulantes orais diretos",
+        "antagonistas da vitamina K"
+      ]
+    },
+    {
+      "id": "diureticos",
+      "name": "Diuréticos",
+      "type": "medication_class",
+      "applications": [
+        "congestão associada à insuficiência cardíaca",
+        "edema agudo de pulmão em contexto apropriado"
+      ],
+      "classes": [
+        "diuréticos de alça",
+        "tiazídicos e similares",
+        "antagonistas do receptor mineralocorticoide"
+      ]
+    },
+    {
+      "id": "vasodilatadores",
+      "name": "Vasodilatadores",
+      "type": "medication_class",
+      "applications": [
+        "alguns quadros de insuficiência cardíaca aguda",
+        "congestão associada à hipertensão em contexto apropriado"
+      ],
+      "note": "A utilização depende da pressão arterial, perfusão, congestão e contexto clínico."
+    },
+    {
+      "id": "terapia_farmacologica_ic",
+      "name": "Terapia farmacológica da insuficiência cardíaca",
+      "type": "treatment_strategy",
+      "classes": [
+        "inibidores do sistema renina-angiotensina",
+        "betabloqueadores",
+        "antagonistas do receptor mineralocorticoide",
+        "inibidores de SGLT2",
+        "diuréticos para controle de congestão"
+      ],
+      "note": "A combinação e a sequência dependem do fenótipo de insuficiência cardíaca, função renal, potássio, pressão arterial e tolerabilidade."
+    },
+    {
+      "id": "cardioversao_eletrica",
+      "name": "Cardioversão elétrica sincronizada",
+      "type": "procedure",
+      "applications": [
+        "taquiarritmia com instabilidade hemodinâmica em contexto apropriado"
+      ]
+    },
+    {
+      "id": "desfibrilacao",
+      "name": "Desfibrilação",
+      "type": "procedure",
+      "applications": [
+        "fibrilação ventricular",
+        "taquicardia ventricular sem pulso"
+      ]
+    },
+    {
+      "id": "marcapasso_temporario",
+      "name": "Estimulação cardíaca temporária",
+      "type": "procedure",
+      "applications": [
+        "bradiarritmia grave",
+        "bloqueio atrioventricular avançado com instabilidade ou risco clínico"
+      ]
+    },
+    {
+      "id": "suporte_avancado_vida",
+      "name": "Suporte avançado de vida",
+      "type": "emergency_protocol",
+      "applications": [
+        "parada cardiorrespiratória"
+      ],
+      "components": [
+        "compressões torácicas de alta qualidade",
+        "desfibrilação quando indicada",
+        "controle de via aérea conforme necessidade",
+        "ventilação",
+        "acesso vascular",
+        "medicações conforme algoritmo aplicável",
+        "identificação e tratamento de causas reversíveis"
+      ]
+    },
+    {
+      "id": "antibioticoterapia_endocardite",
+      "name": "Antibioticoterapia para endocardite infecciosa",
+      "type": "antimicrobial_treatment",
+      "applications": [
+        "endocardite infecciosa confirmada ou fortemente suspeita em contexto apropriado"
+      ],
+      "note": "A escolha deve considerar provável agente, culturas, susceptibilidade, válvula acometida, presença de prótese, complicações e recomendações especializadas."
+    },
+    {
+      "id": "controle_duplo_impulso_aortico",
+      "name": "Controle de frequência cardíaca e pressão arterial na síndrome aórtica aguda",
+      "type": "treatment_strategy",
+      "applications": [
+        "síndrome aórtica aguda"
+      ],
+      "note": "O objetivo é reduzir o estresse de parede aórtica. A escolha farmacológica e a sequência dependem da situação clínica e da avaliação especializada."
+    }
+  ],
+
+  "clinical_rules": [
+    {
+      "id": "rule_sca_ecg",
+      "name": "Investigação inicial da síndrome coronariana aguda",
+      "type": "diagnostic_rule",
+      "if": [
+        "dor torácica ou equivalente isquêmico",
+        "suspeita clínica de síndrome coronariana aguda"
+      ],
+      "then": [
+        "obter eletrocardiograma",
+        "avaliar marcadores de lesão miocárdica quando indicados",
+        "avaliar estabilidade clínica",
+        "estratificar risco"
+      ]
+    },
+    {
+      "id": "rule_iam_supra_reperfusao",
+      "name": "IAM com supradesnivelamento exige avaliação imediata para reperfusão",
+      "type": "management_rule",
+      "if": [
+        "quadro clínico compatível",
+        "ECG compatível com IAM com supradesnivelamento"
+      ],
+      "then": [
+        "acionar estratégia de reperfusão apropriada sem atrasos desnecessários",
+        "avaliar contraindicações e contexto"
+      ]
+    },
+    {
+      "id": "rule_ic_congestao",
+      "name": "Insuficiência cardíaca aguda com congestão",
+      "type": "management_rule",
+      "if": [
+        "sinais ou sintomas de congestão",
+        "insuficiência cardíaca aguda"
+      ],
+      "then": [
+        "avaliar oxigenação e ventilação",
+        "avaliar pressão arterial e perfusão",
+        "considerar diurese em contexto apropriado",
+        "identificar fator precipitante"
+      ]
+    },
+    {
+      "id": "rule_taquiarritmia_instavel",
+      "name": "Taquiarritmia com instabilidade",
+      "type": "emergency_rule",
+      "if": [
+        "taquiarritmia",
+        "instabilidade hemodinâmica atribuível à arritmia"
+      ],
+      "then": [
+        "avaliar cardioversão elétrica sincronizada quando indicada",
+        "realizar suporte clínico apropriado"
+      ]
+    },
+    {
+      "id": "rule_pcr_chocavel",
+      "name": "Parada cardiorrespiratória em ritmo chocável",
+      "type": "emergency_rule",
+      "if": [
+        "parada cardiorrespiratória",
+        "fibrilação ventricular ou taquicardia ventricular sem pulso"
+      ],
+      "then": [
+        "iniciar RCP",
+        "desfibrilar conforme algoritmo",
+        "continuar suporte avançado",
+        "investigar causas reversíveis"
+      ]
+    },
+    {
+      "id": "rule_pcr_nao_chocavel",
+      "name": "Parada cardiorrespiratória em ritmo não chocável",
+      "type": "emergency_rule",
+      "if": [
+        "parada cardiorrespiratória",
+        "atividade elétrica sem pulso ou assistolia"
+      ],
+      "then": [
+        "iniciar RCP",
+        "seguir algoritmo de ritmo não chocável",
+        "investigar causas reversíveis"
+      ]
+    },
+    {
+      "id": "rule_tep_risco",
+      "name": "Estratificação de risco no tromboembolismo pulmonar",
+      "type": "risk_rule",
+      "if": [
+        "suspeita ou diagnóstico de tromboembolismo pulmonar"
+      ],
+      "then": [
+        "avaliar estabilidade hemodinâmica",
+        "avaliar disfunção ventricular direita",
+        "avaliar biomarcadores quando indicados",
+        "classificar risco para orientar tratamento"
+      ]
+    },
+    {
+      "id": "rule_dissection_aortica",
+      "name": "Síndrome aórtica aguda",
+      "type": "emergency_rule",
+      "if": [
+        "suspeita clínica de síndrome aórtica aguda"
+      ],
+      "then": [
+        "reduzir estresse hemodinâmico conforme contexto",
+        "obter imagem apropriada sem atrasos indevidos",
+        "acionar avaliação especializada"
+      ]
+    },
+    {
+      "id": "rule_endocardite_culturas",
+      "name": "Investigação microbiológica da endocardite",
+      "type": "diagnostic_rule",
+      "if": [
+        "suspeita clínica de endocardite infecciosa"
+      ],
+      "then": [
+        "obter hemoculturas adequadas antes da antibioticoterapia quando clinicamente possível",
+        "realizar investigação ecocardiográfica",
+        "avaliar complicações"
+      ]
+    }
+  ],
+
+  "differential_network": [
+    {
+      "presentation": "dor_toracica",
+      "differentials": [
+        {
+          "condition": "sindrome_coronariana_aguda",
+          "discriminators": [
+            "relação com esforço",
+            "características típicas da dor",
+            "ECG",
+            "troponina"
+          ]
+        },
+        {
+          "condition": "tromboembolismo_pulmonar",
+          "discriminators": [
+            "dispneia súbita",
+            "dor pleurítica",
+            "fatores de risco tromboembólico",
+            "hipoxemia"
+          ]
+        },
+        {
+          "condition": "disseccao_aortica_tipo_a",
+          "discriminators": [
+            "início abrupto",
+            "dor intensa",
+            "irradiação dorsal",
+            "assimetria de pulsos",
+            "déficit neurológico"
+          ]
+        }
+      ]
+    },
+    {
+      "presentation": "dispneia_aguda",
+      "differentials": [
+        {
+          "condition": "edema_agudo_pulmao",
+          "discriminators": [
+            "estertores",
+            "ortopneia",
+            "congestão",
+            "hipertensão ou disfunção ventricular"
+          ]
+        },
+        {
+          "condition": "tromboembolismo_pulmonar",
+          "discriminators": [
+            "início súbito",
+            "dor pleurítica",
+            "fatores de risco tromboembólico"
+          ]
+        }
+      ]
+    },
+    {
+      "presentation": "palpitacao",
+      "differentials": [
+        {
+          "condition": "taquicardia_supraventricular_paroxistica",
+          "discriminators": [
+            "ritmo regular",
+            "início abrupto",
+            "término abrupto"
+          ]
+        },
+        {
+          "condition": "fibrilacao_atrial",
+          "discriminators": [
+            "ritmo irregularmente irregular",
+            "ECG"
+          ]
+        },
+        {
+          "condition": "taquicardia_ventricular",
+          "discriminators": [
+            "QRS largo",
+            "doença cardíaca estrutural",
+            "instabilidade hemodinâmica"
+          ]
+        }
+      ]
+    }
+  ],
+
+  "patient_generation": {
+    "enabled": true,
+    "description": "Parâmetros para geração procedural de pacientes cardiovasculares. Estes parâmetros representam possibilidades clínicas e não pacientes fixos.",
+    "demographics": {
+      "age_ranges": [
+        "18-39",
+        "40-59",
+        "60-79",
+        "80+"
+      ],
+      "sex": [
+        "masculino",
+        "feminino"
+      ]
+    },
+    "conditions": [
+      "doenca_arterial_coronariana",
+      "sindrome_coronariana_aguda",
+      "iam_com_supra_st",
+      "iam_sem_supra_st",
+      "angina_instavel",
+      "insuficiencia_cardiaca",
+      "ic_fr_reduzida",
+      "ic_fr_preservada",
+      "edema_agudo_pulmao",
+      "taquicardia_supraventricular_paroxistica",
+      "fibrilacao_atrial",
+      "taquicardia_ventricular",
+      "bloqueio_av_total",
+      "tromboembolismo_pulmonar",
+      "disseccao_aortica_tipo_a",
+      "parada_cardiorrespiratoria",
+      "endocardite_infecciosa"
+    ],
+    "severity_levels": [
+      "leve",
+      "moderado",
+      "grave",
+      "critico"
+    ],
+    "presentation_modes": [
+      "dor_toracica",
+      "dispneia",
+      "palpitacao",
+      "sincope",
+      "edema",
+      "febre",
+      "alteracao_do_estado_mental",
+      "parada_cardiorrespiratoria"
+    ],
+    "risk_factors": [
+      "hipertensao arterial",
+      "diabetes mellitus",
+      "dislipidemia",
+      "tabagismo",
+      "obesidade",
+      "sedentarismo",
+      "idade avançada",
+      "doença renal crônica",
+      "doença cardiovascular prévia",
+      "história familiar"
+    ],
+    "comorbidities": [
+      "hipertensão arterial",
+      "diabetes mellitus",
+      "dislipidemia",
+      "doença renal crônica",
+      "obesidade",
+      "DPOC",
+      "doença vascular periférica"
+    ],
+    "vital_signs": {
+      "heart_rate": {
+        "possible": true
+      },
+      "respiratory_rate": {
+        "possible": true
+      },
+      "blood_pressure": {
+        "possible": true
+      },
+      "oxygen_saturation": {
+        "possible": true
+      },
+      "temperature": {
+        "possible": true
+      },
+      "glucose": {
+        "possible": true
+      }
+    },
+    "hidden_state": [
+      "diagnóstico",
+      "gravidade",
+      "evolução",
+      "comorbidades",
+      "fatores precipitantes",
+      "achados laboratoriais",
+      "achados de imagem",
+      "resposta ao tratamento",
+      "complicações potenciais"
+    ]
   },
-  "fase_2_diagnostico": {
-    "gabarito_esperado": ["endocardite infecciosa", "endocardite"],
-    "distrator_comum": ["febre reumatica", "septicemia"],
-    "feedback_distrator": "As hemoculturas e a vegetação na valva confirmam endocardite, não febre reumática.",
-    "achado_sucesso": "Correto. Diagnóstico de Endocardite Infecciosa."
-  },
-  "fase_3_conduta": {
-    "gabarito_esperado": ["antibioticoterapia", "penicilina", "gentamicina", "cirurgia de substituicao valvular"],
-    "red_flag_mortal": ["anticoagulacao", "corticoterapia"],
-    "feedback_sucesso": "Conduta irretocável. Você iniciou antibioticoterapia de amplo espectro e monitorou complicações.",
-    "feedback_red_flag": "Erro. Anticoagulação está contraindicada pelo risco de embolização séptica cerebral."
-  },
-  "discussao_clinica_final": {
-    "takeaway_message": "A suspeita de endocardite em pacientes com sopro e febre requer hemoculturas e ecocardiograma imediatos.",
-    "fisiopatologia": "Adesão bacteriana ao endocárdio lesado leva a uma vegetação que pode causar embolia e disfunção valvular."
+
+  "sources": [
+    {
+      "id": "legacy_cardiopatias",
+      "type": "project_source",
+      "description": "Conteúdo cardiovascular previamente utilizado pelo Diagnosis como banco de casos.",
+      "status": "transformed"
+    },
+    {
+      "id": "aha_aclsguidelines",
+      "type": "guideline_family",
+      "description": "Diretrizes e algoritmos contemporâneos de ressuscitação e suporte cardiovascular.",
+      "status": "reference"
+    },
+    {
+      "id": "esc_cardiovascular_guidelines",
+      "type": "guideline_family",
+      "description": "Diretrizes europeias utilizadas como referência complementar para síndromes cardiovasculares.",
+      "status": "reference"
+    }
+  ],
+
+  "conflicts": [
+    {
+      "id": "conflict_legacy_fixed_gabarito",
+      "description": "O banco legado continha condutas apresentadas como respostas absolutas. A nova KB não preserva essas condutas como gabaritos rígidos.",
+      "resolution": "converted_to_contextual_clinical_rules"
+    },
+    {
+      "id": "conflict_legacy_red_flags",
+      "description": "Alguns red flags antigos simplificavam situações clínicas complexas.",
+      "resolution": "removed_from_knowledge_layer"
+    }
+  ],
+
+  "uncertainties": [
+    {
+      "id": "uncertainty_therapeutic_doses",
+      "description": "Doses específicas de medicamentos não são representadas nesta versão para evitar transformar informação contextual em regra universal.",
+      "action": "expand_with_validated_guidelines"
+    },
+    {
+      "id": "uncertainty_special_populations",
+      "description": "Gestação, doença renal avançada, idosos frágeis e outras populações especiais requerem representação específica.",
+      "action": "expand_later"
+    },
+    {
+      "id": "uncertainty_interventional_details",
+      "description": "Detalhes técnicos de procedimentos cardiovasculares ainda não estão completamente representados.",
+      "action": "expand_later"
+    },
+    {
+      "id": "uncertainty_endocarditis_management",
+      "description": "A escolha antimicrobiana e indicação cirúrgica na endocardite dependem de agente, válvula, complicações e contexto.",
+      "action": "retain_context_dependence"
+    }
+  ],
+
+  "validation": {
+    "json_syntax": "valid",
+    "architecture": "knowledge_base_v3",
+    "case_bank": false,
+    "contains_fixed_cases": false,
+    "contains_game_rules": false,
+    "contains_answer_key": false,
+    "clinical_validation": "partial",
+    "intended_use": "educational_simulation_and_clinical_reasoning_engine",
+    "not_for_direct_clinical_decision_making": true
   }
 }
-]
