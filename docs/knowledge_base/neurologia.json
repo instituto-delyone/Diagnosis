@@ -1,0 +1,64 @@
+[
+  {
+    "id_caso": "neuro_avci_janela_01",
+    "patologia_alvo": "Acidente Vascular Encefálico Isquêmico Agudo na Janela Terapêutica",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Homem de 65 anos, hipertenso e diabético, é trazido ao pronto-socorro por familiares com déficit motor súbito em hemicorpo direito e desvio rima bucal à esquerda, com início exato há 2 horas e 15 minutos. Ao exame neurológico: consciente, afasia global, desvio conjugado do olhar para a esquerda, hemiplegia direita grau 0, escala NIHSS de 18 pontos. PA 165x95 mmHg, glicemia capilar de 120 mg/dL.",
+    
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["tc de cranio", "tomografia de cranio sem contraste", "angiotc de cranio", "glicemia", "labs"],
+      "achado_sucesso": "Tomografia computadorizada de crânio sem contraste exclui hemorragia intracraniana aguda (aspecto precoce sutil de hipodensidade lenticular ou apagamento de sulcos, ASPECTS 9). Angio-TC demonstra oclusão proximal em segmento M1 da artéria cerebral média esquerda.",
+      "resposta_preceptor_erro": "Doutor, déficit focal agudo com menos de 4 horas e meia de evolução exige exclusão imediata de sangramento intracraniano por neuroimagem sem contraste antes de qualquer manobra de recanalização."
+    },
+
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["avc isquemico agudo", "avci", "acidente vascular encefalico isquemico"],
+      "distrator_comum": ["avc hemorragico", "enxaqueca hemiplegica", "hipoglicemia isolada", "crise convulsiva focal"],
+      "feedback_distrator": "A tomografia sem sangue afasta hemorragia; a glicemia normal afasta simuladores metabólicos. O quadro focal agudo com oclusão vascular confirmada sela o diagnóstico de AVE isquêmico agudo.",
+      "achado_sucesso": "Correto! Diagnóstico de Acidente Vascular Encefálico Isquêmico Agudo (Território de Artéria Cerebral Médias E-M1)."
+    },
+
+    "fase_3_conduta": {
+      "gabarito_esperado": ["tromb", "alteplase", "rt-pa", "trombectomia mecanica", "controle pressorico rigoroso"],
+      "red_flag_mortal": ["anticoagulacao plena precoce", "aspirina imediata antes de 24h", "corticoterapia", "descenso pressorico agressivo abaixo de 180"],
+      "feedback_sucesso": "Conduta de excelência! Você controlou a pressão arterial abaixo de 185/110 mmHg e administrou infusão intravenosa de Alteplase (rt-PA) dentro da janela terapêutica, encaminhando simultaneamente para avaliação de trombectomia mecânica.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Administrar anticoagulantes orais ou heparina plena nas primeiras 24 horas pós-trombólise ou após AVE isquêmico extenso converte a isquemia em um hematoma intraparenquimatoso maciço secundário (transformação hemorrágica sintomática fatal)."
+    },
+
+    "discussao_clinica_final": {
+      "takeaway_message": "O tempo é cérebro. Pacientes com AVE isquêmico na janela de até 4h30 sem contraindicações devem receber trombólise venosa imediata, e oclusões de grandes vasos devem ser avaliadas para trombectomia mecânica.",
+      "fisiopatologia": "A oclusão tromboembólica de uma artéria cerebral interrompe o fluxo sanguíneo local, gerando uma zona central de necrose irreversível (core isquêmico) circundada por tecido eletricamente silente, porém viável (zona de penumbra isquêmica), cujo salvamento depende da recanalização precoce."
+    }
+  },
+  {
+    "id_caso": "neuro_estado_mal_01",
+    "patologia_alvo": "Estado de Mal Epilético Convulsivo Generalizado",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Homem de 40 anos, com história de epilepsia prévia e abandono de tratamento medicamentoso, é admitido na Sala Vermelha apresentando crise tônico-clônica generalizada contínua há mais de 25 minutos, sem recuperação da consciência entre os episódios. Ao exame: cianótico, taquipneico, sialorréia intensa, rigidez generalizada evoluindo com clonos rítmicos persistentes. FC 140 bpm, SpO2 78% em ar ambiente.",
+    
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["glicemia", "gasometria", "eletrólitos", "perfil toxicologico", "funcao renal"],
+      "achado_sucesso": "Glicemia capilar de 55 mg/dL (hipoglicemia corrigida, mas crise mantida), gasometria arterial com acidose mista severa (pH 7.15, Lactato 7.8 mmol/L) decorrente da hiperatividade muscular sustentada.",
+      "resposta_preceptor_erro": "Doutor, crises convulsivas prolongadas além de 5 minutos configuram estado de mal epilético. Avalie imediatamente a oxigenação, assegure via aérea e colete exames urgentes para descartar distúrbios metabólicos precipitantes."
+    },
+
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["estado de mal epilepsico", "estado de mal convulsivo", "status epilepticus"],
+      "distrator_comum": ["crise convulsiva isolada autolimitada", "psicogena nao epileptica", "sindrome de abstinencia simples"],
+      "feedback_distrator": "Crises repetidas sem recuperação da consciência ou com duração superior a 5 minutos caracterizam o Status Epilepticus, que exige intervenção farmacológica escalonada urgente.",
+      "achado_sucesso": "Correto! Diagnóstico de Estado de Mal Epilético Convulsivo Generalizado refratário inicial."
+    },
+
+    "fase_3_conduta": {
+      "gabarito_esperado": ["benzodiazepinico", "diazepam", "lorazepam", "midazolam", "fenitoina", "levetiracetam", "intubacao orotraqueal"],
+      "red_flag_mortal": ["monoterapia inadequada", "atraso na via aerea", "uso isolado de glicose sem benzodiazepina"],
+      "feedback_sucesso": "Conduta impecável! Você administrou benzodiazepínico venoso imediato (Lorazepam/Midazolam), seguiu com anticonvulsivante de manutenção de ação prolongada (Fenitoína/Levetiracetam) e realizou intubação orotraqueal com sequência rápida devido à refratariedade e risco de falência respiratória.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Demorar a escalonagem terapêutica para drogas de segunda e terceira linha em crises prolongadas acarreta excitotoxicidade neuronal irreversível, edema cerebral refratário, rabdomiólise e morte encefálica."
+    },
+
+    "discussao_clinica_final": {
+      "takeaway_message": "O estado de mal epilético é uma emergência neurológica tempo-dependente. O protocolo exige abortar a crise com benzodiazepínicos na primeira fase e introduzir agentes antiepilépticos de manutenção rapidamente para evitar dano neuronal permanente.",
+      "fisiopatologia": "A falha nos mecanismos normais de terminação da crise (geralmente por disfunção dos receptores GABAérgicos inibitórios e hiperativação glutamatérgica NMDA) resulta em disparo neuronal sincrônico prolongado, gerando consumo energético cerebral extremo, acidose lática sistêmica e colapso metabólico neuronal."
+    }
+  }
+]
