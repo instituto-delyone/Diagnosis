@@ -1,54 +1,68 @@
 "use strict";
 
 /* ============================================================
-   DIAGNOSIS ENGINE V3
+   DIAGNOSIS ENGINE
+   ============================================================
+
+   NOVA ARQUITETURA
+
    Knowledge Base
         ↓
-   Knowledge Adapter
+   KnowledgeBaseLoader
         ↓
-   Case Generator
+   ClinicalModel
+        ↓
+   PossibilityEngine
+        ↓
+   PatientGenerator
+        ↓
+   Generated Patient
         ↓
    Patient State
         ↓
    Intent Engine
         ↓
-   Action Resolver / CSI
+   Clinical Action
         ↓
-   Consequence Engine
+   Consequence
         ↓
    Evaluation
 
-   V3:
-   - adiciona camada de intenção/meta-comandos
-   - separa comandos do jogo de ações clínicas
-   - prepara arquitetura para Episode Manager
+   Este engine NÃO utiliza API externa.
+   Este engine NÃO utiliza LLM.
+   Este engine NÃO transforma KB em casos fixos.
+
    ============================================================ */
 
 
 /* ============================================================
-   CONFIGURAÇÃO
+   ARQUIVOS
    ============================================================ */
 
 const ARQUIVOS_POR_SALA = {
 
     vermelha: [
         "knowledge_base/neurologia.json",
-        "knowledge_base/nefrologia.json",
         "knowledge_base/reumatologia.json",
         "knowledge_base/endocrinologia.json",
-        "knowledge_base/cardiopatias.json"
+        "knowledge_base/cardiopatias.json",
+        "knowledge_base/pneumologia.json"
     ],
 
     clinica: [
         "knowledge_base/neurologia.json",
-        "knowledge_base/nefrologia.json",
         "knowledge_base/reumatologia.json",
         "knowledge_base/endocrinologia.json",
-        "knowledge_base/cardiopatias.json"
+        "knowledge_base/cardiopatias.json",
+        "knowledge_base/pneumologia.json"
     ]
 
 };
 
+
+/* ============================================================
+   CONFIG
+   ============================================================ */
 
 const CONFIG = {
 
@@ -110,14 +124,10 @@ function tokens(text) {
         "nos", "nas",
         "e", "ou",
         "que",
-        "com",
-        "sem",
-        "me",
-        "se",
-        "ao",
-        "aos",
-        "peco",
-        "solicito",
+        "com", "sem",
+        "me", "se",
+        "ao", "aos",
+        "peco", "solicito",
         "solicitar",
         "pedir",
         "fazer",
@@ -126,149 +136,63 @@ function tokens(text) {
 
     ]);
 
-
     return normalize(text)
         .split(" ")
         .filter(Boolean)
-        .filter(token =>
-            !stopWords.has(token)
-        );
+        .filter(token => !stopWords.has(token));
 
 }
 
 
 function similarity(a, b) {
 
-    const A =
-        new Set(tokens(a));
+    const A = new Set(tokens(a));
+    const B = new Set(tokens(b));
 
-    const B =
-        new Set(tokens(b));
-
-
-    if (
-        !A.size ||
-        !B.size
-    ) {
-
+    if (!A.size || !B.size) {
         return 0;
-
     }
-
 
     let intersection = 0;
 
+    for (const token of A) {
 
-    for (
-        const token
-        of A
-    ) {
-
-        if (
-            B.has(token)
-        ) {
-
+        if (B.has(token)) {
             intersection++;
-
         }
 
     }
-
 
     return intersection /
-        Math.max(
-            A.size,
-            B.size
-        );
+        Math.max(A.size, B.size);
 
 }
 
 
-function containsPhrase(
-    input,
-    list
-) {
+function containsPhrase(input, list) {
 
-    const text =
-        normalize(input);
+    const text = normalize(input);
 
+    return (list || []).some(item => {
 
-    return (list || [])
-        .some(item => {
+        const target = normalize(item);
 
-            const target =
-                normalize(item);
-
-
-            if (!target) {
-                return false;
-            }
-
-
-            return (
-                text.includes(target) ||
-                target.includes(text)
-            );
-
-        });
-
-}
-
-
-function clone(value) {
-
-    try {
-
-        return JSON.parse(
-            JSON.stringify(value)
-        );
-
-    } catch {
-
-        return value;
-
-    }
-
-}
-
-
-function getArray(
-    object,
-    keys
-) {
-
-    for (
-        const key
-        of keys
-    ) {
-
-        if (
-            Array.isArray(
-                object?.[key]
-            )
-        ) {
-
-            return object[key];
-
+        if (!target) {
+            return false;
         }
 
-    }
+        return (
+            text.includes(target) ||
+            target.includes(text)
+        );
 
-
-    return [];
+    });
 
 }
 
 
 /* ============================================================
    CSI
-   Classificação Semiótica / Semântica de Intenção
-
-   IMPORTANTE:
-   Isso NÃO é o cérebro clínico.
-
-   É somente a camada que transforma linguagem humana
-   em intenção clínica estruturada.
    ============================================================ */
 
 const CSI = {
@@ -279,7 +203,7 @@ const CSI = {
             "ecg",
             "eletro",
             "eletrocardiograma",
-            "traçado"
+            "tracado"
         ],
 
         gasometry: [
@@ -318,7 +242,8 @@ const CSI = {
             "exames de sangue",
             "hemograma",
             "ionograma",
-            "funcao renal"
+            "funcao renal",
+            "exames laboratoriais"
         ],
 
         glucose: [
@@ -326,6 +251,18 @@ const CSI = {
             "glicose",
             "dextro",
             "hgt"
+        ],
+
+        cortisol: [
+            "cortisol"
+        ],
+
+        acth: [
+            "acth"
+        ],
+
+        aldosterone: [
+            "aldosterona"
         ]
 
     },
@@ -396,7 +333,8 @@ const CSI = {
             "hidratacao",
             "soro",
             "expansao",
-            "sf 0.9"
+            "sf 0.9",
+            "solucao salina"
         ],
 
         sedation: [
@@ -439,37 +377,6 @@ const CSI = {
 
 /* ============================================================
    INTENT ENGINE
-   ============================================================
-
-   NOVA CAMADA V3.
-
-   Antes de perguntar:
-
-       "O que o jogador fez clinicamente?"
-
-   perguntamos:
-
-       "O jogador está fazendo uma ação clínica
-        ou está conversando com o próprio jogo?"
-
-   Exemplos:
-
-       "Qual minha nota?"
-       → REQUEST_SCORE
-
-       "Qual o seguimento?"
-       → REQUEST_FOLLOW_UP
-
-       "Me mostre os dados"
-       → REQUEST_INFORMATION
-
-       "Me dê uma dica"
-       → REQUEST_HINT
-
-       "Vou administrar hidrocortisona"
-       → CLINICAL_ACTION
-
-   Essa camada NÃO avalia medicina.
    ============================================================ */
 
 class IntentEngine {
@@ -479,23 +386,18 @@ class IntentEngine {
         this.patterns = {
 
             request_score: [
-
                 "qual minha nota",
                 "qual minha pontuacao",
                 "quanto tirei",
                 "como fui",
                 "me avalie",
                 "minha avaliacao",
-                "minha avaliação",
                 "resultado",
                 "qual foi minha nota",
                 "qual foi minha pontuacao"
-
             ],
 
-
             request_follow_up: [
-
                 "qual o seguimento",
                 "qual seguimento",
                 "e agora",
@@ -508,15 +410,10 @@ class IntentEngine {
                 "follow up",
                 "follow-up",
                 "e depois",
-                "depois disso",
-                "qual o proximo passo",
-                "qual o próximo passo"
-
+                "depois disso"
             ],
 
-
             request_information: [
-
                 "quais exames",
                 "que exames",
                 "quais informacoes",
@@ -530,23 +427,17 @@ class IntentEngine {
                 "como está o paciente",
                 "dados disponiveis",
                 "dados disponíveis"
-
             ],
 
-
             request_hint: [
-
                 "dica",
                 "me de uma dica",
                 "me dê uma dica",
                 "ajuda",
                 "preciso de ajuda"
-
             ],
 
-
             request_finish: [
-
                 "encerrar",
                 "encerrar caso",
                 "finalizar",
@@ -554,7 +445,6 @@ class IntentEngine {
                 "terminar caso",
                 "terminar o caso",
                 "sair do caso"
-
             ]
 
         };
@@ -562,26 +452,15 @@ class IntentEngine {
     }
 
 
-    normalize(text) {
-
-        return normalize(text);
-
-    }
-
-
-    matches(
-        text,
-        patterns
-    ) {
+    matches(text, patterns) {
 
         const normalized =
-            this.normalize(text);
-
+            normalize(text);
 
         return patterns.some(
             pattern =>
                 normalized.includes(
-                    this.normalize(pattern)
+                    normalize(pattern)
                 )
         );
 
@@ -590,49 +469,16 @@ class IntentEngine {
 
     interpret(text) {
 
-        const normalized =
-            this.normalize(text);
-
-
-        if (!normalized) {
-
-            return {
-
-                type:
-                    "UNKNOWN",
-
-                confidence:
-                    0
-
-            };
-
-        }
-
-
-        /*
-         * A ordem é deliberada.
-         *
-         * Primeiro comandos explícitos do jogo.
-         * Só depois deixamos a frase chegar
-         * ao interpretador clínico.
-         */
-
-
         if (
             this.matches(
-                normalized,
+                text,
                 this.patterns.request_score
             )
         ) {
 
             return {
-
-                type:
-                    "REQUEST_SCORE",
-
-                confidence:
-                    1
-
+                type: "REQUEST_SCORE",
+                confidence: 1
             };
 
         }
@@ -640,19 +486,14 @@ class IntentEngine {
 
         if (
             this.matches(
-                normalized,
+                text,
                 this.patterns.request_follow_up
             )
         ) {
 
             return {
-
-                type:
-                    "REQUEST_FOLLOW_UP",
-
-                confidence:
-                    1
-
+                type: "REQUEST_FOLLOW_UP",
+                confidence: 1
             };
 
         }
@@ -660,19 +501,14 @@ class IntentEngine {
 
         if (
             this.matches(
-                normalized,
+                text,
                 this.patterns.request_information
             )
         ) {
 
             return {
-
-                type:
-                    "REQUEST_INFORMATION",
-
-                confidence:
-                    0.95
-
+                type: "REQUEST_INFORMATION",
+                confidence: 0.95
             };
 
         }
@@ -680,19 +516,14 @@ class IntentEngine {
 
         if (
             this.matches(
-                normalized,
+                text,
                 this.patterns.request_hint
             )
         ) {
 
             return {
-
-                type:
-                    "REQUEST_HINT",
-
-                confidence:
-                    1
-
+                type: "REQUEST_HINT",
+                confidence: 1
             };
 
         }
@@ -700,38 +531,22 @@ class IntentEngine {
 
         if (
             this.matches(
-                normalized,
+                text,
                 this.patterns.request_finish
             )
         ) {
 
             return {
-
-                type:
-                    "REQUEST_FINISH",
-
-                confidence:
-                    1
-
+                type: "REQUEST_FINISH",
+                confidence: 1
             };
 
         }
 
 
-        /*
-         * Não é comando de interface.
-         *
-         * Entregamos ao cérebro clínico.
-         */
-
         return {
-
-            type:
-                "CLINICAL_ACTION",
-
-            confidence:
-                0.7
-
+            type: "CLINICAL_ACTION",
+            confidence: 0.7
         };
 
     }
@@ -740,323 +555,178 @@ class IntentEngine {
 
 
 /* ============================================================
-   KNOWLEDGE ADAPTER
+   ACTION RESOLVER
    ============================================================ */
 
-class KnowledgeAdapter {
+class ActionResolver {
 
-    static adaptFile(
-        json,
-        source
-    ) {
+    resolve(text, state) {
 
-        let cases = [];
+        const normalized =
+            normalize(text);
 
+        const intents = [];
 
-        if (
-            Array.isArray(json)
+        for (
+            const [group, concepts]
+            of Object.entries(CSI)
         ) {
 
-            cases =
-                json;
+            for (
+                const [concept, synonyms]
+                of Object.entries(concepts)
+            ) {
 
-        } else if (
-            Array.isArray(json?.casos)
-        ) {
+                const found =
+                    synonyms.some(
+                        synonym =>
+                            normalized.includes(
+                                normalize(synonym)
+                            )
+                    );
 
-            cases =
-                json.casos;
+                if (found) {
 
-        } else if (
-            Array.isArray(json?.conhecimento)
-        ) {
+                    intents.push({
 
-            cases =
-                json.conhecimento;
+                        type:
+                            this.mapType(group),
 
-        } else if (
-            json &&
-            typeof json === "object"
-        ) {
+                        concept,
 
-            cases =
-                [json];
+                        term:
+                            text,
 
-        }
+                        confidence:
+                            1
 
-
-        return cases
-            .map(
-                (item, index) =>
-                    this.adaptCase(
-                        item,
-                        source,
-                        index
-                    )
-            )
-            .filter(Boolean);
-
-    }
-
-
-    static adaptCase(
-        item,
-        source,
-        index
-    ) {
-
-        if (
-            !item ||
-            typeof item !== "object"
-        ) {
-
-            return null;
-
-        }
-
-
-        const investigation =
-            item.fase_1_investigacao ||
-            {};
-
-
-        const diagnosis =
-            item.fase_2_diagnostico ||
-            {};
-
-
-        const treatment =
-            item.fase_3_conduta ||
-            {};
-
-
-        const discussion =
-            item.discussao_clinica_final ||
-            {};
-
-
-        return {
-
-            id:
-                item.id_caso ||
-                item.id ||
-                `${source}_${index}`,
-
-            source,
-
-            pathology:
-                item.patologia_alvo ||
-                item.diagnostico_alvo ||
-                item.entidade_clinica ||
-                item.diagnostico ||
-                "Condição clínica não identificada",
-
-            difficulty:
-                item.dificuldade ||
-                item.nivel ||
-                "Não especificada",
-
-            admission:
-                item.vinheta_admissao ||
-                item.apresentacao_inicial ||
-                item.apresentacao ||
-                item.enunciado ||
-                item.descricao ||
-                "",
-
-            knowledge: {
-
-                investigation: {
-
-                    expected:
-                        getArray(
-                            investigation,
-                            [
-                                "gabarito_esperado",
-                                "respostas_aceitas",
-                                "exames_esperados",
-                                "acoes_esperadas"
-                            ]
-                        ),
-
-                    success:
-                        investigation.achado_sucesso ||
-                        investigation.resultado_sucesso ||
-                        "",
-
-                    error:
-                        investigation.resposta_preceptor_erro ||
-                        ""
-
-                },
-
-
-                diagnosis: {
-
-                    expected:
-                        getArray(
-                            diagnosis,
-                            [
-                                "gabarito_esperado",
-                                "respostas_aceitas",
-                                "diagnosticos_aceitos"
-                            ]
-                        ),
-
-                    distractors:
-                        getArray(
-                            diagnosis,
-                            [
-                                "distratores",
-                                "diagnosticos_distratores",
-                                "respostas_erradas"
-                            ]
-                        ),
-
-                    success:
-                        diagnosis.resposta_sucesso ||
-                        diagnosis.feedback_sucesso ||
-                        "",
-
-                    error:
-                        diagnosis.feedback_erro ||
-                        diagnosis.resposta_preceptor_erro ||
-                        ""
-
-                },
-
-
-                treatment: {
-
-                    expected:
-                        getArray(
-                            treatment,
-                            [
-                                "gabarito_esperado",
-                                "respostas_aceitas",
-                                "condutas_esperadas",
-                                "tratamentos_esperados"
-                            ]
-                        ),
-
-                    redFlags:
-                        getArray(
-                            treatment,
-                            [
-                                "red_flags",
-                                "redflags",
-                                "sinais_de_perigo",
-                                "condutas_perigosas"
-                            ]
-                        ),
-
-                    success:
-                        treatment.resposta_sucesso ||
-                        treatment.feedback_sucesso ||
-                        "",
-
-                    error:
-                        treatment.feedback_erro ||
-                        ""
-
-                },
-
-
-                discussion: {
-
-                    takeaway:
-                        discussion.takeaway ||
-                        discussion.mensagem_chave ||
-                        "",
-
-                    pathophysiology:
-                        discussion.fisiopatologia ||
-                        discussion.explicacao ||
-                        ""
+                    });
 
                 }
 
-            },
-
-            structured:
-                item.estrutura_clinica ||
-                item.structured ||
-                item.clinical_model ||
-                null
-
-        };
-
-    }
-
-}
-
-
-/* ============================================================
-   CASE GENERATOR
-   ============================================================ */
-
-class CaseGenerator {
-
-    constructor(pool) {
-
-        this.pool =
-            pool;
-
-    }
-
-
-    generate(room) {
-
-        if (
-            !this.pool.length
-        ) {
-
-            throw new Error(
-                "Nenhum conhecimento clínico disponível."
-            );
+            }
 
         }
 
 
-        const source =
-            this.pool[
-                Math.floor(
-                    Math.random() *
-                    this.pool.length
+        /*
+         * Diagnóstico explícito.
+         *
+         * A heurística antiga de "qualquer frase longa"
+         * foi removida. Isso evita que frases como:
+         *
+         * "vou avaliar o eixo ACTH"
+         *
+         * sejam classificadas como diagnóstico.
+         */
+
+        if (
+            this.looksLikeDiagnosis(text)
+        ) {
+
+            intents.push({
+
+                type:
+                    "diagnosis",
+
+                concept:
+                    "diagnosis_statement",
+
+                term:
+                    text,
+
+                confidence:
+                    0.8
+
+            });
+
+        }
+
+
+        if (!intents.length) {
+
+            return [{
+
+                type: "unknown",
+                concept: "unknown",
+                term: text,
+                confidence: 0
+
+            }];
+
+        }
+
+
+        const unique = [];
+        const seen = new Set();
+
+        for (const intent of intents) {
+
+            const key =
+                `${intent.type}:${intent.concept}`;
+
+            if (!seen.has(key)) {
+
+                seen.add(key);
+                unique.push(intent);
+
+            }
+
+        }
+
+        return unique;
+
+    }
+
+
+    mapType(group) {
+
+        if (group === "exam") {
+            return "exam";
+        }
+
+        if (group === "treatment") {
+            return "treatment";
+        }
+
+        if (group === "support") {
+            return "support";
+        }
+
+        if (group === "disposition") {
+            return "disposition";
+        }
+
+        return "unknown";
+
+    }
+
+
+    looksLikeDiagnosis(text) {
+
+        const t = normalize(text);
+
+        const expressions = [
+
+            "diagnostico",
+            "hipotese diagnostica",
+            "hipotese",
+            "suspeito de",
+            "suspeita de",
+            "compativel com",
+            "trata-se de",
+            "provavelmente",
+            "considero que seja",
+            "considero como"
+
+        ];
+
+        return expressions.some(
+            expression =>
+                t.includes(
+                    normalize(expression)
                 )
-            ];
-
-
-        return {
-
-            instanceId:
-                `${source.id}_${Date.now()}_${Math.random()
-                    .toString(16)
-                    .slice(2)}`,
-
-            room,
-
-            sourceId:
-                source.id,
-
-            pathology:
-                source.pathology,
-
-            difficulty:
-                source.difficulty,
-
-            admission:
-                source.admission,
-
-            knowledge:
-                clone(source.knowledge),
-
-            structured:
-                clone(source.structured),
-
-            source
-
-        };
+        );
 
     }
 
@@ -1069,12 +739,19 @@ class CaseGenerator {
 
 class PatientState {
 
-    constructor(caseInstance) {
+    constructor(patient, model, possibilityEngine) {
 
-        this.case =
-            caseInstance;
+        this.patient =
+            patient;
+
+        this.model =
+            model;
+
+        this.possibilityEngine =
+            possibilityEngine;
 
         this.stability =
+            patient.vitals?.stability ??
             100;
 
         this.time =
@@ -1084,6 +761,9 @@ class PatientState {
             [];
 
         this.findings =
+            [];
+
+        this.revealedFindings =
             [];
 
         this.hypotheses =
@@ -1104,61 +784,23 @@ class PatientState {
         this.criticalErrors =
             0;
 
-        this.vitals =
-            this.extractVitals(
-                caseInstance.admission
-            );
-
-    }
-
-
-    extractVitals(text) {
-
-        const fc =
-            text.match(
-                /\bFC\s*[:=]?\s*(\d{2,3})/i
-            );
-
-
-        const spo2 =
-            text.match(
-                /\b(?:SpO2|Sat(?:uração)?|saturação)\s*[:=]?\s*(\d{2,3})/i
-            );
-
-
-        const pa =
-            text.match(
-                /\bPA\s*[:=]?\s*(\d{2,3})\s*[xX\/]\s*(\d{2,3})/i
-            );
-
-
-        const glucose =
-            text.match(
-                /\b(?:glicemia|glicose)\s*[:=]?\s*(\d{2,3})/i
-            );
-
-
-        return {
+        this.vitals = {
 
             fc:
-                fc
-                    ? `${fc[1]} bpm`
-                    : "—",
+                patient.vitals?.heartRate ??
+                "—",
 
             spo2:
-                spo2
-                    ? `${spo2[1]}%`
-                    : "—",
+                patient.vitals?.oxygenSaturation ??
+                "—",
 
             pa:
-                pa
-                    ? `${pa[1]}/${pa[2]} mmHg`
-                    : "—",
+                patient.vitals?.bloodPressure ??
+                "—",
 
             glucose:
-                glucose
-                    ? `${glucose[1]} mg/dL`
-                    : "—"
+                patient.vitals?.glucose ??
+                "—"
 
         };
 
@@ -1194,22 +836,30 @@ class PatientState {
             return false;
         }
 
+        const normalized =
+            normalize(
+                typeof finding === "string"
+                    ? finding
+                    : JSON.stringify(finding)
+            );
 
         if (
-            this.findings.includes(
-                finding
-            )
+            this.revealedFindings
+                .some(
+                    item =>
+                        normalize(
+                            String(item)
+                        ) === normalized
+                )
         ) {
 
             return false;
 
         }
 
-
-        this.findings.push(
+        this.revealedFindings.push(
             finding
         );
-
 
         return true;
 
@@ -1233,463 +883,203 @@ class PatientState {
 
 
 /* ============================================================
-   ACTION RESOLVER
+   CLINICAL ACTION / EVALUATION
    ============================================================ */
 
-class ActionResolver {
+class ClinicalEvaluator {
 
-    resolve(
-        text,
-        state
-    ) {
+    constructor(model, possibilityEngine) {
 
-        const normalized =
-            normalize(text);
+        this.model =
+            model;
 
-
-        const intents =
-            [];
-
-
-        for (
-            const [group, concepts]
-            of Object.entries(CSI)
-        ) {
-
-            for (
-                const [concept, synonyms]
-                of Object.entries(concepts)
-            ) {
-
-                const found =
-                    synonyms.some(
-                        synonym =>
-                            normalized.includes(
-                                normalize(synonym)
-                            )
-                    );
-
-
-                if (found) {
-
-                    intents.push({
-
-                        type:
-                            this.mapType(
-                                group
-                            ),
-
-                        concept,
-
-                        term:
-                            text,
-
-                        confidence:
-                            1
-
-                    });
-
-                }
-
-            }
-
-        }
-
-
-        /*
-         * Caso não seja claramente um exame,
-         * suporte ou tratamento, tentamos interpretar
-         * como declaração diagnóstica.
-         */
-
-        if (
-            this.looksLikeDiagnosis(
-                text,
-                state
-            )
-        ) {
-
-            intents.push({
-
-                type:
-                    "diagnosis",
-
-                concept:
-                    "diagnosis_statement",
-
-                term:
-                    text,
-
-                confidence:
-                    similarity(
-                        text,
-                        state.case.pathology
-                    )
-
-            });
-
-        }
-
-
-        if (
-            !intents.length
-        ) {
-
-            return [{
-
-                type:
-                    "unknown",
-
-                concept:
-                    "unknown",
-
-                term:
-                    text,
-
-                confidence:
-                    0
-
-            }];
-
-        }
-
-
-        /*
-         * Remove duplicações.
-         */
-
-        const unique = [];
-
-        const seen =
-            new Set();
-
-
-        for (
-            const intent
-            of intents
-        ) {
-
-            const key =
-                `${intent.type}:${intent.concept}`;
-
-
-            if (
-                !seen.has(key)
-            ) {
-
-                seen.add(key);
-
-                unique.push(
-                    intent
-                );
-
-            }
-
-        }
-
-
-        return unique;
+        this.engine =
+            possibilityEngine;
 
     }
 
 
-    mapType(group) {
-
-        if (
-            group === "exam"
-        ) {
-
-            return "exam";
-
-        }
-
-
-        if (
-            group === "treatment"
-        ) {
-
-            return "treatment";
-
-        }
-
-
-        if (
-            group === "support"
-        ) {
-
-            return "support";
-
-        }
-
-
-        if (
-            group === "disposition"
-        ) {
-
-            return "disposition";
-
-        }
-
-
-        return "unknown";
-
-    }
-
-
-    looksLikeDiagnosis(
-        text,
-        state
-    ) {
-
-        const t =
-            normalize(text);
-
-
-        const diagnosticExpressions = [
-
-            "diagnostico",
-            "hipotese",
-            "suspeito",
-            "compativel",
-            "trata-se de",
-            "provavelmente",
-            "considero"
-
-        ];
-
-
-        if (
-            diagnosticExpressions.some(
-                expression =>
-                    t.includes(
-                        normalize(expression)
-                    )
-            )
-        ) {
-
-            return true;
-
-        }
-
-
-        /*
-         * ATENÇÃO:
-         *
-         * Esta heurística continua existindo para
-         * compatibilidade com a V2.
-         *
-         * Porém, agora frases reconhecidas como
-         * meta-comandos nunca chegam aqui.
-         */
+    getPatientDiseaseId(state) {
 
         return (
-            t.length >= 8 &&
-            !this.containsKnownAction(
-                text
-            )
+            state.patient.condition?.id ||
+            null
         );
 
     }
 
 
-    containsKnownAction(
-        text
-    ) {
+    getDisease(state) {
 
-        const normalized =
-            normalize(text);
-
-
-        for (
-            const group
-            of Object.values(CSI)
-        ) {
-
-            for (
-                const synonyms
-                of Object.values(group)
-            ) {
-
-                for (
-                    const synonym
-                    of synonyms
-                ) {
-
-                    if (
-                        normalized.includes(
-                            normalize(synonym)
-                        )
-                    ) {
-
-                        return true;
-
-                    }
-
-                }
-
-            }
-
-        }
-
-
-        return false;
+        return this.model.getEntity(
+            this.getPatientDiseaseId(state)
+        );
 
     }
 
-}
+
+    entityText(entity) {
+
+        if (!entity) {
+            return "";
+        }
+
+        const parts = [
+
+            entity.id,
+            entity.name,
+            entity.label,
+            entity.canonical_name
+
+        ];
+
+        if (
+            Array.isArray(entity.aliases)
+        ) {
+
+            parts.push(
+                ...entity.aliases
+            );
+
+        }
+
+        return parts
+            .filter(Boolean)
+            .join(" ");
+
+    }
 
 
-/* ============================================================
-   EVALUATION ENGINE
-   ============================================================ */
-
-class EvaluationEngine {
-
-    matchAgainst(
+    actionMatchesEntity(
         input,
-        expected
+        entity
     ) {
 
-        const normalized =
-            normalize(input);
-
-
-        let best = {
-
-            matched:
-                false,
-
-            item:
-                null,
-
-            score:
-                0
-
-        };
-
-
-        for (
-            const item
-            of expected || []
-        ) {
-
-            const target =
-                normalize(item);
-
-
-            if (!target) {
-                continue;
-            }
-
-
-            if (
-                normalized.includes(
-                    target
-                ) ||
-                target.includes(
-                    normalized
-                )
-            ) {
-
-                return {
-
-                    matched:
-                        true,
-
-                    item,
-
-                    score:
-                        1
-
-                };
-
-            }
-
-
-            const score =
-                similarity(
-                    input,
-                    item
-                );
-
-
-            if (
-                score >
-                best.score
-            ) {
-
-                best = {
-
-                    matched:
-                        score >=
-                        CONFIG.similarityThreshold,
-
-                    item,
-
-                    score
-
-                };
-
-            }
-
-        }
-
-
-        return best;
+        return (
+            similarity(
+                input,
+                this.entityText(entity)
+            ) >=
+            CONFIG.similarityThreshold
+        );
 
     }
 
 
-    evaluateInvestigation(
+    evaluateExam(
         input,
         state
     ) {
 
-        const knowledge =
-            state.case
-                .knowledge
-                .investigation;
+        const disease =
+            this.getDisease(state);
+
+        if (!disease) {
+
+            return {
+                kind: "neutral",
+                points: 0,
+                stability: 0,
+                message:
+                    "Não há condição clínica vinculada ao estado."
+            };
+
+        }
 
 
-        const result =
-            this.matchAgainst(
-                input,
-                knowledge.expected
+        const investigations =
+            this.engine
+                .getPossibleInvestigations(
+                    disease.id
+                );
+
+
+        const selected =
+            investigations.find(
+                item =>
+                    this.actionMatchesEntity(
+                        input,
+                        item.entity
+                    )
             );
 
 
-        if (
-            result.matched
-        ) {
-
-            const newFinding =
-                state.addFinding(
-                    knowledge.success
-                );
-
+        if (!selected) {
 
             return {
 
                 kind:
-                    "correct",
+                    "neutral",
 
                 points:
-                    newFinding
-                        ? CONFIG.score.investigation
-                        : 2,
+                    CONFIG.score.irrelevant,
 
                 stability:
                     0,
 
                 message:
-                    newFinding
-                        ? (
-                            knowledge.success ||
-                            "Investigação adequada. Novo achado revelado."
-                        )
-                        : "Essa investigação já foi realizada."
+                    "Investigação registrada, mas ela não está vinculada de forma reconhecível à condição clínica atual."
 
             };
+
+        }
+
+
+        /*
+         * A investigação pode revelar um achado
+         * já presente nas possibilidades do paciente.
+         *
+         * Não inventamos um resultado numérico.
+         */
+
+        const possible =
+            state.patient.presentation || [];
+
+
+        if (possible.length) {
+
+            const unrevealed =
+                possible.filter(
+                    item =>
+                        !state.revealedFindings
+                            .some(
+                                revealed =>
+                                    JSON.stringify(
+                                        revealed
+                                    ) ===
+                                    JSON.stringify(
+                                        item
+                                    )
+                            )
+                );
+
+
+            if (unrevealed.length) {
+
+                const finding =
+                    unrevealed[0];
+
+                state.addFinding(
+                    finding
+                );
+
+                return {
+
+                    kind:
+                        "correct",
+
+                    points:
+                        CONFIG.score.investigation,
+
+                    stability:
+                        0,
+
+                    message:
+                        `Investigação adequada. Um novo achado clínico foi disponibilizado: ${describeClinicalObject(finding)}.`
+
+                };
+
+            }
 
         }
 
@@ -1697,16 +1087,16 @@ class EvaluationEngine {
         return {
 
             kind:
-                "neutral",
+                "correct",
 
             points:
-                CONFIG.score.irrelevant,
+                CONFIG.score.investigation,
 
             stability:
                 0,
 
             message:
-                "Investigação registrada, mas não há consequência configurada para este exame neste caso."
+                "Investigação clinicamente relacionada à condição atual."
 
         };
 
@@ -1718,21 +1108,35 @@ class EvaluationEngine {
         state
     ) {
 
-        const knowledge =
-            state.case
-                .knowledge
-                .diagnosis;
+        const disease =
+            this.getDisease(state);
 
+        if (!disease) {
 
-        const correct =
-            this.matchAgainst(
-                input,
-                knowledge.expected
-            );
+            return {
+
+                kind:
+                    "neutral",
+
+                points:
+                    0,
+
+                stability:
+                    0,
+
+                message:
+                    "Não foi possível determinar a condição clínica do paciente."
+
+            };
+
+        }
 
 
         if (
-            correct.matched
+            this.actionMatchesEntity(
+                input,
+                disease
+            )
         ) {
 
             return {
@@ -1747,24 +1151,31 @@ class EvaluationEngine {
                     0,
 
                 message:
-                    knowledge.success ||
-                    `Diagnóstico compatível com ${state.case.pathology}.`
+                    "Hipótese diagnóstica compatível com o estado clínico atual."
 
             };
 
         }
 
 
-        const distractor =
-            this.matchAgainst(
-                input,
-                knowledge.distractors
+        const differentials =
+            this.engine
+                .getDifferentialEntities(
+                    disease.id
+                );
+
+
+        const isDifferential =
+            differentials.some(
+                item =>
+                    this.actionMatchesEntity(
+                        input,
+                        item.entity
+                    )
             );
 
 
-        if (
-            distractor.matched
-        ) {
+        if (isDifferential) {
 
             return {
 
@@ -1775,43 +1186,10 @@ class EvaluationEngine {
                     CONFIG.score.wrongDiagnosis,
 
                 stability:
-                    -8,
+                    -3,
 
                 message:
-                    knowledge.error ||
-                    "Hipótese diagnóstica inadequada para o estado clínico atual."
-
-            };
-
-        }
-
-
-        /*
-         * Fallback:
-         * compara diretamente com a patologia.
-         */
-
-        if (
-            similarity(
-                input,
-                state.case.pathology
-            ) >= 0.58
-        ) {
-
-            return {
-
-                kind:
-                    "correct",
-
-                points:
-                    CONFIG.score.diagnosis,
-
-                stability:
-                    0,
-
-                message:
-                    knowledge.success ||
-                    `Diagnóstico compatível com ${state.case.pathology}.`
+                    "Essa hipótese pertence ao espaço diferencial, mas não corresponde à condição clínica que está governando este paciente."
 
             };
 
@@ -1830,7 +1208,7 @@ class EvaluationEngine {
                 0,
 
             message:
-                "Hipótese registrada, mas ainda não corresponde ao diagnóstico-alvo configurado."
+                "Hipótese registrada, mas não corresponde ao modelo clínico atual."
 
         };
 
@@ -1842,53 +1220,55 @@ class EvaluationEngine {
         state
     ) {
 
-        const knowledge =
-            state.case
-                .knowledge
-                .treatment;
+        const disease =
+            this.getDisease(state);
 
-
-        /*
-         * Red flag é avaliada ANTES da resposta correta.
-         */
-
-        if (
-            containsPhrase(
-                input,
-                knowledge.redFlags
-            )
-        ) {
+        if (!disease) {
 
             return {
 
                 kind:
-                    "danger",
+                    "neutral",
 
                 points:
-                    CONFIG.score.redFlag,
+                    0,
 
                 stability:
-                    -25,
+                    0,
 
                 message:
-                    knowledge.error ||
-                    "Conduta configurada como red flag neste caso. O estado clínico sofreu deterioração."
+                    "Não há condição clínica definida para avaliar a conduta."
 
             };
 
         }
 
 
-        const result =
-            this.matchAgainst(
-                input,
-                knowledge.expected
+        const treatments =
+            this.engine
+                .getPossibleTreatments(
+                    disease.id
+                );
+
+
+        const selected =
+            treatments.find(
+                item =>
+                    this.actionMatchesEntity(
+                        input,
+                        item.entity
+                    ) ||
+                    similarity(
+                        input,
+                        this.entityText(
+                            item.entity
+                        )
+                    ) >=
+                    CONFIG.similarityThreshold
             );
 
 
-        if (
-            result.matched
-        ) {
+        if (selected) {
 
             return {
 
@@ -1902,13 +1282,18 @@ class EvaluationEngine {
                     0,
 
                 message:
-                    knowledge.success ||
-                    "Conduta adequada reconhecida pelo modelo."
+                    "Conduta reconhecida como uma intervenção relacionada à condição clínica."
 
             };
 
         }
 
+
+        /*
+         * CSI continua sendo útil para reconhecer
+         * ações clínicas genéricas mesmo quando a KB
+         * ainda não possui a intervenção estruturada.
+         */
 
         return {
 
@@ -1922,7 +1307,7 @@ class EvaluationEngine {
                 -1,
 
             message:
-                "Conduta registrada, mas não corresponde às condutas configuradas para este cenário."
+                "Conduta registrada, mas não foi possível vinculá-la às intervenções disponíveis na Knowledge Base."
 
         };
 
@@ -1943,7 +1328,55 @@ class EvaluationEngine {
                 0,
 
             message:
-                "Medida de suporte registrada no estado do paciente."
+                "Medida de suporte registrada."
+
+        };
+
+    }
+
+
+    evaluateDisposition(
+        input,
+        state
+    ) {
+
+        if (
+            normalize(input).includes("alta") &&
+            state.stability < 70
+        ) {
+
+            return {
+
+                kind:
+                    "danger",
+
+                points:
+                    CONFIG.score.redFlag,
+
+                stability:
+                    -20,
+
+                message:
+                    "A disposição proposta é incompatível com a estabilidade atual do paciente."
+
+            };
+
+        }
+
+
+        return {
+
+            kind:
+                "neutral",
+
+            points:
+                0,
+
+            stability:
+                0,
+
+            message:
+                "Disposição registrada. A adequação final depende do estado clínico."
 
         };
 
@@ -1958,10 +1391,13 @@ class EvaluationEngine {
 
 class ConsequenceEngine {
 
-    constructor() {
+    constructor(model, possibilityEngine) {
 
         this.evaluator =
-            new EvaluationEngine();
+            new ClinicalEvaluator(
+                model,
+                possibilityEngine
+            );
 
     }
 
@@ -1974,18 +1410,15 @@ class ConsequenceEngine {
         let result;
 
 
-        switch (
-            intent.type
-        ) {
+        switch (intent.type) {
 
             case "exam":
 
                 result =
-                    this.evaluator
-                        .evaluateInvestigation(
-                            intent.term,
-                            state
-                        );
+                    this.evaluator.evaluateExam(
+                        intent.term,
+                        state
+                    );
 
                 break;
 
@@ -1993,12 +1426,10 @@ class ConsequenceEngine {
             case "diagnosis":
 
                 result =
-                    this.evaluator
-                        .evaluateDiagnosis(
-                            intent.term,
-                            state
-                        );
-
+                    this.evaluator.evaluateDiagnosis(
+                        intent.term,
+                        state
+                    );
 
                 if (
                     result.kind ===
@@ -2016,12 +1447,10 @@ class ConsequenceEngine {
             case "treatment":
 
                 result =
-                    this.evaluator
-                        .evaluateTreatment(
-                            intent.term,
-                            state
-                        );
-
+                    this.evaluator.evaluateTreatment(
+                        intent.term,
+                        state
+                    );
 
                 if (
                     result.kind ===
@@ -2039,29 +1468,18 @@ class ConsequenceEngine {
             case "support":
 
                 result =
-                    this.evaluator
-                        .evaluateSupport();
+                    this.evaluator.evaluateSupport();
 
                 break;
 
 
             case "disposition":
 
-                result = {
-
-                    kind:
-                        "neutral",
-
-                    points:
-                        0,
-
-                    stability:
-                        0,
-
-                    message:
-                        "Disposição registrada. A adequação depende do estado clínico e da Knowledge Base."
-
-                };
+                result =
+                    this.evaluator.evaluateDisposition(
+                        intent.term,
+                        state
+                    );
 
                 break;
 
@@ -2080,7 +1498,7 @@ class ConsequenceEngine {
                         0,
 
                     message:
-                        "Não consegui identificar uma intenção clínica reconhecida."
+                        "Não consegui identificar uma ação clínica reconhecida."
 
                 };
 
@@ -2095,7 +1513,6 @@ class ConsequenceEngine {
         state.record({
 
             intent,
-
             result
 
         });
@@ -2109,56 +1526,244 @@ class ConsequenceEngine {
 
 
 /* ============================================================
-   ENGINE PRINCIPAL
+   AUXILIAR — DESCRIÇÃO
    ============================================================ */
 
-class DiagnosisEngineV2 {
+function describeClinicalObject(object) {
+
+    if (!object) {
+        return "achado clínico";
+    }
+
+
+    if (typeof object === "string") {
+        return object;
+    }
+
+
+    if (object.entity) {
+
+        return (
+            object.entity.name ||
+            object.entity.label ||
+            object.entity.canonical_name ||
+            object.entity.id ||
+            "achado clínico"
+        );
+
+    }
+
+
+    if (object.source) {
+
+        return describeClinicalObject(
+            object.source
+        );
+
+    }
+
+
+    if (object.name) {
+        return object.name;
+    }
+
+    if (object.label) {
+        return object.label;
+    }
+
+    if (object.id) {
+        return object.id;
+    }
+
+
+    /*
+     * Para padrões estruturados, evitamos despejar
+     * o JSON inteiro na interface.
+     */
+
+    if (
+        object.finding ||
+        object.description ||
+        object.pattern
+    ) {
+
+        return (
+            object.finding ||
+            object.description ||
+            object.pattern
+        );
+
+    }
+
+
+    return "novo achado clínico";
+
+}
+
+
+/* ============================================================
+   CASE VIEW
+   ============================================================
+
+   O paciente contém a doença real.
+
+   A interface NÃO recebe a doença.
+
+   Ela recebe somente uma projeção inicial do paciente.
+   ============================================================ */
+
+function buildAdmission(patient) {
+
+    const age =
+        patient.demographics?.age ??
+        "idade não especificada";
+
+    const sex =
+        patient.demographics?.sex === "female"
+            ? "feminino"
+            : "masculino";
+
+    const severity =
+        patient.severity || null;
+
+
+    const presentation =
+        Array.isArray(patient.presentation)
+            ? patient.presentation
+            : [];
+
+
+    const findings =
+        presentation
+            .map(
+                item =>
+                    describeClinicalObject(item)
+            )
+            .filter(Boolean);
+
+
+    let text =
+        `Paciente ${age} anos, sexo ${sex}.`;
+
+
+    if (severity) {
+
+        text +=
+            ` Estado clínico inicialmente classificado como ${translateSeverity(severity)}.`;
+
+    }
+
+
+    if (findings.length) {
+
+        text +=
+            ` Apresenta ${joinNatural(findings)}.`;
+
+    } else {
+
+        text +=
+            " Apresentação clínica inicial ainda pouco caracterizada.";
+
+    }
+
+
+    text +=
+        " Avalie o paciente e conduza a investigação conforme o quadro apresentado.";
+
+
+    return text;
+
+}
+
+
+function translateSeverity(value) {
+
+    const map = {
+
+        mild: "leve",
+
+        moderate:
+            "moderado",
+
+        severe:
+            "grave"
+
+    };
+
+
+    return map[value] || value;
+
+}
+
+
+function joinNatural(items) {
+
+    if (!items.length) {
+        return "";
+    }
+
+    if (items.length === 1) {
+        return items[0];
+    }
+
+    if (items.length === 2) {
+        return `${items[0]} e ${items[1]}`;
+    }
+
+    return (
+        items
+            .slice(0, -1)
+            .join(", ") +
+        " e " +
+        items[items.length - 1]
+    );
+
+}
+
+
+/* ============================================================
+   DIAGNOSIS ENGINE
+   ============================================================ */
+
+class DiagnosisEngine {
 
     constructor() {
 
         this.room =
             this.getRoom();
 
-
-        this.pool =
+        this.knowledgeBases =
             [];
 
+        this.models =
+            [];
 
-        this.case =
+        this.possibilityEngines =
+            [];
+
+        this.patientGenerator =
             null;
 
+        this.model =
+            null;
+
+        this.possibilityEngine =
+            null;
+
+        this.patient =
+            null;
 
         this.state =
             null;
 
-
         this.score =
             0;
-
-
-        /*
-         * V3:
-         * Intent Engine fica antes do Action Resolver.
-         */
 
         this.intentEngine =
             new IntentEngine();
 
-
         this.resolver =
             new ActionResolver();
-
-
-        this.consequence =
-            new ConsequenceEngine();
-
-
-        /*
-         * Preparação para a próxima etapa.
-         *
-         * Ainda não é o Episode Manager.
-         * Apenas mantemos o contexto atual.
-         */
 
         this.clinicalContext = {
 
@@ -2166,16 +1771,9 @@ class DiagnosisEngineV2 {
                 "emergency",
 
             status:
-                "active",
-
-            objectives: [
-                "stabilize_patient",
-                "identify_clinical_problem",
-                "treat_acute_threat"
-            ]
+                "active"
 
         };
-
 
         this.bindUI();
 
@@ -2189,24 +1787,16 @@ class DiagnosisEngineV2 {
                 window.location.search
             );
 
-
         const requested =
             params.get("sala") ||
             "vermelha";
 
 
-        if (
-            ARQUIVOS_POR_SALA[
-                requested
-            ]
-        ) {
-
-            return requested;
-
-        }
-
-
-        return "vermelha";
+        return (
+            ARQUIVOS_POR_SALA[requested]
+                ? requested
+                : "vermelha"
+        );
 
     }
 
@@ -2292,18 +1882,25 @@ class DiagnosisEngineV2 {
 
         this.log(
             "system",
-            "ENGINE",
-            "Inicializando Knowledge Loader..."
+            "DIAGNOSIS",
+            "Inicializando motor clínico procedural..."
         );
 
 
         await this.loadKnowledgeBase();
 
 
+        this.buildClinicalEngines();
+
+
         await this.loadNewCase();
 
     }
 
+
+    /* ========================================================
+       KNOWLEDGE BASE
+       ======================================================== */
 
     async loadKnowledgeBase() {
 
@@ -2313,58 +1910,75 @@ class DiagnosisEngineV2 {
             ];
 
 
-        const errors =
+        this.knowledgeBases =
             [];
 
 
-        for (
-            const file
-            of files
-        ) {
+        for (const file of files) {
 
             try {
 
-                const response =
-                    await fetch(
-                        file,
-                        {
-                            cache:
-                                "no-store"
-                        }
-                    );
+                const loaded =
+                    await KnowledgeBaseLoader
+                        .load(file);
+
+
+                console.log(
+                    "Diagnosis KB:",
+                    loaded
+                );
 
 
                 if (
-                    !response.ok
+                    loaded.type ===
+                    "knowledge_base" &&
+                    loaded.valid
                 ) {
 
-                    throw new Error(
-                        `HTTP ${response.status}`
+                    this.knowledgeBases.push({
+
+                        file,
+
+                        data:
+                            loaded.data
+
+                    });
+
+
+                    this.log(
+                        "system",
+                        "KB",
+                        `${file} reconhecida como Knowledge Base estruturada.`
+                    );
+
+                }
+
+                else if (
+                    loaded.type ===
+                    "legacy"
+                ) {
+
+                    console.warn(
+                        `Diagnosis: ${file} ainda está no formato legado e não participa da geração procedural.`
+                    );
+
+                }
+
+                else {
+
+                    console.warn(
+                        `Diagnosis: ${file} possui estrutura não reconhecida.`,
+                        loaded.errors
                     );
 
                 }
 
 
-                const json =
-                    await response.json();
-
-
-                const adapted =
-                    KnowledgeAdapter.adaptFile(
-                        json,
-                        file
-                    );
-
-
-                this.pool.push(
-                    ...adapted
-                );
-
-
             } catch (error) {
 
-                errors.push(
-                    `${file}: ${error.message}`
+                console.warn(
+                    `Diagnosis: falha ao carregar ${file}`,
+                    error
                 );
 
             }
@@ -2373,30 +1987,11 @@ class DiagnosisEngineV2 {
 
 
         if (
-            !this.pool.length
+            !this.knowledgeBases.length
         ) {
 
             throw new Error(
-                "Nenhuma unidade clínica foi carregada. Verifique os caminhos dos JSONs e se o projeto está sendo servido por HTTP/HTTPS."
-            );
-
-        }
-
-
-        this.log(
-            "system",
-            "KNOWLEDGE BASE",
-            `${this.pool.length} unidade(s) clínicas carregadas.`
-        );
-
-
-        if (
-            errors.length
-        ) {
-
-            console.warn(
-                "Falhas da Knowledge Base:",
-                errors
+                "Nenhuma Knowledge Base estruturada foi encontrada. Verifique os JSONs e os caminhos dos arquivos."
             );
 
         }
@@ -2404,32 +1999,205 @@ class DiagnosisEngineV2 {
     }
 
 
-    async loadNewCase() {
+    /* ========================================================
+       CONSTRUÇÃO DOS MOTORES
+       ======================================================== */
 
-        if (
-            !this.pool.length
+    buildClinicalEngines() {
+
+        this.models =
+            [];
+
+        this.possibilityEngines =
+            [];
+
+
+        for (
+            const item
+            of this.knowledgeBases
         ) {
 
-            return;
+            const model =
+                new ClinicalModel(
+                    item.data
+                );
+
+
+            const possibilityEngine =
+                new PossibilityEngine(
+                    model
+                );
+
+
+            this.models.push(
+                model
+            );
+
+
+            this.possibilityEngines.push(
+                possibilityEngine
+            );
 
         }
 
 
-        const generator =
-            new CaseGenerator(
-                this.pool
+        /*
+         * Por enquanto usamos um modelo unificado para
+         * a geração da instância atual.
+         *
+         * O próximo refinamento pode transformar isso em
+         * um Clinical Registry global.
+         */
+
+        this.model =
+            this.models[0];
+
+
+        this.possibilityEngine =
+            this.possibilityEngines[0];
+
+
+        /*
+         * O PatientGenerator trabalha sobre o modelo
+         * atual. Para não perder os outros domínios,
+         * criamos um gerador por modelo.
+         */
+
+        this.patientGenerators =
+            this.possibilityEngines.map(
+                engine =>
+                    new PatientGenerator(
+                        engine
+                    )
             );
 
 
-        this.case =
-            generator.generate(
-                this.room
+        this.log(
+            "system",
+            "CLINICAL MODEL",
+            `${this.models.length} modelo(s) clínico(s) construído(s).`
+        );
+
+
+        for (
+            let i = 0;
+            i < this.models.length;
+            i++
+        ) {
+
+            const summary =
+                this.possibilityEngines[i]
+                    .summary();
+
+
+            console.log(
+                "Diagnosis Clinical Model:",
+                summary
             );
+
+        }
+
+    }
+
+
+    /* ========================================================
+       PACIENTE PROCEDURAL
+       ======================================================== */
+
+    generatePatient() {
+
+        if (
+            !this.patientGenerators ||
+            !this.patientGenerators.length
+        ) {
+
+            throw new Error(
+                "PatientGenerator não foi inicializado."
+            );
+
+        }
+
+
+        /*
+         * Escolhemos aleatoriamente um domínio clínico
+         * que tenha doenças utilizáveis.
+         */
+
+        const available =
+            this.patientGenerators
+                .map(
+                    (generator, index) => ({
+
+                        generator,
+
+                        index,
+
+                        diseases:
+                            generator.engine
+                                .getDiseaseEntities()
+
+                    })
+                )
+                .filter(
+                    item =>
+                        item.diseases.length > 0
+                );
+
+
+        if (!available.length) {
+
+            throw new Error(
+                "Nenhuma doença disponível nas Knowledge Bases estruturadas."
+            );
+
+        }
+
+
+        const selected =
+            available[
+                Math.floor(
+                    Math.random() *
+                    available.length
+                )
+            ];
+
+
+        this.model =
+            selected.generator.model;
+
+
+        this.possibilityEngine =
+            selected.generator.engine;
+
+
+        this.patientGenerator =
+            selected.generator;
+
+
+        return this.patientGenerator.generate();
+
+    }
+
+
+    /* ========================================================
+       NOVO CASO
+       ======================================================== */
+
+    async loadNewCase() {
+
+        const patient =
+            this.generatePatient();
+
+
+        this.patient =
+            patient;
 
 
         this.state =
             new PatientState(
-                this.case
+                patient,
+                this.model,
+                this.possibilityEngine
             );
 
 
@@ -2437,44 +2205,50 @@ class DiagnosisEngineV2 {
             0;
 
 
-        /*
-         * Cada novo caso começa novamente
-         * no contexto de emergência.
-         */
-
         this.clinicalContext = {
 
             setting:
                 "emergency",
 
             status:
-                "active",
-
-            objectives: [
-                "stabilize_patient",
-                "identify_clinical_problem",
-                "treat_acute_threat"
-            ]
+                "active"
 
         };
 
 
+        /*
+         * A doença permanece PRIVADA no objeto patient.
+         *
+         * A interface recebe somente a apresentação.
+         */
+
+        const admission =
+            buildAdmission(
+                patient
+            );
+
+
+        this.state.initialAdmission =
+            admission;
+
+
         this.setText(
             "caseTitle",
-            this.case.pathology
+            "Novo paciente"
         );
 
 
         this.setText(
             "caseIntro",
-            this.case.admission ||
-            "Sem apresentação inicial."
+            admission
         );
 
 
         this.setText(
             "difficultyLabel",
-            this.case.difficulty
+            translateSeverity(
+                patient.severity
+            )
         );
 
 
@@ -2485,10 +2259,7 @@ class DiagnosisEngineV2 {
 
 
         if (log) {
-
-            log.innerHTML =
-                "";
-
+            log.innerHTML = "";
         }
 
 
@@ -2497,15 +2268,15 @@ class DiagnosisEngineV2 {
 
         this.log(
             "system",
-            "CASO RECEBIDO",
-            `Nova instância clínica gerada a partir do conhecimento: ${this.case.pathology}.`
+            "NOVO CASO",
+            "Paciente gerado proceduralmente a partir da Knowledge Base."
         );
 
 
         this.log(
             "system",
             "SITUAÇÃO INICIAL",
-            "A partir daqui, suas ações são interpretadas em tempo real. Não existe mais uma sequência fixa de fases."
+            "A doença não é revelada. Investigue, formule hipóteses e conduza o paciente."
         );
 
 
@@ -2515,35 +2286,15 @@ class DiagnosisEngineV2 {
 
 
     /* ========================================================
-       PROCESSAMENTO PRINCIPAL
-
-       V3:
-       1. Intent Engine
-       2. Meta-comando?
-       3. Se não, Action Resolver
-       4. Consequence Engine
+       AÇÃO PRINCIPAL
        ======================================================== */
 
     processAction() {
 
         if (
-            !this.state
-        ) {
-
-            return;
-
-        }
-
-
-        if (
+            !this.state ||
             this.state.completed
         ) {
-
-            this.log(
-                "warn",
-                "ENGINE",
-                "Este caso já foi encerrado."
-            );
 
             return;
 
@@ -2560,9 +2311,7 @@ class DiagnosisEngineV2 {
 
 
         if (!input) {
-
             return;
-
         }
 
 
@@ -2577,126 +2326,74 @@ class DiagnosisEngineV2 {
 
 
         /*
-         * =====================================================
-         * CAMADA 1 — INTENÇÃO
-         * =====================================================
+         * PRIMEIRA CAMADA:
+         * intenção/meta-comando.
          */
 
-        const metaIntent =
+        const meta =
             this.intentEngine
                 .interpret(input);
 
 
-        /*
-         * -----------------------------------------------------
-         * NOTA / AVALIAÇÃO
-         * -----------------------------------------------------
-         */
-
         if (
-            metaIntent.type ===
+            meta.type ===
             "REQUEST_SCORE"
         ) {
 
             this.showScore();
-
             return;
 
         }
 
 
-        /*
-         * -----------------------------------------------------
-         * SEGUIMENTO
-         * -----------------------------------------------------
-         */
-
         if (
-            metaIntent.type ===
+            meta.type ===
             "REQUEST_FOLLOW_UP"
         ) {
 
-            this.handleFollowUpQuestion();
-
+            this.handleFollowUp();
             return;
 
         }
 
 
-        /*
-         * -----------------------------------------------------
-         * INFORMAÇÕES DISPONÍVEIS
-         * -----------------------------------------------------
-         */
-
         if (
-            metaIntent.type ===
+            meta.type ===
             "REQUEST_INFORMATION"
         ) {
 
             this.showCurrentInformation();
-
             return;
 
         }
 
 
-        /*
-         * -----------------------------------------------------
-         * DICA
-         * -----------------------------------------------------
-         */
-
         if (
-            metaIntent.type ===
+            meta.type ===
             "REQUEST_HINT"
         ) {
 
             this.requestHint();
-
             return;
 
         }
 
 
-        /*
-         * -----------------------------------------------------
-         * FINALIZAÇÃO
-         * -----------------------------------------------------
-         *
-         * Por enquanto usamos o encerramento antigo.
-         *
-         * Na próxima camada isso será substituído pelo
-         * Episode Manager + fechamento de contexto.
-         */
-
         if (
-            metaIntent.type ===
+            meta.type ===
             "REQUEST_FINISH"
         ) {
 
             this.finishCase();
-
             return;
 
         }
 
 
         /*
-         * =====================================================
-         * CAMADA 2 — AÇÃO CLÍNICA
-         * =====================================================
+         * SEGUNDA CAMADA:
+         * ação clínica.
          */
-
-        if (
-            metaIntent.type !==
-            "CLINICAL_ACTION"
-        ) {
-
-            return;
-
-        }
-
 
         const intents =
             this.resolver.resolve(
@@ -2715,8 +2412,15 @@ class DiagnosisEngineV2 {
             );
 
 
+            const consequence =
+                new ConsequenceEngine(
+                    this.model,
+                    this.possibilityEngine
+                );
+
+
             const result =
-                this.consequence.apply(
+                consequence.apply(
                     intent,
                     this.state
                 );
@@ -2760,7 +2464,6 @@ class DiagnosisEngineV2 {
                 messageType =
                     "danger";
 
-
                 this.state.criticalErrors++;
 
             }
@@ -2777,12 +2480,154 @@ class DiagnosisEngineV2 {
         }
 
 
+        /*
+         * Estado crítico.
+         */
+
         if (
             this.state.stability <= 0
         ) {
 
             this.finishCase(
                 true
+            );
+
+            return;
+
+        }
+
+
+        this.render();
+
+    }
+
+
+    /* ========================================================
+       INFORMAÇÕES
+       ======================================================== */
+
+    showCurrentInformation() {
+
+        if (!this.state) {
+            return;
+        }
+
+
+        const findings =
+            this.state.revealedFindings
+                .map(
+                    item =>
+                        describeClinicalObject(
+                            item
+                        )
+                );
+
+
+        let message =
+
+            `Estabilidade: ${this.state.stability}%.\n` +
+
+            `Tempo: ${this.state.time} min.\n`;
+
+
+        if (findings.length) {
+
+            message +=
+                `Achados disponíveis: ${joinNatural(findings)}.`;
+
+        } else {
+
+            message +=
+                "Nenhum achado adicional foi revelado.";
+
+        }
+
+
+        this.log(
+            "system",
+            "INFORMAÇÕES DISPONÍVEIS",
+            message
+        );
+
+    }
+
+
+    /* ========================================================
+       SEGUIMENTO
+       ======================================================== */
+
+    handleFollowUp() {
+
+        if (
+            !this.state
+        ) {
+            return;
+        }
+
+
+        if (
+            !this.state.diagnosisEstablished
+        ) {
+
+            this.log(
+                "system",
+                "SEGUIMENTO",
+                "O paciente ainda está em investigação. Antes do seguimento definitivo, é necessário estabelecer melhor o problema clínico."
+            );
+
+            return;
+
+        }
+
+
+        if (
+            !this.state.treatmentPerformed
+        ) {
+
+            this.log(
+                "system",
+                "SEGUIMENTO",
+                "O diagnóstico foi reconhecido, mas a etapa terapêutica ainda não foi estabelecida."
+            );
+
+            return;
+
+        }
+
+
+        this.clinicalContext.setting =
+            "followup";
+
+
+        const disease =
+            this.model.getEntity(
+                this.patient.condition.id
+            );
+
+
+        const evolution =
+            this.possibilityEngine
+                .getEvolution(
+                    disease?.id
+                );
+
+
+        if (evolution) {
+
+            this.log(
+                "system",
+                "SEGUIMENTO",
+                describeClinicalObject(
+                    evolution
+                )
+            );
+
+        } else {
+
+            this.log(
+                "system",
+                "SEGUIMENTO",
+                "A Knowledge Base atual não possui informações estruturadas suficientes para determinar o seguimento específico deste paciente."
             );
 
         }
@@ -2794,196 +2639,163 @@ class DiagnosisEngineV2 {
 
 
     /* ========================================================
-       META-COMANDOS
+       SCORE
        ======================================================== */
-
 
     showScore() {
 
-        if (
-            !this.state
-        ) {
-
+        if (!this.state) {
             return;
-
         }
-
-
-        const message =
-
-            `Pontuação atual: ${this.score} pontos.\n` +
-
-            `Tempo decorrido: ${this.state.time} min.\n` +
-
-            `Estabilidade: ${this.state.stability}%.\n` +
-
-            `Achados revelados: ${this.state.findings.length}.\n` +
-
-            `Erros críticos: ${this.state.criticalErrors}.`;
 
 
         this.log(
             "system",
             "AVALIAÇÃO ATUAL",
-            message
+
+            `Pontuação: ${this.score} pontos.
+Tempo: ${this.state.time} min.
+Estabilidade: ${this.state.stability}%.
+Achados revelados: ${this.state.revealedFindings.length}.
+Erros críticos: ${this.state.criticalErrors}.`
+
         );
-
-
-        return {
-
-            type:
-                "score",
-
-            score:
-                this.score
-
-        };
-
-    }
-
-
-    handleFollowUpQuestion() {
-
-        const context =
-            this.clinicalContext?.setting ||
-            "emergency";
-
-
-        let message;
-
-
-        if (
-            context ===
-            "emergency"
-        ) {
-
-            message =
-                "O paciente ainda está no contexto de emergência. O objetivo atual é controlar a ameaça aguda e estabilizar o paciente. O seguimento definitivo será avaliado após o controle do episódio agudo.";
-
-        } else if (
-            context ===
-            "inpatient"
-        ) {
-
-            message =
-                "O episódio agudo foi controlado. Agora o foco pode migrar para confirmação diagnóstica, investigação etiológica e tratamento definitivo.";
-
-        } else if (
-            context ===
-            "outpatient"
-        ) {
-
-            message =
-                "O paciente está em acompanhamento ambulatorial. O foco agora é tratamento de manutenção, prevenção de recorrência e monitorização.";
-
-        } else {
-
-            message =
-                "O próximo passo depende do contexto clínico atual e da evolução do paciente.";
-
-        }
-
-
-        this.log(
-            "system",
-            "SEGUIMENTO",
-            message
-        );
-
-
-        return {
-
-            type:
-                "follow_up",
-
-            context,
-
-            message
-
-        };
-
-    }
-
-
-    showCurrentInformation() {
-
-        if (
-            !this.state
-        ) {
-
-            return;
-
-        }
-
-
-        const findings =
-            this.state.findings.length
-                ? this.state.findings.join(
-                    ", "
-                )
-                : "Nenhum achado adicional foi revelado ainda.";
-
-
-        const message =
-
-            `Contexto atual: ${this.clinicalContext.setting}.\n` +
-
-            `Estabilidade: ${this.state.stability}%.\n` +
-
-            `Achados revelados: ${findings}.`;
-
-
-        this.log(
-            "system",
-            "INFORMAÇÕES DISPONÍVEIS",
-            message
-        );
-
-
-        return {
-
-            type:
-                "information",
-
-            findings:
-                this.state.findings
-
-        };
 
     }
 
 
     /* ========================================================
-       ENCERRAMENTO LEGADO
+       DICA
        ======================================================== */
 
-    isFinishCommand(
-        input
-    ) {
+    requestHint() {
 
-        const text =
-            normalize(input);
+        if (!this.state) {
+            return;
+        }
 
 
-        return [
+        this.state.helpUsed++;
 
-            "finalizar",
-            "finalizar caso",
-            "encerrar",
-            "encerrar caso",
-            "terminar caso"
+        this.score +=
+            CONFIG.score.hint;
 
-        ].some(
-            command =>
-                text === command
+
+        let hint;
+
+
+        if (
+            !this.state.revealedFindings.length
+        ) {
+
+            hint =
+                "Comece pela investigação que mais pode reduzir a incerteza diante da apresentação.";
+
+        }
+
+        else if (
+            !this.state.diagnosisEstablished
+        ) {
+
+            hint =
+                "Use os achados disponíveis para construir uma hipótese diagnóstica explícita.";
+
+        }
+
+        else if (
+            !this.state.treatmentPerformed
+        ) {
+
+            hint =
+                "Com a hipótese definida, procure uma intervenção compatível com a condição clínica.";
+
+        }
+
+        else {
+
+            hint =
+                "Revise estabilidade, evolução e disposição.";
+
+        }
+
+
+        this.log(
+            "warn",
+            "DICA",
+            `${hint} (${CONFIG.score.hint} pontos)`
         );
+
+
+        this.render();
 
     }
 
 
-    finishCase(
-        forced = false
-    ) {
+    /* ========================================================
+       BASE CIENTÍFICA
+       ======================================================== */
+
+    scientificBase() {
+
+        if (!this.patient) {
+            return;
+        }
+
+
+        const disease =
+            this.model.getEntity(
+                this.patient.condition.id
+            );
+
+
+        const pathophysiology =
+            this.possibilityEngine
+                .getPathophysiology(
+                    disease?.id
+                );
+
+
+        /*
+         * A base científica pode mostrar a doença aqui,
+         * porque o botão é um modo de estudo e não a
+         * apresentação inicial do paciente.
+         */
+
+        const text = [
+
+            `Condição clínica: ${
+                disease?.name ||
+                disease?.label ||
+                disease?.id ||
+                "não identificada"
+            }`,
+
+            "",
+
+            pathophysiology
+                ? `Fisiopatologia:\n${describeClinicalObject(pathophysiology)}`
+                : "Fisiopatologia não estruturada.",
+
+            "",
+
+            `Knowledge Base: ${
+                this.model.schemaVersion ||
+                "versão não informada"
+            }`
+
+        ].join("\n");
+
+
+        alert(text);
+
+    }
+
+
+    /* ========================================================
+       ENCERRAMENTO
+       ======================================================== */
+
+    finishCase(forced = false) {
 
         if (
             !this.state ||
@@ -3003,6 +2815,12 @@ class DiagnosisEngineV2 {
             "completed";
 
 
+        const disease =
+            this.model.getEntity(
+                this.patient.condition.id
+            );
+
+
         this.log(
             this.state.stability > 0
                 ? "success"
@@ -3011,181 +2829,60 @@ class DiagnosisEngineV2 {
             "CASO ENCERRADO",
 
             `Pontuação: ${this.score} pts | Tempo: ${this.state.time} min | Estabilidade: ${this.state.stability}%`
-
         );
 
 
-        const discussion =
-            this.case
-                .knowledge
-                .discussion ||
-            {};
-
-
-        const debrief =
-
-            [
-
-                discussion.takeaway
-                    ? `Mensagem-chave:\n${discussion.takeaway}`
-                    : "",
-
-                discussion.pathophysiology
-                    ? `Fisiopatologia:\n${discussion.pathophysiology}`
-                    : ""
-
-            ]
-
-            .filter(Boolean)
-            .join("\n\n");
-
-
-        if (
-            debrief
-        ) {
-
-            this.log(
-                "system",
-                "DEBRIEFING",
-                debrief
-            );
-
-        } else if (
-            !forced
-        ) {
-
-            this.log(
-                "system",
-                "DEBRIEFING",
-                "Este caso ainda não possui debriefing configurado."
-            );
-
-        }
-
-
-        this.render();
-
-    }
-
-
-    /* ========================================================
-       DICA
-       ======================================================== */
-
-    requestHint() {
-
-        if (
-            !this.state
-        ) {
-
-            return;
-
-        }
-
-
-        this.state.helpUsed++;
-
-
-        this.score +=
-            CONFIG.score.hint;
-
-
-        let hint;
-
-
-        if (
-            !this.state.findings.length
-        ) {
-
-            hint =
-                "Pense na investigação que mais reduz a incerteza diante da apresentação inicial.";
-
-        } else if (
-            !this.state.diagnosisEstablished
-        ) {
-
-            hint =
-                "Use os achados já revelados para formular uma hipótese diagnóstica explícita.";
-
-        } else if (
-            !this.state.treatmentPerformed
-        ) {
-
-            hint =
-                "Com o diagnóstico em mente, procure a conduta que modifica o desfecho e evite red flags.";
-
-        } else {
-
-            hint =
-                "Revise segurança, evolução e disposição antes de encerrar.";
-
-        }
-
+        /*
+         * Somente agora, depois do caso encerrado,
+         * podemos revelar a condição geradora.
+         */
 
         this.log(
-            "warn",
-            "DICA",
-            `${hint} (${CONFIG.score.hint} pts)`
+            "system",
+            "DEBRIEFING",
+            `Condição clínica geradora: ${
+                disease?.name ||
+                disease?.label ||
+                disease?.id ||
+                "não identificada"
+            }.`
         );
 
 
-        this.render();
+        const pathophysiology =
+            this.possibilityEngine
+                .getPathophysiology(
+                    disease?.id
+                );
 
-    }
 
+        if (pathophysiology) {
 
-    /* ========================================================
-       BASE CIENTÍFICA
-       ======================================================== */
-
-    scientificBase() {
-
-        if (
-            !this.case
-        ) {
-
-            return;
+            this.log(
+                "system",
+                "FISIOPATOLOGIA",
+                describeClinicalObject(
+                    pathophysiology
+                )
+            );
 
         }
 
 
-        const discussion =
-            this.case
-                .knowledge
-                .discussion ||
-            {};
+        if (
+            forced
+        ) {
+
+            this.log(
+                "danger",
+                "RESULTADO",
+                "O estado clínico atingiu estabilidade zero antes do encerramento."
+            );
+
+        }
 
 
-        const text =
-
-            [
-
-                `Patologia-alvo: ${this.case.pathology}`,
-
-                `Fonte local: ${this.case.sourceId}`,
-
-                "",
-
-                discussion.takeaway
-                    ? `Mensagem-chave:\n${discussion.takeaway}`
-                    : "Mensagem-chave não configurada.",
-
-                "",
-
-                discussion.pathophysiology
-                    ? `Fisiopatologia:\n${discussion.pathophysiology}`
-                    : "Fisiopatologia não configurada.",
-
-                "",
-
-                "Esta V3 utiliza somente a Knowledge Base local. O botão ainda não realiza uma busca externa no PubMed."
-
-            ]
-
-            .join("\n");
-
-
-        alert(text);
+        this.render();
 
     }
 
@@ -3194,9 +2891,7 @@ class DiagnosisEngineV2 {
        LABELS
        ======================================================== */
 
-    intentLabel(
-        type
-    ) {
+    intentLabel(type) {
 
         const labels = {
 
@@ -3230,6 +2925,144 @@ class DiagnosisEngineV2 {
 
 
     /* ========================================================
+       RENDER
+       ======================================================== */
+
+    render() {
+
+        if (!this.state) {
+            return;
+        }
+
+
+        this.setText(
+            "score",
+            this.score
+        );
+
+
+        this.setText(
+            "stabilityText",
+            `${this.state.stability}%`
+        );
+
+
+        const stabilityBar =
+            document.getElementById(
+                "stabilityBar"
+            );
+
+
+        if (stabilityBar) {
+
+            stabilityBar.style.width =
+                `${this.state.stability}%`;
+
+        }
+
+
+        this.setText(
+            "timeText",
+            `${this.state.time} min`
+        );
+
+
+        this.setText(
+            "fc",
+            this.state.vitals.fc
+        );
+
+
+        this.setText(
+            "spo2",
+            this.state.vitals.spo2
+        );
+
+
+        this.setText(
+            "pa",
+            this.state.vitals.pa
+        );
+
+
+        this.setText(
+            "glucose",
+            this.state.vitals.glucose
+        );
+
+
+        const list =
+            document.getElementById(
+                "stateList"
+            );
+
+
+        if (!list) {
+            return;
+        }
+
+
+        list.innerHTML =
+            "";
+
+
+        const states = [
+
+            `Contexto: ${
+                this.clinicalContext.setting
+            }`,
+
+            `Achados revelados: ${
+                this.state.revealedFindings.length
+            }`,
+
+            `Ações executadas: ${
+                this.state.actions.length
+            }`,
+
+            `Diagnóstico estabelecido: ${
+                this.state.diagnosisEstablished
+                    ? "sim"
+                    : "não"
+            }`,
+
+            `Tratamento reconhecido: ${
+                this.state.treatmentPerformed
+                    ? "sim"
+                    : "não"
+            }`,
+
+            `Erros críticos: ${
+                this.state.criticalErrors
+            }`,
+
+            `Dicas utilizadas: ${
+                this.state.helpUsed
+            }`
+
+        ];
+
+
+        for (const item of states) {
+
+            const li =
+                document.createElement(
+                    "li"
+                );
+
+            li.textContent =
+                item;
+
+            list.appendChild(
+                li
+            );
+
+        }
+
+    }
+
+
+    /* ========================================================
        LOG
        ======================================================== */
 
@@ -3245,12 +3078,8 @@ class DiagnosisEngineV2 {
             );
 
 
-        if (
-            !container
-        ) {
-
+        if (!container) {
             return;
-
         }
 
 
@@ -3306,163 +3135,10 @@ class DiagnosisEngineV2 {
 
 
     /* ========================================================
-       RENDER
+       DOM
        ======================================================== */
 
-    render() {
-
-        if (
-            !this.state
-        ) {
-
-            return;
-
-        }
-
-
-        this.setText(
-            "score",
-            this.score
-        );
-
-
-        this.setText(
-            "stabilityText",
-            `${this.state.stability}%`
-        );
-
-
-        const stabilityBar =
-            document.getElementById(
-                "stabilityBar"
-            );
-
-
-        if (
-            stabilityBar
-        ) {
-
-            stabilityBar.style.width =
-                `${this.state.stability}%`;
-
-        }
-
-
-        this.setText(
-            "timeText",
-            `${this.state.time} min`
-        );
-
-
-        this.setText(
-            "fc",
-            this.state.vitals.fc
-        );
-
-
-        this.setText(
-            "spo2",
-            this.state.vitals.spo2
-        );
-
-
-        this.setText(
-            "pa",
-            this.state.vitals.pa
-        );
-
-
-        this.setText(
-            "glucose",
-            this.state.vitals.glucose
-        );
-
-
-        const list =
-            document.getElementById(
-                "stateList"
-            );
-
-
-        if (
-            list
-        ) {
-
-            list.innerHTML =
-                "";
-
-
-            const states = [
-
-                `Contexto: ${
-                    this.clinicalContext.setting
-                }`,
-
-                `Achados revelados: ${
-                    this.state.findings.length
-                }`,
-
-                `Ações executadas: ${
-                    this.state.actions.length
-                }`,
-
-                `Diagnóstico estabelecido: ${
-                    this.state.diagnosisEstablished
-                        ? "sim"
-                        : "não"
-                }`,
-
-                `Tratamento reconhecido: ${
-                    this.state.treatmentPerformed
-                        ? "sim"
-                        : "não"
-                }`,
-
-                `Erros críticos: ${
-                    this.state.criticalErrors
-                }`,
-
-                `Dicas utilizadas: ${
-                    this.state.helpUsed
-                }`
-
-            ];
-
-
-            for (
-                const item
-                of states
-            ) {
-
-                const li =
-                    document.createElement(
-                        "li"
-                    );
-
-
-                li.textContent =
-                    item;
-
-
-                list.appendChild(
-                    li
-                );
-
-            }
-
-        }
-
-    }
-
-
-    /* ========================================================
-       DOM HELPERS
-       ======================================================== */
-
-    setText(
-        id,
-        value
-    ) {
+    setText(id, value) {
 
         const element =
             document.getElementById(
@@ -3470,9 +3146,7 @@ class DiagnosisEngineV2 {
             );
 
 
-        if (
-            element
-        ) {
+        if (element) {
 
             element.textContent =
                 value;
@@ -3482,9 +3156,7 @@ class DiagnosisEngineV2 {
     }
 
 
-    setInput(
-        value
-    ) {
+    setInput(value) {
 
         const input =
             document.getElementById(
@@ -3492,9 +3164,7 @@ class DiagnosisEngineV2 {
             );
 
 
-        if (
-            input
-        ) {
+        if (input) {
 
             input.value =
                 value;
@@ -3510,29 +3180,29 @@ class DiagnosisEngineV2 {
    BOOT
    ============================================================ */
 
-let diagnosisEngine =
-    null;
+let diagnosisEngine = null;
 
 
 window.addEventListener(
     "DOMContentLoaded",
     async () => {
 
-        diagnosisEngine =
-            new DiagnosisEngineV2();
-
-
-        window.idmtEngine =
-            diagnosisEngine;
-
-
         try {
+
+            diagnosisEngine =
+                new DiagnosisEngine();
+
+
+            window.idmtEngine =
+                diagnosisEngine;
+
 
             await diagnosisEngine.init();
 
         } catch (error) {
 
             console.error(
+                "Diagnosis Engine Error:",
                 error
             );
 
@@ -3543,9 +3213,7 @@ window.addEventListener(
                 );
 
 
-            if (
-                log
-            ) {
+            if (log) {
 
                 log.innerHTML =
                     "";
@@ -3562,7 +3230,7 @@ window.addEventListener(
 
 
                 message.textContent =
-                    `Falha ao iniciar o Engine: ${error.message}`;
+                    `Falha ao iniciar o Diagnosis: ${error.message}`;
 
 
                 log.appendChild(
