@@ -1,0 +1,1191 @@
+{
+  "schema_version": "3.0",
+  "knowledge_base": {
+    "id": "reumatologia_geral",
+    "name": "Knowledge Base de Reumatologia - Consolidada",
+    "description": "Base de conhecimento estruturada cobrindo Artrite Reumatoide, Espondiloartropatias Soronegativas, Febre Reumática, Artropatias por Cristais e Osteoartrose a partir dos documentos de curadoria representados nesta versão.",
+    "language": "pt-BR",
+    "status": "curated",
+    "processing": {
+      "source_documents": [
+        "Reumato 1.pdf",
+        "Reumato 2.pdf",
+        "Reumato 3.pdf"
+      ],
+      "processed_date": "2026-09-14",
+      "external_research_used": false,
+      "notes": "Consolidação estruturada segundo a arquitetura da Knowledge Base do Diagnosis. Esta versão representa o conhecimento identificado e estruturado a partir dos conteúdos efetivamente incorporados. Reumato 2.pdf está registrado como fonte, mas não possui entidades clínicas correspondentes nesta versão e requer processamento adicional antes que a base seja considerada completa ou validada."
+    }
+  },
+  "domains": [
+    {
+      "id": "reumatologia",
+      "name": "Reumatologia",
+      "description": "Estudo e manejo das doenças inflamatórias sistêmicas, autoimunes, degenerativas e metabólicas do aparelho locomotor.",
+      "parent_domain": null,
+      "source_traceability": [
+        {
+          "source_id": "src_reumato_1",
+          "location": "Geral",
+          "claim": "Escopo de reumatologia",
+          "evidence_type": "direct"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "artrite_reumatoide",
+      "canonical_name": "Artrite Reumatoide",
+      "type": "disease",
+      "aliases": [
+        "AR",
+        "Artrite Reumatóide"
+      ],
+      "definition": "Doença inflamatória crônica e sistêmica, de natureza autoimune, que acomete predominantemente articulações sinoviais, frequentemente de forma periférica e simétrica, podendo produzir dano estrutural e manifestações extra-articulares.",
+      "pathophysiology": {
+        "mechanisms": [
+          {
+            "description": "A ativação imune crônica da sinóvia promove sinovite proliferativa, formação de pannus e liberação de mediadores inflamatórios, contribuindo para dano de cartilagem e osso.",
+            "cause": "Predisposição genética associada a fatores imunológicos e ambientais.",
+            "effect": "Inflamação sinovial persistente e progressão de dano estrutural articular.",
+            "intermediate_steps": [
+              "Ativação imunológica",
+              "Sinovite crônica",
+              "Formação de pannus",
+              "Liberação de citocinas inflamatórias",
+              "Dano de cartilagem e osso",
+              "Deformidade articular em doença estruturalmente avançada"
+            ]
+          }
+        ],
+        "causalChain": [
+          {
+            "steps": [
+              "predisposicao_imunologica",
+              "ativacao_imune",
+              "sinovite_cronica",
+              "formacao_pannus",
+              "dano_cartilagem_osso",
+              "deformidade_articular"
+            ],
+            "description": "Cadeia fisiopatológica geral relacionada à inflamação sinovial e ao dano estrutural na artrite reumatoide."
+          }
+        ]
+      },
+      "clinical": {
+        "presentations": [
+          {
+            "name": "Poliartrite inflamatória periférica",
+            "features": [
+              {
+                "entity": "rigidez_matinal_prolongada",
+                "context": "Frequentemente prolongada, podendo durar mais de 30-60 minutos.",
+                "strength": "strong"
+              },
+              {
+                "entity": "poliartrite_simetrica",
+                "context": "Acometimento frequente de mãos, punhos e pés; articulações interfalangeanas distais são tipicamente poupadas.",
+                "strength": "strong"
+              }
+            ],
+            "frequency": "frequent",
+            "severity": "moderate_to_severe",
+            "timing": "insidioso, aditivo e crônico",
+            "context": "Mais frequente em mulheres adultas."
+          }
+        ],
+        "symptoms": [
+          {
+            "entity": "artralgia",
+            "context": "Dor articular periférica de padrão inflamatório.",
+            "strength": "strong"
+          },
+          {
+            "entity": "rigidez_matinal_prolongada",
+            "context": "Rigidez após períodos de repouso.",
+            "strength": "strong"
+          }
+        ],
+        "signs": [
+          {
+            "entity": "artrite",
+            "context": "Edema, dor e/ou derrame em articulações inflamadas.",
+            "strength": "strong"
+          },
+          {
+            "entity": "deformidade_articular",
+            "context": "Pode ocorrer em doença estruturalmente avançada.",
+            "strength": "moderate"
+          }
+        ],
+        "risk_factors": [
+          {
+            "entity": "hla_drb1",
+            "context": "Determinados alelos HLA-DRB1 estão associados à suscetibilidade.",
+            "strength": "moderate"
+          }
+        ],
+        "temporal_course": [
+          "Crônico",
+          "Progressivo"
+        ]
+      },
+      "diagnosis": {
+        "diagnostic_approach": [
+          "Avaliação da duração e padrão dos sintomas",
+          "Avaliação do número e distribuição das articulações acometidas",
+          "Dosagem de reagentes de fase aguda",
+          "Investigação de fator reumatoide e anticorpos anti-CCP",
+          "Avaliação por imagem quando indicada"
+        ],
+        "supporting_features": [
+          {
+            "entity": "fator_reumatoide",
+            "context": "Positividade pode apoiar o diagnóstico, especialmente em contexto clínico compatível.",
+            "strength": "moderate"
+          },
+          {
+            "entity": "anti_ccp",
+            "context": "Anticorpos anti-CCP possuem elevada especificidade e podem apoiar o diagnóstico.",
+            "strength": "strong"
+          }
+        ],
+        "features_against": [
+          {
+            "entity": "acometimento_isolado_ifd",
+            "context": "Acometimento predominante de articulações interfalangeanas distais sugere diagnósticos diferenciais.",
+            "strength": "moderate"
+          }
+        ],
+        "confirmatory_tests": [
+          "Fator Reumatoide",
+          "Anti-CCP",
+          "VHS",
+          "PCR",
+          "Radiografia de mãos e punhos"
+        ]
+      },
+      "treatment": {
+        "principles": [
+          "Reduzir atividade inflamatória",
+          "Prevenir dano estrutural e perda funcional",
+          "Alcançar remissão ou baixa atividade de doença",
+          "Individualizar tratamento conforme atividade, prognóstico, comorbidades e segurança"
+        ],
+        "acute": [
+          {
+            "name": "Anti-inflamatórios não esteroidais (AINEs) / Corticosteroides",
+            "type": "medication",
+            "indication": "Controle sintomático da dor e inflamação em contextos selecionados.",
+            "objective": "Alívio dos sintomas enquanto a terapia modificadora exerce efeito.",
+            "priority": "moderate",
+            "context": "Uso deve ser individualizado e não substitui terapia modificadora da doença."
+          }
+        ],
+        "maintenance": [
+          {
+            "name": "Metotrexato",
+            "type": "medication",
+            "indication": "Terapia modificadora da doença frequentemente utilizada como estratégia inicial na artrite reumatoide.",
+            "objective": "Reduzir atividade da doença e prevenir progressão estrutural.",
+            "priority": "high",
+            "source_traceability": [
+              {
+                "source_id": "src_reumato_1",
+                "location": "Tratamento",
+                "claim": "Metotrexato como DMARD sintético utilizado no tratamento da artrite reumatoide.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "name": "Sulfassalazina",
+            "type": "medication",
+            "indication": "Terapia modificadora da doença em contextos apropriados.",
+            "objective": "Reduzir atividade inflamatória.",
+            "priority": "moderate"
+          },
+          {
+            "name": "Hidroxicloroquina",
+            "type": "medication",
+            "indication": "Terapia modificadora em situações clínicas selecionadas.",
+            "objective": "Controle da atividade da doença.",
+            "priority": "moderate"
+          },
+          {
+            "name": "Leflunomida",
+            "type": "medication",
+            "indication": "Terapia modificadora da doença em situações apropriadas.",
+            "objective": "Reduzir atividade inflamatória e progressão.",
+            "priority": "moderate"
+          }
+        ],
+        "treatment_goals": [
+          "Prevenir dano estrutural",
+          "Preservar função",
+          "Induzir remissão ou baixa atividade da doença"
+        ],
+        "monitoring": [
+          "Monitorização hematológica e hepática conforme medicamento utilizado",
+          "Avaliação oftalmológica para toxicidade retiniana relacionada à hidroxicloroquina",
+          "Rastreamento de infecções e fatores de risco antes e durante terapias imunomoduladoras, conforme medicamento"
+        ]
+      },
+      "complications": [
+        {
+          "entity": "subluxacao_atlanto_axial",
+          "mechanism": "Instabilidade cervical relacionada ao comprometimento inflamatório das estruturas cervicais.",
+          "warning_signs": [
+            "Dor cervical alta",
+            "Sintomas neurológicos",
+            "Sinais de compressão medular"
+          ],
+          "management": [
+            "Avaliação clínica e por imagem quando houver suspeita de instabilidade ou comprometimento neurológico."
+          ],
+          "source_traceability": [
+            {
+              "source_id": "src_reumato_1",
+              "location": "Manifestações articulares",
+              "claim": "Comprometimento cervical e subluxação atlanto-axial como complicação da artrite reumatoide.",
+              "evidence_type": "direct"
+            }
+          ]
+        },
+        {
+          "entity": "sindrome_de_felty",
+          "mechanism": "Síndrome associada à artrite reumatoide, classicamente envolvendo neutropenia e esplenomegalia.",
+          "warning_signs": [
+            "Neutropenia",
+            "Infecções recorrentes",
+            "Esplenomegalia"
+          ],
+          "source_traceability": [
+            {
+              "source_id": "src_reumato_1",
+              "location": "Síndrome de Felty",
+              "claim": "Associação entre artrite reumatoide e neutropenia/esplenomegalia.",
+              "evidence_type": "direct"
+            }
+          ]
+        }
+      ],
+      "patient_generation": {
+        "age_ranges": [
+          "Adultos"
+        ],
+        "sex": [
+          "Maior frequência no sexo feminino"
+        ],
+        "risk_factors": [
+          "Predisposição genética",
+          "HLA-DRB1"
+        ],
+        "possible_presentations": [
+          {
+            "features": [
+              "poliartrite simétrica periférica",
+              "rigidez matinal prolongada",
+              "fator reumatoide positivo"
+            ],
+            "frequency": "frequent",
+            "severity": "moderate",
+            "timing": "crônico",
+            "context": "Adulto com quadro inflamatório articular periférico."
+          }
+        ],
+        "source_traceability": [
+          {
+            "source_id": "src_reumato_1",
+            "location": "Artrite Reumatoide",
+            "claim": "Características epidemiológicas e apresentações clínicas da artrite reumatoide.",
+            "evidence_type": "direct"
+          }
+        ]
+      },
+      "source_traceability": [
+        {
+          "source_id": "src_reumato_1",
+          "location": "Artrite Reumatoide",
+          "claim": "Definição, fisiopatologia, manifestações articulares e tratamento da artrite reumatoide.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "espondilite_anquilosante",
+      "canonical_name": "Espondilite Anquilosante",
+      "type": "disease",
+      "aliases": [
+        "EA"
+      ],
+      "definition": "Doença inflamatória axial pertencente ao espectro das espondiloartrites, caracterizada por comprometimento das articulações sacroilíacas e da coluna, frequentemente associada a entesite e inflamação axial crônica.",
+      "pathophysiology": {
+        "mechanisms": [
+          {
+            "description": "Inflamação das articulações sacroilíacas, enteses e estruturas axiais pode evoluir com alterações estruturais, formação de sindesmófitos e redução progressiva da mobilidade.",
+            "cause": "Interação entre predisposição genética, incluindo associação com HLA-B27, e fatores imunológicos e ambientais.",
+            "effect": "Inflamação axial, alterações estruturais e possível anquilose.",
+            "intermediate_steps": [
+              "Inflamação axial",
+              "Entesite",
+              "Sacroileíte",
+              "Formação de alterações ósseas estruturais",
+              "Redução progressiva da mobilidade"
+            ]
+          }
+        ]
+      },
+      "clinical": {
+        "symptoms": [
+          {
+            "entity": "lombalgia_inflamatoria",
+            "context": "Início geralmente antes dos 45 anos, duração crônica, melhora com exercício e piora ou não melhora adequadamente com repouso.",
+            "strength": "strong"
+          }
+        ],
+        "signs": [
+          {
+            "entity": "sacroileite",
+            "context": "Pode ser identificada por imagem.",
+            "strength": "strong"
+          }
+        ]
+      },
+      "diagnosis": {
+        "diagnostic_approach": [
+          "Investigação de dor lombar crônica de início jovem com características inflamatórias",
+          "Avaliação de articulações sacroilíacas por radiografia ou ressonância magnética conforme contexto",
+          "Avaliação de HLA-B27 como elemento de apoio, e não como teste diagnóstico isolado",
+          "Avaliação de manifestações extra-axiais e história familiar"
+        ]
+      },
+      "treatment": {
+        "principles": [
+          "Exercício e reabilitação",
+          "Controle da dor e inflamação",
+          "Terapia imunomoduladora em doença ativa apesar de medidas convencionais"
+        ],
+        "non_pharmacological": [
+          {
+            "name": "Fisioterapia e exercício",
+            "type": "non_pharmacological",
+            "indication": "Doença axial e limitação funcional.",
+            "objective": "Preservar mobilidade, postura e função.",
+            "priority": "high"
+          }
+        ],
+        "acute": [
+          {
+            "name": "AINEs",
+            "type": "medication",
+            "indication": "Dor e inflamação axial.",
+            "objective": "Controle sintomático.",
+            "priority": "high"
+          }
+        ],
+        "maintenance": [
+          {
+            "name": "Inibidores de TNF-alfa",
+            "type": "medication",
+            "indication": "Doença ativa em pacientes selecionados apesar de tratamento convencional adequado.",
+            "objective": "Reduzir atividade inflamatória e preservar função.",
+            "priority": "moderate"
+          }
+        ]
+      },
+      "patient_generation": {
+        "age_ranges": [
+          "Adultos jovens"
+        ],
+        "sex": [
+          "Pode ocorrer em ambos os sexos"
+        ],
+        "risk_factors": [
+          "HLA-B27"
+        ],
+        "possible_presentations": [
+          {
+            "features": [
+              "lombalgia inflamatória crônica",
+              "dor glútea",
+              "rigidez matinal"
+            ],
+            "frequency": "frequent",
+            "severity": "moderate_to_severe",
+            "timing": "crônico e progressivo",
+            "context": "Adulto jovem com dor lombar de padrão inflamatório."
+          }
+        ],
+        "source_traceability": [
+          {
+            "source_id": "src_reumato_1",
+            "location": "Espondilite Anquilosante",
+            "claim": "Quadro clínico, associação com HLA-B27 e características da doença axial.",
+            "evidence_type": "direct"
+          }
+        ]
+      },
+      "source_traceability": [
+        {
+          "source_id": "src_reumato_1",
+          "location": "Espondilite Anquilosante",
+          "claim": "Quadro clínico, fisiopatologia, diagnóstico e tratamento.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "febre_reumatica",
+      "canonical_name": "Febre Reumática",
+      "type": "disease",
+      "aliases": [
+        "FR",
+        "FRa",
+        "Febre Reumática Aguda"
+      ],
+      "definition": "Doença inflamatória sistêmica imunomediada que pode ocorrer após infecção por Streptococcus do grupo A, especialmente após faringite, em indivíduos suscetíveis.",
+      "pathophysiology": {
+        "mechanisms": [
+          {
+            "description": "A resposta imune desencadeada pela infecção estreptocócica pode apresentar reação cruzada com tecidos do hospedeiro por mecanismos de mimetismo molecular.",
+            "cause": "Infecção prévia por Streptococcus do grupo A em indivíduo suscetível.",
+            "effect": "Manifestações inflamatórias envolvendo articulações, coração, sistema nervoso e pele.",
+            "intermediate_steps": [
+              "Infecção estreptocócica",
+              "Resposta imune",
+              "Reatividade cruzada",
+              "Inflamação tecidual"
+            ]
+          }
+        ]
+      },
+      "clinical": {
+        "presentations": [
+          {
+            "name": "Apresentação compatível com febre reumática aguda",
+            "features": [
+              {
+                "entity": "poliartrite_migratoria",
+                "context": "Predominantemente grandes articulações em apresentações clássicas.",
+                "strength": "strong"
+              },
+              {
+                "entity": "cardite",
+                "context": "Pode envolver valvas, miocárdio e/ou pericárdio.",
+                "strength": "strong"
+              }
+            ],
+            "frequency": "frequent",
+            "severity": "moderate_to_severe",
+            "timing": "Após intervalo variável da infecção estreptocócica",
+            "context": "Mais frequente em crianças e adolescentes."
+          }
+        ]
+      },
+      "diagnosis": {
+        "diagnostic_approach": [
+          "Aplicação dos Critérios de Jones na população e contexto epidemiológico apropriados",
+          "Busca de evidência de infecção estreptocócica prévia",
+          "Avaliação das manifestações maiores e menores",
+          "Avaliação cardíaca quando houver suspeita de cardite"
+        ],
+        "diagnostic_criteria": [
+          {
+            "name": "Critérios de Jones",
+            "description": "Em um primeiro episódio, a classificação diagnóstica requer evidência de infecção estreptocócica prévia associada ao conjunto apropriado de manifestações maiores e menores definido pelos critérios vigentes e pelo contexto epidemiológico.",
+            "criteria": [
+              "Dois critérios maiores mais evidência de infecção estreptocócica prévia",
+              "OU um critério maior e dois critérios menores mais evidência de infecção estreptocócica prévia"
+            ],
+            "population": "Crianças, adolescentes e adultos conforme contexto epidemiológico e critérios vigentes.",
+            "source_traceability": [
+              {
+                "source_id": "src_reumato_3",
+                "location": "Diagnóstico",
+                "claim": "Critérios de Jones e necessidade de evidência de infecção estreptocócica prévia.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      "treatment": {
+        "principles": [
+          "Erradicação da infecção estreptocócica quando indicada",
+          "Controle das manifestações inflamatórias",
+          "Prevenção de recorrências por profilaxia secundária quando indicada"
+        ],
+        "acute": [
+          {
+            "name": "Penicilina G Benzatina",
+            "type": "medication",
+            "indication": "Erradicação do Streptococcus do grupo A conforme indicação clínica.",
+            "objective": "Eliminar a infecção estreptocócica residual.",
+            "priority": "high",
+            "route": "IM"
+          },
+          {
+            "name": "Anti-inflamatório",
+            "type": "medication",
+            "indication": "Controle de manifestações articulares inflamatórias.",
+            "objective": "Controle da dor e inflamação.",
+            "priority": "moderate"
+          },
+          {
+            "name": "Corticosteroide",
+            "type": "medication",
+            "indication": "Casos selecionados de cardite ou manifestações inflamatórias graves conforme avaliação clínica.",
+            "objective": "Controle da inflamação.",
+            "priority": "moderate"
+          }
+        ],
+        "maintenance": [
+          {
+            "name": "Penicilina G Benzatina",
+            "type": "medication",
+            "indication": "Profilaxia secundária para prevenção de recorrência quando indicada.",
+            "objective": "Reduzir risco de recorrência e progressão de doença cardíaca reumática.",
+            "priority": "high",
+            "route": "IM",
+            "source_traceability": [
+              {
+                "source_id": "src_reumato_3",
+                "location": "Profilaxia",
+                "claim": "Profilaxia secundária com penicilina G benzatina.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      "patient_generation": {
+        "age_ranges": [
+          "Crianças e adolescentes"
+        ],
+        "sex": [
+          "Ambos os sexos"
+        ],
+        "possible_presentations": [
+          {
+            "features": [
+              "febre",
+              "poliartrite migratória",
+              "sinais de cardite"
+            ],
+            "frequency": "frequent",
+            "severity": "moderate",
+            "timing": "agudo",
+            "context": "Paciente jovem com história compatível de infecção estreptocócica recente."
+          }
+        ]
+      },
+      "source_traceability": [
+        {
+          "source_id": "src_reumato_3",
+          "location": "Febre Reumática",
+          "claim": "Fisiopatologia imunomediada, manifestações clínicas, critérios diagnósticos e tratamento/profilaxia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "gota",
+      "canonical_name": "Gota",
+      "type": "disease",
+      "aliases": [
+        "Artrite Gotosa",
+        "Artrite por Cristais de Urato Monossódico"
+      ],
+      "definition": "Doença inflamatória associada à deposição de cristais de urato monossódico em articulações e outros tecidos, geralmente no contexto de hiperuricemia persistente.",
+      "pathophysiology": {
+        "mechanisms": [
+          {
+            "description": "A elevação sustentada da concentração de urato pode favorecer supersaturação e formação de cristais de urato monossódico. A presença desses cristais em tecidos pode desencadear resposta inflamatória intensa.",
+            "cause": "Hiperuricemia persistente por aumento da produção, redução da excreção renal ou combinação de fatores.",
+            "effect": "Inflamação articular aguda, formação de tofos e manifestações relacionadas à deposição de urato.",
+            "intermediate_steps": [
+              "Elevação persistente do urato",
+              "Supersaturação",
+              "Formação de cristais de urato monossódico",
+              "Reconhecimento pelos sistemas inflamatórios",
+              "Artrite inflamatória aguda"
+            ]
+          }
+        ]
+      },
+      "clinical": {
+        "presentations": [
+          {
+            "name": "Artrite gotosa aguda",
+            "features": [
+              {
+                "entity": "monoartrite_aguda",
+                "context": "Pode acometer a primeira articulação metatarsofalangeana, tornozelo, tarso ou joelho.",
+                "strength": "strong"
+              },
+              {
+                "entity": "podagra",
+                "context": "Acometimento da primeira articulação metatarsofalangeana.",
+                "strength": "strong"
+              }
+            ],
+            "frequency": "frequent",
+            "severity": "severe",
+            "timing": "Início súbito",
+            "context": "Adulto com fatores predisponentes à hiperuricemia."
+          }
+        ]
+      },
+      "diagnosis": {
+        "diagnostic_approach": [
+          "Avaliação clínica do padrão de artrite",
+          "Análise do líquido sinovial quando necessária para confirmação diagnóstica",
+          "Identificação de cristais de urato monossódico por microscopia com luz polarizada",
+          "Avaliação de diagnósticos diferenciais de monoartrite aguda"
+        ]
+      },
+      "treatment": {
+        "principles": [
+          "Controle da inflamação durante a crise",
+          "Redução do risco de recorrência",
+          "Terapia redutora de urato quando indicada"
+        ],
+        "acute": [
+          {
+            "name": "AINEs",
+            "type": "medication",
+            "indication": "Crise aguda em pacientes apropriados.",
+            "objective": "Controle da dor e inflamação.",
+            "priority": "high"
+          },
+          {
+            "name": "Colchicina",
+            "type": "medication",
+            "indication": "Tratamento da crise ou prevenção em contextos apropriados.",
+            "objective": "Reduzir a resposta inflamatória relacionada aos cristais.",
+            "priority": "high"
+          },
+          {
+            "name": "Corticosteroides",
+            "type": "medication",
+            "indication": "Crise aguda quando apropriado.",
+            "objective": "Controle da inflamação.",
+            "priority": "moderate"
+          }
+        ],
+        "maintenance": [
+          {
+            "name": "Alopurinol",
+            "type": "medication",
+            "indication": "Terapia redutora de urato quando indicada.",
+            "objective": "Reduzir a concentração sérica de urato e prevenir deposição/recorrência.",
+            "priority": "high",
+            "source_traceability": [
+              {
+                "source_id": "src_reumato_3",
+                "location": "Gota - Tratamento",
+                "claim": "Alopurinol como medicamento redutor de urato.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "name": "Uricosúrico",
+            "type": "medication",
+            "indication": "Pacientes selecionados conforme função renal, perfil de excreção de urato e demais fatores clínicos.",
+            "objective": "Aumentar a eliminação renal de urato.",
+            "priority": "moderate"
+          }
+        ]
+      },
+      "patient_generation": {
+        "age_ranges": [
+          "Adultos"
+        ],
+        "sex": [
+          "Predomínio masculino na apresentação inicial"
+        ],
+        "risk_factors": [
+          "Obesidade",
+          "Consumo de álcool",
+          "Uso de determinados diuréticos",
+          "Doença renal",
+          "Hiperuricemia persistente"
+        ],
+        "possible_presentations": [
+          {
+            "features": [
+              "monoartrite súbita da primeira metatarsofalangeana",
+              "dor intensa",
+              "edema articular"
+            ],
+            "frequency": "frequent",
+            "severity": "severe",
+            "timing": "agudo",
+            "context": "Adulto com fatores predisponentes à deposição de urato."
+          }
+        ]
+      },
+      "source_traceability": [
+        {
+          "source_id": "src_reumato_3",
+          "location": "Gota",
+          "claim": "Fisiopatologia, diagnóstico, manifestações clínicas e tratamento.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "osteoartrose",
+      "canonical_name": "Osteoartrose",
+      "type": "disease",
+      "aliases": [
+        "Artrose",
+        "Doença Articular Degenerativa"
+      ],
+      "definition": "Doença articular caracterizada por alterações estruturais e funcionais envolvendo cartilagem, osso subcondral e outros componentes articulares, associada a dor e perda funcional.",
+      "pathophysiology": {
+        "mechanisms": [
+          {
+            "description": "Alterações da matriz cartilaginosa, remodelamento do osso subcondral e formação de osteófitos participam da progressão estrutural da osteoartrose.",
+            "cause": "Interação entre idade, sobrecarga mecânica, fatores metabólicos, trauma prévio e outros determinantes individuais.",
+            "effect": "Dor, rigidez, limitação funcional e alterações estruturais articulares.",
+            "intermediate_steps": [
+              "Alteração da cartilagem",
+              "Remodelamento do osso subcondral",
+              "Formação de osteófitos",
+              "Alteração da mecânica articular",
+              "Dor e limitação funcional"
+            ]
+          }
+        ]
+      },
+      "clinical": {
+        "symptoms": [
+          {
+            "entity": "dor_articular_mecanica",
+            "context": "Frequentemente relacionada ao uso e à carga articular.",
+            "strength": "strong"
+          },
+          {
+            "entity": "rigidez_matinal_curta",
+            "context": "Geralmente breve, especialmente quando comparada à rigidez inflamatória prolongada.",
+            "strength": "moderate"
+          }
+        ],
+        "signs": [
+          {
+            "entity": "nodulos_de_heberden",
+            "context": "Nódulos nas articulações interfalangeanas distais.",
+            "strength": "characteristic"
+          },
+          {
+            "entity": "nodulos_de_bouchard",
+            "context": "Nódulos nas articulações interfalangeanas proximais.",
+            "strength": "characteristic"
+          }
+        ]
+      },
+      "diagnosis": {
+        "diagnostic_approach": [
+          "Avaliação clínica do padrão de dor e limitação funcional",
+          "Radiografia quando indicada, demonstrando alterações estruturais compatíveis"
+        ]
+      },
+      "treatment": {
+        "principles": [
+          "Redução de sobrecarga articular quando apropriado",
+          "Exercício e fortalecimento muscular",
+          "Controle da dor",
+          "Redução ponderal quando houver excesso de peso e benefício esperado"
+        ],
+        "non_pharmacological": [
+          {
+            "name": "Exercícios físicos",
+            "type": "non_pharmacological",
+            "indication": "Osteoartrose com perda funcional ou dor.",
+            "objective": "Melhorar força, função e capacidade física.",
+            "priority": "high"
+          },
+          {
+            "name": "Redução ponderal",
+            "type": "non_pharmacological",
+            "indication": "Pacientes com excesso de peso e osteoartrose em articulações de carga.",
+            "objective": "Reduzir sobrecarga e melhorar função.",
+            "priority": "high"
+          }
+        ],
+        "acute": [
+          {
+            "name": "AINEs",
+            "type": "medication",
+            "indication": "Controle sintomático em pacientes selecionados.",
+            "objective": "Alívio da dor.",
+            "priority": "moderate"
+          },
+          {
+            "name": "Corticosteroide intra-articular",
+            "type": "medication",
+            "indication": "Algumas apresentações com dor/inflamação articular persistente.",
+            "objective": "Alívio sintomático temporário.",
+            "priority": "moderate"
+          }
+        ]
+      },
+      "patient_generation": {
+        "age_ranges": [
+          "Adultos, com frequência crescente com a idade"
+        ],
+        "possible_presentations": [
+          {
+            "features": [
+              "dor articular mecânica",
+              "rigidez breve",
+              "alterações nodulares nas mãos"
+            ],
+            "frequency": "frequent",
+            "severity": "mild_to_moderate",
+            "timing": "crônico e progressivo",
+            "context": "Adulto mais velho com dor relacionada ao uso articular."
+          }
+        ]
+      },
+      "source_traceability": [
+        {
+          "source_id": "src_reumato_3",
+          "location": "Osteoartrose",
+          "claim": "Definição, fisiopatologia, manifestações clínicas e tratamento da osteoartrose.",
+          "evidence_type": "direct"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "rel_ar_sinovite",
+      "source": "artrite_reumatoide",
+      "relation": "causes",
+      "target": "sinovite",
+      "context": "A artrite reumatoide caracteriza-se por inflamação sinovial persistente.",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "src_reumato_1",
+          "location": "Artrite Reumatoide",
+          "claim": "Inflamação da sinóvia como componente central da doença.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_ar_fator_reumatoide",
+      "source": "artrite_reumatoide",
+      "relation": "associated_with",
+      "target": "fator_reumatoide",
+      "context": "Fator reumatoide pode estar presente em pacientes com artrite reumatoide, mas não é específico da doença.",
+      "strength": "moderate"
+    },
+    {
+      "id": "rel_ar_anti_ccp",
+      "source": "artrite_reumatoide",
+      "relation": "associated_with",
+      "target": "anti_ccp",
+      "context": "Anti-CCP apresenta associação importante com artrite reumatoide.",
+      "strength": "strong"
+    },
+    {
+      "id": "rel_ar_metotrexato",
+      "source": "artrite_reumatoide",
+      "relation": "treated_by",
+      "target": "metotrexato",
+      "context": "Metotrexato é uma terapia modificadora frequentemente utilizada.",
+      "strength": "strong"
+    },
+    {
+      "id": "rel_ea_sacroileite",
+      "source": "espondilite_anquilosante",
+      "relation": "associated_with",
+      "target": "sacroileite",
+      "context": "Comprometimento das articulações sacroilíacas é característica central do espectro axial.",
+      "strength": "strong"
+    },
+    {
+      "id": "rel_ea_hla_b27",
+      "source": "espondilite_anquilosante",
+      "relation": "associated_with",
+      "target": "hla_b27",
+      "context": "HLA-B27 está associado à suscetibilidade, mas não constitui diagnóstico isolado.",
+      "strength": "moderate"
+    },
+    {
+      "id": "rel_ea_aines",
+      "source": "espondilite_anquilosante",
+      "relation": "treated_by",
+      "target": "aines",
+      "context": "AINEs são utilizados para controle da dor e inflamação.",
+      "strength": "strong"
+    },
+    {
+      "id": "rel_strep_fr_trigger",
+      "source": "streptococcus_pyogenes",
+      "relation": "predisposes_to",
+      "target": "febre_reumatica",
+      "context": "Infecção por Streptococcus do grupo A pode preceder o desenvolvimento de febre reumática em indivíduos suscetíveis por mecanismo imunomediado.",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "src_reumato_3",
+          "location": "Febre Reumática",
+          "claim": "Infecção estreptocócica prévia como evento desencadeador.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_fr_mimetismo",
+      "source": "febre_reumatica",
+      "relation": "results_in",
+      "target": "inflamacao_imunomediada",
+      "context": "A resposta imunológica cruzada participa da fisiopatologia da febre reumática.",
+      "strength": "strong"
+    },
+    {
+      "id": "rel_fr_poliartrite",
+      "source": "febre_reumatica",
+      "relation": "manifests_as",
+      "target": "poliartrite_migratoria",
+      "context": "Manifestação clínica característica da febre reumática aguda.",
+      "strength": "strong"
+    },
+    {
+      "id": "rel_fr_cardite",
+      "source": "febre_reumatica",
+      "relation": "manifests_as",
+      "target": "cardite",
+      "context": "A cardite é uma manifestação maior dos critérios de Jones.",
+      "strength": "strong"
+    },
+    {
+      "id": "rel_fr_penicilina",
+      "source": "febre_reumatica",
+      "relation": "treated_by",
+      "target": "penicilina_g_benzatina",
+      "context": "Utilizada para erradicação do Streptococcus do grupo A quando indicada.",
+      "strength": "strong"
+    },
+    {
+      "id": "rel_hyperuricemia_gout",
+      "source": "hiperuricemia",
+      "relation": "increases_risk_of",
+      "target": "gota",
+      "context": "Hiperuricemia persistente aumenta a possibilidade de formação e deposição de cristais de urato, mas não implica que todo indivíduo hiperuricêmico tenha gota.",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "src_reumato_3",
+          "location": "Gota",
+          "claim": "Hiperuricemia associada à formação de cristais de urato.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_gout_podagra",
+      "source": "gota",
+      "relation": "manifests_as",
+      "target": "podagra",
+      "context": "Acometimento da primeira articulação metatarsofalangeana é uma apresentação característica.",
+      "strength": "strong"
+    },
+    {
+      "id": "rel_gout_colchicine",
+      "source": "gota",
+      "relation": "treated_by",
+      "target": "colchicina",
+      "context": "Colchicina pode ser utilizada no tratamento da crise e em estratégias preventivas selecionadas.",
+      "strength": "strong"
+    },
+    {
+      "id": "rel_gout_allopurinol",
+      "source": "gota",
+      "relation": "treated_by",
+      "target": "alopurinol",
+      "context": "Alopurinol é uma terapia redutora de urato utilizada quando indicada.",
+      "strength": "strong"
+    },
+    {
+      "id": "rel_oa_cartilage",
+      "source": "osteoartrose",
+      "relation": "results_in",
+      "target": "alteracao_cartilagem_articular",
+      "context": "Alterações da cartilagem fazem parte do processo estrutural da osteoartrose.",
+      "strength": "strong"
+    },
+    {
+      "id": "rel_oa_osteophytes",
+      "source": "osteoartrose",
+      "relation": "associated_with",
+      "target": "osteofitos",
+      "context": "Osteófitos são achados estruturais característicos da osteoartrose.",
+      "strength": "strong"
+    },
+    {
+      "id": "rel_oa_heberden",
+      "source": "osteoartrose",
+      "relation": "manifests_as",
+      "target": "nodulos_de_heberden",
+      "context": "Nódulos de Heberden podem ocorrer na osteoartrose das mãos.",
+      "strength": "strong"
+    }
+  ],
+  "clinical_rules": [
+    {
+      "id": "rule_jones_fr_2_major",
+      "description": "Em contexto clínico apropriado, evidência de infecção estreptocócica prévia associada a pelo menos dois critérios maiores aumenta fortemente a probabilidade de febre reumática aguda.",
+      "conditions": [
+        {
+          "entity": "infecao_estreptococica_recente",
+          "relation": "equals",
+          "value": true
+        },
+        {
+          "entity": "criterios_maiores_jones",
+          "relation": "greater_than_or_equal",
+          "value": 2
+        }
+      ],
+      "conclusions": [
+        {
+          "type": "increase_suspicion",
+          "entity": "febre_reumatica",
+          "strength": "strong"
+        }
+      ],
+      "context": "Primeiro episódio e contexto epidemiológico apropriado.",
+      "priority": "high",
+      "source_traceability": [
+        {
+          "source_id": "src_reumato_3",
+          "location": "Febre Reumática - Diagnóstico",
+          "claim": "Critérios de Jones.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rule_jones_fr_1_major_2_minor",
+      "description": "Em contexto clínico apropriado, evidência de infecção estreptocócica prévia associada a pelo menos um critério maior e pelo menos dois critérios menores aumenta fortemente a probabilidade de febre reumática aguda.",
+      "conditions": [
+        {
+          "entity": "infecao_estreptococica_recente",
+          "relation": "equals",
+          "value": true
+        },
+        {
+          "entity": "criterios_maiores_jones",
+          "relation": "greater_than_or_equal",
+          "value": 1
+        },
+        {
+          "entity": "criterios_menores_jones",
+          "relation": "greater_than_or_equal",
+          "value": 2
+        }
+      ],
+      "conclusions": [
+        {
+          "type": "increase_suspicion",
+          "entity": "febre_reumatica",
+          "strength": "strong"
+        }
+      ],
+      "context": "Primeiro episódio e contexto epidemiológico apropriado.",
+      "priority": "high",
+      "source_traceability": [
+        {
+          "source_id": "src_reumato_3",
+          "location": "Febre Reumática - Diagnóstico",
+          "claim": "Critérios de Jones.",
+          "evidence_type": "direct"
+        }
+      ]
+    }
+  ],
+  "differential_network": [
+    {
+      "entity_a": "artrite_reumatoide",
+      "entity_b": "osteoartrose",
+      "shared_features": [
+        "Dor articular",
+        "Rigidez articular",
+        "Possível comprometimento das mãos"
+      ],
+      "discriminators": [
+        "Padrão predominantemente inflamatório na artrite reumatoide versus predominantemente mecânico na osteoartrose",
+        "Rigidez matinal geralmente mais prolongada na artrite reumatoide",
+        "Acometimento predominante de articulações interfalangeanas distais favorece diagnósticos como osteoartrose em vez de artrite reumatoide",
+        "Fator reumatoide e anti-CCP podem apoiar artrite reumatoide em contexto apropriado"
+      ],
+      "useful_investigations": [
+        "VHS",
+        "PCR",
+        "Fator Reumatoide",
+        "Anti-CCP",
+        "Radiografia articular"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "src_reumato_1",
+          "location": "Artrite Reumatoide",
+          "claim": "Padrões clínicos diferenciais entre artrite reumatoide e osteoartrose.",
+          "evidence_type": "direct"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_reumato_1",
+      "type": "pdf",
+      "title": "Reumato 1 - Artrite Reumatoide e Espondiloartropatias",
+      "document_location": "Reumato 1.pdf",
+      "access_date": "2026-09-14"
+    },
+    {
+      "id": "src_reumato_2",
+      "type": "pdf",
+      "title": "Reumato 2 - Miopatias Inflamatórias",
+      "document_location": "Reumato 2.pdf",
+      "access_date": "2026-09-14"
+    },
+    {
+      "id": "src_reumato_3",
+      "type": "pdf",
+      "title": "Reumato 3 - Febre Reumática, Gota e Osteoartrose",
+      "document_location": "Reumato 3.pdf",
+      "access_date": "2026-09-14"
+    }
+  ],
+  "conflicts": [],
+  "uncertainties": [
+    {
+      "id": "uncertainty_reumato_2_incompleto",
+      "description": "Reumato 2.pdf está registrado como fonte documental, mas não há entidades de miopatias inflamatórias representadas nesta versão da Knowledge Base. O documento deve ser processado antes de considerar a base completa.",
+      "severity": "high",
+      "affected_sources": [
+        "src_reumato_2"
+      ]
+    },
+    {
+      "id": "uncertainty_therapeutic_details",
+      "description": "Detalhes de doses, frequências, critérios terapêuticos específicos e estratégias de tratamento devem ser validados contra fontes clínicas atualizadas antes de serem utilizados para simulação clínica.",
+      "severity": "moderate",
+      "affected_sources": [
+        "src_reumato_1",
+        "src_reumato_3"
+      ]
+    }
+  ]
+}
