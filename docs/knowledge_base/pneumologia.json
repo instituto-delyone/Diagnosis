@@ -1,0 +1,159 @@
+[
+  {
+    "id_caso": "pneumo_asma_01",
+    "patologia_alvo": "Crise Asmática Grave / Estado Asmático",
+    "dificuldade": "Intermediária",
+    "vinheta_admissao": "Homem de 28 anos, com histórico de asma mal controlada, procura o pronto-socorro com dispneia intensa e sibilância audível a distância. Relata uso repetido de broncodilatador inalatório em casa sem melhora. Ao exame: taquipneico (32 irpm), uso musculatura acessória, SatO2 88% em ar ambiente, murmúrio vesicular universalmente diminuído com sibilos difusos.",
+    
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["gasometria", "gasometria arterial", "oximetria", "rx de torax", "radiografia"],
+      "achado_sucesso": "Gasometria arterial inicial revela hipoxemia com alcalose respiratória compensada (PaCO2 normal ou discretamente elevada, o que é sinal de alerta máximo para fadiga muscular!).",
+      "resposta_preceptor_erro": "Doutor, uma crise asmática grave com sibilos silentes ou fadiga exige avaliação imediata da troca gasosa. Solicite uma gasometria arterial e cheque a expansibilidade torácica."
+    },
+
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["crise asmatica grave", "estado asmatico", "asma grave descompensada"],
+      "distrator_comum": ["doenca pulmonar obstrutiva cronica", "edema agudo de pulmao", "anafilaxia"],
+      "feedback_distrator": "O perfil do paciente jovem com história alérgica e sibilância difusa aponta diretamente para crise asmática, descartando DPOC obstrutiva ou congestão cardíaca.",
+      "achado_sucesso": "Exato! Trata-se de Estado Asmático (Crise Asmática Grave com risco de insuficiência respiratória iminente)."
+    },
+
+    "fase_3_conduta": {
+      "gabarito_esperado": ["broncodilatador", "beta 2 agonista", "corticoide", "corticoide sistemico", "sulfato de magnesio", "oxigenio"],
+      "red_flag_mortal": ["sedacao precoce", "intubacao imediata sem drogas", "alta precoce", "beta bloqueador"],
+      "feedback_sucesso": "Conduta excelente! Você garantiu oxigênio, administrou beta-2 agonistas de curta ação associados a anticolinérgicos, entrou com corticoide sistêmico e utilizou Sulfato de Magnésio IV para relaxar a musculatura brônquica.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Indicar intubação eletiva sem otimizar o tratamento clínico ou realizar sedação inadequada sem bloqueio neuromuscular adequado em asmáticos graves precipita colapso hemodinâmico por hiperinsuflação dinâmica e parada cardiorrespiratória."
+    },
+
+    "discussao_clinica_final": {
+      "takeaway_message": "Na crise asmática grave, a normalidade da PaCO2 em um paciente taquipneico e cansado não é sinal de melhora, mas sim de fadiga muscular iminente e falência respiratória.",
+      "fisiopatologia": "A broncoconstrição intensa, o edema de mucosa e a hipersecrição de muco geram grave limitação ao fluxo aéreo expiratório, atrapalhando o esvaziamento pulmonar (air trapping) e elevando o trabalho respiratório."
+    }
+  },
+  {
+    "id_caso": "pneumo_sepse_pulmonar_01",
+    "patologia_alvo": "Pneumonia Adquirida na Comunidade (PAC) Grave com Sepse",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Mulher de 68 anos é trazida à Sala Vermelha com febre alta, tosse produtiva com escarro ferruginoso e confusão mental súbita. Ao exame: PA 80x48 mmHg, FC 128 bpm, FR 30 irpm, SatO2 84% em ar ambiente. Extremidades frias e tempo de enchimento capilar lentificado.",
+    
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["lactato", "hemocultura", "gasometria", "radiografia de torax", "perfil renal", "labs"],
+      "achado_sucesso": "Lactato arterial elevado (4.2 mmol/L), radiografia de tórax com consolidação lobar extensa à direita e hemograma com leucocitose com desvio à esquerda.",
+      "resposta_preceptor_erro": "Doutor, hipotensão associada a foco infeccioso pulmonar configura choque séptico até prova em contrário. Avalie marcadores de hipoperfusão tecidual (lactato) e hemoculturas imediatas."
+    },
+
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["choque septico", "sepse pulmonar", "pneumonia grave com choque"],
+      "distrator_comum": ["pneumonia simples", "insuficiencia cardiaca isolada", "tromboembolismo pulmonar"],
+      "feedback_distrator": "Embora haja pneumonia, a hipotensão refratária a volume e o lactato elevado caracterizam o estado de choque séptico de origem pulmonar.",
+      "achado_sucesso": "Correto! Diagnóstico de Choque Séptico secundário a Pneumonia Adquirida na Comunidade Grave."
+    },
+
+    "fase_3_conduta": {
+      "gabarito_esperado": ["antibioticoterapia precoce", "cristalico", "hidratacao venosa", "noradrenalina", "vasopressor"],
+      "red_flag_mortal": ["antibiotico tardio", "apenas soro sem vasopressor", "alta hospitalar"],
+      "feedback_sucesso": "Conduta impecável! Você coletou culturas, iniciou antibioticoterapia de amplo espectro na primeira hora, repôs volume cautelosamente com cristaloides e introduziu Noradrenalina para restaurar a pressão de perfusão orgânica.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Infundir volumes excessivos de soro em um septico com disfunção miocárdica induzida pela sepse sem iniciar vasopressores precipita edema pulmonar grave e colapso circulatório irreversível."
+    },
+
+    "discussao_clinica_final": {
+      "takeaway_message": "O manejo do choque séptico pulmonar exige o 'pacote de 1 hora': colher culturas, administrar antibióticos de largo espectro precocemente, dosar lactato e iniciar vasopressores se a PAM se mantiver abaixo de 65 mmHg.",
+      "fisiopatologia": "A resposta inflamatória sistêmica à infecção pulmonar gera intensa vasoplegia periférica e aumento da permeabilidade capilar, levando à hipoperfusão tecidual generalizada e disfunção de múltiplos órgãos."
+    }
+  },
+    {
+    "id_caso": "pneumo_tep_macico_01",
+    "patologia_alvo": "Tromboembolismo Pulmonar (TEP) Maciço com Instabilidade",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Homem de 52 anos, em pós-operatório recente de cirurgia ortopédica, apresenta quadro súbito de dispneia intensa, dor torácica pleurítica e síncope. Ao exame físico: taquipneico (32 irpm), taquicárdico (125 bpm), PA 80x45 mmHg, jugulares estendidas e saturação de 81% em ar ambiente.",
+    
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["angiotc", "angio-tc", "ecg", "ecocardiograma", "gasometria"],
+      "achado_sucesso": "Angiotomografia de artérias pulmonares confirma grande falha de enchimento bilateral (TEP maciço). O ecocardiograma à beira do leito demonstra sobrecarga aguda de ventrículo direito (sinal de McConnell e D-shape).",
+      "resposta_preceptor_erro": "Doutor, paciente no pós-operatório com colapso hemodinâmico súbito, hipoxemia grave e sinais de sobrecarga direita exige imagem imediata do leito vascular pulmonar (Angio-TC) e avaliação funcional do VD."
+    },
+
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["tep macico", "tromboembolismo pulmonar macico", "embolia pulmonar grave"],
+      "distrator_comum": ["tamponamento cardiaco", "infarto agudo do miocardio", "pneumonia grave"],
+      "feedback_distrator": "O histórico de imobilização/cirurgia associado à instabilidade hemodinâmica e falha emVD descarta infarto isolado ou tamponamento. Trata-se de TEP de alto risco (maciço).",
+      "achado_sucesso": "Correto! Diagnóstico de Tromboembolismo Pulmonar Maciço (Alto Risco)."
+    },
+
+    "fase_3_conduta": {
+      "gabarito_esperado": ["trombolitico", "alteplase", "trombólise", "heparina", "suporte volemico cauteloso"],
+      "red_flag_mortal": ["hidratacao agressiva", "suspensao de oxigenio", "alta precoce", "bloqueador beta"],
+      "feedback_sucesso": "Conduta heroica e cirúrgica! Diante da instabilidade hemodinâmica, você indicou trombólise sistêmica com trombolítico (Alteplase) e suporte hemodinâmico, salvando a perfusão pulmonar do paciente.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Tentar volume agressivo em um ventrículo direito já falido e hiperdilatado agrava o septo paradoxal, colapsando ainda mais o débito cardíaco e levando o paciente à parada cardiorrespiratória irreversível."
+    },
+
+    "discussao_clinica_final": {
+      "takeaway_message": "O TEP maciço é caracterizado por instabilidade hemodinâmica (PA sistólica < 90 mmHg). Nesses casos, a anticoagulação isolada é insuficiente; a trombólise sistêmica ou embolectomia de urgência é mandatória.",
+      "fisio patologia": "A obstrução mecânica aguda de grande parte do leito vascular pulmonar eleva abruptamente a resistência vascular pulmonar (RVP), gerando dilatação e falência aguda do ventrículo direito por cor pulmonale agudo, com queda drástica do débito cardíaco esquerdo."
+    }
+  },
+
+  {
+    "id_caso": "pneumo_asma_dpoc_aguda_01",
+    "patologia_alvo": "Exacerbação Grave de Asma / Estado Asmático vs. DPOC Agudizada",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Homem de 62 anos, tabagista de longa data com história prévia de DPOC e episódios de broncoespasmo, é trazido à emergência em franca insuficiência respiratória. Refere dispneia progressiva há 3 dias, associada a piora da tosse e expectoração purulenta. Ao exame físico: taquipneico (32 irpm), uso de musculatura acessória (intercostal e esternocleidomastóideo), murmúrio vesicular difusamente reduzido com sibilos expiratórios prolongados e estertores esparsos em bases. SpO2 de 82% em ar ambiente. Sinais de esforço respiratório com respiração paradoxal abdominal.",
+    
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["gasometria arterial", "gasometria", "rx de torax", "radiografia de torax", "ecg", "eletrocardiograma"],
+      "achado_sucesso": "Gasometria arterial revela acidose respiratória aguda descompensada (pH 7.28, PaCO2 62 mmHg, PaO2 55 mmHg, HCO3- 26 mEq/L, SatO2 85% em O2 suplementar). Radiografia de tórax evidencia hiperinsuflação pulmonar bilateral, retificação de arcos costais, aumento do espaço intercostal, sem consolidações lobares francas ou pneumotórax.",
+      "resposta_preceptor_erro": "Doutor, um paciente tabagista em franca exacerbação obstrutiva com hipercapnia e fadiga muscular iminente não pode ser avaliado apenas clinicamente. Precisamos quantificar o distúrbio acidobásico e a troca gasosa com uma gasometria arterial imediata e afastar complicações no parênquima."
+    },
+
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["exacerbacao grave de dpoc", "doenca pulmonar obstrutiva cronica agudizada", "estado asmatico", "acidose respiratoria aguda"],
+      "distrator_comum": ["edema agudo de pulmao cardiogenico", "tromboembolismo pulmonar massivo", "crise de ansiedade isolada"],
+      "feedback_distrator": "O padrão espirométrico obstrutivo prévio, o histórico de tabagismo e a retenção crônica de CO2 aguda afastam edema cardiogênico ou quadro puramente hemodinâmico. Trata-se de exacerbação grave de doença pulmonar obstrutiva crônica (ou sobreposição asma-DPOC).",
+      "achado_sucesso": "Correto! Diagnóstico de Exacerbação Aguda Grave de DPOC com Insuficiência Respiratória Hipercapnica (Acidose Respiratória)."
+    },
+
+    "fase_3_conduta": {
+      "gabarito_esperado": ["vni", "ventilacao nao invasiva", "broncodilatador inhalatorio", "beta 2 agonista de curta duracao", "corticoide sistemico", "antibioticoterapia", "oxigenoterapia controlada"],
+      "red_flag_mortal": ["intubacao imediata sem teste de vni", "oxigenio a fluxo livre 100%", "sedacao profunda precoce", "beta bloqueador"],
+      "feedback_sucesso": "Conduta impecável! Você instituiu oxigenoterapia controlada visando saturação entre 88-92%, administrou broncodilatadores inalatórios de curta ação associados a anticolinérgicos, prescreveu corticoterapia sistêmica, iniciou antibioticoterapia para cobertura de patógenos respiratórios e aplicou Ventilação Não Invasiva (VNI) com sucesso, reduzindo o trabalho respiratório e corrigindo a acidose.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Administrar oxigênio a 100% sem controle em portadores de DPOC retentores crônicos de CO2 remove o estímulo hipoxêmico central, aprofundando a hipoventilação alveolar, agravando a narcose por dióxido de carbono e culminando em parada respiratória e morte."
+    },
+
+    "discussao_clinica_final": {
+      "takeaway_message": "Na exacerbação grave da DPOC com acidose respiratória (pH < 7.35 e PaCO2 > 45 mmHg), a VNI é a intervenção de escolha para evitar a intubação orotraqueal e reduzir a mortalidade hospitalar. O oxigênio deve ser estritamente titulado.",
+      "fisiopatologia": "A inflamação crônica das vias aéreas inferiores associada a infecções ou poluentes desencadeia edema de mucosa, broncoconstrição e hipersecreção de muco espesso. Isso gera grave limitação ao fluxo aéreo expiratório, hiperinsuflação dinâmica intrínseca (auto-PEEP), aumento dramático do trabalho dos músculos respiratórios e fadiga alveolar com consequente retenção de CO2."
+    }
+  },
+  {
+    "id_caso": "pneumo_tep_submassivo_01",
+    "patologia_alvo": "Tromboembolismo Pulmonar (TEP) Submaciço / Alto-Risco Intermediário",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Mulher de 58 anos, obesa, usuária de terapia de reposição hormonal, apresenta quadro súbito de dispneia de início há 6 horas, acompanhada de dor torácica pleurítica à direita e palpitações. Nega síncope. Ao exame físico: taquipneica (28 irpm), taquicárdica (115 bpm), PA 115x75 mmHg, jugulares planas, sem hipotensão, porém com B2 hiperfonética em foco pulmonar. SpO2 de 86% em ar ambiente. Gasometria arterial com hipoxemia e hipocapnia severas (PaO2 58 mmHg, PaCO2 29 mmHg).",
+    
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["angiotc", "angiotomografia de arterias pulmonares", "ecocardiograma", "ecocardiograma transtoracico", "ecg", "eletrocardiograma", "dim D"],
+      "achado_sucesso": "Angiotomografia de artérias pulmonares revela trombo oclusivo em artéria pulmonar lobar direita e ramos segmentares bilaterais. Ecocardiograma transtorácico evidencia dilatação e hipocinesia de ventrículo direito com achado de aplanamento do septo interventricular (Sinal de McConnell e D-shape). Troponina ultrassensível e Pro-BNP encontram-se elevados.",
+      "resposta_preceptor_erro": "Doutor, paciente com fatores de risco clássicos para tromboembolismo (obesidade, hormônio, repouso ou estase) e hipoxemia desproporcional à ausculta limpa exige imagem confirmatória imediata (Angio-TC de artérias pulmonares) e avaliação de disfunção do ventrículo direito."
+    },
+
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["tep submaciço", "tromboembolismo pulmonar de risco intermediario", "tep agudo"],
+      "distrator_comum": ["infarto agudo do miocardio", "pneumonia adquirida na comunidade", "tamponamento cardiaco"],
+      "feedback_distrator": "A presença de sobrecarga de ventrículo direito ao ecocardiograma e marcadores de necrose miocárdica elevados, mesmo com PA estável na admissão, classifica o TEP como de risco intermediário-alto (submaciço), descartando infarto coronariano puro.",
+      "achado_sucesso": "Correto! Diagnóstico de Tromboembolismo Pulmonar Submaciço (Risco Intermediário-Alto)."
+    },
+
+    "fase_3_conduta": {
+      "gabarito_esperado": ["anticoagulacao plena", "heparina debaixo peso molecular", "enoxaparina", "heparina nao fracionada", "monitorizacao rigorosa"],
+      "red_flag_mortal": ["trombolise sistemica de rotina sem instabilidade", "suspensao da anticoagulacao", "puncao arterial sem compressao", "alta precoce"],
+      "feedback_sucesso": "Conduta exemplar! Você iniciou anticoagulação parenteral plena imediata (com Enoxaparina ou Heparina Não Fracionada endovenosa) e manteve a paciente sob estrita vigilância em leito de alta complexidade, monitorando sinais de descompensação hemodinâmica para resgate trombolítico caso ocorra hipotensão.",
+      "feedback_red_flag": "ERRO CRÍTICO FATAL! Aplicar trombólise sistêmica de rotina em paciente com TEP submaciço estável (sem queda da pressão arterial sistólica) expõe o paciente a um risco catastrófico de hemorragia intracraniana grave que supera o benefício terapêutico marginal."
+    },
+
+    "discussao_clinica_final": {
+      "takeaway_message": "O TEP submaciço (normotenso, mas com disfunção de ventrículo direito e dano miocárdico) exige anticoagulação imediata e monitorização intensiva, reservando a trombólise de resgate apenas para pacientes que evoluem com instabilidade hemodinâmica secundária.",
+      "fisiopatologia": "A oclusão embólica mecânica do leito vascular pulmonar eleva subitamente a resistência vascular pulmonar, causando aumento abrupto da pós-carga do ventrículo direito. Isso resulta em dilatação do VD, aumento do consumo de oxigênio miocárdico, desvio do septo interventricular para a esquerda com consequente compressão do ventrículo esquerdo e queda crítica do débito cardíaco sistêmico."
+    }
+  }
+]
+
