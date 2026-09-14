@@ -1,7 +1,7 @@
 "use strict";
 
 /* ============================================================
-   DIAGNOSIS ENGINE V2
+   DIAGNOSIS ENGINE V3
    Knowledge Base
         ↓
    Knowledge Adapter
@@ -10,11 +10,18 @@
         ↓
    Patient State
         ↓
+   Intent Engine
+        ↓
    Action Resolver / CSI
         ↓
    Consequence Engine
         ↓
    Evaluation
+
+   V3:
+   - adiciona camada de intenção/meta-comandos
+   - separa comandos do jogo de ações clínicas
+   - prepara arquitetura para Episode Manager
    ============================================================ */
 
 
@@ -23,6 +30,7 @@
    ============================================================ */
 
 const ARQUIVOS_POR_SALA = {
+
     vermelha: [
         "knowledge_base/neurologia.json",
         "knowledge_base/nefrologia.json",
@@ -38,6 +46,7 @@ const ARQUIVOS_POR_SALA = {
         "knowledge_base/endocrinologia.json",
         "knowledge_base/cardiopatias.json"
     ]
+
 };
 
 
@@ -88,6 +97,7 @@ function normalize(text) {
 function tokens(text) {
 
     const stopWords = new Set([
+
         "de", "da", "do",
         "das", "dos",
         "a", "o",
@@ -113,58 +123,94 @@ function tokens(text) {
         "fazer",
         "realizar",
         "avaliar"
+
     ]);
+
 
     return normalize(text)
         .split(" ")
         .filter(Boolean)
-        .filter(token => !stopWords.has(token));
+        .filter(token =>
+            !stopWords.has(token)
+        );
 
 }
 
 
 function similarity(a, b) {
 
-    const A = new Set(tokens(a));
-    const B = new Set(tokens(b));
+    const A =
+        new Set(tokens(a));
 
-    if (!A.size || !B.size) {
+    const B =
+        new Set(tokens(b));
+
+
+    if (
+        !A.size ||
+        !B.size
+    ) {
+
         return 0;
+
     }
+
 
     let intersection = 0;
 
-    for (const token of A) {
 
-        if (B.has(token)) {
+    for (
+        const token
+        of A
+    ) {
+
+        if (
+            B.has(token)
+        ) {
+
             intersection++;
+
         }
 
     }
 
-    return intersection / Math.max(A.size, B.size);
+
+    return intersection /
+        Math.max(
+            A.size,
+            B.size
+        );
 
 }
 
 
-function containsPhrase(input, list) {
+function containsPhrase(
+    input,
+    list
+) {
 
-    const text = normalize(input);
+    const text =
+        normalize(input);
 
-    return (list || []).some(item => {
 
-        const target = normalize(item);
+    return (list || [])
+        .some(item => {
 
-        if (!target) {
-            return false;
-        }
+            const target =
+                normalize(item);
 
-        return (
-            text.includes(target) ||
-            target.includes(text)
-        );
 
-    });
+            if (!target) {
+                return false;
+            }
+
+
+            return (
+                text.includes(target) ||
+                target.includes(text)
+            );
+
+        });
 
 }
 
@@ -186,17 +232,28 @@ function clone(value) {
 }
 
 
-function getArray(object, keys) {
+function getArray(
+    object,
+    keys
+) {
 
-    for (const key of keys) {
+    for (
+        const key
+        of keys
+    ) {
 
-        if (Array.isArray(object?.[key])) {
+        if (
+            Array.isArray(
+                object?.[key]
+            )
+        ) {
 
             return object[key];
 
         }
 
     }
+
 
     return [];
 
@@ -211,7 +268,7 @@ function getArray(object, keys) {
    Isso NÃO é o cérebro clínico.
 
    É somente a camada que transforma linguagem humana
-   em intenção estruturada.
+   em intenção clínica estruturada.
    ============================================================ */
 
 const CSI = {
@@ -277,7 +334,6 @@ const CSI = {
     support: {
 
         oxygen: [
-            "oxigenio",
             "oxigenio",
             "o2",
             "cateter nasal",
@@ -382,74 +438,401 @@ const CSI = {
 
 
 /* ============================================================
+   INTENT ENGINE
+   ============================================================
+
+   NOVA CAMADA V3.
+
+   Antes de perguntar:
+
+       "O que o jogador fez clinicamente?"
+
+   perguntamos:
+
+       "O jogador está fazendo uma ação clínica
+        ou está conversando com o próprio jogo?"
+
+   Exemplos:
+
+       "Qual minha nota?"
+       → REQUEST_SCORE
+
+       "Qual o seguimento?"
+       → REQUEST_FOLLOW_UP
+
+       "Me mostre os dados"
+       → REQUEST_INFORMATION
+
+       "Me dê uma dica"
+       → REQUEST_HINT
+
+       "Vou administrar hidrocortisona"
+       → CLINICAL_ACTION
+
+   Essa camada NÃO avalia medicina.
+   ============================================================ */
+
+class IntentEngine {
+
+    constructor() {
+
+        this.patterns = {
+
+            request_score: [
+
+                "qual minha nota",
+                "qual minha pontuacao",
+                "quanto tirei",
+                "como fui",
+                "me avalie",
+                "minha avaliacao",
+                "minha avaliação",
+                "resultado",
+                "qual foi minha nota",
+                "qual foi minha pontuacao"
+
+            ],
+
+
+            request_follow_up: [
+
+                "qual o seguimento",
+                "qual seguimento",
+                "e agora",
+                "o que faco agora",
+                "o que faço agora",
+                "proximo passo",
+                "próximo passo",
+                "como acompanhar",
+                "seguimento",
+                "follow up",
+                "follow-up",
+                "e depois",
+                "depois disso",
+                "qual o proximo passo",
+                "qual o próximo passo"
+
+            ],
+
+
+            request_information: [
+
+                "quais exames",
+                "que exames",
+                "quais informacoes",
+                "quais informações",
+                "o que eu sei",
+                "o que sabemos",
+                "quais dados",
+                "me mostre os dados",
+                "estado do paciente",
+                "como esta o paciente",
+                "como está o paciente",
+                "dados disponiveis",
+                "dados disponíveis"
+
+            ],
+
+
+            request_hint: [
+
+                "dica",
+                "me de uma dica",
+                "me dê uma dica",
+                "ajuda",
+                "preciso de ajuda"
+
+            ],
+
+
+            request_finish: [
+
+                "encerrar",
+                "encerrar caso",
+                "finalizar",
+                "finalizar caso",
+                "terminar caso",
+                "terminar o caso",
+                "sair do caso"
+
+            ]
+
+        };
+
+    }
+
+
+    normalize(text) {
+
+        return normalize(text);
+
+    }
+
+
+    matches(
+        text,
+        patterns
+    ) {
+
+        const normalized =
+            this.normalize(text);
+
+
+        return patterns.some(
+            pattern =>
+                normalized.includes(
+                    this.normalize(pattern)
+                )
+        );
+
+    }
+
+
+    interpret(text) {
+
+        const normalized =
+            this.normalize(text);
+
+
+        if (!normalized) {
+
+            return {
+
+                type:
+                    "UNKNOWN",
+
+                confidence:
+                    0
+
+            };
+
+        }
+
+
+        /*
+         * A ordem é deliberada.
+         *
+         * Primeiro comandos explícitos do jogo.
+         * Só depois deixamos a frase chegar
+         * ao interpretador clínico.
+         */
+
+
+        if (
+            this.matches(
+                normalized,
+                this.patterns.request_score
+            )
+        ) {
+
+            return {
+
+                type:
+                    "REQUEST_SCORE",
+
+                confidence:
+                    1
+
+            };
+
+        }
+
+
+        if (
+            this.matches(
+                normalized,
+                this.patterns.request_follow_up
+            )
+        ) {
+
+            return {
+
+                type:
+                    "REQUEST_FOLLOW_UP",
+
+                confidence:
+                    1
+
+            };
+
+        }
+
+
+        if (
+            this.matches(
+                normalized,
+                this.patterns.request_information
+            )
+        ) {
+
+            return {
+
+                type:
+                    "REQUEST_INFORMATION",
+
+                confidence:
+                    0.95
+
+            };
+
+        }
+
+
+        if (
+            this.matches(
+                normalized,
+                this.patterns.request_hint
+            )
+        ) {
+
+            return {
+
+                type:
+                    "REQUEST_HINT",
+
+                confidence:
+                    1
+
+            };
+
+        }
+
+
+        if (
+            this.matches(
+                normalized,
+                this.patterns.request_finish
+            )
+        ) {
+
+            return {
+
+                type:
+                    "REQUEST_FINISH",
+
+                confidence:
+                    1
+
+            };
+
+        }
+
+
+        /*
+         * Não é comando de interface.
+         *
+         * Entregamos ao cérebro clínico.
+         */
+
+        return {
+
+            type:
+                "CLINICAL_ACTION",
+
+            confidence:
+                0.7
+
+        };
+
+    }
+
+}
+
+
+/* ============================================================
    KNOWLEDGE ADAPTER
-
-   Aqui fazemos a ponte entre o JSON que o Gine já produz
-   e o modelo que o Engine entende.
-
-   Portanto:
-
-   NÃO precisamos reescrever a KB agora.
    ============================================================ */
 
 class KnowledgeAdapter {
 
-    static adaptFile(json, source) {
+    static adaptFile(
+        json,
+        source
+    ) {
 
         let cases = [];
 
-        if (Array.isArray(json)) {
 
-            cases = json;
+        if (
+            Array.isArray(json)
+        ) {
 
-        } else if (Array.isArray(json?.casos)) {
+            cases =
+                json;
 
-            cases = json.casos;
+        } else if (
+            Array.isArray(json?.casos)
+        ) {
 
-        } else if (Array.isArray(json?.conhecimento)) {
+            cases =
+                json.casos;
 
-            cases = json.conhecimento;
+        } else if (
+            Array.isArray(json?.conhecimento)
+        ) {
 
-        } else if (json && typeof json === "object") {
+            cases =
+                json.conhecimento;
 
-            cases = [json];
+        } else if (
+            json &&
+            typeof json === "object"
+        ) {
+
+            cases =
+                [json];
 
         }
 
+
         return cases
-            .map((item, index) =>
-                this.adaptCase(
-                    item,
-                    source,
-                    index
-                )
+            .map(
+                (item, index) =>
+                    this.adaptCase(
+                        item,
+                        source,
+                        index
+                    )
             )
             .filter(Boolean);
 
     }
 
 
-    static adaptCase(item, source, index) {
+    static adaptCase(
+        item,
+        source,
+        index
+    ) {
 
         if (
             !item ||
             typeof item !== "object"
         ) {
+
             return null;
+
         }
 
 
         const investigation =
-            item.fase_1_investigacao || {};
+            item.fase_1_investigacao ||
+            {};
+
 
         const diagnosis =
-            item.fase_2_diagnostico || {};
+            item.fase_2_diagnostico ||
+            {};
+
 
         const treatment =
-            item.fase_3_conduta || {};
+            item.fase_3_conduta ||
+            {};
+
 
         const discussion =
-            item.discussao_clinica_final || {};
+            item.discussao_clinica_final ||
+            {};
 
 
         return {
@@ -610,24 +993,23 @@ class KnowledgeAdapter {
 
 /* ============================================================
    CASE GENERATOR
-
-   O caso deixa de ser diretamente "o objeto do JSON".
-
-   Ele vira uma INSTÂNCIA de conhecimento.
    ============================================================ */
 
 class CaseGenerator {
 
     constructor(pool) {
 
-        this.pool = pool;
+        this.pool =
+            pool;
 
     }
 
 
     generate(room) {
 
-        if (!this.pool.length) {
+        if (
+            !this.pool.length
+        ) {
 
             throw new Error(
                 "Nenhum conhecimento clínico disponível."
@@ -683,12 +1065,6 @@ class CaseGenerator {
 
 /* ============================================================
    PATIENT STATE
-
-   Este é o objeto mais importante da próxima fase.
-
-   O jogador não conversa mais com um JSON.
-
-   Ele conversa com o ESTADO DO PACIENTE.
    ============================================================ */
 
 class PatientState {
@@ -743,15 +1119,18 @@ class PatientState {
                 /\bFC\s*[:=]?\s*(\d{2,3})/i
             );
 
+
         const spo2 =
             text.match(
                 /\b(?:SpO2|Sat(?:uração)?|saturação)\s*[:=]?\s*(\d{2,3})/i
             );
 
+
         const pa =
             text.match(
                 /\bPA\s*[:=]?\s*(\d{2,3})\s*[xX\/]\s*(\d{2,3})/i
             );
+
 
         const glucose =
             text.match(
@@ -815,17 +1194,22 @@ class PatientState {
             return false;
         }
 
+
         if (
             this.findings.includes(
                 finding
             )
         ) {
+
             return false;
+
         }
+
 
         this.findings.push(
             finding
         );
+
 
         return true;
 
@@ -850,16 +1234,18 @@ class PatientState {
 
 /* ============================================================
    ACTION RESOLVER
-
-   Linguagem humana → intenção estruturada.
    ============================================================ */
 
 class ActionResolver {
 
-    resolve(text, state) {
+    resolve(
+        text,
+        state
+    ) {
 
         const normalized =
             normalize(text);
+
 
         const intents =
             [];
@@ -889,7 +1275,9 @@ class ActionResolver {
                     intents.push({
 
                         type:
-                            this.mapType(group),
+                            this.mapType(
+                                group
+                            ),
 
                         concept,
 
@@ -943,7 +1331,9 @@ class ActionResolver {
         }
 
 
-        if (!intents.length) {
+        if (
+            !intents.length
+        ) {
 
             return [{
 
@@ -974,10 +1364,14 @@ class ActionResolver {
             new Set();
 
 
-        for (const intent of intents) {
+        for (
+            const intent
+            of intents
+        ) {
 
             const key =
                 `${intent.type}:${intent.concept}`;
+
 
             if (
                 !seen.has(key)
@@ -1001,31 +1395,55 @@ class ActionResolver {
 
     mapType(group) {
 
-        if (group === "exam") {
+        if (
+            group === "exam"
+        ) {
+
             return "exam";
+
         }
 
-        if (group === "treatment") {
+
+        if (
+            group === "treatment"
+        ) {
+
             return "treatment";
+
         }
 
-        if (group === "support") {
+
+        if (
+            group === "support"
+        ) {
+
             return "support";
+
         }
 
-        if (group === "disposition") {
+
+        if (
+            group === "disposition"
+        ) {
+
             return "disposition";
+
         }
+
 
         return "unknown";
 
     }
 
 
-    looksLikeDiagnosis(text, state) {
+    looksLikeDiagnosis(
+        text,
+        state
+    ) {
 
         const t =
             normalize(text);
+
 
         const diagnosticExpressions = [
 
@@ -1055,8 +1473,13 @@ class ActionResolver {
 
 
         /*
-         * Se não parece uma ação objetiva,
-         * tratamos como possível hipótese.
+         * ATENÇÃO:
+         *
+         * Esta heurística continua existindo para
+         * compatibilidade com a V2.
+         *
+         * Porém, agora frases reconhecidas como
+         * meta-comandos nunca chegam aqui.
          */
 
         return (
@@ -1069,10 +1492,13 @@ class ActionResolver {
     }
 
 
-    containsKnownAction(text) {
+    containsKnownAction(
+        text
+    ) {
 
         const normalized =
             normalize(text);
+
 
         for (
             const group
@@ -1105,6 +1531,7 @@ class ActionResolver {
 
         }
 
+
         return false;
 
     }
@@ -1125,6 +1552,7 @@ class EvaluationEngine {
 
         const normalized =
             normalize(input);
+
 
         let best = {
 
@@ -1155,8 +1583,12 @@ class EvaluationEngine {
 
 
             if (
-                normalized.includes(target) ||
-                target.includes(normalized)
+                normalized.includes(
+                    target
+                ) ||
+                target.includes(
+                    normalized
+                )
             ) {
 
                 return {
@@ -1214,7 +1646,9 @@ class EvaluationEngine {
     ) {
 
         const knowledge =
-            state.case.knowledge.investigation;
+            state.case
+                .knowledge
+                .investigation;
 
 
         const result =
@@ -1285,7 +1719,9 @@ class EvaluationEngine {
     ) {
 
         const knowledge =
-            state.case.knowledge.diagnosis;
+            state.case
+                .knowledge
+                .diagnosis;
 
 
         const correct =
@@ -1407,7 +1843,9 @@ class EvaluationEngine {
     ) {
 
         const knowledge =
-            state.case.knowledge.treatment;
+            state.case
+                .knowledge
+                .treatment;
 
 
         /*
@@ -1543,10 +1981,11 @@ class ConsequenceEngine {
             case "exam":
 
                 result =
-                    this.evaluator.evaluateInvestigation(
-                        intent.term,
-                        state
-                    );
+                    this.evaluator
+                        .evaluateInvestigation(
+                            intent.term,
+                            state
+                        );
 
                 break;
 
@@ -1554,10 +1993,11 @@ class ConsequenceEngine {
             case "diagnosis":
 
                 result =
-                    this.evaluator.evaluateDiagnosis(
-                        intent.term,
-                        state
-                    );
+                    this.evaluator
+                        .evaluateDiagnosis(
+                            intent.term,
+                            state
+                        );
 
 
                 if (
@@ -1576,10 +2016,11 @@ class ConsequenceEngine {
             case "treatment":
 
                 result =
-                    this.evaluator.evaluateTreatment(
-                        intent.term,
-                        state
-                    );
+                    this.evaluator
+                        .evaluateTreatment(
+                            intent.term,
+                            state
+                        );
 
 
                 if (
@@ -1598,7 +2039,8 @@ class ConsequenceEngine {
             case "support":
 
                 result =
-                    this.evaluator.evaluateSupport();
+                    this.evaluator
+                        .evaluateSupport();
 
                 break;
 
@@ -1677,23 +2119,63 @@ class DiagnosisEngineV2 {
         this.room =
             this.getRoom();
 
+
         this.pool =
             [];
+
 
         this.case =
             null;
 
+
         this.state =
             null;
+
 
         this.score =
             0;
 
+
+        /*
+         * V3:
+         * Intent Engine fica antes do Action Resolver.
+         */
+
+        this.intentEngine =
+            new IntentEngine();
+
+
         this.resolver =
             new ActionResolver();
 
+
         this.consequence =
             new ConsequenceEngine();
+
+
+        /*
+         * Preparação para a próxima etapa.
+         *
+         * Ainda não é o Episode Manager.
+         * Apenas mantemos o contexto atual.
+         */
+
+        this.clinicalContext = {
+
+            setting:
+                "emergency",
+
+            status:
+                "active",
+
+            objectives: [
+                "stabilize_patient",
+                "identify_clinical_problem",
+                "treat_acute_threat"
+            ]
+
+        };
+
 
         this.bindUI();
 
@@ -1706,6 +2188,7 @@ class DiagnosisEngineV2 {
             new URLSearchParams(
                 window.location.search
             );
+
 
         const requested =
             params.get("sala") ||
@@ -1815,6 +2298,7 @@ class DiagnosisEngineV2 {
 
 
         await this.loadKnowledgeBase();
+
 
         await this.loadNewCase();
 
@@ -1953,6 +2437,28 @@ class DiagnosisEngineV2 {
             0;
 
 
+        /*
+         * Cada novo caso começa novamente
+         * no contexto de emergência.
+         */
+
+        this.clinicalContext = {
+
+            setting:
+                "emergency",
+
+            status:
+                "active",
+
+            objectives: [
+                "stabilize_patient",
+                "identify_clinical_problem",
+                "treat_acute_threat"
+            ]
+
+        };
+
+
         this.setText(
             "caseTitle",
             this.case.pathology
@@ -1979,7 +2485,10 @@ class DiagnosisEngineV2 {
 
 
         if (log) {
-            log.innerHTML = "";
+
+            log.innerHTML =
+                "";
+
         }
 
 
@@ -2004,6 +2513,16 @@ class DiagnosisEngineV2 {
 
     }
 
+
+    /* ========================================================
+       PROCESSAMENTO PRINCIPAL
+
+       V3:
+       1. Intent Engine
+       2. Meta-comando?
+       3. Se não, Action Resolver
+       4. Consequence Engine
+       ======================================================== */
 
     processAction() {
 
@@ -2041,7 +2560,9 @@ class DiagnosisEngineV2 {
 
 
         if (!input) {
+
             return;
+
         }
 
 
@@ -2055,13 +2576,122 @@ class DiagnosisEngineV2 {
         );
 
 
+        /*
+         * =====================================================
+         * CAMADA 1 — INTENÇÃO
+         * =====================================================
+         */
+
+        const metaIntent =
+            this.intentEngine
+                .interpret(input);
+
+
+        /*
+         * -----------------------------------------------------
+         * NOTA / AVALIAÇÃO
+         * -----------------------------------------------------
+         */
+
         if (
-            this.isFinishCommand(
-                input
-            )
+            metaIntent.type ===
+            "REQUEST_SCORE"
+        ) {
+
+            this.showScore();
+
+            return;
+
+        }
+
+
+        /*
+         * -----------------------------------------------------
+         * SEGUIMENTO
+         * -----------------------------------------------------
+         */
+
+        if (
+            metaIntent.type ===
+            "REQUEST_FOLLOW_UP"
+        ) {
+
+            this.handleFollowUpQuestion();
+
+            return;
+
+        }
+
+
+        /*
+         * -----------------------------------------------------
+         * INFORMAÇÕES DISPONÍVEIS
+         * -----------------------------------------------------
+         */
+
+        if (
+            metaIntent.type ===
+            "REQUEST_INFORMATION"
+        ) {
+
+            this.showCurrentInformation();
+
+            return;
+
+        }
+
+
+        /*
+         * -----------------------------------------------------
+         * DICA
+         * -----------------------------------------------------
+         */
+
+        if (
+            metaIntent.type ===
+            "REQUEST_HINT"
+        ) {
+
+            this.requestHint();
+
+            return;
+
+        }
+
+
+        /*
+         * -----------------------------------------------------
+         * FINALIZAÇÃO
+         * -----------------------------------------------------
+         *
+         * Por enquanto usamos o encerramento antigo.
+         *
+         * Na próxima camada isso será substituído pelo
+         * Episode Manager + fechamento de contexto.
+         */
+
+        if (
+            metaIntent.type ===
+            "REQUEST_FINISH"
         ) {
 
             this.finishCase();
+
+            return;
+
+        }
+
+
+        /*
+         * =====================================================
+         * CAMADA 2 — AÇÃO CLÍNICA
+         * =====================================================
+         */
+
+        if (
+            metaIntent.type !==
+            "CLINICAL_ACTION"
+        ) {
 
             return;
 
@@ -2130,6 +2760,7 @@ class DiagnosisEngineV2 {
                 messageType =
                     "danger";
 
+
                 this.state.criticalErrors++;
 
             }
@@ -2162,6 +2793,170 @@ class DiagnosisEngineV2 {
     }
 
 
+    /* ========================================================
+       META-COMANDOS
+       ======================================================== */
+
+
+    showScore() {
+
+        if (
+            !this.state
+        ) {
+
+            return;
+
+        }
+
+
+        const message =
+
+            `Pontuação atual: ${this.score} pontos.\n` +
+
+            `Tempo decorrido: ${this.state.time} min.\n` +
+
+            `Estabilidade: ${this.state.stability}%.\n` +
+
+            `Achados revelados: ${this.state.findings.length}.\n` +
+
+            `Erros críticos: ${this.state.criticalErrors}.`;
+
+
+        this.log(
+            "system",
+            "AVALIAÇÃO ATUAL",
+            message
+        );
+
+
+        return {
+
+            type:
+                "score",
+
+            score:
+                this.score
+
+        };
+
+    }
+
+
+    handleFollowUpQuestion() {
+
+        const context =
+            this.clinicalContext?.setting ||
+            "emergency";
+
+
+        let message;
+
+
+        if (
+            context ===
+            "emergency"
+        ) {
+
+            message =
+                "O paciente ainda está no contexto de emergência. O objetivo atual é controlar a ameaça aguda e estabilizar o paciente. O seguimento definitivo será avaliado após o controle do episódio agudo.";
+
+        } else if (
+            context ===
+            "inpatient"
+        ) {
+
+            message =
+                "O episódio agudo foi controlado. Agora o foco pode migrar para confirmação diagnóstica, investigação etiológica e tratamento definitivo.";
+
+        } else if (
+            context ===
+            "outpatient"
+        ) {
+
+            message =
+                "O paciente está em acompanhamento ambulatorial. O foco agora é tratamento de manutenção, prevenção de recorrência e monitorização.";
+
+        } else {
+
+            message =
+                "O próximo passo depende do contexto clínico atual e da evolução do paciente.";
+
+        }
+
+
+        this.log(
+            "system",
+            "SEGUIMENTO",
+            message
+        );
+
+
+        return {
+
+            type:
+                "follow_up",
+
+            context,
+
+            message
+
+        };
+
+    }
+
+
+    showCurrentInformation() {
+
+        if (
+            !this.state
+        ) {
+
+            return;
+
+        }
+
+
+        const findings =
+            this.state.findings.length
+                ? this.state.findings.join(
+                    ", "
+                )
+                : "Nenhum achado adicional foi revelado ainda.";
+
+
+        const message =
+
+            `Contexto atual: ${this.clinicalContext.setting}.\n` +
+
+            `Estabilidade: ${this.state.stability}%.\n` +
+
+            `Achados revelados: ${findings}.`;
+
+
+        this.log(
+            "system",
+            "INFORMAÇÕES DISPONÍVEIS",
+            message
+        );
+
+
+        return {
+
+            type:
+                "information",
+
+            findings:
+                this.state.findings
+
+        };
+
+    }
+
+
+    /* ========================================================
+       ENCERRAMENTO LEGADO
+       ======================================================== */
+
     isFinishCommand(
         input
     ) {
@@ -2171,11 +2966,13 @@ class DiagnosisEngineV2 {
 
 
         return [
+
             "finalizar",
             "finalizar caso",
             "encerrar",
             "encerrar caso",
             "terminar caso"
+
         ].some(
             command =>
                 text === command
@@ -2202,12 +2999,19 @@ class DiagnosisEngineV2 {
             true;
 
 
+        this.clinicalContext.status =
+            "completed";
+
+
         this.log(
             this.state.stability > 0
                 ? "success"
                 : "danger",
+
             "CASO ENCERRADO",
+
             `Pontuação: ${this.score} pts | Tempo: ${this.state.time} min | Estabilidade: ${this.state.stability}%`
+
         );
 
 
@@ -2219,7 +3023,9 @@ class DiagnosisEngineV2 {
 
 
         const debrief =
+
             [
+
                 discussion.takeaway
                     ? `Mensagem-chave:\n${discussion.takeaway}`
                     : "",
@@ -2229,6 +3035,7 @@ class DiagnosisEngineV2 {
                     : ""
 
             ]
+
             .filter(Boolean)
             .join("\n\n");
 
@@ -2261,6 +3068,10 @@ class DiagnosisEngineV2 {
     }
 
 
+    /* ========================================================
+       DICA
+       ======================================================== */
+
     requestHint() {
 
         if (
@@ -2273,6 +3084,7 @@ class DiagnosisEngineV2 {
 
 
         this.state.helpUsed++;
+
 
         this.score +=
             CONFIG.score.hint;
@@ -2322,6 +3134,10 @@ class DiagnosisEngineV2 {
     }
 
 
+    /* ========================================================
+       BASE CIENTÍFICA
+       ======================================================== */
+
     scientificBase() {
 
         if (
@@ -2341,9 +3157,13 @@ class DiagnosisEngineV2 {
 
 
         const text =
+
             [
+
                 `Patologia-alvo: ${this.case.pathology}`,
+
                 `Fonte local: ${this.case.sourceId}`,
+
                 "",
 
                 discussion.takeaway
@@ -2358,9 +3178,10 @@ class DiagnosisEngineV2 {
 
                 "",
 
-                "Esta V2 utiliza somente a Knowledge Base local. O botão ainda não realiza uma busca externa no PubMed."
+                "Esta V3 utiliza somente a Knowledge Base local. O botão ainda não realiza uma busca externa no PubMed."
 
             ]
+
             .join("\n");
 
 
@@ -2368,6 +3189,10 @@ class DiagnosisEngineV2 {
 
     }
 
+
+    /* ========================================================
+       LABELS
+       ======================================================== */
 
     intentLabel(
         type
@@ -2403,6 +3228,10 @@ class DiagnosisEngineV2 {
 
     }
 
+
+    /* ========================================================
+       LOG
+       ======================================================== */
 
     log(
         type,
@@ -2475,6 +3304,10 @@ class DiagnosisEngineV2 {
 
     }
 
+
+    /* ========================================================
+       RENDER
+       ======================================================== */
 
     render() {
 
@@ -2555,14 +3388,23 @@ class DiagnosisEngineV2 {
             list
         ) {
 
-            list.innerHTML = "";
+            list.innerHTML =
+                "";
 
 
             const states = [
 
-                `Achados revelados: ${this.state.findings.length}`,
+                `Contexto: ${
+                    this.clinicalContext.setting
+                }`,
 
-                `Ações executadas: ${this.state.actions.length}`,
+                `Achados revelados: ${
+                    this.state.findings.length
+                }`,
+
+                `Ações executadas: ${
+                    this.state.actions.length
+                }`,
 
                 `Diagnóstico estabelecido: ${
                     this.state.diagnosisEstablished
@@ -2576,9 +3418,13 @@ class DiagnosisEngineV2 {
                         : "não"
                 }`,
 
-                `Erros críticos: ${this.state.criticalErrors}`,
+                `Erros críticos: ${
+                    this.state.criticalErrors
+                }`,
 
-                `Dicas utilizadas: ${this.state.helpUsed}`
+                `Dicas utilizadas: ${
+                    this.state.helpUsed
+                }`
 
             ];
 
@@ -2608,6 +3454,10 @@ class DiagnosisEngineV2 {
 
     }
 
+
+    /* ========================================================
+       DOM HELPERS
+       ======================================================== */
 
     setText(
         id,
@@ -2697,7 +3547,8 @@ window.addEventListener(
                 log
             ) {
 
-                log.innerHTML = "";
+                log.innerHTML =
+                    "";
 
 
                 const message =
