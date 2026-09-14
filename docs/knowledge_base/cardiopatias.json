@@ -1,35 +1,282 @@
 [
   {
-    "id_doenca": "cardio_tamponamento_01",
-    "nome_doenca": "Tamponamento Cardíaco",
-    "especialidade": "Cardiologia / Trauma",
-    "dificuldade": "Avançada",
-    
-    "vinheta_admissao": "Homem de 40 anos com ferimento por arma branca no tórax dá entrada na emergência com intensa falta de ar, agitação psicomotora e sensação de morte iminente. Ao exame: turgência jugular patológica, bulhas cardíacas hipofonéticas e pulso paradoxal.",
-
+    "id_doenca": "cardio_iam_01",
+    "nome_doenca": "Infarto Agudo do Miocárdio com Supra de ST",
+    "especialidade": "Cardiologia",
+    "dificuldade": "Intermediária",
+    "vinheta_admissao": "Homem de 62 anos, hipertenso e tabagista, chega ao pronto-socorro com dor retroesternal em aperto, irradiada para o membro superior esquerdo, com início há duas horas. Ao exame: sudoreico, PA 170/100 mmHg, FC 110 bpm.",
     "fase_1_investigacao": {
-      "gabarito_esperado": ["pocus", "ultrassom", "ecg", "eletrocardiograma", "eco", "ecocardiograma"],
-      "achado_sucesso": "Pocus e Ecocardiograma revelam grande derrame pericárdico circunferencial com colapso diastólico do ventrículo direito. ECG mostra baixa voltagem e alternância elétrica[span_1](start_span)[span_1](end_span).",
-      "resposta_preceptor_erro": "Doutor, paciente traumatizado com turgência jugular e bulhas abafadas está em choque obstrutivo. Precisamos avaliar a janela cardíaca imediatamente com ultrassom ou ecocardiograma de urgência!"
+      "gabarito_esperado": ["ecg", "eletrocardiograma", "troponina"],
+      "achado_sucesso": "O ECG revela supradesnivelamento do segmento ST nas derivações V1 a V4. Troponina positiva.",
+      "resposta_preceptor_erro": "Doutor, dor precordial típica em paciente de risco exige avaliação imediata da atividade elétrica. Solicite um eletrocardiograma."
     },
-
     "fase_2_diagnostico": {
-      "gabarito_esperado": ["tamponamento", "tamponamento cardiaco", "triade de beck"],
-      "distrator_comum": ["tep", "pneumotorax hipertensivo", "infarto do ventriculo direito"],
-      "feedback_distrator": "Embora o TEP e o pneumotórax causem choque obstrutivo, a presença concomitante da Tríade de Beck (hipofonenia, turgência jugular e hipotensão) aponta diretamente para compressão mecânica pericárdica.",
-      "achado_sucesso": "Correto! Diagnóstico confirmado de Tamponamento Cardíaco."
+      "gabarito_esperado": ["iam sst", "infarto", "iam com supra"],
+      "distrator_comum": ["angina instavel", "pericardite"],
+      "feedback_distrator": "O supra de ST no ECG confirma o infarto com supra, descartando angina instável.",
+      "achado_sucesso": "Correto. Diagnóstico de Infarto Agudo do Miocárdio com Supra de ST."
     },
-
     "fase_3_conduta": {
-      "gabarito_esperado": ["pericardiocentese", "puncao de marfan", "janela pericardica", "toracotomia"],
-      "red_flag_mortal": ["diuretico", "furosemida", "vni", "intubacao com pressao positiva", "drenagem de torax", "alta"],
-      "feedback_sucesso": "Conduta salvadora perfeita! Você realizou a descompressão mecânica imediata (pericardiocentese/cirurgia), restaurando o enchimento diastólico e salvando o paciente.",
-      "feedback_red_flag": "ERRO CRÍTICO FATAL! Administrar diuréticos ou ventilação com pressão positiva reduziu de vez o retorno venoso já comprometido, colapsando o coração e levando o paciente a uma parada cardiorrespiratória irreversível."
+      "gabarito_esperado": ["aas", "clopidogrel", "heparina", "angioplastia"],
+      "red_flag_mortal": ["tromboliticos sem avaliacao", "diureticos"],
+      "feedback_sucesso": "Conduta perfeita. Você administrou dupla antiagregação, anticoagulação e indicou angioplastia primária.",
+      "feedback_red_flag": "Erro. Tratar essa condição com diuréticos é ineficaz e atrasa o tratamento definitivo."
     },
-
     "discussao_clinica_final": {
-      "takeaway_message": "Tamponamento cardíaco (Tríade de Beck) cursa com choque obstrutivo. O tratamento salvador é mecânico: Pericardiocentese. Diuréticos são estritamente contraindicados[span_2](start_span)[span_2](end_span).",
-      "fisiopatologia": "O acúmulo de líquido no pericárdio inelástico aumenta a pressão no saco pericárdico, impedindo o enchimento diastólico das câmaras direitas e gerando choque obstrutivo[span_3](start_span)[span_3](end_span)."
+      "takeaway_message": "O supra de ST no ECG em paciente com dor típica é emergência médica. O tempo porta-balão é crucial.",
+      "fisiopatologia": "Oclusão coronariana aguda por ruptura de placa aterosclerótica gera isquemia transmural e necrose miocárdica."
+    }
+  },
+  {
+    "id_doenca": "cardio_urgencia_hiper_01",
+    "nome_doenca": "Emergência Hipertensiva (Edema Agudo de Pulmão)",
+    "especialidade": "Cardiologia",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Mulher de 58 anos, hipertensa sem tratamento, refere dispneia progressiva e ortopneia há três dias. Hoje, apresentou piora súbita. Ao exame: PA 210/120 mmHg, FC 120 bpm, estertores crepitantes bilaterais e saturação de 85%.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["gasometria", "radiografia de torax", "ecg"],
+      "achado_sucesso": "Radiografia com congestão hilar e linhas B de Kerley. Gasometria mostra hipoxemia grave.",
+      "resposta_preceptor_erro": "Doutor, desconforto respiratório grave com hipertensão severa sugere falha ventricular aguda. Avalie a troca gasosa e congestão."
+    },
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["edema agudo de pulmao", "eap", "insuficiencia cardiaca descompensada"],
+      "distrator_comum": ["asma', 'pneumonia"],
+      "feedback_distrator": "A hipertensão grave e os estertores pulmonares bilaterais apontam para o edema agudo, não asma ou pneumonia.",
+      "achado_sucesso": "Exato. Edema Agudo de Pulmão secundário à emergência hipertensiva."
+    },
+    "fase_3_conduta": {
+      "gabarito_esperado": ["diuretico de alça", "nitrato", "oxigenio", "vni"],
+      "red_flag_mortal": ["beta bloqueador na fase aguda", "vasodilatador oral apenas"],
+      "feedback_sucesso": "Excelente. Você reduziu a pré e pós-carga com vasodilatadores e diuréticos, e iniciou ventilação não invasiva.",
+      "feedback_red_flag": "Erro. Betabloqueadores na fase aguda podem precipitar choque cardiogênico ao reduzir o inotropismo."
+    },
+    "discussao_clinica_final": {
+      "takeaway_message": "Redução rápida e controlada da pressão arterial e melhora da congestão pulmonar salvam vidas no EAP.",
+      "fisiopatologia": "Aumento súbito da pós-carga eleva a pressão atrial esquerda e capilar, transudando líquido para os alvéolos."
+    }
+  },
+  {
+    "id_doenca": "cardio_ic_01",
+    "nome_doenca": "Insuficiência Cardíaca Crônica Descompensada",
+    "especialidade": "Cardiologia",
+    "dificuldade": "Intermediária",
+    "vinheta_admissao": "Homem de 75 anos com histórico de insuficiência cardíaca isquêmica, relata ganho de peso de 5 kg em uma semana, edema em membros inferiores e aumento do volume abdominal. Ao exame: PA 110/70 mmHg, jugulares distendidas e hepatomegalia.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["pro bnp", "ecocardiograma", "funcao renal"],
+      "achado_sucesso": "Pro-BNP elevado indica sobrecarga ventricular. Ecocardiograma revela fração de ejeção reduzida.",
+      "resposta_preceptor_erro": "Doutor, paciente com ICC e sinais de sobrecarga hídrica necessita de avaliação de função renal e marcadores de estresse."
+    },
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["ic descompensada", "insuficiencia cardiaca", "congestao sistemica"],
+      "distrator_comum": ["cirrose hepatica", "doenca renal cronica"],
+      "feedback_distrator": "O quadro é de congestão sistêmica por ICC, não cirrose ou doença renal.",
+      "achado_sucesso": "Correto. Insuficiência Cardíaca Congestiva Descompensada."
+    },
+    "fase_3_conduta": {
+      "gabarito_esperado": ["furosemida', 'restricao hidrica'],
+      "red_flag_mortal": ["hidratacao vigorosa", 'suspensao da medicacao de base'],
+      "feedback_sucesso": "Conduta correta. Diuréticos de alça e balanço hídrico negativo estabilizaram o paciente.",
+      "feedback_red_flag": "Erro. Hidratação pioraria a sobrecarga de volume, levando a um EAP."
+    },
+    "discussao_clinica_final": {
+      "takeaway_message": "O manejo da ICC descompensada foca na remoção do excesso de volume e ajuste da medicação crônica.",
+      "fisiopatologia": "Retenção hidrossalina e remodelamento cardíaco levam à diminuição do débito e congestão retrógrada."
+    }
+  },
+  {
+    "id_doenca": "cardio_arritmia_01",
+    "nome_doenca": "Taquicardia Supraventricular com Instabilidade",
+    "especialidade": "Cardiologia",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Mulher de 45 anos, sem histórico prévio, chega ao pronto-socorro referindo palpitações intensas e tontura. Ao exame: pálida, PA 85/50 mmHg, FC 186 bpm. ECG mostra taquicardia de complexo estreito, sem ondas P visíveis.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["ecg", "acesso venoso"],
+      "achado_sucesso": "ECG confirma TPSV. Paciente apresenta sinais de hipoperfusão sistêmica.",
+      "resposta_preceptor_erro": "Doutor, taquicardia sintomática com hipotensão exige avaliação rápida do ritmo e preparo para intervenção."
+    },
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["tpsv", "taquicardia supraventricular", "fibrilacao atrial com alta resposta"],
+      "distrator_comum": ["taquicardia sinusal", "flutter atrial"],
+      "feedback_distrator": "A frequência fixa e ausência de ondas P indicam TPSV, não taquicardia sinusal.",
+      "achado_sucesso": "Exato. Taquicardia Supraventricular com instabilidade hemodinâmica."
+    },
+    "fase_3_conduta": {
+      "gabarito_esperado": ["cardioversao eletrica", "sedacao"],
+      "red_flag_mortal": ["adenosina em paciente instavel", "verapamil"],
+      "feedback_sucesso": "Conduta irretocável. Paciente instável, você optou pela cardioversão elétrica imediata.",
+      "feedback_red_flag": "Erro. Bloqueadores de nó AV como adenosina podem piorar a instabilidade em pacientes hipotensos."
+    },
+    "discussao_clinica_final": {
+      "takeaway_message": "Estabilidade hemodinâmica dita a conduta na taquicardia. Hipotensão = cardioversão imediata.",
+      "fisiopatologia": "Mecanismo de reentrada nodal ou via acessória mantendo alta frequência ventricular e prejuízo do enchimento diastólico."
+    }
+  },
+  {
+    "id_doenca": "cardio_bradi_01",
+    "nome_doenca": "Bloqueio Atrioventricular Total",
+    "especialidade": "Cardiologia",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Homem de 80 anos é admitido com síncope e fraqueza intensa. Ao exame: PA 90/60 mmHg, bradicardia extrema, FC 34 bpm. ECG revela dissociação entre ondas P e complexos QRS.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["ecg", "transcutaneo", "marcapasso"],
+      "achado_sucesso": "ECG confirma BAV Total. Prepara-se marcapasso provisório.",
+      "resposta_preceptor_erro": "Doutor, síncope e FC abaixo de 40 demonstram falha grave na condução elétrica. Obtenha o eletro."
+    },
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["bav total", "bloqueio atrioventriculo total", "bav t"],
+      "distrator_comum": ["bav 2 grau", "baixas voltagens"],
+      "feedback_distrator": "A dissociação total entre P e QRS confirma BAV Total.",
+      "achado_sucesso": "Correto. Diagnóstico de Bloqueio Atrioventricular Total."
+    },
+    "fase_3_conduta": {
+      "gabarito_esperado": ["marcapasso transcutaneo", "atropina", "marcapasso provisorio"],
+      "red_flag_mortal": ["betabloqueador", "observacao"],
+      "feedback_sucesso": "Conduta heroica e precisa. Você iniciou suporte cronotrópico imediato com marcapasso transcutâneo.",
+      "feedback_red_flag": "Erro. Observar ou administrar betabloqueador causaria parada assistólica irreversível."
+    },
+    "discussao_clinica_final": {
+      "takeaway_message": "BAV Total sintomático com bradicardia extrema requer marcapasso transcutâneo imediato e definitivo posterior.",
+      "fisiopatologia": "Falha total de condução do estímulo atrial ao ventrículo, resultando em ritmo de escape muito lento."
+    }
+  },
+  {
+    "id_doenca": "cardio_tep_01",
+    "nome_doenca": "Tromboembolismo Pulmonar Maciço",
+    "especialidade": "Cardiologia / Emergência",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Homem de 48 anos, em pós-operatório ortopédico, apresenta súbita dispneia, dor torácica pleurítica e síncope. Ao exame: taquipneico (30 irpm), taquicárdico (130 bpm), PA 85/50 mmHg e saturação de 82%.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["angiotc", "ecg", "ecocardiograma"],
+      "achado_sucesso": "Angiotomografia confirma falha de enchimento em artéria pulmonar principal. ECG mostra padrão S1Q3T3.",
+      "resposta_preceptor_erro": "Doutor, paciente em choque e hipoxemia pós-cirúrgica sugere obstrução do leito pulmonar. Solicite angiotomografia urgente."
+    },
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["tep macico", "embolia pulmonar"],
+      "distrator_comum": ["tamponamento", "infarto"],
+      "feedback_distrator": "A hipoxemia severa e a taquicardia desproporcional apontam para TEP, não IAM.",
+      "achado_sucesso": "Correto. Diagnóstico de Tromboembolismo Pulmonar Maciço."
+    },
+    "fase_3_conduta": {
+      "gabarito_esperado": ["trombolitico", "alteplase", "heparina"],
+      "red_flag_mortal": ["cirurgia eletiva", "suspensao de oxigenio"],
+      "feedback_sucesso": "Conduta perfeita. Paciente chocado, você indicou trombólise sistêmica imediata.",
+      "feedback_red_flag": "Erro. Sem trombólise em paciente instável, o colapso do ventrículo direito leva ao óbito."
+    },
+    "discussao_clinica_final": {
+      "takeaway_message": "TEP maciço com instabilidade hemodinâmica é indicação absoluta de trombólise.",
+      "fisiopatologia": "Obstrução vascular aguda aumenta abruptamente a pós-carga ventricular direita, levando à dilatação e falha dessa câmara."
+    }
+  },
+  {
+    "id_doenca": "cardio_disseccao_01",
+    "nome_doenca": "Dissecção Aórtica Tipo A",
+    "especialidade": "Cardiologia / Cirurgia Vascular",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Mulher de 60 anos, hipertensa de longa data, refere dor torácica lancinante e súbita, com irradiação para as costas. Ao exame: PA 180/110 mmHg no braço direito e 140/90 mmHg no esquerdo. Pulso femoral diminuído à esquerda.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["angiotc", "tomografia", "radiografia de torax"],
+      "achado_sucesso": "AngioTC de aorta identifica flap intimal na aorta ascendente. Radiografia mostra alargamento do mediastino.",
+      "resposta_preceptor_erro": "Doutor, dor em facada irradiada para as costas e diferença de PA nos braços exigem exame de imagem da aorta."
+    },
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["disseccao aortica", "disseccao de aorta"],
+      "distrator_comum": ["iam", "sindrome aortica aguda"],
+      "feedback_distrator": "A diferença de pulsos e a dor lancinante distinguem a dissecção do infarto típico.",
+      "achado_sucesso": "Exato. Dissecção Aguda de Aorta Tipo A."
+    },
+    "fase_3_conduta": {
+      "gabarito_esperado": ["beta bloqueador", "nitroprussiato", "cirurgia de emergencia"],
+      "red_flag_mortal": ["anticoagulante", "trombolitico"],
+      "feedback_sucesso": "Conduta irretocável. Controle rápido de FC e PA com beta-bloqueador e encaminhamento cirúrgico imediato.",
+      "feedback_red_flag": "Erro. Administrar anticoagulantes aumentaria a expansão do falso lúmen, causando ruptura fatal."
+    },
+    "discussao_clinica_final": {
+      "takeaway_message": "Dissecção de aorta tipo A é emergência cirúrgica. Controle inicial foca no estresse de cisalhamento.",
+      "fisiopatologia": "Ruptura da íntima aórtica permite que o sangue separe as camadas da parede arterial, criando um falso lúmen."
+    }
+  },
+  {
+    "id_doenca": "cardio_pcr_01",
+    "nome_doenca": "Parada Cardiorrespiratória em Fibrilação Ventricular",
+    "especialidade": "Cardiologia / Emergência",
+    "dificuldade": "Intermediária",
+    "vinheta_admissao": "Homem de 50 anos, durante exame de rotina, apresenta perda súbita de consciência e ausência de pulso carotídeo. O monitor mostra ritmo caótico e desorganizado sem ondas P, QRS ou T.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["monitor", "ecg"],
+      "achado_sucesso": "Ritmo visualizado no monitor é Fibrilação Ventricular. Inicia-se protocolo de RCP.",
+      "resposta_preceptor_erro": "Doutor, paciente sem pulso. Verifique o monitor imediatamente para identificar o ritmo da parada."
+    },
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["fibrilacao ventricular", "fv", "ritmo chocavel"],
+      "distrator_comum": ["aesp", "assistolia"],
+      "feedback_distrator": "Ritmo caótico corresponde à FV, sendo um ritmo chocável.",
+      "achado_sucesso": "Correto. Parada Cardiorrespiratória em Fibrilação Ventricular."
+    },
+    "fase_3_conduta": {
+      "gabarito_esperado": ["desfibrilacao", "adrenalina", "amiodarona"],
+      "red_flag_mortal": ["atropina isolada", "trombólise sem causa"],
+      "feedback_sucesso": "Excelente ressuscitação. Desfibrilação precoce seguida de compressões e drogas antiarrítmicas.",
+      "feedback_red_flag": "Erro. Demorar o choque para aplicar outras medidas reduz drasticamente a sobrevida."
+    },
+    "discussao_clinica_final": {
+      "takeaway_message": "Choque rápido na FV e RCP de alta qualidade são os pilares da sobrevida no PCR.",
+      "fisiopatologia": "Atividade elétrica miocárdica fragmentada que impede a contração ventricular efetiva, resultando em ausência de débito cardíaco."
+    }
+  },
+  {
+    "id_doenca": "cardio_ic_fer_01",
+    "nome_doenca": "Insuficiência Cardíaca com Fração de Ejeção Reduzida",
+    "especialidade": "Cardiologia",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Homem de 68 anos, com histórico de IAM, refere dispneia progressiva aos médios esforços e ortopneia. Ao exame: PA 100/70 mmHg, FC 98 bpm, estase jugular, terceira bulha (B3) e edema de membros inferiores.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["ecocardiograma", "pro bnp", "radiografia de torax"],
+      "achado_sucesso": "Ecocardiograma revela fração de ejeção de 32% e dilatação das câmaras esquerdas. Radiografia mostra cardiomegalia e congestão.",
+      "resposta_preceptor_erro": "Doutor, paciente com dispneia e sinais de sobrecarga hídrica pós-infarto precisa de avaliação de contratilidade e volemia."
+    },
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["ic com fracao de ejecao reduzida", "icfer", "insuficiencia cardiaca esquerda"],
+      "distrator_comum": ["ic com fracao preservada", "doenca pulmonar"],
+      "feedback_distrator": "O ecocardiograma confirma FE reduzida e o histórico de IAM aponta para IC por disfunção sistólica.",
+      "achado_sucesso": "Correto. Diagnóstico de IC com Fração de Ejeção Reduzida."
+    },
+    "fase_3_conduta": {
+      "gabarito_esperado": ["betabloqueador", "ieca", "diuretico de alca"],
+      "red_flag_mortal": ["hidratacao vigorosa a 0 9", "verapamil"],
+      "feedback_sucesso": "Conduta excelente. Você iniciou o bloqueio neuro-hormonal com betabloqueador e IECA, associado a diuréticos para controle dos sintomas.",
+      "feedback_red_flag": "Erro. A hidratação sobrecarregaria o ventrículo falho, precipitando um edema agudo de pulmão."
+    },
+    "discussao_clinica_final": {
+      "takeaway_message": "O tratamento da ICFER visa o bloqueio neuro-hormonal para melhorar o prognóstico.",
+      "fisiopatologia": "O remodelamento ventricular pós-infarto reduz a contratilidade, ativando sistemas que perpetuam a falência cardíaca."
+    }
+  },
+  {
+    "id_doenca": "cardio_ic_fep_01",
+    "nome_doenca": "Insuficiência Cardíaca com Fração de Ejeção Preservada",
+    "especialidade": "Cardiologia",
+    "dificuldade": "Avançada",
+    "vinheta_admissao": "Mulher de 75 anos, hipertensa de longa data, apresenta dispneia aos pequenos esforços e episódios de dispneia paroxística noturna. Ao exame: PA 150/90 mmHg, FC 88 bpm. Sem sopros ou B3 evidente.",
+    "fase_1_investigacao": {
+      "gabarito_esperado": ["ecocardiograma", "pro bnp"],
+      "achado_sucesso": "Ecocardiograma mostra hipertrofia concêntrica ventricular com função sistólica preservada (FE 58%) e disfunção diastólica. Pro-BNP moderadamente elevado.",
+      "resposta_preceptor_erro": "Doutor, paciente hipertensa com sinais de congestão necessita de avaliação da função diastólica."
+    },
+    "fase_2_diagnostico": {
+      "gabarito_esperado": ["ic com fracao de ejecao preservada", "icfep"],
+      "distrator_comum": ["icfer", "asfixia"],
+      "feedback_distrator": "Os exames confirmam função sistólica normal com alteração no enchimento ventricular, característico da ICFEP.",
+      "achado_sucesso": "Exato. Diagnóstico de IC com Fração de Ejeção Preservada."
+    },
+    "fase_3_conduta": {
+      "gabarito_esperado": ["diuretico", "controle da pressao arterial"],
+      "red_flag_mortal": ["inotrópico positivo", "digoxina"],
+      "feedback_sucesso": "Conduta ótima. Controle estrito da pressão arterial e uso de diuréticos para resolver a congestão pulmonar.",
+      "feedback_red_flag": "Erro. Inotrópicos não são benéficos e podem causar arritmias nesta condição de rigidez ventricular."
+    },
+    "discussao_clinica_final": {
+      "takeaway_message": "A ICFEP é desafiadora, e o tratamento prioriza o controle de comorbidades e da pressão arterial.",
+      "fisiopatologia": "A hipertrofia ventricular gera rigidez do músculo cardíaco, dificultando o relaxamento e enchimento ventricular adequado."
     }
   }
 ]
