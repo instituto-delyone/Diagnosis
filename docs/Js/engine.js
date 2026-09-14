@@ -31,8 +31,8 @@
    ============================================================ */
 
 const ARQUIVOS_POR_SALA = {
-
     vermelha: [
+        "knowledge_base/hipertensao_arterial.json",
         "knowledge_base/neurologia.json",
         "knowledge_base/reumatologia.json",
         "knowledge_base/endocrinologia.json",
@@ -41,6 +41,7 @@ const ARQUIVOS_POR_SALA = {
     ],
 
     clinica: [
+        "knowledge_base/hipertensao_arterial.json",
         "knowledge_base/neurologia.json",
         "knowledge_base/reumatologia.json",
         "knowledge_base/endocrinologia.json",
