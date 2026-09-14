@@ -2,49 +2,32 @@
   "id_doenca": "cardio_tamponamento_01",
   "nome_doenca": "Tamponamento Cardíaco",
   "especialidade": "Cardiologia / Trauma",
+  "dificuldade": "Avançada",
   
-  "gerador_demografico": [
-    "Jovem de 25 anos vítima de colisão frontal de carro",
-    "Homem de 40 anos com ferimento por arma branca no tórax",
-    "Mulher de 60 anos em pós-operatório de cirurgia cardíaca"
-  ],
-  
-  "gerador_clinico": {
-    "queixas_principais": [
-      "intensa falta de ar e dor torácica",
-      "sensação de morte iminente e confusão mental",
-      "dispneia severa com agitação psicomotora"
-    ],
-    "achados_exame_fisico": [
-      "turgência jugular patológica a 90 graus",
-      "bulhas cardíacas hipofonéticas e abafadas",
-      "pulso paradoxal (queda da PA na inspiração)"
-    ]
+  "vinheta_admissao": "Homem de 40 anos com ferimento por arma branca no tórax dá entrada na emergência com intensa falta de ar, agitação psicomotora e sensação de morte iminente. Ao exame: turgência jugular patológica, bulhas cardíacas hipofonéticas e pulso paradoxal.",
+
+  "fase_1_investigacao": {
+    "gabarito_esperado": ["pocus", "ultrassom", "ecg", "eletrocardiograma", "eco", "ecocardiograma"],
+    "achado_sucesso": "Pocus e Ecocardiograma revelam grande derrame pericárdico circunferencial com colapso diastólico do ventrículo direito. ECG mostra baixa voltagem e alternância elétrica.",
+    "resposta_preceptor_erro": "Doutor, paciente traumatizado com turgência jugular e bulhas abafadas está em choque obstrutivo. Precisamos avaliar a janela cardíaca imediatamente com ultrassom ou ecocardiograma de urgência!"
   },
-  
-  "hemodinamica_base": {
-    "pa_sistolica_range": [70, 90],
-    "pa_diastolica_range": [40, 60],
-    "fc_range": [110, 140],
-    "spo2_range": [85, 92],
-    "ritmo_monitor": "Taquicardia Sinusal com Alternância Elétrica"
+
+  "fase_2_diagnostico": {
+    "gabarito_esperado": ["tamponamento", "tamponamento cardiaco", "triade de beck"],
+    "distrator_comum": ["tep", "pneumotorax hipertensivo", "infarto do ventriculo direito"],
+    "feedback_distrator": "Embora o TEP e o pneumotórax causem choque obstrutivo, a presença concomitante da Tríade de Beck (hipofonenia, turgência jugular e hipotensão) aponta diretamente para compressão mecânica pericárdica.",
+    "achado_sucesso": "Correto! Diagnóstico confirmado de Tamponamento Cardíaco."
   },
-  
-  "mapa_exames": {
-    "ecg": "Taquicardia sinusal com baixa voltagem e alternância elétrica dos complexos QRS.",
-    "raio_x": "Alargamento global da área cardíaca (aspecto em moringa). Pulmões sem congestão.",
-    "ultrassom": "POCUS revela grande derrame pericárdico circunferencial com colapso diastólico do ventrículo direito.",
-    "pocus": "POCUS revela grande derrame pericárdico circunferencial com colapso diastólico do ventrículo direito."
+
+  "fase_3_conduta": {
+    "gabarito_esperado": ["pericardiocentese", "puncao de marfan", "janela pericardica", "toracotomia"],
+    "red_flag_mortal": ["diuretico", "furosemida", "vni", "intubacao com pressao positiva", "drenagem de torax", "alta"],
+    "feedback_sucesso": "Conduta salvadora perfeita! Você realizou a descompressão mecânica imediata (pericardiocentese/cirurgia), restaurando o enchimento diastólico e salvando o paciente.",
+    "feedback_red_flag": "ERRO CRÍTICO FATAL! Administrar diuréticos ou ventilação com pressão positiva reduziu de vez o retorno venoso já comprometido, colapsando o coração e levando o paciente a uma parada cardiorrespiratória irreversível."
   },
-  
-  "criterios_resolucao": {
-    "diagnosticos_aceitos": ["tamponamento", "tamponamento cardiaco", "triade de beck"],
-    "tratamentos_salvadores": ["pericardiocentese", "puncao de marfan", "janela pericardica", "toracotomia"],
-    "condutas_letais": ["diuretico", "furosemida", "vni", "intubacao com pressao positiva", "drenagem de torax"]
-  },
-  
-  "debriefing": {
-    "takeaway": "Tamponamento cardíaco (Tríade de Beck) cursa com choque obstrutivo. O tratamento salvador é mecânico: Pericardiocentese. Diuréticos são estritamente contraindicados.",
+
+  "discussao_clinica_final": {
+    "takeaway_message": "Tamponamento cardíaco (Tríade de Beck) cursa com choque obstrutivo. O tratamento salvador é mecânico: Pericardiocentese. Diuréticos são estritamente contraindicados.",
     "fisiopatologia": "O acúmulo de líquido no pericárdio inelástico aumenta a pressão no saco pericárdico, impedindo o enchimento diastólico das câmaras direitas e gerando choque obstrutivo."
   }
 }
