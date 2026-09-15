@@ -3,7 +3,7 @@
 /**
  * =============================================================
  * DIAGNOSIS
- * Patient Generator — v2
+ * Patient Generator — v2.1
  * =============================================================
  *
  * RESPONSABILIDADE
@@ -29,16 +29,16 @@
  * A geração é baseada somente no Clinical Model +
  * Possibility Engine.
  *
- *
  * PRINCÍPIO:
  *
  * A doença determina o espaço clínico.
- * O gerador determina a apresentação.
- * O Patient State determina o que é verdadeiro.
- * O Interlocutor determina o que pode ser revelado.
+ * O Knowledge fornece a apresentação possível.
+ * O Generator instancia uma apresentação.
+ * O Patient State mantém o que é verdadeiro.
+ * O Interlocutor revela apenas o que for solicitado.
  *
- * A doença pode permanecer oculta.
- * A queixa clínica não pode estar ausente.
+ * A doença pode estar oculta.
+ * A apresentação clínica não.
  * =============================================================
  */
 
@@ -96,6 +96,10 @@ class PatientGenerator {
 
 
     shuffle(array) {
+
+        if (!Array.isArray(array)) {
+            return [];
+        }
 
         const copy = [...array];
 
@@ -200,7 +204,7 @@ class PatientGenerator {
         const diseases =
             this.engine.getDiseaseEntities();
 
-        if (diseases.length === 0) {
+        if (!Array.isArray(diseases) || diseases.length === 0) {
             return null;
         }
 
@@ -255,15 +259,13 @@ class PatientGenerator {
 
 
     /* =========================================================
-       APRESENTAÇÃO — CANDIDATOS
+       APRESENTAÇÃO CLÍNICA
        =========================================================
-       Esta função preserva a lógica original.
+       O Knowledge é a fonte da apresentação.
 
-       Ela consulta o Possibility Engine e obtém manifestações
-       e achados possíveis associados à doença.
-
-       Esses elementos ainda NÃO constituem a queixa principal.
-       São matéria-prima para a construção da apresentação.
+       O Generator NÃO inventa uma doença nova nem uma queixa
+       arbitrária. Ele consulta as manifestações possíveis
+       associadas à doença e instancia algumas delas.
        ========================================================= */
 
     generatePresentationCandidates(disease) {
@@ -276,26 +278,44 @@ class PatientGenerator {
             this.getDiseaseId(disease);
 
         const manifestations =
-            this.engine.getPossibleManifestations(id);
+            this.engine.getPossibleManifestations(id) || [];
 
         const findings =
-            this.engine.getPossibleFindings(id);
+            this.engine.getPossibleFindings(id) || [];
 
         const candidates = [];
 
 
         /*
-         * Relações clínicas.
+         * Manifestações clínicas vindas das relações do
+         * Knowledge Base.
          */
 
         for (const item of manifestations) {
 
+            if (!item) {
+                continue;
+            }
+
             if (item.entity) {
 
                 candidates.push({
+
                     type: "manifestation",
 
                     source: item.entity,
+
+                    relationship:
+                        item.relationship || null
+                });
+
+            } else {
+
+                candidates.push({
+
+                    type: "manifestation",
+
+                    source: item,
 
                     relationship:
                         item.relationship || null
@@ -305,12 +325,17 @@ class PatientGenerator {
 
 
         /*
-         * Padrões clínicos estruturados.
+         * Findings estruturados.
          */
 
         for (const finding of findings) {
 
+            if (!finding) {
+                continue;
+            }
+
             candidates.push({
+
                 type: "finding",
 
                 source: finding
@@ -319,7 +344,7 @@ class PatientGenerator {
 
 
         /*
-         * Remove duplicatas simples.
+         * Remove duplicatas.
          */
 
         const unique = [];
@@ -328,8 +353,20 @@ class PatientGenerator {
 
         for (const item of candidates) {
 
+            const reference =
+                this.normalizeClinicalReference(item);
+
+            if (!reference) {
+                continue;
+            }
+
             const key =
-                JSON.stringify(item.source);
+                reference.id ||
+                reference.name;
+
+            if (!key) {
+                continue;
+            }
 
             if (seen.has(key)) {
                 continue;
@@ -337,58 +374,21 @@ class PatientGenerator {
 
             seen.add(key);
 
-            unique.push(item);
+            unique.push({
+
+                ...item,
+
+                reference
+            });
         }
 
 
-        /*
-         * Quantidade variável de manifestações.
-         *
-         * Evitamos colocar todos os achados disponíveis no
-         * mesmo paciente.
-         */
-
-        const shuffled =
-            this.shuffle(unique);
-
-        const maxCount =
-            Math.min(
-                5,
-                shuffled.length
-            );
-
-        if (maxCount === 0) {
-            return [];
-        }
-
-        const minCount =
-            Math.min(
-                2,
-                maxCount
-            );
-
-        const count =
-            this.randomInt(
-                minCount,
-                maxCount
-            );
-
-        return shuffled.slice(
-            0,
-            count
-        );
+        return unique;
     }
 
 
     /* =========================================================
-       NORMALIZAÇÃO DE MANIFESTAÇÕES
-       =========================================================
-       Converte estruturas diferentes da KB em referências
-       clínicas simples.
-
-       IMPORTANTE:
-       Não inventa texto médico.
-       Apenas tenta extrair identificadores/nomes já existentes.
+       NORMALIZAÇÃO DE REFERÊNCIA CLÍNICA
        ========================================================= */
 
     normalizeClinicalReference(item) {
@@ -406,24 +406,36 @@ class PatientGenerator {
             return null;
         }
 
+
+        /*
+         * Caso a KB tenha apenas uma string.
+         */
+
         if (typeof source === "string") {
 
             return {
+
                 id: source,
+
                 name: source,
-                type: item.type || null
+
+                type:
+                    item.type || null
             };
         }
+
 
         if (typeof source !== "object") {
             return null;
         }
+
 
         const id =
             source.id ||
             source.entity_id ||
             source.canonical_id ||
             source.code ||
+            source.key ||
             null;
 
         const name =
@@ -432,7 +444,14 @@ class PatientGenerator {
             source.canonical_name ||
             source.term ||
             source.title ||
+            source.description ||
             null;
+
+
+        if (!id && !name) {
+            return null;
+        }
+
 
         return {
 
@@ -453,14 +472,7 @@ class PatientGenerator {
 
 
     /* =========================================================
-       SINTOMAS
-       =========================================================
-       Seleciona manifestações que poderão compor a queixa
-       inicial.
-
-       Nesta fase não tentamos decidir automaticamente se um
-       achado é sintoma ou sinal por inferência médica.
-       A KB poderá posteriormente fornecer essa distinção.
+       SINTOMAS DA APRESENTAÇÃO
        ========================================================= */
 
     generateSymptoms(
@@ -476,13 +488,28 @@ class PatientGenerator {
             return [];
         }
 
+
         const references =
             presentationCandidates
-                .map(item =>
-                    this.normalizeClinicalReference(item)
-                )
+                .map(item => {
+
+                    return (
+                        item.reference ||
+                        this.normalizeClinicalReference(item)
+                    );
+
+                })
                 .filter(Boolean);
 
+
+        if (references.length === 0) {
+            return [];
+        }
+
+
+        /*
+         * Remove duplicatas.
+         */
 
         const unique = [];
 
@@ -494,7 +521,11 @@ class PatientGenerator {
                 reference.id ||
                 reference.name;
 
-            if (!key || seen.has(key)) {
+            if (!key) {
+                continue;
+            }
+
+            if (seen.has(key)) {
                 continue;
             }
 
@@ -510,18 +541,17 @@ class PatientGenerator {
 
 
         /*
-         * Por padrão, uma apresentação inicial possui
-         * 1–3 sintomas/queixas.
+         * Por padrão, a chegada possui entre 1 e 3
+         * manifestações principais.
+         *
+         * Não colocamos 5 sintomas automaticamente.
          */
-
-        const requestedCount =
-            options.symptomCount;
 
         let count;
 
         if (
             Number.isInteger(
-                requestedCount
+                options.symptomCount
             )
         ) {
 
@@ -529,7 +559,7 @@ class PatientGenerator {
                 Math.max(
                     1,
                     Math.min(
-                        requestedCount,
+                        options.symptomCount,
                         unique.length
                     )
                 );
@@ -557,13 +587,12 @@ class PatientGenerator {
 
 
     /* =========================================================
-       TEXTO DA QUEIXA
+       QUEIXA PRINCIPAL
        =========================================================
-       Nesta versão o texto narrativo só é construído quando
-       houver informação textual suficiente na KB.
+       A queixa é construída a partir dos sintomas selecionados
+       pelo Generator.
 
-       Não inventamos descrições temporais ou características
-       clínicas que não estejam disponíveis.
+       Não usamos o diagnóstico para escrever a queixa.
        ========================================================= */
 
     generateChiefComplaint(
@@ -571,20 +600,9 @@ class PatientGenerator {
         options = {}
     ) {
 
-        const validSymptoms =
-            Array.isArray(symptoms)
-                ? symptoms.filter(
-                    symptom =>
-                        symptom &&
-                        (
-                            symptom.name ||
-                            symptom.id
-                        )
-                )
-                : [];
-
         if (
-            validSymptoms.length === 0
+            !Array.isArray(symptoms) ||
+            symptoms.length === 0
         ) {
 
             return {
@@ -598,43 +616,51 @@ class PatientGenerator {
         }
 
 
+        const symptomNames =
+            symptoms
+                .map(
+                    symptom =>
+                        symptom.name ||
+                        symptom.id
+                )
+                .filter(Boolean);
+
+
         /*
-         * Se futuramente a KB fornecer uma narrativa pronta,
-         * ela poderá ser utilizada diretamente.
+         * Se houver uma narrativa explicitamente fornecida
+         * pela camada de geração, usamos ela.
+         *
+         * Caso contrário, deixamos a narrativa para a UI montar
+         * a partir dos sintomas estruturados.
          */
-
-        const narrative =
-            options.narrative ||
-            null;
-
 
         return {
 
             symptoms:
-                validSymptoms.map(
+                symptoms.map(
                     symptom =>
                         symptom.id ||
                         symptom.name
                 ),
 
-            narrative
+            narrative:
+                options.narrative ||
+                null,
+
+            labels:
+                symptomNames
         };
     }
 
 
     /* =========================================================
-       INÍCIO / ONSET
+       INÍCIO DOS SINTOMAS
        ========================================================= */
 
     generateOnset(
         disease,
         options = {}
     ) {
-
-        /*
-         * Se a chamada de geração fornecer explicitamente
-         * informações de início, preservamos essas informações.
-         */
 
         if (options.onset) {
 
@@ -644,28 +670,18 @@ class PatientGenerator {
         }
 
 
-        /*
-         * Nesta fase ainda não criamos uma duração clínica
-         * arbitrária como "há 2 horas".
-         *
-         * O tipo pode existir como estado estrutural, mas a
-         * descrição fica nula até que a KB possua essa informação.
-         */
-
-        const type =
-            options.onsetType ||
-            this.randomItem([
-                "acute",
-                "subacute",
-                "chronic"
-            ]);
-
-
         return {
 
-            type,
+            type:
+                options.onsetType ||
+                this.randomItem([
+                    "acute",
+                    "subacute",
+                    "chronic"
+                ]),
 
             description:
+                options.onsetDescription ||
                 null
         };
     }
@@ -689,10 +705,7 @@ class PatientGenerator {
 
 
     /* =========================================================
-       APRESENTAÇÃO CLÍNICA
-       =========================================================
-       Aqui transformamos os candidatos da KB em uma
-       apresentação inicial real do paciente.
+       APRESENTAÇÃO COMPLETA
        ========================================================= */
 
     generateClinicalPresentation(
@@ -712,6 +725,11 @@ class PatientGenerator {
                 options
             );
 
+
+        /*
+         * O sistema precisa saber se conseguiu construir
+         * uma apresentação clínica real.
+         */
 
         const chiefComplaint =
             this.generateChiefComplaint(
@@ -740,7 +758,14 @@ class PatientGenerator {
 
             onset,
 
-            context
+            context,
+
+            /*
+             * Mantemos os candidatos disponíveis no estado
+             * interno para facilitar debug e evolução do motor.
+             */
+            _candidates:
+                candidates
         };
     }
 
@@ -759,16 +784,12 @@ class PatientGenerator {
             this.getDiseaseId(disease);
 
         const factors =
-            this.engine.getRiskFactors(id);
+            this.engine.getRiskFactors(id) || [];
 
-        if (!factors.length) {
+        if (!Array.isArray(factors) || factors.length === 0) {
             return [];
         }
 
-        /*
-         * Nem todo paciente precisa possuir todos os
-         * fatores de risco disponíveis.
-         */
 
         return this.shuffle(factors)
             .slice(
@@ -798,9 +819,12 @@ class PatientGenerator {
             this.getDiseaseId(disease);
 
         const etiologies =
-            this.engine.getEtiologies(id);
+            this.engine.getEtiologies(id) || [];
 
-        if (!etiologies.length) {
+        if (
+            !Array.isArray(etiologies) ||
+            etiologies.length === 0
+        ) {
             return null;
         }
 
@@ -812,10 +836,6 @@ class PatientGenerator {
 
     /* =========================================================
        HISTÓRIA CLÍNICA
-       =========================================================
-       A estrutura existe desde já, mas os campos permanecem
-       vazios até que a Knowledge Base forneça informação
-       suficiente para preenchê-los.
        ========================================================= */
 
     generateHistory(
@@ -874,7 +894,7 @@ class PatientGenerator {
 
 
     /* =========================================================
-       EXAMES INICIAIS POSSÍVEIS
+       INVESTIGAÇÕES POSSÍVEIS
        ========================================================= */
 
     generateInvestigationPossibilities(disease) {
@@ -886,20 +906,15 @@ class PatientGenerator {
         const id =
             this.getDiseaseId(disease);
 
-        return this.engine
-            .getPossibleInvestigations(id);
+        return (
+            this.engine
+                .getPossibleInvestigations(id) || []
+        );
     }
 
 
     /* =========================================================
        INVESTIGAÇÕES DO PACIENTE
-       =========================================================
-       Possibilidades de investigação e resultados do paciente
-       são coisas diferentes.
-
-       O Generator prepara o espaço de investigação.
-       O resultado só deverá aparecer quando uma ação clínica
-       solicitar a investigação correspondente.
        ========================================================= */
 
     generateInvestigations(
@@ -980,7 +995,14 @@ class PatientGenerator {
 
         const differentials =
             this.engine
-                .getDifferentialEntities(id);
+                .getDifferentialEntities(id) || [];
+
+        if (
+            !Array.isArray(differentials) ||
+            differentials.length === 0
+        ) {
+            return [];
+        }
 
         return this.shuffle(
             differentials
@@ -1007,8 +1029,10 @@ class PatientGenerator {
         const id =
             this.getDiseaseId(disease);
 
-        return this.engine
-            .getPossibleTreatments(id);
+        return (
+            this.engine
+                .getPossibleTreatments(id) || []
+        );
     }
 
 
@@ -1027,7 +1051,14 @@ class PatientGenerator {
 
         const complications =
             this.engine
-                .getPossibleComplications(id);
+                .getPossibleComplications(id) || [];
+
+        if (
+            !Array.isArray(complications) ||
+            complications.length === 0
+        ) {
+            return [];
+        }
 
         return this.shuffle(
             complications
@@ -1048,22 +1079,19 @@ class PatientGenerator {
     generateVitals(severity) {
 
         /*
-         * Importante:
+         * Não inventamos valores médicos específicos.
          *
-         * Não inventamos valores médicos específicos a partir
-         * de conhecimento que não esteja na KB.
+         * Nesta fase os sinais vitais permanecem disponíveis
+         * como campos estruturados.
          *
-         * Por enquanto o gerador cria apenas um estado de
-         * estabilidade qualitativo.
-         *
-         * A camada posterior poderá derivar sinais vitais
-         * de padrões fisiológicos explicitamente presentes
-         * na Knowledge Base.
+         * A etapa posterior poderá preenchê-los a partir do
+         * Knowledge clínico.
          */
 
         let stability = 100;
 
         if (severity === "moderate") {
+
             stability =
                 this.randomInt(
                     70,
@@ -1072,12 +1100,14 @@ class PatientGenerator {
         }
 
         if (severity === "severe") {
+
             stability =
                 this.randomInt(
                     35,
                     69
                 );
         }
+
 
         return {
 
@@ -1100,10 +1130,6 @@ class PatientGenerator {
 
     /* =========================================================
        HIDDEN STATE
-       =========================================================
-       Este objeto contém aquilo que é verdadeiro sobre o
-       paciente, mas que NÃO deve ser apresentado diretamente
-       ao jogador.
        ========================================================= */
 
     generateHiddenState(
@@ -1186,15 +1212,12 @@ class PatientGenerator {
 
     /* =========================================================
        PATIENT STATE
-       =========================================================
-       Estrutura central do paciente.
-
-       Esta camada representa o estado clínico verdadeiro.
        ========================================================= */
 
     generatePatientState(
         disease,
         severity,
+        demographics,
         presentation,
         history,
         vitals,
@@ -1208,9 +1231,7 @@ class PatientGenerator {
             id:
                 this.generateId(),
 
-            demographics:
-                options.demographics ||
-                null,
+            demographics,
 
             presentation,
 
@@ -1249,6 +1270,7 @@ class PatientGenerator {
             options.disease ||
             this.selectDisease();
 
+
         if (!disease) {
 
             throw new Error(
@@ -1281,7 +1303,7 @@ class PatientGenerator {
 
         /*
          * -----------------------------------------------------
-         * 4. APRESENTAÇÃO CLÍNICA
+         * 4. APRESENTAÇÃO
          * -----------------------------------------------------
          */
 
@@ -1290,6 +1312,43 @@ class PatientGenerator {
                 disease,
                 options
             );
+
+
+        /*
+         * -----------------------------------------------------
+         * PROTEÇÃO CONTRA PACIENTE SEM QUEIXA
+         * -----------------------------------------------------
+         *
+         * Se a KB não possuir manifestações/finding utilizáveis,
+         * não fabricamos uma queixa falsa.
+         *
+         * O erro é explicitado para que a KB seja corrigida.
+         */
+
+        if (
+            !presentation
+                .chief_complaint
+                .symptoms
+                .length
+        ) {
+
+            const diseaseName =
+                this.getDiseaseName(
+                    disease
+                ) ||
+                this.getDiseaseId(
+                    disease
+                ) ||
+                "doença desconhecida";
+
+
+            throw new Error(
+                "PatientGenerator: a doença '" +
+                diseaseName +
+                "' não possui manifestações clínicas utilizáveis " +
+                "para gerar a queixa inicial."
+            );
+        }
 
 
         /*
@@ -1425,28 +1484,19 @@ class PatientGenerator {
             this.generatePatientState(
                 disease,
                 severity,
+                demographics,
                 presentation,
                 history,
                 vitals,
                 physicalExam,
                 investigations,
-                {
-                    ...options,
-
-                    demographics
-                }
+                options
             );
 
 
         /*
          * -----------------------------------------------------
          * 16. PACIENTE FINAL
-         * -----------------------------------------------------
-         *
-         * condition continua existindo para o motor interno.
-         *
-         * Ela NÃO deve ser utilizada diretamente pela UI
-         * como informação apresentada ao jogador.
          * -----------------------------------------------------
          */
 
@@ -1461,9 +1511,11 @@ class PatientGenerator {
             demographics,
 
             /*
-             * A doença continua presente no estado interno
-             * para permitir avaliação, evolução e resolução.
+             * Estado interno.
+             *
+             * A UI NÃO deve exibir condition diretamente.
              */
+
             condition: {
 
                 id:
@@ -1484,9 +1536,20 @@ class PatientGenerator {
             riskFactors,
 
             /*
-             * Nova apresentação clínica estruturada.
+             * Apresentação inicial do paciente.
              */
-            presentation,
+
+            presentation: {
+
+                chief_complaint:
+                    presentation.chief_complaint,
+
+                onset:
+                    presentation.onset,
+
+                context:
+                    presentation.context
+            },
 
             history,
 
@@ -1504,8 +1567,9 @@ class PatientGenerator {
             vitals,
 
             /*
-             * Estado verdadeiro do paciente.
+             * Estado verdadeiro oculto.
              */
+
             hidden_state:
                 patientState.hidden_state,
 
