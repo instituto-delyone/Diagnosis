@@ -6,4 +6,4 @@ medunity codifica e padroniza os dados
 2
 diagnosis aprende com a epidemiologia, se ele começar a mostrar casos “esquisitos” nós teoricamente teríamos que nos preparar. Ainda então em desenvolvimento e longe do proprosito, ainda faltariam meses com financiamento adequado no Brasil. semanas em um país com suporte à ciência 
 
-ps: no momento, por questões éticas, não existe integração nenhuma de memória entra os sistemas, nenhum banco de dados nenhuma comunicação, apenas logica. mas caso existisse, a saúde pública teria como maior problema procurar novos problemas para resolver
+ps: no momento, por questões éticas, não existe integração nenhuma de memória entre os sistemas, nenhum banco de dados nenhuma comunicação, apenas logica. mas caso existisse, a saúde pública teria como maior problema procurar novos problemas para resolver
