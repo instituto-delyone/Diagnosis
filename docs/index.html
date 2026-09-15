@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnosis | IDMT</title>
+    <style>
+        body {
+            background-color: #071426;
+            color: #f7f9fc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background: #1f2933;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 400px;
+            width: 90%;
+        }
+        h1 { color: #fff; margin-bottom: 10px; }
+        p { color: #94a3b8; margin-bottom: 30px; }
+        button {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            transition: opacity 0.2s;
+        }
+        button:hover { opacity: 0.9; }
+        .btn-vermelha { background-color: #dc2626; } /* Vermelho Emergência */
+        .btn-clinica { background-color: #1f5fae; } /* Azul Investigação */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DIAGNOSIS ENGINE</h1>
+        <p>Selecione seu plantão de hoje:</p>
+        
+        <!-- Ao clicar, enviamos a variável 'sala' pela URL -->
+        <button class="btn-vermelha" onclick="window.location.href='engine.html?sala=vermelha'">
+            🚑 Sala Vermelha
+        </button>
+        <button class="btn-clinica" onclick="window.location.href='engine.html?sala=clinica'">
+            🩺 Clínica Médica
+        </button>
+    </div>
+</body>
+</html>
