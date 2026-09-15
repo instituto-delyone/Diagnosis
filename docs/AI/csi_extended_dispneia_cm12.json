@@ -1,0 +1,399 @@
+{
+  "schema_version": "1.0",
+  "id": "csi_extended_dispneia",
+  "name": "CSI Estendido — Dispneia — CM 12",
+  "status": "draft",
+  "source": {
+    "source_id": "cm12_dispneia_med_2026",
+    "title": "CM 12 - Dispneia.docx(1).pdf",
+    "scope": "Vocabulário, intenções e padrões conversacionais derivados do conteúdo do PDF."
+  },
+  "purpose": "Extender a camada CSI para compreender linguagem natural do médico dentro do domínio de dispneia, sem diagnosticar, inventar dados ou substituir o Patient State/Clinical Model.",
+  "non_negotiable_rules": [
+    "Não diagnosticar a partir da frase do médico.",
+    "Não inventar achado do paciente.",
+    "Não transformar sintoma em diagnóstico.",
+    "Preservar ambiguidade quando a frase permitir mais de uma interpretação.",
+    "Encaminhar a intenção clínica para Patient State, Clinical Model ou Knowledge Base conforme a ação solicitada.",
+    "Quando o médico pedir um conjunto, retornar o conjunto disponível em vez de apenas o primeiro item.",
+    "Perguntas sobre 'como está o paciente' devem ser tratadas como pedidos de síntese clínica, não como pedido isolado de pressão arterial.",
+    "O CSI estendido organiza linguagem; a verdade clínica permanece no Patient State."
+  ],
+  "domain": {
+    "canonical_anchor": "SYM.003",
+    "canonical_term": "Dispneia",
+    "document_anchors": [
+      "002.001",
+      "002.002",
+      "003.000",
+      "003.001",
+      "005.000",
+      "006.000"
+    ]
+  },
+  "intents": [
+    {
+      "id": "dispneia_caracterizacao",
+      "name": "Caracterizar dispneia",
+      "examples": [
+        "como é essa falta de ar?",
+        "me caracterize a dispneia",
+        "a dispneia é súbita?",
+        "quando começou a falta de ar?",
+        "é aos esforços?"
+      ],
+      "semantic_targets": [
+        "dispneia",
+        "evento_súbito"
+      ],
+      "action": "reveal_patient_information",
+      "patient_state_targets": [
+        "presentation",
+        "history"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1,5,7",
+          "claim": "O material diferencia apresentação súbita do TEP e apresentações de DPOC/asma.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "sinais_vitais",
+      "name": "Solicitar sinais vitais",
+      "examples": [
+        "quais são os sinais vitais?",
+        "como estão os sinais vitais?",
+        "me passa os sinais vitais",
+        "como está hemodinamicamente?",
+        "qual a FC, FR, pressão e saturação?"
+      ],
+      "semantic_targets": [
+        "sinais_vitais"
+      ],
+      "action": "reveal_all_vitals",
+      "patient_state_targets": [
+        "vitals"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "O domínio utiliza frequência respiratória, FC, pressão e saturação em diferentes contextos.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "exame_respiratorio",
+      "name": "Exame físico respiratório",
+      "examples": [
+        "como está a ausculta pulmonar?",
+        "como está o murmúrio vesicular?",
+        "tem sibilos?",
+        "tem estertores?",
+        "como está o exame respiratório?"
+      ],
+      "semantic_targets": [
+        "sibilancia",
+        "murmúrio vesicular",
+        "exame respiratório"
+      ],
+      "action": "perform_physical_examination",
+      "patient_state_targets": [
+        "physical_exam.respiratory"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1,5,6,7",
+          "claim": "Sibilância, murmúrio vesicular reduzido e tórax silencioso aparecem no material.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "investigar_tep",
+      "name": "Investigar TEP",
+      "examples": [
+        "quero investigar TEP",
+        "qual exame faço para TEP?",
+        "peço D-dímero?",
+        "peço angio-TC?",
+        "como está o Wells?"
+      ],
+      "semantic_targets": [
+        "tep",
+        "d_dimer",
+        "angiotomografia",
+        "wells"
+      ],
+      "action": "clinical_reasoning_query",
+      "patient_state_targets": [
+        "history",
+        "vitals",
+        "investigations"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 2-3",
+          "claim": "Algoritmo de Wells e exames do TEP.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "investigar_dpoc",
+      "name": "Investigar DPOC",
+      "examples": [
+        "isso pode ser DPOC?",
+        "qual exame confirma obstrução?",
+        "como está a espirometria?",
+        "qual o VEF1/CVF?"
+      ],
+      "semantic_targets": [
+        "dpoc",
+        "espirometria_forcada"
+      ],
+      "action": "clinical_reasoning_query",
+      "patient_state_targets": [
+        "history",
+        "investigations"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 4-6",
+          "claim": "Espirometria e DPOC.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "classificar_crise_asmatica",
+      "name": "Classificar crise asmática",
+      "examples": [
+        "essa crise é grave?",
+        "qual a gravidade da asma?",
+        "qual o PFE?",
+        "fala frases ou palavras?",
+        "como está a saturação?"
+      ],
+      "semantic_targets": [
+        "asma",
+        "pfe",
+        "saturação",
+        "FR",
+        "FC",
+        "consciência"
+      ],
+      "action": "clinical_reasoning_query",
+      "patient_state_targets": [
+        "vitals",
+        "physical_exam",
+        "investigations"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 7",
+          "claim": "Classificação da crise asmática.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "historia_ocupacional",
+      "name": "Investigar exposição ocupacional",
+      "examples": [
+        "qual a profissão?",
+        "trabalha com poeira?",
+        "teve contato com amianto?",
+        "trabalha em pedreira?",
+        "tem exposição ocupacional?"
+      ],
+      "semantic_targets": [
+        "exposicao_ocupacional",
+        "exposicao_asbesto",
+        "exposicao_silica"
+      ],
+      "action": "reveal_patient_information",
+      "patient_state_targets": [
+        "history.social_history",
+        "history.occupational_exposure"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 4-5",
+          "claim": "História ocupacional na pneumoconiose.",
+          "evidence_type": "direct"
+        }
+      ]
+    }
+  ],
+  "lexicon": {
+    "dispneia": [
+      "dispneia",
+      "falta de ar",
+      "fôlego curto",
+      "dificuldade para respirar",
+      "cansaço para respirar"
+    ],
+    "taquipneia": [
+      "taquipneia",
+      "FR alta",
+      "respiração rápida",
+      "respirando rápido"
+    ],
+    "sibilancia": [
+      "sibilos",
+      "chiado",
+      "chiadeira",
+      "sibilância"
+    ],
+    "dor_toracica_pleuritica": [
+      "dor pleurítica",
+      "dor no peito que piora ao respirar",
+      "dor torácica pleurítica"
+    ],
+    "tep": [
+      "TEP",
+      "tromboembolismo pulmonar",
+      "tromboembolia pulmonar",
+      "embolia pulmonar"
+    ],
+    "tvp": [
+      "TVP",
+      "trombose venosa profunda"
+    ],
+    "dpoc": [
+      "DPOC",
+      "doença pulmonar obstrutiva crônica"
+    ],
+    "asma": [
+      "asma",
+      "crise asmática",
+      "crise de asma"
+    ],
+    "espirometria": [
+      "espirometria",
+      "prova de função pulmonar"
+    ],
+    "wells": [
+      "Wells",
+      "escore de Wells",
+      "score de Wells"
+    ],
+    "d_dimer": [
+      "D-dímero",
+      "d dímero",
+      "d-dimero"
+    ],
+    "angiotomografia": [
+      "angio-TC",
+      "angiotomografia",
+      "angio TC"
+    ],
+    "murmurio_vesicular": [
+      "MV",
+      "murmúrio vesicular",
+      "murmúrio pulmonar",
+      "ausculta pulmonar"
+    ],
+    "pfe": [
+      "PFE",
+      "pico de fluxo",
+      "peak flow"
+    ]
+  },
+  "compound_patterns": [
+    {
+      "pattern_id": "pedido_sinais_vitais_completo",
+      "examples": [
+        "me passa os sinais vitais",
+        "quais os sinais vitais atuais",
+        "como estão os sinais vitais"
+      ],
+      "must_resolve_as": "sinais_vitais",
+      "response_strategy": "retornar FC, FR, PA, SpO2, temperatura e glicemia quando disponíveis no Patient State",
+      "do_not": "não retornar apenas PA por correspondência lexical isolada"
+    },
+    {
+      "pattern_id": "pedido_exame_respiratorio",
+      "examples": [
+        "como está a ausculta pulmonar",
+        "exame respiratório",
+        "como estão os pulmões"
+      ],
+      "must_resolve_as": "exame_respiratorio",
+      "response_strategy": "consultar physical_exam.respiratory e retornar apenas achados presentes/reveláveis"
+    },
+    {
+      "pattern_id": "pergunta_qualitativa_hemodinamica",
+      "examples": [
+        "está hemodinamicamente estável?",
+        "como está hemodinamicamente?"
+      ],
+      "must_resolve_as": "sintese_hemodinamica",
+      "response_strategy": "avaliar conjunto de sinais disponíveis no Patient State; não reduzir automaticamente a PA"
+    }
+  ],
+  "ambiguity_rules": [
+    {
+      "input_examples": [
+        "chiado",
+        "cansaço",
+        "falta de ar"
+      ],
+      "rule": "Mapear primeiro para sintoma/sinal; não inferir asma ou DPOC sem dados clínicos adicionais."
+    },
+    {
+      "input_examples": [
+        "pressão",
+        "pressão boa"
+      ],
+      "rule": "Se não houver contexto suficiente para pressão arterial, pedir esclarecimento; evitar captura automática de qualquer menção a 'pressão'."
+    },
+    {
+      "input_examples": [
+        "como estão os pulmões?"
+      ],
+      "rule": "Interpretar como pedido de exame respiratório/síntese respiratória, não como diagnóstico."
+    },
+    {
+      "input_examples": [
+        "isso é TEP?"
+      ],
+      "rule": "Tratar como solicitação de avaliação diagnóstica; consultar possibilidades e evidências do Patient State/Clinical Model, sem converter a pergunta em confirmação automática."
+    }
+  ],
+  "response_templates": {
+    "vitals": "Sinais vitais atuais: {heart_rate}; {respiratory_rate}; {blood_pressure}; {oxygen_saturation}; {temperature}; {glucose}.",
+    "physical_exam": "Exame respiratório: {findings}.",
+    "missing_investigation": "A solicitação de {investigation} foi reconhecida, mas não há resultado disponível para este paciente.",
+    "ambiguous": "Posso interpretar isso de mais de uma forma. Você quer {candidate_1} ou {candidate_2}?"
+  },
+  "routing": {
+    "raw_language": "entrada textual do médico",
+    "normalization": "normalização ortográfica segura",
+    "domain_detection": "dispneia",
+    "intent_detection": "intent",
+    "semantic_targets": "lexicon + compound_patterns",
+    "patient_state": "fonte de verdade do caso",
+    "clinical_model": "interpretação clínica",
+    "possibility_engine": "hipóteses e relações",
+    "diagnosis": "separado do CSI"
+  },
+  "source_traceability": [
+    {
+      "source_id": "cm12_dispneia_med_2026",
+      "location": "p. 1-8",
+      "claim": "CSI derivado do vocabulário e dos conceitos presentes no CM 12.",
+      "evidence_type": "direct"
+    }
+  ]
+}
