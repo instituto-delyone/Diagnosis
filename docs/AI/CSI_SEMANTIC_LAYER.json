@@ -1,0 +1,598 @@
+{
+  "schema_version": "1.0",
+  "id": "diagnosis_csi_semantic_layer",
+  "name": "CSI Semantic Layer for Diagnosis",
+  "status": "architecture_derived_from_current_CSI_repository",
+  "purpose": "Fornecer ao Diagnosis uma camada semantica inspirada no CSI para normalizar diferentes formas de linguagem clinica em unidades semanticas estaveis, sem transformar linguagem em diagnostico automaticamente.",
+  "architectural_principle": {
+    "core_idea": "O sistema nao deve depender da palavra exata utilizada pelo paciente, medico ou formulario. Deve reconhecer variacoes linguisticamente equivalentes ou relacionadas e encaminha-las para uma representacao semantica canonica.",
+    "separation": {
+      "document_structure": "Onde a informacao esta.",
+      "semantic_content": "O que a informacao significa.",
+      "clinical_reasoning": "O que essa informacao pode significar clinicamente.",
+      "diagnosis": "Conclusao clinica que deve permanecer separada da normalizacao semantica."
+    },
+    "pipeline": [
+      "raw_language",
+      "normalization",
+      "candidate_semantic_units",
+      "canonical_anchors",
+      "patient_state",
+      "clinical_model",
+      "possibility_engine",
+      "clinical_reasoning"
+    ]
+  },
+  "non_negotiable_rules": [
+    "CSI nao diagnostica.",
+    "CSI nao deve substituir o raciocinio clinico.",
+    "Uma expressao de linguagem natural nao deve ser convertida em diagnostico apenas porque aparece associada a um diagnostico em uma lista lexical.",
+    "Preservar a diferenca entre sintoma, sinal, achado, campo documental, investigacao, tratamento e diagnostico.",
+    "Quando uma expressao for ambigua, retornar candidatos ou marcar ambiguidade em vez de inventar uma interpretacao.",
+    "Nao apagar o texto original: a forma original deve permanecer disponivel para auditoria e contexto.",
+    "A ancora canonica representa identidade semantica; nao representa por si so causalidade, gravidade ou diagnostico.",
+    "A mesma unidade semantica pode aparecer em diferentes formularios, idiomas e interfaces.",
+    "O conhecimento clinico continua pertencendo a Knowledge Base e ao Clinical Model.",
+    "O Patient State representa o estado verdadeiro do paciente; a camada CSI apenas ajuda a interpretar a linguagem que alimenta esse estado."
+  ],
+  "anchor_families": {
+    "documental": {
+      "description": "Estrutura da informacao clinica/documental.",
+      "examples": [
+        "000.001. Nome Civil ou Social",
+        "000.002. Idade Cronologica e Nascimento",
+        "002.001. Queixa Principal (QP)",
+        "002.002. Historia da Doenca Atual (HDA)",
+        "002.003. Historia Patologica Pregressa (HPP)",
+        "002.004. Historia Familiar (HF)",
+        "002.005. Historia Social e Habitos de Vida (HS)",
+        "002.006. Alergias e Reacoes Adversas",
+        "003.001. Sinais Vitais",
+        "003.000. Exame Fisico Geral e Segmentar",
+        "004.001. Diagnostico Nosologico Principal",
+        "005.000. Investigacao Complementar Solicitada",
+        "006.000. Plano Terapeutico e Evolucao Diaria",
+        "006.002. Terapia Farmacologica Especifica"
+      ]
+    },
+    "semiological": {
+      "description": "Conteudo clinico reconhecivel como sintoma, sinal ou achado.",
+      "examples": [
+        "SYM.001 Pirexia / Estado Febril",
+        "SYM.002 Cefaleia",
+        "SYM.003 Dispneia",
+        "SYM.004 Emese / Nausea",
+        "SYM.005 Mialgia",
+        "SYM.006 Dor Toracica",
+        "SYM.007 Dor Abdominal",
+        "SYM.008 Diarreia",
+        "SYM.009 Vertigem / Tontura",
+        "SYM.010 Tosse"
+      ]
+    }
+  },
+  "semantic_record_model": {
+    "raw_text": "Texto original recebido pelo sistema.",
+    "normalized_text": "Texto normalizado para comparacao sem alterar o original.",
+    "language": "Idioma detectado ou informado.",
+    "document_anchor": "Ancora estrutural opcional, por exemplo 002.001.",
+    "semantic_anchor": "Ancora de conteudo opcional, por exemplo SYM.003.",
+    "canonical_term": "Nome canonico associado a ancora.",
+    "match_type": "exact | lexical_variant | popular_variant | abbreviation | multilingual_variant | ambiguous | unknown",
+    "confidence": "Valor de 0 a 1 para a correspondencia semantica.",
+    "evidence": "Termo ou regra que justificou a correspondencia.",
+    "original_preserved": true,
+    "clinical_inference": "Nao preenchido pela camada CSI.",
+    "diagnosis": "Nao preenchido pela camada CSI."
+  },
+  "processing_algorithm": {
+    "step_1": "Preservar a entrada original.",
+    "step_2": "Normalizar apenas para comparacao: caixa, espacos e variacoes ortograficas seguras.",
+    "step_3": "Identificar o contexto estrutural quando houver: queixa, HDA, exame, sinais vitais, investigacao etc.",
+    "step_4": "Pesquisar primeiro correspondencias exatas nas formas canonicas.",
+    "step_5": "Pesquisar sinonimos, variacoes populares, abreviacoes e variantes linguisticamente equivalentes.",
+    "step_6": "Mapear a expressao para uma ou mais ancoras semanticas candidatas.",
+    "step_7": "Se houver mais de uma interpretacao plausivel, manter candidatos e marcar ambiguidade.",
+    "step_8": "Produzir uma representacao estruturada sem apagar o texto original.",
+    "step_9": "Entregar a representacao ao Patient State / Clinical Model.",
+    "step_10": "Deixar o raciocinio clinico, diferencial e diagnostico para as camadas clinicas."
+  },
+  "current_repository_lexicon": {
+    "semiology": [
+      {
+        "anchor": "SYM.001",
+        "canonical": "Pirexia / Estado Febril",
+        "variants": {
+          "PT_BR": [
+            "febre",
+            "febrícula",
+            "hipertermia"
+          ],
+          "EN": [
+            "fever",
+            "high temperature",
+            "pyrexia"
+          ],
+          "ES": [
+            "fiebre",
+            "calentura",
+            "hipertermia"
+          ],
+          "POPULAR": [
+            "corpo quente",
+            "quentura",
+            "queimando de febre",
+            "feverish"
+          ]
+        }
+      },
+      {
+        "anchor": "SYM.002",
+        "canonical": "Cefaleia",
+        "variants": {
+          "PT_BR": [
+            "cefaleia",
+            "dor cefálica"
+          ],
+          "EN": [
+            "headache",
+            "head pain",
+            "cephalalgia"
+          ],
+          "ES": [
+            "cefalea",
+            "dolor de cabeza"
+          ],
+          "POPULAR": [
+            "dor de cabeça",
+            "cabeça latejando",
+            "cabeça pesada",
+            "enxaqueca"
+          ]
+        }
+      },
+      {
+        "anchor": "SYM.003",
+        "canonical": "Dispneia",
+        "variants": {
+          "PT_BR": [
+            "dispneia",
+            "desconforto respiratório"
+          ],
+          "EN": [
+            "dyspnea",
+            "shortness of breath",
+            "breathlessness"
+          ],
+          "ES": [
+            "disnea",
+            "dificultad para respirar",
+            "falta de aire"
+          ],
+          "POPULAR": [
+            "falta de ar",
+            "fôlego curto",
+            "puxando o ar",
+            "peito chiando",
+            "cansaço pra respirar"
+          ]
+        }
+      },
+      {
+        "anchor": "SYM.004",
+        "canonical": "Emese / Náusea",
+        "variants": {
+          "PT_BR": [
+            "vômito",
+            "êmese",
+            "náusea"
+          ],
+          "EN": [
+            "vomiting",
+            "nausea",
+            "emesis",
+            "throwing up"
+          ],
+          "ES": [
+            "vómito",
+            "náusea",
+            "emesis"
+          ],
+          "POPULAR": [
+            "enjoo",
+            "ânsia de vômito",
+            "chamando o hugo",
+            "botando pra fora",
+            "feeling sick"
+          ]
+        }
+      },
+      {
+        "anchor": "SYM.005",
+        "canonical": "Mialgia",
+        "variants": {
+          "PT_BR": [
+            "mialgia",
+            "dor muscular"
+          ],
+          "EN": [
+            "myalgia",
+            "muscle pain",
+            "muscle ache"
+          ],
+          "ES": [
+            "mialgia",
+            "dolor muscular"
+          ],
+          "POPULAR": [
+            "dor no corpo",
+            "corpo moído",
+            "corpo dolorido",
+            "dor nas juntas",
+            "body aches"
+          ]
+        }
+      },
+      {
+        "anchor": "SYM.006",
+        "canonical": "Dor Torácica",
+        "variants": {
+          "PT_BR": [
+            "dor torácica",
+            "precordialgia",
+            "angina"
+          ],
+          "EN": [
+            "chest pain",
+            "chest tightness",
+            "angina"
+          ],
+          "ES": [
+            "dolor torácico",
+            "dolor de pecho",
+            "angina"
+          ],
+          "POPULAR": [
+            "dor no peito",
+            "aperto no peito",
+            "coração doendo",
+            "peso no peito",
+            "pontada no coração"
+          ]
+        }
+      },
+      {
+        "anchor": "SYM.007",
+        "canonical": "Dor Abdominal",
+        "variants": {
+          "PT_BR": [
+            "dor abdominal",
+            "abdome agudo"
+          ],
+          "EN": [
+            "abdominal pain",
+            "belly ache",
+            "stomach pain"
+          ],
+          "ES": [
+            "dolor abdominal",
+            "dolor de barriga"
+          ],
+          "POPULAR": [
+            "dor na barriga",
+            "cólica forte",
+            "pontada na barriga",
+            "estômago embrulhado",
+            "dor no pé da barriga"
+          ]
+        }
+      },
+      {
+        "anchor": "SYM.008",
+        "canonical": "Diarreia",
+        "variants": {
+          "PT_BR": [
+            "diarreia",
+            "evacuação líquida",
+            "disenteria"
+          ],
+          "EN": [
+            "diarrhea",
+            "loose stools",
+            "bowel urgency"
+          ],
+          "ES": [
+            "diarrea",
+            "heces sueltas"
+          ],
+          "POPULAR": [
+            "caganeira",
+            "soltura",
+            "desarranjo",
+            "virose",
+            "piriri",
+            "intestino solto"
+          ]
+        }
+      },
+      {
+        "anchor": "SYM.009",
+        "canonical": "Vertigem / Tontura",
+        "variants": {
+          "PT_BR": [
+            "vertigem",
+            "tontura",
+            "instabilidade postural"
+          ],
+          "EN": [
+            "dizziness",
+            "vertigo",
+            "lightheadedness"
+          ],
+          "ES": [
+            "vértigo",
+            "mareo"
+          ],
+          "POPULAR": [
+            "mundo girando",
+            "zonzeira",
+            "cabeça oca",
+            "labirintite atacada",
+            "visão escura"
+          ]
+        }
+      },
+      {
+        "anchor": "SYM.010",
+        "canonical": "Tosse",
+        "variants": {
+          "PT_BR": [
+            "tosse",
+            "tosse produtiva",
+            "tosse seca"
+          ],
+          "EN": [
+            "cough",
+            "coughing"
+          ],
+          "ES": [
+            "tos"
+          ],
+          "POPULAR": [
+            "tossida",
+            "pigarro",
+            "garganta arranhando",
+            "catarro no peito",
+            "tosse de cachorro"
+          ]
+        }
+      }
+    ],
+    "document_terms": [
+      [
+        "000.001.",
+        "Nome Civil ou Social",
+        [
+          "nome",
+          "nome do paciente",
+          "name",
+          "nombre",
+          "paciente"
+        ]
+      ],
+      [
+        "000.002.",
+        "Idade Cronológica e Nascimento",
+        [
+          "idade",
+          "age",
+          "data de nascimento",
+          "nascimento",
+          "dn"
+        ]
+      ],
+      [
+        "002.001.",
+        "Queixa Principal (QP)",
+        [
+          "qp",
+          "qpp",
+          "queixa",
+          "motivo da consulta",
+          "chief complaint"
+        ]
+      ],
+      [
+        "002.002.",
+        "História da Doença Atual (HDA)",
+        [
+          "hda",
+          "história",
+          "histórico",
+          "history of present illness",
+          "relato da doença"
+        ]
+      ],
+      [
+        "002.003.",
+        "História Patológica Pregressa (HPP)",
+        [
+          "hpp",
+          "antecedentes pessoais",
+          "comorbidades",
+          "doenças prévias",
+          "past medical history"
+        ]
+      ],
+      [
+        "002.004.",
+        "História Familiar (HF)",
+        [
+          "hf",
+          "antecedentes familiares",
+          "histórico familiar",
+          "family history"
+        ]
+      ],
+      [
+        "002.005.",
+        "História Social e Hábitos de Vida (HS)",
+        [
+          "hs",
+          "hábitos de vida",
+          "tabagismo",
+          "etilismo",
+          "história social",
+          "social history"
+        ]
+      ],
+      [
+        "002.006.",
+        "Alergias e Reações Adversas",
+        [
+          "alergias",
+          "reação alérgica",
+          "alérgico",
+          "allergies",
+          "hipersensibilidade"
+        ]
+      ],
+      [
+        "003.001.",
+        "Sinais Vitais",
+        [
+          "sv",
+          "sinais vitais",
+          "vital signs",
+          "pressão arterial",
+          "frequência cardíaca",
+          "temperatura"
+        ]
+      ],
+      [
+        "003.000.",
+        "Exame Físico Geral e Segmentar",
+        [
+          "exame físico",
+          "ef",
+          "physical exam",
+          "exame clínico",
+          "ausculta",
+          "ectoscopia"
+        ]
+      ],
+      [
+        "004.001.",
+        "Diagnóstico Nosológico Principal",
+        [
+          "hipótese diagnóstica",
+          "diagnóstico",
+          "hd",
+          "diagnosis",
+          "cid",
+          "cid-10"
+        ]
+      ],
+      [
+        "005.000.",
+        "Investigação Complementar Solicitada",
+        [
+          "exames solicitados",
+          "pedidos de exames",
+          "labs",
+          "laboratoriais",
+          "imagem"
+        ]
+      ],
+      [
+        "006.000.",
+        "Plano Terapêutico e Evolução Diária",
+        [
+          "conduta",
+          "plano",
+          "therapeutic plan",
+          "tratamento",
+          "evolução",
+          "observações"
+        ]
+      ],
+      [
+        "006.002.",
+        "Terapia Farmacológica Específica",
+        [
+          "prescrição",
+          "medicamentos",
+          "receita",
+          "fármacos",
+          "terapia"
+        ]
+      ]
+    ]
+  },
+  "integration_with_diagnosis": {
+    "input": "Linguagem natural do jogador/paciente/sistema.",
+    "semantic_layer": "CSI-inspired normalization.",
+    "patient_state": "Recebe unidades semanticas e seus valores/contexto.",
+    "knowledge_base": "Interpreta relacoes clinicas e possibilidades.",
+    "possibility_engine": "Gera/atualiza hipoteses a partir do estado clinico.",
+    "evaluation": {
+      "propaedeutics": "Avalia coleta e caracterizacao de informacoes.",
+      "diagnosis": "Avalia hipoteses e conclusao diagnostica.",
+      "treatment": "Avalia conduta terapeutica."
+    }
+  },
+  "example_transformations": [
+    {
+      "input": "Paciente diz: 'Estou puxando o ar desde ontem.'",
+      "document_context": "002.001.",
+      "semantic_candidate": "SYM.003",
+      "canonical": "Dispneia",
+      "diagnostic_conclusion": null
+    },
+    {
+      "input": "Médico pergunta: 'Qual a queixa principal?'",
+      "document_context": "002.001.",
+      "semantic_candidate": null,
+      "canonical": null,
+      "action": "Solicitar/recuperar o conteúdo da queixa principal do Patient State."
+    },
+    {
+      "input": "Paciente: 'Minha pressão subiu.'",
+      "document_context": null,
+      "semantic_candidate": "ambiguous",
+      "reason": "A expressão pode descrever um valor de sinal vital, uma condição conhecida ou uma queixa percebida pelo paciente.",
+      "action": "Nao converter automaticamente em diagnóstico; recuperar/solicitar valor de PA e contexto."
+    }
+  ],
+  "ambiguity_policy": {
+    "description": "A camada semantica deve preferir representar incerteza a produzir uma certeza clinica falsa.",
+    "output": {
+      "status": "ambiguous",
+      "candidates": [],
+      "requires_clinical_interpretation": true
+    }
+  },
+  "future_extension_points": [
+    "Adicionar sinonimos e regionalismos sem alterar ancoras existentes.",
+    "Adicionar morfologia e flexoes linguisticas.",
+    "Adicionar abreviacoes medicas.",
+    "Adicionar normalizacao multilingue.",
+    "Adicionar reconhecimento de entidades e valores: PA, FC, FR, temperatura, SpO2, glicemia etc.",
+    "Adicionar composicao de conceitos: sintoma + inicio + duracao + intensidade + fatores associados.",
+    "Adicionar negacao clinica: 'nega febre' nao deve virar febre presente.",
+    "Adicionar temporalidade: passado, presente, recorrente, inicio, duracao e evolucao.",
+    "Adicionar experienciador: paciente, familiar ou terceiro.",
+    "Adicionar fonte da informacao: paciente, acompanhante, medico, exame, prontuario.",
+    "Adicionar qualificadores sem alterar a identidade da ancora.",
+    "Adicionar mapeamento entre representacoes documentais do MediUnity e Patient State do Diagnosis."
+  ],
+  "implementation_note": {
+    "recommended_role": "Modulo semantico/lexical auxiliar do Diagnosis.",
+    "not_recommended": [
+      "Usar este arquivo como Knowledge Base de doencas.",
+      "Usar o arquivo para determinar automaticamente o diagnostico.",
+      "Misturar ancoras documentais com entidades de doenca.",
+      "Sobrescrever o Patient State com inferencias produzidas apenas pelo vocabulario."
+    ]
+  }
+}
