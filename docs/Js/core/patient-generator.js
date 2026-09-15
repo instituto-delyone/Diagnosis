@@ -3,7 +3,7 @@
 /**
  * =============================================================
  * DIAGNOSIS
- * Patient Generator
+ * Patient Generator — v2
  * =============================================================
  *
  * RESPONSABILIDADE
@@ -12,7 +12,9 @@
  *        ↓
  * Patient Generator
  *        ↓
- * Patient
+ * Patient State
+ *        ↓
+ * Simulation
  *
  * O gerador transforma conhecimento clínico em uma instância
  * específica de paciente.
@@ -26,6 +28,17 @@
  *
  * A geração é baseada somente no Clinical Model +
  * Possibility Engine.
+ *
+ *
+ * PRINCÍPIO:
+ *
+ * A doença determina o espaço clínico.
+ * O gerador determina a apresentação.
+ * O Patient State determina o que é verdadeiro.
+ * O Interlocutor determina o que pode ser revelado.
+ *
+ * A doença pode permanecer oculta.
+ * A queixa clínica não pode estar ausente.
  * =============================================================
  */
 
@@ -195,6 +208,36 @@ class PatientGenerator {
     }
 
 
+    getDiseaseId(disease) {
+
+        if (!disease) {
+            return null;
+        }
+
+        return (
+            disease.id ||
+            disease.entity_id ||
+            disease.canonical_id ||
+            null
+        );
+    }
+
+
+    getDiseaseName(disease) {
+
+        if (!disease) {
+            return null;
+        }
+
+        return (
+            disease.name ||
+            disease.label ||
+            disease.canonical_name ||
+            null
+        );
+    }
+
+
     /* =========================================================
        SEVERIDADE
        ========================================================= */
@@ -212,19 +255,25 @@ class PatientGenerator {
 
 
     /* =========================================================
-       APRESENTAÇÃO
+       APRESENTAÇÃO — CANDIDATOS
+       =========================================================
+       Esta função preserva a lógica original.
+
+       Ela consulta o Possibility Engine e obtém manifestações
+       e achados possíveis associados à doença.
+
+       Esses elementos ainda NÃO constituem a queixa principal.
+       São matéria-prima para a construção da apresentação.
        ========================================================= */
 
-    generatePresentation(disease) {
+    generatePresentationCandidates(disease) {
 
         if (!disease) {
             return [];
         }
 
         const id =
-            disease.id ||
-            disease.entity_id ||
-            disease.canonical_id;
+            this.getDiseaseId(disease);
 
         const manifestations =
             this.engine.getPossibleManifestations(id);
@@ -242,9 +291,12 @@ class PatientGenerator {
         for (const item of manifestations) {
 
             if (item.entity) {
+
                 candidates.push({
                     type: "manifestation",
+
                     source: item.entity,
+
                     relationship:
                         item.relationship || null
                 });
@@ -260,6 +312,7 @@ class PatientGenerator {
 
             candidates.push({
                 type: "finding",
+
                 source: finding
             });
         }
@@ -283,6 +336,7 @@ class PatientGenerator {
             }
 
             seen.add(key);
+
             unique.push(item);
         }
 
@@ -290,26 +344,404 @@ class PatientGenerator {
         /*
          * Quantidade variável de manifestações.
          *
-         * A ideia é evitar que todo paciente tenha
-         * absolutamente tudo descrito na KB.
+         * Evitamos colocar todos os achados disponíveis no
+         * mesmo paciente.
          */
 
         const shuffled =
             this.shuffle(unique);
 
-        const count =
+        const maxCount =
             Math.min(
-                shuffled.length,
-                this.randomInt(
-                    2,
-                    Math.max(
-                        2,
-                        Math.min(5, shuffled.length)
-                    )
-                )
+                5,
+                shuffled.length
             );
 
-        return shuffled.slice(0, count);
+        if (maxCount === 0) {
+            return [];
+        }
+
+        const minCount =
+            Math.min(
+                2,
+                maxCount
+            );
+
+        const count =
+            this.randomInt(
+                minCount,
+                maxCount
+            );
+
+        return shuffled.slice(
+            0,
+            count
+        );
+    }
+
+
+    /* =========================================================
+       NORMALIZAÇÃO DE MANIFESTAÇÕES
+       =========================================================
+       Converte estruturas diferentes da KB em referências
+       clínicas simples.
+
+       IMPORTANTE:
+       Não inventa texto médico.
+       Apenas tenta extrair identificadores/nomes já existentes.
+       ========================================================= */
+
+    normalizeClinicalReference(item) {
+
+        if (!item) {
+            return null;
+        }
+
+        const source =
+            item.source ||
+            item.entity ||
+            item;
+
+        if (!source) {
+            return null;
+        }
+
+        if (typeof source === "string") {
+
+            return {
+                id: source,
+                name: source,
+                type: item.type || null
+            };
+        }
+
+        if (typeof source !== "object") {
+            return null;
+        }
+
+        const id =
+            source.id ||
+            source.entity_id ||
+            source.canonical_id ||
+            source.code ||
+            null;
+
+        const name =
+            source.name ||
+            source.label ||
+            source.canonical_name ||
+            source.term ||
+            source.title ||
+            null;
+
+        return {
+
+            id,
+
+            name,
+
+            type:
+                item.type ||
+                source.type ||
+                null,
+
+            relationship:
+                item.relationship ||
+                null
+        };
+    }
+
+
+    /* =========================================================
+       SINTOMAS
+       =========================================================
+       Seleciona manifestações que poderão compor a queixa
+       inicial.
+
+       Nesta fase não tentamos decidir automaticamente se um
+       achado é sintoma ou sinal por inferência médica.
+       A KB poderá posteriormente fornecer essa distinção.
+       ========================================================= */
+
+    generateSymptoms(
+        presentationCandidates,
+        options = {}
+    ) {
+
+        if (
+            !Array.isArray(
+                presentationCandidates
+            )
+        ) {
+            return [];
+        }
+
+        const references =
+            presentationCandidates
+                .map(item =>
+                    this.normalizeClinicalReference(item)
+                )
+                .filter(Boolean);
+
+
+        const unique = [];
+
+        const seen = new Set();
+
+        for (const reference of references) {
+
+            const key =
+                reference.id ||
+                reference.name;
+
+            if (!key || seen.has(key)) {
+                continue;
+            }
+
+            seen.add(key);
+
+            unique.push(reference);
+        }
+
+
+        if (unique.length === 0) {
+            return [];
+        }
+
+
+        /*
+         * Por padrão, uma apresentação inicial possui
+         * 1–3 sintomas/queixas.
+         */
+
+        const requestedCount =
+            options.symptomCount;
+
+        let count;
+
+        if (
+            Number.isInteger(
+                requestedCount
+            )
+        ) {
+
+            count =
+                Math.max(
+                    1,
+                    Math.min(
+                        requestedCount,
+                        unique.length
+                    )
+                );
+
+        } else {
+
+            count =
+                this.randomInt(
+                    1,
+                    Math.min(
+                        3,
+                        unique.length
+                    )
+                );
+        }
+
+
+        return this.shuffle(
+            unique
+        ).slice(
+            0,
+            count
+        );
+    }
+
+
+    /* =========================================================
+       TEXTO DA QUEIXA
+       =========================================================
+       Nesta versão o texto narrativo só é construído quando
+       houver informação textual suficiente na KB.
+
+       Não inventamos descrições temporais ou características
+       clínicas que não estejam disponíveis.
+       ========================================================= */
+
+    generateChiefComplaint(
+        symptoms,
+        options = {}
+    ) {
+
+        const validSymptoms =
+            Array.isArray(symptoms)
+                ? symptoms.filter(
+                    symptom =>
+                        symptom &&
+                        (
+                            symptom.name ||
+                            symptom.id
+                        )
+                )
+                : [];
+
+        if (
+            validSymptoms.length === 0
+        ) {
+
+            return {
+
+                symptoms: [],
+
+                narrative:
+                    options.narrative ||
+                    null
+            };
+        }
+
+
+        /*
+         * Se futuramente a KB fornecer uma narrativa pronta,
+         * ela poderá ser utilizada diretamente.
+         */
+
+        const narrative =
+            options.narrative ||
+            null;
+
+
+        return {
+
+            symptoms:
+                validSymptoms.map(
+                    symptom =>
+                        symptom.id ||
+                        symptom.name
+                ),
+
+            narrative
+        };
+    }
+
+
+    /* =========================================================
+       INÍCIO / ONSET
+       ========================================================= */
+
+    generateOnset(
+        disease,
+        options = {}
+    ) {
+
+        /*
+         * Se a chamada de geração fornecer explicitamente
+         * informações de início, preservamos essas informações.
+         */
+
+        if (options.onset) {
+
+            return {
+                ...options.onset
+            };
+        }
+
+
+        /*
+         * Nesta fase ainda não criamos uma duração clínica
+         * arbitrária como "há 2 horas".
+         *
+         * O tipo pode existir como estado estrutural, mas a
+         * descrição fica nula até que a KB possua essa informação.
+         */
+
+        const type =
+            options.onsetType ||
+            this.randomItem([
+                "acute",
+                "subacute",
+                "chronic"
+            ]);
+
+
+        return {
+
+            type,
+
+            description:
+                null
+        };
+    }
+
+
+    /* =========================================================
+       CONTEXTO DE CHEGADA
+       ========================================================= */
+
+    generatePresentationContext(
+        options = {}
+    ) {
+
+        return {
+
+            arrival_mode:
+                options.arrivalMode ||
+                "encaminhado_pela_enfermagem"
+        };
+    }
+
+
+    /* =========================================================
+       APRESENTAÇÃO CLÍNICA
+       =========================================================
+       Aqui transformamos os candidatos da KB em uma
+       apresentação inicial real do paciente.
+       ========================================================= */
+
+    generateClinicalPresentation(
+        disease,
+        options = {}
+    ) {
+
+        const candidates =
+            this.generatePresentationCandidates(
+                disease
+            );
+
+
+        const symptoms =
+            this.generateSymptoms(
+                candidates,
+                options
+            );
+
+
+        const chiefComplaint =
+            this.generateChiefComplaint(
+                symptoms,
+                options
+            );
+
+
+        const onset =
+            this.generateOnset(
+                disease,
+                options
+            );
+
+
+        const context =
+            this.generatePresentationContext(
+                options
+            );
+
+
+        return {
+
+            chief_complaint:
+                chiefComplaint,
+
+            onset,
+
+            context
+        };
     }
 
 
@@ -324,9 +756,7 @@ class PatientGenerator {
         }
 
         const id =
-            disease.id ||
-            disease.entity_id ||
-            disease.canonical_id;
+            this.getDiseaseId(disease);
 
         const factors =
             this.engine.getRiskFactors(id);
@@ -345,7 +775,10 @@ class PatientGenerator {
                 0,
                 this.randomInt(
                     0,
-                    Math.min(3, factors.length)
+                    Math.min(
+                        3,
+                        factors.length
+                    )
                 )
             );
     }
@@ -362,9 +795,7 @@ class PatientGenerator {
         }
 
         const id =
-            disease.id ||
-            disease.entity_id ||
-            disease.canonical_id;
+            this.getDiseaseId(disease);
 
         const etiologies =
             this.engine.getEtiologies(id);
@@ -380,6 +811,69 @@ class PatientGenerator {
 
 
     /* =========================================================
+       HISTÓRIA CLÍNICA
+       =========================================================
+       A estrutura existe desde já, mas os campos permanecem
+       vazios até que a Knowledge Base forneça informação
+       suficiente para preenchê-los.
+       ========================================================= */
+
+    generateHistory(
+        disease,
+        options = {}
+    ) {
+
+        return {
+
+            past_medical_history:
+                Array.isArray(
+                    options.pastMedicalHistory
+                )
+                    ? [
+                        ...options.pastMedicalHistory
+                    ]
+                    : [],
+
+            medications:
+                Array.isArray(
+                    options.medications
+                )
+                    ? [
+                        ...options.medications
+                    ]
+                    : [],
+
+            allergies:
+                Array.isArray(
+                    options.allergies
+                )
+                    ? [
+                        ...options.allergies
+                    ]
+                    : [],
+
+            family_history:
+                Array.isArray(
+                    options.familyHistory
+                )
+                    ? [
+                        ...options.familyHistory
+                    ]
+                    : [],
+
+            social_history:
+                Array.isArray(
+                    options.socialHistory
+                )
+                    ? [
+                        ...options.socialHistory
+                    ]
+                    : []
+        };
+    }
+
+
+    /* =========================================================
        EXAMES INICIAIS POSSÍVEIS
        ========================================================= */
 
@@ -390,12 +884,84 @@ class PatientGenerator {
         }
 
         const id =
-            disease.id ||
-            disease.entity_id ||
-            disease.canonical_id;
+            this.getDiseaseId(disease);
 
         return this.engine
             .getPossibleInvestigations(id);
+    }
+
+
+    /* =========================================================
+       INVESTIGAÇÕES DO PACIENTE
+       =========================================================
+       Possibilidades de investigação e resultados do paciente
+       são coisas diferentes.
+
+       O Generator prepara o espaço de investigação.
+       O resultado só deverá aparecer quando uma ação clínica
+       solicitar a investigação correspondente.
+       ========================================================= */
+
+    generateInvestigations(
+        disease,
+        options = {}
+    ) {
+
+        return {
+
+            available:
+                this.generateInvestigationPossibilities(
+                    disease
+                ),
+
+            ordered: [],
+
+            results:
+                options.investigationResults ||
+                {
+
+                    laboratory: {},
+
+                    ecg: null,
+
+                    imaging: {},
+
+                    other: {}
+                }
+        };
+    }
+
+
+    /* =========================================================
+       EXAME FÍSICO
+       ========================================================= */
+
+    generatePhysicalExam(
+        options = {}
+    ) {
+
+        return {
+
+            general:
+                options.physicalExam?.general ||
+                {},
+
+            cardiovascular:
+                options.physicalExam?.cardiovascular ||
+                {},
+
+            respiratory:
+                options.physicalExam?.respiratory ||
+                {},
+
+            neurologic:
+                options.physicalExam?.neurologic ||
+                {},
+
+            other:
+                options.physicalExam?.other ||
+                {}
+        };
     }
 
 
@@ -410,9 +976,7 @@ class PatientGenerator {
         }
 
         const id =
-            disease.id ||
-            disease.entity_id ||
-            disease.canonical_id;
+            this.getDiseaseId(disease);
 
         const differentials =
             this.engine
@@ -422,7 +986,10 @@ class PatientGenerator {
             differentials
         ).slice(
             0,
-            Math.min(4, differentials.length)
+            Math.min(
+                4,
+                differentials.length
+            )
         );
     }
 
@@ -438,9 +1005,7 @@ class PatientGenerator {
         }
 
         const id =
-            disease.id ||
-            disease.entity_id ||
-            disease.canonical_id;
+            this.getDiseaseId(disease);
 
         return this.engine
             .getPossibleTreatments(id);
@@ -458,9 +1023,7 @@ class PatientGenerator {
         }
 
         const id =
-            disease.id ||
-            disease.entity_id ||
-            disease.canonical_id;
+            this.getDiseaseId(disease);
 
         const complications =
             this.engine
@@ -470,13 +1033,16 @@ class PatientGenerator {
             complications
         ).slice(
             0,
-            Math.min(3, complications.length)
+            Math.min(
+                3,
+                complications.length
+            )
         );
     }
 
 
     /* =========================================================
-       VITALS INICIAIS
+       VITAIS INICIAIS
        ========================================================= */
 
     generateVitals(severity) {
@@ -498,11 +1064,19 @@ class PatientGenerator {
         let stability = 100;
 
         if (severity === "moderate") {
-            stability = this.randomInt(70, 89);
+            stability =
+                this.randomInt(
+                    70,
+                    89
+                );
         }
 
         if (severity === "severe") {
-            stability = this.randomInt(35, 69);
+            stability =
+                this.randomInt(
+                    35,
+                    69
+                );
         }
 
         return {
@@ -525,6 +1099,49 @@ class PatientGenerator {
 
 
     /* =========================================================
+       HIDDEN STATE
+       =========================================================
+       Este objeto contém aquilo que é verdadeiro sobre o
+       paciente, mas que NÃO deve ser apresentado diretamente
+       ao jogador.
+       ========================================================= */
+
+    generateHiddenState(
+        disease,
+        severity,
+        options = {}
+    ) {
+
+        return {
+
+            diagnosis:
+                this.getDiseaseId(
+                    disease
+                ),
+
+            severity,
+
+            pathophysiology:
+                options.pathophysiology ||
+                {},
+
+            complications:
+                Array.isArray(
+                    options.hiddenComplications
+                )
+                    ? [
+                        ...options.hiddenComplications
+                    ]
+                    : [],
+
+            evolution:
+                options.evolution ||
+                {}
+        };
+    }
+
+
+    /* =========================================================
        ESTADO CLÍNICO
        ========================================================= */
 
@@ -536,10 +1153,9 @@ class PatientGenerator {
         return {
 
             diseaseId:
-                disease?.id ||
-                disease?.entity_id ||
-                disease?.canonical_id ||
-                null,
+                this.getDiseaseId(
+                    disease
+                ),
 
             severity,
 
@@ -569,10 +1185,65 @@ class PatientGenerator {
 
 
     /* =========================================================
+       PATIENT STATE
+       =========================================================
+       Estrutura central do paciente.
+
+       Esta camada representa o estado clínico verdadeiro.
+       ========================================================= */
+
+    generatePatientState(
+        disease,
+        severity,
+        presentation,
+        history,
+        vitals,
+        physicalExam,
+        investigations,
+        options = {}
+    ) {
+
+        return {
+
+            id:
+                this.generateId(),
+
+            demographics:
+                options.demographics ||
+                null,
+
+            presentation,
+
+            history,
+
+            vitals,
+
+            physical_exam:
+                physicalExam,
+
+            investigations,
+
+            hidden_state:
+                this.generateHiddenState(
+                    disease,
+                    severity,
+                    options
+                )
+        };
+    }
+
+
+    /* =========================================================
        GERADOR PRINCIPAL
        ========================================================= */
 
     generate(options = {}) {
+
+        /*
+         * -----------------------------------------------------
+         * 1. DOENÇA
+         * -----------------------------------------------------
+         */
 
         const disease =
             options.disease ||
@@ -586,20 +1257,59 @@ class PatientGenerator {
         }
 
 
+        /*
+         * -----------------------------------------------------
+         * 2. SEVERIDADE
+         * -----------------------------------------------------
+         */
+
         const severity =
             options.severity ||
             this.generateSeverity();
 
 
+        /*
+         * -----------------------------------------------------
+         * 3. DEMOGRAFIA
+         * -----------------------------------------------------
+         */
+
         const demographics =
+            options.demographics ||
             this.generateDemographics();
 
 
+        /*
+         * -----------------------------------------------------
+         * 4. APRESENTAÇÃO CLÍNICA
+         * -----------------------------------------------------
+         */
+
         const presentation =
-            this.generatePresentation(
-                disease
+            this.generateClinicalPresentation(
+                disease,
+                options
             );
 
+
+        /*
+         * -----------------------------------------------------
+         * 5. HISTÓRIA
+         * -----------------------------------------------------
+         */
+
+        const history =
+            this.generateHistory(
+                disease,
+                options
+            );
+
+
+        /*
+         * -----------------------------------------------------
+         * 6. FATORES DE RISCO
+         * -----------------------------------------------------
+         */
 
         const riskFactors =
             this.generateRiskFactors(
@@ -607,17 +1317,36 @@ class PatientGenerator {
             );
 
 
+        /*
+         * -----------------------------------------------------
+         * 7. ETIOLOGIA
+         * -----------------------------------------------------
+         */
+
         const etiology =
             this.generateEtiology(
                 disease
             );
 
 
+        /*
+         * -----------------------------------------------------
+         * 8. INVESTIGAÇÕES
+         * -----------------------------------------------------
+         */
+
         const investigations =
-            this.generateInvestigationPossibilities(
-                disease
+            this.generateInvestigations(
+                disease,
+                options
             );
 
+
+        /*
+         * -----------------------------------------------------
+         * 9. DIFERENCIAIS
+         * -----------------------------------------------------
+         */
 
         const differentials =
             this.generateDifferentials(
@@ -625,11 +1354,23 @@ class PatientGenerator {
             );
 
 
+        /*
+         * -----------------------------------------------------
+         * 10. TRATAMENTOS
+         * -----------------------------------------------------
+         */
+
         const treatments =
             this.generateTreatmentPossibilities(
                 disease
             );
 
+
+        /*
+         * -----------------------------------------------------
+         * 11. COMPLICAÇÕES
+         * -----------------------------------------------------
+         */
 
         const complications =
             this.generateComplications(
@@ -637,11 +1378,35 @@ class PatientGenerator {
             );
 
 
+        /*
+         * -----------------------------------------------------
+         * 12. VITAIS
+         * -----------------------------------------------------
+         */
+
         const vitals =
             this.generateVitals(
                 severity
             );
 
+
+        /*
+         * -----------------------------------------------------
+         * 13. EXAME FÍSICO
+         * -----------------------------------------------------
+         */
+
+        const physicalExam =
+            this.generatePhysicalExam(
+                options
+            );
+
+
+        /*
+         * -----------------------------------------------------
+         * 14. ESTADO CLÍNICO
+         * -----------------------------------------------------
+         */
 
         const clinicalState =
             this.generateClinicalState(
@@ -650,29 +1415,66 @@ class PatientGenerator {
             );
 
 
+        /*
+         * -----------------------------------------------------
+         * 15. PATIENT STATE
+         * -----------------------------------------------------
+         */
+
+        const patientState =
+            this.generatePatientState(
+                disease,
+                severity,
+                presentation,
+                history,
+                vitals,
+                physicalExam,
+                investigations,
+                {
+                    ...options,
+
+                    demographics
+                }
+            );
+
+
+        /*
+         * -----------------------------------------------------
+         * 16. PACIENTE FINAL
+         * -----------------------------------------------------
+         *
+         * condition continua existindo para o motor interno.
+         *
+         * Ela NÃO deve ser utilizada diretamente pela UI
+         * como informação apresentada ao jogador.
+         * -----------------------------------------------------
+         */
+
         return {
 
             id:
-                this.generateId(),
+                patientState.id,
 
             generatedAt:
                 new Date().toISOString(),
 
             demographics,
 
+            /*
+             * A doença continua presente no estado interno
+             * para permitir avaliação, evolução e resolução.
+             */
             condition: {
 
                 id:
-                    disease.id ||
-                    disease.entity_id ||
-                    disease.canonical_id ||
-                    null,
+                    this.getDiseaseId(
+                        disease
+                    ),
 
                 name:
-                    disease.name ||
-                    disease.label ||
-                    disease.canonical_name ||
-                    null
+                    this.getDiseaseName(
+                        disease
+                    )
             },
 
             severity,
@@ -681,7 +1483,15 @@ class PatientGenerator {
 
             riskFactors,
 
+            /*
+             * Nova apresentação clínica estruturada.
+             */
             presentation,
+
+            history,
+
+            physical_exam:
+                physicalExam,
 
             investigations,
 
@@ -693,6 +1503,12 @@ class PatientGenerator {
 
             vitals,
 
+            /*
+             * Estado verdadeiro do paciente.
+             */
+            hidden_state:
+                patientState.hidden_state,
+
             clinicalState
         };
     }
@@ -702,7 +1518,10 @@ class PatientGenerator {
        GERAÇÃO DE VÁRIOS PACIENTES
        ========================================================= */
 
-    generateMany(count = 1, options = {}) {
+    generateMany(
+        count = 1,
+        options = {}
+    ) {
 
         const patients = [];
 
@@ -726,4 +1545,5 @@ class PatientGenerator {
    DISPONIBILIZAÇÃO GLOBAL
    ============================================================= */
 
-window.PatientGenerator = PatientGenerator;
+window.PatientGenerator =
+    PatientGenerator;
