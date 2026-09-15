@@ -3,8 +3,7 @@
  * DIAGNOSIS — CLINICAL INTERLOCUTOR
  * ============================================================
  *
- * O interlocutor é a camada que traduz a linguagem do médico
- * em consultas/ações sobre o mundo clínico do paciente.
+ * Camada de interpretação clínica.
  *
  * MÉDICO
  *   ↓
@@ -12,20 +11,12 @@
  *   ↓
  * INTENÇÃO CLÍNICA
  *   ↓
- * PATIENT STATE / KNOWLEDGE
+ * PATIENT STATE
  *   ↓
  * REVELAÇÃO
  *
- * O interlocutor conhece o estado completo do paciente,
- * mas só revela aquilo que o médico solicitou ou conseguiu
- * obter através da interação clínica.
- *
- * Não contém casos específicos.
- * Não contém diagnósticos fixos.
- * Não contém pontuação.
- * Não contém regras de jogo.
- *
- * ============================================================
+ * Não contém casos específicos, diagnósticos fixos,
+ * pontuação ou regras de jogo.
  */
 
 (function (global) {
@@ -85,18 +76,14 @@
 
             const normalized = this.normalize(original);
 
-            let result = null;
-
             /*
-             * A ordem é importante.
-             *
-             * Primeiro identificamos consultas específicas.
-             * Depois interação com o paciente.
-             * Depois exames.
-             * Depois avaliação/exame físico.
+             * A ordem é importante:
+             * 1. consultas estruturadas de sinais vitais
+             * 2. interação com paciente
+             * 3. investigação
+             * 4. exame físico
              */
-
-            result =
+            let result =
                 this.interpretVital(normalized) ||
                 this.interpretPatientInteraction(normalized) ||
                 this.interpretInvestigation(normalized) ||
@@ -126,13 +113,32 @@
 
         interpretVital(text) {
 
+            /*
+             * Primeiro tratamos pedidos do CONJUNTO de sinais vitais.
+             * Isso evita que "quais são os sinais vitais?" seja capturado
+             * pelo primeiro campo individual.
+             */
+            const allVitalTerms = [
+                "sinais vitais",
+                "parametros vitais",
+                "parâmetros vitais",
+                "vital signs",
+                "sinais vitais atuais",
+                "parametros vitais atuais",
+                "parâmetros vitais atuais"
+            ];
+
+            if (this.hasAny(text, allVitalTerms)) {
+                return this.revealAllVitals();
+            }
+
             const patterns = [
 
                 {
                     target: "heart_rate",
                     terms: [
                         "frequencia cardiaca",
-                        "frequencia cardíaca",
+                        "frequência cardíaca",
                         "fc",
                         "pulso",
                         "batimentos"
@@ -146,7 +152,9 @@
                         "saturação",
                         "spo2",
                         "spo 2",
-                        "oximetria"
+                        "oximetria",
+                        "saturacao de oxigenio",
+                        "saturação de oxigênio"
                     ]
                 },
 
@@ -155,8 +163,6 @@
                     terms: [
                         "pressao arterial",
                         "pressão arterial",
-                        "pressao",
-                        "pressão",
                         "pa"
                     ]
                 },
@@ -165,7 +171,8 @@
                     target: "glucose",
                     terms: [
                         "glicemia",
-                        "glicose"
+                        "glicose",
+                        "glicemia capilar"
                     ]
                 },
 
@@ -173,6 +180,7 @@
                     target: "temperature",
                     terms: [
                         "temperatura",
+                        "temperatura corporal",
                         "febre"
                     ]
                 },
@@ -183,8 +191,8 @@
                         "frequencia respiratoria",
                         "frequência respiratória",
                         "fr",
-                        "respiracoes",
-                        "respirações"
+                        "respiracoes por minuto",
+                        "respirações por minuto"
                     ]
                 }
             ];
@@ -199,6 +207,66 @@
             }
 
             return null;
+        }
+
+
+        revealAllVitals() {
+
+            const targets = [
+                "heart_rate",
+                "respiratory_rate",
+                "blood_pressure",
+                "spo2",
+                "temperature",
+                "glucose"
+            ];
+
+            const labels = {
+                heart_rate: "Frequência cardíaca",
+                respiratory_rate: "Frequência respiratória",
+                blood_pressure: "Pressão arterial",
+                spo2: "SpO₂",
+                temperature: "Temperatura",
+                glucose: "Glicemia"
+            };
+
+            const values = {};
+            const messages = [];
+
+            for (const target of targets) {
+
+                const value = this.readPatientValue(target);
+
+                if (value !== undefined && value !== null && value !== "") {
+                    values[target] = value;
+                    messages.push(
+                        `${labels[target]}: ${this.formatVital(target, value)}`
+                    );
+                }
+            }
+
+            if (!messages.length) {
+                return this.response(
+                    "vital_signs",
+                    "Os sinais vitais ainda não estão disponíveis no estado clínico atual.",
+                    "vital_signs",
+                    {
+                        available: false,
+                        revealed: false
+                    }
+                );
+            }
+
+            return this.response(
+                "vital_signs",
+                `${messages.join(". ")}.`,
+                "vital_signs",
+                {
+                    values: values,
+                    available: true,
+                    revealed: true
+                }
+            );
         }
 
 
@@ -337,6 +405,7 @@
         revealPatientInformation(intent) {
 
             const aliases = {
+
                 chief_complaint: [
                     "chief_complaint",
                     "queixa_principal",
@@ -531,6 +600,85 @@
             const examinations = [
 
                 {
+                    target: "general",
+                    terms: [
+                        "exame fisico geral",
+                        "exame físico geral",
+                        "aspecto geral",
+                        "estado geral"
+                    ]
+                },
+
+                {
+                    target: "cardiovascular",
+                    terms: [
+                        "exame cardiovascular",
+                        "exame cardiologico",
+                        "exame cardiológico",
+                        "avaliacao cardiovascular",
+                        "avaliação cardiovascular",
+                        "ausculta cardiaca",
+                        "ausculta cardíaca",
+                        "bulhas cardiacas",
+                        "bulhas cardíacas"
+                    ]
+                },
+
+                {
+                    target: "respiratory",
+                    terms: [
+                        "exame respiratorio",
+                        "exame respiratório",
+                        "avaliacao respiratoria",
+                        "avaliação respiratória",
+                        "ausculta pulmonar",
+                        "ausculta respiratoria",
+                        "ausculta respiratória",
+                        "murmurio vesicular",
+                        "murmúrio vesicular",
+                        "sons respiratorios",
+                        "sons respiratórios"
+                    ]
+                },
+
+                {
+                    target: "neurologic",
+                    terms: [
+                        "exame neurologico",
+                        "exame neurológico",
+                        "avaliacao neurologica",
+                        "avaliação neurológica",
+                        "estado neurologico",
+                        "estado neurológico"
+                    ]
+                },
+
+                {
+                    target: "abdomen",
+                    terms: [
+                        "exame abdominal",
+                        "exame do abdomen",
+                        "exame do abdômen",
+                        "palpacao abdominal",
+                        "palpação abdominal",
+                        "abdome",
+                        "abdômen"
+                    ]
+                },
+
+                {
+                    target: "extremities",
+                    terms: [
+                        "exame dos membros",
+                        "membros",
+                        "extremidades",
+                        "edema",
+                        "pulsos perifericos",
+                        "pulsos periféricos"
+                    ]
+                },
+
+                {
                     target: "primary_assessment",
                     terms: [
                         "abcde",
@@ -557,9 +705,7 @@
                     terms: [
                         "perfusao",
                         "perfusão",
-                        "enchimento capilar",
-                        "pulsos perifericos",
-                        "pulsos periféricos"
+                        "enchimento capilar"
                     ]
                 },
 
@@ -589,13 +735,9 @@
 
         performExamination(target) {
 
-            const result = this.findPatientInformation([
-                target,
-                `exam_${target}`,
-                `examination_${target}`
-            ]);
+            const result = this.findPhysicalExamination(target);
 
-            if (!result) {
+            if (result === undefined || result === null || result === "") {
 
                 return this.response(
                     "physical_examination",
@@ -675,7 +817,8 @@
                     "respiratoryRate",
                     "respiratory_rate",
                     "fr",
-                    "frequenciaRespiratoria"
+                    "frequenciaRespiratoria",
+                    "frequencia_respiratoria"
                 ]
             };
 
@@ -729,7 +872,120 @@
                 this.patientState.case && this.patientState.case.patient,
                 this.patientState.hidden,
                 this.patientState.case && this.patientState.case.hidden,
-                this.patientState.presentation
+                this.patientState.presentation,
+                this.patientState.history,
+                this.patientState.patient && this.patientState.patient.history,
+                this.patientState.case && this.patientState.case.patient &&
+                    this.patientState.case.patient.history
+            ].filter(Boolean);
+
+            for (const source of sources) {
+
+                for (const key of keys) {
+
+                    if (source[key] !== undefined) {
+                        return source[key];
+                    }
+                }
+            }
+
+            return undefined;
+        }
+
+
+        findPhysicalExamination(target) {
+
+            if (!this.patientState) {
+                return undefined;
+            }
+
+            const state = this.patientState;
+
+            const aliases = {
+
+                general: [
+                    "general",
+                    "exame_geral",
+                    "general_exam",
+                    "physical_general"
+                ],
+
+                cardiovascular: [
+                    "cardiovascular",
+                    "cardiac",
+                    "cardiovascular_exam",
+                    "exame_cardiovascular"
+                ],
+
+                respiratory: [
+                    "respiratory",
+                    "respiratory_exam",
+                    "pulmonary",
+                    "pulmonary_exam",
+                    "exame_respiratorio"
+                ],
+
+                neurologic: [
+                    "neurologic",
+                    "neurological",
+                    "neurologic_exam",
+                    "exame_neurologico"
+                ],
+
+                abdomen: [
+                    "abdomen",
+                    "abdominal",
+                    "abdominal_exam",
+                    "exame_abdominal"
+                ],
+
+                extremities: [
+                    "extremities",
+                    "members",
+                    "limbs",
+                    "exame_membros"
+                ],
+
+                primary_assessment: [
+                    "primary_assessment",
+                    "avaliacao_primaria",
+                    "initial_assessment"
+                ],
+
+                mental_status: [
+                    "mental_status",
+                    "estado_mental",
+                    "nivel_consciencia"
+                ],
+
+                perfusion: [
+                    "perfusion",
+                    "perfusao",
+                    "enchimento_capilar"
+                ],
+
+                monitoring: [
+                    "monitoring",
+                    "monitorizacao",
+                    "monitoring_exam"
+                ]
+            };
+
+            const keys = aliases[target] || [target];
+
+            const sources = [
+                state.physical_exam,
+                state.physicalExam,
+                state.examination,
+                state.exam,
+                state.patient && state.patient.physical_exam,
+                state.patient && state.patient.physicalExam,
+                state.patient && state.patient.examination,
+                state.patient && state.patient.exam,
+                state.case && state.case.physical_exam,
+                state.case && state.case.physicalExam,
+                state.case && state.case.examination,
+                state.case && state.case.exam
             ].filter(Boolean);
 
             for (const source of sources) {
@@ -760,13 +1016,64 @@
                 this.patientState.case &&
                     this.patientState.case.exams,
                 this.patientState.hidden &&
-                    this.patientState.hidden.investigations
+                    this.patientState.hidden.investigations,
+                this.patientState.case &&
+                    this.patientState.case.hidden &&
+                    this.patientState.case.hidden.investigations
             ].filter(Boolean);
+
+            const aliases = {
+
+                ecg: [
+                    "ecg",
+                    "electrocardiogram",
+                    "eletrocardiograma"
+                ],
+
+                blood_gas: [
+                    "blood_gas",
+                    "gasometry",
+                    "gasometria"
+                ],
+
+                hemogram: [
+                    "hemogram",
+                    "hemograma",
+                    "cbc"
+                ],
+
+                laboratory: [
+                    "laboratory",
+                    "laboratorio",
+                    "laboratório",
+                    "labs"
+                ],
+
+                ct: [
+                    "ct",
+                    "tc",
+                    "tomografia",
+                    "computed_tomography"
+                ],
+
+                chest_xray: [
+                    "chest_xray",
+                    "xray",
+                    "rx_torax",
+                    "radiografia_torax",
+                    "radiografia_de_torax"
+                ]
+            };
+
+            const keys = aliases[target] || [target];
 
             for (const source of sources) {
 
-                if (source[target] !== undefined) {
-                    return source[target];
+                for (const key of keys) {
+
+                    if (source[key] !== undefined) {
+                        return source[key];
+                    }
                 }
 
                 const normalizedTarget = this.normalize(target);
@@ -870,6 +1177,12 @@
         labelExamination(target) {
 
             const labels = {
+                general: "exame físico geral",
+                cardiovascular: "exame cardiovascular",
+                respiratory: "exame respiratório",
+                neurologic: "exame neurológico",
+                abdomen: "exame abdominal",
+                extremities: "exame dos membros e extremidades",
                 primary_assessment: "avaliação primária",
                 mental_status: "nível de consciência",
                 perfusion: "perfusão",
