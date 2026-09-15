@@ -1,0 +1,236 @@
+{
+  "schema_version": "1.0",
+  "status": "draft_source_derived",
+  "csi": {
+    "id": "csi_has_dislipidemia_cm3",
+    "name": "CSI Semantic Layer — HAS e Dislipidemia",
+    "source_kb": "has_dislipidemia_cm3"
+  },
+  "normalization": {
+    "remove_accents": true,
+    "lowercase": true,
+    "collapse_whitespace": true
+  },
+  "concepts": [
+    {
+      "id": "hypertension",
+      "aliases": [
+        "hipertensao",
+        "has",
+        "pressao alta",
+        "pressao arterial elevada"
+      ]
+    },
+    {
+      "id": "pseudocrisis",
+      "aliases": [
+        "pseudocrise",
+        "pseudocrise hipertensiva"
+      ]
+    },
+    {
+      "id": "aortic_dissection",
+      "aliases": [
+        "disseccao de aorta",
+        "dissecção de aorta"
+      ]
+    },
+    {
+      "id": "dyslipidemia",
+      "aliases": [
+        "dislipidemia"
+      ]
+    },
+    {
+      "id": "target_organ_damage",
+      "aliases": [
+        "lesao de orgao alvo",
+        "lesão de órgão-alvo"
+      ]
+    },
+    {
+      "id": "secondary_hypertension",
+      "aliases": [
+        "hipertensao secundaria",
+        "hipertensão secundária"
+      ]
+    },
+    {
+      "id": "ecg",
+      "aliases": [
+        "ecg",
+        "eletrocardiograma"
+      ]
+    },
+    {
+      "id": "hba1c",
+      "aliases": [
+        "hba1",
+        "hba1c",
+        "hemoglobina glicada"
+      ]
+    },
+    {
+      "id": "potassium",
+      "aliases": [
+        "k+",
+        "potassio",
+        "potássio"
+      ]
+    },
+    {
+      "id": "creatinine",
+      "aliases": [
+        "creatinina"
+      ]
+    },
+    {
+      "id": "urinalysis",
+      "aliases": [
+        "analise de urina",
+        "análise de urina",
+        "eas"
+      ]
+    },
+    {
+      "id": "fasting_glucose",
+      "aliases": [
+        "glicemia de jejum"
+      ]
+    },
+    {
+      "id": "hdl",
+      "aliases": [
+        "hdl"
+      ]
+    },
+    {
+      "id": "triglycerides",
+      "aliases": [
+        "triglicerides",
+        "triglicerídeos",
+        "tg"
+      ]
+    },
+    {
+      "id": "uric_acid",
+      "aliases": [
+        "acido urico",
+        "ácido úrico"
+      ]
+    }
+  ],
+  "intents": [
+    {
+      "id": "initial_diagnosis",
+      "aliases": [
+        "diagnostico inicial",
+        "hipotese inicial",
+        "qual o diagnostico"
+      ],
+      "actions": [
+        "record_initial_diagnosis"
+      ]
+    },
+    {
+      "id": "request_investigation",
+      "aliases": [
+        "peco",
+        "solicito",
+        "quero pedir",
+        "faca",
+        "realize",
+        "avaliar com"
+      ],
+      "actions": [
+        "resolve_investigation"
+      ]
+    },
+    {
+      "id": "ask_result",
+      "aliases": [
+        "resultado",
+        "como veio",
+        "o que deu",
+        "qual o valor"
+      ],
+      "actions": [
+        "reveal_investigation_result"
+      ]
+    },
+    {
+      "id": "treatment_proposal",
+      "aliases": [
+        "tratamento",
+        "conduta",
+        "o que fazer",
+        "prescrevo",
+        "medicacao"
+      ],
+      "actions": [
+        "record_treatment"
+      ]
+    },
+    {
+      "id": "disposition",
+      "aliases": [
+        "alta",
+        "internar",
+        "encaminhar",
+        "transferir",
+        "destino"
+      ],
+      "actions": [
+        "record_disposition"
+      ]
+    }
+  ],
+  "composite_examples": [
+    {
+      "input": "Minha hipótese inicial é hipertensão secundária e quero pedir creatinina, potássio e ECG.",
+      "expected": [
+        {
+          "intent": "initial_diagnosis",
+          "concept": "secondary_hypertension"
+        },
+        {
+          "intent": "request_investigation",
+          "concept": "creatinine"
+        },
+        {
+          "intent": "request_investigation",
+          "concept": "potassium"
+        },
+        {
+          "intent": "request_investigation",
+          "concept": "ecg"
+        }
+      ]
+    },
+    {
+      "input": "Acho que é dislipidemia e quero ver colesterol total, HDL e triglicerídeos.",
+      "expected": [
+        {
+          "intent": "initial_diagnosis",
+          "concept": "dyslipidemia"
+        },
+        {
+          "intent": "request_investigation",
+          "concept": "total_cholesterol"
+        },
+        {
+          "intent": "request_investigation",
+          "concept": "hdl"
+        },
+        {
+          "intent": "request_investigation",
+          "concept": "triglycerides"
+        }
+      ]
+    }
+  ],
+  "source_traceability": {
+    "source": "CM 3 - Síndrome Metabólica - HAS e Dislipidemia.docx",
+    "derived_without_external_research": true
+  }
+}
