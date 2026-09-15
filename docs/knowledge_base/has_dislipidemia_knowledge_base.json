@@ -1,0 +1,385 @@
+{
+  "schema_version": "3.0",
+  "status": "draft_source_derived",
+  "knowledge_base": {
+    "id": "has_dislipidemia_cm3",
+    "name": "Hipertensão Arterial Sistêmica e Dislipidemia",
+    "domain": "cardiovascular",
+    "source_material": "CM 3 - Síndrome Metabólica - HAS e Dislipidemia",
+    "source_date": "2021-03-25",
+    "external_research_used": false
+  },
+  "domains": [
+    "hypertension",
+    "dyslipidemia",
+    "target_organ_damage",
+    "secondary_hypertension",
+    "hypertensive_emergency"
+  ],
+  "entities": [
+    {
+      "id": "hypertension",
+      "type": "disease",
+      "name": "Hipertensão arterial sistêmica",
+      "domain": "hypertension",
+      "description": "Condição clínica abordada no material de HAS e dislipidemia.",
+      "risk_factors": [],
+      "manifestations": [],
+      "mechanisms": [],
+      "complications": [
+        "target_organ_damage"
+      ],
+      "subtypes": [
+        "pseudocrisis",
+        "aortic_dissection"
+      ]
+    },
+    {
+      "id": "target_organ_damage",
+      "type": "clinical_concept",
+      "name": "Lesão de órgão-alvo",
+      "domain": "target_organ_damage",
+      "description": "Alterações que devem ser investigadas na avaliação do hipertenso.",
+      "risk_factors": [],
+      "manifestations": [],
+      "mechanisms": [],
+      "complications": [],
+      "subtypes": []
+    },
+    {
+      "id": "secondary_hypertension",
+      "type": "clinical_concept",
+      "name": "Hipertensão secundária",
+      "domain": "secondary_hypertension",
+      "description": "Possibilidade etiológica cuja investigação é contemplada no material.",
+      "risk_factors": [],
+      "manifestations": [],
+      "mechanisms": [],
+      "complications": [],
+      "subtypes": []
+    },
+    {
+      "id": "pseudocrisis",
+      "type": "clinical_concept",
+      "name": "Pseudocrise hipertensiva",
+      "domain": "hypertension",
+      "description": "Paciente em uso irregular de anti-hipertensivo submetido a estresse.",
+      "risk_factors": [
+        "irregular_antihypertensive_use",
+        "stress"
+      ],
+      "manifestations": [],
+      "mechanisms": [],
+      "complications": [],
+      "subtypes": []
+    },
+    {
+      "id": "aortic_dissection",
+      "type": "disease",
+      "name": "Dissecção de aorta",
+      "domain": "hypertensive_emergency",
+      "description": "Emergência cardiovascular citada no material.",
+      "risk_factors": [],
+      "manifestations": [],
+      "mechanisms": [],
+      "complications": [],
+      "subtypes": [
+        "ascending_aortic_dissection"
+      ]
+    },
+    {
+      "id": "dyslipidemia",
+      "type": "disease",
+      "name": "Dislipidemia",
+      "domain": "dyslipidemia",
+      "description": "Distúrbio metabólico abordado no material.",
+      "risk_factors": [],
+      "manifestations": [],
+      "mechanisms": [],
+      "complications": [],
+      "subtypes": []
+    },
+    {
+      "id": "rosuvastatin",
+      "type": "treatment",
+      "name": "Rosuvastatina",
+      "domain": "dyslipidemia",
+      "description": "O material cita rosuvastatina 40–80 mg como opção de tratamento de alta intensidade.",
+      "risk_factors": [],
+      "manifestations": [],
+      "mechanisms": [],
+      "complications": [],
+      "subtypes": []
+    }
+  ],
+  "relationships": [
+    {
+      "id": "r1",
+      "source": "hypertension",
+      "relation": "requires_evaluation_for",
+      "target": "target_organ_damage"
+    },
+    {
+      "id": "r2",
+      "source": "hypertension",
+      "relation": "requires_evaluation_for",
+      "target": "secondary_hypertension"
+    },
+    {
+      "id": "r3",
+      "source": "pseudocrisis",
+      "relation": "associated_with",
+      "target": "hypertension"
+    },
+    {
+      "id": "r4",
+      "source": "aortic_dissection",
+      "relation": "associated_with",
+      "target": "hypertension"
+    },
+    {
+      "id": "r5",
+      "source": "dyslipidemia",
+      "relation": "treated_with",
+      "target": "rosuvastatin"
+    }
+  ],
+  "clinical_patterns": [
+    {
+      "id": "hypertensive_initial_workup",
+      "name": "Avaliação do hipertenso",
+      "features": [
+        "hypertension"
+      ],
+      "expected_investigations": [
+        "urinalysis",
+        "potassium",
+        "creatinine",
+        "fasting_glucose",
+        "hba1c",
+        "total_cholesterol",
+        "hdl",
+        "triglycerides",
+        "uric_acid",
+        "ecg"
+      ]
+    },
+    {
+      "id": "pseudocrisis_pattern",
+      "name": "Pseudocrise descrita no material",
+      "features": [
+        "irregular_antihypertensive_use",
+        "stress"
+      ],
+      "concept": "pseudocrisis"
+    }
+  ],
+  "investigations": [
+    {
+      "id": "urinalysis",
+      "name": "Análise de urina",
+      "aliases": [
+        "urina",
+        "EAS",
+        "analise de urina"
+      ]
+    },
+    {
+      "id": "potassium",
+      "name": "Potássio",
+      "aliases": [
+        "K+",
+        "K",
+        "potassio"
+      ]
+    },
+    {
+      "id": "creatinine",
+      "name": "Creatinina",
+      "aliases": [
+        "creatinina"
+      ]
+    },
+    {
+      "id": "fasting_glucose",
+      "name": "Glicemia de jejum",
+      "aliases": [
+        "glicemia de jejum"
+      ]
+    },
+    {
+      "id": "hba1c",
+      "name": "Hemoglobina glicada",
+      "aliases": [
+        "HbA1",
+        "HbA1c",
+        "hemoglobina glicada"
+      ]
+    },
+    {
+      "id": "total_cholesterol",
+      "name": "Colesterol total",
+      "aliases": [
+        "colesterol total"
+      ]
+    },
+    {
+      "id": "hdl",
+      "name": "HDL",
+      "aliases": [
+        "HDL"
+      ]
+    },
+    {
+      "id": "triglycerides",
+      "name": "Triglicerídeos",
+      "aliases": [
+        "triglicerideos",
+        "TG"
+      ]
+    },
+    {
+      "id": "uric_acid",
+      "name": "Ácido úrico",
+      "aliases": [
+        "acido urico"
+      ]
+    },
+    {
+      "id": "ecg",
+      "name": "Eletrocardiograma",
+      "aliases": [
+        "ECG",
+        "eletrocardiograma"
+      ]
+    }
+  ],
+  "treatments": [
+    {
+      "id": "pseudocrisis_treatment",
+      "name": "Conduta descrita para pseudocrise",
+      "components": [
+        "ansiolítico",
+        "analgesia"
+      ]
+    },
+    {
+      "id": "high_intensity_statin",
+      "name": "Tratamento hipolipemiante de alta intensidade",
+      "drug": "rosuvastatina",
+      "dose_text": "40–80 mg"
+    },
+    {
+      "id": "ascending_aortic_dissection_surgery",
+      "name": "Tratamento cirúrgico da dissecção de aorta ascendente",
+      "components": [
+        "cirurgia"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "id": "rule_htn_workup",
+      "conditions": [
+        {
+          "concept": "hypertension"
+        }
+      ],
+      "conclusions": [
+        {
+          "action": "consider_investigations",
+          "set": "hypertensive_initial_workup"
+        }
+      ]
+    },
+    {
+      "id": "rule_pseudocrisis",
+      "conditions": [
+        {
+          "concept": "hypertension"
+        },
+        {
+          "concept": "irregular_antihypertensive_use"
+        },
+        {
+          "concept": "stress"
+        }
+      ],
+      "conclusions": [
+        {
+          "concept": "pseudocrisis"
+        },
+        {
+          "action": "source_described_treatment",
+          "items": [
+            "ansiolítico",
+            "analgesia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rule_aortic_dissection",
+      "conditions": [
+        {
+          "concept": "aortic_dissection"
+        }
+      ],
+      "conclusions": [
+        {
+          "action": "source_described_bp_goal",
+          "text": "NORMALIZAR a pressão"
+        },
+        {
+          "action": "consider_surgery_if",
+          "condition": "ascending_aortic_dissection"
+        }
+      ]
+    }
+  ],
+  "patient_generation": {
+    "possible_presentations": [
+      {
+        "id": "hypertension_evaluation",
+        "complaints": [
+          "pressão arterial elevada",
+          "avaliação de hipertensão"
+        ],
+        "timing": [
+          "variável"
+        ]
+      },
+      {
+        "id": "pseudocrisis",
+        "complaints": [
+          "mal-estar associado a elevação pressórica"
+        ],
+        "timing": [
+          "agudo"
+        ]
+      },
+      {
+        "id": "aortic_dissection",
+        "complaints": [
+          "dor torácica"
+        ],
+        "timing": [
+          "agudo"
+        ]
+      }
+    ]
+  },
+  "sources": [
+    {
+      "type": "uploaded_source",
+      "name": "CM 3 - Síndrome Metabólica - HAS e Dislipidemia.docx",
+      "date": "2021-03-25",
+      "external_research_used": false
+    }
+  ],
+  "conflicts": [],
+  "uncertainties": [
+    "Estruturação do material fornecido; não é atualização de diretriz.",
+    "O próprio material orienta consultar a diretriz brasileira para alguns pontos; isso não foi feito nesta versão."
+  ]
+}
