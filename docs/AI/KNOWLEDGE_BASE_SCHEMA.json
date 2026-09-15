@@ -1,0 +1,1740 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://diagnosis.delyone.com/schemas/knowledge-base.schema.json",
+  "title": "Diagnosis Medical Knowledge Base",
+  "description": "Schema técnico para Knowledge Bases médicas reutilizáveis do projeto Diagnosis.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "knowledge_base",
+    "domains",
+    "entities",
+    "relationships",
+    "clinical_rules",
+    "differential_network",
+    "sources",
+    "conflicts",
+    "uncertainties"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "3.0"
+    },
+    "knowledge_base": {
+      "$ref": "#/$defs/knowledgeBaseMetadata"
+    },
+    "domains": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/domain"
+      }
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entity"
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relationship"
+      }
+    },
+    "clinical_rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/clinicalRule"
+      }
+    },
+    "differential_network": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/differentialRelation"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/conflict"
+      }
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/uncertainty"
+      }
+    }
+  },
+  "$defs": {
+    "knowledgeBaseMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "language",
+        "status",
+        "processing"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_-]*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string",
+          "const": "pt-BR"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "review",
+            "validated",
+            "deprecated"
+          ]
+        },
+        "processing": {
+          "$ref": "#/$defs/processing"
+        }
+      }
+    },
+    "processing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_documents",
+        "processed_date",
+        "external_research_used"
+      ],
+      "properties": {
+        "source_documents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "processed_date": {
+          "type": "string"
+        },
+        "external_research_used": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "parent_domain": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "canonical_name",
+        "type",
+        "aliases",
+        "definition",
+        "pathophysiology",
+        "diagnosis",
+        "treatment",
+        "complications",
+        "patient_generation",
+        "relationships",
+        "source_traceability"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_-]*$"
+        },
+        "canonical_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "disease",
+            "syndrome",
+            "condition",
+            "physiological_state",
+            "symptom",
+            "sign",
+            "finding",
+            "laboratory_finding",
+            "imaging_finding",
+            "risk_factor",
+            "prognostic_factor",
+            "etiology",
+            "pathophysiology",
+            "mechanism",
+            "investigation",
+            "diagnostic_criterion",
+            "differential_diagnosis",
+            "treatment",
+            "procedure",
+            "medication",
+            "complication",
+            "adverse_effect",
+            "contraindication",
+            "anatomical_structure",
+            "physiological_process",
+            "clinical_rule"
+          ]
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "definition": {
+          "type": "string"
+        },
+        "classification": {
+          "$ref": "#/$defs/classification"
+        },
+        "epidemiology": {
+          "$ref": "#/$defs/epidemiology"
+        },
+        "etiology": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entityReference"
+          }
+        },
+        "pathophysiology": {
+          "$ref": "#/$defs/pathophysiology"
+        },
+        "clinical": {
+          "$ref": "#/$defs/clinicalProfile"
+        },
+        "physical_examination": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/clinicalFinding"
+          }
+        },
+        "laboratory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/laboratoryFinding"
+          }
+        },
+        "imaging": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/imagingFinding"
+          }
+        },
+        "investigations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/investigation"
+          }
+        },
+        "diagnosis": {
+          "$ref": "#/$defs/diagnosis"
+        },
+        "treatment": {
+          "$ref": "#/$defs/treatment"
+        },
+        "medications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/medication"
+          }
+        },
+        "complications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/complication"
+          }
+        },
+        "prognosis": {
+          "$ref": "#/$defs/prognosis"
+        },
+        "follow_up": {
+          "$ref": "#/$defs/followUp"
+        },
+        "clinical_rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "patient_generation": {
+          "$ref": "#/$defs/patientGeneration"
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uncertainties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "subtype": {
+          "type": "string"
+        },
+        "parent_entity": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "severity": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "epidemiology": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "age_groups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sex_distribution": {
+          "type": "string"
+        },
+        "frequency": {
+          "type": "string"
+        },
+        "incidence": {
+          "type": "string"
+        },
+        "prevalence": {
+          "type": "string"
+        },
+        "population": {
+          "type": "string"
+        },
+        "geography": {
+          "type": "string"
+        }
+      }
+    },
+    "pathophysiology": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mechanisms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/mechanism"
+          }
+        },
+        "causal_chains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/causalChain"
+          }
+        }
+      }
+    },
+    "mechanism": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "description"
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "cause": {
+          "type": "string"
+        },
+        "effect": {
+          "type": "string"
+        },
+        "intermediate_steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "causalChain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "steps"
+      ],
+      "properties": {
+        "steps": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "clinicalProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "presentations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/clinicalPattern"
+          }
+        },
+        "symptoms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entityReference"
+          }
+        },
+        "signs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entityReference"
+          }
+        },
+        "risk_factors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entityReference"
+          }
+        },
+        "temporal_course": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "clinicalPattern": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "features"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entityReference"
+          }
+        },
+        "frequency": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "timing": {
+          "type": "string"
+        },
+        "context": {
+          "type": "string"
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "clinicalFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "finding"
+      ],
+      "properties": {
+        "finding": {
+          "type": "string"
+        },
+        "frequency": {
+          "type": "string"
+        },
+        "presence": {
+          "type": "string",
+          "enum": [
+            "possible",
+            "common",
+            "frequent",
+            "characteristic",
+            "required",
+            "unknown"
+          ]
+        },
+        "severity": {
+          "type": "string"
+        },
+        "timing": {
+          "type": "string"
+        },
+        "context": {
+          "type": "string"
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "laboratoryFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "test"
+      ],
+      "properties": {
+        "test": {
+          "type": "string"
+        },
+        "finding": {
+          "type": "string"
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "increased",
+            "decreased",
+            "normal",
+            "positive",
+            "negative",
+            "variable",
+            "unknown"
+          ]
+        },
+        "value": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reference_range": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "clinical_context": {
+          "type": "string"
+        },
+        "interpretation": {
+          "type": "string"
+        },
+        "diagnostic_impact": {
+          "type": "string"
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "imagingFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modality"
+      ],
+      "properties": {
+        "modality": {
+          "type": "string"
+        },
+        "finding": {
+          "type": "string"
+        },
+        "typicality": {
+          "type": "string"
+        },
+        "interpretation": {
+          "type": "string"
+        },
+        "diagnostic_impact": {
+          "type": "string"
+        },
+        "clinical_context": {
+          "type": "string"
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "investigation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "laboratory",
+            "imaging",
+            "physiological",
+            "pathological",
+            "functional",
+            "clinical",
+            "other"
+          ]
+        },
+        "indication": {
+          "type": "string"
+        },
+        "clinical_question": {
+          "type": "string"
+        },
+        "possible_results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/investigationResult"
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "priority": {
+          "type": "string"
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "investigationResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "result"
+      ],
+      "properties": {
+        "result": {
+          "type": "string"
+        },
+        "interpretation": {
+          "type": "string"
+        },
+        "supports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "argues_against": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "diagnostic_impact": {
+          "type": "string"
+        }
+      }
+    },
+    "diagnosis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "diagnostic_approach": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supporting_features": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entityReference"
+          }
+        },
+        "features_against": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entityReference"
+          }
+        },
+        "diagnostic_criteria": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/diagnosticCriterion"
+          }
+        },
+        "confirmatory_tests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "screening_tests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "diagnostic_thresholds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/threshold"
+          }
+        },
+        "differential_diagnoses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/differentialDiagnosis"
+          }
+        }
+      }
+    },
+    "diagnosticCriterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "criteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "population": {
+          "type": "string"
+        },
+        "context": {
+          "type": "string"
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "threshold": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "value",
+        "unit"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": [
+            "number",
+            "string"
+          ]
+        },
+        "unit": {
+          "type": "string"
+        },
+        "purpose": {
+          "type": "string"
+        },
+        "population": {
+          "type": "string"
+        },
+        "context": {
+          "type": "string"
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "differentialDiagnosis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity"
+      ],
+      "properties": {
+        "entity": {
+          "type": "string"
+        },
+        "why_consider": {
+          "type": "string"
+        },
+        "supporting_features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "discriminating_features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "useful_investigations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "features_against": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "treatment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "principles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "acute": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/intervention"
+          }
+        },
+        "maintenance": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/intervention"
+          }
+        },
+        "non_pharmacological": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/intervention"
+          }
+        },
+        "procedures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/intervention"
+          }
+        },
+        "treatment_goals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "monitoring": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "intervention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "medication",
+            "procedure",
+            "supportive",
+            "non_pharmacological",
+            "monitoring",
+            "other"
+          ]
+        },
+        "indication": {
+          "type": "string"
+        },
+        "objective": {
+          "type": "string"
+        },
+        "mechanism": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "string"
+        },
+        "context": {
+          "type": "string"
+        },
+        "risks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contraindications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "monitoring": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dose": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "route": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "medication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "generic_name": {
+          "type": "string"
+        },
+        "class": {
+          "type": "string"
+        },
+        "mechanism": {
+          "type": "string"
+        },
+        "indications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contraindications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "adverse_effects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "interactions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "monitoring": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "doses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dose"
+          }
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "dose": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dose"
+      ],
+      "properties": {
+        "dose": {
+          "type": "string"
+        },
+        "route": {
+          "type": "string"
+        },
+        "frequency": {
+          "type": "string"
+        },
+        "population": {
+          "type": "string"
+        },
+        "context": {
+          "type": "string"
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "complication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity"
+      ],
+      "properties": {
+        "entity": {
+          "type": "string"
+        },
+        "mechanism": {
+          "type": "string"
+        },
+        "risk_factors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warning_signs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prevention": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "management": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "prognosis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "expected_course": {
+          "type": "string"
+        },
+        "prognostic_factors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entityReference"
+          }
+        },
+        "recurrence": {
+          "type": "string"
+        },
+        "mortality": {
+          "type": "string"
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "followUp": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "monitoring": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "etiologic_investigation": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "chronic_management": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "patient_education": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recurrence_prevention": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "patientGeneration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "age_ranges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sex": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "risk_factors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "comorbidities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "possible_presentations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/presentationPossibility"
+          }
+        },
+        "severity_levels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contexts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "possible_complications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "presentationPossibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "features"
+      ],
+      "properties": {
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "frequency": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "timing": {
+          "type": "string"
+        },
+        "context": {
+          "type": "string"
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "source",
+        "relation",
+        "target"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "relation": {
+          "type": "string",
+          "enum": [
+            "causes",
+            "caused_by",
+            "associated_with",
+            "predisposes_to",
+            "increases_risk_of",
+            "decreases",
+            "increases",
+            "results_in",
+            "leads_to",
+            "characterized_by",
+            "manifests_as",
+            "suggests",
+            "supports_diagnosis_of",
+            "argues_against",
+            "requires",
+            "treated_by",
+            "contraindicated_by",
+            "complicates",
+            "precedes",
+            "follows",
+            "differentiates_from",
+            "part_of",
+            "subtype_of"
+          ]
+        },
+        "target": {
+          "type": "string"
+        },
+        "context": {
+          "type": "string"
+        },
+        "strength": {
+          "type": "string",
+          "enum": [
+            "weak",
+            "moderate",
+            "strong",
+            "unknown"
+          ]
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "clinicalRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "description"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ruleCondition"
+          }
+        },
+        "conclusions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ruleConclusion"
+          }
+        },
+        "context": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "string"
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "ruleCondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity"
+      ],
+      "properties": {
+        "entity": {
+          "type": "string"
+        },
+        "relation": {
+          "type": "string"
+        },
+        "value": {
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
+        }
+      }
+    },
+    "ruleConclusion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "entity"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "increase_suspicion",
+            "decrease_suspicion",
+            "supports",
+            "argues_against",
+            "requires_investigation",
+            "suggests_treatment",
+            "suggests_action",
+            "indicates_risk",
+            "indicates_complication"
+          ]
+        },
+        "entity": {
+          "type": "string"
+        },
+        "strength": {
+          "type": "string",
+          "enum": [
+            "weak",
+            "moderate",
+            "strong",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "differentialRelation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_a",
+        "entity_b"
+      ],
+      "properties": {
+        "entity_a": {
+          "type": "string"
+        },
+        "entity_b": {
+          "type": "string"
+        },
+        "shared_features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "discriminators": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "useful_investigations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_traceability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          }
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "pdf",
+            "guideline",
+            "consensus",
+            "official",
+            "systematic_review",
+            "meta_analysis",
+            "primary_study",
+            "academic",
+            "web",
+            "other"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "organization": {
+          "type": "string"
+        },
+        "publication_date": {
+          "type": "string"
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "document_location": {
+          "type": "string"
+        },
+        "access_date": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "sourceReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "claim": {
+          "type": "string"
+        },
+        "evidence_type": {
+          "type": "string",
+          "enum": [
+            "direct",
+            "synthesis",
+            "inference",
+            "external_verification"
+          ]
+        }
+      }
+    },
+    "entityReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity"
+      ],
+      "properties": {
+        "entity": {
+          "type": "string"
+        },
+        "context": {
+          "type": "string"
+        },
+        "strength": {
+          "type": "string",
+          "enum": [
+            "weak",
+            "moderate",
+            "strong",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "conflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "description",
+        "sources"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "string"
+          }
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resolution": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "unresolved",
+            "resolved",
+            "context_dependent"
+          ]
+        }
+      }
+    },
+    "uncertainty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "description"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "affected_entities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reason": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "uncertain",
+            "insufficient_evidence",
+            "under_review"
+          ]
+        }
+      }
+    }
+  }
+}
