@@ -1,0 +1,4214 @@
+{
+  "schema_version": "3.0",
+  "knowledge_base": {
+    "id": "med_cm12_dispneia",
+    "name": "MED — CM 12 — Dispneia",
+    "description": "Knowledge Base sindrômica derivada exclusivamente do CM 12 — Dispneia. Mantém a organização clínica do material em manifestações, mecanismos, investigação, diferenciação, gravidade e tratamento.",
+    "language": "pt-BR",
+    "status": "draft",
+    "processing": {
+      "source_documents": [
+        "CM 12 - Dispneia.docx(1).pdf"
+      ],
+      "processed_date": "2026-09-15",
+      "external_research_used": false,
+      "notes": "Primeira tradução estrutural do MED para o formato Diagnosis. Conteúdo não foi corrigido ou atualizado por diretrizes externas."
+    }
+  },
+  "domains": [
+    {
+      "id": "dispneia",
+      "name": "Dispneia",
+      "description": "Síndrome respiratória e seus principais mecanismos, apresentações, investigação e entidades associadas presentes no material.",
+      "parent_domain": null,
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-8",
+          "claim": "Título e organização global do material.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "tromboembolismo_pulmonar",
+      "name": "Tromboembolia pulmonar",
+      "description": "Espectro TVP/TEP, manifestações, investigação, critérios de Wells e tratamento apresentados no material.",
+      "parent_domain": "dispneia",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-3",
+          "claim": "Conteúdo sobre TVP/TEP.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "doenca_obstrutiva",
+      "name": "Doenças obstrutivas",
+      "description": "Espirometria, DPOC e asma, incluindo apresentações e tratamento.",
+      "parent_domain": "dispneia",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 4-8",
+          "claim": "Conteúdo sobre obstrução, DPOC e asma.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "doenca_intersticial_ocupacional",
+      "name": "Doenças intersticiais e ocupacionais",
+      "description": "Pneumoconioses, silicose e padrões restritivos descritos no material.",
+      "parent_domain": "dispneia",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 4-5",
+          "claim": "Conteúdo sobre pneumoconiose e fibrose.",
+          "evidence_type": "direct"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "dispneia",
+      "canonical_name": "Dispneia",
+      "type": "symptom",
+      "aliases": [
+        "falta de ar",
+        "dificuldade para respirar",
+        "fôlego curto",
+        "cansaço para respirar"
+      ],
+      "definition": "Sensação de falta de ar descrita no material como principal sintoma do TEP e também como manifestação de DPOC e asma.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": [
+          "pode ter apresentação súbita no TEP; pode ser persistente/crônica na DPOC; variável na asma"
+        ]
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {
+        "age_ranges": [
+          "variável conforme a doença de base"
+        ],
+        "sex": [
+          "qualquer"
+        ],
+        "possible_presentations": [
+          {
+            "features": [
+              "dispneia"
+            ],
+            "frequency": "comum no domínio",
+            "severity": "variável",
+            "timing": "variável",
+            "context": "síndrome respiratória",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "p. 1, 5, 7",
+                "claim": "Dispneia aparece como principal sintoma do TEP e como manifestação de DPOC/asma.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "severity_levels": [
+          "variável"
+        ],
+        "contexts": [
+          "emergência",
+          "ambulatório",
+          "doença crônica"
+        ],
+        "possible_complications": []
+      },
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "tep",
+      "canonical_name": "Tromboembolia pulmonar",
+      "type": "disease",
+      "aliases": [
+        "TEP",
+        "embolia pulmonar",
+        "tromboembolismo pulmonar"
+      ],
+      "definition": "Evento de obstrução vascular pulmonar por êmbolo, apresentado no material como espectro relacionado à TVP.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [
+          {
+            "name": "apresentação típica descrita",
+            "features": [
+              {
+                "entity": "evento_s_bito"
+              },
+              {
+                "entity": "dispneia"
+              },
+              {
+                "entity": "taquipneia"
+              },
+              {
+                "entity": "dor_toracica_pleuritica"
+              },
+              {
+                "entity": "hemoptise"
+              },
+              {
+                "entity": "sibilancia"
+              }
+            ],
+            "timing": "súbito",
+            "context": "TEP",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "p. 1",
+                "claim": "Manifestações clínicas do TEP.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "symptoms": [
+          {
+            "entity": "dispneia"
+          },
+          {
+            "entity": "dor_toracica_pleuritica"
+          },
+          {
+            "entity": "hemoptise"
+          }
+        ],
+        "signs": [
+          {
+            "entity": "taquipneia"
+          }
+        ],
+        "risk_factors": [
+          {
+            "entity": "imobilizacao",
+            "context": "critério de Wells",
+            "strength": "moderate"
+          },
+          {
+            "entity": "cirurgia_recente",
+            "context": "critério de Wells",
+            "strength": "moderate"
+          },
+          {
+            "entity": "tvp_previa",
+            "context": "critério de Wells",
+            "strength": "moderate"
+          },
+          {
+            "entity": "malignidade",
+            "context": "critério de Wells",
+            "strength": "moderate"
+          }
+        ],
+        "temporal_course": [
+          "súbito"
+        ]
+      },
+      "physical_examination": [
+        {
+          "finding": "taquipneia",
+          "presence": "characteristic",
+          "timing": "apresentação aguda",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 1",
+              "claim": "Taquipneia indicada como principal sinal.",
+              "evidence_type": "direct"
+            }
+          ]
+        },
+        {
+          "finding": "hipotensão",
+          "presence": "possible",
+          "severity": "TEP maciço",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 1",
+              "claim": "Hipotensão associada ao TEP maciço.",
+              "evidence_type": "direct"
+            }
+          ]
+        },
+        {
+          "finding": "turgência jugular",
+          "presence": "possible",
+          "severity": "TEP grave",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 1",
+              "claim": "Turgência jugular descrita na disfunção aguda de VD.",
+              "evidence_type": "direct"
+            }
+          ]
+        },
+        {
+          "finding": "edema de membros inferiores",
+          "presence": "possible",
+          "severity": "TEP grave",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 1",
+              "claim": "Edema de MMII descrito na disfunção aguda de VD.",
+              "evidence_type": "direct"
+            }
+          ]
+        },
+        {
+          "finding": "hepatomegalia",
+          "presence": "possible",
+          "severity": "TEP grave",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 1",
+              "claim": "Hepatomegalia descrita na disfunção aguda de VD.",
+              "evidence_type": "direct"
+            }
+          ]
+        }
+      ],
+      "laboratory": [
+        {
+          "test": "gasometria",
+          "finding": "hipoxemia e hipocapnia",
+          "direction": "variable",
+          "value": null,
+          "unit": null,
+          "reference_range": null,
+          "clinical_context": "TEP",
+          "interpretation": "reforça a hipótese, não confirma",
+          "diagnostic_impact": "apoio",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 2",
+              "claim": "Gasometria descrita como inespecífica.",
+              "evidence_type": "direct"
+            }
+          ]
+        },
+        {
+          "test": "BNP",
+          "finding": "aumento",
+          "direction": "increased",
+          "value": null,
+          "unit": null,
+          "reference_range": null,
+          "clinical_context": "TEP maciço/disfunção ventricular",
+          "interpretation": "associado à repercussão cardíaca/pior prognóstico",
+          "diagnostic_impact": "prognóstico",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 1-2",
+              "claim": "BNP elevado em insuficiência ventricular e associado a pior prognóstico.",
+              "evidence_type": "direct"
+            }
+          ]
+        },
+        {
+          "test": "troponina",
+          "finding": "aumento",
+          "direction": "increased",
+          "value": null,
+          "unit": null,
+          "reference_range": null,
+          "clinical_context": "TEP grave",
+          "interpretation": "associada à lesão miocárdica do VD e pior prognóstico",
+          "diagnostic_impact": "prognóstico",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 1-2",
+              "claim": "Troponina descrita na repercussão do VD.",
+              "evidence_type": "direct"
+            }
+          ]
+        },
+        {
+          "test": "D-dímero",
+          "finding": "pode estar elevado",
+          "direction": "increased",
+          "value": null,
+          "unit": null,
+          "reference_range": null,
+          "clinical_context": "suspeita de TEP",
+          "interpretation": "não diagnostica TEP; pode elevar-se em outras situações trombóticas",
+          "diagnostic_impact": "triagem em baixa probabilidade conforme algoritmo da fonte",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 2",
+              "claim": "Atenção ao D-dímero.",
+              "evidence_type": "direct"
+            }
+          ]
+        }
+      ],
+      "imaging": [
+        {
+          "modality": "ECG",
+          "finding": "taquicardia sinusal; padrão S1Q3T3 como alteração mais característica",
+          "diagnostic_impact": "reforça hipótese; não é diagnóstico",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 2",
+              "claim": "Achados eletrocardiográficos descritos.",
+              "evidence_type": "direct"
+            }
+          ],
+          "clinical_context": "TEP"
+        },
+        {
+          "modality": "radiografia de tórax",
+          "finding": "normal é mais comum; pode haver derrame/atelectasia; Westermark/Hampton/Palla são raros",
+          "diagnostic_impact": "inespecífico; achados descritos não confirmam",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 2",
+              "claim": "Achados radiológicos descritos.",
+              "evidence_type": "direct"
+            }
+          ],
+          "clinical_context": "TEP"
+        },
+        {
+          "modality": "ecocardiograma",
+          "finding": "disfunção de VD",
+          "diagnostic_impact": "indica repercussão cardíaca e pior prognóstico",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 2",
+              "claim": "Repercussão cardíaca ocorre no VD.",
+              "evidence_type": "direct"
+            }
+          ],
+          "clinical_context": "TEP"
+        },
+        {
+          "modality": "Doppler de MMII",
+          "finding": "TVP",
+          "diagnostic_impact": "na lógica apresentada, pode confirmar o diagnóstico quando há clínica de TEP",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 2",
+              "claim": "Relação TVP/TEP descrita no material.",
+              "evidence_type": "direct"
+            }
+          ],
+          "clinical_context": "clínica de TEP"
+        },
+        {
+          "modality": "cintilografia",
+          "finding": "alteração perfusional",
+          "diagnostic_impact": "exame específico apresentado no algoritmo",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 1-2",
+              "claim": "Cintilografia listada como exame específico.",
+              "evidence_type": "direct"
+            }
+          ],
+          "clinical_context": "TEP"
+        },
+        {
+          "modality": "angiotomografia",
+          "finding": "imagem diagnóstica",
+          "diagnostic_impact": "primeira escolha de imagem no algoritmo apresentado",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 2",
+              "claim": "Angio-TC como primeira escolha no algoritmo da fonte.",
+              "evidence_type": "direct"
+            }
+          ],
+          "clinical_context": "TEP"
+        },
+        {
+          "modality": "arteriografia pulmonar",
+          "finding": "exame invasivo",
+          "diagnostic_impact": "descrita como exame de maior acurácia/padrão-ouro no material",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 2",
+              "claim": "Arteriografia descrita como padrão-ouro.",
+              "evidence_type": "direct"
+            }
+          ],
+          "clinical_context": "TEP"
+        }
+      ],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [
+          "suspeita clínica → estratificação por Wells → D-dímero ou imagem conforme probabilidade"
+        ],
+        "diagnostic_criteria": [
+          {
+            "name": "critério da fonte",
+            "description": "Wells ≤ 4: baixa probabilidade no algoritmo apresentado",
+            "criteria": [
+              "Wells ≤ 4: baixa probabilidade no algoritmo apresentado"
+            ],
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "name": "critério da fonte",
+            "description": "Wells > 4: alta probabilidade no algoritmo apresentado",
+            "criteria": [
+              "Wells > 4: alta probabilidade no algoritmo apresentado"
+            ],
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [
+          "frear a doença embólica",
+          "tratar instabilidade no TEP maciço"
+        ],
+        "acute": [
+          {
+            "name": "anticoagulação por 3 meses conforme esquemas apresentados no material",
+            "type": "other",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "name": "no TEP maciço com instabilidade/IVD: trombólise até o 14º dia segundo a fonte",
+            "type": "other",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "name": "filtro de veia cava inferior quando contraindicação à anticoagulação ou falha desta, segundo a fonte",
+            "type": "other",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {
+        "age_ranges": [
+          "adulto"
+        ],
+        "sex": [
+          "qualquer"
+        ],
+        "risk_factors": [
+          "imobilização",
+          "cirurgia recente",
+          "episódio prévio de TVP/TEP",
+          "hemoptise",
+          "malignidade"
+        ],
+        "possible_presentations": [
+          {
+            "features": [
+              "evento súbito",
+              "dispneia",
+              "taquipneia"
+            ],
+            "frequency": "típica no material",
+            "severity": "variável",
+            "timing": "súbito",
+            "context": "emergência",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "p. 1",
+                "claim": "Apresentação do TEP.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "features": [
+              "hipotensão",
+              "disfunção de VD"
+            ],
+            "frequency": "TEP maciço/grave",
+            "severity": "grave",
+            "timing": "agudo",
+            "context": "instabilidade",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "p. 1-2",
+                "claim": "TEP maciço.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "severity_levels": [
+          "não especificado",
+          "grave"
+        ],
+        "contexts": [
+          "emergência"
+        ],
+        "possible_complications": [
+          "choque obstrutivo",
+          "cor pulmonale agudo",
+          "disfunção de VD"
+        ]
+      },
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "evento_s_bito",
+      "canonical_name": "Evento súbito",
+      "type": "finding",
+      "aliases": [
+        "início súbito"
+      ],
+      "definition": "Apresentação súbita descrita no TEP.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "dor_toracica_pleuritica",
+      "canonical_name": "Dor torácica pleurítica",
+      "type": "symptom",
+      "aliases": [
+        "dor pleurítica"
+      ],
+      "definition": "Dor torácica pleurítica descrita no TEP.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "hemoptise",
+      "canonical_name": "Hemoptise",
+      "type": "symptom",
+      "aliases": [],
+      "definition": "Hemoptise descrita como manifestação de TEP.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "sibilancia",
+      "canonical_name": "Sibilância",
+      "type": "sign",
+      "aliases": [
+        "chiado"
+      ],
+      "definition": "Sibilância descrita como manifestação de TEP e na crise asmática.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "taquipneia",
+      "canonical_name": "Taquipneia",
+      "type": "sign",
+      "aliases": [
+        "FR alta",
+        "respiração rápida"
+      ],
+      "definition": "Aumento da frequência respiratória; indicada como principal sinal do TEP.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "tvp",
+      "canonical_name": "Trombose venosa profunda",
+      "type": "disease",
+      "aliases": [
+        "TVP"
+      ],
+      "definition": "Entendida pelo material como espectro relacionado ao TEP.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "tep_macico",
+      "canonical_name": "TEP maciço",
+      "type": "condition",
+      "aliases": [
+        "TEP grave"
+      ],
+      "definition": "Forma grave descrita com hipotensão e disfunção de VD.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "choque_obstrutivo",
+      "canonical_name": "Choque obstrutivo",
+      "type": "complication",
+      "aliases": [],
+      "definition": "Choque decorrente de obstrução significativa do fluxo pulmonar no TEP maciço.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "disfuncao_vd",
+      "canonical_name": "Disfunção de ventrículo direito",
+      "type": "finding",
+      "aliases": [
+        "disfunção de VD",
+        "IVD"
+      ],
+      "definition": "Repercussão cardíaca do TEP, associada a pior prognóstico.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "imobilizacao",
+      "canonical_name": "Imobilização",
+      "type": "risk_factor",
+      "aliases": [],
+      "definition": "Imobilização >3 dias como critério de Wells no material.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "cirurgia_recente",
+      "canonical_name": "Cirurgia recente",
+      "type": "risk_factor",
+      "aliases": [],
+      "definition": "Cirurgia <4 semanas como critério de Wells no material.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "tvp_previa",
+      "canonical_name": "Episódio prévio de TVP/TEP",
+      "type": "risk_factor",
+      "aliases": [],
+      "definition": "Episódio prévio de TVP/TEP como critério de Wells.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "malignidade",
+      "canonical_name": "Malignidade",
+      "type": "risk_factor",
+      "aliases": [
+        "câncer"
+      ],
+      "definition": "Malignidade como critério de Wells.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "embolia_gordurosa",
+      "canonical_name": "Embolia gordurosa",
+      "type": "disease",
+      "aliases": [
+        "síndrome de embolia gordurosa"
+      ],
+      "definition": "Quadro descrito após fraturas de ossos longos e pelve, com micropartículas de gordura na circulação.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [
+          {
+            "name": "tríade descrita",
+            "features": [
+              {
+                "entity": "hipoxemia"
+              },
+              {
+                "entity": "alteracao_neurologica"
+              },
+              {
+                "entity": "rash_petequial"
+              }
+            ],
+            "timing": "3-72h",
+            "context": "fraturas de ossos longos e pelve",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "p. 3",
+                "claim": "Embolia gordurosa.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [
+          {
+            "entity": "fraturas_ossos_longos",
+            "context": "contexto descrito",
+            "strength": "strong"
+          }
+        ],
+        "temporal_course": [
+          "3-72h após o evento descrito"
+        ]
+      },
+      "physical_examination": [
+        {
+          "finding": "rash petequial",
+          "presence": "characteristic",
+          "timing": "3-72h",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 3",
+              "claim": "Manifestação cutânea descrita.",
+              "evidence_type": "direct"
+            }
+          ]
+        }
+      ],
+      "laboratory": [
+        {
+          "test": "oximetria/gasometria",
+          "finding": "hipoxemia",
+          "direction": "decreased",
+          "value": null,
+          "unit": null,
+          "reference_range": null,
+          "clinical_context": "embolia gordurosa",
+          "interpretation": "manifestação pulmonar descrita",
+          "diagnostic_impact": "apoio",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 3",
+              "claim": "Hipoxemia descrita.",
+              "evidence_type": "direct"
+            }
+          ]
+        }
+      ],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [
+          "reconhecer contexto de fratura e associação temporal com manifestações pulmonares, neurológicas e cutâneas"
+        ],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [
+          "suporte"
+        ],
+        "acute": [
+          {
+            "name": "suporte",
+            "type": "other",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "name": "metilprednisolona é descrita como muito empregada na prática, mas o material ressalta ausência de comprovação científica",
+            "type": "other",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "non_pharmacological": [
+          {
+            "name": "imobilização precoce",
+            "type": "non_pharmacological",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "name": "correção cirúrgica precoce de fraturas",
+            "type": "non_pharmacological",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {
+        "age_ranges": [
+          "adulto"
+        ],
+        "sex": [
+          "qualquer"
+        ],
+        "risk_factors": [
+          "fratura de ossos longos",
+          "fratura de pelve"
+        ],
+        "possible_presentations": [
+          {
+            "features": [
+              "hipoxemia",
+              "alteração neurológica",
+              "rash petequial"
+            ],
+            "frequency": "descrita",
+            "severity": "variável",
+            "timing": "3-72h",
+            "context": "pós-fratura",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "p. 3",
+                "claim": "Apresentação da embolia gordurosa.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "severity_levels": [
+          "variável"
+        ],
+        "contexts": [
+          "pós-trauma"
+        ],
+        "possible_complications": []
+      },
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "espirometria_forcada",
+      "canonical_name": "Espirometria forçada",
+      "type": "investigation",
+      "aliases": [
+        "espirometria",
+        "prova de função pulmonar"
+      ],
+      "definition": "Exame descrito por curva volume expirado x tempo, com VEF1, CVF e índice de Tiffeneau.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [
+        {
+          "name": "espirometria forçada",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 4",
+              "claim": "Espirometria forçada.",
+              "evidence_type": "direct"
+            }
+          ],
+          "clinical_question": "diferenciar padrão obstrutivo e restritivo"
+        }
+      ],
+      "diagnosis": {
+        "diagnostic_approach": [
+          "avaliar VEF1, CVF e VEF1/CVF"
+        ],
+        "diagnostic_criteria": [
+          {
+            "name": "critério da fonte",
+            "description": "padrão obstrutivo: VEF1/CVF reduzida; no material, <0,7",
+            "criteria": [
+              "padrão obstrutivo: VEF1/CVF reduzida; no material, <0,7"
+            ],
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "name": "critério da fonte",
+            "description": "padrão restritivo: VEF1 e CVF reduzidos proporcionalmente com razão preservada",
+            "criteria": [
+              "padrão restritivo: VEF1 e CVF reduzidos proporcionalmente com razão preservada"
+            ],
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "pneumoconiose",
+      "canonical_name": "Pneumoconiose",
+      "type": "disease",
+      "aliases": [
+        "pneumoconioses"
+      ],
+      "definition": "Doença pulmonar ocupacional associada à inalação de micropartículas, com inflamação e fibrose.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [
+          {
+            "name": "padrão ocupacional",
+            "features": [
+              {
+                "entity": "exposicao_ocupacional"
+              },
+              {
+                "entity": "fibrose"
+              }
+            ],
+            "timing": "crônico",
+            "context": "exposição ocupacional",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "p. 4",
+                "claim": "Pneumoconiose.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "symptoms": [
+          {
+            "entity": "dispneia"
+          }
+        ],
+        "signs": [],
+        "risk_factors": [
+          {
+            "entity": "exposicao_asbesto"
+          },
+          {
+            "entity": "exposicao_silica"
+          }
+        ],
+        "temporal_course": [
+          "crônico"
+        ]
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [
+        {
+          "modality": "radiografia de tórax",
+          "finding": "alterações compatíveis com a pneumoconiose conforme a exposição; silicose com infiltrado micronodular em zonas superiores e linfonodos com calcificação em casca de ovo",
+          "diagnostic_impact": "parte da avaliação diagnóstica descrita",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 4",
+              "claim": "Diagnóstico e silicose.",
+              "evidence_type": "direct"
+            }
+          ],
+          "clinical_context": "silicose"
+        }
+      ],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [
+          "investigar exposição ocupacional e correlacionar com clínica e radiografia"
+        ],
+        "diagnostic_criteria": [
+          {
+            "name": "critério da fonte",
+            "description": "história ocupacional + clínica + RX",
+            "criteria": [
+              "história ocupacional + clínica + RX"
+            ],
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [
+          "prevenção de progressão/exposição"
+        ],
+        "acute": [
+          {
+            "name": "não há tratamento específico descrito; prevenção é destacada",
+            "type": "other",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "non_pharmacological": [
+          {
+            "name": "evitar exposição ocupacional",
+            "type": "non_pharmacological",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {
+        "age_ranges": [
+          "adulto"
+        ],
+        "sex": [
+          "qualquer"
+        ],
+        "risk_factors": [
+          "construção civil/demolição",
+          "pedreira",
+          "jateamento de areia",
+          "jateamento de vidro",
+          "cerâmica"
+        ],
+        "possible_presentations": [
+          {
+            "features": [
+              "dispneia",
+              "história ocupacional relevante"
+            ],
+            "frequency": "variável",
+            "severity": "variável",
+            "timing": "crônico",
+            "context": "doença ocupacional",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "p. 4",
+                "claim": "Pneumoconiose.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "severity_levels": [
+          "variável"
+        ],
+        "contexts": [
+          "ambulatório",
+          "doença ocupacional"
+        ],
+        "possible_complications": []
+      },
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "dpoc",
+      "canonical_name": "DPOC",
+      "type": "disease",
+      "aliases": [
+        "doença pulmonar obstrutiva crônica"
+      ],
+      "definition": "Doença evitável e tratável, segundo o material, com sintomas respiratórios persistentes e limitação ao fluxo aéreo associada a exposições a partículas e gases nocivos.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [
+          {
+            "name": "apresentação clínica",
+            "features": [
+              {
+                "entity": "dispneia"
+              },
+              {
+                "entity": "tosse_cronica"
+              },
+              {
+                "entity": "expectoracao_cronica"
+              }
+            ],
+            "timing": "persistente",
+            "context": "DPOC",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "p. 5",
+                "claim": "Apresentação clínica da DPOC.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "symptoms": [
+          {
+            "entity": "dispneia"
+          },
+          {
+            "entity": "tosse_cronica"
+          },
+          {
+            "entity": "expectoracao_cronica"
+          }
+        ],
+        "signs": [],
+        "risk_factors": [
+          {
+            "entity": "tabagismo"
+          },
+          {
+            "entity": "poluicao"
+          },
+          {
+            "entity": "deficiencia_a1_antitripsina"
+          }
+        ],
+        "temporal_course": [
+          "crônico",
+          "exacerbação aguda"
+        ]
+      },
+      "physical_examination": [
+        {
+          "finding": "murmúrio vesicular reduzido",
+          "presence": "possible",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 5",
+              "claim": "Alteração descrita na DPOC.",
+              "evidence_type": "direct"
+            }
+          ]
+        },
+        {
+          "finding": "hiperinsuflação",
+          "presence": "possible",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 5",
+              "claim": "Hiperinsuflação descrita.",
+              "evidence_type": "direct"
+            }
+          ]
+        },
+        {
+          "finding": "cor pulmonale",
+          "presence": "possible",
+          "severity": "doença avançada",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 6",
+              "claim": "Cor pulmonale descrito na hipoxemia crônica.",
+              "evidence_type": "direct"
+            }
+          ]
+        }
+      ],
+      "laboratory": [
+        {
+          "test": "gasometria",
+          "finding": "hipercapnia e hipoxemia",
+          "direction": "variable",
+          "value": null,
+          "unit": null,
+          "reference_range": null,
+          "clinical_context": "DPOC",
+          "interpretation": "retenção crônica de CO2 e hipoxemia são descritas",
+          "diagnostic_impact": "caracterização",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 5-6",
+              "claim": "Fisiopatologia e gasometria.",
+              "evidence_type": "direct"
+            }
+          ]
+        }
+      ],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [
+          "correlacionar sintomas, exposição e espirometria"
+        ],
+        "diagnostic_criteria": [
+          {
+            "name": "critério da fonte",
+            "description": "espirometria com padrão obstrutivo; VEF1/CVF <70% conforme material",
+            "criteria": [
+              "espirometria com padrão obstrutivo; VEF1/CVF <70% conforme material"
+            ],
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [
+          "melhorar sintomas e tratar exacerbação"
+        ],
+        "acute": [
+          {
+            "name": "na exacerbação, esquema ABCD apresentado: antibiótico quando indicado, broncodilatador inalatório de curta ação, corticoide sistêmico por 5 dias, oxigênio",
+            "type": "other",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "name": "VNI se pH ≤7,35 ou PaCO2 ≥45 mmHg segundo a fonte",
+            "type": "other",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "name": "intubação se redução de consciência segundo a fonte",
+            "type": "other",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "non_pharmacological": [
+          {
+            "name": "cessar tabagismo",
+            "type": "non_pharmacological",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "name": "vacinação pneumocócica e influenza",
+            "type": "non_pharmacological",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {
+        "age_ranges": [
+          "adulto",
+          "idoso"
+        ],
+        "sex": [
+          "qualquer"
+        ],
+        "risk_factors": [
+          "tabagismo",
+          "poluição",
+          "infecções",
+          "pobreza",
+          "deficiência de α1-antitripsina"
+        ],
+        "possible_presentations": [
+          {
+            "features": [
+              "dispneia",
+              "tosse crônica",
+              "expectoração crônica"
+            ],
+            "frequency": "descrita",
+            "severity": "variável",
+            "timing": "crônico",
+            "context": "DPOC estável",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "p. 5",
+                "claim": "Apresentação clínica.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "features": [
+              "aumento da dispneia",
+              "aumento do volume do escarro",
+              "escarro purulento"
+            ],
+            "frequency": "exacerbação",
+            "severity": "aguda",
+            "timing": "agudo",
+            "context": "DPOC descompensada",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "p. 6",
+                "claim": "Três aspectos clínicos da exacerbação.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "severity_levels": [
+          "estável",
+          "exacerbação"
+        ],
+        "contexts": [
+          "ambulatório",
+          "emergência"
+        ],
+        "possible_complications": [
+          "cor pulmonale",
+          "hipoxemia crônica"
+        ]
+      },
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "asma",
+      "canonical_name": "Asma brônquica",
+      "type": "disease",
+      "aliases": [
+        "asma"
+      ],
+      "definition": "Doença inflamatória crônica das vias aéreas, definida no material por sintomas variáveis como sibilos, dispneia, opressão torácica e tosse.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [
+          {
+            "name": "crise asmática",
+            "features": [
+              {
+                "entity": "tosse"
+              },
+              {
+                "entity": "dispneia"
+              },
+              {
+                "entity": "sibilancia"
+              },
+              {
+                "entity": "aperto_no_peito"
+              }
+            ],
+            "timing": "agudo",
+            "context": "crise",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "p. 7",
+                "claim": "Quadro clínico da crise asmática.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "symptoms": [
+          {
+            "entity": "tosse"
+          },
+          {
+            "entity": "dispneia"
+          },
+          {
+            "entity": "sibilancia"
+          },
+          {
+            "entity": "aperto_no_peito"
+          }
+        ],
+        "signs": [],
+        "risk_factors": [
+          {
+            "entity": "acaros"
+          },
+          {
+            "entity": "polen"
+          },
+          {
+            "entity": "poeira"
+          },
+          {
+            "entity": "pelos_animais"
+          }
+        ],
+        "temporal_course": [
+          "variável",
+          "agudo na crise"
+        ]
+      },
+      "physical_examination": [
+        {
+          "finding": "fala por palavras",
+          "presence": "possible",
+          "severity": "grave",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 7",
+              "claim": "Classificação da crise grave.",
+              "evidence_type": "direct"
+            }
+          ]
+        },
+        {
+          "finding": "agitação",
+          "presence": "possible",
+          "severity": "grave",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 7",
+              "claim": "Classificação da crise grave.",
+              "evidence_type": "direct"
+            }
+          ]
+        },
+        {
+          "finding": "tórax silencioso / murmúrio vesicular abolido",
+          "presence": "characteristic",
+          "severity": "muito grave",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 7",
+              "claim": "Classificação muito grave.",
+              "evidence_type": "direct"
+            }
+          ]
+        },
+        {
+          "finding": "redução do nível de consciência",
+          "presence": "possible",
+          "severity": "muito grave",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 7",
+              "claim": "Classificação muito grave.",
+              "evidence_type": "direct"
+            }
+          ]
+        }
+      ],
+      "laboratory": [
+        {
+          "test": "gasometria",
+          "finding": "alcalose respiratória na crise grave; acidose respiratória na muito grave",
+          "direction": "variable",
+          "value": null,
+          "unit": null,
+          "reference_range": null,
+          "clinical_context": "crise asmática",
+          "interpretation": "classificação de gravidade no material",
+          "diagnostic_impact": "gravidade",
+          "source_traceability": [
+            {
+              "source_id": "cm12_dispneia_med_2026",
+              "location": "p. 7",
+              "claim": "Classificação da crise.",
+              "evidence_type": "direct"
+            }
+          ]
+        }
+      ],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [
+          "classificar gravidade antes de definir intensidade terapêutica"
+        ],
+        "diagnostic_criteria": [
+          {
+            "name": "critério da fonte",
+            "description": "crise leve/moderada, grave e muito grave segundo sinais, PFE, FC, SatO2 e FR apresentados",
+            "criteria": [
+              "crise leve/moderada, grave e muito grave segundo sinais, PFE, FC, SatO2 e FR apresentados"
+            ],
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [
+          "reverter broncoespasmo e controlar crise"
+        ],
+        "acute": [
+          {
+            "name": "beta-2 agonista de curta ação",
+            "type": "other",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "name": "prednisolona VO",
+            "type": "other",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "name": "oxigênio suplementar",
+            "type": "other",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "name": "na grave, acrescentar ipratrópio e considerar MgSO4/corticoide inalatório em alta dose",
+            "type": "other",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "name": "na muito grave, preparar IOT e indicar CTI",
+            "type": "other",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "non_pharmacological": [
+          {
+            "name": "controle ambiental",
+            "type": "non_pharmacological",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "name": "tratamento de manutenção conforme controle",
+            "type": "non_pharmacological",
+            "context": "CM 12 — Dispneia",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "PDF completo; páginas conforme indicado",
+                "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {
+        "age_ranges": [
+          "criança",
+          "adulto"
+        ],
+        "sex": [
+          "qualquer"
+        ],
+        "risk_factors": [
+          "ácaros",
+          "pólen",
+          "poeira",
+          "pelos de animais"
+        ],
+        "possible_presentations": [
+          {
+            "features": [
+              "tosse",
+              "dispneia",
+              "sibilos",
+              "aperto no peito"
+            ],
+            "frequency": "crise",
+            "severity": "leve a moderada",
+            "timing": "agudo",
+            "context": "crise asmática",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "p. 7",
+                "claim": "Quadro clínico da crise.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "features": [
+              "fala por palavras",
+              "FC >110",
+              "SatO2 <90",
+              "FR >30"
+            ],
+            "frequency": "crise grave",
+            "severity": "grave",
+            "timing": "agudo",
+            "context": "emergência",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "p. 7",
+                "claim": "Critérios de crise grave.",
+                "evidence_type": "direct"
+              }
+            ]
+          },
+          {
+            "features": [
+              "PFE <30%",
+              "redução da consciência",
+              "tórax silencioso"
+            ],
+            "frequency": "crise muito grave",
+            "severity": "muito grave",
+            "timing": "agudo",
+            "context": "emergência",
+            "source_traceability": [
+              {
+                "source_id": "cm12_dispneia_med_2026",
+                "location": "p. 7",
+                "claim": "Critérios de crise muito grave.",
+                "evidence_type": "direct"
+              }
+            ]
+          }
+        ],
+        "severity_levels": [
+          "leve a moderada",
+          "grave",
+          "muito grave"
+        ],
+        "contexts": [
+          "emergência",
+          "ambulatório"
+        ],
+        "possible_complications": []
+      },
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "tosse",
+      "canonical_name": "Tosse",
+      "type": "symptom",
+      "aliases": [
+        "tosse"
+      ],
+      "definition": "Tosse descrita como sintoma de DPOC e asma.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "tosse_cronica",
+      "canonical_name": "Tosse crônica",
+      "type": "symptom",
+      "aliases": [
+        "tosse há meses",
+        "tosse persistente"
+      ],
+      "definition": "Tosse crônica descrita na DPOC.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "expectoracao_cronica",
+      "canonical_name": "Expectoração crônica",
+      "type": "symptom",
+      "aliases": [
+        "catarro crônico"
+      ],
+      "definition": "Expectoração crônica, geralmente mucoide, descrita na DPOC.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "expectoracao_purulenta",
+      "canonical_name": "Expectoração purulenta",
+      "type": "finding",
+      "aliases": [
+        "escarro purulento"
+      ],
+      "definition": "Escarro purulento descrito como marcador de exacerbação da DPOC.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "tabagismo",
+      "canonical_name": "Tabagismo",
+      "type": "risk_factor",
+      "aliases": [
+        "fumo",
+        "fumante"
+      ],
+      "definition": "Fator de risco para DPOC descrito no material.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "deficiencia_a1_antitripsina",
+      "canonical_name": "Deficiência de alfa-1-antitripsina",
+      "type": "condition",
+      "aliases": [
+        "deficiência de A1AT",
+        "alfa-1-antitripsina"
+      ],
+      "definition": "Condição associada a enfisema em contextos específicos descritos no material.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "aperto_no_peito",
+      "canonical_name": "Aperto no peito",
+      "type": "symptom",
+      "aliases": [
+        "opressão torácica"
+      ],
+      "definition": "Sintoma descrito na crise asmática.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "sibilos",
+      "canonical_name": "Sibilos",
+      "type": "sign",
+      "aliases": [
+        "chiado"
+      ],
+      "definition": "Sibilos descritos na crise asmática.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "pfe",
+      "canonical_name": "PFE",
+      "type": "laboratory_finding",
+      "aliases": [
+        "pico de fluxo expiratório"
+      ],
+      "definition": "Pico de fluxo expiratório utilizado na classificação da crise asmática no material.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "hipoxemia",
+      "canonical_name": "Hipoxemia",
+      "type": "laboratory_finding",
+      "aliases": [
+        "baixa saturação"
+      ],
+      "definition": "Redução da oxigenação descrita em TEP, embolia gordurosa e DPOC.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "hipercapnia",
+      "canonical_name": "Hipercapnia",
+      "type": "laboratory_finding",
+      "aliases": [
+        "CO2 alto"
+      ],
+      "definition": "Retenção de CO2 descrita na DPOC.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "exposicao_ocupacional",
+      "canonical_name": "Exposição ocupacional",
+      "type": "risk_factor",
+      "aliases": [
+        "exposição profissional"
+      ],
+      "definition": "Exposição a micropartículas associada a pneumoconiose.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "exposicao_asbesto",
+      "canonical_name": "Exposição a asbesto",
+      "type": "risk_factor",
+      "aliases": [
+        "amianto"
+      ],
+      "definition": "Exposição ocupacional descrita em construção civil/demolição.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "exposicao_silica",
+      "canonical_name": "Exposição à sílica",
+      "type": "risk_factor",
+      "aliases": [
+        "sílica"
+      ],
+      "definition": "Exposição descrita em pedreiras, jateamento e cerâmica.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "fraturas_ossos_longos",
+      "canonical_name": "Fraturas de ossos longos",
+      "type": "risk_factor",
+      "aliases": [
+        "fratura de fêmur",
+        "fratura de ossos longos"
+      ],
+      "definition": "Contexto descrito para embolia gordurosa.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "alteracao_neurologica",
+      "canonical_name": "Alteração neurológica",
+      "type": "sign",
+      "aliases": [],
+      "definition": "Manifestação descrita na embolia gordurosa.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rash_petequial",
+      "canonical_name": "Rash petequial",
+      "type": "sign",
+      "aliases": [
+        "petéquias"
+      ],
+      "definition": "Manifestação cutânea descrita na embolia gordurosa.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "d_dimer",
+      "canonical_name": "D-dímero",
+      "type": "investigation",
+      "aliases": [
+        "D-dímero"
+      ],
+      "definition": "Produto da degradação da fibrina descrito no material; não diagnostica TEP.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "angiotomografia",
+      "canonical_name": "Angiotomografia",
+      "type": "investigation",
+      "aliases": [
+        "angio-TC",
+        "TC de tórax para TEP"
+      ],
+      "definition": "Exame de imagem indicado como primeira escolha no algoritmo apresentado para alta probabilidade de TEP.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "tratamento_crise_asmatic",
+      "canonical_name": "Tratamento da crise asmática",
+      "type": "treatment",
+      "aliases": [
+        "tratamento da crise",
+        "manejo da asma"
+      ],
+      "definition": "Conjunto de medidas descritas para a crise asmática.",
+      "classification": {},
+      "epidemiology": {},
+      "etiology": [],
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": []
+      },
+      "physical_examination": [],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [],
+        "diagnostic_criteria": [],
+        "features_against": []
+      },
+      "treatment": {
+        "treatment_goals": [],
+        "acute": [],
+        "non_pharmacological": []
+      },
+      "medications": [],
+      "complications": [],
+      "prognosis": {},
+      "follow_up": {},
+      "clinical_rules": [],
+      "patient_generation": {},
+      "relationships": [],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "PDF completo; páginas conforme indicado",
+          "claim": "Conhecimento extraído diretamente do CM 12 — Dispneia.",
+          "evidence_type": "direct"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "rel_tep_tvp",
+      "source": "tep",
+      "relation": "associated_with",
+      "target": "tvp",
+      "context": "TVP e TEP são apresentados como dois espectros de uma mesma doença.",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "TVP e TEP são apresentados como dois espectros de uma mesma doença.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_tep_dispneia",
+      "source": "tep",
+      "relation": "manifests_as",
+      "target": "dispneia",
+      "context": "Dispneia é o principal sintoma do TEP no material.",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Dispneia é o principal sintoma do TEP no material.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_tep_taquipneia",
+      "source": "tep",
+      "relation": "manifests_as",
+      "target": "taquipneia",
+      "context": "Taquipneia é o principal sinal do TEP no material.",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Taquipneia é o principal sinal do TEP no material.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_tep_choque",
+      "source": "tep",
+      "relation": "complicates",
+      "target": "choque_obstrutivo",
+      "context": "TEP maciço pode causar choque obstrutivo.",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "TEP maciço pode causar choque obstrutivo.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_tep_vd",
+      "source": "tep",
+      "relation": "complicates",
+      "target": "disfuncao_vd",
+      "context": "TEP grave pode causar disfunção de VD.",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "TEP grave pode causar disfunção de VD.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_tep_imobilizacao",
+      "source": "imobilizacao",
+      "relation": "increases_risk_of",
+      "target": "tep",
+      "context": "Imobilização >3 dias aparece no Wells.",
+      "strength": "moderate",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Imobilização >3 dias aparece no Wells.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_tep_cirurgia",
+      "source": "cirurgia_recente",
+      "relation": "increases_risk_of",
+      "target": "tep",
+      "context": "Cirurgia <4 semanas aparece no Wells.",
+      "strength": "moderate",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Cirurgia <4 semanas aparece no Wells.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_tep_prev",
+      "source": "tvp_previa",
+      "relation": "increases_risk_of",
+      "target": "tep",
+      "context": "Episódio prévio de TVP/TEP aparece no Wells.",
+      "strength": "moderate",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Episódio prévio de TVP/TEP aparece no Wells.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_tep_malignidade",
+      "source": "malignidade",
+      "relation": "increases_risk_of",
+      "target": "tep",
+      "context": "Malignidade aparece no Wells.",
+      "strength": "moderate",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Malignidade aparece no Wells.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_dpoc_dispneia",
+      "source": "dpoc",
+      "relation": "manifests_as",
+      "target": "dispneia",
+      "context": "Dispneia é descrita na apresentação clínica da DPOC.",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Dispneia é descrita na apresentação clínica da DPOC.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_dpoc_tabagismo",
+      "source": "tabagismo",
+      "relation": "increases_risk_of",
+      "target": "dpoc",
+      "context": "Tabagismo é fator de risco descrito.",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Tabagismo é fator de risco descrito.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_dpoc_obstrucao",
+      "source": "dpoc",
+      "relation": "characterized_by",
+      "target": "espirometria_forcada",
+      "context": "DPOC apresenta padrão obstrutivo na espirometria descrita.",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "DPOC apresenta padrão obstrutivo na espirometria descrita.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_dpoc_exacerbacao",
+      "source": "dpoc",
+      "relation": "complicates",
+      "target": "expectoracao_purulenta",
+      "context": "Escarro purulento é um dos aspectos da exacerbação descrita.",
+      "strength": "moderate",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Escarro purulento é um dos aspectos da exacerbação descrita.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_asma_dispneia",
+      "source": "asma",
+      "relation": "manifests_as",
+      "target": "dispneia",
+      "context": "Dispneia é sintoma da asma.",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Dispneia é sintoma da asma.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_asma_sibilos",
+      "source": "asma",
+      "relation": "manifests_as",
+      "target": "sibilos",
+      "context": "Sibilos são descritos na crise asmática.",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Sibilos são descritos na crise asmática.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_pneumo_exposicao",
+      "source": "exposicao_ocupacional",
+      "relation": "increases_risk_of",
+      "target": "pneumoconiose",
+      "context": "Pneumoconiose é associada à inalação ocupacional de micropartículas.",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Pneumoconiose é associada à inalação ocupacional de micropartículas.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_embolia_fratura",
+      "source": "fraturas_ossos_longos",
+      "relation": "predisposes_to",
+      "target": "embolia_gordurosa",
+      "context": "Fraturas de ossos longos/pelve são o contexto descrito.",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Fraturas de ossos longos/pelve são o contexto descrito.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rel_embolia_hipoxemia",
+      "source": "embolia_gordurosa",
+      "relation": "manifests_as",
+      "target": "hipoxemia",
+      "context": "Hipoxemia é manifestação pulmonar descrita.",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Hipoxemia é manifestação pulmonar descrita.",
+          "evidence_type": "direct"
+        }
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "id": "rule_tep_wells_low",
+      "description": "No algoritmo apresentado, suspeita de TEP com Wells ≤4 segue para D-dímero.",
+      "conditions": [
+        {
+          "entity": "tep",
+          "relation": "suspeita"
+        },
+        {
+          "entity": "wells",
+          "relation": "<=",
+          "value": 4
+        }
+      ],
+      "conclusions": [
+        {
+          "type": "requires_investigation",
+          "entity": "d_dimer",
+          "strength": "moderate"
+        }
+      ],
+      "context": "Conteúdo do CM 12 — Dispneia.",
+      "priority": "source_order",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 2, 4, 7",
+          "claim": "No algoritmo apresentado, suspeita de TEP com Wells ≤4 segue para D-dímero.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rule_tep_wells_high",
+      "description": "No algoritmo apresentado, suspeita de TEP com Wells >4 segue para imagem.",
+      "conditions": [
+        {
+          "entity": "tep",
+          "relation": "suspeita"
+        },
+        {
+          "entity": "wells",
+          "relation": ">",
+          "value": 4
+        }
+      ],
+      "conclusions": [
+        {
+          "type": "requires_investigation",
+          "entity": "angiotomografia",
+          "strength": "strong"
+        }
+      ],
+      "context": "Conteúdo do CM 12 — Dispneia.",
+      "priority": "source_order",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 2, 4, 7",
+          "claim": "No algoritmo apresentado, suspeita de TEP com Wells >4 segue para imagem.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rule_d_dimer_limit",
+      "description": "D-dímero elevado não diagnostica TEP, pois pode elevar-se em outras situações trombóticas.",
+      "conditions": [
+        {
+          "entity": "d_dimer",
+          "relation": "elevado"
+        }
+      ],
+      "conclusions": [
+        {
+          "type": "decrease_suspicion",
+          "entity": "tep",
+          "strength": "unknown"
+        }
+      ],
+      "context": "Conteúdo do CM 12 — Dispneia.",
+      "priority": "source_order",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 2, 4, 7",
+          "claim": "D-dímero elevado não diagnostica TEP, pois pode elevar-se em outras situações trombóticas.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rule_tep_vdp",
+      "description": "No material, clínica de TEP associada a Doppler de MMII mostrando TVP pode confirmar o diagnóstico.",
+      "conditions": [
+        {
+          "entity": "tep",
+          "relation": "suspeita"
+        },
+        {
+          "entity": "tvp",
+          "relation": "presente"
+        }
+      ],
+      "conclusions": [
+        {
+          "type": "supports",
+          "entity": "tep",
+          "strength": "strong"
+        }
+      ],
+      "context": "Conteúdo do CM 12 — Dispneia.",
+      "priority": "source_order",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 2, 4, 7",
+          "claim": "No material, clínica de TEP associada a Doppler de MMII mostrando TVP pode confirmar o diagnóstico.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rule_dpoc_obstructive",
+      "description": "O material relaciona DPOC a padrão obstrutivo com VEF1/CVF reduzida.",
+      "conditions": [
+        {
+          "entity": "dpoc",
+          "relation": "suspeita"
+        }
+      ],
+      "conclusions": [
+        {
+          "type": "requires_investigation",
+          "entity": "espirometria_forcada",
+          "strength": "strong"
+        }
+      ],
+      "context": "Conteúdo do CM 12 — Dispneia.",
+      "priority": "source_order",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 2, 4, 7",
+          "claim": "O material relaciona DPOC a padrão obstrutivo com VEF1/CVF reduzida.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "id": "rule_asthma_severe",
+      "description": "Na classificação apresentada, FC >110, SatO2 <90% ou FR >30 integram a descrição de crise grave.",
+      "conditions": [
+        {
+          "entity": "asma",
+          "relation": "crise"
+        },
+        {
+          "entity": "gravidade",
+          "relation": "grave"
+        }
+      ],
+      "conclusions": [
+        {
+          "type": "suggests_action",
+          "entity": "tratamento_crise_asmatic",
+          "strength": "moderate"
+        }
+      ],
+      "context": "Conteúdo do CM 12 — Dispneia.",
+      "priority": "source_order",
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 2, 4, 7",
+          "claim": "Na classificação apresentada, FC >110, SatO2 <90% ou FR >30 integram a descrição de crise grave.",
+          "evidence_type": "direct"
+        }
+      ]
+    }
+  ],
+  "differential_network": [
+    {
+      "entity_a": "tep",
+      "entity_b": "dpoc",
+      "shared_features": [
+        "dispneia"
+      ],
+      "discriminators": [
+        "evento súbito/TVP/Wells versus doença obstrutiva crônica"
+      ],
+      "useful_investigations": [
+        "avaliação clínica",
+        "gasometria",
+        "imagem",
+        "espirometria"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Rede diferencial construída apenas a partir das distinções presentes no material.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "entity_a": "dpoc",
+      "entity_b": "asma",
+      "shared_features": [
+        "dispneia",
+        "sibilância"
+      ],
+      "discriminators": [
+        "cronicidade, fatores de risco e classificação de crise"
+      ],
+      "useful_investigations": [
+        "espirometria",
+        "avaliação clínica"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Rede diferencial construída apenas a partir das distinções presentes no material.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "entity_a": "pneumoconiose",
+      "entity_b": "dpoc",
+      "shared_features": [
+        "dispneia"
+      ],
+      "discriminators": [
+        "história ocupacional e padrão restritivo versus obstrutivo"
+      ],
+      "useful_investigations": [
+        "história ocupacional",
+        "RX",
+        "espirometria"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Rede diferencial construída apenas a partir das distinções presentes no material.",
+          "evidence_type": "direct"
+        }
+      ]
+    },
+    {
+      "entity_a": "tep",
+      "entity_b": "embolia_gordurosa",
+      "shared_features": [
+        "hipoxemia"
+      ],
+      "discriminators": [
+        "contexto de TVP versus fratura de ossos longos/pelve e janela temporal"
+      ],
+      "useful_investigations": [
+        "história clínica",
+        "oximetria/gasometria"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "cm12_dispneia_med_2026",
+          "location": "p. 1-7",
+          "claim": "Rede diferencial construída apenas a partir das distinções presentes no material.",
+          "evidence_type": "direct"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "cm12_dispneia_med_2026",
+      "type": "pdf",
+      "title": "CM 12 - Dispneia.docx(1).pdf",
+      "document_location": "8 páginas",
+      "access_date": "2026-09-15",
+      "notes": "Fonte fornecida pelo usuário. Esta KB é uma representação estruturada do conteúdo da fonte, sem validação externa."
+    }
+  ],
+  "conflicts": [],
+  "uncertainties": []
+}
