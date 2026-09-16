@@ -1,0 +1,247 @@
+{
+  "schema_version": "1.0",
+  "id": "diagnosis_csi_pulso_circulacao",
+  "name": "CSI — Pulso, Circulação e Inconsistência Hemodinâmica",
+  "status": "draft",
+  "purpose": "Adicionar ancoragem semântica para expressões relacionadas a pulso, circulação, pressão arterial, frequência cardíaca e dados conflitantes, sem transformar linguagem em diagnóstico.",
+  "architectural_principle": {
+    "core_idea": "Normalizar a linguagem para unidades semânticas estáveis e entregar essas unidades ao Patient State e à Knowledge Base.",
+    "separation": {
+      "document_structure": "Onde o dado aparece.",
+      "semantic_content": "O que o dado representa.",
+      "clinical_reasoning": "O que a combinação dos dados pode exigir como investigação.",
+      "diagnosis": "Conclusão clínica permanece fora da camada CSI."
+    },
+    "pipeline": [
+      "raw_language",
+      "normalization",
+      "candidate_semantic_units",
+      "canonical_anchors",
+      "patient_state",
+      "clinical_model",
+      "clinical_reasoning"
+    ]
+  },
+  "non_negotiable_rules": [
+    "CSI não diagnostica.",
+    "CSI não deve substituir o raciocínio clínico.",
+    "Preservar o texto original.",
+    "Uma expressão ambígua deve permanecer ambígua até que o contexto clínico a resolva.",
+    "Uma âncora semântica não representa causalidade ou gravidade por si só.",
+    "Contradição entre unidades deve ser representada como relação, não apagada por normalização."
+  ],
+  "anchor_families": {
+    "documental": {
+      "description": "Campos estruturais do caso.",
+      "examples": [
+        "003.001. Sinais Vitais",
+        "003.000. Exame Físico Geral e Segmentar",
+        "005.000. Investigação Complementar Solicitada"
+      ]
+    },
+    "semiological": {
+      "description": "Unidades clínicas reconhecíveis.",
+      "examples": [
+        "SIGN.011 Pulso Central",
+        "FIND.011 Pressão Arterial Mensurável",
+        "FIND.012 Frequência Cardíaca",
+        "STATE.011 Circulação Presente",
+        "RULE.011 Inconsistência Clínica"
+      ]
+    }
+  },
+  "semantic_record_model": {
+    "raw_text": "Texto original.",
+    "normalized_text": "Texto normalizado somente para comparação.",
+    "language": "Idioma.",
+    "document_anchor": "Âncora documental opcional.",
+    "semantic_anchor": "Âncora semântica.",
+    "canonical_term": "Termo canônico.",
+    "match_type": "exact | lexical_variant | popular_variant | abbreviation | multilingual_variant | ambiguous | unknown",
+    "confidence": "0 a 1",
+    "evidence": "Evidência lexical/contextual.",
+    "original_preserved": true,
+    "clinical_inference": "Não preenchido automaticamente pela CSI.",
+    "diagnosis": "Não preenchido pela CSI."
+  },
+  "lexicon": [
+    {
+      "anchor": "SIGN.011",
+      "canonical": "Pulso Central",
+      "variants": {
+        "PT_BR": [
+          "pulso central",
+          "pulso carotídeo",
+          "pulso femoral",
+          "tem pulso",
+          "não tem pulso"
+        ],
+        "EN": [
+          "central pulse",
+          "carotid pulse",
+          "femoral pulse",
+          "no pulse"
+        ],
+        "POPULAR": [
+          "pulso",
+          "batimento no pescoço",
+          "batimento na virilha"
+        ]
+      }
+    },
+    {
+      "anchor": "FIND.011",
+      "canonical": "Pressão Arterial",
+      "variants": {
+        "PT_BR": [
+          "pressão arterial",
+          "PA",
+          "pressão",
+          "tensão"
+        ],
+        "EN": [
+          "blood pressure",
+          "BP"
+        ],
+        "POPULAR": [
+          "pressão",
+          "pressão medida"
+        ]
+      }
+    },
+    {
+      "anchor": "FIND.012",
+      "canonical": "Frequência Cardíaca",
+      "variants": {
+        "PT_BR": [
+          "frequência cardíaca",
+          "FC",
+          "batimentos por minuto",
+          "bpm"
+        ],
+        "EN": [
+          "heart rate",
+          "HR",
+          "beats per minute"
+        ],
+        "POPULAR": [
+          "batimentos",
+          "batimento cardíaco"
+        ]
+      }
+    },
+    {
+      "anchor": "STATE.011",
+      "canonical": "Circulação Presente",
+      "variants": {
+        "PT_BR": [
+          "tem circulação",
+          "há circulação",
+          "circulação presente"
+        ],
+        "EN": [
+          "circulation present"
+        ],
+        "POPULAR": [
+          "está circulando sangue"
+        ]
+      }
+    },
+    {
+      "anchor": "RULE.011",
+      "canonical": "Inconsistência Clínica",
+      "variants": {
+        "PT_BR": [
+          "dados conflitantes",
+          "informações incompatíveis",
+          "isso não bate",
+          "tem alguma coisa errada nos dados"
+        ],
+        "EN": [
+          "conflicting data",
+          "inconsistent findings"
+        ],
+        "POPULAR": [
+          "uma coisa não bate com a outra",
+          "isso não fecha"
+        ]
+      }
+    }
+  ],
+  "compositional_rules": [
+    {
+      "id": "CSI_COMP_VITAL_SIGN_VALUE",
+      "input_pattern": "FIND.011 + valor numérico",
+      "output": "FIND.011(value, unit=mmHg)",
+      "note": "O valor deve ser preservado como atributo; não converter automaticamente em diagnóstico."
+    },
+    {
+      "id": "CSI_COMP_HEART_RATE_VALUE",
+      "input_pattern": "FIND.012 + valor numérico + bpm",
+      "output": "FIND.012(value, unit=bpm)",
+      "note": "A classificação clínica do valor pertence à Knowledge Base/Clinical Model."
+    },
+    {
+      "id": "CSI_REL_CONFLICT",
+      "input_pattern": "SIGN.011(absent) + FIND.011(measurable)",
+      "output": "RELATION(conflict=true)",
+      "note": "Representar a contradição e encaminhar para reconfirmação; não resolver semanticamente por conta própria."
+    }
+  ],
+  "example_transformations": [
+    {
+      "input": "Não estou encontrando pulso central.",
+      "document_context": "003.000.",
+      "semantic_anchor": "SIGN.011",
+      "canonical": "Pulso Central",
+      "attributes": {
+        "presence": "not_found"
+      },
+      "clinical_inference": null
+    },
+    {
+      "input": "PA 116/74.",
+      "document_context": "003.001.",
+      "semantic_anchor": "FIND.011",
+      "canonical": "Pressão Arterial",
+      "attributes": {
+        "systolic": 116,
+        "diastolic": 74,
+        "unit": "mmHg"
+      },
+      "clinical_inference": null
+    },
+    {
+      "input": "FC 68.",
+      "document_context": "003.001.",
+      "semantic_anchor": "FIND.012",
+      "canonical": "Frequência Cardíaca",
+      "attributes": {
+        "value": 68,
+        "unit": "bpm"
+      },
+      "clinical_inference": null
+    },
+    {
+      "input": "Como ele está sem pulso central então?",
+      "document_context": null,
+      "semantic_anchor": "RULE.011",
+      "canonical": "Inconsistência Clínica",
+      "attributes": {
+        "trigger": "conflicting_circulatory_data"
+      },
+      "clinical_inference": null
+    }
+  ],
+  "integration_with_diagnosis": {
+    "input": "Linguagem natural do jogador, paciente ou interlocutor.",
+    "semantic_layer": "CSI-inspired normalization.",
+    "patient_state": "Recebe âncoras, valores, presença/ausência e relações.",
+    "knowledge_base": "Interpreta combinações e regras clínicas.",
+    "evaluation": {
+      "propaedeutics": "Avalia se o participante percebe e reconfirma dados conflitantes.",
+      "diagnosis": "Permanece separado da normalização semântica.",
+      "cognitive_efficiency": "Pode registrar se a reconfirmação ocorreu antes de investigações secundárias."
+    }
+  }
+}
