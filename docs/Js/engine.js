@@ -38,7 +38,11 @@ const ARQUIVOS_POR_SALA = {
         "knowledge_base/reumatologia.json",
         "knowledge_base/endocrinologia.json",
         "knowledge_base/cardiopatias.json",
-        "knowledge_base/pneumologia.json"
+        "knowledge_base/pneumologia.json",
+       "knowledge_base/diagnosis_kb_glicemia_consciencia_v1.json",
+       "knowledge_base/diagnosis_kb_pulso_circulacao_v1.json",
+       "knowledge_base/has_dislipidemia_knowledge_base.json",
+"knowledge_base/med_cm12_dispneia_knowledge_base.json"
     ],
 
     clinica: [
@@ -48,7 +52,11 @@ const ARQUIVOS_POR_SALA = {
         "knowledge_base/reumatologia.json",
         "knowledge_base/endocrinologia.json",
         "knowledge_base/cardiopatias.json",
-        "knowledge_base/pneumologia.json"
+        "knowledge_base/pneumologia.json",
+       "knowledge_base/diagnosis_kb_glicemia_consciencia_v1.json",
+       "knowledge_base/diagnosis_kb_pulso_circulacao_v1.json",
+       "knowledge_base/has_dislipidemia_knowledge_base.json",
+"knowledge_base/med_cm12_dispneia_knowledge_base.json"
     ]
 };
 
