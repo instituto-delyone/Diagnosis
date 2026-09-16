@@ -1,0 +1,903 @@
+{
+  "schema_version": "3.0",
+  "knowledge_base": {
+    "id": "kb_glicemia_consciencia",
+    "name": "Knowledge Base — Glicemia, Consciência e Hipoglicemia Aguda",
+    "description": "Representação clínica reutilizável para relacionar alteração do estado mental, glicemia e hipoglicemia, com ênfase em investigação de alto valor informacional e segurança.",
+    "language": "pt-BR",
+    "status": "draft",
+    "processing": {
+      "source_documents": [
+        "Tratado-de-Clinica-Medica-3a-Ed.-ACL.pdf",
+        "Diagnosis framework V1.0..pdf"
+      ],
+      "processed_date": "2026-09-16",
+      "external_research_used": false,
+      "notes": "Construída a partir das fontes internas já presentes no repositório do Diagnosis."
+    }
+  },
+  "domains": [
+    {
+      "id": "metabolico",
+      "name": "Metabolismo e homeostase",
+      "description": "Glicose, alterações metabólicas e manifestações neurológicas.",
+      "parent_domain": null,
+      "source_traceability": [
+        {
+          "source_id": "src_tratado_clinica_medica_3ed"
+        }
+      ]
+    },
+    {
+      "id": "emergencia_cognicao",
+      "name": "Emergência e raciocínio clínico",
+      "description": "Avaliação rápida de alterações potencialmente reversíveis e priorização de investigação.",
+      "parent_domain": null,
+      "source_traceability": [
+        {
+          "source_id": "src_diagnosis_framework_v1"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "alteracao_estado_mental",
+      "canonical_name": "Alteração do estado mental",
+      "type": "finding",
+      "aliases": [
+        "rebaixamento de consciência",
+        "confusão",
+        "alteração da consciência",
+        "distúrbio de conduta"
+      ],
+      "definition": "Mudança observável do nível de consciência, comportamento, orientação ou capacidade de interação.",
+      "classification": {
+        "category": "achado clínico",
+        "subtype": "neurológico/comportamental",
+        "parent_entity": null,
+        "severity": [
+          "variável"
+        ]
+      },
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": [
+          "agudo, subagudo ou crônico"
+        ]
+      },
+      "physical_examination": [
+        {
+          "finding": "Nível de consciência alterado",
+          "presence": "possible",
+          "context": "Achado que exige caracterização temporal e neurológica."
+        }
+      ],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [
+        {
+          "name": "Glicemia capilar",
+          "type": "laboratory",
+          "indication": "Alteração aguda do estado mental, especialmente em contexto de emergência.",
+          "clinical_question": "Existe alteração glicêmica que possa explicar ou contribuir para o estado atual?",
+          "possible_results": [
+            {
+              "result": "Glicemia baixa",
+              "interpretation": "Pode apoiar hipoglicemia no contexto clínico apropriado.",
+              "supports": [
+                "hipoglicemia"
+              ],
+              "argues_against": [],
+              "diagnostic_impact": "Aumenta a necessidade de tratar/confirmar hipoglicemia conforme o estado clínico."
+            },
+            {
+              "result": "Glicemia não baixa",
+              "interpretation": "Reduz a plausibilidade de hipoglicemia como explicação imediata.",
+              "supports": [],
+              "argues_against": [
+                "hipoglicemia"
+              ],
+              "diagnostic_impact": "Redireciona a investigação para outras causas."
+            }
+          ],
+          "limitations": [
+            "Um valor isolado deve ser interpretado no contexto clínico.",
+            "Resultado não substitui a avaliação neurológica e sistêmica."
+          ],
+          "priority": "alta em alteração aguda do estado mental",
+          "source_traceability": [
+            {
+              "source_id": "src_diagnosis_framework_v1"
+            }
+          ]
+        }
+      ],
+      "diagnosis": {
+        "diagnostic_approach": [
+          "Caracterizar a alteração do estado mental e pesquisar causas rapidamente reversíveis.",
+          "Interpretar a glicemia junto ao contexto clínico."
+        ],
+        "supporting_features": [],
+        "features_against": [],
+        "diagnostic_criteria": [],
+        "confirmatory_tests": [],
+        "screening_tests": [],
+        "diagnostic_thresholds": [],
+        "differential_diagnoses": []
+      },
+      "treatment": {
+        "principles": [
+          "Priorizar causas imediatamente reversíveis e preservar segurança do paciente."
+        ],
+        "acute": [],
+        "maintenance": [],
+        "non_pharmacological": [],
+        "procedures": [],
+        "treatment_goals": [
+          "Restaurar função fisiológica e identificar a causa."
+        ],
+        "monitoring": [
+          "Nível de consciência",
+          "sinais vitais",
+          "evolução clínica"
+        ]
+      },
+      "complications": [],
+      "prognosis": {
+        "expected_course": "Depende da etiologia e da rapidez da correção.",
+        "prognostic_factors": [],
+        "recurrence": "",
+        "mortality": ""
+      },
+      "follow_up": {
+        "required": true,
+        "monitoring": [
+          "Estado mental"
+        ],
+        "etiologic_investigation": [
+          "Investigar causa da alteração"
+        ],
+        "chronic_management": [],
+        "patient_education": [],
+        "recurrence_prevention": []
+      },
+      "clinical_rules": [
+        "rule_altered_mental_status_glucose"
+      ],
+      "patient_generation": {
+        "age_ranges": [
+          "adulto",
+          "idoso",
+          "pediátrico"
+        ],
+        "sex": [
+          "qualquer"
+        ],
+        "risk_factors": [
+          "diabetes tratado com insulina ou fármacos hipoglicemiantes"
+        ],
+        "comorbidities": [],
+        "possible_presentations": [
+          {
+            "features": [
+              "confusão",
+              "sonolência",
+              "comportamento alterado"
+            ],
+            "frequency": "variável",
+            "severity": "variável",
+            "timing": "agudo",
+            "context": "emergência"
+          }
+        ],
+        "severity_levels": [
+          "leve",
+          "moderada",
+          "grave"
+        ],
+        "contexts": [
+          "emergência",
+          "internação",
+          "ambulatório"
+        ],
+        "possible_complications": [
+          "convulsão",
+          "perda de consciência"
+        ],
+        "constraints": [
+          "Não inferir hipoglicemia apenas pela presença de alteração mental."
+        ]
+      },
+      "relationships": [
+        "rel_alteracao_glicemia"
+      ],
+      "uncertainties": [
+        "u_mental_status_nonspecific"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "src_diagnosis_framework_v1"
+        },
+        {
+          "source_id": "src_tratado_clinica_medica_3ed"
+        }
+      ]
+    },
+    {
+      "id": "glicemia_baixa",
+      "canonical_name": "Glicemia baixa",
+      "type": "laboratory_finding",
+      "aliases": [
+        "hipoglicemia",
+        "glicose baixa",
+        "açúcar baixo"
+      ],
+      "definition": "Concentração de glicose abaixo do limiar clínico considerado relevante no contexto.",
+      "classification": {
+        "category": "achado laboratorial",
+        "subtype": "glicose",
+        "parent_entity": null,
+        "severity": [
+          "variável"
+        ]
+      },
+      "pathophysiology": {
+        "mechanisms": [
+          {
+            "description": "Redução da disponibilidade de glicose para tecidos, incluindo o sistema nervoso central, podendo produzir manifestações autonômicas e neuroglicopênicas.",
+            "cause": "desequilíbrio entre oferta e utilização de glicose",
+            "effect": "sintomas e sinais compatíveis com hipoglicemia",
+            "intermediate_steps": []
+          }
+        ],
+        "causal_chains": []
+      },
+      "clinical": {
+        "presentations": [],
+        "symptoms": [],
+        "signs": [],
+        "risk_factors": [],
+        "temporal_course": [
+          "agudo"
+        ]
+      },
+      "physical_examination": [],
+      "laboratory": [
+        {
+          "test": "Glicemia plasmática/capilar",
+          "finding": "Valor reduzido",
+          "direction": "decreased",
+          "value": "< 70",
+          "unit": "mg/dL",
+          "reference_range": "",
+          "clinical_context": "Limiar associado a sintomas/sinais em muitos pacientes.",
+          "interpretation": "Abaixo ou igual a 70 mg/dL é um limiar clínico importante para hipoglicemia; a apresentação varia.",
+          "diagnostic_impact": "Aumenta a plausibilidade de hipoglicemia quando compatível com o quadro.",
+          "source_traceability": [
+            {
+              "source_id": "src_tratado_clinica_medica_3ed"
+            }
+          ]
+        }
+      ],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [
+          "Correlacionar o valor de glicose com sintomas, sinais e contexto.",
+          "Evitar transformar um número isolado em diagnóstico sem contexto."
+        ],
+        "supporting_features": [
+          {
+            "entity": "alteracao_estado_mental",
+            "context": "quando presente",
+            "strength": "moderate"
+          }
+        ],
+        "features_against": [],
+        "diagnostic_criteria": [],
+        "confirmatory_tests": [],
+        "screening_tests": [],
+        "diagnostic_thresholds": [
+          {
+            "name": "Limiar de glicose associado a sintomas/sinais",
+            "value": "<=70",
+            "unit": "mg/dL",
+            "purpose": "Identificar faixa em que muitos pacientes apresentam manifestações.",
+            "population": "pacientes em geral",
+            "context": "avaliação clínica de hipoglicemia",
+            "source_traceability": [
+              {
+                "source_id": "src_tratado_clinica_medica_3ed"
+              }
+            ]
+          }
+        ],
+        "differential_diagnoses": []
+      },
+      "treatment": {
+        "principles": [
+          "A abordagem depende do estado de consciência e da capacidade de ingerir com segurança.",
+          "Hipoglicemia grave requer abordagem imediata."
+        ],
+        "acute": [],
+        "maintenance": [],
+        "non_pharmacological": [],
+        "procedures": [],
+        "treatment_goals": [
+          "Corrigir a hipoglicemia",
+          "Identificar e tratar a causa"
+        ],
+        "monitoring": [
+          "Glicemia seriada",
+          "Estado neurológico"
+        ]
+      },
+      "complications": [
+        {
+          "entity": "convulsao",
+          "mechanism": "Disfunção neuroglicopênica em hipoglicemia grave.",
+          "risk_factors": [
+            "hipoglicemia grave/prolongada"
+          ],
+          "warning_signs": [
+            "alteração de consciência",
+            "convulsão"
+          ],
+          "prevention": [
+            "Reconhecimento e correção precoces"
+          ],
+          "management": [
+            "Tratamento imediato da hipoglicemia e suporte clínico."
+          ]
+        }
+      ],
+      "prognosis": {
+        "expected_course": "Frequentemente reversível quando reconhecida e corrigida, mas a gravidade e duração influenciam o risco.",
+        "prognostic_factors": [],
+        "recurrence": "Pode recorrer se a causa persistir.",
+        "mortality": "Depende da gravidade e etiologia."
+      },
+      "follow_up": {
+        "required": true,
+        "monitoring": [
+          "Glicemia",
+          "estado mental"
+        ],
+        "etiologic_investigation": [
+          "Revisar medicamentos, ingestão alimentar e outras causas conforme contexto"
+        ],
+        "chronic_management": [],
+        "patient_education": [],
+        "recurrence_prevention": []
+      },
+      "clinical_rules": [
+        "rule_glucose_70",
+        "rule_severe_hypoglycemia"
+      ],
+      "patient_generation": {
+        "age_ranges": [
+          "qualquer"
+        ],
+        "sex": [
+          "qualquer"
+        ],
+        "risk_factors": [
+          "insulina",
+          "tratamento hipoglicemiante",
+          "jejum"
+        ],
+        "comorbidities": [
+          "diabetes mellitus"
+        ],
+        "possible_presentations": [
+          {
+            "features": [
+              "sudorese",
+              "tremor",
+              "confusão",
+              "alteração de consciência"
+            ],
+            "frequency": "variável",
+            "severity": "leve a grave",
+            "timing": "agudo",
+            "context": "variável"
+          }
+        ],
+        "severity_levels": [
+          "leve",
+          "moderada",
+          "grave"
+        ],
+        "contexts": [
+          "emergência",
+          "internação",
+          "domicílio"
+        ],
+        "possible_complications": [
+          "convulsão",
+          "perda de consciência"
+        ],
+        "constraints": [
+          "Manifestações podem ser ausentes em alguns episódios, especialmente em pacientes com hipoglicemia recorrente."
+        ]
+      },
+      "relationships": [
+        "rel_glicemia_estado_mental",
+        "rel_glicemia_convulsao"
+      ],
+      "uncertainties": [
+        "u_threshold_context"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "src_tratado_clinica_medica_3ed"
+        }
+      ]
+    },
+    {
+      "id": "hipoglicemia_grave",
+      "canonical_name": "Hipoglicemia grave",
+      "type": "condition",
+      "aliases": [
+        "hipoglicemia severa"
+      ],
+      "definition": "Hipoglicemia com manifestações neurológicas importantes, podendo incluir alteração de conduta, perda de consciência e/ou convulsão.",
+      "classification": {
+        "category": "distúrbio metabólico agudo",
+        "subtype": "hipoglicemia grave",
+        "parent_entity": "glicemia_baixa",
+        "severity": [
+          "grave"
+        ]
+      },
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": [
+          {
+            "steps": [
+              "glicose reduzida",
+              "disfunção cerebral por neuroglicopenia",
+              "alteração neurológica"
+            ],
+            "description": "A redução importante da glicose pode comprometer a função cerebral."
+          }
+        ]
+      },
+      "clinical": {
+        "presentations": [
+          {
+            "name": "Neuroglicopenia grave",
+            "features": [
+              {
+                "entity": "alteracao_estado_mental",
+                "strength": "strong"
+              }
+            ],
+            "severity": "grave",
+            "timing": "agudo",
+            "context": "hipoglicemia importante"
+          }
+        ],
+        "symptoms": [],
+        "signs": [
+          {
+            "entity": "alteracao_estado_mental",
+            "strength": "strong"
+          }
+        ],
+        "risk_factors": [],
+        "temporal_course": [
+          "agudo"
+        ]
+      },
+      "physical_examination": [
+        {
+          "finding": "Alteração de conduta ou consciência",
+          "presence": "characteristic",
+          "severity": "grave",
+          "timing": "agudo",
+          "context": "hipoglicemia grave",
+          "source_traceability": [
+            {
+              "source_id": "src_tratado_clinica_medica_3ed"
+            }
+          ]
+        }
+      ],
+      "laboratory": [],
+      "imaging": [],
+      "investigations": [],
+      "diagnosis": {
+        "diagnostic_approach": [
+          "Correlacionar hipoglicemia documentada com manifestações clínicas."
+        ],
+        "supporting_features": [
+          {
+            "entity": "glicemia_baixa",
+            "strength": "strong"
+          }
+        ],
+        "features_against": [],
+        "diagnostic_criteria": [],
+        "confirmatory_tests": [],
+        "screening_tests": [],
+        "diagnostic_thresholds": [
+          {
+            "name": "Valor descrito na fonte para hipoglicemia grave",
+            "value": "<40",
+            "unit": "mg/dL",
+            "purpose": "Referência descritiva de gravidade na fonte.",
+            "population": "pacientes com hipoglicemia",
+            "context": "hipoglicemia grave",
+            "source_traceability": [
+              {
+                "source_id": "src_tratado_clinica_medica_3ed"
+              }
+            ]
+          }
+        ],
+        "differential_diagnoses": []
+      },
+      "treatment": {
+        "principles": [
+          "Emergência clínica; corrigir glicose e proteger via aérea quando necessário."
+        ],
+        "acute": [],
+        "maintenance": [],
+        "non_pharmacological": [],
+        "procedures": [],
+        "treatment_goals": [
+          "Restaurar glicemia",
+          "Proteger função neurológica"
+        ],
+        "monitoring": [
+          "Glicemia",
+          "consciência",
+          "via aérea quando comprometida"
+        ]
+      },
+      "complications": [
+        {
+          "entity": "convulsao",
+          "mechanism": "Neuroglicopenia grave.",
+          "risk_factors": [
+            "hipoglicemia prolongada"
+          ],
+          "warning_signs": [
+            "convulsão",
+            "coma"
+          ],
+          "prevention": [
+            "Correção precoce"
+          ],
+          "management": [
+            "Suporte e correção imediata da glicemia."
+          ]
+        }
+      ],
+      "prognosis": {
+        "expected_course": "Pode haver recuperação após correção, dependendo da duração e etiologia.",
+        "prognostic_factors": [],
+        "recurrence": "Relacionada à causa subjacente.",
+        "mortality": ""
+      },
+      "follow_up": {
+        "required": true,
+        "monitoring": [
+          "Glicemia seriada",
+          "estado neurológico"
+        ],
+        "etiologic_investigation": [
+          "Investigar causa"
+        ],
+        "chronic_management": [],
+        "patient_education": [],
+        "recurrence_prevention": []
+      },
+      "clinical_rules": [
+        "rule_severe_hypoglycemia"
+      ],
+      "patient_generation": {
+        "age_ranges": [
+          "qualquer"
+        ],
+        "sex": [
+          "qualquer"
+        ],
+        "risk_factors": [
+          "insulina",
+          "hipoglicemiantes",
+          "jejum"
+        ],
+        "comorbidities": [
+          "diabetes mellitus"
+        ],
+        "possible_presentations": [
+          {
+            "features": [
+              "confusão",
+              "perda de consciência",
+              "convulsão"
+            ],
+            "frequency": "variável",
+            "severity": "grave",
+            "timing": "agudo",
+            "context": "emergência"
+          }
+        ],
+        "severity_levels": [
+          "grave"
+        ],
+        "contexts": [
+          "emergência",
+          "internação"
+        ],
+        "possible_complications": [
+          "convulsão",
+          "coma"
+        ],
+        "constraints": [
+          "Não assumir etiologia apenas pelo valor de glicemia."
+        ]
+      },
+      "relationships": [
+        "rel_severe_hypoglycemia_glucose"
+      ],
+      "uncertainties": [],
+      "source_traceability": [
+        {
+          "source_id": "src_tratado_clinica_medica_3ed"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "rel_alteracao_glicemia",
+      "source": "alteracao_estado_mental",
+      "relation": "requires",
+      "target": "glicemia_baixa",
+      "context": "Como hipótese reversível a ser investigada",
+      "strength": "moderate",
+      "source_traceability": [
+        {
+          "source_id": "src_diagnosis_framework_v1"
+        }
+      ]
+    },
+    {
+      "id": "rel_glicemia_estado_mental",
+      "source": "glicemia_baixa",
+      "relation": "manifests_as",
+      "target": "alteracao_estado_mental",
+      "context": "Quando hipoglicemia produz manifestações neuroglicopênicas",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "src_tratado_clinica_medica_3ed"
+        }
+      ]
+    },
+    {
+      "id": "rel_glicemia_convulsao",
+      "source": "glicemia_baixa",
+      "relation": "increases_risk_of",
+      "target": "convulsao",
+      "context": "Hipoglicemia grave",
+      "strength": "moderate",
+      "source_traceability": [
+        {
+          "source_id": "src_tratado_clinica_medica_3ed"
+        }
+      ]
+    },
+    {
+      "id": "rel_severe_hypoglycemia_glucose",
+      "source": "hipoglicemia_grave",
+      "relation": "caused_by",
+      "target": "glicemia_baixa",
+      "context": "Quadro clínico compatível",
+      "strength": "strong",
+      "source_traceability": [
+        {
+          "source_id": "src_tratado_clinica_medica_3ed"
+        }
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "id": "rule_altered_mental_status_glucose",
+      "description": "Na alteração aguda do estado mental, a glicemia é uma variável rapidamente acessível e potencialmente reversível que deve ser considerada precocemente.",
+      "conditions": [
+        {
+          "entity": "alteracao_estado_mental",
+          "relation": "present",
+          "value": true
+        }
+      ],
+      "conclusions": [
+        {
+          "type": "requires_investigation",
+          "entity": "glicemia_baixa",
+          "strength": "strong"
+        }
+      ],
+      "context": "emergência"
+    },
+    {
+      "id": "rule_glucose_70",
+      "description": "Glicemia ≤70 mg/dL é um limiar clínico associado à ocorrência de sintomas ou sinais em muitos pacientes.",
+      "conditions": [
+        {
+          "entity": "glicemia_baixa",
+          "relation": "value_lte_mg_dl",
+          "value": 70
+        }
+      ],
+      "conclusions": [
+        {
+          "type": "increase_suspicion",
+          "entity": "hipoglicemia_grave",
+          "strength": "weak"
+        }
+      ],
+      "context": "o limiar isolado não define gravidade clínica"
+    },
+    {
+      "id": "rule_severe_hypoglycemia",
+      "description": "Manifestações neurológicas importantes associadas a glicemia muito baixa devem elevar a prioridade de correção e suporte.",
+      "conditions": [
+        {
+          "entity": "glicemia_baixa",
+          "relation": "value_lt_mg_dl",
+          "value": 40
+        },
+        {
+          "entity": "alteracao_estado_mental",
+          "relation": "present",
+          "value": true
+        }
+      ],
+      "conclusions": [
+        {
+          "type": "indicates_risk",
+          "entity": "hipoglicemia_grave",
+          "strength": "strong"
+        },
+        {
+          "type": "suggests_action",
+          "entity": "glicemia_baixa",
+          "strength": "strong"
+        }
+      ],
+      "context": "emergência"
+    }
+  ],
+  "differential_network": [
+    {
+      "entity_a": "alteracao_estado_mental",
+      "entity_b": "hipoglicemia_grave",
+      "shared_features": [
+        "alteração de consciência",
+        "confusão",
+        "comportamento alterado"
+      ],
+      "discriminators": [
+        "glicemia medida",
+        "relação temporal com intervenção/correção",
+        "outras causas metabólicas e neurológicas"
+      ],
+      "useful_investigations": [
+        "glicemia capilar",
+        "avaliação neurológica",
+        "sinais vitais"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "src_diagnosis_framework_v1"
+        }
+      ]
+    },
+    {
+      "entity_a": "hipoglicemia_grave",
+      "entity_b": "convulsao",
+      "shared_features": [
+        "alteração neurológica",
+        "possível perda de consciência"
+      ],
+      "discriminators": [
+        "glicemia",
+        "semiologia do evento",
+        "estado pós-evento"
+      ],
+      "useful_investigations": [
+        "glicemia",
+        "avaliação clínica"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "src_tratado_clinica_medica_3ed"
+        }
+      ]
+    },
+    {
+      "entity_a": "alteracao_estado_mental",
+      "entity_b": "glicemia_baixa",
+      "shared_features": [
+        "pode ocorrer em emergência"
+      ],
+      "discriminators": [
+        "valor de glicemia e contexto"
+      ],
+      "useful_investigations": [
+        "glicemia capilar"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "src_diagnosis_framework_v1"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "type": "pdf",
+      "title": "Tratado de Clínica Médica — 3ª edição",
+      "authors": [],
+      "organization": "Biblioteca fornecida ao projeto Diagnosis",
+      "publication_date": "",
+      "url": null,
+      "document_location": "Trecho localizado no arquivo sobre hipoglicemia associada ao tratamento com insulina",
+      "access_date": "2026-09-16",
+      "notes": "Fonte interna do projeto; utilizada para ancorar limiar sintomático e manifestações de hipoglicemia grave.",
+      "id": "src_tratado_clinica_medica_3ed"
+    },
+    {
+      "type": "pdf",
+      "title": "Diagnosis: a Dynamic Clinical Simulation Framework for Measuring Clinical Cognition and Decision-Making — Version 1.0",
+      "authors": [
+        "Dr. Delyone de Paula Canedo Filho"
+      ],
+      "organization": "",
+      "publication_date": "2026",
+      "url": null,
+      "document_location": "Arquitetura cognitiva, raciocínio por trajetória e sete dimensões cognitivas",
+      "access_date": "2026-09-16",
+      "notes": "Fonte metodológica interna do Diagnosis.",
+      "id": "src_diagnosis_framework_v1"
+    }
+  ],
+  "conflicts": [],
+  "uncertainties": [
+    {
+      "id": "u_mental_status_nonspecific",
+      "description": "Alteração do estado mental é inespecífica e pode resultar de múltiplas causas; a presença do achado não identifica hipoglicemia.",
+      "affected_entities": [
+        "alteracao_estado_mental",
+        "glicemia_baixa"
+      ],
+      "reason": "Baixa especificidade do achado.",
+      "status": "uncertain"
+    },
+    {
+      "id": "u_threshold_context",
+      "description": "Limiares de glicemia não devem ser usados isoladamente para inferir gravidade ou causalidade; contexto clínico e manifestações importam.",
+      "affected_entities": [
+        "glicemia_baixa",
+        "hipoglicemia_grave"
+      ],
+      "reason": "Relação entre número, sintomas e gravidade é contextual.",
+      "status": "under_review"
+    }
+  ]
+}
