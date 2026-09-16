@@ -1,0 +1,259 @@
+{
+  "schema_version": "1.0",
+  "id": "diagnosis_csi_glicemia_consciencia",
+  "name": "CSI — Glicemia, Consciência e Hipoglicemia",
+  "status": "draft",
+  "purpose": "Adicionar ancoragem semântica para expressões relacionadas a glicemia, alteração do estado mental e hipoglicemia sem converter linguagem diretamente em diagnóstico.",
+  "architectural_principle": {
+    "core_idea": "Normalizar linguagem clínica em unidades semânticas estáveis e entregar essas unidades ao Patient State e à Knowledge Base.",
+    "separation": {
+      "document_structure": "Onde o dado aparece.",
+      "semantic_content": "O que o dado representa.",
+      "clinical_reasoning": "O que a combinação dos dados pode exigir como investigação.",
+      "diagnosis": "Conclusão clínica permanece fora da camada CSI."
+    },
+    "pipeline": [
+      "raw_language",
+      "normalization",
+      "candidate_semantic_units",
+      "canonical_anchors",
+      "patient_state",
+      "clinical_model",
+      "clinical_reasoning"
+    ]
+  },
+  "non_negotiable_rules": [
+    "CSI não diagnostica.",
+    "CSI não substitui raciocínio clínico.",
+    "Preservar o texto original.",
+    "Expressão ambígua permanece ambígua até o contexto resolvê-la.",
+    "Âncora semântica não representa causalidade ou gravidade por si só."
+  ],
+  "anchor_families": {
+    "documental": {
+      "description": "Estrutura da informação clínica/documental.",
+      "examples": [
+        "003.001. Sinais Vitais",
+        "003.000. Exame Físico Geral e Segmentar",
+        "005.000. Investigação Complementar Solicitada"
+      ]
+    },
+    "semiological": {
+      "description": "Unidades clínicas reconhecíveis.",
+      "examples": [
+        "FIND.013 Glicemia",
+        "SIGN.012 Estado de Consciência",
+        "STATE.012 Alteração do Estado Mental",
+        "RULE.012 Relação Glicemia-Consciência"
+      ]
+    }
+  },
+  "semantic_record_model": {
+    "raw_text": "Texto original.",
+    "normalized_text": "Texto normalizado somente para comparação.",
+    "language": "Idioma.",
+    "document_anchor": "Âncora documental opcional.",
+    "semantic_anchor": "Âncora semântica.",
+    "canonical_term": "Termo canônico.",
+    "match_type": "exact | lexical_variant | popular_variant | abbreviation | multilingual_variant | ambiguous | unknown",
+    "confidence": "0 a 1.",
+    "evidence": "Evidência lexical/contextual.",
+    "original_preserved": true,
+    "clinical_inference": "Não preenchido automaticamente pela CSI.",
+    "diagnosis": "Não preenchido pela CSI."
+  },
+  "processing_algorithm": {
+    "step_1": "Preservar entrada original.",
+    "step_2": "Normalizar caixa, espaços e variações ortográficas seguras.",
+    "step_3": "Identificar contexto estrutural.",
+    "step_4": "Pesquisar formas canônicas.",
+    "step_5": "Pesquisar sinônimos, variantes populares e abreviações.",
+    "step_6": "Mapear para âncoras candidatas.",
+    "step_7": "Se houver múltiplas interpretações plausíveis, marcar ambiguidade.",
+    "step_8": "Produzir representação estruturada sem apagar o original.",
+    "step_9": "Entregar ao Patient State / Clinical Model.",
+    "step_10": "Deixar raciocínio clínico e diagnóstico para camadas clínicas."
+  },
+  "lexicon": [
+    {
+      "anchor": "FIND.013",
+      "canonical": "Glicemia",
+      "variants": {
+        "PT_BR": [
+          "glicemia",
+          "glicose",
+          "glicemia capilar",
+          "açúcar no sangue"
+        ],
+        "EN": [
+          "blood glucose",
+          "blood sugar",
+          "glucose"
+        ],
+        "ES": [
+          "glucemia",
+          "glucosa"
+        ],
+        "POPULAR": [
+          "açúcar",
+          "açúcar baixo",
+          "glicose baixa"
+        ]
+      }
+    },
+    {
+      "anchor": "SIGN.012",
+      "canonical": "Estado de Consciência",
+      "variants": {
+        "PT_BR": [
+          "consciência",
+          "nível de consciência",
+          "estado mental"
+        ],
+        "EN": [
+          "level of consciousness",
+          "mental status",
+          "alertness"
+        ],
+        "ES": [
+          "nivel de conciencia",
+          "estado mental"
+        ],
+        "POPULAR": [
+          "acordado",
+          "apagado",
+          "sonolento",
+          "não responde"
+        ]
+      }
+    },
+    {
+      "anchor": "STATE.012",
+      "canonical": "Alteração do Estado Mental",
+      "variants": {
+        "PT_BR": [
+          "confusão",
+          "rebaixamento",
+          "alteração da consciência",
+          "alteração do estado mental",
+          "distúrbio de conduta"
+        ],
+        "EN": [
+          "altered mental status",
+          "confusion",
+          "decreased consciousness"
+        ],
+        "ES": [
+          "alteración del estado mental",
+          "confusión"
+        ],
+        "POPULAR": [
+          "fora do ar",
+          "desorientado",
+          "apagando",
+          "não está ele mesmo"
+        ]
+      }
+    },
+    {
+      "anchor": "FIND.014",
+      "canonical": "Glicemia Baixa",
+      "variants": {
+        "PT_BR": [
+          "glicemia baixa",
+          "glicose baixa",
+          "açúcar baixo",
+          "hipoglicemia"
+        ],
+        "EN": [
+          "low blood glucose",
+          "low blood sugar",
+          "hypoglycemia"
+        ],
+        "ES": [
+          "glucosa baja",
+          "hipoglucemia"
+        ],
+        "POPULAR": [
+          "açúcar caiu",
+          "açúcar despencou"
+        ]
+      }
+    },
+    {
+      "anchor": "RULE.012",
+      "canonical": "Relação Glicemia–Consciência",
+      "variants": {
+        "PT_BR": [
+          "glicemia na confusão",
+          "checar açúcar na confusão",
+          "glicemia no rebaixamento"
+        ],
+        "EN": [
+          "check glucose in altered mental status"
+        ],
+        "ES": [
+          "glucosa en alteración de conciencia"
+        ],
+        "POPULAR": [
+          "vê o açúcar",
+          "checa a glicose",
+          "mede o açúcar"
+        ]
+      }
+    }
+  ],
+  "ambiguity_rules": [
+    {
+      "expression": "hipoglicemia",
+      "possible_anchors": [
+        "FIND.014"
+      ],
+      "note": "Pode ser usada como descrição de valor baixo ou como condição clínica; CSI mantém a forma semântica e não decide causalidade."
+    },
+    {
+      "expression": "apagado",
+      "possible_anchors": [
+        "SIGN.012",
+        "STATE.012"
+      ],
+      "note": "Pode indicar sono, perda de consciência ou estado de alerta reduzido; requer contexto."
+    }
+  ],
+  "examples": [
+    {
+      "raw_text": "Ele está confuso, vê a glicemia.",
+      "records": [
+        {
+          "semantic_anchor": "STATE.012",
+          "canonical_term": "Alteração do Estado Mental",
+          "match_type": "exact",
+          "confidence": 0.99
+        },
+        {
+          "semantic_anchor": "FIND.013",
+          "canonical_term": "Glicemia",
+          "match_type": "lexical_variant",
+          "confidence": 0.99
+        },
+        {
+          "semantic_anchor": "RULE.012",
+          "canonical_term": "Relação Glicemia–Consciência",
+          "match_type": "contextual",
+          "confidence": 0.92
+        }
+      ]
+    },
+    {
+      "raw_text": "Está com o açúcar baixo.",
+      "records": [
+        {
+          "semantic_anchor": "FIND.014",
+          "canonical_term": "Glicemia Baixa",
+          "match_type": "popular_variant",
+          "confidence": 0.97
+        }
+      ]
+    }
+  ]
+}
