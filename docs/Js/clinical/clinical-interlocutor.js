@@ -1122,11 +1122,77 @@
         }
 
 
+        /*
+         * ======================================================
+         * CORREÇÃO CRÍTICA DE MATCHING
+         * ======================================================
+         *
+         * Abreviações clínicas curtas, como:
+         *
+         *   pa
+         *   fc
+         *   fr
+         *   tc
+         *   ct
+         *
+         * NÃO podem ser procuradas simplesmente com
+         * text.includes(), porque isso permite falsos positivos.
+         *
+         * Exemplo do bug original:
+         *
+         *   "paciente"
+         *
+         * contém:
+         *
+         *   "pa"
+         *
+         * Portanto:
+         *
+         *   "Paciente ingere álcool"
+         *
+         * podia ser interpretado como:
+         *
+         *   "PA"
+         *
+         * Agora abreviações de até 3 caracteres precisam aparecer
+         * como tokens/palavras independentes.
+         *
+         * Termos maiores continuam usando includes(), preservando
+         * o comportamento original para expressões clínicas como:
+         *
+         *   "pressao arterial"
+         *   "frequencia cardiaca"
+         *   "exame cardiovascular"
+         *
+         * ======================================================
+         */
+
         hasAny(text, terms) {
 
-            return terms.some(term =>
-                text.includes(this.normalize(term))
-            );
+            return terms.some(term => {
+
+                const normalizedTerm = this.normalize(term);
+
+                /*
+                 * Abreviações clínicas muito curtas precisam ser
+                 * reconhecidas como palavras/tokens independentes.
+                 */
+                if (/^[a-z0-9]{1,3}$/i.test(normalizedTerm)) {
+
+                    const pattern = new RegExp(
+                        `\\b${normalizedTerm}\\b`,
+                        "i"
+                    );
+
+                    return pattern.test(text);
+                }
+
+                /*
+                 * Expressões clínicas maiores continuam utilizando
+                 * busca por substring, como no comportamento original.
+                 */
+                return text.includes(normalizedTerm);
+            });
         }
 
 
