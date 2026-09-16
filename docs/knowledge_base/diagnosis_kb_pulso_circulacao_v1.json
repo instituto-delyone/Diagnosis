@@ -1,0 +1,548 @@
+{
+  "schema_version": "3.0",
+  "knowledge_base": {
+    "id": "kb_pulso_circulacao_emergencia",
+    "name": "Knowledge Base — Pulso, Circulação e Inconsistência Hemodinâmica",
+    "description": "Unidade clínica para o Diagnosis reconhecer, representar e explorar relações entre pulso central, pressão arterial, frequência cardíaca e confirmação de circulação, com foco em inconsistências entre dados clínicos.",
+    "language": "pt-BR",
+    "status": "draft",
+    "processing": {
+      "source_documents": [
+        "Diagnosis framework V1.0..pdf",
+        "diagnosis_csi_semantic_layer.json",
+        "KNOWLEDGE_BASE_SCHEMA.json"
+      ],
+      "processed_date": "2026-09-16",
+      "external_research_used": false,
+      "notes": "Estrutura derivada dos artefatos do Diagnosis. Conteúdo clínico organizado como conhecimento reutilizável; validação clínica formal permanece necessária antes de uso assistencial."
+    }
+  },
+  "domains": [
+    {
+      "id": "circulacao_emergencia",
+      "name": "Circulação e avaliação inicial em emergência",
+      "description": "Relação entre presença de pulso, sinais de circulação, sinais vitais e necessidade de confirmação de dados conflitantes.",
+      "parent_domain": null,
+      "source_traceability": [
+        {
+          "source_id": "diagnosis_framework",
+          "claim": "Casos dinâmicos devem integrar apresentação clínica, decisões sequenciais e atualização do estado.",
+          "evidence_type": "synthesis"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "pulso_central",
+      "canonical_name": "Pulso central",
+      "type": "sign",
+      "aliases": [
+        "pulso carotídeo",
+        "pulso femoral",
+        "pulso central palpável"
+      ],
+      "definition": "Palpação de uma artéria central para avaliar a presença de circulação pulsátil.",
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "diagnosis": {},
+      "treatment": {},
+      "complications": [],
+      "patient_generation": {
+        "age_ranges": [
+          "adulto"
+        ],
+        "sex": [
+          "qualquer"
+        ],
+        "risk_factors": [],
+        "comorbidities": [],
+        "possible_presentations": [
+          {
+            "features": [
+              "pulso central ausente"
+            ],
+            "severity": "crítica",
+            "context": "emergência"
+          }
+        ],
+        "severity_levels": [
+          "normal",
+          "alterado",
+          "ausente"
+        ],
+        "contexts": [
+          "emergência",
+          "reanimação"
+        ],
+        "possible_complications": [],
+        "constraints": [
+          "A avaliação deve ser contextualizada com responsividade e respiração."
+        ]
+      },
+      "relationships": [
+        "pulso_central",
+        "circulacao_presente",
+        "circulacao_ausente"
+      ],
+      "clinical_rules": [
+        "RULE_PULSE_VS_BP"
+      ],
+      "uncertainties": [
+        "UNCONFIRMED_PULSE"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "diagnosis_framework",
+          "claim": "O estado clínico deve ser atualizado a partir das informações e decisões do caso.",
+          "evidence_type": "synthesis"
+        }
+      ]
+    },
+    {
+      "id": "pressao_arterial_mensuravel",
+      "canonical_name": "Pressão arterial mensurável",
+      "type": "finding",
+      "aliases": [
+        "PA mensurável",
+        "pressão arterial aferida"
+      ],
+      "definition": "Registro de pressão arterial obtido por método de aferição válido.",
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "diagnosis": {},
+      "treatment": {},
+      "complications": [],
+      "patient_generation": {
+        "age_ranges": [
+          "adulto"
+        ],
+        "sex": [
+          "qualquer"
+        ],
+        "risk_factors": [],
+        "comorbidities": [],
+        "possible_presentations": [
+          {
+            "features": [
+              "PA 116/74 mmHg"
+            ],
+            "severity": "sem alteração hemodinâmica aparente",
+            "context": "caso simulado"
+          }
+        ],
+        "severity_levels": [
+          "normal",
+          "alterada"
+        ],
+        "contexts": [
+          "emergência",
+          "consulta"
+        ],
+        "possible_complications": [],
+        "constraints": [
+          "Uma PA aferida não substitui a avaliação clínica global."
+        ]
+      },
+      "relationships": [
+        "pressao_arterial_mensuravel",
+        "circulacao_presente"
+      ],
+      "clinical_rules": [
+        "RULE_PULSE_VS_BP"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "diagnosis_framework",
+          "claim": "Sinais vitais integram o estado inicial do paciente.",
+          "evidence_type": "synthesis"
+        }
+      ]
+    },
+    {
+      "id": "frequencia_cardiaca",
+      "canonical_name": "Frequência cardíaca",
+      "type": "finding",
+      "aliases": [
+        "FC",
+        "heart rate"
+      ],
+      "definition": "Número de batimentos cardíacos por minuto, obtido por palpação, ausculta, monitorização ou outro método apropriado.",
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "diagnosis": {},
+      "treatment": {},
+      "complications": [],
+      "patient_generation": {
+        "age_ranges": [
+          "adulto"
+        ],
+        "sex": [
+          "qualquer"
+        ],
+        "risk_factors": [],
+        "comorbidities": [],
+        "possible_presentations": [
+          {
+            "features": [
+              "FC 68 bpm"
+            ],
+            "severity": "sem taquicardia ou bradicardia pelo valor isolado",
+            "context": "adulto"
+          }
+        ],
+        "severity_levels": [
+          "normal",
+          "bradicardia",
+          "taquicardia"
+        ],
+        "contexts": [
+          "emergência",
+          "consulta"
+        ],
+        "possible_complications": [],
+        "constraints": [
+          "Interpretar conforme idade, contexto e método de obtenção."
+        ]
+      },
+      "relationships": [
+        "frequencia_cardiaca",
+        "bradicardia",
+        "taquicardia"
+      ],
+      "clinical_rules": [
+        "RULE_FC_68_NOT_BRADYCARDIA"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "diagnosis_framework",
+          "claim": "O Diagnosis pode registrar sinais vitais e analisar a sequência de decisões.",
+          "evidence_type": "synthesis"
+        }
+      ]
+    },
+    {
+      "id": "circulacao_presente",
+      "canonical_name": "Circulação presente",
+      "type": "physiological_state",
+      "aliases": [
+        "perfusão circulatória presente"
+      ],
+      "definition": "Estado em que há evidência de circulação efetiva suficiente para produzir sinais mensuráveis, devendo ser interpretado no contexto clínico.",
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "diagnosis": {},
+      "treatment": {},
+      "complications": [],
+      "patient_generation": {
+        "age_ranges": [
+          "qualquer"
+        ],
+        "sex": [
+          "qualquer"
+        ],
+        "risk_factors": [],
+        "comorbidities": [],
+        "possible_presentations": [
+          {
+            "features": [
+              "PA mensurável",
+              "FC registrada"
+            ],
+            "context": "avaliação clínica"
+          }
+        ],
+        "severity_levels": [
+          "presente"
+        ],
+        "contexts": [
+          "emergência",
+          "reanimação"
+        ],
+        "possible_complications": [],
+        "constraints": [
+          "Não inferir ausência de circulação somente de uma informação verbal conflitante sem reconfirmação."
+        ]
+      },
+      "relationships": [
+        "circulacao_presente",
+        "pulso_central"
+      ],
+      "clinical_rules": [
+        "RULE_PULSE_VS_BP"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "diagnosis_framework",
+          "claim": "O estado do paciente é uma representação estruturada que deve ser atualizado e validado.",
+          "evidence_type": "synthesis"
+        }
+      ]
+    },
+    {
+      "id": "inconsistencia_clinica",
+      "canonical_name": "Inconsistência entre dados clínicos",
+      "type": "clinical_rule",
+      "aliases": [
+        "dados conflitantes",
+        "contradição clínica"
+      ],
+      "definition": "Conjunto de informações que não pode ser aceito simultaneamente sem reconciliação, verificação da fonte ou revisão do dado.",
+      "pathophysiology": {
+        "mechanisms": [],
+        "causal_chains": []
+      },
+      "diagnosis": {},
+      "treatment": {},
+      "complications": [],
+      "patient_generation": {
+        "age_ranges": [
+          "qualquer"
+        ],
+        "sex": [
+          "qualquer"
+        ],
+        "risk_factors": [],
+        "comorbidities": [],
+        "possible_presentations": [
+          {
+            "features": [
+              "pulso central dito ausente",
+              "PA mensurável",
+              "FC registrada"
+            ],
+            "context": "emergência"
+          }
+        ],
+        "severity_levels": [
+          "variável"
+        ],
+        "contexts": [
+          "qualquer"
+        ],
+        "possible_complications": [],
+        "constraints": [
+          "A inconsistência não é um diagnóstico; é um sinal de necessidade de validação."
+        ]
+      },
+      "relationships": [
+        "inconsistencia_clinica",
+        "pulso_central",
+        "pressao_arterial_mensuravel",
+        "frequencia_cardiaca"
+      ],
+      "clinical_rules": [
+        "RULE_PULSE_VS_BP",
+        "RULE_VERIFY_PRIMARY_CONTRADICTION"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "diagnosis_framework",
+          "claim": "O sistema deve registrar inconsistências e reconstruir a sequência de decisões.",
+          "evidence_type": "synthesis"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "REL_BP_IMPLIES_CIRCULATION_CHECK",
+      "source": "pressao_arterial_mensuravel",
+      "relation": "suggests",
+      "target": "circulacao_presente",
+      "context": "PA efetivamente aferida",
+      "strength": "strong"
+    },
+    {
+      "id": "REL_FC68_NOT_BRADY",
+      "source": "frequencia_cardiaca",
+      "relation": "argues_against",
+      "target": "bradicardia",
+      "context": "adulto, FC 68 bpm",
+      "strength": "strong"
+    },
+    {
+      "id": "REL_PULSE_BP_CONFLICT",
+      "source": "pulso_central",
+      "relation": "differentiates_from",
+      "target": "inconsistencia_clinica",
+      "context": "pulso dito ausente com PA mensurável",
+      "strength": "strong"
+    },
+    {
+      "id": "REL_CONFLICT_REQUIRES_RECHECK",
+      "source": "inconsistencia_clinica",
+      "relation": "requires",
+      "target": "investigacao_reconfirmacao_dado",
+      "context": "dados fisiologicamente conflitantes",
+      "strength": "strong"
+    }
+  ],
+  "clinical_rules": [
+    {
+      "id": "RULE_PULSE_VS_BP",
+      "description": "Quando há registro de PA mensurável e, simultaneamente, relato de ausência de pulso central, o sistema deve reconhecer uma inconsistência e priorizar a reconfirmação do estado circulatório.",
+      "conditions": [
+        {
+          "entity": "pressao_arterial_mensuravel",
+          "relation": "present",
+          "value": true
+        },
+        {
+          "entity": "pulso_central",
+          "relation": "reported_absent",
+          "value": true
+        }
+      ],
+      "conclusions": [
+        {
+          "type": "requires_investigation",
+          "entity": "investigacao_reconfirmacao_dado",
+          "strength": "strong"
+        },
+        {
+          "type": "indicates_risk",
+          "entity": "inconsistencia_clinica",
+          "strength": "strong"
+        }
+      ],
+      "context": "emergência",
+      "priority": "alta",
+      "source_traceability": [
+        {
+          "source_id": "diagnosis_framework",
+          "claim": "A sequência e priorização das decisões são avaliáveis.",
+          "evidence_type": "synthesis"
+        }
+      ]
+    },
+    {
+      "id": "RULE_FC_68_NOT_BRADYCARDIA",
+      "description": "Uma frequência cardíaca de 68 bpm em adulto não deve ser rotulada como bradicardia apenas pelo valor.",
+      "conditions": [
+        {
+          "entity": "frequencia_cardiaca",
+          "relation": "equals",
+          "value": 68
+        }
+      ],
+      "conclusions": [
+        {
+          "type": "argues_against",
+          "entity": "bradicardia",
+          "strength": "strong"
+        }
+      ],
+      "context": "adulto",
+      "priority": "moderada",
+      "source_traceability": [
+        {
+          "source_id": "diagnosis_framework",
+          "claim": "A avaliação pode diferenciar erros de interpretação ao longo do caminho de raciocínio.",
+          "evidence_type": "synthesis"
+        }
+      ]
+    },
+    {
+      "id": "RULE_VERIFY_PRIMARY_CONTRADICTION",
+      "description": "Quando dois dados fundamentais do estado fisiológico são incompatíveis, validar primeiro o dado primário antes de construir hipóteses secundárias.",
+      "conditions": [
+        {
+          "entity": "inconsistencia_clinica",
+          "relation": "present",
+          "value": true
+        }
+      ],
+      "conclusions": [
+        {
+          "type": "suggests_action",
+          "entity": "investigacao_reconfirmacao_dado",
+          "strength": "strong"
+        }
+      ],
+      "context": "emergência e simulação clínica",
+      "priority": "alta",
+      "source_traceability": [
+        {
+          "source_id": "diagnosis_framework",
+          "claim": "O Diagnosis avalia priorização, estratégia diagnóstica e eficiência cognitiva.",
+          "evidence_type": "synthesis"
+        }
+      ]
+    }
+  ],
+  "differential_network": [
+    {
+      "entity_a": "circulacao_presente",
+      "entity_b": "circulacao_ausente",
+      "shared_features": [
+        "alteração de consciência pode ocorrer",
+        "contexto de emergência"
+      ],
+      "discriminators": [
+        "pulso central",
+        "sinais circulatórios mensuráveis",
+        "reavaliação clínica"
+      ],
+      "useful_investigations": [
+        "reavaliação de pulso central",
+        "avaliação de responsividade e respiração",
+        "monitorização"
+      ],
+      "source_traceability": [
+        {
+          "source_id": "diagnosis_framework",
+          "claim": "Casos devem permitir atualização dinâmica do estado.",
+          "evidence_type": "synthesis"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "diagnosis_framework",
+      "type": "pdf",
+      "title": "Diagnosis: a Dynamic Clinical Simulation Framework for Measuring Clinical Cognition and Decision-Making",
+      "authors": [
+        "Dr. Delyone de Paula Canedo Filho"
+      ],
+      "publication_date": "2026",
+      "url": null,
+      "document_location": "Diagnosis framework V1.0..pdf",
+      "access_date": "2026-09-16",
+      "notes": "Fonte arquitetural do modelo de estado, raciocínio sequencial e avaliação cognitiva."
+    },
+    {
+      "id": "diagnosis_csi",
+      "type": "other",
+      "title": "CSI Semantic Layer for Diagnosis",
+      "authors": [],
+      "publication_date": "2026",
+      "url": null,
+      "document_location": "diagnosis_csi_semantic_layer.json",
+      "access_date": "2026-09-16",
+      "notes": "Fonte da separação entre normalização semântica, estado do paciente e raciocínio clínico."
+    }
+  ],
+  "conflicts": [],
+  "uncertainties": [
+    {
+      "id": "UNCONFIRMED_PULSE",
+      "description": "Um relato de pulso ausente pode resultar de erro de palpação, informação desatualizada ou contradição com outros dados; a causa da discrepância não deve ser inventada.",
+      "affected_entities": [
+        "pulso_central",
+        "inconsistencia_clinica"
+      ],
+      "reason": "Dados conflitantes exigem confirmação.",
+      "status": "insufficient_evidence"
+    }
+  ]
+}
