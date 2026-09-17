@@ -29,7 +29,7 @@
                 const match = bloodPressure.match(/(\d+)\s*\/\s*(\d+)/);
                 bloodPressure = match ? { systolic: Number(match[1]), diastolic: Number(match[2]) } : null;
             }
-            const normalized = {
+            return new OriginalPatientState({
                 ...initialState,
                 vitals: {
                     heart_rate: raw.heart_rate ?? raw.heartRate ?? raw.fc ?? null,
@@ -39,8 +39,7 @@
                     temperature: raw.temperature ?? raw.temp ?? null,
                     glucose: raw.glucose ?? raw.glicemia ?? null
                 }
-            };
-            return new OriginalPatientState(normalized);
+            });
         };
         global.PatientState.prototype = OriginalPatientState.prototype;
     }
@@ -162,6 +161,15 @@
         global.ClinicalInterlocutor.prototype.findPhysicalExamination = function (target) {
             const exam = this.patientState?.getPhysicalExam?.() || {};
             return exam[target] !== undefined ? exam[target] : undefined;
+        };
+        global.ClinicalInterlocutor.prototype.interpretInvestigation = function (text) {
+            if (!this.config.allowInvestigationRequests) return null;
+            const definitions = Array.isArray(this.knowledgeBase?.entities) ? this.knowledgeBase.entities.filter(entity => normalize(entity?.type) === "investigation") : [];
+            for (const definition of definitions) {
+                const terms = [definition.id, definition.name, ...(Array.isArray(definition.aliases) ? definition.aliases : [])].filter(Boolean).map(normalize);
+                if (terms.some(term => text.includes(term))) return this.requestInvestigation(definition.id);
+            }
+            return null;
         };
         global.ClinicalInterlocutor.prototype.findInvestigation = function (target) {
             const investigations = this.patientState?.getInvestigations?.() || {};
