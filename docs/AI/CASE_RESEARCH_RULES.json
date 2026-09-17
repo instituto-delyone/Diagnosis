@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "enabled": true,
+  "research_trigger": {
+    "on_case_generation": true,
+    "before_case_presentation": true,
+    "on_user_research_request": true,
+    "minimum_enabled_sources": 2
+  },
+  "sources": [
+    {
+      "id": "msd_manuals",
+      "name": "Manual MSD — Profissionais",
+      "base_url": "https://www.msdmanuals.com/pt/profissional/",
+      "enabled": true,
+      "priority": 1,
+      "type": "clinical_reference",
+      "research_topics": [
+        "clinical_presentation",
+        "history",
+        "physical_examination",
+        "diagnosis",
+        "investigations",
+        "management",
+        "complications",
+        "evolution"
+      ]
+    },
+    {
+      "id": "ministerio_saude",
+      "name": "Ministério da Saúde — PCDT",
+      "base_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt",
+      "enabled": true,
+      "priority": 1,
+      "type": "government_guideline",
+      "research_topics": [
+        "diagnosis",
+        "investigations",
+        "management",
+        "follow_up",
+        "treatment",
+        "monitoring"
+      ]
+    }
+  ],
+  "query_policy": {
+    "use_primary_concept": true,
+    "use_case_anchors": true,
+    "use_opening_context": true,
+    "generate_topic_queries": true,
+    "maximum_queries_per_source": 6
+  },
+  "query_templates": [
+    "{concept} apresentação clínica",
+    "{concept} sintomas sinais exame físico",
+    "{concept} diagnóstico investigação exames",
+    "{concept} tratamento manejo",
+    "{concept} complicações evolução",
+    "{concept} protocolo acompanhamento"
+  ],
+  "evidence_policy": {
+    "preserve_source_id": true,
+    "preserve_source_name": true,
+    "preserve_url": true,
+    "preserve_query": true,
+    "preserve_retrieval_date": true,
+    "preserve_title": true,
+    "preserve_abstract_or_excerpt_when_licensed": true,
+    "never_present_missing_evidence_as_fact": true
+  },
+  "case_builder_policy": {
+    "local_library_defines_case_structure": true,
+    "external_evidence_enriches_case": true,
+    "external_evidence_validates_case": true,
+    "external_evidence_must_not_replace_patient_state": true,
+    "hidden_diagnosis_must_remain_hidden": true
+  },
+  "runtime_research": {
+    "enabled": true,
+    "local_first": true,
+    "search_if_local_answer_missing": true,
+    "search_if_user_explicitly_requests": true,
+    "sources_must_be_shown": true,
+    "do_not_invent_clinical_knowledge_when_search_fails": true
+  }
+}
