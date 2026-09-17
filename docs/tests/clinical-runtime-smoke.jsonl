@@ -1,0 +1,7 @@
+{"test_id":"state-contract","description":"PatientGenerator -> PatientState must preserve presentation, hidden truth, clinical state, vitals and investigations.","knowledge_base":"knowledge_base/med_cm12_dispneia_knowledge_base.json","assertions":["patient_state_is_valid","hidden_state_preserved","clinical_state_preserved","vitals_preserved","investigations_preserved"]}
+{"test_id":"vital-blood-pressure","input":"Qual a PA?","expected_intent":"vital","expected_target":"blood_pressure","negative_example":"Paciente ingere álcool diariamente"}
+{"test_id":"vital-heart-rate","input":"Qual a FC?","expected_intent":"vital","expected_target":"heart_rate"}
+{"test_id":"vital-respiratory-rate","input":"Qual a FR?","expected_intent":"vital","expected_target":"respiratory_rate"}
+{"test_id":"investigation-d-dimer","input":"Solicito D-dímero","expected_intent":"investigation","expected_target":"d_dimer","knowledge_base":"knowledge_base/med_cm12_dispneia_knowledge_base.json"}
+{"test_id":"onset-coherence","description":"ClinicalState onset must derive from the generated presentation onset instead of being randomized independently.","assertions":["clinical_state_onset_equals_presentation_onset"]}
+{"test_id":"disease-selection","description":"PossibilityEngine must select only disease/condition/diagnosis entities as disease candidates.","assertions":["exclude_symptoms","exclude_signs","exclude_risk_factors","exclude_complications"]}
