@@ -146,6 +146,7 @@ class DiagnosisEngine {
         for (const [globalName, src] of dependencies) {
             if (typeof window[globalName] !== "function") await loadScript(src);
         }
+        await loadScript("Js/core/clinical-runtime-adapter.js");
     }
 
     setRoomLabel() {
