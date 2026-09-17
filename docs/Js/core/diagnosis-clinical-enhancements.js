@@ -2,8 +2,7 @@
  * Diagnosis Clinical Enhancements
  *
  * Integration layer for Medical Library, natural Portuguese communication,
- * and fictional examination results. Kept outside engine.js to avoid making
- * the core engine unnecessarily large.
+ * fictional examination results, and context-dependent clinical challenges.
  */
 (function (global) {
     "use strict";
@@ -31,7 +30,6 @@
                 existing.addEventListener("error", reject, { once: true });
                 return;
             }
-
             const script = document.createElement("script");
             script.src = src;
             script.async = true;
@@ -141,6 +139,76 @@
         return true;
     }
 
+    function createClinicalChallenge(engine, exam, association, result) {
+        const findings = association?.findings || [];
+        engine.pendingClinicalChallenge = {
+            type: "exam_interpretation",
+            examId: exam.id,
+            question: "O senhor notou alguma alteração relevante nesse exame?",
+            findings: [...findings],
+            result,
+            createdAt: Date.now()
+        };
+
+        engine.patientState.clinicalChallenges = engine.patientState.clinicalChallenges || [];
+        engine.patientState.clinicalChallenges.push({
+            type: "exam_interpretation",
+            exam: exam.id,
+            status: "pending",
+            question: engine.pendingClinicalChallenge.question,
+            findings: [...findings],
+            timestamp: Date.now()
+        });
+
+        engine.log("DESAFIO CLÍNICO", engine.pendingClinicalChallenge.question);
+        engine.renderState();
+    }
+
+    function evaluateClinicalChallenge(engine, text) {
+        const challenge = engine.pendingClinicalChallenge;
+        if (!challenge) return false;
+
+        const value = normalize(text);
+        const findings = challenge.findings || [];
+        const normalResponse = /\b(normal|normais|sem alteracao|sem alteracoes|sem alterações|normalidade|nada de anormal)\b/.test(value);
+        const mentionedFinding = findings.some(finding => value.includes(normalize(finding)));
+        const status = findings.length === 0
+            ? (normalResponse || /sem alter/.test(value) ? "coerente" : "registrada")
+            : (mentionedFinding ? "coerente" : "parcial");
+
+        const challenges = engine.patientState.clinicalChallenges || [];
+        const current = challenges[challenges.length - 1];
+        if (current) {
+            current.status = status;
+            current.answer = text;
+            current.answeredAt = Date.now();
+        }
+
+        engine.patientState.record({
+            type: "clinical_challenge",
+            challenge: challenge.type,
+            exam: challenge.examId,
+            question: challenge.question,
+            answer: text,
+            findings,
+            status,
+            timestamp: Date.now()
+        });
+
+        if (status === "coerente") {
+            engine.score = Number(engine.score || 0) + 2;
+            engine.log("AVALIAÇÃO", "Interpretação registrada e coerente com os achados disponíveis.");
+        } else if (status === "parcial") {
+            engine.log("AVALIAÇÃO", "Interpretação registrada. O exame continha achados que não foram explicitamente mencionados.");
+        } else {
+            engine.log("AVALIAÇÃO", "Resposta registrada para este ponto do caso.");
+        }
+
+        engine.pendingClinicalChallenge = null;
+        engine.renderState();
+        return true;
+    }
+
     function install(engine) {
         if (!engine || engine.__clinicalEnhancementsInstalled) return;
         engine.__clinicalEnhancementsInstalled = true;
@@ -174,11 +242,17 @@
         };
 
         engine.processAction = function (text) {
+            if (this.pendingClinicalChallenge) {
+                evaluateClinicalChallenge(this, text);
+                return;
+            }
+
             const exam = findExamination(this.examinationRules, text);
             if (exam && this.patientState) {
                 const association = findAssociation(exam, this);
                 const result = generateResult(exam, association);
                 applyExamination(this, exam, association, result);
+                createClinicalChallenge(this, exam, association, result);
                 return;
             }
 
