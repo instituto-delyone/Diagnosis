@@ -1,14 +1,16 @@
 /*
  * Diagnosis Clinical Enhancements
  *
- * Integration layer for Medical Library, natural Portuguese communication,
- * fictional examination results, and context-dependent clinical challenges.
+ * Integration layer for Medical Library, UMLS terminology, natural Portuguese
+ * communication, fictional examination results, and context-dependent
+ * clinical challenges.
  */
 (function (global) {
     "use strict";
 
     const CONFIG = {
         libraryScript: "Js/core/medical-library.js",
+        umlsScript: "Js/core/umls-resolver.js",
         conversationRules: "AI/CLINICAL_CONVERSATION_PT.json",
         examinationRules: "knowledge_base/examinations.json"
     };
@@ -230,15 +232,36 @@
                     this.medicalLibrary = new global.MedicalLibrary();
                     await this.medicalLibrary.init();
                     await this.medicalLibrary.loadAll();
-                    const summary = this.medicalLibrary.summary();
-                    this.log("BIBLIOTECA", `Medical Library: ${summary.loaded}/${summary.sources} fontes carregadas e ${summary.chunks} chunks indexados.`);
                 }
             } catch (error) {
                 console.warn("Medical Library indisponível:", error);
                 this.medicalLibrary = null;
             }
 
+            try {
+                await loadScript(CONFIG.umlsScript);
+            } catch (error) {
+                console.warn("UMLS Resolver indisponível:", error);
+            }
+
             await originalBoot();
+
+            if (typeof global.UMLSResolver === "function") {
+                try {
+                    this.umlsResolver = new global.UMLSResolver();
+                    this.log("UMLS", "Resolver terminológico conectado ao proxy seguro.");
+                } catch (error) {
+                    console.warn("Não foi possível inicializar o UMLS Resolver:", error);
+                    this.umlsResolver = null;
+                }
+            } else {
+                this.umlsResolver = null;
+            }
+
+            if (this.medicalLibrary) {
+                const summary = this.medicalLibrary.summary();
+                this.log("BIBLIOTECA", `Medical Library: ${summary.loaded}/${summary.sources} fontes carregadas e ${summary.chunks} chunks indexados.`);
+            }
         };
 
         engine.processAction = function (text) {
