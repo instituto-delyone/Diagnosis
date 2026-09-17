@@ -144,6 +144,7 @@
         const originalGenerate = global.PatientGenerator.prototype.generate;
         global.PatientGenerator.prototype.generate = function (options = {}) {
             const result = originalGenerate.call(this, options);
+            if (result?.clinicalState && result?.presentation?.onset?.type) result.clinicalState.onset = result.presentation.onset.type;
             if (result?.hidden_state) {
                 result.hidden_state = {
                     ...result.hidden_state,
