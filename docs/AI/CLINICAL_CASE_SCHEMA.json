@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Diagnosys Clinical Case",
+  "type": "object",
+  "required": [
+    "case_id",
+    "patient",
+    "presentation",
+    "initial_state",
+    "history",
+    "physical_exam",
+    "investigations",
+    "management",
+    "evolution",
+    "hidden"
+  ],
+  "properties": {
+    "case_id": { "type": "string" },
+    "patient": {
+      "type": "object",
+      "required": ["age", "sex"],
+      "properties": {
+        "age": { "type": "integer", "minimum": 0, "maximum": 130 },
+        "sex": { "type": "string" },
+        "occupation": { "type": "string" }
+      }
+    },
+    "presentation": {
+      "type": "object",
+      "required": ["chief_complaint", "initial_narrative", "vitals"],
+      "properties": {
+        "chief_complaint": { "type": "string" },
+        "initial_narrative": { "type": "string" },
+        "vitals": { "type": "object" }
+      }
+    },
+    "initial_state": {
+      "type": "object",
+      "properties": {
+        "stability": { "type": "string" },
+        "severity": { "type": "string" },
+        "time": { "type": "string" }
+      }
+    },
+    "history": { "type": "object" },
+    "physical_exam": { "type": "object" },
+    "investigations": { "type": "object" },
+    "management": { "type": "object" },
+    "evolution": { "type": "object" },
+    "hidden": {
+      "type": "object",
+      "required": ["diagnosis"],
+      "properties": {
+        "diagnosis": { "type": "string" },
+        "pathophysiology": { "type": "object" },
+        "differential": { "type": "array" }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "revelation_state": {
+      "type": "object",
+      "description": "Runtime-only state describing which facts have already been revealed to the user."
+    }
+  }
+}
