@@ -602,11 +602,27 @@ class PatientState {
                             ?.events
                     ),
 
-                current_state:
-                    ensureObject(
+                current_state: {
+                    ...ensureObject(
                         state.evolution
                             ?.current_state
                     ),
+
+                    stability:
+                        Number.isFinite(
+                            Number(
+                                state.evolution
+                                    ?.current_state
+                                    ?.stability
+                            )
+                        )
+                            ? Number(
+                                state.evolution
+                                    .current_state
+                                    .stability
+                            )
+                            : Number(state.initialStability) || 75
+                },
 
                 trajectory:
                     ensureArray(
@@ -614,6 +630,12 @@ class PatientState {
                             ?.trajectory
                     )
             },
+
+
+            clinicalState:
+                ensureObject(
+                    state.clinicalState
+                ),
 
 
             /* ==================================================
@@ -1232,11 +1254,6 @@ class PatientState {
 
     /* ============================================================
      * INTERNAL TRUTH
-     *
-     * IMPORTANTE:
-     * Estes métodos existem para os motores internos.
-     * A UI NÃO deve chamar getInternalTruth()
-     * para montar a apresentação do paciente.
      * ============================================================ */
 
     getInternalTruth() {
@@ -1260,19 +1277,6 @@ class PatientState {
             this.state.internal_truth
                 .physiological_state
         );
-    }
-
-
-    setPhysiologicalState(
-        key,
-        value
-    ) {
-
-        this.state.internal_truth
-            .physiological_state[key] =
-            deepClone(value);
-
-        return true;
     }
 
 
@@ -1310,20 +1314,17 @@ class PatientState {
                     ? intervention.time
                     : this.getCurrentTime(),
 
-            action:
-                intervention.action ||
+            type:
+                intervention.type ||
+                "intervention",
+
+            name:
+                intervention.name ||
                 null,
 
-            parameters:
-                ensureObject(
-                    intervention.parameters
-                ),
-
-            state_before:
-                deepClone(
-                    intervention.state_before ||
-                    {}
-                ),
+            indication:
+                intervention.indication ||
+                null,
 
             effects:
                 ensureArray(
@@ -1477,45 +1478,24 @@ class PatientState {
             physical_exam:
                 this.getPhysicalExam(),
 
-            physiological_state:
-                this.getPhysiologicalState(),
+            investigations:
+                this.getInvestigations(),
 
-            complications:
-                deepClone(
-                    this.state.internal_truth
-                        .complications
-                )
+            internal_truth:
+                this.getInternalTruth(),
+
+            revealed:
+                this.getRevealed(),
+
+            interventions:
+                this.getInterventions()
         };
     }
 
 
-    recordTrajectoryPoint(
-        label = null
-    ) {
-
-        const snapshot =
-            this.createSnapshot();
-
-        this.state.evolution
-            .trajectory
-            .push({
-
-                time:
-                    snapshot.time,
-
-                label,
-
-                state:
-                    snapshot
-            });
-
-        this.state.evolution
-            .current_state =
-            deepClone(snapshot);
-
-        return snapshot;
-    }
-
+    /* ============================================================
+     * TRAJETÓRIA
+     * ============================================================ */
 
     getTrajectory() {
 
@@ -1526,64 +1506,27 @@ class PatientState {
     }
 
 
+    addTrajectoryPoint(
+        point
+    ) {
+
+        if (!point) {
+            return null;
+        }
+
+        this.state.evolution
+            .trajectory
+            .push(
+                deepClone(point)
+            );
+
+        return true;
+    }
+
+
     /* ============================================================
      * COMPLICAÇÕES
      * ============================================================ */
-
-    addComplication(
-        complication
-    ) {
-
-        if (!complication) {
-            return false;
-        }
-
-        const exists =
-            this.state.internal_truth
-                .complications
-                .some(
-                    item =>
-                        item === complication ||
-                        item?.id === complication?.id
-                );
-
-        if (!exists) {
-
-            this.state.internal_truth
-                .complications
-                .push(
-                    deepClone(complication)
-                );
-        }
-
-        return true;
-    }
-
-
-    removeComplication(
-        complication
-    ) {
-
-        const list =
-            this.state.internal_truth
-                .complications;
-
-        const index =
-            list.findIndex(
-                item =>
-                    item === complication ||
-                    item?.id === complication?.id
-            );
-
-        if (index === -1) {
-            return false;
-        }
-
-        list.splice(index, 1);
-
-        return true;
-    }
-
 
     getComplications() {
 
@@ -1595,31 +1538,8 @@ class PatientState {
 
 
     /* ============================================================
-     * METADATA
+     * STATUS
      * ============================================================ */
-
-    setCaseId(
-        caseId
-    ) {
-
-        this.state.metadata.case_id =
-            caseId ?? null;
-
-        return true;
-    }
-
-
-    setKnowledgeBaseId(
-        knowledgeBaseId
-    ) {
-
-        this.state.metadata
-            .knowledge_base_id =
-            knowledgeBaseId ?? null;
-
-        return true;
-    }
-
 
     setStatus(
         status
@@ -1655,15 +1575,6 @@ class PatientState {
 
         const copy =
             this.toJSON();
-
-        /*
-         * Método reservado para futuras interfaces
-         * que precisem de uma representação pública.
-         *
-         * NÃO remover internal_truth daqui sem antes
-         * implementar explicitamente o mecanismo de
-         * exposição segura.
-         */
 
         return copy;
     }
@@ -1717,33 +1628,17 @@ class PatientState {
             knowledge_base_id:
                 this.getKnowledgeBaseId(),
 
-            age:
-                this.state.demographics.age,
-
-            sex:
-                this.state.demographics.sex,
-
-            chief_complaint:
-                this.state.presentation
-                    .chief_complaint
-                    .primary,
-
-            symptoms:
-                this.getSymptoms(),
-
             current_time:
                 this.getCurrentTime(),
 
+            status:
+                this.getStatus(),
+
+            diagnosis:
+                this.getDiagnosis(),
+
             interventions:
                 this.state.interventions.length,
-
-            investigations_requested:
-                this.state.investigations
-                    .requested.length,
-
-            investigations_performed:
-                this.state.investigations
-                    .performed.length,
 
             evolution_events:
                 this.state.evolution
@@ -1754,26 +1649,9 @@ class PatientState {
 
 
 /* ============================================================
- * EXPORTAÇÃO
+ * DISPONIBILIZAÇÃO GLOBAL
  * ============================================================ */
 
-if (
-    typeof window !== "undefined"
-) {
-    window.PatientState =
-        PatientState;
+if (typeof window !== "undefined") {
+    window.PatientState = PatientState;
 }
-
-
-if (
-    typeof module !== "undefined" &&
-    module.exports
-) {
-    module.exports =
-        PatientState;
-}
-
-
-/* ============================================================
- * FIM
- * ============================================================ */
