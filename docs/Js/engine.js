@@ -8,12 +8,8 @@
  */
 (function (global) {
     const CONFIG = {
-        caseLibraries: [
-            "knowledge_base/anemia_clinical_cases_degree_v1.json"
-        ],
-        theoryLibraries: [
-            "knowledge_base/anemia_theory_degree_v1.json"
-        ],
+        caseLibraries: ["knowledge_base/anemia_clinical_cases_degree_v1.json"],
+        theoryLibraries: ["knowledge_base/anemia_theory_degree_v1.json"],
         researchRules: "AI/CASE_RESEARCH_RULES.json",
         defaultRoom: "clinica"
     };
@@ -95,7 +91,15 @@
             this.researchRules = null;
             this.referenceRanges = null;
             this.pendingResearch = false;
-            this.context = {
+            this.score = 0;
+            this.errors = 0;
+            this.hints = 0;
+            this.time = 0;
+            this.context = this.createContext();
+        }
+
+        createContext() {
+            return {
                 phase: "investigation",
                 revealed: new Set(),
                 history: [],
@@ -103,6 +107,12 @@
                 score: 0,
                 errors: 0
             };
+        }
+
+        syncCompatibilityState() {
+            this.score = Number(this.context?.score || 0);
+            this.errors = Number(this.context?.errors || 0);
+            this.time = Number(this.context?.time || 0);
         }
 
         async boot() {
@@ -174,17 +184,18 @@
         }
 
         async startNewCase() {
-            this.context = { phase: "investigation", revealed: new Set(), history: [], time: 0, score: 0, errors: 0 };
+            this.context = this.createContext();
+            this.score = 0;
+            this.errors = 0;
+            this.time = 0;
             this.clearLog();
             this.research = null;
             this.pendingResearch = false;
+            this.pendingClinicalChallenge = null;
 
             const sourceCase = this.library.random();
-            if (!sourceCase) {
-                this.currentCase = this.createFallbackCase();
-            } else {
-                this.currentCase = await this.buildCase(sourceCase);
-            }
+            if (!sourceCase) this.currentCase = this.createFallbackCase();
+            else this.currentCase = await this.buildCase(sourceCase);
 
             this.patientState = this.createPatientState(this.currentCase);
             this.renderInitialCase();
@@ -244,7 +255,8 @@
         }
 
         createPatientState(caseData) {
-            return {
+            const engine = this;
+            const state = {
                 diagnosis: caseData.hidden?.diagnosis || null,
                 history: caseData.history || {},
                 physical_exam: caseData.physical_exam || {},
@@ -252,8 +264,34 @@
                 management: caseData.management || {},
                 evolution: caseData.evolution || {},
                 revealed: {},
-                stability: caseData.initial_state?.stability || "stable"
+                findings: [],
+                records: [],
+                clinicalChallenges: [],
+                stability: caseData.initial_state?.stability || "stable",
+
+                // Compatibility API used by the legacy clinical-enhancement layer.
+                advanceTime(type) {
+                    const increments = { investigation: 5, examination: 2, history: 1, treatment: 2, default: 1 };
+                    const delta = increments[type] ?? increments.default;
+                    engine.context.time += delta;
+                    engine.syncCompatibilityState();
+                    return engine.context.time;
+                },
+
+                addFinding(finding) {
+                    this.findings = this.findings || [];
+                    this.findings.push(finding);
+                    return finding;
+                },
+
+                record(entry) {
+                    this.records = this.records || [];
+                    this.records.push(entry);
+                    return entry;
+                }
             };
+
+            return state;
         }
 
         createFallbackCase() {
@@ -334,6 +372,7 @@
             const physicalAnswer = this.queryPatientState(input);
             if (physicalAnswer) {
                 this.context.time += 1;
+                this.syncCompatibilityState();
                 this.log("PACIENTE", physicalAnswer);
                 this.renderState();
                 return;
@@ -351,6 +390,8 @@
                 return;
             }
 
+            this.context.errors += 1;
+            this.syncCompatibilityState();
             this.log("SISTEMA", "Não encontrei uma ação clínica específica para essa frase. Tente perguntar sobre história, exame físico ou solicitar um exame disponível.");
         }
 
@@ -361,13 +402,13 @@
 
             if (/idade|quantos anos/.test(n)) return `Tenho ${this.currentCase.patient?.age ?? "idade não informada"} anos.`;
             if (/sexo|homem|mulher/.test(n)) return `Sou ${this.sexLabel(this.currentCase.patient?.sex).toLowerCase()}.`;
-
             if (/exame fisico|exame clinico|ao exame/.test(n)) return this.formatExam(pe);
 
             const termMap = [
                 ["ictericia|icterico|icterica", "icterícia"],
                 ["palidez|palido|palida", "palidez"],
                 ["sangramento|sangra|sangue", "sangramento"],
+                ["melena|fezes negras|fezes escurecidas", "melena"],
                 ["pica", "pica"],
                 ["glossite", "glossite"],
                 ["queilite", "queilite angular"],
@@ -378,7 +419,11 @@
             for (const [pattern, label] of termMap) {
                 if (new RegExp(pattern).test(n)) {
                     const found = this.findClinicalTerm(label, h, pe);
-                    if (found != null) return found ? `Sim. Há ${label} no caso.` : `Não. Não há ${label} registrado no caso.`;
+                    if (found != null) {
+                        return found
+                            ? `Sim. Há ${label} no caso.`
+                            : `Não. Não há ${label} registrado no caso.`;
+                    }
                 }
             }
 
@@ -391,9 +436,32 @@
         findClinicalTerm(label, history, physical) {
             const target = normalize(label);
             const text = normalize(JSON.stringify({ history, physical }));
-            if (text.includes(target)) return true;
-            const negatives = ["sem " + target, "nega " + target, "nao apresenta " + target];
-            if (negatives.some(item => text.includes(item))) return false;
+
+            // Evaluate explicit negative statements before generic presence.
+            const aliases = {
+                "icterícia": ["ictericia", "icterico", "icterica"],
+                "palidez": ["palidez", "palido", "palida"],
+                "sangramento": ["sangramento", "sangra"],
+                "melena": ["melena", "fezes negras", "fezes escurecidas"],
+                "pica": ["pica"],
+                "glossite": ["glossite"],
+                "queilite angular": ["queilite angular", "queilite"],
+                "edema": ["edema", "inchaco", "inchada", "inchado"],
+                "dor": ["dor"]
+            };
+            const candidates = aliases[label] || [target];
+            const negativePrefixes = ["sem", "nega", "nao apresenta", "nao ha", "nao tem", "ausencia de"];
+
+            for (const candidate of candidates) {
+                for (const prefix of negativePrefixes) {
+                    if (text.includes(`${prefix} ${candidate}`)) return false;
+                }
+            }
+
+            for (const candidate of candidates) {
+                if (text.includes(candidate)) return true;
+            }
+
             return null;
         }
 
@@ -416,12 +484,17 @@
         matchInvestigation(input) {
             const n = normalize(input);
             const inv = this.currentCase.investigations || {};
-            if (/hemograma|cbc/.test(n) && inv.initial) return { id: "initial_cbc", name: "Hemograma", result: inv.initial };
+
+            if (/hemograma|cbc|hemograma completo|complete blood count/.test(n) && inv.initial) {
+                return { id: "initial_cbc", name: "Hemograma", result: inv.initial };
+            }
 
             const list = flatten(inv.available || []);
             for (const item of list) {
                 const name = normalize(item?.exam || item?.name || item);
-                if (name && n.includes(name)) return { id: item.exam || item.id || name, name: item.exam || item.name || name, result: item };
+                if (name && n.includes(name)) {
+                    return { id: item.exam || item.id || name, name: item.exam || item.name || name, result: item };
+                }
             }
             return null;
         }
@@ -429,6 +502,16 @@
         revealInvestigation(exam) {
             this.context.time += 5;
             this.context.revealed.add(exam.id);
+            this.patientState.revealed = this.patientState.revealed || {};
+            this.patientState.revealed[exam.id] = exam.result;
+            this.patientState.investigations = this.patientState.investigations || {};
+            this.patientState.investigations[exam.id] = {
+                requested: true,
+                result: exam.result,
+                timestamp: Date.now()
+            };
+            this.patientState.record?.({ type: "investigation", target: exam.id, result: exam.result, timestamp: Date.now() });
+            this.syncCompatibilityState();
             this.log("INVESTIGAÇÃO", `${exam.name} solicitado.`);
             this.log("RESULTADO", this.formatInvestigationResult(exam));
             this.renderState();
@@ -454,7 +537,9 @@
             return "Resultado disponível conforme o caso clínico.";
         }
 
-        isReferenceQuestion(n) { return /valor de referencia|valores de referencia|normal|faixa de referencia/.test(n); }
+        isReferenceQuestion(n) {
+            return /valor de referencia|valores de referencia|normal|faixa de referencia/.test(n);
+        }
 
         answerReferenceQuestion(input) {
             const n = normalize(input);
@@ -494,19 +579,20 @@
         }
 
         showHint() {
+            this.hints += 1;
             this.log("DICA", "Comece pela história e pelo exame físico antes de avançar para exames complementares.");
         }
 
         renderState(age, sex) {
             if (!this.elements.stateList) return;
             const c = this.currentCase;
-            const revealed = [...this.context.revealed];
+            const revealed = [...(this.context?.revealed || [])];
             this.elements.stateList.innerHTML = [
                 `<li>Paciente: ${escapeHTML(sex || (c?.patient?.sex || "--"))}, ${escapeHTML(age || (c?.patient?.age ? c.patient.age + " anos" : "--"))}</li>`,
                 `<li>Estabilidade: ${escapeHTML(c?.initial_state?.stability || "--")}</li>`,
-                `<li>Tempo clínico: ${this.context.time} min</li>`,
+                `<li>Tempo clínico: ${this.context?.time || 0} min</li>`,
                 `<li>Exames revelados: ${revealed.length}</li>`,
-                `<li>Diagnóstico estabelecido: ${this.context.phase === "diagnosis" ? "sim" : "não"}</li>`
+                `<li>Diagnóstico estabelecido: ${this.context?.phase === "diagnosis" ? "sim" : "não"}</li>`
             ].join("");
         }
 
