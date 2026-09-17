@@ -1,0 +1,1523 @@
+{
+  "schema_version": "1.0",
+  "catalog_name": "Diagnosys — Catálogo Mestre de Doenças e Condições Clínicas",
+  "purpose": "Catálogo nominal unificado para servir como camada de identificação/conceitos do sistema.",
+  "link_policy": "Nenhum link de fonte é armazenado neste arquivo. As fontes são identificadas apenas por proveniência.",
+  "sources_included": [
+    "PCDT — Ministério da Saúde",
+    "MSD Manual Professional",
+    "Knowledge Base do Diagnosys"
+  ],
+  "counts": {
+    "pcdt_catalog_entries_considered": 176,
+    "msd_catalog_entries_considered": 28,
+    "knowledge_base_names_considered": 59,
+    "unique_master_entries": 249
+  },
+  "entries": [
+    {
+      "name": "Acidente Vascular Cerebral Isquêmico Agudo",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Acidente vascular encefálico",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Acidentes Escorpiônicos",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Acidentes Ofídicos",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Acromegalia",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Adenocarcinoma de Cólon e Reto",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Adenocarcinoma de Estômago",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Adenocarcinoma de Próstata",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Alergia alimentar",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Amiloidoses associadas à Transtirretina",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Anafilaxia",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Anemia da inflamação/doença crônica",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Anemia Deficiência de Ferro",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Anemia Hemolítica Autoimune",
+      "sources": [
+        "PCDT — Ministério da Saúde",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Anemia megaloblástica por B12/folato",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Anemia na Doença Renal Crônica - DRC",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Anemia por deficiência de ferro",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Anemia sideroblástica",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Aneurisma aorta abdominal",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Angina instável",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Angioedema deficiência C1 esterase",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Artrite Idiopática Juvenil",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Artrite Psoriásica",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Artrite Reativa",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Artrite Reumatóide",
+      "sources": [
+        "PCDT — Ministério da Saúde",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Asma",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Asma brônquica",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Assistência ao Parto Normal - Diretriz Nacional",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Atenção à Gestante a operação cesariana - Diretriz",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Atenção Integral às Pessoas com Doenças Raras (Linha de Cuidado)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Atenção Integral às Pessoas com Infecções Sexualmente Transmissíveis",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Aterosclerose",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Atrofia Muscular Espinhal",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Avaliação do paciente com problemas pulmonares",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Avaliação do paciente com problemas renais",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Avaliação do paciente dermatológico",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Avaliação do paciente gastrointestinal",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Beta-talassemia",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Blinatumomabe",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Bloqueio atrioventricular",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Brucelose Humana",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Câncer de Cabeça e Pescoço",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Câncer de Mama",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Câncer de Pulmão",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Carcinoma de Células Renais",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Carcinoma de Esôfago",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Carcinoma Diferenciado da Tireoide",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Carcinoma Hepatocelular no Adulto",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Cardiomiopatia hipertrófica",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Cirurgia de citorredução e hipertermoquimioterapia em caso de mesotelioma peritoneal maligno",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Cirurgia de citorredução e hipertermoquimioterapia em caso de pseudomixoma peritoneal",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Colangite Biliar Primária",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Comportamento Agressivo no Transtorno do Espectro do Autismo",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Cross-linking corneano no tratamento do ceratone",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Deficiência de alfa-1-antitripsina",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Deficiência de Biotinidase",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Deficiência de G6PD",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Deficiência do Hormônio de Crescimento - Hipopituitarismo",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Deficiência Intelectual - Protocolo para o Diagnóstico Etiológico",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Degeneração Macular Relacionada com a Idade - Portaria Conjunta nº 24",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Dermatite Atópica",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Descrição das lesões cutâneas",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Diabete Melito Tipo 1",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Diabete Melito Tipo 2",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Diabetes Insípido",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Diabetes mellitus",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Diabetes mellitus tipo 2",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Diagnóstico e tratamento de intoxicações por agrotóxicos - Capítulo 1",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Diagnóstico e tratamento de intoxicações por agrotóxicos - Capítulo 2",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Diagnóstico e tratamento de intoxicações por agrotóxicos - Capítulo 3",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Diagnóstico e tratamento de intoxicações por agrotóxicos - Capítulo 4",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Diagnóstico e tratamento de intoxicações por agrotóxicos - Capítulo 5",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Dislipidemia",
+      "sources": [
+        "PCDT — Ministério da Saúde",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Dissecção aórtica tipo A",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Dissecção de aorta",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Distonias e Espasmo Hemifacial",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Distrator Osteogênico Mandibular (DOM)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Distúrbio Mineral Ósseo na Doença Renal Crônica",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Distúrbios endócrinos — visão geral",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Doença arterial coronariana",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Doença arterial obstrutiva periférica",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Doença Celíaca",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Alzheimer",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Chagas",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Crohn",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Fabry",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Gaucher",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Niemann-Pick Tipo C (Diretriz Brasileira)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Paget",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Parkinson",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Pompe",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Wilson",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença Falciforme",
+      "sources": [
+        "PCDT — Ministério da Saúde",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Doença Pulmonar Obstrutiva Crônica",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença renal crônica",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Doenças autoimunes",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Doenças infecciosas — seção profissional",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Dor Crônica",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "DPOC",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Edema agudo de pulmão cardiogênico",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Embolia gordurosa",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Endocardite infecciosa",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Endometriose",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Epidermólise Bolhosa (Diretriz Brasileira)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Epilepsia",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Esclerose Lateral Amiotrófica",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Esclerose Múltipla",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Esclerose Sistêmica",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Esferocitose hereditária",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Espasticidade",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Espondilite Ancilosante",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Espondilite Anquilosante",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Esquizofrenia",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Estratégias para Atenuar a Progressão da Doença Renal Crônica",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Febre Reumática",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Fenilcetonúria",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Fibrilação atrial",
+      "sources": [
+        "MSD Manual Professional",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Fibrilação ventricular",
+      "sources": [
+        "MSD Manual Professional",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Fibrose Cística",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Flutter atrial",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Fratura do Colo do Fêmur em Idosos (Linha de Cuidado)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Fratura do Colo do Fêmur em Idosos - Tratamento - Diretrizes Brasileiras",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Glaucoma",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Gota",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hanseníase",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hemangioma Infantil",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hematologia — seção profissional",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Hemofilia A – Uso do Emicizumabe (Protocolo de Uso)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hemoglobinúria Paroxística Noturna",
+      "sources": [
+        "PCDT — Ministério da Saúde",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hepatite Autoimune",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hepatite B e coinfecções",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hepatite C e coinfecções",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hidradenite Supurativa",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hidroxocobalamina na intoxicação aguda por cianeto (Protocolo de Uso)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hiperplasia adrenal congênita",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hiperprolactinemia",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hipersensibilidade a medicamentos",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Hipertensão arterial resistente",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hipertensão Arterial Sistêmica",
+      "sources": [
+        "PCDT — Ministério da Saúde",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hipertensão do avental branco",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hipertensão essencial (primária)",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hipertensão mascarada",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hipertensão Pulmonar",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hipertensão secundária",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hipoglicemia grave",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hipoparatireoidismo",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hipotireoidismo Congênito",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Homocistinúria Clássica",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Ictioses Hereditárias",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Imunodeficiência Primária com Predominância de Defeitos de Anticorpos - Imunoglobulina Humana",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Imunossupressão no Transplante Cardíaco",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Imunossupressão no Transplante Hepático em Pediatria",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Imunossupressão no Transplante Renal",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Imunosupressão no Transplante Hépático em Adultos",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Incontinência Urinária não Neurogênica",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Indução de Imunotolerância para Indivíduos com Hemofilia A e Inibidor",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Infarto agudo do miocárdio com supradesnivelamento do segmento ST",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Infarto agudo do miocárdio sem supradesnivelamento do segmento ST",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Insuficiência Adrenal",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Insuficiência adrenal primária (doença de Addison)",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Insuficiência cardíaca",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Insuficiência cardíaca com fração de ejeção preservada",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Insuficiência Cardíaca com Fração de Ejeção Reduzida",
+      "sources": [
+        "PCDT — Ministério da Saúde",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Insuficiência Pancreática Exócrina",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Iodeto de Potássio na Emergência Nuclear",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Isotretinoína no tratamento da acne grave",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Leiomioma de útero",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Leucemia Linfoblástica Aguda Cromossoma Philadelphia Positivo de Crianças e Adolescentes (DDT)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Leucemia Linfoblástica Aguda Ph+ de Adulto com Mesilato de Imatinibe (DDT)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Leucemia Mieloide Aguda de Crianças e Adolescentes - Diretrizes Diagnósticas e Terapêuticas",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Leucemia Mieloide Aguda do Adulto - Diretrizes Diagnósticas e Terapêuticas",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Leucemia Mieloide Crônica de Criança e Adolescente",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Leucemia Mieloide Crônica do Adulto",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Linfangioleiomiomatose",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Linfoma de Hodgkin no Adulto",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Linfoma Difuso de Grandes Células B",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Linfoma Folicular",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Linha de Cuidado do Infarto Agudo do Miocárdio e o Protocolo de Síndromes Coronarianas Agudas",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Manejo da Infecção pelo HIV em Adultos - Módulo 1",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Manejo da Infecção pelo HIV em Adultos - Módulo 2",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Manejo da Infecção pelo HIV em Crianças e Adolescentes - Módulo 1",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Manejo da Infecção pelo HIV em Crianças e Adolescentes - Módulo 2",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Marca-passos cardíacos implantáveis e ressincronizadores (Protocolo de Uso)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Melanoma Cutâneo (DDT)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Mesotelioma Pleural",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Miastenia Gravis",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Mieloma Múltiplo (DDT)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Miopatias Inflamatórias",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Mucopolissacaridose do Tipo I",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Mucopolissacaridose do Tipo II",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Mucopolissacaridose do Tipo VII",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Mucopolissacaridose Tipo IV A",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Mucopolissacaridose Tipo VI",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Neurologia — seção profissional",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Nirsevimabe para Prevenção de Infecção do Trato Respiratório Inferior Associado ao Vírus Sincicial Respiratório para Bebês Prematuros ou com Comorbidades (Protocolo de Uso)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Osteoartrose",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Osteogênese Imperfeita",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Osteoporose",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Palivizumabe para a Prevenção da Infecção pelo Vírus Sincicial Respiratório (Protocolo de Uso)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Parada cardiorrespiratória",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Pessoas com Deficiência Auditiva (Linha de Cuidado)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Pneumoconiose",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Porfirias",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Prevenção da Transmissão Vertical do HIV, Sífilis e Hepatites Virais",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Profilaxia Pós-Exposição de Risco (PEP) à Infecção pelo HIV",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Profilaxia Pré-Exposição (PrEP) Oral à Infecção pelo HIV",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Profilaxia primária em caso de Hemofilia Grave (Protocolo de Uso)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Psoríase",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Puberdade Precoce Central",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Raquitismo e Osteomalácia",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Rastreamento do Câncer do Colo do Útero (Diretriz Brasileira)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Retinopatia Diabética",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Reumatologia e ortopedia — seção profissional",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Síndrome aórtica aguda",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Síndrome coronariana aguda",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Síndrome de Falência Medular",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Síndrome de Guillain-Barré",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Síndrome de Ovários Policísticos",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Síndrome de Turner",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Síndrome de Wolff-Parkinson-White",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Síndrome hemolítica",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Síndrome hemolítico-urêmica",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Síndrome Mielodisplásica de Baixo Risco",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Síndrome Nefrótica Primária em Adultos",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Síndrome Nefrótica Primária em Crianças e Adolescentes",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Sintomas gastrointestinais",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Sobrecarga de Ferro",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Sobrepeso e Obesidade em Adultos",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Tabagismo",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Talidomida no tratamento da Doença Enxerto Contra Hospedeiro e do Mieloma Múltiplo",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Taquicardia supraventricular paroxística",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Taquicardia ventricular",
+      "sources": [
+        "MSD Manual Professional",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "TEP maciço",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Testes de função pulmonar",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Testes diagnósticos para doenças cutâneas",
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Transtorno Afetivo Bipolar do Tipo I",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Transtorno Esquizoafetivo",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Trombocitopenia Imune Primária",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Tromboembolia pulmonar",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Tromboembolismo pulmonar",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Tromboembolismo Venoso em Gestantes com Trombofilia",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Trombose venosa profunda",
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Tumor Cerebral no Adulto (DDT)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Tumor do Estroma Gastrointestinal",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Utilização de Endoprótese em Aorta Torácica Descendente (Diretrizes Brasileiras)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Utilização de Stents em Pacientes com Doença Coronariana Estável (Diretrizes Brasileiras)",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Uveítes não Infecciosas",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Vasculite",
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    }
+  ]
+}
