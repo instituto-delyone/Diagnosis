@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "name": "Diagnosis Medical Library Rules",
+  "purpose": "Define how the Diagnosis Engine reads, indexes and exposes the extra medical knowledge stored in docs/medical_library.",
+  "principles": [
+    "Medical Library is knowledge, not a case bank.",
+    "The original source file remains the provenance of extracted knowledge.",
+    "Extracted text is indexed for lexical and semantic retrieval; it does not become a diagnosis by itself.",
+    "A word is not an action. Action is determined from the relationship between the user's phrase, the current context and the available knowledge.",
+    "Knowledge retrieved from the library may enrich vocabulary, explanations, investigation interpretation and clinical reasoning, but must not reveal the hidden diagnosis at case start.",
+    "The engine must preserve the distinction between source knowledge, patient state, user action and diagnostic hypothesis."
+  ],
+  "library_root": "medical_library",
+  "source_types": {
+    "pdf": {
+      "enabled": true,
+      "extract_text": true,
+      "index_text": true,
+      "retain_source_reference": true
+    },
+    "docx": {
+      "enabled": true,
+      "extract_text": true,
+      "index_text": true,
+      "retain_source_reference": true
+    },
+    "other": {
+      "enabled": false,
+      "index_text": false
+    }
+  },
+  "processing": {
+    "preserve_original_text": true,
+    "normalize_for_search": true,
+    "remove_duplicate_passages": true,
+    "minimum_term_length": 3,
+    "chunk_target_characters": 1800,
+    "chunk_overlap_characters": 250,
+    "max_chunks_per_source": 5000
+  },
+  "retrieval": {
+    "use_for": [
+      "vocabulary",
+      "clinical_concepts",
+      "symptoms",
+      "signs",
+      "physical_examination",
+      "investigations",
+      "pathophysiology",
+      "differential_reasoning",
+      "treatment_concepts",
+      "complications",
+      "clinical_explanations"
+    ],
+    "query_strategy": "context_plus_user_text",
+    "rank_by": [
+      "exact_term_match",
+      "phrase_match",
+      "concept_match",
+      "chunk_relevance"
+    ],
+    "default_top_k": 6,
+    "minimum_relevance": 0.18
+  },
+  "memory": {
+    "session_memory": true,
+    "remember_loaded_sources_during_session": true,
+    "knowledge_state_values": [
+      "loading",
+      "loaded",
+      "error",
+      "unavailable"
+    ],
+    "ui_indicator": true,
+    "ui_loaded_state": "green"
+  },
+  "ui": {
+    "panel_id": "medicalLibraryStatus",
+    "show_source_name": true,
+    "show_status": true,
+    "show_chunk_count": true,
+    "show_loaded_sources": true,
+    "green_means": "source text successfully extracted and indexed for the current session"
+  },
+  "safety": {
+    "never_store_real_patient_data": true,
+    "never_treat_source_text_as_patient_state": true,
+    "never_auto_convert_retrieved_text_into_a_diagnosis": true,
+    "never_expose_hidden_case_diagnosis_from_library_retrieval": true,
+    "retain_provenance": true
+  },
+  "future_persistence": {
+    "enabled": false,
+    "planned_path": "knowledge_base/evidence",
+    "description": "A later layer may persist structured evidence and indexes in GitHub. This rules file does not authorize direct browser writes to GitHub."
+  }
+}
