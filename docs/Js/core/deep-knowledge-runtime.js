@@ -194,10 +194,12 @@
     window.DeepKnowledgeRuntime = DeepKnowledgeRuntime;
 
     function install() {
+        if (window.__deepKnowledgeRuntimeInstalled) return;
         if (!window.DiagnosisEngine || !window.KnowledgeDrivenCaseGenerator) {
             console.warn("Deep Knowledge Runtime: engine principal ainda não está disponível.");
             return;
         }
+        window.__deepKnowledgeRuntimeInstalled = true;
 
         const originalBoot = window.DiagnosisEngine.prototype.boot;
         const originalStartNewCase = window.DiagnosisEngine.prototype.startNewCase;
@@ -341,11 +343,6 @@
             this.setText("difficultyLabelMeta", `Degree ${this.currentCase.knowledgeDegree}/7`);
         };
 
-        /*
-         * O boot original já cria o primeiro caso antes do nosso runtime.
-         * Assim que o Deep Knowledge terminar de carregar, substituímos por
-         * um caso profundo. Os casos antigos continuam como fallback.
-         */
         const originalBootWithDeep = window.DiagnosisEngine.prototype.boot;
         window.DiagnosisEngine.prototype.boot = async function () {
             await originalBootWithDeep.call(this);
@@ -355,9 +352,10 @@
         console.info("Deep Knowledge Runtime instalado.");
     }
 
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", install, { once: true });
-    } else {
-        install();
-    }
+    /*
+     * Os scripts são carregados no final do HTML, antes do DOMContentLoaded.
+     * A instalação precisa ocorrer imediatamente para que o boot registrado
+     * pelo engine.js já utilize os métodos profundos.
+     */
+    install();
 })();
