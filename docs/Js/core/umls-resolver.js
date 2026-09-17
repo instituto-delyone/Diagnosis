@@ -23,6 +23,20 @@
  *   público. O navegador conversa com um proxy seguro configurado em
  *   `baseUrl`; o proxy mantém a credencial do UMLS no servidor.
  *
+ * FLUXO:
+ *
+ *   texto clínico
+ *        ↓
+ *   UMLSResolver
+ *        ↓
+ *   proxy seguro
+ *        ↓
+ *   UMLS REST API
+ *        ↓
+ *   CUI / conceito / semântica
+ *        ↓
+ *   CSI / Clinical Interlocutor
+ *
  * ============================================================
  */
 (function (global) {
@@ -92,6 +106,9 @@
             }
         }
 
+        /* ======================================================
+           SEARCH
+           ====================================================== */
         async search(term, options = {}) {
             const text = String(term || "").trim();
 
@@ -127,6 +144,9 @@
             };
         }
 
+        /* ======================================================
+           CONCEPT
+           ====================================================== */
         async getConcept(cui) {
             const id = String(cui || "").trim();
 
@@ -148,6 +168,9 @@
             };
         }
 
+        /* ======================================================
+           ATOMS
+           ====================================================== */
         async getAtoms(cui, options = {}) {
             const id = String(cui || "").trim();
 
@@ -177,6 +200,9 @@
             };
         }
 
+        /* ======================================================
+           DEFINITIONS
+           ====================================================== */
         async getDefinitions(cui, options = {}) {
             const id = String(cui || "").trim();
 
@@ -199,6 +225,9 @@
             };
         }
 
+        /* ======================================================
+           RELATIONS
+           ====================================================== */
         async getRelations(cui, options = {}) {
             const id = String(cui || "").trim();
 
@@ -216,6 +245,9 @@
             };
         }
 
+        /* ======================================================
+           NORMALIZAÇÃO CSI
+           ====================================================== */
         async normalize(text, options = {}) {
             const rawText = String(text || "").trim();
 
