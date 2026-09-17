@@ -120,11 +120,41 @@
             if (!description && type === "chronic") description = "de evolução crônica";
             return { type, description };
         };
+
+        const originalHiddenState = global.PatientGenerator.prototype.generateHiddenState;
+        global.PatientGenerator.prototype.generateHiddenState = function (disease, severity, options = {}) {
+            const state = originalHiddenState.call(this, disease, severity, options) || {};
+            return {
+                ...state,
+                riskFactors: Array.isArray(options.hiddenRiskFactors) ? [...options.hiddenRiskFactors] : state.riskFactors || [],
+                etiology: options.hiddenEtiology ?? state.etiology ?? null,
+                differential: Array.isArray(options.hiddenDifferentials) ? [...options.hiddenDifferentials] : state.differential || [],
+                treatments: Array.isArray(options.hiddenTreatments) ? [...options.hiddenTreatments] : state.treatments || [],
+                complications: Array.isArray(options.hiddenComplications) ? [...options.hiddenComplications] : state.complications || []
+            };
+        };
+
         const originalClinicalState = global.PatientGenerator.prototype.generateClinicalState;
         global.PatientGenerator.prototype.generateClinicalState = function (disease, severity, presentation = null) {
             const state = originalClinicalState.call(this, disease, severity) || {};
             state.onset = presentation?.onset?.type || state.onset || "subacute";
             return state;
+        };
+
+        const originalGenerate = global.PatientGenerator.prototype.generate;
+        global.PatientGenerator.prototype.generate = function (options = {}) {
+            const result = originalGenerate.call(this, options);
+            if (result?.hidden_state) {
+                result.hidden_state = {
+                    ...result.hidden_state,
+                    riskFactors: result.riskFactors || result.hidden_state.riskFactors || [],
+                    etiology: result.etiology ?? result.hidden_state.etiology ?? null,
+                    differential: result.differentials || result.hidden_state.differential || [],
+                    treatments: result.treatments || result.hidden_state.treatments || [],
+                    complications: result.complications || result.hidden_state.complications || []
+                };
+            }
+            return result;
         };
     }
 
