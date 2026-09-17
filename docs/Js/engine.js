@@ -1,195 +1,165 @@
 "use strict";
 
 /*
- * Diagnosis: knowledge-driven fictional patient simulator.
+ * Diagnosys — clinical simulation orchestrator.
  *
- * The case generator remains knowledge-driven, but the interaction layer is
- * conversational: natural-language input is interpreted before the case phase
- * is evaluated. No external LLM/API is required for the local conversation.
+ * This layer owns the patient truth, case presentation and conversation loop.
+ * Knowledge/research/building are delegated to dedicated modules when available.
  */
-(function () {
-    const KNOWLEDGE_FILES = {
-        interaction: "knowledge_base/interaction/cardiologia/cardiologia_tratado_interaction_v1.json",
-        structured: [
-            "knowledge_base/cirurgia_4.json",
-            "knowledge_base/hipertensao_arterial.json",
-            "knowledge_base/neurologia.json",
-            "knowledge_base/reumatologia.json",
-            "knowledge_base/endocrinologia.json"
-        ]
+(function (global) {
+    const CONFIG = {
+        caseLibraries: [
+            "knowledge_base/anemia_clinical_cases_degree_v1.json"
+        ],
+        theoryLibraries: [
+            "knowledge_base/anemia_theory_degree_v1.json"
+        ],
+        researchRules: "AI/CASE_RESEARCH_RULES.json",
+        defaultRoom: "clinica"
     };
 
-    const PHASES = ["investigation", "diagnosis", "treatment", "completed"];
-    const normalize = value => String(value || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[!?.,;:()[\]{}]/g, " ").replace(/\s+/g, " ").trim();
-    const flatten = value => Array.isArray(value) ? value.flat(Infinity) : value == null ? [] : [value];
-    const escapeHTML = value => String(value || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    const normalize = value => String(value || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
 
-    class KnowledgeDrivenCaseGenerator {
-        constructor() { this.corpus = null; this.structured = []; }
+    const escapeHTML = value => String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    const flatten = value => Array.isArray(value) ? value.flat(Infinity) : value == null ? [] : [value];
+
+    async function loadScript(src) {
+        if ([...document.scripts].some(script => script.src.endsWith(src))) return;
+        await new Promise((resolve, reject) => {
+            const script = document.createElement("script");
+            script.src = src;
+            script.onload = resolve;
+            script.onerror = () => reject(new Error(`Falha ao carregar ${src}`));
+            document.head.appendChild(script);
+        });
+    }
+
+    class CaseLibrary {
+        constructor(paths = CONFIG.caseLibraries) {
+            this.paths = paths;
+            this.cases = [];
+            this.theory = [];
+        }
 
         async load() {
-            const files = [KNOWLEDGE_FILES.interaction, ...KNOWLEDGE_FILES.structured];
-            for (const file of files) {
+            for (const path of this.paths) {
                 try {
-                    const response = await fetch(file, { cache: "no-store" });
+                    const response = await fetch(path, { cache: "no-store" });
                     if (!response.ok) continue;
                     const data = await response.json();
-                    if (file.includes("interaction")) this.corpus = data;
-                    else this.structured.push({ file, data });
+                    if (Array.isArray(data?.cases)) this.cases.push(...data.cases);
+                    else if (Array.isArray(data)) this.cases.push(...data);
                 } catch (error) {
-                    console.warn("Knowledge source unavailable:", file, error);
+                    console.warn("Biblioteca de casos indisponível:", path, error);
+                }
+            }
+
+            for (const path of CONFIG.theoryLibraries) {
+                try {
+                    const response = await fetch(path, { cache: "no-store" });
+                    if (!response.ok) continue;
+                    this.theory.push(await response.json());
+                } catch (error) {
+                    console.warn("Biblioteca teórica indisponível:", path, error);
                 }
             }
         }
 
-        terms(group) {
-            return Object.entries(this.corpus?.lexicon?.[group] || {}).map(([id, aliases]) => ({
-                id,
-                name: aliases?.[0] || id,
-                aliases: flatten(aliases)
-            }));
-        }
-
-        sections(query) {
-            const words = normalize(query).split(" ").filter(word => word.length > 2);
-            return (this.corpus?.sections || [])
-                .map(section => {
-                    const searchable = normalize([section.chapter, section.section, section.search_terms, section.source_text].flat().join(" "));
-                    const score = words.reduce((total, word) => total + (searchable.includes(word) ? 1 : 0), 0);
-                    return { ...section, score };
-                })
-                .filter(section => section.score > 0)
-                .sort((a, b) => b.score - a.score)
-                .slice(0, 8);
-        }
-
-        text(section) { return flatten(section?.source_text).join(" "); }
-        random(items) { return items[Math.floor(Math.random() * items.length)]; }
-
-        generate() {
-            const diseases = this.terms("conditions");
-            const disease = this.random(diseases.length ? diseases : [{ id: "cardiac_condition", name: "condição cardiovascular", aliases: [] }]);
-            const symptoms = this.terms("symptoms");
-            const selectedSymptoms = symptoms.sort(() => Math.random() - .5).slice(0, Math.min(3, Math.max(1, symptoms.length)));
-            const evidence = this.sections(`${disease.name} quadro clínico diagnóstico tratamento`);
-            const diagnosisSections = this.sections(`${disease.name} diagnóstico`);
-            const treatmentSections = this.sections(`${disease.name} tratamento manejo`);
-            const investigations = this.terms("investigations").filter(item => /ecg|eco|radiograf|troponina|cateter|resson|esforco|teste/.test(normalize(item.name))).slice(0, 4);
-            const age = 25 + Math.floor(Math.random() * 60);
-
-            return {
-                id: `fictional_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
-                title: disease.name,
-                specialty: "Cardiologia",
-                difficulty: "Gerado por conhecimento",
-                fictional: true,
-                source: {
-                    corpus: KNOWLEDGE_FILES.interaction,
-                    evidenceSections: evidence.map(section => ({ id: section.id, chapter: section.chapter, section: section.section }))
-                },
-                demographics: { age, sex: Math.random() > .5 ? "female" : "male" },
-                presentation: {
-                    chief_complaint: {
-                        symptoms: selectedSymptoms.map(item => item.id),
-                        labels: selectedSymptoms.map(item => item.name),
-                        narrative: `Paciente de ${age} anos apresenta ${selectedSymptoms.map(item => item.name).join(", ")}.`
-                    }
-                },
-                expected: {
-                    investigation: investigations.flatMap(item => [item.id, item.name, ...item.aliases]),
-                    diagnosis: [disease.id, disease.name, ...disease.aliases],
-                    treatment: treatmentSections.flatMap(section => [section.section, ...flatten(section.search_terms)]).slice(0, 12)
-                },
-                educational: {
-                    etiology: this.text(this.sections(`${disease.name} etiologia etiopatogenia`)[0]),
-                    pathophysiology: this.text(this.sections(`${disease.name} fisiopatologia`)[0]),
-                    diagnosis: this.text(diagnosisSections[0]),
-                    treatment: this.text(treatmentSections[0]),
-                    references: evidence
-                }
-            };
-        }
-
-        validate(caseData) {
-            const errors = [];
-            if (!caseData.fictional) errors.push("Case is not marked fictional");
-            if (!caseData.title) errors.push("Missing condition");
-            if (!caseData.presentation?.chief_complaint?.symptoms?.length) errors.push("Missing presentation");
-            if (!caseData.expected?.diagnosis?.length) errors.push("Missing diagnosis candidates");
-            return { valid: errors.length === 0, errors };
+        random() {
+            if (!this.cases.length) return null;
+            return structuredClone(this.cases[Math.floor(Math.random() * this.cases.length)]);
         }
     }
 
     class DiagnosisEngine {
         constructor() {
             const params = new URLSearchParams(location.search);
-            this.room = params.get("sala") === "vermelha" ? "vermelha" : "clinica";
-            this.generator = new KnowledgeDrivenCaseGenerator();
-            this.currentCase = null;
-            this.research = null;
+            this.room = params.get("sala") || CONFIG.defaultRoom;
             this.elements = {};
-            this.semanticResolver = null;
+            this.library = new CaseLibrary();
+            this.currentCase = null;
+            this.patientState = null;
+            this.research = null;
+            this.researchRules = null;
+            this.referenceRanges = null;
+            this.pendingResearch = false;
             this.context = {
                 phase: "investigation",
+                revealed: new Set(),
                 history: [],
-                answered: {},
-                pendingAction: null
+                time: 0,
+                score: 0,
+                errors: 0
             };
-            this.score = 0;
-            this.errors = 0;
-            this.hints = 0;
-            this.time = 0;
-        }
-
-        async loadSemanticRuntime() {
-            if (window.ClinicalKnowledgeResolver) {
-                this.semanticResolver = new window.ClinicalKnowledgeResolver({ basePath: "knowledge_base/interaction" });
-                try {
-                    await this.semanticResolver.load([KNOWLEDGE_FILES.interaction]);
-                    this.log("SEMÂNTICA", `CSI carregado: ${this.semanticResolver.summary().semantic_concepts} conceitos e ${this.semanticResolver.summary().semantic_intents} intenções.`);
-                } catch (error) {
-                    console.warn("CSI runtime unavailable:", error);
-                }
-                return;
-            }
-
-            await new Promise((resolve, reject) => {
-                const script = document.createElement("script");
-                script.src = "Js/core/clinical-knowledge-resolver.js";
-                script.onload = resolve;
-                script.onerror = () => reject(new Error("Não foi possível carregar ClinicalKnowledgeResolver."));
-                document.head.appendChild(script);
-            });
-
-            this.semanticResolver = new window.ClinicalKnowledgeResolver({ basePath: "knowledge_base/interaction" });
-            try {
-                await this.semanticResolver.load([KNOWLEDGE_FILES.interaction]);
-                const summary = this.semanticResolver.summary();
-                this.log("SEMÂNTICA", `CSI carregado: ${summary.semantic_concepts} conceitos e ${summary.semantic_intents} intenções.`);
-            } catch (error) {
-                console.warn("CSI runtime unavailable:", error);
-            }
         }
 
         async boot() {
             this.bindUI();
             this.setText("roomLabel", this.room === "vermelha" ? "Sala Vermelha" : "Sala Clínica");
             this.setText("roomLabelMeta", this.room === "vermelha" ? "Sala Vermelha" : "Sala Clínica");
-            this.createAcademicPanel();
-            await this.loadSemanticRuntime();
-            await this.generator.load();
-            this.startNewCase();
+            await this.loadModules();
+            await this.library.load();
+            await this.loadResearchRules();
+            await this.loadReferenceRanges();
+            await this.startNewCase();
+        }
+
+        async loadModules() {
+            try { await loadScript("Js/core/case-builder.js"); } catch (e) { console.warn(e); }
+            try { await loadScript("Js/core/case-research-engine.js"); } catch (e) { console.warn(e); }
+            try { await loadScript("Js/core/reference-range-resolver.js"); } catch (e) { console.warn(e); }
+        }
+
+        async loadResearchRules() {
+            try {
+                const response = await fetch(CONFIG.researchRules, { cache: "no-store" });
+                if (response.ok) this.researchRules = await response.json();
+            } catch (error) {
+                console.warn("Regras de pesquisa externa indisponíveis:", error);
+            }
+        }
+
+        async loadReferenceRanges() {
+            try {
+                const response = await fetch("knowledge_base/reference_ranges.json", { cache: "no-store" });
+                if (response.ok) this.referenceRanges = await response.json();
+            } catch (error) {
+                console.warn("Tabela de referências indisponível:", error);
+            }
         }
 
         bindUI() {
             this.elements = {
+                title: document.getElementById("caseTitle"),
+                intro: document.getElementById("caseIntro"),
+                log: document.getElementById("clinicalLog"),
                 input: document.getElementById("actionInput"),
                 send: document.getElementById("sendBtn"),
                 hint: document.getElementById("hintBtn"),
                 science: document.getElementById("scienceBtn"),
                 next: document.getElementById("nextBtn"),
-                log: document.getElementById("clinicalLog")
+                back: document.getElementById("backBtn"),
+                stateList: document.getElementById("stateList"),
+                fc: document.getElementById("fc"),
+                rr: document.getElementById("rr"),
+                spo2: document.getElementById("spo2"),
+                pa: document.getElementById("pa"),
+                temp: document.getElementById("temp"),
+                glucose: document.getElementById("glucose")
             };
+
             this.elements.send?.addEventListener("click", () => this.submit());
             this.elements.input?.addEventListener("keydown", event => {
                 if (event.key === "Enter") {
@@ -197,262 +167,352 @@
                     this.submit();
                 }
             });
-            this.elements.hint?.addEventListener("click", () => this.hint());
-            this.elements.science?.addEventListener("click", () => this.academicAnswers());
             this.elements.next?.addEventListener("click", () => this.startNewCase());
+            this.elements.science?.addEventListener("click", () => this.researchOnDemand("Base científica solicitada pelo médico."));
+            this.elements.hint?.addEventListener("click", () => this.showHint());
+            this.elements.back?.addEventListener("click", () => this.log("SISTEMA", "Não há uma etapa anterior disponível neste caso."));
         }
 
-        createAcademicPanel() {
-            if (document.getElementById("academicResearchPanel")) return;
-            const panel = document.createElement("section");
-            panel.id = "academicResearchPanel";
-            panel.className = "panel";
-            panel.style.marginTop = "14px";
-            panel.innerHTML = `<div class="panel-header"><div><div class="panel-title">Conhecimento acadêmico</div><div class="panel-subtitle">Fontes locais do tratado e literatura atual</div></div></div><div id="academicResearchContent" style="padding:16px;line-height:1.6;color:var(--muted)"><p>O caso é gerado a partir do conhecimento local. Clique em “Base científica” para estudar a doença.</p></div>`;
-            document.querySelector("main")?.insertAdjacentElement("afterend", panel);
-        }
-
-        startNewCase() {
-            this.context = { phase: "investigation", history: [], answered: {}, pendingAction: null };
-            this.score = 0;
-            this.errors = 0;
-            this.hints = 0;
-            this.time = 0;
-            this.research = null;
+        async startNewCase() {
+            this.context = { phase: "investigation", revealed: new Set(), history: [], time: 0, score: 0, errors: 0 };
             this.clearLog();
-            this.setResearch("<p>Novo paciente fictício gerado a partir da base de conhecimento.</p>");
+            this.research = null;
+            this.pendingResearch = false;
 
-            let generated = this.generator.generate();
-            for (let attempt = 0; attempt < 5 && !this.generator.validate(generated).valid; attempt++) generated = this.generator.generate();
-            this.currentCase = generated;
+            const sourceCase = this.library.random();
+            if (!sourceCase) {
+                this.currentCase = this.createFallbackCase();
+            } else {
+                this.currentCase = await this.buildCase(sourceCase);
+            }
 
-            this.log("NOVO CASO", "Paciente fictício gerado por conhecimento clínico. Nenhum caso real foi utilizado.");
-            this.log("PACIENTE", "Estou pronto. Você pode perguntar sobre a queixa, história, sintomas ou me dizer o que pretende fazer.");
-            this.render();
+            this.patientState = this.createPatientState(this.currentCase);
+            this.renderInitialCase();
+            this.log("SISTEMA", "Novo caso clínico carregado. O diagnóstico permanece oculto.");
         }
 
-        submit() {
-            const value = this.elements.input?.value.trim();
-            if (!value) return;
-            this.elements.input.value = "";
-            this.log("VOCÊ", value);
-            this.process(value);
+        async buildCase(sourceCase) {
+            let evidence = { enabled: false, evidence: [] };
+
+            if (global.CaseResearchEngine && this.researchRules) {
+                try {
+                    const researcher = new global.CaseResearchEngine({ config: this.researchRules });
+                    evidence = await researcher.research(sourceCase);
+                } catch (error) {
+                    console.warn("Pesquisa externa durante geração falhou:", error);
+                }
+            }
+
+            if (global.CaseBuilder) {
+                try {
+                    return new global.CaseBuilder({ caseSource: sourceCase, research: evidence }).build();
+                } catch (error) {
+                    console.warn("CaseBuilder falhou; usando caso local:", error);
+                }
+            }
+
+            return this.normalizeCase(sourceCase, evidence);
         }
 
-        semanticInterpret(input) {
-            try {
-                return this.semanticResolver?.resolveSemantic?.(input) || null;
-            } catch (error) {
-                console.warn("Semantic interpretation failed:", error);
-                return null;
-            }
-        }
-
-        isQuestion(value) {
-            return /^(o que|qual|como|quando|onde|por que|porque|há quanto|quanto tempo|me diga|pode me dizer|refere|refere-se)/.test(value)
-                || /\?$/.test(String(value || "").trim());
-        }
-
-        detectAction(input, semantic) {
-            const value = normalize(input);
-            const history = this.context.history;
-            const previous = history[history.length - 1];
-
-            const medicationNames = [
-                "diazepam", "midazolam", "lorazepam", "haloperidol", "fenitoina", "fenobarbital",
-                "levetiracetam", "valproato", "insulina", "adrenalina", "noradrenalina", "morfina", "furosemida"
-            ];
-            const treatmentVerb = /\b(trato|tratar|inicio|iniciar|administro|administrar|prescrevo|prescrever|dou|dar|manejo|conduta|interven[cç][aã]o|terapia)\b/.test(value);
-            const hasMedication = medicationNames.some(name => value.includes(name));
-            const investigation = /\b(ecg|eletrocardiograma|eco|ecocardiograma|ultrassom|radiografia|raio x|troponina|cateter|ressonancia|ressonancia magnetica|exame|investigar|investigacao|solicito)\b/.test(value);
-            const diagnosis = /\b(diagnostico|diagnosticar|hipotese|hipotese diagnostica|penso em|acredito que|suspeito de)\b/.test(value);
-
-            if (hasMedication && (previous?.action === "treatment" || previous?.intent === "treatment")) {
-                return { type: "treatment_detail", concept: input.trim(), semantic };
-            }
-            if (treatmentVerb || hasMedication || semantic?.intent === "treatment_proposal" || semantic?.action === "record_treatment") {
-                return { type: "treatment", concept: input.trim(), semantic };
-            }
-            if (investigation) return { type: "investigation", concept: input.trim(), semantic };
-            if (diagnosis || (this.context.phase === "diagnosis" && !this.isQuestion(value))) return { type: "diagnosis", concept: input.trim(), semantic };
-            if (this.isQuestion(value)) return { type: "question", concept: input.trim(), semantic };
-            return { type: "statement", concept: input.trim(), semantic };
-        }
-
-        answerQuestion(input) {
-            const value = normalize(input);
-            const p = this.currentCase.presentation?.chief_complaint || {};
-            const labels = p.labels || [];
-
-            if (/queixa|motivo|trouxe|veio|consulta/.test(value)) {
-                return `Minha queixa principal é ${labels.join(", ") || "o quadro descrito na apresentação"}.`;
-            }
-            if (/sintoma|sentindo|sente|refer/.test(value)) {
-                return `Estou apresentando ${labels.join(", ") || "os sintomas descritos no caso"}.`;
-            }
-            if (/idade|quantos anos/.test(value)) {
-                return `Tenho ${this.currentCase.demographics.age} anos.`;
-            }
-            if (/quem|sexo|homem|mulher/.test(value)) {
-                return `Sexo registrado no caso: ${this.currentCase.demographics.sex === "female" ? "feminino" : "masculino"}.`;
-            }
-            if (/diagnostico|doenca|doença/.test(value)) {
-                return "Ainda não tenho um diagnóstico estabelecido. Você pode continuar a investigação antes de formular sua hipótese.";
-            }
-            if (/historia|história|hda|antecedente|comorbidade|passado/.test(value)) {
-                return "Posso fornecer a história detalhada conforme você investigar. No momento, a apresentação inicial disponível é a queixa e os sintomas descritos acima.";
-            }
-            if (/medicamento|remedio|remédio|alergia/.test(value)) {
-                return "Essa informação ainda não foi definida neste caso gerado. Você pode solicitá-la como parte da investigação da história clínica.";
-            }
-            return "Entendi sua pergunta. Essa informação ainda não está disponível no estado atual do paciente; você pode especificar o aspecto da história ou do exame que deseja investigar.";
-        }
-
-        process(input) {
-            const value = normalize(input);
-            if (/pontuacao|pontuação|score|nota/.test(value)) return this.log("PONTUAÇÃO", `Pontuação: ${this.score}. Erros: ${this.errors}.`);
-            if (/dica|hint|ajuda|help/.test(value)) return this.hint();
-            if (/novo caso|proximo caso|próximo caso|new case/.test(value)) return this.startNewCase();
-
-            const semantic = this.semanticInterpret(input);
-            const action = this.detectAction(input, semantic);
-            this.context.history.push({ input, phase: this.context.phase, ...action, timestamp: Date.now() });
-
-            if (action.type === "question") {
-                this.time += 1;
-                return this.log("PACIENTE", this.answerQuestion(input));
-            }
-
-            if (action.type === "treatment_detail") {
-                this.time += 1;
-                this.context.pendingAction = { type: "treatment", detail: action.concept, previous: this.context.pendingAction };
-                return this.log("PACIENTE", `Entendi. Você está especificando ${action.concept} para a conduta que acabou de propor. Registrei a medicação no contexto da intervenção. Qual é o próximo passo?`);
-            }
-
-            if (action.type === "treatment") {
-                this.time += 2;
-                this.context.phase = "treatment";
-                this.context.pendingAction = { type: "treatment", text: action.concept };
-                this.context.answered.treatment = true;
-                this.score += 1;
-                this.log("INTERPRETAÇÃO", `Entendi sua proposta terapêutica: ${action.concept}.`);
-                this.log("PACIENTE", "Conduta registrada no caso. Você pode especificar a medicação, fazer outra intervenção ou perguntar como o paciente evoluiu.");
-                this.render();
-                return;
-            }
-
-            if (action.type === "investigation") {
-                return this.evaluateInvestigation(input);
-            }
-
-            if (action.type === "diagnosis") {
-                return this.evaluateDiagnosis(input);
-            }
-
-            this.time += 1;
-            this.log("PACIENTE", "Entendi a informação. Você pode perguntar sobre o paciente ou indicar a próxima ação clínica.");
-            this.render();
-        }
-
-        evaluateInvestigation(input) {
-            const normalized = normalize(input);
-            const candidates = flatten(this.currentCase.expected.investigation).filter(Boolean);
-            const answer = candidates.find(item => {
-                const a = normalize(item);
-                return a && (normalized.includes(a) || a.includes(normalized));
-            });
-
-            this.time += 5;
-            if (!answer) {
-                this.errors++;
-                this.score--;
-                this.log("INTERPRETAÇÃO", `Entendi que você quer investigar: ${input}. Esse exame não está entre as investigações previstas pelo caso gerado.`);
-                this.render();
-                return;
-            }
-
-            this.context.phase = "diagnosis";
-            this.context.answered.investigation = true;
-            this.score += 2;
-            this.log("INVESTIGAÇÃO", `${answer} solicitada e registrada.`);
-            this.log("PACIENTE", "Investigação registrada. Com os dados disponíveis agora, qual é sua hipótese diagnóstica principal?");
-            this.render();
-        }
-
-        evaluateDiagnosis(input) {
-            const normalized = normalize(input);
-            const candidates = flatten(this.currentCase.expected.diagnosis).filter(Boolean);
-            const answer = candidates.find(item => {
-                const a = normalize(item);
-                return a && (normalized.includes(a) || a.includes(normalized));
-            });
-
-            this.time += 1;
-            if (!answer) {
-                this.errors++;
-                this.score--;
-                this.log("FEEDBACK", `Hipótese registrada: ${input}. Ela não corresponde à condição que gerou este caso. Você pode continuar investigando ou reformular a hipótese.`);
-                this.render();
-                return;
-            }
-
-            this.context.phase = "treatment";
-            this.context.answered.diagnosis = true;
-            this.score += 5;
-            this.log("DIAGNÓSTICO", `Hipótese compatível com o caso: ${answer}.`);
-            this.log("PRÓXIMA ETAPA", "Agora estabeleça a conduta. Você pode escrever a intervenção em linguagem natural.");
-            this.render();
-        }
-
-        hint() {
-            this.score -= 3;
-            this.hints++;
-            const messages = {
-                investigation: "Pergunte sobre o paciente ou solicite uma investigação compatível com a apresentação.",
-                diagnosis: "Compare a apresentação e os dados obtidos com as condições possíveis antes de formular a hipótese.",
-                treatment: "Descreva a conduta em linguagem natural; depois você pode especificar a medicação ou intervenção.",
-                completed: "O caso já foi concluído."
+        normalizeCase(source, research) {
+            return {
+                case_id: source.id || `case_${Date.now()}`,
+                title: source.title || source.primary_concept || "Caso clínico",
+                difficulty: source.difficulty || "Simulação clínica",
+                patient: source.patient || source.demographics || {},
+                presentation: {
+                    chief_complaint: source.opening || source.presentation?.chief_complaint || "",
+                    initial_narrative: source.opening || "",
+                    vitals: source.physical_exam?.vitals || {}
+                },
+                initial_state: { stability: "stable" },
+                history: source.history || {},
+                physical_exam: source.physical_exam || {},
+                investigations: {
+                    initial: source.initial_cbc || null,
+                    available: source.propedeutics || []
+                },
+                management: source.possible_actions || [],
+                evolution: source.temporal_evolution || [],
+                hidden: {
+                    diagnosis: source.primary_concept || source.title || null,
+                    differential: source.differential || []
+                },
+                evidence: research?.evidence || [],
+                educational: source.educational || {}
             };
-            this.log("DICA", messages[this.context.phase]);
-            this.render();
         }
 
-        academicAnswers() {
-            const e = this.currentCase.educational;
-            const refs = (e.references || []).map(section => `<li>${escapeHTML(section.chapter || "")}: ${escapeHTML(section.section || "")}</li>`).join("");
-            this.setResearch(`<h3>${escapeHTML(this.currentCase.title)}</h3><p><strong>Paciente:</strong> fictício e gerado por restrições da base local.</p><h4>Etiologia</h4><p>${escapeHTML(e.etiology || "Não localizada no corpus.")}</p><h4>Fisiopatologia</h4><p>${escapeHTML(e.pathophysiology || "Não localizada no corpus.")}</p><h4>Diagnóstico</h4><p>${escapeHTML(e.diagnosis || "Não localizada no corpus.")}</p><h4>Tratamento</h4><p>${escapeHTML(e.treatment || "Não localizada no corpus.")}</p><h4>Seções consultadas</h4><ol>${refs}</ol>`);
-            this.log("BASE CIENTÍFICA", "Resumo recuperado do tratado local; ele não altera automaticamente o caso.");
+        createPatientState(caseData) {
+            return {
+                diagnosis: caseData.hidden?.diagnosis || null,
+                history: caseData.history || {},
+                physical_exam: caseData.physical_exam || {},
+                investigations: caseData.investigations || {},
+                management: caseData.management || {},
+                evolution: caseData.evolution || {},
+                revealed: {},
+                stability: caseData.initial_state?.stability || "stable"
+            };
         }
 
-        render() {
-            if (!this.currentCase) return;
-            this.setText("caseTitle", this.currentCase.title);
-            this.setText("caseIntro", this.currentCase.presentation.chief_complaint.narrative);
-            this.setText("difficultyLabel", this.currentCase.difficulty);
-            this.setText("difficultyLabelMeta", this.currentCase.difficulty);
-            this.setText("score", this.score);
-            const labels = { investigation: "INVESTIGAÇÃO", diagnosis: "DIAGNÓSTICO", treatment: "CONDUTA", completed: "FINALIZADO" };
-            this.setText("stateStatus", labels[this.context.phase]);
-            this.setText("stabilityText", "100%");
-            const list = document.getElementById("stateList");
-            if (list) {
-                list.innerHTML = `<li><span class="state-key">Fase atual</span><span class="state-value">${labels[this.context.phase]}</span></li><li><span class="state-key">Tempo</span><span class="state-value">${this.time} min</span></li><li><span class="state-key">Diagnóstico</span><span class="state-value">${this.context.answered.diagnosis ? "Estabelecido" : "Não estabelecido"}</span></li><li><span class="state-key">Conversa</span><span class="state-value">${this.context.history.length} interações</span></li>`;
+        createFallbackCase() {
+            return {
+                case_id: `fallback_${Date.now()}`,
+                title: "Caso clínico",
+                difficulty: "Simulação clínica",
+                patient: { age: 58, sex: "feminino" },
+                presentation: {
+                    chief_complaint: "Dor e aumento de volume em membro inferior esquerdo desde ontem.",
+                    initial_narrative: "Paciente chega ao pronto-socorro consciente e orientada, referindo dor e edema em membro inferior esquerdo.",
+                    vitals: { BP: "138/84 mmHg", HR: "96 bpm", RR: "18 irpm", SpO2: "97%", temperature: "37,2 °C" }
+                },
+                initial_state: { stability: "stable" },
+                history: {}, physical_exam: {}, investigations: {}, management: {}, evolution: {},
+                hidden: { diagnosis: "trombose venosa profunda" }, evidence: []
+            };
+        }
+
+        renderInitialCase() {
+            const c = this.currentCase;
+            const patient = c.patient || {};
+            const p = c.presentation || {};
+            const vitals = p.vitals || {};
+            const age = patient.age != null ? `${patient.age} anos` : "idade não informada";
+            const sex = this.sexLabel(patient.sex);
+
+            this.setText("caseTitle", "Novo paciente");
+            this.setText("difficultyLabel", c.difficulty || "Simulação clínica");
+            this.setText("caseIntro", p.initial_narrative || this.composeNarrative(c));
+            this.setText("fc", vitals.HR || vitals.fc || "--");
+            this.setText("rr", vitals.RR || vitals.fr || "--");
+            this.setText("spo2", vitals.SpO2 || vitals.spo2 || "--");
+            this.setText("pa", vitals.BP || vitals.pa || "--");
+            this.setText("temp", vitals.temperature || vitals.temp || "--");
+            this.setText("glucose", vitals.glucose || "--");
+
+            this.renderState(age, sex);
+            this.log("PACIENTE", `Paciente ${sex.toLowerCase()}, ${age}, chega para avaliação.`);
+            this.log("PACIENTE", `Queixa principal: ${p.chief_complaint || "não informada"}`);
+        }
+
+        composeNarrative(c) {
+            const p = c.patient || {};
+            const complaint = c.presentation?.chief_complaint || "procura atendimento médico";
+            return `${this.sexLabel(p.sex)}, ${p.age ?? "idade não informada"} anos, ${complaint}.`;
+        }
+
+        sexLabel(value) {
+            const n = normalize(value);
+            if (n === "female" || n === "feminino" || n === "f") return "Mulher";
+            if (n === "male" || n === "masculino" || n === "m") return "Homem";
+            return "Paciente";
+        }
+
+        async submit() {
+            const input = this.elements.input?.value.trim();
+            if (!input) return;
+            this.elements.input.value = "";
+            this.log("MÉDICO", input);
+            await this.processAction(input);
+        }
+
+        async processAction(input) {
+            const n = normalize(input);
+            this.context.history.push(input);
+
+            if (/^(base cientifica|pesquisa|busca cientifica|buscar evidencia|procure na literatura)/.test(n)) {
+                await this.researchOnDemand(input);
+                return;
+            }
+
+            if (this.isReferenceQuestion(n)) {
+                this.answerReferenceQuestion(input);
+                return;
+            }
+
+            const physicalAnswer = this.queryPatientState(input);
+            if (physicalAnswer) {
+                this.context.time += 1;
+                this.log("PACIENTE", physicalAnswer);
+                this.renderState();
+                return;
+            }
+
+            const exam = this.matchInvestigation(input);
+            if (exam) {
+                this.revealInvestigation(exam);
+                return;
+            }
+
+            if (/^(diagnostico|minha hipotese|suspeito|penso em)/.test(n)) {
+                this.log("SISTEMA", "Hipótese registrada. Continue a investigação ou conduza o manejo conforme o estado clínico.");
+                this.context.phase = "diagnosis";
+                return;
+            }
+
+            this.log("SISTEMA", "Não encontrei uma ação clínica específica para essa frase. Tente perguntar sobre história, exame físico ou solicitar um exame disponível.");
+        }
+
+        queryPatientState(input) {
+            const n = normalize(input);
+            const h = this.currentCase.history || {};
+            const pe = this.currentCase.physical_exam || {};
+
+            if (/idade|quantos anos/.test(n)) return `Tenho ${this.currentCase.patient?.age ?? "idade não informada"} anos.`;
+            if (/sexo|homem|mulher/.test(n)) return `Sou ${this.sexLabel(this.currentCase.patient?.sex).toLowerCase()}.`;
+
+            if (/exame fisico|exame clinico|ao exame/.test(n)) return this.formatExam(pe);
+
+            const termMap = [
+                ["ictericia|icterico|icterica", "icterícia"],
+                ["palidez|palido|palida", "palidez"],
+                ["sangramento|sangra|sangue", "sangramento"],
+                ["pica", "pica"],
+                ["glossite", "glossite"],
+                ["queilite", "queilite angular"],
+                ["edema|inchaco|inchada|inchado", "edema"],
+                ["dor", "dor"]
+            ];
+
+            for (const [pattern, label] of termMap) {
+                if (new RegExp(pattern).test(n)) {
+                    const found = this.findClinicalTerm(label, h, pe);
+                    if (found != null) return found ? `Sim. Há ${label} no caso.` : `Não. Não há ${label} registrado no caso.`;
+                }
+            }
+
+            if (/historia|historico|antecedente|comorbidade|hda/.test(n)) return this.formatHistory(h);
+            if (/sintoma|sente|sentindo|queixa/.test(n)) return `A queixa inicial é: ${this.currentCase.presentation?.chief_complaint || "não informada"}.`;
+
+            return null;
+        }
+
+        findClinicalTerm(label, history, physical) {
+            const target = normalize(label);
+            const text = normalize(JSON.stringify({ history, physical }));
+            if (text.includes(target)) return true;
+            const negatives = ["sem " + target, "nega " + target, "nao apresenta " + target];
+            if (negatives.some(item => text.includes(item))) return false;
+            return null;
+        }
+
+        formatExam(exam) {
+            const vitals = exam.vitals || {};
+            const findings = flatten(exam.findings || []).map(item => typeof item === "string" ? item : JSON.stringify(item));
+            const vitalText = Object.entries(vitals).map(([k, v]) => `${k}: ${v}`).join("; ");
+            return `Ao exame: ${vitalText || "sinais vitais não informados"}. ${findings.length ? "Achados: " + findings.join("; ") + "." : "Nenhum achado adicional registrado."}`;
+        }
+
+        formatHistory(history) {
+            const parts = [];
+            for (const [key, value] of Object.entries(history || {})) {
+                if (Array.isArray(value)) parts.push(`${key}: ${value.join(", ")}`);
+                else if (value != null && typeof value !== "object") parts.push(`${key}: ${value}`);
+            }
+            return parts.length ? parts.join("; ") + "." : "A história detalhada ainda não foi registrada.";
+        }
+
+        matchInvestigation(input) {
+            const n = normalize(input);
+            const inv = this.currentCase.investigations || {};
+            if (/hemograma|cbc/.test(n) && inv.initial) return { id: "initial_cbc", name: "Hemograma", result: inv.initial };
+
+            const list = flatten(inv.available || []);
+            for (const item of list) {
+                const name = normalize(item?.exam || item?.name || item);
+                if (name && n.includes(name)) return { id: item.exam || item.id || name, name: item.exam || item.name || name, result: item };
+            }
+            return null;
+        }
+
+        revealInvestigation(exam) {
+            this.context.time += 5;
+            this.context.revealed.add(exam.id);
+            this.log("INVESTIGAÇÃO", `${exam.name} solicitado.`);
+            this.log("RESULTADO", this.formatInvestigationResult(exam));
+            this.renderState();
+        }
+
+        formatInvestigationResult(exam) {
+            if (exam.id === "initial_cbc" && exam.result) {
+                const labels = {
+                    hemoglobin_g_dl: "Hemoglobina",
+                    hematocrit_percent: "Hematócrito",
+                    rbc_million_per_mm3: "Hemácias",
+                    mcv_fl: "VCM",
+                    mch_pg: "HCM",
+                    mchc_g_dl: "CHCM",
+                    rdw_percent: "RDW",
+                    wbc_per_mm3: "Leucócitos",
+                    platelets_per_mm3: "Plaquetas",
+                    reticulocytes_percent: "Reticulócitos"
+                };
+                return Object.entries(exam.result).map(([key, value]) => `${labels[key] || key}: ${value}`).join(" | ");
+            }
+            if (exam.result?.expected_result) return `${exam.result.expected_result}${exam.result.interpretation ? ` — ${exam.result.interpretation}` : ""}`;
+            return "Resultado disponível conforme o caso clínico.";
+        }
+
+        isReferenceQuestion(n) { return /valor de referencia|valores de referencia|normal|faixa de referencia/.test(n); }
+
+        answerReferenceQuestion(input) {
+            const n = normalize(input);
+            const terms = ["hemoglobina", "hematocrito", "vcm", "hcm", "chcm", "rdw", "leucocitos", "plaquetas", "creatinina", "sodio", "potassio", "glicemia", "tsh"];
+            const term = terms.find(item => n.includes(item));
+            if (global.ReferenceRangeResolver && term) {
+                const resolver = new global.ReferenceRangeResolver(this.referenceRanges || {});
+                const result = resolver.get(term, { age: this.currentCase.patient?.age, sex: this.currentCase.patient?.sex });
+                if (result) {
+                    this.log("REFERÊNCIA", `${result.name}: ${typeof result.reference === "string" ? result.reference : JSON.stringify(result.reference)} ${result.unit || ""}.`);
+                    return;
+                }
+            }
+            this.log("REFERÊNCIA", "Consulte a tabela de valores de referência disponível no sistema; os intervalos podem variar conforme laboratório, método, idade e sexo.");
+        }
+
+        async researchOnDemand(reason) {
+            if (this.pendingResearch) return;
+            this.pendingResearch = true;
+            this.log("PESQUISA", "Consultando a camada de evidências configurada...");
+            try {
+                if (!global.CaseResearchEngine || !this.researchRules) {
+                    this.log("PESQUISA", "O gatilho está instalado, mas o conector externo ainda não está disponível nesta execução.");
+                    return;
+                }
+                const researcher = new global.CaseResearchEngine({ config: this.researchRules });
+                this.research = await researcher.research({
+                    concept: this.currentCase.hidden?.diagnosis,
+                    primary_concept: this.currentCase.hidden?.diagnosis,
+                    anchors: [reason]
+                });
+                const count = this.research?.evidence?.length || 0;
+                this.log("PESQUISA", count ? `${count} registros de evidência retornados.` : "Nenhuma evidência retornada.");
+            } finally {
+                this.pendingResearch = false;
             }
         }
 
-        setText(id, value) {
-            const element = document.getElementById(id);
-            if (element) element.textContent = String(value ?? "");
+        showHint() {
+            this.log("DICA", "Comece pela história e pelo exame físico antes de avançar para exames complementares.");
         }
 
-        setResearch(html) {
-            const element = document.getElementById("academicResearchContent");
-            if (element) element.innerHTML = html;
+        renderState(age, sex) {
+            if (!this.elements.stateList) return;
+            const c = this.currentCase;
+            const revealed = [...this.context.revealed];
+            this.elements.stateList.innerHTML = [
+                `<li>Paciente: ${escapeHTML(sex || (c?.patient?.sex || "--"))}, ${escapeHTML(age || (c?.patient?.age ? c.patient.age + " anos" : "--"))}</li>`,
+                `<li>Estabilidade: ${escapeHTML(c?.initial_state?.stability || "--")}</li>`,
+                `<li>Tempo clínico: ${this.context.time} min</li>`,
+                `<li>Exames revelados: ${revealed.length}</li>`,
+                `<li>Diagnóstico estabelecido: ${this.context.phase === "diagnosis" ? "sim" : "não"}</li>`
+            ].join("");
         }
 
-        clearLog() {
-            if (this.elements.log) this.elements.log.innerHTML = "";
-        }
+        render() { this.renderState(); }
+
+        clearLog() { if (this.elements.log) this.elements.log.innerHTML = ""; }
 
         log(type, message) {
             const log = this.elements.log || document.getElementById("clinicalLog");
@@ -463,10 +523,19 @@
             log.appendChild(entry);
             log.scrollTop = log.scrollHeight;
         }
+
+        setText(id, value) {
+            const element = document.getElementById(id);
+            if (element) element.textContent = String(value ?? "");
+        }
     }
 
-    window.KnowledgeDrivenCaseGenerator = KnowledgeDrivenCaseGenerator;
-    window.DiagnosisEngine = DiagnosisEngine;
-    window.idmtEngine = new DiagnosisEngine();
-    document.addEventListener("DOMContentLoaded", () => window.idmtEngine.boot().catch(error => console.error("DIAGNOSIS ENGINE:", error)));
-})();
+    global.DiagnosisEngine = DiagnosisEngine;
+    global.idmtEngine = new DiagnosisEngine();
+    global.addEventListener("DOMContentLoaded", () => {
+        global.idmtEngine.boot().catch(error => {
+            console.error("Diagnosis boot failure:", error);
+            global.idmtEngine.log("ERRO", "Não foi possível inicializar o caso clínico.");
+        });
+    });
+})(window);
