@@ -240,9 +240,12 @@ class PatientState {
 
         this.case = patientCase;
 
+        this.vitals = this.extractVitals(patientCase);
+
         this.stability =
             Number(patientCase?.stability) ||
             Number(patientCase?.initialStability) ||
+            Number(this.vitals?.stability) ||
             75;
 
         this.time = 0;
@@ -265,11 +268,13 @@ class PatientState {
 
         this.revealedInformation = [];
 
-        this.investigations = {};
-
-        this.vitals = this.extractVitals(patientCase);
+        this.investigations =
+            clone(patientCase?.investigations || {});
 
         this.hidden = this.extractHiddenState(patientCase);
+
+        this.clinicalState =
+            clone(patientCase?.clinicalState || {});
     }
 
 
@@ -301,25 +306,17 @@ class PatientState {
 
     extractHiddenState(patientCase) {
 
-        const candidates = [
-
-            patientCase?.hidden,
-
-            patientCase?.patient?.hidden,
-
-            patientCase?.state?.hidden,
-
-            patientCase?.patientState?.hidden
-        ];
-
-        for (const candidate of candidates) {
-
-            if (candidate && typeof candidate === "object") {
-                return candidate;
-            }
-        }
-
-        return {};
+        return clone(
+            patientCase?.hidden_state ||
+            patientCase?.hidden ||
+            patientCase?.patient?.hidden_state ||
+            patientCase?.patient?.hidden ||
+            patientCase?.state?.hidden_state ||
+            patientCase?.state?.hidden ||
+            patientCase?.patientState?.hidden_state ||
+            patientCase?.patientState?.hidden ||
+            {}
+        );
     }
 
 
@@ -914,10 +911,10 @@ class DiagnosisEngine {
 
 
         const hidden =
+            generated?.hidden_state ||
+            value?.hidden_state ||
             generated?.hidden ||
             value?.hidden ||
-            generated?.clinicalState ||
-            value?.clinicalState ||
             {};
 
 
@@ -959,16 +956,29 @@ class DiagnosisEngine {
 
             hidden,
 
+            clinicalState:
+                clone(
+                    generated?.clinicalState ||
+                    value?.clinicalState ||
+                    {}
+                ),
+
             investigations:
-                generated?.investigations ||
-                value?.investigations ||
-                hidden?.investigations ||
-                {},
+                clone(
+                    generated?.investigations ||
+                    value?.investigations ||
+                    hidden?.investigations ||
+                    {}
+                ),
 
             initialStability:
-                generated?.initialStability ||
-                value?.initialStability ||
-                75,
+                Number(
+                    generated?.initialStability ??
+                    value?.initialStability ??
+                    generated?.vitals?.stability ??
+                    value?.vitals?.stability ??
+                    75
+                ),
 
             sourceFile:
                 source.file,
