@@ -231,138 +231,6 @@ class IntentEngine {
 
 
 /* ============================================================
-   PATIENT STATE
-   ============================================================ */
-
-class PatientState {
-
-    constructor(patientCase) {
-
-        this.case = patientCase;
-
-        this.vitals = this.extractVitals(patientCase);
-
-        this.stability =
-            Number(patientCase?.stability) ||
-            Number(patientCase?.initialStability) ||
-            Number(this.vitals?.stability) ||
-            75;
-
-        this.time = 0;
-
-        this.actions = [];
-
-        this.findings = [];
-
-        this.hypotheses = [];
-
-        this.diagnosisEstablished = false;
-
-        this.treatmentPerformed = false;
-
-        this.completed = false;
-
-        this.helpUsed = 0;
-
-        this.criticalErrors = 0;
-
-        this.revealedInformation = [];
-
-        this.investigations =
-            clone(patientCase?.investigations || {});
-
-        this.hidden = this.extractHiddenState(patientCase);
-
-        this.clinicalState =
-            clone(patientCase?.clinicalState || {});
-    }
-
-
-    extractVitals(patientCase) {
-
-        const candidates = [
-
-            patientCase?.vitals,
-
-            patientCase?.patient?.vitals,
-
-            patientCase?.presentation?.vitals,
-
-            patientCase?.state?.vitals,
-
-            patientCase?.patientState?.vitals
-        ];
-
-        for (const candidate of candidates) {
-
-            if (candidate && typeof candidate === "object") {
-                return clone(candidate);
-            }
-        }
-
-        return {};
-    }
-
-
-    extractHiddenState(patientCase) {
-
-        return clone(
-            patientCase?.hidden_state ||
-            patientCase?.hidden ||
-            patientCase?.patient?.hidden_state ||
-            patientCase?.patient?.hidden ||
-            patientCase?.state?.hidden_state ||
-            patientCase?.state?.hidden ||
-            patientCase?.patientState?.hidden_state ||
-            patientCase?.patientState?.hidden ||
-            {}
-        );
-    }
-
-
-    advanceTime(type = "unknown") {
-
-        this.time += CONFIG.timeCost[type] || 1;
-
-        this.actions.push({
-            type: "time",
-            action: type,
-            time: this.time
-        });
-    }
-
-
-    changeStability(delta) {
-
-        this.stability += Number(delta) || 0;
-
-        this.stability = Math.max(
-            0,
-            Math.min(100, this.stability)
-        );
-    }
-
-
-    addFinding(finding) {
-
-        if (!finding) {
-            return;
-        }
-
-        this.findings.push(finding);
-
-        this.revealedInformation.push(finding);
-    }
-
-
-    record(action) {
-
-        this.actions.push(action);
-    }
-}
-
-
-/* ============================================================
    EVALUATION
    ============================================================ */
 
@@ -463,6 +331,7 @@ class DiagnosisEngine {
         this.patientGenerator = null;
 
         this.initialized = false;
+        this.helpUsed = 0;
     }
 
 
@@ -676,15 +545,6 @@ class DiagnosisEngine {
 
     async generateCase() {
 
-        /*
-         * Não escolhemos uma KB ao acaso e aceitamos qualquer resultado.
-         * Algumas bases ainda estão em formatos intermediários e podem não
-         * conter informação suficiente para gerar uma apresentação.
-         *
-         * Tentamos as fontes em ordem aleatória até encontrar um caso
-         * clinicamente utilizável. Assim, uma KB incompleta não derruba
-         * o ambiente inteiro nem produz o falso caso "pouco caracterizado".
-         */
         const sources =
             [...(this.sources || [])].sort(
                 () => Math.random() - 0.5
@@ -764,11 +624,6 @@ class DiagnosisEngine {
             }
         }
 
-        /*
-         * Se nenhuma KB estruturada conseguir gerar um caso, usamos o
-         * fallback apenas como último recurso e também exigimos uma
-         * apresentação minimamente utilizável.
-         */
         if (!generated) {
 
             source = sources.find(item => item && item.raw) || null;
@@ -790,23 +645,27 @@ class DiagnosisEngine {
 
         this.currentSource = source;
 
-
         this.currentCase =
             this.normalizeGeneratedCase(
                 generated,
                 source
             );
 
+        if (typeof window.PatientState !== "function") {
+            throw new Error(
+                "PatientState não carregado. Verifique a ordem dos scripts em engine.html."
+            );
+        }
 
         this.patientState =
-            new PatientState(
+            new window.PatientState(
                 this.currentCase
             );
 
-
-        /*
-         * INTERLOCUTOR
-         */
+        this.patientState.set(
+            "evolution.current_state.stability",
+            this.currentCase.initialStability
+        );
 
         if (
             typeof window.ClinicalInterlocutor ===
@@ -833,7 +692,6 @@ class DiagnosisEngine {
                 "ClinicalInterlocutor não carregado."
             );
         }
-
 
         this.renderInitialCase();
     }
@@ -898,17 +756,17 @@ class DiagnosisEngine {
             generated?.case ||
             generated;
 
-        /*
-         * O PatientGenerator devolve a demografia no campo
-         * `demographics`. O engine precisa expor isso à camada de
-         * apresentação sem confundir com o estado oculto.
-         */
         const patient =
             generated?.patient ||
+            {};
+
+        const demographics =
             generated?.demographics ||
             value?.demographics ||
-            value;
-
+            {
+                age: patient?.age ?? patient?.idade ?? null,
+                sex: patient?.sex ?? patient?.sexo ?? null
+            };
 
         const hidden =
             generated?.hidden_state ||
@@ -917,14 +775,6 @@ class DiagnosisEngine {
             value?.hidden ||
             {};
 
-
-        const vitals =
-            generated?.vitals ||
-            value?.vitals ||
-            hidden?.vitals ||
-            {};
-
-
         const presentation =
             generated?.presentation ||
             value?.presentation ||
@@ -932,6 +782,11 @@ class DiagnosisEngine {
             value?.initialPresentation ||
             {};
 
+        const vitals =
+            generated?.vitals ||
+            value?.vitals ||
+            hidden?.vitals ||
+            {};
 
         return {
 
@@ -948,7 +803,7 @@ class DiagnosisEngine {
                 value?.difficulty ||
                 "moderado",
 
-            patient,
+            demographics,
 
             presentation,
 
@@ -1003,12 +858,10 @@ class DiagnosisEngine {
         const entity =
             randomItem(entities);
 
-
         const patientGeneration =
             entity?.patient_generation ||
             entity?.patientGeneration ||
             {};
-
 
         const presentation =
             randomItem(
@@ -1017,7 +870,6 @@ class DiagnosisEngine {
                     patientGeneration?.presentationPossibilities
                 )
             );
-
 
         return {
 
@@ -1045,8 +897,7 @@ class DiagnosisEngine {
                         "Apresentação clínica inicial ainda pouco caracterizada."
                 },
 
-            hidden: {
-
+            hidden_state: {
                 targetEntity:
                     entity || null
             },
@@ -1152,56 +1003,31 @@ class DiagnosisEngine {
             return;
         }
 
-
         const intent =
             this.intentEngine.interpret(text);
-
-
-        /* ====================================================
-           META
-           ==================================================== */
 
         switch (intent.type) {
 
             case "REQUEST_SCORE":
-
                 this.showScore();
-
                 return;
-
 
             case "REQUEST_HINT":
-
                 this.requestHint();
-
                 return;
-
 
             case "REQUEST_INFORMATION":
-
                 this.scientificBase();
-
                 return;
-
 
             case "REQUEST_FOLLOW_UP":
-
                 this.requestFollowUp();
-
                 return;
-
 
             case "REQUEST_FINISH":
-
                 this.finishCase();
-
                 return;
         }
-
-
-        /* ====================================================
-           INTERLOCUTOR
-           ==================================================== */
 
         if (
             intent.type === "CLINICAL_ACTION" &&
@@ -1213,7 +1039,6 @@ class DiagnosisEngine {
                     text
                 );
 
-
             if (response?.recognized) {
 
                 this.applyInterlocutorResponse(
@@ -1223,13 +1048,6 @@ class DiagnosisEngine {
                 return;
             }
         }
-
-
-        /*
-         * Caso não tenha sido reconhecido
-         * pelo interlocutor, mantemos uma resposta
-         * clara em vez de fingir que entendemos.
-         */
 
         this.evaluation.add(
             CONFIG.score.irrelevant
@@ -1251,62 +1069,48 @@ class DiagnosisEngine {
         const type =
             response.intent || "clinical";
 
+        const timeCost =
+            CONFIG.timeCost[type] ||
+            CONFIG.timeCost.unknown;
 
-        this.patientState.advanceTime(
-            type
-        );
+        this.patientState.advanceTime(timeCost);
 
-
-        if (
-            response.data?.revealed
-        ) {
-
-            this.patientState.addFinding({
-
-                type,
-
-                target:
-                    response.target,
-
-                value:
-                    response.data.value ||
-                    response.data.result ||
-                    response.message,
-
-                message:
-                    response.message
-            });
-        }
-
-
-        this.patientState.record({
-
+        this.patientState.addEvolutionEvent({
             type,
-
-            target:
-                response.target,
-
-            message:
-                response.message,
-
-            timestamp:
-                Date.now()
+            description: response.message,
+            effects: response.data || [],
+            metadata: {
+                target: response.target || null
+            }
         });
 
+        if (response.data?.revealed) {
+            const revealed =
+                this.patientState.get("revealed.other");
+
+            this.patientState.set(
+                "revealed.other",
+                [
+                    ...(Array.isArray(revealed) ? revealed : []),
+                    {
+                        type,
+                        target: response.target || null,
+                        value:
+                            response.data.value ||
+                            response.data.result ||
+                            response.message,
+                        message: response.message
+                    }
+                ]
+            );
+        }
 
         this.log(
             "INTERLOCUTOR",
             response.message
         );
 
-
-        /*
-         * Atualiza a UI com os dados revelados.
-         */
-
         this.updateRevealedVitals();
-
-
         this.renderState();
     }
 
@@ -1383,66 +1187,47 @@ class DiagnosisEngine {
                 document.getElementById("difficultyLabel")
         };
 
-
         if (this.elements.send) {
-
             this.elements.send.addEventListener(
                 "click",
-                () => {
-
-                    this.submitInput();
-
-                }
+                () => this.submitInput()
             );
         }
 
-
         if (this.elements.input) {
-
             this.elements.input.addEventListener(
                 "keydown",
                 event => {
-
                     if (event.key === "Enter") {
-
                         event.preventDefault();
-
                         this.submitInput();
                     }
                 }
             );
         }
 
-
         if (this.elements.hint) {
-
             this.elements.hint.addEventListener(
                 "click",
                 () => this.requestHint()
             );
         }
 
-
         if (this.elements.science) {
-
             this.elements.science.addEventListener(
                 "click",
                 () => this.scientificBase()
             );
         }
 
-
         if (this.elements.next) {
-
             this.elements.next.addEventListener(
                 "click",
                 () => this.generateCase()
             );
         }
 
-
         if (this.elements.back) {
-
             this.elements.back.addEventListener(
                 "click",
                 () => window.history.back()
@@ -1460,7 +1245,6 @@ class DiagnosisEngine {
             return;
         }
 
-
         const text =
             input.value.trim();
 
@@ -1468,15 +1252,12 @@ class DiagnosisEngine {
             return;
         }
 
-
         this.log(
             "VOCÊ",
             text
         );
 
-
         input.value = "";
-
 
         this.processAction(text);
     }
@@ -1522,8 +1303,9 @@ class DiagnosisEngine {
         }
 
         const vitals =
-            this.patientState.vitals ||
-            {};
+            typeof this.patientState.getVitals === "function"
+                ? this.patientState.getVitals()
+                : {};
 
         if (this.elements.fc) {
             this.elements.fc.textContent =
@@ -1586,14 +1368,14 @@ class DiagnosisEngine {
     }
 
 
-        /* ========================================================
+    /* ========================================================
        INITIAL RENDER
        ======================================================== */
 
     renderInitialCase() {
 
         const patient =
-            this.currentCase?.patient ||
+            this.currentCase?.demographics ||
             {};
 
         const presentation =
@@ -1678,11 +1460,6 @@ class DiagnosisEngine {
                 parts.push(`Início: ${onset}.`);
             }
 
-            /*
-             * Não expomos diagnóstico, origem da KB,
-             * severidade interna ou instruções de jogo.
-             */
-
             this.elements.caseIntro.textContent =
                 parts.join(" ") ||
                 "Paciente admitido para avaliação clínica.";
@@ -1695,7 +1472,6 @@ class DiagnosisEngine {
         }
 
         this.updateRevealedVitals();
-
         this.renderState();
 
         this.log(
@@ -1716,101 +1492,57 @@ class DiagnosisEngine {
             return;
         }
 
+        const stability =
+            Number(
+                this.patientState.get(
+                    "evolution.current_state.stability"
+                )
+            ) || 0;
+
+        const revealed =
+            this.patientState.getRevealed();
+
+        const evolutionEvents =
+            this.patientState.getEvolutionEvents();
 
         if (this.elements.score) {
-
             this.elements.score.textContent =
                 this.evaluation.score;
         }
 
-
         if (this.elements.stabilityText) {
-
             this.elements.stabilityText.textContent =
-                `${Math.round(
-                    this.patientState.stability
-                )}%`;
+                `${Math.round(stability)}%`;
         }
-
 
         if (this.elements.stabilityBar) {
-
             this.elements.stabilityBar.style.width =
-                `${this.patientState.stability}%`;
+                `${Math.max(0, Math.min(100, stability))}%`;
         }
-
 
         if (this.elements.timeText) {
-
             this.elements.timeText.textContent =
-                `${this.patientState.time} min`;
+                `${this.patientState.getCurrentTime()} min`;
         }
 
-
         if (this.elements.stateList) {
+            const revealedCount =
+                Object.values(revealed)
+                    .reduce(
+                        (total, items) =>
+                            total +
+                            (Array.isArray(items) ? items.length : 0),
+                        0
+                    );
 
             this.elements.stateList.innerHTML = `
-
-                <li>
-                    Contexto:
-                    ${
-                        this.room === "vermelha"
-                            ? "emergency"
-                            : "clinical"
-                    }
-                </li>
-
-                <li>
-                    Achados revelados:
-                    ${
-                        this.patientState
-                            .findings.length
-                    }
-                </li>
-
-                <li>
-                    Ações executadas:
-                    ${
-                        this.patientState
-                            .actions.length
-                    }
-                </li>
-
-                <li>
-                    Diagnóstico estabelecido:
-                    ${
-                        this.patientState
-                            .diagnosisEstablished
-                            ? "sim"
-                            : "não"
-                    }
-                </li>
-
-                <li>
-                    Tratamento reconhecido:
-                    ${
-                        this.patientState
-                            .treatmentPerformed
-                            ? "sim"
-                            : "não"
-                    }
-                </li>
-
-                <li>
-                    Erros críticos:
-                    ${
-                        this.patientState
-                            .criticalErrors
-                    }
-                </li>
-
-                <li>
-                    Dicas utilizadas:
-                    ${
-                        this.patientState
-                            .helpUsed
-                    }
-                </li>
+                <li><span class="state-key">Contexto</span><span class="state-value">${
+                    this.room === "vermelha" ? "emergency" : "clinical"
+                }</span></li>
+                <li><span class="state-key">Informações reveladas</span><span class="state-value">${revealedCount}</span></li>
+                <li><span class="state-key">Eventos clínicos</span><span class="state-value">${evolutionEvents.length}</span></li>
+                <li><span class="state-key">Tempo clínico</span><span class="state-value">${this.patientState.getCurrentTime()} min</span></li>
+                <li><span class="state-key">Estado</span><span class="state-value">${this.patientState.getStatus()}</span></li>
             `;
         }
     }
@@ -1829,32 +1561,23 @@ class DiagnosisEngine {
             return;
         }
 
-
         const block =
             document.createElement("div");
-
 
         block.className =
             "clinical-log-entry";
 
-
         block.innerHTML = `
-
             <div class="clinical-log-type">
                 ${type}
             </div>
-
             <div class="clinical-log-message">
                 ${this.escapeHTML(message)}
             </div>
-
         `;
 
-
         log.appendChild(block);
-
-        log.scrollTop =
-            log.scrollHeight;
+        log.scrollTop = log.scrollHeight;
     }
 
 
@@ -1884,18 +1607,16 @@ class DiagnosisEngine {
 
     requestHint() {
 
-        this.patientState.helpUsed++;
+        this.helpUsed = (this.helpUsed || 0) + 1;
 
         this.evaluation.add(
             CONFIG.score.hint
         );
 
-
         this.log(
             "DICA",
             "Comece pela investigação que mais pode reduzir a incerteza diante da apresentação. (-3 pontos)"
         );
-
 
         this.renderState();
     }
@@ -1921,15 +1642,12 @@ class DiagnosisEngine {
 
     finishCase() {
 
-        this.patientState.completed =
-            true;
-
+        this.patientState.setStatus("completed");
 
         this.log(
             "CASO FINALIZADO",
             `Pontuação final: ${this.evaluation.score}.`
         );
-
 
         this.renderState();
     }
@@ -1965,19 +1683,14 @@ window.addEventListener(
                 if (log) {
 
                     log.innerHTML += `
-
                         <div class="clinical-log-entry">
-
                             <div class="clinical-log-type">
                                 ERRO
                             </div>
-
                             <div class="clinical-log-message">
                                 Não foi possível iniciar o ambiente clínico.
                             </div>
-
                         </div>
-
                     `;
                 }
             });
