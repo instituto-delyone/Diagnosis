@@ -11,6 +11,7 @@
         caseLibraries: ["knowledge_base/anemia_clinical_cases_degree_v1.json"],
         theoryLibraries: ["knowledge_base/anemia_theory_degree_v1.json"],
         researchRules: "AI/CASE_RESEARCH_RULES.json",
+        pcdtCatalog: "knowledge_base/pcdt_catalog.json",
         defaultRoom: "clinica"
     };
 
@@ -90,6 +91,7 @@
             this.research = null;
             this.researchRules = null;
             this.referenceRanges = null;
+            this.pcdtCatalog = null;
             this.pendingResearch = false;
             this.score = 0;
             this.errors = 0;
@@ -122,6 +124,7 @@
             await this.loadModules();
             await this.library.load();
             await this.loadResearchRules();
+            await this.loadPCDTCatalog();
             await this.loadReferenceRanges();
             await this.startNewCase();
         }
@@ -129,6 +132,7 @@
         async loadModules() {
             try { await loadScript("Js/core/case-builder.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/case-research-engine.js"); } catch (e) { console.warn(e); }
+            try { await loadScript("Js/core/pcdt-catalog-provider.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/reference-range-resolver.js"); } catch (e) { console.warn(e); }
         }
 
@@ -138,6 +142,15 @@
                 if (response.ok) this.researchRules = await response.json();
             } catch (error) {
                 console.warn("Regras de pesquisa externa indisponíveis:", error);
+            }
+        }
+
+        async loadPCDTCatalog() {
+            try {
+                const response = await fetch(CONFIG.pcdtCatalog, { cache: "no-store" });
+                if (response.ok) this.pcdtCatalog = await response.json();
+            } catch (error) {
+                console.warn("Catálogo PCDT indisponível:", error);
             }
         }
 
@@ -207,7 +220,10 @@
 
             if (global.CaseResearchEngine && this.researchRules) {
                 try {
-                    const researcher = new global.CaseResearchEngine({ config: this.researchRules });
+                    const researcher = new global.CaseResearchEngine({
+                    config: this.researchRules,
+                    provider: global.DiagnosysResearchProvider || null
+                });
                     evidence = await researcher.research(sourceCase);
                 } catch (error) {
                     console.warn("Pesquisa externa durante geração falhou:", error);
@@ -572,7 +588,14 @@
                     anchors: [reason]
                 });
                 const count = this.research?.evidence?.length || 0;
-                this.log("PESQUISA", count ? `${count} registros de evidência retornados.` : "Nenhuma evidência retornada.");
+                const pcdt = (this.research?.evidence || []).find(item => item.source_id === "ministerio_saude");
+                const matches = pcdt?.result?.matches || [];
+                this.log(
+                    "PESQUISA",
+                    count
+                        ? `${count} registros retornados. PCDT: ${matches.length ? matches.slice(0, 3).map(item => item.name).join(" | ") : "sem correspondência"}.`
+                        : "Nenhuma evidência retornada."
+                );
             } finally {
                 this.pendingResearch = false;
             }
