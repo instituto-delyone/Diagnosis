@@ -158,6 +158,10 @@
       };
     }
 
+    async research(caseSource) {
+      return this.searchCase(caseSource);
+    }
+
     async researchQuestion(question, context) {
       if (!question || !String(question).trim()) {
         return null;
