@@ -23,28 +23,22 @@
  *   público. O navegador conversa com um proxy seguro configurado em
  *   `baseUrl`; o proxy mantém a credencial do UMLS no servidor.
  *
- * FLUXO:
- *
- *   texto clínico
- *        ↓
- *   UMLSResolver
- *        ↓
- *   proxy seguro
- *        ↓
- *   UMLS REST API
- *        ↓
- *   CUI / conceito / semântica
- *        ↓
- *   CSI / Clinical Interlocutor
- *
  * ============================================================
  */
 (function (global) {
     "use strict";
 
+    const DEFAULT_PROXY_URL =
+        "https://diagnosys-umls-proxy.dr-delyone.workers.dev/api/umls";
+
     class UMLSResolver {
         constructor(options = {}) {
-            this.baseUrl = String(options.baseUrl || "/api/umls").replace(/\/$/, "");
+            const configuredBaseUrl =
+                options.baseUrl ||
+                global.DIAGNOSYS_CONFIG?.UMLS_API_BASE ||
+                DEFAULT_PROXY_URL;
+
+            this.baseUrl = String(configuredBaseUrl).replace(/\/$/, "");
             this.timeoutMs = Number(options.timeoutMs || 10000);
             this.defaultSearchOptions = options.defaultSearchOptions || {};
             this.lastResolution = null;
@@ -98,9 +92,6 @@
             }
         }
 
-        /* ======================================================
-           SEARCH
-           ====================================================== */
         async search(term, options = {}) {
             const text = String(term || "").trim();
 
@@ -136,9 +127,6 @@
             };
         }
 
-        /* ======================================================
-           CONCEPT
-           ====================================================== */
         async getConcept(cui) {
             const id = String(cui || "").trim();
 
@@ -160,9 +148,6 @@
             };
         }
 
-        /* ======================================================
-           ATOMS
-           ====================================================== */
         async getAtoms(cui, options = {}) {
             const id = String(cui || "").trim();
 
@@ -192,9 +177,6 @@
             };
         }
 
-        /* ======================================================
-           DEFINITIONS
-           ====================================================== */
         async getDefinitions(cui, options = {}) {
             const id = String(cui || "").trim();
 
@@ -217,9 +199,6 @@
             };
         }
 
-        /* ======================================================
-           RELATIONS
-           ====================================================== */
         async getRelations(cui, options = {}) {
             const id = String(cui || "").trim();
 
@@ -237,9 +216,6 @@
             };
         }
 
-        /* ======================================================
-           NORMALIZAÇÃO CSI
-           ====================================================== */
         async normalize(text, options = {}) {
             const rawText = String(text || "").trim();
 
