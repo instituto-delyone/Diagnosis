@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0",
+  "name": "Diagnosis Fictional Examination Patterns",
+  "purpose": "Define examinations and plausible fictional results for the clinical simulator. Results are generated for fictional patients and are not real laboratory data.",
+  "rules": {
+    "results_are_fictional": true,
+    "normal_results_are_allowed": true,
+    "normal_results_can_reduce_differential": true,
+    "abnormal_results_require_context": true,
+    "never_reveal_diagnosis_directly": true,
+    "never_penalize_examination_request": true
+  },
+  "examinations": [
+    {
+      "id": "hemograma",
+      "aliases": ["hemograma completo", "cbc", "hemograma"],
+      "units": {
+        "hemoglobina": "g/dL",
+        "hematocrito": "%",
+        "leucocitos": "/mm³",
+        "plaquetas": "/mm³"
+      },
+      "normal": {
+        "hemoglobina": {"min": 12.0, "max": 16.0, "decimals": 1},
+        "hematocrito": {"min": 36, "max": 48, "decimals": 0},
+        "leucocitos": {"min": 4500, "max": 11000, "decimals": 0},
+        "plaquetas": {"min": 150000, "max": 450000, "decimals": 0}
+      },
+      "associations": [
+        {
+          "concepts": ["dengue", "dengue virus", "febre dengue"],
+          "pattern": {
+            "hemoglobina": {"min": 12.0, "max": 15.5, "decimals": 1},
+            "hematocrito": {"min": 37, "max": 49, "decimals": 0},
+            "leucocitos": {"min": 2500, "max": 4499, "decimals": 0},
+            "plaquetas": {"min": 70000, "max": 149999, "decimals": 0}
+          },
+          "findings": ["leucopenia", "plaquetopenia"]
+        },
+        {
+          "concepts": ["anemia ferropriva", "deficiencia de ferro", "anemia por deficiencia de ferro"],
+          "pattern": {
+            "hemoglobina": {"min": 8.5, "max": 11.9, "decimals": 1},
+            "hematocrito": {"min": 26, "max": 35, "decimals": 0},
+            "leucocitos": {"min": 4500, "max": 11000, "decimals": 0},
+            "plaquetas": {"min": 150000, "max": 450000, "decimals": 0}
+          },
+          "findings": ["anemia"]
+        },
+        {
+          "concepts": ["leucemia", "leucemia aguda", "leucemia mieloide", "leucemia linfoblastica"],
+          "pattern": {
+            "hemoglobina": {"min": 7.5, "max": 10.9, "decimals": 1},
+            "hematocrito": {"min": 23, "max": 33, "decimals": 0},
+            "leucocitos": {"min": 18000, "max": 65000, "decimals": 0},
+            "plaquetas": {"min": 50000, "max": 149999, "decimals": 0}
+          },
+          "findings": ["anemia", "leucocitose", "plaquetopenia"]
+        },
+        {
+          "concepts": ["infeccao bacteriana", "infecção bacteriana", "pneumonia bacteriana", "sepse"],
+          "pattern": {
+            "hemoglobina": {"min": 12.0, "max": 16.0, "decimals": 1},
+            "hematocrito": {"min": 36, "max": 48, "decimals": 0},
+            "leucocitos": {"min": 12000, "max": 22000, "decimals": 0},
+            "plaquetas": {"min": 150000, "max": 450000, "decimals": 0}
+          },
+          "findings": ["leucocitose"]
+        }
+      ]
+    },
+    {
+      "id": "glicemia",
+      "aliases": ["glicemia", "glicemia de jejum", "glicose"],
+      "units": {"glicose": "mg/dL"},
+      "normal": {"glicose": {"min": 70, "max": 99, "decimals": 0}},
+      "associations": [
+        {
+          "concepts": ["diabetes", "diabetes mellitus", "hiperglicemia"],
+          "pattern": {"glicose": {"min": 130, "max": 280, "decimals": 0}},
+          "findings": ["hiperglicemia"]
+        }
+      ]
+    },
+    {
+      "id": "creatinina",
+      "aliases": ["creatinina", "funcao renal", "função renal"],
+      "units": {"creatinina": "mg/dL"},
+      "normal": {"creatinina": {"min": 0.6, "max": 1.2, "decimals": 2}},
+      "associations": [
+        {
+          "concepts": ["insuficiencia renal", "insuficiência renal", "doenca renal", "doença renal"],
+          "pattern": {"creatinina": {"min": 1.5, "max": 5.0, "decimals": 2}},
+          "findings": ["elevacao da creatinina"]
+        }
+      ]
+    }
+  ]
+}
