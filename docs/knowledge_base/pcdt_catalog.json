@@ -1,0 +1,1093 @@
+{
+  "schema_version": "1.0",
+  "catalog_name": "PCDT Ministério da Saúde — catálogo A–V",
+  "retrieved": "2026-09-17",
+  "source": "Ministério da Saúde — Protocolos Clínicos e Diretrizes Terapêuticas",
+  "source_index_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt",
+  "notes": [
+    "O portal oficial organiza os PCDT por letra e informa que os documentos estabelecem critérios de diagnóstico, tratamento, controle clínico e acompanhamento.",
+    "Os nomes foram transcritos das páginas A–V consultadas.",
+    "O campo guideline_entry_url aponta para a página de entrada do documento no portal gov.br; essa página é a porta oficial para o arquivo/diretriz.",
+    "As URLs individuais foram normalizadas a partir da estrutura de links do portal e devem ser tratadas como links de navegação; o portal pode alterar slugs."
+  ],
+  "letters_present": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V"
+  ],
+  "count": 176,
+  "entries": [
+    {
+      "letter": "A",
+      "name": "Acidente Vascular Cerebral Isquêmico Agudo",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/acidente-vascular-cerebral-isquemico-agudo/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Acidentes Escorpiônicos",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/acidentes-escorpionicos/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Acidentes Ofídicos",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/acidentes-ofidicos/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Acromegalia",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/acromegalia/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Adenocarcinoma de Cólon e Reto",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/adenocarcinoma-de-colon-e-reto/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Adenocarcinoma de Estômago",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/adenocarcinoma-de-estomago/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Adenocarcinoma de Próstata",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/adenocarcinoma-de-prostata/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Amiloidoses associadas à Transtirretina",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/amiloidoses-associadas-a-transtirretina/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Anemia Deficiência de Ferro",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/anemia-deficiencia-de-ferro/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Anemia Hemolítica Autoimune",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/anemia-hemolitica-autoimune/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Anemia na Doença Renal Crônica - DRC",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/anemia-na-doenca-renal-cronica-drc/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Aneurisma aorta abdominal",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/aneurisma-aorta-abdominal/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Angioedema deficiência C1 esterase",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/angioedema-deficiencia-c1-esterase/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Artrite Idiopática Juvenil",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/artrite-idiopatica-juvenil/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Artrite Psoriásica",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/artrite-psoriasica/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Artrite Reativa",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/artrite-reativa/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Artrite Reumatóide",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/artrite-reumatoide/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Asma",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/asma/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Assistência ao Parto Normal - Diretriz Nacional",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/assistencia-ao-parto-normal-diretriz-nacional/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Atenção à Gestante a operação cesariana - Diretriz",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/atencao-a-gestante-a-operacao-cesariana-diretriz/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Atenção Integral às Pessoas com Doenças Raras (Linha de Cuidado)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/atencao-integral-as-pessoas-com-doencas-raras/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Atenção Integral às Pessoas com Infecções Sexualmente Transmissíveis",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/atencao-integral-as-pessoas-com-infeccoes-sexualmente-transmissiveis/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "A",
+      "name": "Atrofia Muscular Espinhal",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a/atrofia-muscular-espinhal/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/a"
+    },
+    {
+      "letter": "B",
+      "name": "Blinatumomabe",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/b/blinatumomabe/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/b"
+    },
+    {
+      "letter": "B",
+      "name": "Brucelose Humana",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/b/brucelose-humana/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/b"
+    },
+    {
+      "letter": "C",
+      "name": "Câncer de Cabeça e Pescoço",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c/cancer-de-cabeca-e-pescoco/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c"
+    },
+    {
+      "letter": "C",
+      "name": "Câncer de Mama",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c/cancer-de-mama/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c"
+    },
+    {
+      "letter": "C",
+      "name": "Câncer de Pulmão",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c/cancer-de-pulmao/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c"
+    },
+    {
+      "letter": "C",
+      "name": "Carcinoma de Células Renais",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c/carcinoma-de-celulas-renais/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c"
+    },
+    {
+      "letter": "C",
+      "name": "Carcinoma de Esôfago",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c/carcinoma-de-esofago/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c"
+    },
+    {
+      "letter": "C",
+      "name": "Carcinoma Diferenciado da Tireoide",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c/carcinoma-diferenciado-da-tireoide/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c"
+    },
+    {
+      "letter": "C",
+      "name": "Carcinoma Hepatocelular no Adulto",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c/carcinoma-hepatocelular-no-adulto/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c"
+    },
+    {
+      "letter": "C",
+      "name": "Cirurgia de citorredução e hipertermoquimioterapia em caso de mesotelioma peritoneal maligno",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c/cirurgia-de-citorreducao-e-hipertermoquimioterapia-em-caso-de-mesotelioma-peritoneal-maligno/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c"
+    },
+    {
+      "letter": "C",
+      "name": "Cirurgia de citorredução e hipertermoquimioterapia em caso de pseudomixoma peritoneal",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c/cirurgia-de-citorreducao-e-hipertermoquimioterapia-em-caso-de-pseudomixoma-peritoneal/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c"
+    },
+    {
+      "letter": "C",
+      "name": "Colangite Biliar Primária",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c/colangite-biliar-primaria/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c"
+    },
+    {
+      "letter": "C",
+      "name": "Comportamento Agressivo no Transtorno do Espectro do Autismo",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c/comportamento-agressivo-no-transtorno-do-espectro-do-autismo/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c"
+    },
+    {
+      "letter": "C",
+      "name": "Cross-linking corneano no tratamento do ceratone",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c/cross-linking-corneano-no-tratamento-do-ceratone/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/c"
+    },
+    {
+      "letter": "D",
+      "name": "Deficiência de Biotinidase",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/deficiencia-de-biotinidase/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Deficiência do Hormônio de Crescimento - Hipopituitarismo",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/deficiencia-do-hormonio-de-crescimento-hipopituitarismo/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Deficiência Intelectual - Protocolo para o Diagnóstico Etiológico",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/deficiencia-intelectual-protocolo-para-o-diagnostico-etiologico/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Degeneração Macular Relacionada com a Idade - Portaria Conjunta nº 24",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/degeneracao-macular-relacionada-com-a-idade-portaria-conjunta-no-24/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Dermatite Atópica",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/dermatite-atopica/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Diabete Melito Tipo 1",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/diabete-melito-tipo-1/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Diabete Melito Tipo 2",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/diabete-melito-tipo-2/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Diabetes Insípido",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/diabetes-insipido/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Diagnóstico e tratamento de intoxicações por agrotóxicos - Capítulo 1",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/diagnostico-e-tratamento-de-intoxicacoes-por-agrotoxicos-capitulo-1/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Diagnóstico e tratamento de intoxicações por agrotóxicos - Capítulo 2",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/diagnostico-e-tratamento-de-intoxicacoes-por-agrotoxicos-capitulo-2/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Diagnóstico e tratamento de intoxicações por agrotóxicos - Capítulo 3",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/diagnostico-e-tratamento-de-intoxicacoes-por-agrotoxicos-capitulo-3/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Diagnóstico e tratamento de intoxicações por agrotóxicos - Capítulo 4",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/diagnostico-e-tratamento-de-intoxicacoes-por-agrotoxicos-capitulo-4/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Diagnóstico e tratamento de intoxicações por agrotóxicos - Capítulo 5",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/diagnostico-e-tratamento-de-intoxicacoes-por-agrotoxicos-capitulo-5/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Dislipidemia",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/dislipidemia/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Distonias e Espasmo Hemifacial",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/distonias-e-espasmo-hemifacial/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Distrator Osteogênico Mandibular (DOM)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/distrator-osteogenico-mandibular/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Distúrbio Mineral Ósseo na Doença Renal Crônica",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/disturbio-mineral-osseo-na-doenca-renal-cronica/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Doença Celíaca",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/doenca-celiaca/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Doença de Alzheimer",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/doenca-de-alzheimer/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Doença de Chagas",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/doenca-de-chagas/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Doença de Crohn",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/doenca-de-crohn/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Doença de Fabry",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/doenca-de-fabry/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Doença de Gaucher",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/doenca-de-gaucher/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Doença de Niemann-Pick Tipo C (Diretriz Brasileira)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/doenca-de-niemann-pick-tipo-c/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Doença de Paget",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/doenca-de-paget/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Doença de Parkinson",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/doenca-de-parkinson/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Doença de Pompe",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/doenca-de-pompe/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Doença de Wilson",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/doenca-de-wilson/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Doença Falciforme",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/doenca-falciforme/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Doença Pulmonar Obstrutiva Crônica",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/doenca-pulmonar-obstrutiva-cronica/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "D",
+      "name": "Dor Crônica",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/dor-cronica/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d"
+    },
+    {
+      "letter": "E",
+      "name": "Endometriose",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e/endometriose/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e"
+    },
+    {
+      "letter": "E",
+      "name": "Epidermólise Bolhosa (Diretriz Brasileira)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e/epidermolise-bolhosa/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e"
+    },
+    {
+      "letter": "E",
+      "name": "Epilepsia",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e/epilepsia/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e"
+    },
+    {
+      "letter": "E",
+      "name": "Esclerose Lateral Amiotrófica",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e/esclerose-lateral-amiotrofica/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e"
+    },
+    {
+      "letter": "E",
+      "name": "Esclerose Múltipla",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e/esclerose-multipla/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e"
+    },
+    {
+      "letter": "E",
+      "name": "Esclerose Sistêmica",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e/esclerose-sistemica/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e"
+    },
+    {
+      "letter": "E",
+      "name": "Espasticidade",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e/espasticidade/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e"
+    },
+    {
+      "letter": "E",
+      "name": "Espondilite Ancilosante",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e/espondilite-ancilosante/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e"
+    },
+    {
+      "letter": "E",
+      "name": "Esquizofrenia",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e/esquizofrenia/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e"
+    },
+    {
+      "letter": "E",
+      "name": "Estratégias para Atenuar a Progressão da Doença Renal Crônica",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e/estrategias-para-atenuar-a-progressao-da-doenca-renal-cronica/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/e"
+    },
+    {
+      "letter": "F",
+      "name": "Fenilcetonúria",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/f/fenilcetonuria/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/f"
+    },
+    {
+      "letter": "F",
+      "name": "Fibrose Cística",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/f/fibrose-cistica/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/f"
+    },
+    {
+      "letter": "F",
+      "name": "Fratura do Colo do Fêmur em Idosos (Linha de Cuidado)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/f/fratura-do-colo-do-femur-em-idosos/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/f"
+    },
+    {
+      "letter": "F",
+      "name": "Fratura do Colo do Fêmur em Idosos - Tratamento - Diretrizes Brasileiras",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/f/fratura-do-colo-do-femur-em-idosos-tratamento-diretrizes-brasileiras/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/f"
+    },
+    {
+      "letter": "G",
+      "name": "Glaucoma",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/g/glaucoma/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/g"
+    },
+    {
+      "letter": "H",
+      "name": "Hanseníase",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hanseniase/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h"
+    },
+    {
+      "letter": "H",
+      "name": "Hemangioma Infantil",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hemangioma-infantil/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h"
+    },
+    {
+      "letter": "H",
+      "name": "Hemofilia A – Uso do Emicizumabe (Protocolo de Uso)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hemofilia-a-uso-do-emicizumabe/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h"
+    },
+    {
+      "letter": "H",
+      "name": "Hemoglobinúria Paroxística Noturna",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hemoglobinuria-paroxistica-noturna/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h"
+    },
+    {
+      "letter": "H",
+      "name": "Hepatite Autoimune",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hepatite-autoimune/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h"
+    },
+    {
+      "letter": "H",
+      "name": "Hepatite B e coinfecções",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hepatite-b-e-coinfeccoes/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h"
+    },
+    {
+      "letter": "H",
+      "name": "Hepatite C e coinfecções",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hepatite-c-e-coinfeccoes/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h"
+    },
+    {
+      "letter": "H",
+      "name": "Hidradenite Supurativa",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hidradenite-supurativa/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h"
+    },
+    {
+      "letter": "H",
+      "name": "Hidroxocobalamina na intoxicação aguda por cianeto (Protocolo de Uso)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hidroxocobalamina-na-intoxicacao-aguda-por-cianeto/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h"
+    },
+    {
+      "letter": "H",
+      "name": "Hiperplasia adrenal congênita",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hiperplasia-adrenal-congenita/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h"
+    },
+    {
+      "letter": "H",
+      "name": "Hiperprolactinemia",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hiperprolactinemia/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h"
+    },
+    {
+      "letter": "H",
+      "name": "Hipertensão Arterial Sistêmica",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hipertensao-arterial-sistemica/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h"
+    },
+    {
+      "letter": "H",
+      "name": "Hipertensão Pulmonar",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hipertensao-pulmonar/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h"
+    },
+    {
+      "letter": "H",
+      "name": "Hipoparatireoidismo",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hipoparatireoidismo/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h"
+    },
+    {
+      "letter": "H",
+      "name": "Hipotireoidismo Congênito",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hipotireoidismo-congenito/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h"
+    },
+    {
+      "letter": "H",
+      "name": "Homocistinúria Clássica",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/homocistinuria-classica/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h"
+    },
+    {
+      "letter": "I",
+      "name": "Ictioses Hereditárias",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i/ictioses-hereditarias/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i"
+    },
+    {
+      "letter": "I",
+      "name": "Imunodeficiência Primária com Predominância de Defeitos de Anticorpos - Imunoglobulina Humana",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i/imunodeficiencia-primaria-com-predominancia-de-defeitos-de-anticorpos-imunoglobulina-humana/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i"
+    },
+    {
+      "letter": "I",
+      "name": "Imunossupressão no Transplante Hepático em Pediatria",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i/imunossupressao-no-transplante-hepatico-em-pediatria/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i"
+    },
+    {
+      "letter": "I",
+      "name": "Imunossupressão no Transplante Cardíaco",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i/imunossupressao-no-transplante-cardiaco/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i"
+    },
+    {
+      "letter": "I",
+      "name": "Imunossupressão no Transplante Renal",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i/imunossupressao-no-transplante-renal/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i"
+    },
+    {
+      "letter": "I",
+      "name": "Imunosupressão no Transplante Hépático em Adultos",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i/imunosupressao-no-transplante-hepatico-em-adultos/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i"
+    },
+    {
+      "letter": "I",
+      "name": "Incontinência Urinária não Neurogênica",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i/incontinencia-urinaria-nao-neurogenica/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i"
+    },
+    {
+      "letter": "I",
+      "name": "Indução de Imunotolerância para Indivíduos com Hemofilia A e Inibidor",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i/inducao-de-imunotolerancia-para-individuos-com-hemofilia-a-e-inibidor/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i"
+    },
+    {
+      "letter": "I",
+      "name": "Insuficiência Adrenal",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i/insuficiencia-adrenal/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i"
+    },
+    {
+      "letter": "I",
+      "name": "Insuficiência Cardíaca com Fração de Ejeção Reduzida",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i/insuficiencia-cardiaca-com-fracao-de-ejecao-reduzida/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i"
+    },
+    {
+      "letter": "I",
+      "name": "Insuficiência Pancreática Exócrina",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i/insuficiencia-pancreatica-exocrina/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i"
+    },
+    {
+      "letter": "I",
+      "name": "Iodeto de Potássio na Emergência Nuclear",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i/iodeto-de-potassio-na-emergencia-nuclear/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i"
+    },
+    {
+      "letter": "I",
+      "name": "Isotretinoína no tratamento da acne grave",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i/isotretinoina-no-tratamento-da-acne-grave/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/i"
+    },
+    {
+      "letter": "L",
+      "name": "Leiomioma de útero",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l/leiomioma-de-utero/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l"
+    },
+    {
+      "letter": "L",
+      "name": "Leucemia Linfoblástica Aguda Ph+ de Adulto com Mesilato de Imatinibe (DDT)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l/leucemia-linfoblastica-aguda-ph-de-adulto-com-mesilato-de-imatinibe/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l"
+    },
+    {
+      "letter": "L",
+      "name": "Leucemia Linfoblástica Aguda Cromossoma Philadelphia Positivo de Crianças e Adolescentes (DDT)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l/leucemia-linfoblastica-aguda-cromossoma-philadelphia-positivo-de-criancas-e-adolescentes/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l"
+    },
+    {
+      "letter": "L",
+      "name": "Leucemia Mieloide Aguda de Crianças e Adolescentes - Diretrizes Diagnósticas e Terapêuticas",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l/leucemia-mieloide-aguda-de-criancas-e-adolescentes-diretrizes-diagnosticas-e-terapeuticas/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l"
+    },
+    {
+      "letter": "L",
+      "name": "Leucemia Mieloide Aguda do Adulto - Diretrizes Diagnósticas e Terapêuticas",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l/leucemia-mieloide-aguda-do-adulto-diretrizes-diagnosticas-e-terapeuticas/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l"
+    },
+    {
+      "letter": "L",
+      "name": "Leucemia Mieloide Crônica de Criança e Adolescente",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l/leucemia-mieloide-cronica-de-crianca-e-adolescente/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l"
+    },
+    {
+      "letter": "L",
+      "name": "Leucemia Mieloide Crônica do Adulto",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l/leucemia-mieloide-cronica-do-adulto/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l"
+    },
+    {
+      "letter": "L",
+      "name": "Linfangioleiomiomatose",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l/linfangioleiomiomatose/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l"
+    },
+    {
+      "letter": "L",
+      "name": "Linfoma de Hodgkin no Adulto",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l/linfoma-de-hodgkin-no-adulto/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l"
+    },
+    {
+      "letter": "L",
+      "name": "Linfoma Difuso de Grandes Células B",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l/linfoma-difuso-de-grandes-celulas-b/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l"
+    },
+    {
+      "letter": "L",
+      "name": "Linfoma Folicular",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l/linfoma-folicular/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l"
+    },
+    {
+      "letter": "L",
+      "name": "Linha de Cuidado do Infarto Agudo do Miocárdio e o Protocolo de Síndromes Coronarianas Agudas",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l/linha-de-cuidado-do-infarto-agudo-do-miocardio-e-o-protocolo-de-sindromes-coronarianas-agudas/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/l"
+    },
+    {
+      "letter": "M",
+      "name": "Manejo da Infecção pelo HIV em Crianças e Adolescentes - Módulo 1",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m/manejo-da-infeccao-pelo-hiv-em-criancas-e-adolescentes-modulo-1/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m"
+    },
+    {
+      "letter": "M",
+      "name": "Manejo da Infecção pelo HIV em Adultos - Módulo 1",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m/manejo-da-infeccao-pelo-hiv-em-adultos-modulo-1/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m"
+    },
+    {
+      "letter": "M",
+      "name": "Manejo da Infecção pelo HIV em Crianças e Adolescentes - Módulo 2",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m/manejo-da-infeccao-pelo-hiv-em-criancas-e-adolescentes-modulo-2/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m"
+    },
+    {
+      "letter": "M",
+      "name": "Manejo da Infecção pelo HIV em Adultos - Módulo 2",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m/manejo-da-infeccao-pelo-hiv-em-adultos-modulo-2/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m"
+    },
+    {
+      "letter": "M",
+      "name": "Marca-passos cardíacos implantáveis e ressincronizadores (Protocolo de Uso)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m/marca-passos-cardiacos-implantaveis-e-ressincronizadores/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m"
+    },
+    {
+      "letter": "M",
+      "name": "Melanoma Cutâneo (DDT)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m/melanoma-cutaneo/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m"
+    },
+    {
+      "letter": "M",
+      "name": "Mesotelioma Pleural",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m/mesotelioma-pleural/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m"
+    },
+    {
+      "letter": "M",
+      "name": "Miastenia Gravis",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m/miastenia-gravis/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m"
+    },
+    {
+      "letter": "M",
+      "name": "Mieloma Múltiplo (DDT)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m/mieloma-multiplo/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m"
+    },
+    {
+      "letter": "M",
+      "name": "Miopatias Inflamatórias",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m/miopatias-inflamatorias/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m"
+    },
+    {
+      "letter": "M",
+      "name": "Mucopolissacaridose do Tipo I",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m/mucopolissacaridose-do-tipo-i/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m"
+    },
+    {
+      "letter": "M",
+      "name": "Mucopolissacaridose do Tipo II",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m/mucopolissacaridose-do-tipo-ii/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m"
+    },
+    {
+      "letter": "M",
+      "name": "Mucopolissacaridose do Tipo VII",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m/mucopolissacaridose-do-tipo-vii/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m"
+    },
+    {
+      "letter": "M",
+      "name": "Mucopolissacaridose Tipo IV A",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m/mucopolissacaridose-tipo-iv-a/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m"
+    },
+    {
+      "letter": "M",
+      "name": "Mucopolissacaridose Tipo VI",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m/mucopolissacaridose-tipo-vi/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m"
+    },
+    {
+      "letter": "N",
+      "name": "Nirsevimabe para Prevenção de Infecção do Trato Respiratório Inferior Associado ao Vírus Sincicial Respiratório para Bebês Prematuros ou com Comorbidades (Protocolo de Uso)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/n/nirsevimabe-para-prevencao-de-infeccao-do-trato-respiratorio-inferior-associado-ao-virus-sincicial-respiratorio-para-bebes-prematuros-ou-com-comorbidades/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/n"
+    },
+    {
+      "letter": "O",
+      "name": "Osteogênese Imperfeita",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/o/osteogenese-imperfeita/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/o"
+    },
+    {
+      "letter": "O",
+      "name": "Osteoporose",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/o/osteoporose/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/o"
+    },
+    {
+      "letter": "P",
+      "name": "Palivizumabe para a Prevenção da Infecção pelo Vírus Sincicial Respiratório (Protocolo de Uso)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p/palivizumabe-para-a-prevencao-da-infeccao-pelo-virus-sincicial-respiratorio/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p"
+    },
+    {
+      "letter": "P",
+      "name": "Pessoas com Deficiência Auditiva (Linha de Cuidado)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p/pessoas-com-deficiencia-auditiva/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p"
+    },
+    {
+      "letter": "P",
+      "name": "Porfirias",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p/porfirias/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p"
+    },
+    {
+      "letter": "P",
+      "name": "Prevenção da Transmissão Vertical do HIV, Sífilis e Hepatites Virais",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p/prevencao-da-transmissao-vertical-do-hiv-sifilis-e-hepatites-virais/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p"
+    },
+    {
+      "letter": "P",
+      "name": "Profilaxia Pós-Exposição de Risco (PEP) à Infecção pelo HIV",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p/profilaxia-pos-exposicao-de-risco-a-infeccao-pelo-hiv/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p"
+    },
+    {
+      "letter": "P",
+      "name": "Profilaxia Pré-Exposição (PrEP) Oral à Infecção pelo HIV",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p/profilaxia-pre-exposicao-oral-a-infeccao-pelo-hiv/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p"
+    },
+    {
+      "letter": "P",
+      "name": "Profilaxia primária em caso de Hemofilia Grave (Protocolo de Uso)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p/profilaxia-primaria-em-caso-de-hemofilia-grave/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p"
+    },
+    {
+      "letter": "P",
+      "name": "Psoríase",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p/psoriase/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p"
+    },
+    {
+      "letter": "P",
+      "name": "Puberdade Precoce Central",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p/puberdade-precoce-central/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/p"
+    },
+    {
+      "letter": "R",
+      "name": "Raquitismo e Osteomalácia",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/r/raquitismo-e-osteomalacia/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/r"
+    },
+    {
+      "letter": "R",
+      "name": "Rastreamento do Câncer do Colo do Útero (Diretriz Brasileira)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/r/rastreamento-do-cancer-do-colo-do-utero/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/r"
+    },
+    {
+      "letter": "R",
+      "name": "Retinopatia Diabética",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/r/retinopatia-diabetica/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/r"
+    },
+    {
+      "letter": "S",
+      "name": "Síndrome de Falência Medular",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s/sindrome-de-falencia-medular/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s"
+    },
+    {
+      "letter": "S",
+      "name": "Síndrome de Guillain-Barré",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s/sindrome-de-guillain-barre/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s"
+    },
+    {
+      "letter": "S",
+      "name": "Síndrome de Ovários Policísticos",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s/sindrome-de-ovarios-policisticos/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s"
+    },
+    {
+      "letter": "S",
+      "name": "Síndrome de Turner",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s/sindrome-de-turner/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s"
+    },
+    {
+      "letter": "S",
+      "name": "Síndrome Mielodisplásica de Baixo Risco",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s/sindrome-mielodisplasica-de-baixo-risco/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s"
+    },
+    {
+      "letter": "S",
+      "name": "Síndrome Nefrótica Primária em Adultos",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s/sindrome-nefrotica-primaria-em-adultos/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s"
+    },
+    {
+      "letter": "S",
+      "name": "Síndrome Nefrótica Primária em Crianças e Adolescentes",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s/sindrome-nefrotica-primaria-em-criancas-e-adolescentes/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s"
+    },
+    {
+      "letter": "S",
+      "name": "Sobrecarga de Ferro",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s/sobrecarga-de-ferro/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s"
+    },
+    {
+      "letter": "S",
+      "name": "Sobrepeso e Obesidade em Adultos",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s/sobrepeso-e-obesidade-em-adultos/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/s"
+    },
+    {
+      "letter": "T",
+      "name": "Tabagismo",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t/tabagismo/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t"
+    },
+    {
+      "letter": "T",
+      "name": "Talidomida no tratamento da Doença Enxerto Contra Hospedeiro e do Mieloma Múltiplo",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t/talidomida-no-tratamento-da-doenca-enxerto-contra-hospedeiro-e-do-mieloma-multiplo/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t"
+    },
+    {
+      "letter": "T",
+      "name": "Transtorno Afetivo Bipolar do Tipo I",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t/transtorno-afetivo-bipolar-do-tipo-i/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t"
+    },
+    {
+      "letter": "T",
+      "name": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t/transtorno-do-deficit-de-atencao-com-hiperatividade-tdah/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t"
+    },
+    {
+      "letter": "T",
+      "name": "Transtorno Esquizoafetivo",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t/transtorno-esquizoafetivo/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t"
+    },
+    {
+      "letter": "T",
+      "name": "Trombocitopenia Imune Primária",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t/trombocitopenia-imune-primaria/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t"
+    },
+    {
+      "letter": "T",
+      "name": "Tromboembolismo Venoso em Gestantes com Trombofilia",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t/tromboembolismo-venoso-em-gestantes-com-trombofilia/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t"
+    },
+    {
+      "letter": "T",
+      "name": "Tumor Cerebral no Adulto (DDT)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t/tumor-cerebral-no-adulto/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t"
+    },
+    {
+      "letter": "T",
+      "name": "Tumor do Estroma Gastrointestinal",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t/tumor-do-estroma-gastrointestinal/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/t"
+    },
+    {
+      "letter": "U",
+      "name": "Utilização de Endoprótese em Aorta Torácica Descendente (Diretrizes Brasileiras)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/u/utilizacao-de-endoprotese-em-aorta-toracica-descendente/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/u"
+    },
+    {
+      "letter": "U",
+      "name": "Utilização de Stents em Pacientes com Doença Coronariana Estável (Diretrizes Brasileiras)",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/u/utilizacao-de-stents-em-pacientes-com-doenca-coronariana-estavel/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/u"
+    },
+    {
+      "letter": "U",
+      "name": "Uveítes não Infecciosas",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/u/uveites-nao-infecciosas/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/u"
+    },
+    {
+      "letter": "V",
+      "name": "Vasculite",
+      "guideline_entry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/v/vasculite/view",
+      "catalog_page_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/v"
+    }
+  ]
+}
