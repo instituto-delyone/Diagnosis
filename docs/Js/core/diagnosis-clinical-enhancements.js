@@ -265,20 +265,38 @@
         };
 
         engine.processAction = function (text) {
-            if (this.pendingClinicalChallenge) {
-                evaluateClinicalChallenge(this, text);
+            /*
+             * O núcleo do Diagnosys já possui uma camada própria para
+             * investigações que pertencem ao caso clínico. Ela deve ter
+             * prioridade sobre a camada legada de exames, porque conhece
+             * o resultado real definido no Case JSON.
+             */
+            const caseInvestigation = typeof this.matchInvestigation === "function"
+                ? this.matchInvestigation(text)
+                : null;
+
+            if (caseInvestigation) {
+                this.pendingClinicalChallenge = null;
+                originalProcessAction(text);
                 return;
             }
 
+            /*
+             * A camada legada continua disponível para exames auxiliares
+             * definidos em examinations.json, mas não cria mais um desafio
+             * bloqueante depois do exame. O médico deve poder continuar
+             * conversando com o paciente imediatamente.
+             */
             const exam = findExamination(this.examinationRules, text);
             if (exam && this.patientState) {
+                this.pendingClinicalChallenge = null;
                 const association = findAssociation(exam, this);
                 const result = generateResult(exam, association);
                 applyExamination(this, exam, association, result);
-                createClinicalChallenge(this, exam, association, result);
                 return;
             }
 
+            this.pendingClinicalChallenge = null;
             originalProcessAction(text);
         };
     }
