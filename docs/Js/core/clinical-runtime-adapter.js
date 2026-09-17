@@ -230,6 +230,15 @@
     engine.diagnosisCorrect = false;
     engine.diagnosticHypothesisPoints = 10;
 
+    function normalizeClinicalText(value) {
+        return String(value ?? "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase()
+            .replace(/\s+/g, " ")
+            .trim();
+    }
+
     const originalLoadKnowledge = engine.loadKnowledge.bind(engine);
     const originalRegisterKnowledgeSource = engine.registerKnowledgeSource.bind(engine);
     const originalGenerateCase = engine.generateCase.bind(engine);
@@ -350,10 +359,10 @@
     }
 
     function hypothesisMatches(text) {
-        const value = normalize(text);
+        const value = normalizeClinicalText(text);
         const definition = findDiagnosisDefinition();
         const terms = [diagnosisTruth(), definition?.id, definition?.name, ...(Array.isArray(definition?.aliases) ? definition.aliases : [])]
-            .filter(Boolean).map(normalize);
+            .filter(Boolean).map(normalizeClinicalText);
         return Boolean(value) && terms.some(term => term.length <= 3 ? new RegExp(`\\b${term}\\b`, "i").test(value) : value.includes(term));
     }
 
