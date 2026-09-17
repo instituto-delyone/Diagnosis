@@ -23,15 +23,21 @@
     if (typeof global.ClinicalModel === "function") {
         const originalBuildIndexes = global.ClinicalModel.prototype.buildIndexes;
         global.ClinicalModel.prototype.buildIndexes = function () {
-            this.relationships = this.relationships.map(relation => ({
-                ...relation,
-                type: relationType(relation)
-            }));
+            this.relationships = this.relationships.map(relation => ({ ...relation, type: relationType(relation) }));
             return originalBuildIndexes.call(this);
         };
     }
 
     if (typeof global.PossibilityEngine === "function") {
+        global.PossibilityEngine.prototype.getDiseaseEntities = function () {
+            const allowed = new Set(["disease", "condition", "disorder", "syndrome", "diagnosis"]);
+            return this.model.getEntities().filter(entity => {
+                const type = normalize(entity?.type || entity?.entity_type || entity?.classification?.type);
+                const category = normalize(entity?.category);
+                return allowed.has(type) || allowed.has(category);
+            });
+        };
+
         global.PossibilityEngine.prototype.getPossibleManifestations = function (entityId) {
             const result = [];
             const source = this.model.getEntity(entityId);
@@ -82,11 +88,7 @@
     if (typeof global.PatientGenerator === "function") {
         global.PatientGenerator.prototype.generateOnset = function (disease, options = {}) {
             if (options.onset) return { ...options.onset };
-            const sources = [
-                disease?.patient_generation?.possible_presentations,
-                disease?.clinical?.presentations,
-                disease?.presentations
-            ];
+            const sources = [disease?.patient_generation?.possible_presentations, disease?.clinical?.presentations, disease?.presentations];
             const timingText = sources.flatMap(value => Array.isArray(value) ? value : []).map(item => item?.timing || item?.onset || item?.id || "").join(" ").toLowerCase();
             let type = null;
             if (timingText.includes("crôn") || timingText.includes("cron")) type = "chronic";
@@ -112,9 +114,7 @@
         global.ClinicalInterlocutor.prototype.hasAny = function (text, terms) {
             return terms.some(term => {
                 const normalizedTerm = normalize(term);
-                if (/^[a-z0-9]{1,3}$/i.test(normalizedTerm)) {
-                    return new RegExp(`\\b${normalizedTerm}\\b`, "i").test(text);
-                }
+                if (/^[a-z0-9]{1,3}$/i.test(normalizedTerm)) return new RegExp(`\\b${normalizedTerm}\\b`, "i").test(text);
                 return text.includes(normalizedTerm);
             });
         };
@@ -131,9 +131,7 @@
                 glucose: ["glucose", "glicemia"],
                 temperature: ["temperature", "temp"]
             };
-            for (const key of maps[target] || [target]) {
-                if (vitals[key] !== undefined) return vitals[key];
-            }
+            for (const key of maps[target] || [target]) if (vitals[key] !== undefined) return vitals[key];
             return undefined;
         };
 
@@ -142,8 +140,7 @@
             if (!state) return undefined;
             const presentation = state.getPresentation?.() || {};
             const history = state.getHistory?.() || {};
-            const sources = [presentation, presentation.chief_complaint, history];
-            for (const source of sources) {
+            for (const source of [presentation, presentation.chief_complaint, history]) {
                 for (const key of keys) if (source?.[key] !== undefined) return source[key];
             }
             return undefined;
@@ -151,8 +148,7 @@
 
         global.ClinicalInterlocutor.prototype.findPhysicalExamination = function (target) {
             const exam = this.patientState?.getPhysicalExam?.() || {};
-            if (exam[target] !== undefined) return exam[target];
-            return undefined;
+            return exam[target] !== undefined ? exam[target] : undefined;
         };
 
         global.ClinicalInterlocutor.prototype.findInvestigation = function (target) {
