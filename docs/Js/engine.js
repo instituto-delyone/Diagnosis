@@ -175,6 +175,7 @@
                 next: document.getElementById("nextBtn"),
                 back: document.getElementById("backBtn"),
                 stateList: document.getElementById("stateList"),
+                investigationCatalog: document.getElementById("investigationCatalog"),
                 fc: document.getElementById("fc"),
                 rr: document.getElementById("rr"),
                 spo2: document.getElementById("spo2"),
@@ -497,25 +498,90 @@
             return parts.length ? parts.join("; ") + "." : "A história detalhada ainda não foi registrada.";
         }
 
+        renderInvestigationCatalog() {
+            const root = this.elements.investigationCatalog;
+            if (!root) return;
+
+            const catalog = Array.isArray(this.currentCase?.investigations?.catalog)
+                ? this.currentCase.investigations.catalog
+                : [];
+
+            if (!catalog.length) {
+                root.innerHTML = \`<div class="investigation-empty">Nenhuma investigação disponível neste cenário.</div>\`;
+                return;
+            }
+
+            root.innerHTML = catalog
+                .filter(item => item && item.available !== false)
+                .map(item => {
+                    const id = escapeHTML(item.id || item.exam || item.name || "");
+                    const name = escapeHTML(item.name || item.exam || item.id || "Exame");
+                    const performed = this.context?.revealed?.has(item.id);
+                    return \`
+                        <button type="button"
+                                class="investigation-chip \${performed ? "performed" : ""}"
+                                data-investigation-id="\${id}">
+                            <span class="investigation-chip-name">\${name}</span>
+                            <span class="investigation-chip-status">\${performed ? "resultado revelado" : "disponível"}</span>
+                        </button>
+                    \`;
+                })
+                .join("");
+
+            root.querySelectorAll("[data-investigation-id]").forEach(button => {
+                button.addEventListener("click", () => {
+                    const id = button.dataset.investigationId;
+                    const item = catalog.find(entry => String(entry.id || entry.exam || entry.name) === id);
+                    if (item) {
+                        this.revealInvestigation({
+                            id: item.id || item.exam || item.name,
+                            name: item.name || item.exam || item.id,
+                            result: item.result,
+                            interpretation: item.interpretation || null
+                        });
+                    }
+                });
+            });
+        }
+
         matchInvestigation(input) {
             const n = normalize(input);
-            const inv = this.currentCase.investigations || {};
+            const catalog = Array.isArray(this.currentCase?.investigations?.catalog)
+                ? this.currentCase.investigations.catalog
+                : [];
 
-            if (/hemograma|cbc|hemograma completo|complete blood count/.test(n) && inv.initial) {
-                return { id: "initial_cbc", name: "Hemograma", result: inv.initial };
-            }
+            for (const item of catalog) {
+                if (!item || item.available === false) continue;
+                const name = normalize(item.exam || item.name || item.id);
+                if (!name) continue;
 
-            const list = flatten(inv.available || []);
-            for (const item of list) {
-                const name = normalize(item?.exam || item?.name || item);
-                if (name && n.includes(name)) {
-                    return { id: item.exam || item.id || name, name: item.exam || item.name || name, result: item };
+                if (
+                    n.includes(name) ||
+                    (name === "hemograma" && /cbc|hemograma completo|complete blood count/.test(n))
+                ) {
+                    return {
+                        id: item.id || item.exam || item.name,
+                        name: item.name || item.exam || item.id,
+                        result: item.result,
+                        interpretation: item.interpretation || null
+                    };
                 }
             }
+
             return null;
         }
 
         revealInvestigation(exam) {
+            if (!exam || exam.result === undefined || exam.result === null || exam.result === "") {
+                this.log("SISTEMA", \`A investigação \${exam?.name || "solicitada"} não possui resultado definido no caso e não pode ser revelada.\`);
+                return;
+            }
+
+            if (this.context.revealed.has(exam.id)) {
+                this.log("RESULTADO", \`\${exam.name} já foi realizado neste caso.\`);
+                return;
+            }
+
             this.context.time += 5;
             this.context.revealed.add(exam.id);
             this.patientState.revealed = this.patientState.revealed || {};
@@ -523,18 +589,28 @@
             this.patientState.investigations = this.patientState.investigations || {};
             this.patientState.investigations[exam.id] = {
                 requested: true,
+                performed: true,
                 result: exam.result,
                 timestamp: Date.now()
             };
-            this.patientState.record?.({ type: "investigation", target: exam.id, result: exam.result, timestamp: Date.now() });
+            this.patientState.record?.({
+                type: "investigation",
+                target: exam.id,
+                result: exam.result,
+                timestamp: Date.now()
+            });
             this.syncCompatibilityState();
-            this.log("INVESTIGAÇÃO", `${exam.name} solicitado.`);
+            this.log("INVESTIGAÇÃO", \`\${exam.name} solicitado.\`);
             this.log("RESULTADO", this.formatInvestigationResult(exam));
             this.renderState();
         }
 
         formatInvestigationResult(exam) {
-            if (exam.id === "initial_cbc" && exam.result) {
+            if (!exam || exam.result === undefined || exam.result === null) {
+                return "Resultado não definido.";
+            }
+
+            if (exam.id === "initial_cbc" && typeof exam.result === "object") {
                 const labels = {
                     hemoglobin_g_dl: "Hemoglobina",
                     hematocrit_percent: "Hematócrito",
@@ -547,10 +623,19 @@
                     platelets_per_mm3: "Plaquetas",
                     reticulocytes_percent: "Reticulócitos"
                 };
-                return Object.entries(exam.result).map(([key, value]) => `${labels[key] || key}: ${value}`).join(" | ");
+                return Object.entries(exam.result)
+                    .map(([key, value]) => \`\${labels[key] || key}: \${value}\`)
+                    .join(" | ");
             }
-            if (exam.result?.expected_result) return `${exam.result.expected_result}${exam.result.interpretation ? ` — ${exam.result.interpretation}` : ""}`;
-            return "Resultado disponível conforme o caso clínico.";
+
+            if (typeof exam.result === "object") {
+                const valueText = Object.entries(exam.result)
+                    .map(([key, value]) => \`\${key}: \${typeof value === "object" ? JSON.stringify(value) : value}\`)
+                    .join(" | ");
+                return \`\${valueText}\${exam.interpretation ? \` — \${exam.interpretation}\` : ""}\`;
+            }
+
+            return \`\${exam.result}\${exam.interpretation ? \` — \${exam.interpretation}\` : ""}\`;
         }
 
         isReferenceQuestion(n) {
@@ -607,9 +692,13 @@
         }
 
         renderState(age, sex) {
-            if (!this.elements.stateList) return;
+            if (!this.elements.stateList) {
+                this.renderInvestigationCatalog();
+                return;
+            }
             const c = this.currentCase;
             const revealed = [...(this.context?.revealed || [])];
+            this.renderInvestigationCatalog();
             this.elements.stateList.innerHTML = [
                 `<li>Paciente: ${escapeHTML(sex || (c?.patient?.sex || "--"))}, ${escapeHTML(age || (c?.patient?.age ? c.patient.age + " anos" : "--"))}</li>`,
                 `<li>Estabilidade: ${escapeHTML(c?.initial_state?.stability || "--")}</li>`,
