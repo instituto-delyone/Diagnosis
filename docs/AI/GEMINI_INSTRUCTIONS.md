@@ -724,7 +724,7 @@ A estrutura relevante do projeto é:
 
 docs/
 ├── index.html
-├── engine.html
+├── diagnosis.html
 ├── AI/
 │   ├── GEMINI_INSTRUCTIONS.md
 │   ├── KNOWLEDGE_BASE_RULES.md
