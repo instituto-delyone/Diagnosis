@@ -129,8 +129,8 @@
         ? this.engine.referenceRanges.tests
         : [];
 
-      const examDefinitions = Array.isArray(this.engine.examinations?.examinations)
-        ? this.engine.examinations.examinations
+      const examDefinitions = Array.isArray(this.engine.examinationRules?.examinations)
+        ? this.engine.examinationRules.examinations
         : [];
 
       const examMap = new Map();
