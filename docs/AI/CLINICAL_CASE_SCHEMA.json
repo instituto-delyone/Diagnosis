@@ -198,6 +198,13 @@
         "diagnosis": {
           "type": "string"
         },
+        "label": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Human-readable hidden diagnosis label used by the evaluation layer."
+        },
         "pathophysiology": {
           "type": "object"
         },
