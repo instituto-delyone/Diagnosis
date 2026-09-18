@@ -463,7 +463,9 @@
                 const maxLength = Math.max(value.length, target.length, 1);
                 const editSimilarity = 1 - (distance / maxLength);
 
-                return Math.max(jaccard, editSimilarity * 0.8);
+                return intersection > 0
+                    ? Math.max(jaccard, editSimilarity * 0.8)
+                    : jaccard;
             };
 
             return Math.max(...candidates.map(similarityFor), 0);
