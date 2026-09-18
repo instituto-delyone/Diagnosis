@@ -708,7 +708,58 @@
             }
         }
 
-    </style>
+    
+        .hypothesis-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .hypothesis-help {
+            margin: 0;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.55;
+        }
+
+        .hypothesis-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .hypothesis-input {
+            min-width: 0;
+            flex: 1;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+            color: var(--text);
+            padding: 10px 12px;
+            font: inherit;
+        }
+
+        .hypothesis-input:disabled {
+            opacity: 0.75;
+            cursor: not-allowed;
+        }
+
+        .hypothesis-status {
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.45;
+        }
+
+        .hypothesis-submit {
+            white-space: nowrap;
+        }
+
+        @media (max-width: 700px) {
+            .hypothesis-row {
+                flex-direction: column;
+            }
+        }
+
+</style>
 </head>
 
 <body class="preparing">
@@ -1134,6 +1185,47 @@
             <div class="side-section">
 
                 <div class="side-title">
+                    Hipótese diagnóstica
+                </div>
+
+                <div class="hypothesis-box">
+                    <p class="hypothesis-help">
+                        Registre uma única hipótese quando estiver pronto. Depois de fixada,
+                        ela não pode mais ser alterada. A pontuação combina proximidade do diagnóstico
+                        oculto com a rapidez da decisão.
+                    </p>
+
+                    <div class="hypothesis-row">
+                        <input
+                            id="hypothesisInput"
+                            class="hypothesis-input"
+                            type="text"
+                            autocomplete="off"
+                            placeholder="Ex.: anemia ferropriva"
+                            aria-label="Hipótese diagnóstica"
+                        >
+
+                        <button
+                            id="hypothesisSubmit"
+                            class="btn btn-primary hypothesis-submit"
+                            type="button"
+                        >
+                            Fixar hipótese
+                        </button>
+                    </div>
+
+                    <div id="hypothesisStatus" class="hypothesis-status">
+                        Hipótese ainda não fixada.
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="side-section">
+
+                <div class="side-title">
                     Arquitetura
                 </div>
 
@@ -1290,6 +1382,7 @@
         const originalStartNewCase = engine.startNewCase;
         engine.startNewCase = async function () {
             if (engine.__casePreparationReady && engine.__casePreparation) {
+                engine.finalizeHypothesis?.();
                 engine.__casePreparation.preparedCases = [];
                 await prepareCases(engine, true);
                 return;
@@ -1309,6 +1402,7 @@
             await prepareCases(engine, false);
 
             engine.startNewCase = async function () {
+                engine.finalizeHypothesis?.();
                 await prepareCases(engine, true);
             };
         } catch (error) {
@@ -1338,6 +1432,15 @@
             statusRow("três casos", "pronto", "casos completos e validados");
         } else {
             statusRow("três casos", "renovado", "novo conjunto preparado");
+
+            const previous = engine.__lastHypothesisResult;
+            if (previous) {
+                const detail = previous.registered
+                    ? `${previous.score}/100 · ${Math.round(previous.similarity * 100)}% de proximidade · ${Math.round(previous.elapsedSeconds)} s até a fixação`
+                    : "nenhuma hipótese foi fixada";
+                statusRow("resultado anterior", "encerrado", detail);
+                engine.__lastHypothesisResult = null;
+            }
         }
 
         showCards(engine, prepared);
