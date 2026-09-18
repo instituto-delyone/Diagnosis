@@ -35,8 +35,28 @@
       this.preparedCases = [];
     }
 
+    async loadClinicalCatalogModule() {
+      if (window.ClinicalDiseaseCatalog) return true;
+      return new Promise((resolve) => {
+        const existing = Array.from(document.scripts).find(script =>
+          script.src.endsWith("Js/core/clinical-disease-catalog.js")
+        );
+        if (existing) {
+          existing.addEventListener("load", () => resolve(true), { once: true });
+          existing.addEventListener("error", () => resolve(false), { once: true });
+          return;
+        }
+        const script = document.createElement("script");
+        script.src = "Js/core/clinical-disease-catalog.js";
+        script.onload = () => resolve(true);
+        script.onerror = () => resolve(false);
+        document.head.appendChild(script);
+      });
+    }
+
     async loadMasterCatalog(onStatus) {
       onStatus?.("catálogo mestre", "carregando");
+      await this.loadClinicalCatalogModule();
       try {
         if (this.clinicalCatalog) {
           this.catalog = await this.clinicalCatalog.load();
