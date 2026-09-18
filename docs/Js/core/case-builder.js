@@ -77,6 +77,13 @@
             source.concept ||
             null,
 
+          label:
+            source.hidden && source.hidden.label ||
+            source.title ||
+            source.primary_concept ||
+            source.concept ||
+            null,
+
           pathophysiology:
             source.hidden && source.hidden.pathophysiology ||
             {},
