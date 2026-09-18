@@ -1236,6 +1236,10 @@
             engine.startNewCase = originalStartNewCase;
 
             await prepareCases(engine, false);
+
+            engine.startNewCase = async function () {
+                await prepareCases(engine, true);
+            };
         } catch (error) {
             engine.startNewCase = originalStartNewCase;
             errorRoot.textContent = "Não foi possível preparar os três casos: " + (error.message || String(error));
@@ -1246,6 +1250,13 @@
     };
 
     async function prepareCases(engine, fromNextCase) {
+        overlay.classList.remove("prep-hidden");
+        document.body.classList.add("preparing");
+        statusRoot.innerHTML = "";
+        cardsRoot.innerHTML = "";
+        cardsRoot.classList.add("prep-hidden");
+        errorRoot.classList.add("prep-hidden");
+
         const preparation = new window.CasePreparationEngine({ engine });
         engine.__casePreparation = preparation;
 
