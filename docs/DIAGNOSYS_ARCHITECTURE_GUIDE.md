@@ -25,7 +25,7 @@ CÓDIGO DE EXECUÇÃO
         ↓
       docs/Js
         ↓
-      engine.html
+      diagnosis.html
 ```
 
 A lógica clínica pretendida segue, em alto nível:
@@ -74,7 +74,7 @@ A camada de linguagem deve respeitar a regra fundamental do projeto:
 
 # 3. INTERFACE
 
-## `docs/engine.html`
+## `docs/diagnosis.html`
 
 **Função:** interface principal da simulação clínica.
 
@@ -90,7 +90,7 @@ Responsabilidades principais:
 
 ### Regra de manutenção
 
-Se a mudança é **visual ou de interface**, procure primeiro `engine.html` e `Js/ui/`.  
+Se a mudança é **visual ou de interface**, procure primeiro `diagnosis.html` e `Js/ui/`.  
 Se a mudança altera **comportamento clínico**, procure `Js/core/`, `Js/clinical/` ou `knowledge_base/` antes de alterar a interface.
 
 ---
@@ -721,7 +721,7 @@ PATIENT STATE
 
 | Quero mudar... | Procuro primeiro em... |
 |---|---|
-| aparência/interface | `engine.html`, `Js/ui/` |
+| aparência/interface | `diagnosis.html`, `Js/ui/` |
 | inicialização/orquestração | `Js/engine.js` |
 | criação de pacientes | `Js/core/patient-generator.js` |
 | estado do paciente | `Js/core/patient-state.js` |
@@ -999,7 +999,7 @@ A modularidade é especialmente importante agora que o projeto possui:
 # 24. RESUMO EM UMA FRASE POR COMPONENTE
 
 ```text
-engine.html
+diagnosis.html
 → mostra o sistema.
 
 engine.js
