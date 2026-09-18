@@ -170,11 +170,22 @@
 
     global.addEventListener("DOMContentLoaded", () => {
         const button = document.getElementById("endCaseBtn");
+        const next = document.getElementById("nextBtn");
+        const resultRoot = document.getElementById("caseResult");
+
         if (button) button.addEventListener("click", () => {
             const engine = global.idmtEngine;
             if (!engine || engine.context?.caseEnded) return;
             const result = engine.endCase?.();
             if (result) button.disabled = true;
+        });
+
+        if (next) next.addEventListener("click", () => {
+            if (button) button.disabled = false;
+            if (resultRoot) {
+                resultRoot.classList.add("case-result-hidden");
+                resultRoot.innerHTML = "";
+            }
         });
     });
 })(window);
