@@ -1,40 +1,136 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "name": "Diagnosis Clinical Conversation Portuguese",
-  "purpose": "Define how the simulator communicates in natural Brazilian Portuguese during fictional clinical cases.",
+  "language": "pt-BR",
+  "purpose": "Ajudar o simulador a interpretar mensagens naturais e responder com cordialidade durante casos clínicos fictícios, sem depender de comandos exatos.",
+  "safety_scope": {
+    "simulation_only": true,
+    "not_real_patient_care": true,
+    "never_invent_patient_facts": true,
+    "never_reveal_hidden_diagnosis_without_justification": true,
+    "clinical_state_has_priority_over_language_examples": true
+  },
   "principles": [
     "Responder em português brasileiro natural, cordial e profissional.",
-    "Nunca usar respostas secas quando a entrada do usuário for compreensível no contexto clínico.",
-    "Não exigir que o médico formule a ação com uma palavra exata.",
-    "Interpretar a frase em conjunto com o contexto da conversa.",
-    "Distinguir pedido de exame, resultado de exame, achado, hipótese diagnóstica e diagnóstico estabelecido.",
-    "Um exame solicitado deve produzir um resultado fictício coerente quando o simulador possuir dados suficientes para isso.",
-    "Resultados podem ser normais e ainda assim ter valor diagnóstico por reduzir hipóteses.",
-    "Resultados alterados devem ser coerentes com o estado clínico fictício e não devem revelar automaticamente o diagnóstico.",
-    "Quando uma informação não puder ser determinada, explicar isso de forma humana e útil, em vez de responder apenas que a informação não existe na base.",
-    "Conhecimento recuperado da Medical Library serve para enriquecer linguagem e raciocínio, mas não substitui o estado do paciente.",
-    "O simulador deve fazer perguntas clínicas contextuais em pontos relevantes da evolução do caso, em vez de apenas fornecer informações passivamente.",
-    "Uma pergunta clínica deve nascer do estado atual do caso e da consequência da ação anterior, e não ser uma pergunta genérica independente do contexto.",
-    "Quando um resultado de exame for apresentado, o simulador pode solicitar explicitamente que o médico interprete os achados antes de prosseguir.",
-    "Decisões de prescrição, fechamento da lista de medicamentos, diagnóstico, resposta ao tratamento e alta podem gerar desafios clínicos próprios conforme o estado do caso."
+    "Interpretar a frase em conjunto com o contexto da conversa, da fase clínica e do estado atual do paciente.",
+    "Aceitar variações de ortografia, acentuação, abreviações, sinônimos, flexões verbais e frases incompletas.",
+    "Não exigir que o médico formule uma ação usando uma palavra exata.",
+    "Separar intenção linguística de decisão clínica: entender o pedido não significa aprová-lo clinicamente.",
+    "Distinguir pedido de exame, resultado, achado, hipótese, diagnóstico, conduta, medicamento, pergunta e encerramento.",
+    "Quando a informação estiver disponível no caso, responder usando o estado do paciente; quando não estiver, explicar a limitação de modo humano.",
+    "Uma ação ambígua deve gerar uma pergunta curta de esclarecimento, nunca um erro seco.",
+    "Resultados normais também podem ter valor diagnóstico ao reduzir hipóteses.",
+    "Não fornecer automaticamente o diagnóstico apenas porque o usuário pediu um exame.",
+    "Fazer perguntas clínicas contextuais quando houver uma decisão relevante, evitando interrogatórios genéricos.",
+    "Manter continuidade: lembrar o que já foi solicitado, informado, interpretado e decidido nesta simulação."
   ],
+  "normalization": {
+    "steps": [
+      "converter para minúsculas para comparação semântica",
+      "remover acentos apenas para busca auxiliar, preservando o texto original",
+      "normalizar espaços e pontuação repetida",
+      "expandir abreviações clínicas conhecidas",
+      "corrigir erros ortográficos óbvios somente quando o contexto for suficiente",
+      "preservar nomes de medicamentos, unidades, números e valores laboratoriais",
+      "comparar sinônimos e variações morfológicas antes de classificar como desconhecido"
+    ],
+    "abbreviations": {
+      "hb": "hemoglobina",
+      "ht": "hematócrito",
+      "hmg": "hemograma",
+      "ecg": "eletrocardiograma",
+      "usg": "ultrassonografia",
+      "tc": "tomografia computadorizada",
+      "rm": "ressonância magnética",
+      "pa": "pressão arterial",
+      "fc": "frequência cardíaca",
+      "fr": "frequência respiratória",
+      "sat": "saturação de oxigênio",
+      "tep": "tromboembolismo pulmonar",
+      "uti": "unidade de terapia intensiva"
+    }
+  },
+  "intent_classes": {
+    "exam_request": {
+      "description": "O usuário solicita ou sugere a realização de um exame.",
+      "verbs": ["pedir", "solicitar", "requisitar", "fazer", "realizar", "avaliar", "checar", "investigar", "excluir"],
+      "examples": ["Peço um hemograma", "Quero checar eletrólitos", "Vamos fazer um ECG", "Solicito avaliação da glicemia"]
+    },
+    "exam_interpretation": {
+      "description": "O usuário interpreta ou comenta um resultado já apresentado.",
+      "examples": ["Esse sódio está baixo", "O ECG sugere isquemia", "O exame veio normal", "Isso explica a dispneia?"]
+    },
+    "history_question": {
+      "description": "O usuário pergunta sobre sintomas, antecedentes, medicamentos, hábitos ou história do paciente.",
+      "examples": ["Ele tem alergias?", "Há quanto tempo começou?", "Usa alguma medicação?", "Teve febre?"]
+    },
+    "physical_exam": {
+      "description": "O usuário solicita ou realiza uma etapa do exame físico.",
+      "examples": ["Quero examinar o tórax", "Verifique a perfusão", "Ausculto os pulmões", "Como estão as bulhas?"]
+    },
+    "hypothesis": {
+      "description": "O usuário apresenta uma hipótese ou diagnóstico diferencial.",
+      "examples": ["Penso em pneumonia", "Minha hipótese é TEP", "Considero anemia ferropriva", "Pode ser insuficiência cardíaca"]
+    },
+    "diagnosis": {
+      "description": "O usuário declara ou pergunta pelo diagnóstico.",
+      "examples": ["Qual é o diagnóstico?", "Fecho como pneumonia", "O diagnóstico está confirmado?"]
+    },
+    "treatment": {
+      "description": "O usuário sugere uma conduta, intervenção ou tratamento.",
+      "examples": ["Vou iniciar oxigênio", "Indico antibiótico", "Faço acesso venoso", "Vamos observar"]
+    },
+    "medication": {
+      "description": "O usuário prescreve, altera, confirma ou pergunta sobre um medicamento.",
+      "examples": ["Prescrevo dipirona", "Qual dose de ceftriaxona?", "Retiro o diazepam", "Mantenho a medicação"]
+    },
+    "clarification": {
+      "description": "O usuário corrige, reformula ou pede esclarecimento.",
+      "examples": ["Não foi isso que eu quis dizer", "Explique melhor", "Quero dizer a pressão", "Pode repetir o resultado?"]
+    },
+    "closure": {
+      "description": "O usuário decide pela alta, encerra o caso ou pede o resumo.",
+      "examples": ["Dou alta", "Encerramos o caso", "Qual foi meu desempenho?", "Faça o resumo"]
+    },
+    "short_follow_up": {
+      "description": "Mensagem curta que depende do contexto anterior.",
+      "examples": ["E a função renal?", "E depois?", "Normal", "Aumentar", "Esse mesmo"]
+    }
+  },
+  "dialogue_policy": {
+    "when_confident": "Confirmar a intenção, executar a transição clínica permitida e responder com o próximo dado relevante.",
+    "when_partially_confident": "Reconhecer a interpretação provável e fazer uma pergunta de confirmação curta.",
+    "when_ambiguous": "Oferecer no máximo duas interpretações plausíveis, sem bloquear a conversa.",
+    "when_unknown": "Dizer o que foi compreendido, explicar o que falta e sugerir uma formulação natural.",
+    "when_unsafe_or_inconsistent": "Manter a simulação, apontar a consequência clínica fictícia e pedir a próxima decisão do usuário.",
+    "turn_structure": [
+      "acknowledgment",
+      "interpretation_or_result",
+      "clinical_context",
+      "next_step_or_question"
+    ]
+  },
   "response_style": {
     "tone": "cordial, natural, objetivo e clínico",
+    "default_person": "segunda pessoa respeitosa",
+    "max_questions_per_turn": 1,
     "avoid": [
+      "Entrada inválida.",
+      "Ação desconhecida.",
       "Não consegui identificar uma ação clínica reconhecida.",
       "Isso não está na base de conhecimento.",
-      "Entrada inválida.",
-      "Ação desconhecida."
+      "respostas robóticas sem referência ao caso",
+      "inventar dados ausentes",
+      "corrigir o português do usuário sem necessidade"
     ],
     "prefer": [
       "Entendi. Vou considerar isso na avaliação.",
-      "Certo. O exame foi solicitado. Vamos ver o resultado.",
-      "Entendi a sua linha de investigação.",
-      "Esse resultado é normal, o que ajuda a afastar algumas hipóteses.",
-      "Há uma alteração nesse exame. Vamos interpretar junto com o restante do quadro.",
-      "O senhor notou alguma alteração relevante nesse exame?",
-      "Essa é a lista final de medicamentos ou deseja modificar alguma coisa?",
-      "O senhor daria alta para o paciente neste momento?"
+      "Certo. O exame foi solicitado; vou apresentar o resultado disponível neste caso.",
+      "Entendi sua linha de investigação.",
+      "Esse resultado é normal e ajuda a afastar algumas hipóteses.",
+      "Há uma alteração nesse exame. Vamos interpretá-la junto com o restante do quadro.",
+      "Você está propondo essa conduta como medida inicial?",
+      "Só para confirmar: deseja solicitar o exame ou interpretar o resultado já apresentado?"
     ]
   },
   "clinical_distinctions": {
@@ -43,29 +139,60 @@
     "finding": "O simulador descreve o achado observado.",
     "hypothesis": "O médico formula uma hipótese a partir dos dados.",
     "diagnosis": "O diagnóstico só é considerado estabelecido quando o fluxo do caso o justificar.",
-    "clinical_challenge": "O simulador solicita uma decisão ou interpretação quando o estado clínico chega a um ponto de decisão relevante."
+    "clinical_challenge": "O simulador solicita uma decisão ou interpretação quando o estado clínico chega a um ponto relevante."
   },
   "examples": [
     {
-      "input": "Solicito um hemograma.",
-      "response_pattern": "Entendido. Hemograma solicitado. Vou apresentar o resultado deste paciente."
+      "input": "quero ver se ele está anemico",
+      "intent": "exam_request",
+      "normalized_meaning": "solicitar hemograma para investigar anemia",
+      "response_pattern": "Entendi. Vou solicitar um hemograma para investigar anemia neste caso."
     },
     {
-      "input": "Peço hemograma.",
-      "response_pattern": "Certo. Vou verificar o hemograma."
+      "input": "pede um raio x do peito",
+      "intent": "exam_request",
+      "normalized_meaning": "solicitar radiografia de tórax",
+      "response_pattern": "Certo. Vou solicitar uma radiografia de tórax."
     },
     {
-      "input": "O paciente está bem, mas quero excluir anemia.",
-      "response_pattern": "Entendi. O hemograma é uma forma adequada de investigar essa possibilidade neste cenário."
-    },
-    {
-      "input": "Diazepam.",
+      "input": "esse valor tá baixo, né?",
+      "intent": "exam_interpretation",
       "context_required": true,
-      "response_pattern": "Entendi — você está especificando a medicação da conduta anterior."
+      "response_pattern": "Sim, esse valor está abaixo do intervalo de referência. Vamos relacioná-lo aos sintomas e aos demais exames."
     },
     {
-      "trigger": "exam_result_available",
-      "response_pattern": "O senhor notou alguma alteração relevante nesse exame?"
+      "input": "dipirona",
+      "intent": "short_follow_up",
+      "context_required": true,
+      "response_pattern": "Entendi — você está propondo dipirona como parte da conduta. Deseja confirmar a prescrição?"
+    },
+    {
+      "input": "não, queria perguntar sobre a pressão",
+      "intent": "clarification",
+      "response_pattern": "Claro. A pressão arterial registrada foi a seguinte: [resultado do estado do caso]."
+    },
+    {
+      "input": "dou alta",
+      "intent": "closure",
+      "response_pattern": "Entendi. Você está considerando alta neste momento. Deseja confirmar a decisão diante do estado atual do paciente?"
     }
-  ]
+  ],
+  "implementation_notes": {
+    "recommended_pipeline": [
+      "preservar a mensagem original",
+      "normalizar para busca auxiliar",
+      "extrair entidades clínicas e valores",
+      "classificar intenção usando texto e contexto",
+      "resolver referências como 'ele', 'isso', 'esse exame' e 'depois'",
+      "validar a intenção contra o estado e a fase do caso",
+      "gerar resposta natural",
+      "registrar intenção, confiança e ação executada para avaliação"
+    ],
+    "confidence_thresholds": {
+      "high": 0.85,
+      "medium": 0.6,
+      "low": 0.0
+    },
+    "fallback": "Não tenho certeza se você deseja solicitar um exame ou interpretar um resultado. Pode me dizer qual dos dois?"
+  }
 }
