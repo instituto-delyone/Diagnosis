@@ -8,7 +8,7 @@ Antes de alterar qualquer arquivo, identifique **qual responsabilidade está sen
 
 | Problema | Área |
 |---|---|
-| interface | `docs/engine.html`, `docs/Js/ui/` |
+| interface | `docs/diagnosis.html`, `docs/Js/ui/` |
 | orquestração | `docs/Js/engine.js` |
 | estado do paciente | `docs/Js/core/patient-state.js` |
 | geração de paciente/caso | `docs/Js/core/patient-generator.js` |
