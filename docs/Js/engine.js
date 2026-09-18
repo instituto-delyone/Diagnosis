@@ -125,6 +125,7 @@
             this.score = Number(this.context?.score || 0);
             this.errors = Number(this.context?.errors || 0);
             this.time = Number(this.context?.time || 0);
+            this.setText("score", this.score);
         }
 
         async boot() {
@@ -506,6 +507,7 @@
             state.evaluated = false;
 
             this.context.phase = "diagnosis";
+            this.syncCompatibilityState();
             this.renderHypothesis();
             this.log(
                 "HIPÓTESE",
