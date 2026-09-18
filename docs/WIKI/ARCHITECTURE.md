@@ -17,7 +17,7 @@ CÓDIGO DE EXECUÇÃO
         ↓
       docs/Js
         ↓
-   engine.html
+   diagnosis.html
 ```
 
 ## Pipeline clínico
