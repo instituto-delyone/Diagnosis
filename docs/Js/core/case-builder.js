@@ -155,7 +155,7 @@
           performed: false,
           source: "case.propedeutics"
         });
-      });
+            }, this);
 
       catalog.forEach(function (item) {
         if (!item) return;
