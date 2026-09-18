@@ -72,10 +72,10 @@ Isso não significa que seus resultados já estejam revelados.
 ```text
 available = true
 performed = false
-result = definido internamente ou gerável por regra válida
+result = já definido no Clinical Case Model
 ```
 
-Ao solicitar o exame, o runtime registra a realização e revela o resultado correspondente.
+Ao solicitar o exame, o runtime registra a realização e revela o resultado correspondente já existente no caso. O runtime não gera um novo resultado naquele momento.
 
 ## Exame não disponível
 
