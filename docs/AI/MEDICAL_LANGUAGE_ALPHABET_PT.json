@@ -1,0 +1,252 @@
+{
+  "schema_version": "1.0",
+  "id": "diagnosis_medical_language_alphabet_pt_br",
+  "name": "Alfabetização do Linguajar Médico em Português Brasileiro",
+  "purpose": "Ensinar ao motor conversacional do Diagnosis como reconhecer, relacionar e usar linguagem médica em português brasileiro, sem confundir vocabulário com diagnóstico.",
+  "scope": {
+    "language": "pt-BR",
+    "audience": "motor de interpretação e diálogo clínico",
+    "simulation_only": true,
+    "does_not_diagnose": true,
+    "does_not_replace_patient_state": true
+  },
+  "learning_order": [
+    "palavra",
+    "sinônimo e variante popular",
+    "conceito clínico",
+    "categoria semântica",
+    "contexto",
+    "negação",
+    "temporalidade",
+    "intensidade e qualificadores",
+    "relação entre conceitos",
+    "interpretação clínica posterior"
+  ],
+  "core_vocabulary": {
+    "symptom": {
+      "definition": "Queixa ou experiência percebida pelo paciente.",
+      "examples": [
+        {
+          "canonical": "cefaleia",
+          "simple_forms": ["dor de cabeça", "cabeça doendo", "cabeça pesada"],
+          "related_forms": ["dor cefálica", "cefaleia frontal", "cefaleia occipital"]
+        },
+        {
+          "canonical": "dispneia",
+          "simple_forms": ["falta de ar", "cansaço para respirar", "fôlego curto"],
+          "related_forms": ["desconforto respiratório", "dispneia aos esforços", "dispneia em repouso"]
+        },
+        {
+          "canonical": "dor torácica",
+          "simple_forms": ["dor no peito", "aperto no peito", "peso no peito"],
+          "related_forms": ["precordialgia", "dor retroesternal", "dor pleurítica"]
+        },
+        {
+          "canonical": "náusea",
+          "simple_forms": ["enjoo", "ânsia", "vontade de vomitar"],
+          "related_forms": ["emese", "vômito", "êmese"]
+        },
+        {
+          "canonical": "tontura",
+          "simple_forms": ["cabeça girando", "zonzeira", "sensação de desmaio"],
+          "related_forms": ["vertigem", "lipotímia", "instabilidade postural"]
+        }
+      ]
+    },
+    "sign": {
+      "definition": "Manifestação observável, mensurável ou identificada pelo examinador.",
+      "examples": [
+        { "canonical": "febre", "medical_forms": ["pirexia", "estado febril", "hipertermia"] },
+        { "canonical": "pressão arterial elevada", "medical_forms": ["hipertensão", "níveis pressóricos elevados"] },
+        { "canonical": "frequência cardíaca elevada", "medical_forms": ["taquicardia"] },
+        { "canonical": "frequência cardíaca reduzida", "medical_forms": ["bradicardia"] },
+        { "canonical": "frequência respiratória elevada", "medical_forms": ["taquipneia"] },
+        { "canonical": "coloração azulada", "medical_forms": ["cianose"] },
+        { "canonical": "inchaço", "medical_forms": ["edema"] },
+        { "canonical": "pele amarelada", "medical_forms": ["icterícia"] }
+      ]
+    },
+    "history": {
+      "definition": "Informações obtidas por perguntas ao paciente ou acompanhante.",
+      "sections": [
+        { "term": "queixa principal", "abbreviation": "QP", "meaning": "motivo principal da consulta" },
+        { "term": "história da doença atual", "abbreviation": "HDA", "meaning": "início, evolução, características e contexto do problema atual" },
+        { "term": "história patológica pregressa", "abbreviation": "HPP", "meaning": "doenças, cirurgias e eventos clínicos anteriores" },
+        { "term": "história familiar", "abbreviation": "HF", "meaning": "doenças relevantes em familiares" },
+        { "term": "história social", "abbreviation": "HS", "meaning": "hábitos, ocupação, exposições e contexto social" },
+        { "term": "história medicamentosa", "abbreviation": "HM", "meaning": "medicamentos em uso, doses, adesão e automedicação" }
+      ]
+    },
+    "physical_exam": {
+      "definition": "Avaliação objetiva do paciente por inspeção, palpação, percussão, ausculta e medidas.",
+      "terms": [
+        { "canonical": "inspeção", "simple_forms": ["observar", "olhar o paciente"] },
+        { "canonical": "palpação", "simple_forms": ["examinar com as mãos", "apertar a região"] },
+        { "canonical": "ausculta", "simple_forms": ["escutar com o estetoscópio"] },
+        { "canonical": "percussão", "simple_forms": ["percutir", "bater para avaliar o som"] },
+        { "canonical": "estado geral", "simple_forms": ["como o paciente parece", "aspecto geral"] },
+        { "canonical": "perfusão periférica", "simple_forms": ["circulação nas extremidades", "enchimento capilar"] }
+      ]
+    },
+    "investigation": {
+      "definition": "Exame ou procedimento usado para obter evidência clínica.",
+      "groups": {
+        "laboratory": ["hemograma", "glicemia", "eletrólitos", "função renal", "função hepática", "gasometria", "coagulograma"],
+        "imaging": ["radiografia", "ultrassonografia", "tomografia", "ressonância magnética", "ecocardiograma"],
+        "physiologic": ["eletrocardiograma", "oximetria", "espirometria", "monitorização cardíaca"]
+      },
+      "verbs": ["solicitar", "pedir", "realizar", "coletar", "avaliar", "investigar", "repetir", "acompanhar"]
+    },
+    "diagnostic_reasoning": {
+      "terms": [
+        { "canonical": "hipótese diagnóstica", "meaning": "explicação clínica provisória que ainda será testada" },
+        { "canonical": "diagnóstico diferencial", "meaning": "conjunto de possibilidades que podem explicar o quadro" },
+        { "canonical": "diagnóstico confirmado", "meaning": "conclusão sustentada pelo conjunto de dados disponível" },
+        { "canonical": "achado", "meaning": "dado observado em exame, história ou investigação" },
+        { "canonical": "sinal de alarme", "meaning": "dado associado a risco ou necessidade de avaliação urgente" },
+        { "canonical": "probabilidade pré-teste", "meaning": "estimativa inicial antes de um novo exame" },
+        { "canonical": "valor preditivo", "meaning": "relação entre um resultado e a probabilidade da condição no contexto" }
+      ]
+    },
+    "management": {
+      "terms": [
+        { "canonical": "conduta", "simple_forms": ["o que fazer", "plano", "próximo passo"] },
+        { "canonical": "tratamento", "simple_forms": ["terapia", "cuidado", "medida terapêutica"] },
+        { "canonical": "prescrição", "simple_forms": ["receita", "medicação indicada"] },
+        { "canonical": "suporte", "simple_forms": ["medidas de apoio", "estabilização"] },
+        { "canonical": "reavaliação", "simple_forms": ["ver novamente", "acompanhar evolução"] },
+        { "canonical": "alta", "simple_forms": ["liberar o paciente", "ir para casa"] },
+        { "canonical": "internação", "simple_forms": ["admitir", "manter no hospital"] }
+      ]
+    }
+  },
+  "clinical_grammar": {
+    "negation": {
+      "description": "Negação modifica o conceito e não deve ser interpretada como presença do achado.",
+      "markers": ["não", "nega", "negativo para", "sem", "ausência de", "nunca teve", "não apresenta"],
+      "examples": [
+        { "input": "nega febre", "concept": "febre", "present": false },
+        { "input": "sem dor torácica", "concept": "dor torácica", "present": false },
+        { "input": "não apresenta dispneia", "concept": "dispneia", "present": false }
+      ]
+    },
+    "temporality": {
+      "past": ["teve", "apresentou", "já apresentou", "no passado", "há dois anos"],
+      "present": ["tem", "apresenta", "refere", "agora", "neste momento"],
+      "future_or_plan": ["vai realizar", "será solicitado", "pretendo iniciar", "planejo"],
+      "recurrence": ["recorrente", "episódios repetidos", "volta e meia", "intermitente"],
+      "onset": ["começou hoje", "iniciou há", "de início súbito", "de início gradual"],
+      "examples": [
+        { "input": "teve febre ontem, mas está afebril agora", "facts": [{ "concept": "febre", "time": "past", "present": true }, { "concept": "febre", "time": "present", "present": false }] },
+        { "input": "dor há três dias, piorando", "facts": [{ "concept": "dor", "duration": "três dias", "course": "worsening" }] }
+      ]
+    },
+    "severity": {
+      "mild": ["leve", "discreta", "pouca", "suportável"],
+      "moderate": ["moderada", "importante", "considerável"],
+      "severe": ["intensa", "grave", "incapacitante", "insuportável", "muito forte"],
+      "emergency": ["instabilidade", "risco iminente", "choque", "rebaixamento", "sinal de alarme"]
+    },
+    "certainty": {
+      "low": ["talvez", "pode ser", "considero", "não descarto"],
+      "medium": ["suspeito de", "provável", "sugestivo de", "compatível com"],
+      "high": ["confirmado", "evidente", "diagnóstico estabelecido", "comprovado"]
+    },
+    "source": {
+      "patient": ["refere", "relata", "diz que", "sente"],
+      "companion": ["acompanhante informa", "família relata"],
+      "clinician": ["ao exame", "observa-se", "à ausculta", "à palpação"],
+      "investigation": ["o exame mostra", "laboratório revela", "na imagem observa-se"]
+    }
+  },
+  "common_abbreviations": {
+    "QP": "queixa principal",
+    "HDA": "história da doença atual",
+    "HPP": "história patológica pregressa",
+    "HF": "história familiar",
+    "HS": "história social",
+    "SV": "sinais vitais",
+    "EF": "exame físico",
+    "PA": "pressão arterial",
+    "FC": "frequência cardíaca",
+    "FR": "frequência respiratória",
+    "SpO2": "saturação periférica de oxigênio",
+    "T": "temperatura",
+    "ECG": "eletrocardiograma",
+    "TC": "tomografia computadorizada",
+    "RNM": "ressonância nuclear magnética",
+    "POCUS": "ultrassonografia à beira-leito",
+    "TEP": "tromboembolismo pulmonar",
+    "IAM": "infarto agudo do miocárdio",
+    "UTI": "unidade de terapia intensiva"
+  },
+  "semantic_relations": {
+    "is_a": ["dispneia é um sintoma", "taquicardia é um sinal", "hemograma é uma investigação"],
+    "part_of": ["HDA faz parte da história clínica", "ausculta faz parte do exame físico"],
+    "qualifies": ["intensa qualifica dor", "súbito qualifica início", "produtiva qualifica tosse"],
+    "contradicts": ["nega febre contradiz febre presente"],
+    "supports": ["achado pode apoiar hipótese, mas não a confirma sozinho"],
+    "requires_context": ["pressão subiu", "está ruim", "melhorou", "isso", "ele", "depois"]
+  },
+  "response_templates": {
+    "term_recognized": "Entendi: você está descrevendo [termo_canonico]. Vou considerar esse dado no contexto do caso.",
+    "abbreviation_expanded": "Entendi. Quando você diz [abreviacao], está se referindo a [termo_completo].",
+    "negation_recognized": "Certo: o paciente não apresenta [conceito] neste momento.",
+    "ambiguous_term": "Posso interpretar [expressao] como [opcao_1] ou [opcao_2]. Qual sentido você pretende usar neste caso?",
+    "missing_context": "Entendi a ideia, mas preciso de um pouco mais de contexto para interpretar [expressao] corretamente.",
+    "clinical_boundary": "Reconheci o termo, mas ele sozinho não estabelece um diagnóstico. Vou relacioná-lo aos demais dados do paciente."
+  },
+  "training_examples": [
+    {
+      "input": "Paciente com falta de ar e peito chiando.",
+      "normalized": "Paciente com dispneia e sibilância.",
+      "concepts": ["dispneia", "sibilância"],
+      "source": "patient_or_history",
+      "diagnosis": null
+    },
+    {
+      "input": "Nega febre, mas refere tosse seca há cinco dias.",
+      "concepts": [
+        { "name": "febre", "present": false },
+        { "name": "tosse", "present": true, "qualifier": "seca", "duration": "cinco dias" }
+      ],
+      "diagnosis": null
+    },
+    {
+      "input": "Solicito ECG para investigar dor no peito.",
+      "intent": "exam_request",
+      "concepts": ["eletrocardiograma", "dor torácica"],
+      "relation": "investigation_for_symptom",
+      "diagnosis": null
+    },
+    {
+      "input": "Penso em pneumonia, mas ainda não está confirmado.",
+      "intent": "hypothesis",
+      "concepts": [{ "name": "pneumonia", "status": "hypothesis", "certainty": "low" }],
+      "diagnosis": null
+    }
+  ],
+  "processing_rules": [
+    "Preservar sempre a mensagem original.",
+    "Normalizar a forma apenas para busca e comparação.",
+    "Separar entidade clínica, categoria, qualificador, negação, temporalidade e fonte.",
+    "Não transformar sintoma em doença automaticamente.",
+    "Não transformar uma hipótese em diagnóstico confirmado.",
+    "Quando houver ambiguidade, manter candidatos em vez de inventar certeza.",
+    "Entregar os conceitos estruturados ao Patient State e deixar a inferência clínica para o Clinical Model.",
+    "Registrar o termo original, a forma normalizada, o conceito canônico e a confiança da correspondência."
+  ],
+  "output_record": {
+    "original_text": "Texto original recebido.",
+    "normalized_text": "Texto normalizado para comparação.",
+    "concept": "Conceito canônico, quando identificado.",
+    "category": "symptom | sign | history | examination | investigation | hypothesis | diagnosis | management | medication",
+    "present": "true | false | unknown",
+    "certainty": "low | medium | high | unknown",
+    "temporality": "past | present | future_or_plan | recurrent | unknown",
+    "qualifiers": [],
+    "source": "patient | companion | clinician | investigation | user | unknown",
+    "confidence": 0.0,
+    "requires_clinical_interpretation": true
+  }
+}
