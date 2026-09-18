@@ -15,50 +15,202 @@
     "hidden"
   ],
   "properties": {
-    "case_id": { "type": "string" },
+    "case_id": {
+      "type": "string"
+    },
     "patient": {
       "type": "object",
-      "required": ["age", "sex"],
+      "required": [
+        "age",
+        "sex"
+      ],
       "properties": {
-        "age": { "type": "integer", "minimum": 0, "maximum": 130 },
-        "sex": { "type": "string" },
-        "occupation": { "type": "string" }
+        "age": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 130
+        },
+        "sex": {
+          "type": "string"
+        },
+        "occupation": {
+          "type": "string"
+        }
       }
     },
     "presentation": {
       "type": "object",
-      "required": ["chief_complaint", "initial_narrative", "vitals"],
+      "required": [
+        "chief_complaint",
+        "initial_narrative",
+        "vitals"
+      ],
       "properties": {
-        "chief_complaint": { "type": "string" },
-        "initial_narrative": { "type": "string" },
-        "vitals": { "type": "object" }
+        "chief_complaint": {
+          "type": "string"
+        },
+        "initial_narrative": {
+          "type": "string"
+        },
+        "vitals": {
+          "type": "object"
+        }
       }
     },
     "initial_state": {
       "type": "object",
       "properties": {
-        "stability": { "type": "string" },
-        "severity": { "type": "string" },
-        "time": { "type": "string" }
+        "stability": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        }
       }
     },
-    "history": { "type": "object" },
-    "physical_exam": { "type": "object" },
-    "investigations": { "type": "object" },
-    "management": { "type": "object" },
-    "evolution": { "type": "object" },
+    "history": {
+      "type": "object"
+    },
+    "physical_exam": {
+      "type": "object"
+    },
+    "investigations": {
+      "type": "object",
+      "description": "Complete investigation truth for the fictional case. Every available investigation must have a pre-built result before the case is presented.",
+      "required": [
+        "available",
+        "catalog",
+        "results",
+        "result_policy"
+      ],
+      "properties": {
+        "available": {
+          "type": "array",
+          "description": "Investigations that can be requested in this scenario. Each entry already contains its frozen case result.",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "exam",
+              "name",
+              "result"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "exam": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "result": {},
+              "interpretation": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "performed": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "catalog": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "exam",
+              "result"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "exam": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "result": {},
+              "interpretation": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "available": {
+                "type": "boolean"
+              },
+              "performed": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "results": {
+          "type": "object"
+        },
+        "result_policy": {
+          "type": "object",
+          "required": [
+            "all_available_investigations_have_prebuilt_results",
+            "generated_at_case_build",
+            "reveal_only_after_request"
+          ],
+          "properties": {
+            "all_available_investigations_have_prebuilt_results": {
+              "type": "boolean",
+              "const": true
+            },
+            "generated_at_case_build": {
+              "type": "boolean",
+              "const": true
+            },
+            "reveal_only_after_request": {
+              "type": "boolean",
+              "const": true
+            }
+          }
+        }
+      }
+    },
+    "management": {
+      "type": "object"
+    },
+    "evolution": {
+      "type": "object"
+    },
     "hidden": {
       "type": "object",
-      "required": ["diagnosis"],
+      "required": [
+        "diagnosis"
+      ],
       "properties": {
-        "diagnosis": { "type": "string" },
-        "pathophysiology": { "type": "object" },
-        "differential": { "type": "array" }
+        "diagnosis": {
+          "type": "string"
+        },
+        "pathophysiology": {
+          "type": "object"
+        },
+        "differential": {
+          "type": "array"
+        }
       }
     },
     "evidence": {
       "type": "array",
-      "items": { "type": "object" }
+      "items": {
+        "type": "object"
+      }
     },
     "revelation_state": {
       "type": "object",
