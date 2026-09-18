@@ -221,3 +221,55 @@ Patient State
       ↓
 Clinical Conversation
 ```
+
+## Protocolo clínico de construção do caso
+
+Para cada caso jogável, a construção deve seguir esta ordem:
+
+1. **Escolher a doença** a partir do catálogo clínico elegível.
+2. **Definir o perfil epidemiológico**: idade, sexo quando relevante, contexto, exposição, prevalência e cenário compatíveis.
+3. **Mapear a apresentação clínica completa**: sintomas e sinais presentes/ausentes que pertencem à verdade do caso.
+4. **Separar apresentação de revelação**: na abertura aparecem apenas os elementos que justificam a procura pelo serviço de saúde; os demais ficam disponíveis por anamnese, exame físico ou investigação.
+5. **Mapear os diagnósticos diferenciais** e, para cada diferencial relevante, garantir que o caso contenha informação suficiente ou uma investigação plausível para discriminá-lo.
+6. **Selecionar fatores de risco** coerentes com epidemiologia e, quando clinicamente útil, incluir alguns já na apresentação.
+7. **Classificar estabilidade inicial**. A classificação deve ser coerente com os sinais vitais e o estado clínico:
+   - `instável` → fluxo de emergência;
+   - `estável` → fluxo de clínica médica.
+8. **Dor, quando presente**: o caso deve armazenar dados suficientes para responder ao decálogo da dor por anamnese. Não é obrigatório revelar todos os elementos na abertura.
+9. **Exame físico coerente**: os achados devem ser compatíveis com a doença, história, gravidade e sinais vitais.
+10. **Dificuldade progressiva**: casos iniciais devem privilegiar síndromes e doenças comuns, com diferenciais reconhecíveis e informações recuperáveis.
+11. **Tratamento e complicações** devem ser definidos antes da apresentação, com condutas possíveis e eventos adversos/evolutivos coerentes.
+12. **Encerramento por prescrição**: quando o médico registra uma prescrição/conduta terapêutica final, o trabalho clínico daquele caso é considerado concluído e a avaliação pode ser encerrada. O botão manual de encerramento permanece como contingência para outros fluxos.
+
+### Verdade clínica x abertura
+
+O gerador deve manter explicitamente:
+
+- `clinical_truth.symptoms`: todos os sintomas verdadeiros;
+- `clinical_truth.signs`: todos os sinais verdadeiros;
+- `clinical_truth.risk_factors`: fatores de risco;
+- `clinical_truth.differentials`: diferenciais e discriminadores;
+- `clinical_truth.pain`: dados do decálogo, quando aplicável;
+- `presentation.initial_reasons_for_hospital`: elementos que justificam a procura pelo hospital;
+- `presentation.revealed_initially`: somente o subconjunto liberado na abertura.
+
+A abertura não pode revelar automaticamente a totalidade da verdade clínica.
+
+### Roteamento de gravidade
+
+O caso deve carregar `initial_state.stability` e `initial_state.care_mode`. O `care_mode` é derivado da estabilidade declarada/validada:
+
+- `instável` → `emergencia`;
+- `estável` → `clinica_medica`.
+
+A validação deve rejeitar casos que declarem estabilidade e sinais vitais/estado clínico incompatíveis quando houver regras explícitas para essa classificação.
+
+### Regra de prescrição
+
+Uma prescrição reconhecida pelo motor deve:
+
+1. registrar a ação;
+2. avaliar a correspondência com o manejo previsto;
+3. encerrar automaticamente a avaliação;
+4. apresentar o resultado geral;
+5. manter a possibilidade de consulta da Base Científica como etapa educacional pós-caso.
