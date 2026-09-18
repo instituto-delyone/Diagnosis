@@ -9,7 +9,7 @@
     "use strict";
 
     const CONFIG = {
-        libraryScript: "Js/core/medical-library.js",
+        libraryScript: "Js/core/medical-library-compressed-text.js",
         umlsScript: "Js/core/umls-resolver.js",
         conversationRules: "AI/CLINICAL_CONVERSATION_PT.json",
         examinationRules: "knowledge_base/examinations.json"
@@ -265,12 +265,6 @@
         };
 
         engine.processAction = function (text) {
-            /*
-             * O núcleo do Diagnosys já possui uma camada própria para
-             * investigações que pertencem ao caso clínico. Ela deve ter
-             * prioridade sobre a camada legada de exames, porque conhece
-             * o resultado real definido no Case JSON.
-             */
             const caseInvestigation = typeof this.matchInvestigation === "function"
                 ? this.matchInvestigation(text)
                 : null;
@@ -281,12 +275,6 @@
                 return;
             }
 
-            /*
-             * A camada legada continua disponível para exames auxiliares
-             * definidos em examinations.json, mas não cria mais um desafio
-             * bloqueante depois do exame. O médico deve poder continuar
-             * conversando com o paciente imediatamente.
-             */
             const exam = findExamination(this.examinationRules, text);
             if (exam && this.patientState) {
                 this.pendingClinicalChallenge = null;
