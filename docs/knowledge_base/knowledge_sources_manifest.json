@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Universal clinical knowledge sources for Diagnosis Engine case generation.",
+  "include": [
+    "anemia_clinical_cases_degree_v1.json",
+    "anemia_theory_degree_v1.json",
+    "cardiologia.json",
+    "cardiopatias.json",
+    "cirurgia_4.json",
+    "diagnosis_kb_glicemia_consciencia_v1.json",
+    "diagnosis_kb_pulso_circulacao_v1.json",
+    "endocrinologia.json",
+    "has_dislipidemia_knowledge_base.json",
+    "hipertensao_arterial.json",
+    "med_cm12_dispneia_knowledge_base.json",
+    "neurologia.json",
+    "pneumologia.json",
+    "reumatologia.json"
+  ],
+  "exclude_from_case_generation": [
+    "diagnosys_catalogo_mestre_doencas.json",
+    "examinations.json",
+    "pcdt_catalog.json",
+    "reference_ranges.json"
+  ]
+}
