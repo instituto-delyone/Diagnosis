@@ -828,6 +828,114 @@
             font-size: 11px;
             line-height: 1.6;
         }
+
+        .scientific-base {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 28px;
+            background: rgba(4, 10, 20, 0.92);
+            backdrop-filter: blur(10px);
+        }
+
+        .scientific-base-hidden {
+            display: none;
+        }
+
+        .scientific-base-card {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 28px;
+            border: 1px solid rgba(84, 229, 255, 0.28);
+            border-radius: 20px;
+            background: rgba(12, 27, 48, 0.98);
+            box-shadow: 0 24px 80px rgba(0,0,0,0.45);
+        }
+
+        .scientific-base-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        .scientific-base-kicker {
+            color: var(--muted);
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            font-weight: 800;
+        }
+
+        .scientific-base-header h2 {
+            margin: 6px 0 8px;
+            font-size: 30px;
+        }
+
+        .scientific-base-header p,
+        .scientific-section p {
+            color: var(--muted);
+            line-height: 1.75;
+        }
+
+        .scientific-source-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .scientific-source {
+            display: inline-flex;
+            padding: 9px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(84, 229, 255, 0.25);
+            color: inherit;
+            text-decoration: none;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .scientific-source:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .scientific-section {
+            padding: 18px 0;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .scientific-section h3 {
+            margin: 0 0 8px;
+            font-size: 16px;
+        }
+
+        .science-evidence-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 12px 14px;
+            margin-top: 9px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.035);
+        }
+
+        .science-evidence-item span {
+            color: var(--muted);
+            line-height: 1.55;
+            font-size: 12px;
+        }
+
+        .scientific-empty,
+        .scientific-disclaimer {
+            margin-top: 18px;
+            padding: 14px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.035);
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.6;
+        }
 </style>
 </head>
 
@@ -1339,6 +1447,10 @@
     </main>
 
 
+
+
+    <div id="scientificBase" class="scientific-base scientific-base-hidden" aria-live="polite"></div>
+
     <div class="footer">
         Diagnosis Engine · IDMT Pró · Clinical Cognition Simulation
     </div>
@@ -1535,6 +1647,7 @@
 
 <script src="Js/core/diagnosis-clinical-enhancements.js"></script>
 <script src="Js/core/diagnosis-case-controls.js"></script>
+<script src="Js/core/scientific-base.js"></script>
 
 
 <!-- =============================================================
