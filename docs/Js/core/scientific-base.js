@@ -37,11 +37,16 @@
       this.root = document.getElementById("scientificBase");
     }
 
-    open() {
+    async open() {
       if (!this.root) return;
-      this.render();
       this.root.classList.remove("scientific-base-hidden");
       document.body.classList.add("scientific-base-open");
+
+      if (!this.engine.research && typeof this.engine.researchOnDemand === "function") {
+        await this.engine.researchOnDemand("Base científica solicitada pelo médico.");
+      }
+
+      this.render();
     }
 
     close() {
