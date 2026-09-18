@@ -111,11 +111,16 @@
         ? this.engine.library.cases
         : [];
 
+      /*
+       * UNIVERSAL KNOWLEDGE BASE:
+       * O conceito não precisa existir no catálogo mestre para ser usado.
+       * O catálogo é enriquecimento/validação auxiliar; a fonte real de
+       * seleção é o universo clínico carregado pelo CaseLibrary.
+       */
       const usable = sourceCases.filter(item =>
         item &&
         (item.id || item.case_id) &&
-        (item.primary_concept || item.concept || item.title) &&
-        this.isPlayableCase(item)
+        (item.primary_concept || item.concept || item.title)
       );
 
       if (usable.length < count) {
