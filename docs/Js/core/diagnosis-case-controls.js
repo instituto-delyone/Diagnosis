@@ -41,6 +41,13 @@
         return /\b(trat|prescrev|indico|inici|administ|repor|transfund|transfus|medic|terapia|conduta|manejo|dou alta|observar|internar|hidrata|oxigen|antibiot|cortico|analges|anticoagul|insulina|piridoxina|ferro)\w*/.test(n);
     }
 
+    function likelyPrescription(text) {
+        const n = normalize(text);
+        if (!n) return false;
+        if (/^qual |^posso |^como |^devo /.test(n)) return false;
+        return /\\b(prescrev|prescricao|receita|mg\\b|mcg\\b|ml\\b|comprimido|capsula|ampola|dose|via oral|vo\\b|iv\\b|im\\b|sc\\b)\\w*/.test(n);
+    }
+
     const original = global.DiagnosisEngine?.prototype.processAction;
     if (!original || global.__diagnosisCaseControlsInstalled) return;
     global.__diagnosisCaseControlsInstalled = true;
@@ -90,6 +97,10 @@
             });
             this.log("CONDUTA", "Ação terapêutica registrada." + warning);
             this.renderState?.();
+            if (likelyPrescription(input) && !state.caseEnded) {
+                this.log("ENCERRAMENTO", "Prescrição registrada. O trabalho clínico deste caso foi concluído.");
+                this.endCase?.({ reason: "prescricao" });
+            }
             return;
         }
 
