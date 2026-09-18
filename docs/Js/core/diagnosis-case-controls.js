@@ -45,7 +45,7 @@
         const n = normalize(text);
         if (!n) return false;
         if (/^qual |^posso |^como |^devo /.test(n)) return false;
-        return /\\b(prescrev|prescricao|receita|mg\\b|mcg\\b|ml\\b|comprimido|capsula|ampola|dose|via oral|vo\\b|iv\\b|im\\b|sc\\b)\\w*/.test(n);
+        return /\b(prescrev|prescricao|receita|mg\b|mcg\b|ml\b|comprimido|capsula|ampola|dose|via oral|vo\b|iv\b|im\b|sc\b)\w*/.test(n);
     }
 
     const original = global.DiagnosisEngine?.prototype.processAction;
