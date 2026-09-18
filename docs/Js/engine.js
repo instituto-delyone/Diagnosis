@@ -57,7 +57,6 @@
             return String(value || "")
                 .toLowerCase()
                 .normalize("NFD")
-                .replace(/[\\u0300-\\u036f]/g, "")
                 .replace(/[^a-z0-9\\s]/g, " ")
                 .replace(/\\s+/g, " ")
                 .trim();
@@ -69,19 +68,17 @@
 
         isDiseaseLike(item) {
             const type = this.normalize(item?.type || item?.category || "");
-            return ["disease","diagnosis","syndrome","condition","disorder","complication"].includes(type)
+            return ["disease", "diagnosis", "syndrome", "condition", "disorder", "complication"].includes(type)
                 || !!(item?.patologia_alvo || item?.diagnosis || item?.clinical_truth);
         }
 
-        manifestations(item) {
+        collectManifestations(item) {
             const values = [];
             const add = value => {
                 if (!value) return;
                 if (typeof value === "string") values.push(value);
                 else if (Array.isArray(value)) value.forEach(add);
-                else if (typeof value === "object") {
-                    Object.values(value).forEach(add);
-                }
+                else if (typeof value === "object") Object.values(value).forEach(add);
             };
             add(item?.manifestations);
             add(item?.features);
@@ -90,11 +87,10 @@
             add(item?.clinical?.presentations);
             add(item?.clinical?.symptoms);
             add(item?.clinical?.signs);
-            add(item?.physical_exam);
             return [...new Set(values.map(v => String(v).trim()).filter(Boolean))].slice(0, 12);
         }
 
-        investigations(item) {
+        collectInvestigations(item) {
             const raw = item?.investigations || item?.investigation || item?.exams || [];
             const list = Array.isArray(raw) ? raw : (raw && typeof raw === "object" ? Object.values(raw) : []);
             return list.map((x, i) => {
@@ -107,9 +103,7 @@
                     const candidates = x.results || x.possibleResults;
                     if (Array.isArray(candidates) && candidates.length) result = candidates[0];
                 }
-                if (result == null || result === "") {
-                    result = "Resultado não determinante no caso inicial.";
-                }
+                if (result == null || result === "") result = "Resultado não determinante no caso inicial.";
                 return {
                     id: x.id || this.slug(exam),
                     exam: String(exam),
@@ -127,30 +121,49 @@
             const concept = item?.name || item?.canonical_name || item?.patologia_alvo || item?.title || item?.id_caso;
             if (!concept || !this.isDiseaseLike(item)) return null;
 
-            const manifestations = this.manifestations(item);
-            const inv = this.investigations(item);
-            const difficulty = item?.difficulty?.base
-                ? ({1:"Básica",2:"Básica",3:"Intermediária",4:"Avançada",5:"Avançada"}[item.difficulty.base] || "Intermediária")
-                : item?.dificuldade || "Simulação clínica";
-
+            const manifestations = this.collectManifestations(item);
+            const inv = this.collectInvestigations(item);
             const patient = {
                 age: item?.epidemiology?.age_range
                     ? Math.round((item.epidemiology.age_range[0] + item.epidemiology.age_range[1]) / 2)
                     : 45,
-                sex: item?.epidemiology?.sex_distribution === "female" ? "feminino"
-                    : item?.epidemiology?.sex_distribution === "male" ? "masculino"
-                    : (Math.random() < 0.5 ? "feminino" : "masculino")
+                sex: item?.epidemiology?.sex_distribution === "female"
+                    ? "feminino"
+                    : item?.epidemiology?.sex_distribution === "male"
+                        ? "masculino"
+                        : (Math.random() < 0.5 ? "feminino" : "masculino")
             };
 
             const complaint = manifestations[0] || ("avaliação por " + concept);
-            const risk = Array.isArray(item?.risk_factors) ? item.risk_factors.map(x => typeof x === "string" ? x : x?.id).filter(Boolean) : [];
-            const differentials = item?.differentials || item?.diagnosis?.differential_diagnoses || item?.differential_diagnoses || [];
+            const risk = Array.isArray(item?.risk_factors)
+                ? item.risk_factors.map(x => typeof x === "string" ? x : x?.id).filter(Boolean)
+                : [];
+            const differentials = item?.differentials
+                || item?.diagnosis?.differential_diagnoses
+                || item?.differential_diagnoses
+                || [];
+
+            if (!inv.length) {
+                inv.push({
+                    id: "avaliacao_clinica_inicial",
+                    exam: "avaliação clínica dirigida",
+                    name: "Avaliação clínica dirigida",
+                    result: manifestations.length
+                        ? "Achados clínicos registrados: " + manifestations.slice(0, 4).join("; ") + "."
+                        : "Avaliação clínica inicial sem achado específico registrado.",
+                    available: true,
+                    performed: false,
+                    source: "knowledge_base"
+                });
+            }
 
             return {
-                id: "kb_" + this.slug(sourcePath.replace(/\\.json$/,"")) + "_" + this.slug(concept) + "_" + index,
+                id: "kb_" + this.slug(sourcePath.replace(/\.json$/, "")) + "_" + this.slug(concept) + "_" + index,
                 primary_concept: item?.id || concept,
                 title: concept,
-                difficulty,
+                difficulty: item?.difficulty?.base
+                    ? ({1:"Básica",2:"Básica",3:"Intermediária",4:"Avançada",5:"Avançada"}[item.difficulty.base] || "Intermediária")
+                    : item?.dificuldade || "Simulação clínica",
                 patient,
                 opening: {
                     chief_complaint: complaint,
@@ -187,19 +200,12 @@
         adaptRecord(item, sourcePath, index) {
             if (!item || typeof item !== "object") return null;
 
-            // Existing complete clinical cases remain valid, regardless of specialty.
-            if (
-                item.id || item.case_id || item.id_caso
-            ) {
-                const hasCaseNarrative = item.opening || item.vinheta_admissao ||
-                    item.presentation || item.chief_complaint || item.primary_concept ||
-                    item.patologia_alvo;
-                if (hasCaseNarrative && (item.hidden || item.clinical_truth || item.fase_2_diagnostico || item.patologia_alvo)) {
-                    if (item.vinheta_admissao) {
-                        return this.legacyCaseToSource(item, sourcePath, index);
-                    }
-                    return item;
-                }
+            if (item.vinheta_admissao || item.patologia_alvo) {
+                return this.legacyCaseToSource(item, sourcePath, index);
+            }
+
+            if ((item.id || item.case_id) && (item.hidden || item.clinical_truth || item.primary_concept)) {
+                return item;
             }
 
             return this.entityToCase(item, sourcePath, index);
@@ -210,7 +216,6 @@
             const f1 = item.fase_1_investigacao || {};
             const f2 = item.fase_2_diagnostico || {};
             const f3 = item.fase_3_conduta || {};
-            const investigationResult = f1.achado_sucesso || "Investigação compatível com o quadro clínico.";
             return {
                 id: item.id_caso || ("kb_" + this.slug(sourcePath) + "_" + index),
                 primary_concept: target,
@@ -227,18 +232,14 @@
                         id: "investigacao_inicial",
                         exam: "investigação direcionada",
                         name: "Investigação direcionada",
-                        result: investigationResult,
+                        result: f1.achado_sucesso || "Investigação compatível com o quadro clínico.",
                         available: true,
                         performed: false
                     }]
                 },
                 management: { possible_actions: f3.gabarito_esperado || [] },
                 evolution: {},
-                clinical_truth: {
-                    symptoms: [],
-                    signs: [],
-                    differentials: f2.distrator_comum || []
-                },
+                clinical_truth: { symptoms: [], signs: [], differentials: f2.distrator_comum || [] },
                 hidden: {
                     diagnosis: target,
                     label: target,
@@ -266,17 +267,19 @@
             this.cases = [];
             this.theory = [];
             this.sources = [];
+            this.stats = { files: 0, records: 0, playable: 0 };
 
             const manifestPaths = await this.loadManifest();
             const paths = [...new Set([...(this.paths || []), ...manifestPaths])];
 
             for (const path of paths) {
                 try {
-                    const response = await fetch("knowledge_base/" + path.replace(/^knowledge_base\\//, ""), { cache: "no-store" });
+                    const cleanPath = String(path).replace(/^knowledge_base\//, "");
+                    const response = await fetch("knowledge_base/" + cleanPath, { cache: "no-store" });
                     if (!response.ok) continue;
                     const data = await response.json();
                     this.stats.files += 1;
-                    this.sources.push(path);
+                    this.sources.push(cleanPath);
 
                     const records = Array.isArray(data)
                         ? data
@@ -285,7 +288,7 @@
                         : [];
 
                     records.forEach((item, index) => {
-                        const adapted = this.adaptRecord(item, path, index);
+                        const adapted = this.adaptRecord(item, cleanPath, index);
                         if (adapted) this.cases.push(adapted);
                     });
                 } catch (error) {
@@ -296,7 +299,6 @@
             this.stats.records = this.cases.length;
             this.stats.playable = this.cases.length;
             console.info("Knowledge Base universal carregada:", this.stats, this.sources);
-
             return this;
         }
 
