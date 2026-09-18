@@ -1,7 +1,7 @@
 /*
  * Medical Library compressed-text adapter.
  * Keeps the canonical MedicalLibrary implementation and adds support for
- * .txt.gz.b64 sources produced by the ingestion pipeline.
+ * binary gzip source blobs stored with the .txt.gz.b64 library suffix.
  */
 (function (global) {
     "use strict";
@@ -25,12 +25,11 @@
         });
     }
 
-    async function inflateGzipBase64(base64) {
+    async function inflateGzipResponse(response) {
         if (typeof DecompressionStream !== "function") {
             throw new Error("O navegador não suporta DecompressionStream(gzip).");
         }
-        const binary = atob(String(base64 || "").replace(/\s+/g, ""));
-        const bytes = Uint8Array.from(binary, char => char.charCodeAt(0));
+        const bytes = new Uint8Array(await response.arrayBuffer());
         const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
         return new TextDecoder("utf-8").decode(await new Response(stream).arrayBuffer());
     }
@@ -77,7 +76,7 @@
                 try {
                     const response = await fetch(source.download_url || source.html_url, { cache: "no-store" });
                     if (!response.ok) throw new Error(`Falha ao baixar fonte comprimida (${response.status}).`);
-                    const text = await inflateGzipBase64(await response.text());
+                    const text = await inflateGzipResponse(response);
                     const chunks = this.chunkText(text);
                     chunks.forEach((chunk, index) => this.chunks.push({
                         id: `${source.path}#${index + 1}`,
