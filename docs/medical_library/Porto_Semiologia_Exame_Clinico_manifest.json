@@ -3,7 +3,7 @@
   "sha256": "3ddb0328f9fd16f05477e40c49163a7e2ca2c2f90e707106507cac2414969f23",
   "pages": 25,
   "parts": 5,
-  "format": "PDF -> extracted text -> gzip+base64",
+  "format": "PDF -> extracted text -> binary gzip blobs",
   "part_pages": ["1-5", "6-10", "11-15", "16-20", "21-25"],
-  "note": "The compressed text preserves the extracted page markers and is decoded at runtime by medical-library-compressed-text.js."
+  "note": "The compressed source blobs preserve extracted page markers and are decompressed at runtime by medical-library-compressed-text.js."
 }
