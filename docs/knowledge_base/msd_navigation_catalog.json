@@ -1,0 +1,230 @@
+{
+  "schema_version": "1.0",
+  "catalog_name": "Manual MSD — mapa de navegação profissional",
+  "retrieved": "2026-09-18",
+  "source": "Manual MSD — Profissionais",
+  "source_index_url": "https://www.msdmanuals.com/pt/profissional/health-topics",
+  "hierarchy": [
+    "section",
+    "chapter",
+    "topic"
+  ],
+  "notes": [
+    "O Manual MSD organiza o conteúdo hierarquicamente por seção, capítulo e assunto individual.",
+    "Este mapa registra as seções oficiais para permitir ao Diagnosys localizar o capítulo/assunto correto antes de sintetizar conhecimento.",
+    "A lista de doenças/assuntos individuais deve ser atualizada pelo Worker a partir das páginas oficiais das seções, evitando uma lista manual pequena e desatualizada.",
+    "Não copiar texto do Manual: armazenar nomes, hierarquia e URLs de navegação; o conteúdo clínico deve ser recuperado/sintetizado conforme as regras de evidência e licenciamento."
+  ],
+  "research_dimensions": [
+    {
+      "id": "fisiopatologia",
+      "queries": [
+        "fisiopatologia",
+        "etiologia",
+        "mecanismo",
+        "patogênese"
+      ]
+    },
+    {
+      "id": "clinica",
+      "queries": [
+        "sinais e sintomas",
+        "apresentação clínica",
+        "manifestações clínicas",
+        "história"
+      ]
+    },
+    {
+      "id": "exame_fisico",
+      "queries": [
+        "exame físico",
+        "sinais",
+        "achados ao exame"
+      ]
+    },
+    {
+      "id": "diagnostico",
+      "queries": [
+        "diagnóstico",
+        "critérios diagnósticos",
+        "diagnóstico diferencial"
+      ]
+    },
+    {
+      "id": "propedeutica",
+      "queries": [
+        "investigação",
+        "exames",
+        "testes diagnósticos",
+        "propedêutica"
+      ]
+    },
+    {
+      "id": "tratamento",
+      "queries": [
+        "tratamento",
+        "manejo",
+        "terapia",
+        "conduta"
+      ]
+    },
+    {
+      "id": "complicacoes",
+      "queries": [
+        "complicações",
+        "prognóstico",
+        "evolução"
+      ]
+    },
+    {
+      "id": "seguimento",
+      "queries": [
+        "seguimento",
+        "monitoramento",
+        "acompanhamento",
+        "prevenção"
+      ]
+    },
+    {
+      "id": "epidemiologia",
+      "queries": [
+        "epidemiologia",
+        "incidência",
+        "prevalência",
+        "fatores de risco"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "alergia_imunologia",
+      "name": "Alergia e imunologia",
+      "url": "https://www.msdmanuals.com/pt/profissional/imunologia-dist%C3%BArbios-al%C3%A9rgicos"
+    },
+    {
+      "id": "cardiologia",
+      "name": "Cardiologia",
+      "url": "https://www.msdmanuals.com/pt/profissional/doen%C3%A7as-cardiovasculares"
+    },
+    {
+      "id": "dermatologia",
+      "name": "Dermatologia",
+      "url": "https://www.msdmanuals.com/pt/profissional/dist%C3%BArbios-dermatol%C3%B3gicos"
+    },
+    {
+      "id": "infectologia",
+      "name": "Doença infecciosa",
+      "url": "https://www.msdmanuals.com/pt/profissional/doen%C3%A7as-infecciosas"
+    },
+    {
+      "id": "endocrinologia",
+      "name": "Endocrinologia",
+      "url": "https://www.msdmanuals.com/pt/profissional/dist%C3%BArbios-end%C3%B3crinos-e-metab%C3%B3licos"
+    },
+    {
+      "id": "farmacologia",
+      "name": "Farmacologia clínica",
+      "url": "https://www.msdmanuals.com/pt/profissional/farmacologia-cl%C3%ADnica"
+    },
+    {
+      "id": "gastroenterologia",
+      "name": "Gastroenterologia",
+      "url": "https://www.msdmanuals.com/pt/profissional/dist%C3%BArbios-gastrointestinais"
+    },
+    {
+      "id": "geriatria",
+      "name": "Geriatria",
+      "url": "https://www.msdmanuals.com/pt/profissional/geriatria"
+    },
+    {
+      "id": "gineco_obstetricia",
+      "name": "Ginecologia e obstetrícia",
+      "url": "https://www.msdmanuals.com/pt/profissional/ginecologia-e-obstetr%C3%ADcia"
+    },
+    {
+      "id": "hematologia",
+      "name": "Hematologia",
+      "url": "https://www.msdmanuals.com/pt/profissional/hematologia"
+    },
+    {
+      "id": "hepatologia",
+      "name": "Hepatologia",
+      "url": "https://www.msdmanuals.com/pt/profissional/dist%C3%BArbios-hep%C3%A1ticos-e-biliares"
+    },
+    {
+      "id": "lesoes_intoxicacao",
+      "name": "Lesões; intoxicação",
+      "url": "https://www.msdmanuals.com/pt/profissional/les%C3%B5es-intoxica%C3%A7%C3%A3o"
+    },
+    {
+      "id": "cuidados_criticos",
+      "name": "Medicina de cuidados críticos",
+      "url": "https://www.msdmanuals.com/pt/profissional/medicina-de-cuidados-cr%C3%ADticos"
+    },
+    {
+      "id": "nefrologia",
+      "name": "Nefrologia",
+      "url": "https://www.msdmanuals.com/pt/profissional/nefrologia"
+    },
+    {
+      "id": "neurologia",
+      "name": "Neurologia",
+      "url": "https://www.msdmanuals.com/pt/profissional/dist%C3%BArbios-neurol%C3%B3gicos"
+    },
+    {
+      "id": "nutricao",
+      "name": "Nutrição",
+      "url": "https://www.msdmanuals.com/pt/profissional/dist%C3%BArbios-nutricionais"
+    },
+    {
+      "id": "odontologia",
+      "name": "Odontologia",
+      "url": "https://www.msdmanuals.com/pt/profissional/dist%C3%BArbios-odontol%C3%B3gicos"
+    },
+    {
+      "id": "oftalmologia",
+      "name": "Oftalmologia",
+      "url": "https://www.msdmanuals.com/pt/profissional/dist%C3%BArbios-oftalmol%C3%B3gicos"
+    },
+    {
+      "id": "oncologia",
+      "name": "Oncologia",
+      "url": "https://www.msdmanuals.com/pt/profissional/oncologia"
+    },
+    {
+      "id": "otorrino",
+      "name": "Otorrinolaringologia",
+      "url": "https://www.msdmanuals.com/pt/profissional/dist%C3%BArbios-do-ouvido-nariz-e-garganta"
+    },
+    {
+      "id": "pediatria",
+      "name": "Pediatria",
+      "url": "https://www.msdmanuals.com/pt/profissional/pediatria"
+    },
+    {
+      "id": "pneumologia",
+      "name": "Pneumologia",
+      "url": "https://www.msdmanuals.com/pt/profissional/dist%C3%BArbios-pulmonares"
+    },
+    {
+      "id": "psiquiatria",
+      "name": "Psiquiatria",
+      "url": "https://www.msdmanuals.com/pt/profissional/transtornos-psiqui%C3%A1tricos"
+    },
+    {
+      "id": "reumatologia_ortopedia",
+      "name": "Reumatologia e ortopedia",
+      "url": "https://www.msdmanuals.com/pt/profissional/dist%C3%BArbios-dos-tecidos-conjuntivo-e-musculoesquel%C3%A9tico"
+    },
+    {
+      "id": "topicos_especiais",
+      "name": "Tópicos especiais",
+      "url": "https://www.msdmanuals.com/pt/profissional/t%C3%B3picos-especiais"
+    },
+    {
+      "id": "urologia",
+      "name": "Urologia",
+      "url": "https://www.msdmanuals.com/pt/profissional/dist%C3%BArbios-geniturin%C3%A1rios"
+    }
+  ]
+}
