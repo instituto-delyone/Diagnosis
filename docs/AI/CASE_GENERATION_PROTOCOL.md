@@ -112,8 +112,10 @@ O objeto interno deve conter, quando aplicável:
 - fatores de risco;
 - exame físico;
 - sinais vitais;
-- exames disponíveis;
-- resultados dos exames quando realizados;
+- catálogo completo de exames disponíveis;
+- resultado pré-construído para cada exame disponível;
+- interpretação clínica associada quando definida;
+- estado de realização/revelação de cada investigação;
 - diagnóstico interno;
 - fisiopatologia;
 - diferenciais;
@@ -178,7 +180,27 @@ O sistema não deve transformar ausência de informação em informação clíni
 
 Se uma fonte externa não responder a uma questão de conhecimento, o sistema deve declarar que a evidência não foi encontrada ou utilizar outra fonte configurada.
 
-Se um exame não fizer parte do caso, o sistema não deve fabricar um resultado apenas para responder ao médico. Um resultado simulado só pode existir quando o exame estiver definido como disponível e tiver um modelo de geração/resultado válido.
+Se um exame não fizer parte do caso, o sistema não deve fabricar um resultado para responder ao médico.
+
+Todo exame marcado como disponível no caso deve possuir um resultado definido durante a construção do Clinical Case Model. O resultado pode vir diretamente do caso, de um resultado esperado explicitamente definido ou de uma escolha determinística entre resultados possíveis declarados pelo próprio modelo do caso.
+
+Depois que o caso é construído, o resultado fica congelado: a conversa apenas controla quando ele é revelado.
+
+Assim:
+
+GERAÇÃO DO CASO
+    ↓
+exame disponível
+    ↓
+resultado definido
+    ↓
+resultado congelado
+    ↓
+médico solicita exame
+    ↓
+resultado revelado
+
+O Gemini e a camada conversacional podem apresentar o resultado naturalmente, mas não podem alterá-lo silenciosamente.
 
 ## Arquitetura
 
