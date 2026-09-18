@@ -9,7 +9,7 @@
   const normalize = value => String(value || "")
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[\u0300-\u036f]/g, " ")
     .replace(/[^a-z0-9\s]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
@@ -28,21 +28,62 @@
       this.engine = options.engine || window.idmtEngine || null;
       this.catalogPath = options.catalogPath || "knowledge_base/diagnosys_catalogo_mestre_doencas.json";
       this.catalog = null;
+      this.clinicalCatalog = window.ClinicalDiseaseCatalog
+        ? new window.ClinicalDiseaseCatalog({ path: this.catalogPath })
+        : null;
+      this.playableCatalog = [];
       this.preparedCases = [];
     }
 
     async loadMasterCatalog(onStatus) {
       onStatus?.("catálogo mestre", "carregando");
       try {
-        const response = await fetch(this.catalogPath, { cache: "no-store" });
-        if (!response.ok) throw new Error("HTTP " + response.status);
-        this.catalog = await response.json();
-        onStatus?.("catálogo mestre", "ok", (this.catalog.entries?.length || 0) + " conceitos");
+        if (this.clinicalCatalog) {
+          this.catalog = await this.clinicalCatalog.load();
+          this.playableCatalog = await this.clinicalCatalog.getPlayableEntries();
+        } else {
+          const response = await fetch(this.catalogPath, { cache: "no-store" });
+          if (!response.ok) throw new Error("HTTP " + response.status);
+          this.catalog = await response.json();
+          this.playableCatalog = Array.isArray(this.catalog.entries) ? this.catalog.entries : [];
+        }
+
+        onStatus?.(
+          "catálogo mestre",
+          "ok",
+          (this.catalog.entries?.length || 0) + " conceitos · " +
+          this.playableCatalog.length + " elegíveis para casos"
+        );
         return this.catalog;
       } catch (error) {
-        onStatus?.("catálogo mestre", "opcional", "arquivo ainda não disponível");
+        onStatus?.("catálogo mestre", "aviso", "não foi possível carregar o catálogo");
+        this.catalog = null;
+        this.playableCatalog = [];
         return null;
       }
+    }
+
+    isPlayableCase(item) {
+      if (!item) return false;
+      const concept = item.primary_concept || item.concept || item.title;
+      if (!concept) return false;
+
+      if (!this.playableCatalog.length) return true;
+
+      const n = normalize(concept);
+      return this.playableCatalog.some(entry => {
+        const name = normalize(entry.name);
+        return name === n || name.includes(n) || n.includes(name);
+      });
+    }
+
+    catalogEntryFor(item) {
+      const concept = item?.primary_concept || item?.concept || item?.title || "";
+      const n = normalize(concept);
+      return this.playableCatalog.find(entry => {
+        const name = normalize(entry.name);
+        return name === n || name.includes(n) || n.includes(name);
+      }) || null;
     }
 
     chooseSourceCases(count = 3) {
@@ -51,14 +92,31 @@
         : [];
 
       const usable = sourceCases.filter(item =>
-        item && (item.id || item.case_id) && (item.primary_concept || item.concept || item.title)
+        item &&
+        (item.id || item.case_id) &&
+        (item.primary_concept || item.concept || item.title) &&
+        this.isPlayableCase(item)
       );
 
       if (usable.length < count) {
-        throw new Error("A biblioteca clínica possui apenas " + usable.length + " casos utilizáveis; são necessários " + count + ".");
+        throw new Error(
+          "A biblioteca clínica possui apenas " + usable.length +
+          " casos compatíveis com o catálogo jogável; são necessários " + count +
+          "."
+        );
       }
 
-      return shuffle(usable).slice(0, count).map(clone);
+      return shuffle(usable).slice(0, count).map(item => {
+        const copy = clone(item);
+        const catalogEntry = this.catalogEntryFor(copy);
+        copy.catalog_context = catalogEntry
+          ? {
+              concept: catalogEntry.name,
+              sources: clone(catalogEntry.sources || [])
+            }
+          : null;
+        return copy;
+      });
     }
 
     async researchAndBuild(sourceCase, index, onStatus) {
@@ -83,7 +141,12 @@
         }
       }
 
-      onStatus?.("caso " + (index + 1), "construindo", "modelo clínico completo");
+      onStatus?.(
+        "caso " + (index + 1),
+        "construindo",
+        "modelo clínico completo · referências: " +
+        ((sourceCase.catalog_context?.sources || []).join(", ") || "catálogo")
+      );
 
       let clinicalCase;
       if (window.CaseBuilder) {
@@ -113,16 +176,10 @@
       if (!clinicalCase.presentation?.chief_complaint) throw new Error("Caso sem queixa principal.");
 
       const investigations = clinicalCase.investigations || {};
-      const available = Array.isArray(investigations.available)
-        ? investigations.available
-        : [];
-      const catalog = Array.isArray(investigations.catalog)
-        ? investigations.catalog
-        : [];
+      const available = Array.isArray(investigations.available) ? investigations.available : [];
+      const catalog = Array.isArray(investigations.catalog) ? investigations.catalog : [];
 
-      if (!available.length) {
-        throw new Error("Caso sem investigações disponíveis.");
-      }
+      if (!available.length) throw new Error("Caso sem investigações disponíveis.");
 
       const missingResults = available.filter(item => {
         const result = item?.result;
@@ -176,19 +233,13 @@
       const sourceCases = this.chooseSourceCases(count);
 
       const builtCases = await Promise.all(
-        sourceCases.map((sourceCase, index) =>
-          this.researchAndBuild(sourceCase, index, onStatus)
-        )
+        sourceCases.map((sourceCase, index) => this.researchAndBuild(sourceCase, index, onStatus))
       );
 
-      this.preparedCases = builtCases.map((built, index) =>
-        this.cardData(built, index)
-      );
+      this.preparedCases = builtCases.map((built, index) => this.cardData(built, index));
 
       if (this.preparedCases.length !== count) {
-        throw new Error(
-          "Não foi possível preparar " + count + " casos clínicos completos."
-        );
+        throw new Error("Não foi possível preparar " + count + " casos clínicos completos.");
       }
 
       return this.preparedCases;
@@ -197,7 +248,8 @@
     backgroundWarmup() {
       const jobs = [
         () => fetch("knowledge_base/reference_ranges.json", { cache: "force-cache" }).catch(() => null),
-        () => fetch("knowledge_base/pcdt_catalog.json", { cache: "force-cache" }).catch(() => null)
+        () => fetch("knowledge_base/pcdt_catalog.json", { cache: "force-cache" }).catch(() => null),
+        () => fetch(this.catalogPath, { cache: "force-cache" }).catch(() => null)
       ];
 
       const run = () => Promise.all(jobs.map(job => job()));
