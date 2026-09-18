@@ -313,22 +313,29 @@ Quando uma relação for derivada logicamente de informações disponíveis, mar
 
 ⸻
 
-13. NÃO INVENTAR
+13. NÃO INVENTAR FORA DO CASO
 
-Nunca inventar:
+Não inventar fatos fora do estado clínico estabelecido.
 
-* doses;
-* critérios;
+Em casos clínicos fictícios, o sistema pode gerar previamente:
+
 * valores laboratoriais;
-* prevalências;
-* mecanismos;
-* contraindicações;
-* probabilidades;
-* recomendações;
 * resultados de exames;
-* dados epidemiológicos.
+* sinais vitais;
+* achados de imagem;
+* evolução;
+* outros dados necessários ao caso.
 
-Se a informação não puder ser sustentada:
+Depois que o Clinical Case Model for construído, esses dados passam a constituir a verdade interna daquele caso.
+
+O modelo de linguagem pode apresentar e explicar dados já existentes no caso, mas não deve:
+
+* alterar silenciosamente um resultado;
+* criar um resultado para um exame que não esteja disponível;
+* contradizer um resultado já revelado;
+* substituir um resultado do caso por uma hipótese própria.
+
+Se um dado não estiver presente no estado do caso:
 
 unknown
 
