@@ -206,7 +206,7 @@
                 }
             });
             this.elements.next?.addEventListener("click", () => this.startNewCase());
-            this.elements.science?.addEventListener("click", () => this.researchOnDemand("Base científica solicitada pelo médico."));
+            this.elements.science?.addEventListener("click", () => this.scientificBase?.open());
             this.elements.hint?.addEventListener("click", () => this.showHint());
             this.elements.hypothesisSubmit?.addEventListener("click", () => this.submitHypothesis());
             this.elements.hypothesisInput?.addEventListener("keydown", event => {
