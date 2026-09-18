@@ -369,7 +369,7 @@
 
             this.renderState(age, sex);
             this.renderHypothesis();
-            this.log("PACIENTE", `Paciente \${sex.toLowerCase()}, \${age}, chega para avaliação.`);
+            this.log("PACIENTE", `Paciente ${sex.toLowerCase()}, ${age}, chega para avaliação.`);
             this.log("PACIENTE", `Queixa principal: ${p.chief_complaint || "não informada"}`);
         }
 
@@ -553,7 +553,7 @@
 
             this.log(
                 "RESULTADO",
-                \`Hipótese encerrada: \${score}/100. Tempo até fixação: \${Math.round(elapsed)} s. Proximidade: \${Math.round(similarity * 100)}%.\`
+                `Hipótese encerrada: ${score}/100. Tempo até fixação: ${Math.round(elapsed)} s. Proximidade: ${Math.round(similarity * 100)}%.`
             );
             this.renderHypothesis();
             this.renderState();
@@ -575,13 +575,13 @@
 
             if (state.locked) {
                 status.textContent = state.evaluated
-                    ? \`Encerrada: \${state.score}/100\`
+                    ? `Encerrada: ${state.score}/100`
                     : "Hipótese fixada. Continue a investigação; a pontuação aparece ao encerrar o caso.";
                 return;
             }
 
             const elapsed = Math.max(0, (Date.now() - (state.startedAt || Date.now())) / 1000);
-            status.textContent = \`Hipótese ainda não fixada · \${Math.round(elapsed)} s desde o início\`;
+            status.textContent = `Hipótese ainda não fixada · ${Math.round(elapsed)} s desde o início`;
         }
 
         queryPatientState(input) {
