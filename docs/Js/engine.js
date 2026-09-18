@@ -107,7 +107,17 @@
                 history: [],
                 time: 0,
                 score: 0,
-                errors: 0
+                errors: 0,
+                startedAt: Date.now(),
+                hypothesis: {
+                    text: "",
+                    locked: false,
+                    submittedAt: null,
+                    elapsedSeconds: null,
+                    similarity: null,
+                    score: null,
+                    evaluated: false
+                }
             };
         }
 
@@ -176,6 +186,9 @@
                 back: document.getElementById("backBtn"),
                 stateList: document.getElementById("stateList"),
                 investigationCatalog: document.getElementById("investigationCatalog"),
+                hypothesisInput: document.getElementById("hypothesisInput"),
+                hypothesisSubmit: document.getElementById("hypothesisSubmit"),
+                hypothesisStatus: document.getElementById("hypothesisStatus"),
                 fc: document.getElementById("fc"),
                 rr: document.getElementById("rr"),
                 spo2: document.getElementById("spo2"),
@@ -194,6 +207,13 @@
             this.elements.next?.addEventListener("click", () => this.startNewCase());
             this.elements.science?.addEventListener("click", () => this.researchOnDemand("Base científica solicitada pelo médico."));
             this.elements.hint?.addEventListener("click", () => this.showHint());
+            this.elements.hypothesisSubmit?.addEventListener("click", () => this.submitHypothesis());
+            this.elements.hypothesisInput?.addEventListener("keydown", event => {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    this.submitHypothesis();
+                }
+            });
             this.elements.back?.addEventListener("click", () => this.log("SISTEMA", "Não há uma etapa anterior disponível neste caso."));
         }
 
@@ -213,6 +233,7 @@
 
             this.patientState = this.createPatientState(this.currentCase);
             this.renderInitialCase();
+            this.renderHypothesis();
             this.log("SISTEMA", "Novo caso clínico carregado. O diagnóstico permanece oculto.");
         }
 
@@ -347,7 +368,8 @@
             this.setText("glucose", vitals.glucose || "--");
 
             this.renderState(age, sex);
-            this.log("PACIENTE", `Paciente ${sex.toLowerCase()}, ${age}, chega para avaliação.`);
+            this.renderHypothesis();
+            this.log("PACIENTE", `Paciente \${sex.toLowerCase()}, \${age}, chega para avaliação.`);
             this.log("PACIENTE", `Queixa principal: ${p.chief_complaint || "não informada"}`);
         }
 
@@ -410,6 +432,159 @@
             this.context.errors += 1;
             this.syncCompatibilityState();
             this.log("SISTEMA", "Não encontrei uma ação clínica específica para essa frase. Tente perguntar sobre história, exame físico ou solicitar um exame disponível.");
+        }
+
+        hypothesisSimilarity(text) {
+            const hidden = this.currentCase?.hidden || {};
+            const candidates = [
+                hidden.diagnosis,
+                hidden.label,
+                ...(Array.isArray(hidden.differential)
+                    ? hidden.differential.map(item => typeof item === "string" ? item : item?.concept)
+                    : [])
+            ].filter(Boolean).map(value => normalize(value));
+
+            const value = normalize(text);
+            if (!value || !candidates.length) return 0;
+
+            const tokens = value.split(" ").filter(Boolean);
+            const tokenSet = new Set(tokens);
+
+            const similarityFor = target => {
+                if (!target) return 0;
+                if (value === target) return 1;
+                if (target.includes(value) || value.includes(target)) return 0.9;
+
+                const targetTokens = target.split(" ").filter(Boolean);
+                const targetSet = new Set(targetTokens);
+                const intersection = [...tokenSet].filter(token => targetSet.has(token)).length;
+                const union = new Set([...tokenSet, ...targetSet]).size;
+                const jaccard = union ? intersection / union : 0;
+
+                const distance = this.levenshtein(value, target);
+                const maxLength = Math.max(value.length, target.length, 1);
+                const editSimilarity = 1 - (distance / maxLength);
+
+                return Math.max(jaccard, editSimilarity * 0.8);
+            };
+
+            return Math.max(...candidates.map(similarityFor), 0);
+        }
+
+        levenshtein(a, b) {
+            const previous = Array.from({ length: b.length + 1 }, (_, i) => i);
+
+            for (let i = 1; i <= a.length; i += 1) {
+                const current = [i];
+
+                for (let j = 1; j <= b.length; j += 1) {
+                    const insert = current[j - 1] + 1;
+                    const remove = previous[j] + 1;
+                    const replace = previous[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1);
+                    current.push(Math.min(insert, remove, replace));
+                }
+
+                for (let j = 0; j < current.length; j += 1) previous[j] = current[j];
+            }
+
+            return previous[b.length];
+        }
+
+        submitHypothesis() {
+            const state = this.context?.hypothesis;
+
+            if (!state || state.locked) return;
+
+            const input = this.elements.hypothesisInput?.value.trim();
+            if (!input) {
+                this.setText("hypothesisStatus", "Digite uma hipótese antes de fixá-la.");
+                return;
+            }
+
+            state.text = input;
+            state.locked = true;
+            state.submittedAt = Date.now();
+            state.elapsedSeconds = Math.max(0, (state.submittedAt - state.startedAt) / 1000);
+            state.similarity = this.hypothesisSimilarity(input);
+            state.evaluated = false;
+
+            this.context.phase = "diagnosis";
+            this.renderHypothesis();
+            this.log(
+                "HIPÓTESE",
+                "Hipótese diagnóstica fixada. Ela não poderá mais ser alterada neste caso; a pontuação será revelada no encerramento."
+            );
+        }
+
+        finalizeHypothesis() {
+            const state = this.context?.hypothesis;
+            if (!state || state.evaluated) return state || null;
+
+            if (!state.locked) {
+                state.evaluated = true;
+                state.score = 0;
+                state.similarity = 0;
+                this.__lastHypothesisResult = {
+                    score: 0,
+                    similarity: 0,
+                    elapsedSeconds: Math.max(0, (Date.now() - (state.startedAt || Date.now())) / 1000),
+                    text: "",
+                    target: this.currentCase?.hidden?.label || this.currentCase?.hidden?.diagnosis || null,
+                    registered: false
+                };
+                return this.__lastHypothesisResult;
+            }
+
+            const elapsed = Math.max(0, state.elapsedSeconds || 0);
+            const speedFactor = Math.max(0.2, 1 - (elapsed / 600));
+            const similarity = Math.max(0, Math.min(1, Number(state.similarity || 0)));
+            const score = Math.round(100 * similarity * speedFactor);
+
+            state.score = score;
+            state.evaluated = true;
+            this.context.score += score;
+            this.syncCompatibilityState();
+
+            this.__lastHypothesisResult = {
+                score,
+                similarity,
+                elapsedSeconds: elapsed,
+                text: state.text,
+                target: this.currentCase?.hidden?.label || this.currentCase?.hidden?.diagnosis || null,
+                registered: true
+            };
+
+            this.log(
+                "RESULTADO",
+                \`Hipótese encerrada: \${score}/100. Tempo até fixação: \${Math.round(elapsed)} s. Proximidade: \${Math.round(similarity * 100)}%.\`
+            );
+            this.renderHypothesis();
+            this.renderState();
+
+            return this.__lastHypothesisResult;
+        }
+
+        renderHypothesis() {
+            const state = this.context?.hypothesis;
+            const input = this.elements.hypothesisInput;
+            const button = this.elements.hypothesisSubmit;
+            const status = this.elements.hypothesisStatus;
+
+            if (!state || !input || !button || !status) return;
+
+            input.value = state.text || "";
+            input.disabled = Boolean(state.locked);
+            button.disabled = Boolean(state.locked);
+
+            if (state.locked) {
+                status.textContent = state.evaluated
+                    ? \`Encerrada: \${state.score}/100\`
+                    : "Hipótese fixada. Continue a investigação; a pontuação aparece ao encerrar o caso.";
+                return;
+            }
+
+            const elapsed = Math.max(0, (Date.now() - (state.startedAt || Date.now())) / 1000);
+            status.textContent = \`Hipótese ainda não fixada · \${Math.round(elapsed)} s desde o início\`;
         }
 
         queryPatientState(input) {
