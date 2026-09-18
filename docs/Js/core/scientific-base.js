@@ -67,7 +67,7 @@
       const pathophysiology =
         firstMeaningful(educational, ["pathophysiology", "fisiopatologia", "physiopathology"]) ||
         firstMeaningful(c, ["pathophysiology", "fisiopatologia"]) ||
-        "A fisiopatologia específica desta condição deve ser consultada nas fontes científicas indicadas abaixo. O jogo não inventa conteúdo quando a base local não o fornece.";
+        "A fisiopatologia específica desta condição deve ser consultada nas fontes científicas indicadas abaixo.";
 
       const propedeutics =
         firstMeaningful(educational, ["propedeutics", "propedeutica", "propedêutica", "diagnosis", "diagnostico"]) ||
@@ -84,7 +84,7 @@
         firstMeaningful(educational, ["treatment", "tratamento", "management", "manejo"]) ||
         (management.length
           ? "Condutas previstas no caso: " + management.join("; ") + "."
-          : "O tratamento específico não está descrito na base local deste caso. Consulte as fontes oficiais.");
+          : "O tratamento específico não está descrito na base local deste caso.");
 
       const complications =
         firstMeaningful(educational, ["complications", "complicacoes", "complicações", "prognosis", "prognostico"]) ||
@@ -105,33 +105,148 @@
         );
       }).join("");
 
+      const diagnosticPoints = [
+        ...(Array.isArray(history.symptoms) ? history.symptoms.map(x => "Manifestação: " + x) : []),
+        ...(Array.isArray(physical.findings) ? physical.findings.map(x => "Achado: " + x) : []),
+        ...(Array.isArray(c.differential) ? c.differential.map(x => {
+          const name = typeof x === "string" ? x : (x.name || x.diagnosis || x.label || "");
+          const discriminator = typeof x === "object" ? (x.discriminating_features || x.discriminator || "") : "";
+          return name ? "Diferencial: " + name + (discriminator ? " · discriminador: " + asText(discriminator) : "") : "";
+        }) : []),
+        ...(Array.isArray(investigations.available)
+          ? investigations.available.map(x => {
+              const name = x.exam || x.name || x.id;
+              return name ? "Investigação útil: " + name : "";
+            })
+          : [])
+      ].filter(Boolean).slice(0, 24);
+
+      const diagnosticItems = diagnosticPoints.length
+        ? diagnosticPoints.map(x => '<li>' + escapeHTML(x) + '</li>').join("")
+        : '<li>Os pontos diagnósticos específicos ainda não estão estruturados para este caso.</li>';
+
+      const refTests = Array.isArray(this.engine.referenceRanges?.tests)
+        ? this.engine.referenceRanges.tests
+        : [];
+
+      const examDefinitions = Array.isArray(this.engine.examinations?.examinations)
+        ? this.engine.examinations.examinations
+        : [];
+
+      const examMap = new Map();
+      [...examDefinitions.map(x => ({...x, _kind: "examination"})), ...refTests.map(x => ({...x, _kind: "reference"}))]
+        .forEach(item => {
+          const id = item.id || item.name;
+          if (id && !examMap.has(id)) examMap.set(id, item);
+        });
+
+      const examRows = [...examMap.values()].slice(0, 80).map(item => {
+        const name = item.name || item.id || "Exame";
+        const aliases = Array.isArray(item.aliases) ? item.aliases.slice(0, 4).join(", ") : "";
+        const unit = item.unit || "";
+        const reference = item.reference
+          ? Object.entries(item.reference).map(([k, v]) => k + ": " + v).join(" · ")
+          : "";
+        const normal = item.normal
+          ? Object.entries(item.normal).map(([k, v]) => {
+              if (v && typeof v === "object" && v.min !== undefined) return k + ": " + v.min + "–" + v.max;
+              return k + ": " + asText(v);
+            }).join(" · ")
+          : "";
+        return (
+          '<tr>' +
+            '<td><strong>' + escapeHTML(name) + '</strong>' +
+              (aliases ? '<small>' + escapeHTML(aliases) + '</small>' : '') +
+            '</td>' +
+            '<td>' + escapeHTML(unit || "—") + '</td>' +
+            '<td>' + escapeHTML(reference || normal || "Consultar laudo/método") + '</td>' +
+          '</tr>'
+        );
+      }).join("");
+
+      const examTable = examRows
+        ? '<div class="science-table-wrap"><table class="science-table"><thead><tr><th>Exame/parâmetro</th><th>Unidade</th><th>Referência educacional</th></tr></thead><tbody>' + examRows + '</tbody></table></div>'
+        : '<p>Nenhuma tabela de exames foi carregada nesta execução.</p>';
+
       this.root.innerHTML =
         '<div class="scientific-base-card">' +
           '<div class="scientific-base-header">' +
             '<div>' +
               '<div class="scientific-base-kicker">BASE CIENTÍFICA</div>' +
               '<h2>' + escapeHTML(diagnosis) + '</h2>' +
-              '<p>Material de estudo liberado após a decisão de consultar a base. O conteúdo é separado da verdade interna do caso.</p>' +
+              '<p>Conhecimento, pontos diagnósticos e referências ficam separados da verdade interna do caso.</p>' +
             '</div>' +
             '<button id="scientificBaseClose" class="btn" type="button">Fechar</button>' +
           '</div>' +
 
-          '<div class="scientific-source-row">' +
-            '<a class="scientific-source" href="https://www.msdmanuals.com/pt/profissional/" target="_blank" rel="noopener">Manual MSD — Profissionais ↗</a>' +
-            '<a class="scientific-source" href="https://www.gov.br/saude/pt-br/assuntos/pcdt" target="_blank" rel="noopener">Ministério da Saúde — PCDT ↗</a>' +
+          '<div class="science-tabs" role="tablist">' +
+            '<button type="button" class="science-tab active" data-science-tab="knowledge">Conhecimento</button>' +
+            '<button type="button" class="science-tab" data-science-tab="diagnostic">Pontos diagnósticos</button>' +
+            '<button type="button" class="science-tab" data-science-tab="exams">Exames e referências</button>' +
+            '<button type="button" class="science-tab" data-science-tab="sources">Fontes</button>' +
           '</div>' +
 
-          '<div class="scientific-section"><h3>Fisiopatologia</h3><p>' + escapeHTML(pathophysiology) + '</p></div>' +
-          '<div class="scientific-section"><h3>Propedêutica</h3><p>' + escapeHTML(propedeutics) + '</p></div>' +
-          '<div class="scientific-section"><h3>Tratamento e manejo</h3><p>' + escapeHTML(treatment) + '</p></div>' +
-          '<div class="scientific-section"><h3>Complicações e evolução</h3><p>' + escapeHTML(complications) + '</p></div>' +
+          '<div class="science-tab-panel active" data-science-panel="knowledge">' +
+            '<div class="scientific-section"><h3>Fisiopatologia</h3><p>' + escapeHTML(pathophysiology) + '</p></div>' +
+            '<div class="scientific-section"><h3>Propedêutica</h3><p>' + escapeHTML(propedeutics) + '</p></div>' +
+            '<div class="scientific-section"><h3>Tratamento e manejo</h3><p>' + escapeHTML(treatment) + '</p></div>' +
+            '<div class="scientific-section"><h3>Complicações e evolução</h3><p>' + escapeHTML(complications) + '</p></div>' +
+          '</div>' +
 
-          (evidenceItems
-            ? '<div class="scientific-section"><h3>Evidências localizadas nesta execução</h3>' + evidenceItems + '</div>'
-            : '<div class="scientific-empty">Nenhum texto externo foi recuperado nesta execução. As fontes oficiais continuam disponíveis acima. O sistema não preenche essa lacuna com conhecimento inventado.</div>') +
+          '<div class="science-tab-panel" data-science-panel="diagnostic">' +
+            '<div class="scientific-section"><h3>Pontos de diagnóstico e constatação</h3>' +
+              '<p>Elementos já disponíveis para sustentar, diferenciar ou investigar hipóteses. Não são uma resposta automática.</p>' +
+              '<ul class="science-list">' + diagnosticItems + '</ul>' +
+            '</div>' +
+          '</div>' +
 
-          '<div class="scientific-disclaimer">A Base Científica é um modo educacional. O conteúdo deve ser interpretado no contexto clínico e nas versões atuais das fontes.</div>' +
+          '<div class="science-tab-panel" data-science-panel="exams">' +
+            '<div class="scientific-section"><h3>Exames e parâmetros de referência</h3>' +
+              '<p>Valores gerais são educacionais. Quando o caso trouxer intervalo próprio, o intervalo do caso prevalece.</p>' +
+              examTable +
+            '</div>' +
+          '</div>' +
+
+          '<div class="science-tab-panel" data-science-panel="sources">' +
+            '<div class="scientific-source-row">' +
+              '<a class="scientific-source" href="https://www.msdmanuals.com/pt/profissional/" target="_blank" rel="noopener">Manual MSD — Profissionais ↗</a>' +
+              '<a class="scientific-source" href="https://www.gov.br/saude/pt-br/assuntos/pcdt" target="_blank" rel="noopener">Ministério da Saúde — PCDT ↗</a>' +
+            '</div>' +
+            (evidenceItems
+              ? '<div class="scientific-section"><h3>Evidências localizadas nesta execução</h3>' + evidenceItems + '</div>'
+              : '<div class="scientific-empty">Nenhuma evidência externa foi recuperada nesta execução.</div>') +
+          '</div>' +
+
+          '<div class="scientific-disclaimer">A Base Científica é um modo educacional. Intervalos laboratoriais variam conforme laboratório, método, idade, sexo, gestação e contexto.</div>' +
         '</div>';
+
+      if (!document.getElementById("scientificBaseTabsStyle")) {
+        const style = document.createElement("style");
+        style.id = "scientificBaseTabsStyle";
+        style.textContent = `
+          .science-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:10px}
+          .science-tab{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:inherit;border-radius:8px;padding:8px 12px;cursor:pointer}
+          .science-tab.active{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.28)}
+          .science-tab-panel{display:none}.science-tab-panel.active{display:block}
+          .science-list{margin:0;padding-left:20px}.science-list li{margin:7px 0;line-height:1.5}
+          .science-table-wrap{overflow:auto;max-height:55vh;border:1px solid rgba(255,255,255,.10);border-radius:10px}
+          .science-table{width:100%;border-collapse:collapse;min-width:650px}
+          .science-table th,.science-table td{text-align:left;padding:10px;border-bottom:1px solid rgba(255,255,255,.08);vertical-align:top}
+          .science-table th{position:sticky;top:0;background:#101a28;z-index:1}
+          .science-table small{display:block;opacity:.65;margin-top:3px}
+        `;
+        document.head.appendChild(style);
+      }
+
+      this.root.querySelectorAll("[data-science-tab]").forEach(button => {
+        button.addEventListener("click", () => {
+          const target = button.dataset.scienceTab;
+          this.root.querySelectorAll("[data-science-tab]").forEach(x => x.classList.toggle("active", x === button));
+          this.root.querySelectorAll("[data-science-panel]").forEach(panel => {
+            panel.classList.toggle("active", panel.dataset.sciencePanel === target);
+          });
+        });
+      });
 
       this.root.querySelector("#scientificBaseClose")?.addEventListener("click", () => this.close());
     }
