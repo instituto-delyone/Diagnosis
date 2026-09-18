@@ -438,10 +438,7 @@
             const hidden = this.currentCase?.hidden || {};
             const candidates = [
                 hidden.diagnosis,
-                hidden.label,
-                ...(Array.isArray(hidden.differential)
-                    ? hidden.differential.map(item => typeof item === "string" ? item : item?.concept)
-                    : [])
+                hidden.label
             ].filter(Boolean).map(value => normalize(value));
 
             const value = normalize(text);
@@ -453,7 +450,7 @@
             const similarityFor = target => {
                 if (!target) return 0;
                 if (value === target) return 1;
-                if (target.includes(value) || value.includes(target)) return 0.9;
+                if (tokens.length >= 2 && (target.includes(value) || value.includes(target))) return 0.85;
 
                 const targetTokens = target.split(" ").filter(Boolean);
                 const targetSet = new Set(targetTokens);
