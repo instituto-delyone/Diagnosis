@@ -2,7 +2,7 @@
 
 ## Interface
 
-### `docs/engine.html`
+### `docs/diagnosis.html`
 
 Interface principal da simulação: apresenta o caso, recebe ações/perguntas, mostra o log clínico e renderiza o estado.
 
@@ -72,7 +72,7 @@ Interpreta a linguagem clínica do médico em contexto e a transforma em uma int
 
 Se a mudança for:
 
-- **visual** → `engine.html` / `Js/ui/`
+- **visual** → `diagnosis.html` / `Js/ui/`
 - **orquestração** → `Js/engine.js`
 - **paciente/estado** → `Js/core/patient-state.js`
 - **geração** → `Js/core/patient-generator.js`
