@@ -507,7 +507,7 @@
                 : [];
 
             if (!catalog.length) {
-                root.innerHTML = \`<div class="investigation-empty">Nenhuma investigação disponível neste cenário.</div>\`;
+                root.innerHTML = `<div class="investigation-empty">Nenhuma investigação disponível neste cenário.</div>`;
                 return;
             }
 
@@ -517,14 +517,14 @@
                     const id = escapeHTML(item.id || item.exam || item.name || "");
                     const name = escapeHTML(item.name || item.exam || item.id || "Exame");
                     const performed = this.context?.revealed?.has(item.id);
-                    return \`
+                    return `
                         <button type="button"
-                                class="investigation-chip \${performed ? "performed" : ""}"
-                                data-investigation-id="\${id}">
-                            <span class="investigation-chip-name">\${name}</span>
-                            <span class="investigation-chip-status">\${performed ? "resultado revelado" : "disponível"}</span>
+                                class="investigation-chip ${performed ? "performed" : ""}"
+                                data-investigation-id="${id}">
+                            <span class="investigation-chip-name">${name}</span>
+                            <span class="investigation-chip-status">${performed ? "resultado revelado" : "disponível"}</span>
                         </button>
-                    \`;
+                    `;
                 })
                 .join("");
 
@@ -573,12 +573,12 @@
 
         revealInvestigation(exam) {
             if (!exam || exam.result === undefined || exam.result === null || exam.result === "") {
-                this.log("SISTEMA", \`A investigação \${exam?.name || "solicitada"} não possui resultado definido no caso e não pode ser revelada.\`);
+                this.log("SISTEMA", `A investigação ${exam?.name || "solicitada"} não possui resultado definido no caso e não pode ser revelada.`);
                 return;
             }
 
             if (this.context.revealed.has(exam.id)) {
-                this.log("RESULTADO", \`\${exam.name} já foi realizado neste caso.\`);
+                this.log("RESULTADO", `${exam.name} já foi realizado neste caso.`);
                 return;
             }
 
@@ -600,7 +600,7 @@
                 timestamp: Date.now()
             });
             this.syncCompatibilityState();
-            this.log("INVESTIGAÇÃO", \`\${exam.name} solicitado.\`);
+            this.log("INVESTIGAÇÃO", `${exam.name} solicitado.`);
             this.log("RESULTADO", this.formatInvestigationResult(exam));
             this.renderState();
         }
@@ -624,18 +624,18 @@
                     reticulocytes_percent: "Reticulócitos"
                 };
                 return Object.entries(exam.result)
-                    .map(([key, value]) => \`\${labels[key] || key}: \${value}\`)
+                    .map(([key, value]) => `${labels[key] || key}: ${value}`)
                     .join(" | ");
             }
 
             if (typeof exam.result === "object") {
                 const valueText = Object.entries(exam.result)
-                    .map(([key, value]) => \`\${key}: \${typeof value === "object" ? JSON.stringify(value) : value}\`)
+                    .map(([key, value]) => `${key}: ${typeof value === "object" ? JSON.stringify(value) : value}`)
                     .join(" | ");
-                return \`\${valueText}\${exam.interpretation ? \` — \${exam.interpretation}\` : ""}\`;
+                return `${valueText}${exam.interpretation ? ` — ${exam.interpretation}` : ""}`;
             }
 
-            return \`\${exam.result}\${exam.interpretation ? \` — \${exam.interpretation}\` : ""}\`;
+            return `${exam.result}${exam.interpretation ? ` — ${exam.interpretation}` : ""}`;
         }
 
         isReferenceQuestion(n) {
