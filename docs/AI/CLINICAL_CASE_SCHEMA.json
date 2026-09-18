@@ -54,6 +54,16 @@
         },
         "vitals": {
           "type": "object"
+        },
+        "revealed_initially": {
+          "type": "array",
+          "items": {}
+        },
+        "initial_reasons_for_hospital": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -68,14 +78,46 @@
         },
         "time": {
           "type": "string"
+        },
+        "care_mode": {
+          "type": "string",
+          "enum": [
+            "emergencia",
+            "clinica_medica"
+          ]
         }
       }
     },
     "history": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "epidemiology": {
+          "type": "object"
+        },
+        "risk_factors": {
+          "type": "array",
+          "items": {}
+        },
+        "pain": {
+          "type": "object",
+          "description": "Dados necessários para responder ao decálogo da dor quando a queixa for dolorosa."
+        },
+        "symptoms": {
+          "type": "object",
+          "description": "Sintomas presentes e ausentes, incluindo os que ainda não foram revelados."
+        }
+      }
     },
     "physical_exam": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "vital_signs": {
+          "type": "object"
+        },
+        "findings": {
+          "type": "object"
+        }
+      }
     },
     "investigations": {
       "type": "object",
@@ -209,7 +251,15 @@
           "type": "object"
         },
         "differential": {
-          "type": "array"
+          "type": "array",
+          "items": {}
+        },
+        "complications": {
+          "type": "array",
+          "items": {}
+        },
+        "treatment": {
+          "type": "object"
         }
       }
     },
@@ -222,6 +272,29 @@
     "revelation_state": {
       "type": "object",
       "description": "Runtime-only state describing which facts have already been revealed to the user."
+    },
+    "clinical_truth": {
+      "type": "object",
+      "description": "Verdade clínica completa, separada do que foi revelado inicialmente.",
+      "properties": {
+        "symptoms": {
+          "type": "object"
+        },
+        "signs": {
+          "type": "object"
+        },
+        "risk_factors": {
+          "type": "array",
+          "items": {}
+        },
+        "differentials": {
+          "type": "array",
+          "items": {}
+        },
+        "pain": {
+          "type": "object"
+        }
+      }
     }
   }
 }
