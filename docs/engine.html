@@ -389,6 +389,54 @@
 
         /* SIDE PANEL */
 
+        .investigation-catalog {
+            display: grid;
+            gap: 7px;
+        }
+
+        .investigation-chip {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 9px 10px;
+            text-align: left;
+            color: var(--text);
+            background: rgba(56, 189, 248, 0.045);
+            border: 1px solid rgba(56, 189, 248, 0.18);
+            border-radius: 9px;
+            transition: border-color .15s ease, background .15s ease, transform .15s ease;
+        }
+
+        .investigation-chip:hover {
+            transform: translateY(-1px);
+            border-color: var(--primary);
+            background: rgba(56, 189, 248, 0.09);
+        }
+
+        .investigation-chip.performed {
+            border-color: rgba(52, 211, 153, 0.35);
+            background: rgba(52, 211, 153, 0.07);
+        }
+
+        .investigation-chip-name {
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .investigation-chip-status {
+            flex: 0 0 auto;
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .investigation-empty {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
         .side-section {
             padding: 16px 18px;
             border-bottom: 1px solid var(--border);
@@ -1056,6 +1104,29 @@
                     e produz consequências de acordo com o conhecimento
                     disponível.
                 </p>
+
+            </div>
+
+
+            <div class="side-section">
+
+                <div class="side-title">
+                    Investigações disponíveis
+                </div>
+
+                <p
+                    style="
+                        margin:0 0 10px;
+                        color:var(--muted);
+                        font-size:12px;
+                        line-height:1.5;
+                    "
+                >
+                    O caso já possui resultados definidos internamente.
+                    O resultado só é revelado quando o exame é solicitado.
+                </p>
+
+                <div id="investigationCatalog" class="investigation-catalog" aria-live="polite"></div>
 
             </div>
 
