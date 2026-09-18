@@ -759,6 +759,75 @@
             }
         }
 
+
+        .btn-warning {
+            border: 1px solid rgba(255, 196, 92, 0.55);
+            background: rgba(255, 178, 66, 0.12);
+            color: #ffd98a;
+        }
+
+        .btn-warning:hover:not(:disabled) {
+            background: rgba(255, 178, 66, 0.2);
+        }
+
+        .case-result {
+            margin-top: 18px;
+            padding: 20px;
+            border: 1px solid rgba(84, 229, 255, 0.35);
+            border-radius: 16px;
+            background: rgba(20, 40, 70, 0.65);
+        }
+
+        .case-result-hidden {
+            display: none;
+        }
+
+        .case-result-title {
+            font-size: 12px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+
+        .case-result-score {
+            font-size: 38px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .case-result-score span {
+            font-size: 16px;
+            color: var(--muted);
+            margin-left: 3px;
+        }
+
+        .case-result-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .case-result-grid > div {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            font-size: 12px;
+        }
+
+        .case-result-grid span {
+            color: var(--muted);
+        }
+
+        .case-result-note {
+            margin-top: 14px;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.6;
+        }
 </style>
 </head>
 
@@ -1049,6 +1118,14 @@
                     </button>
 
                     <button
+                        id="endCaseBtn"
+                        class="btn btn-warning"
+                        type="button"
+                    >
+                        Encerrar avaliação
+                    </button>
+
+                    <button
                         id="nextBtn"
                         class="btn btn-success"
                         type="button"
@@ -1221,6 +1298,9 @@
 
             </div>
 
+
+
+            <div id="caseResult" class="case-result case-result-hidden" aria-live="polite"></div>
 
 
             <div class="side-section">
@@ -1454,6 +1534,7 @@
 </script>
 
 <script src="Js/core/diagnosis-clinical-enhancements.js"></script>
+<script src="Js/core/diagnosis-case-controls.js"></script>
 
 
 <!-- =============================================================
