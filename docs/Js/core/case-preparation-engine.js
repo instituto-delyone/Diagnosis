@@ -111,6 +111,43 @@
       if (missing.length) throw new Error("Campos clínicos ausentes: " + missing.join(", "));
       if (!clinicalCase.hidden?.diagnosis) throw new Error("Caso sem diagnóstico interno.");
       if (!clinicalCase.presentation?.chief_complaint) throw new Error("Caso sem queixa principal.");
+
+      const investigations = clinicalCase.investigations || {};
+      const available = Array.isArray(investigations.available)
+        ? investigations.available
+        : [];
+      const catalog = Array.isArray(investigations.catalog)
+        ? investigations.catalog
+        : [];
+
+      if (!available.length) {
+        throw new Error("Caso sem investigações disponíveis.");
+      }
+
+      const missingResults = available.filter(item => {
+        const result = item?.result;
+        return result === undefined || result === null || result === "";
+      });
+
+      if (missingResults.length) {
+        throw new Error(
+          "Investigações disponíveis sem resultado pré-construído: " +
+          missingResults.map(item => item?.exam || item?.name || item?.id || "exame").join(", ")
+        );
+      }
+
+      const catalogWithoutResults = catalog.filter(item => {
+        if (item?.available === false) return false;
+        return item?.result === undefined || item?.result === null || item?.result === "";
+      });
+
+      if (catalogWithoutResults.length) {
+        throw new Error(
+          "Catálogo de investigações incompleto: " +
+          catalogWithoutResults.map(item => item?.exam || item?.name || item?.id || "exame").join(", ")
+        );
+      }
+
       return true;
     }
 
@@ -138,13 +175,20 @@
       await this.loadMasterCatalog(onStatus);
       const sourceCases = this.chooseSourceCases(count);
 
-      for (let i = 0; i < sourceCases.length; i += 1) {
-        const built = await this.researchAndBuild(sourceCases[i], i, onStatus);
-        this.preparedCases.push(this.cardData(built, i));
-      }
+      const builtCases = await Promise.all(
+        sourceCases.map((sourceCase, index) =>
+          this.researchAndBuild(sourceCase, index, onStatus)
+        )
+      );
+
+      this.preparedCases = builtCases.map((built, index) =>
+        this.cardData(built, index)
+      );
 
       if (this.preparedCases.length !== count) {
-        throw new Error("Não foi possível preparar os três casos clínicos.");
+        throw new Error(
+          "Não foi possível preparar " + count + " casos clínicos completos."
+        );
       }
 
       return this.preparedCases;
