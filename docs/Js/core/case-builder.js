@@ -21,6 +21,18 @@
       var patient = source.patient || {};
       var opening = source.opening || source.presentation || {};
 
+      var initialState = Object.assign({ stability: "estável", severity: "não classificada" }, source.initial_state || {});
+      var careMode = initialState.stability === "instável" ? "emergencia" : "clinica_medica";
+      var history = this.clone(source.history || {});
+      var physicalExam = this.clone(source.physical_exam || {});
+      var clinicalTruth = this.clone(source.clinical_truth || {});
+      clinicalTruth.symptoms = clinicalTruth.symptoms || history.symptoms || {};
+      clinicalTruth.signs = clinicalTruth.signs || physicalExam.findings || physicalExam.signs || {};
+      clinicalTruth.risk_factors = clinicalTruth.risk_factors || history.risk_factors || source.risk_factors || [];
+      clinicalTruth.differentials = clinicalTruth.differentials || source.differential || [];
+      clinicalTruth.pain = clinicalTruth.pain || history.pain || source.pain || null;
+      var initialReasons = Array.isArray(source.presentation && source.presentation.initial_reasons_for_hospital) ? source.presentation.initial_reasons_for_hospital.slice() : (Array.isArray(source.initial_reasons_for_hospital) ? source.initial_reasons_for_hospital.slice() : []);
+
       var clinicalCase = {
         case_id: source.id || source.case_id || "generated_" + Date.now(),
 
@@ -41,19 +53,18 @@
           vitals:
             source.vitals ||
             source.physical_exam && source.physical_exam.vitals ||
-            {}
+            {},
+          initial_reasons_for_hospital: initialReasons,
+          revealed_initially: Array.isArray(source.revealed_initially) ? this.clone(source.revealed_initially) : initialReasons.slice()
         },
 
-        initial_state: Object.assign({
-          stability: "estável",
-          severity: "não classificada"
-        }, source.initial_state || {}),
+        initial_state: Object.assign(initialState, { care_mode: careMode }),
 
-        history: this.clone(source.history || {}),
+        history: history,
 
-        physical_exam: this.clone(
-          source.physical_exam || {}
-        ),
+        physical_exam: Object.assign(physicalExam, {
+          vital_signs: physicalExam.vital_signs || source.vitals || {}
+        }),
 
         investigations: this.buildInvestigations(source),
 
@@ -69,6 +80,8 @@
             consequences: source.consequences || {}
           }
         ),
+
+        clinical_truth: clinicalTruth,
 
         hidden: {
           diagnosis:
