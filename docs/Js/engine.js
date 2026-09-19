@@ -435,7 +435,7 @@
                 }
             });
             this.elements.next?.addEventListener("click", () => this.startNewCase());
-            this.elements.science?.addEventListener("click", () => this.scientificBase?.open());
+            // Scientific Base owns its own button listener; keeping a single owner avoids duplicate research calls.
             this.elements.hint?.addEventListener("click", () => this.showHint());
             this.elements.hypothesisSubmit?.addEventListener("click", () => this.submitHypothesis());
             this.elements.hypothesisInput?.addEventListener("keydown", event => {
