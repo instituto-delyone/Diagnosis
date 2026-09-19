@@ -31,6 +31,12 @@
       clinicalTruth.risk_factors = clinicalTruth.risk_factors || history.risk_factors || source.risk_factors || [];
       clinicalTruth.differentials = clinicalTruth.differentials || source.differential || [];
       clinicalTruth.pain = clinicalTruth.pain || history.pain || source.pain || null;
+      clinicalTruth.syndromic_diagnosis =
+        clinicalTruth.syndromic_diagnosis ||
+        source.syndromic_diagnosis ||
+        source.hidden?.syndromic_diagnosis ||
+        source.primary_syndrome ||
+        null;
       if (global.SymptomCharacterization) {
         var symptomCharacterization = new global.SymptomCharacterization().create({
           source: Object.assign({}, history, {
@@ -102,6 +108,20 @@
             source.concept ||
             null,
 
+          syndromic_diagnosis:
+            source.hidden && source.hidden.syndromic_diagnosis ||
+            source.syndromic_diagnosis ||
+            source.primary_syndrome ||
+            clinicalTruth.syndromic_diagnosis ||
+            null,
+
+          etiologic_diagnosis:
+            source.hidden && source.hidden.etiologic_diagnosis ||
+            source.etiologic_diagnosis ||
+            source.primary_concept ||
+            source.concept ||
+            null,
+
           label:
             source.hidden && source.hidden.label ||
             source.title ||
@@ -145,6 +165,13 @@
         }
       };
 
+      clinicalCase.clinical_truth.conversation_ready = Boolean(
+        clinicalCase.history &&
+        clinicalCase.physical_exam &&
+        clinicalCase.investigations &&
+        clinicalCase.management &&
+        clinicalCase.clinical_truth.symptom_characterization
+      );
       return clinicalCase;
     }
 
