@@ -374,6 +374,7 @@
             try { await loadScript("Js/core/pcdt-catalog-provider.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/reference-range-resolver.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/gemini-research-provider.js"); } catch (e) { console.warn(e); }
+            try { await loadScript("Js/core/gemini-conversation-provider.js"); } catch (e) { console.warn(e); }
         }
 
         async loadResearchRules() {
