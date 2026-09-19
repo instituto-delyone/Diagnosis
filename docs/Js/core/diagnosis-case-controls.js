@@ -177,7 +177,7 @@
                 '<div><strong>Ações</strong><span>' + escapeHTML(result.actionsCount) + '</span></div>' +
                 '<div><strong>Erros</strong><span>' + escapeHTML(result.errors) + '</span></div>' +
             '</div>' +
-            '<div class="case-result-note">A conduta pode ser registrada mesmo antes do diagnóstico etiológico definitivo. Alertas clínicos não bloqueiam a decisão.</div>';
+            '<div class="case-result-note">O caso segue o fluxo diagnóstico → terapêutico. O tratamento é liberado após o diagnóstico etiológico; alertas clínicos são registrados no log e integram a avaliação.</div>';
 
         if (this.elements?.input) this.elements.input.disabled = true;
         if (this.elements?.send) this.elements.send.disabled = true;
