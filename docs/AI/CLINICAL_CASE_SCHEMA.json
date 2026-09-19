@@ -240,6 +240,12 @@
         "diagnosis": {
           "type": "string"
         },
+        "syndromic_diagnosis": {
+          "type": ["string", "null"]
+        },
+        "etiologic_diagnosis": {
+          "type": ["string", "null"]
+        },
         "label": {
           "type": [
             "string",
@@ -293,6 +299,16 @@
         },
         "pain": {
           "type": "object"
+        },
+        "symptom_characterization": {
+          "type": "object",
+          "description": "Caracterização semiológica completa dos sintomas, incluindo o módulo clássico da dor quando aplicável."
+        },
+        "syndromic_diagnosis": {
+          "type": ["string", "null"]
+        },
+        "conversation_ready": {
+          "type": "boolean"
         }
       }
     }
