@@ -20,6 +20,11 @@
       var symptoms = Array.isArray(options.symptoms)
         ? options.symptoms
         : this.normalizeSymptoms(source.symptoms || source);
+      if (source.pain && !symptoms.some(function (item) {
+        return this.slug(item.id || item.name || item.symptom) === "dor";
+      }, this)) {
+        symptoms.push(Object.assign({ id: "dor", name: "dor", is_pain: true }, this.clone(source.pain)));
+      }
       var result = {};
 
       symptoms.forEach(function (symptom) {
