@@ -202,6 +202,14 @@
       : kind === "syndromic";
 
     this.context.history.push("[DIAGNÓSTICO " + kind + "] " + value);
+    if (kind === "etiologic") {
+      this.context.hypothesis.text = value;
+      this.context.hypothesis.locked = true;
+      this.context.hypothesis.submittedAt = Date.now();
+      this.context.hypothesis.elapsedSeconds = Math.max(0, (Date.now() - (this.context.hypothesis.startedAt || Date.now())) / 1000);
+      this.context.hypothesis.similarity = state.lastScore;
+      this.context.hypothesis.evaluated = false;
+    }
 
     if (accepted) {
       state.solved = true;
