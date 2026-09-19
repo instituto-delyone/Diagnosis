@@ -709,6 +709,79 @@
         }
 
     
+        .diagnosis-panels {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .diagnosis-panels-title {
+            font-size: 14px;
+            font-weight: 850;
+            margin-bottom: 2px;
+        }
+
+        .diagnosis-stage {
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.025);
+        }
+
+        .diagnosis-stage.is-locked {
+            opacity: 0.58;
+        }
+
+        .diagnosis-stage.is-unlocked {
+            border-color: rgba(56,189,248,0.28);
+        }
+
+        .diagnosis-stage-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: flex-start;
+            margin-bottom: 9px;
+        }
+
+        .diagnosis-stage-head strong,
+        .diagnosis-stage-head span {
+            display: block;
+        }
+
+        .diagnosis-stage-head span {
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.45;
+            margin-top: 3px;
+        }
+
+        .diagnosis-stage-head b {
+            color: var(--primary);
+            font-size: 11px;
+            white-space: nowrap;
+        }
+
+        .diagnosis-feedback {
+            margin-top: 9px;
+            padding: 9px 10px;
+            border-left: 3px solid var(--primary);
+            background: rgba(56,189,248,0.06);
+            color: #dce8f1;
+            font-size: 11px;
+            line-height: 1.5;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .monitor.monitor-active .vital {
+            border-color: rgba(52,211,153,0.45);
+            box-shadow: 0 0 0 1px rgba(52,211,153,0.08), 0 0 18px rgba(52,211,153,0.08);
+        }
+
+        .monitor.monitor-active .vital-value {
+            color: #9ff4d0;
+        }
+
         .hypothesis-box {
             display: flex;
             flex-direction: column;
@@ -1369,43 +1442,14 @@
 
             <div class="side-section">
 
-                <div class="side-title">
-                    Hipótese diagnóstica
-                </div>
+                <div id="diagnosisPanels" class="diagnosis-panels" aria-live="polite"></div>
 
-                <div class="hypothesis-box">
-                    <p class="hypothesis-help">
-                        Registre uma única hipótese quando estiver pronto. Depois de fixada,
-                        ela não pode mais ser alterada. A pontuação combina proximidade do diagnóstico
-                        oculto com a rapidez da decisão.
-                    </p>
-
-                    <div class="hypothesis-row">
-                        <input
-                            id="hypothesisInput"
-                            class="hypothesis-input"
-                            type="text"
-                            autocomplete="off"
-                            placeholder="Ex.: anemia ferropriva"
-                            aria-label="Hipótese diagnóstica"
-                        >
-
-                        <button
-                            id="hypothesisSubmit"
-                            class="btn btn-primary hypothesis-submit"
-                            type="button"
-                        >
-                            Fixar hipótese
-                        </button>
-                    </div>
-
-                    <div id="hypothesisStatus" class="hypothesis-status">
-                        Hipótese ainda não fixada.
-                    </div>
-                </div>
+                <!-- Compatibilidade com o avaliador legado; o novo fluxo usa os dois painéis acima. -->
+                <input id="hypothesisInput" type="hidden">
+                <button id="hypothesisSubmit" type="button" hidden></button>
+                <div id="hypothesisStatus" hidden></div>
 
             </div>
-
 
 
             <div id="caseResult" class="case-result case-result-hidden" aria-live="polite"></div>
@@ -1647,6 +1691,7 @@
 
 <script src="Js/core/diagnosis-clinical-enhancements.js"></script>
 <script src="Js/core/diagnosis-case-controls.js"></script>
+<script src="Js/core/diagnosis-clinical-flow.js"></script>
 <script src="Js/core/scientific-base.js"></script>
 
 
