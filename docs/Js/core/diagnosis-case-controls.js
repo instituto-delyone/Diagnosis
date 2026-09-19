@@ -3,10 +3,10 @@
 /*
  * Diagnosis — case controls.
  *
- * Keeps treatment permissive: a clinical action may be recorded even when
- * the diagnostic hypothesis is only syndromic or etiologically incomplete.
- * The engine may warn about a mismatch/known contraindication, but never
- * blocks the physician's action.
+ * Keeps the low-level treatment recorder permissive, while the higher
+ * clinical-flow layer decides when the treatment stage is unlocked.
+ * Once treatment is allowed, the engine may warn about a mismatch/known
+ * contraindication, but does not silently rewrite the physician's action.
  */
 (function (global) {
     const normalize = value => String(value || "")
