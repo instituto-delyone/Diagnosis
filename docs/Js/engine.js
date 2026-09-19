@@ -13,7 +13,8 @@
         theoryLibraries: [],
         researchRules: "AI/CASE_RESEARCH_RULES.json",
         pcdtCatalog: "knowledge_base/pcdt_catalog.json",
-        defaultRoom: "clinica"
+        defaultRoom: "clinica",
+        geminiWorkerUrl: "https://diagnosis-gemini-proxy.dr-delyone.workers.dev/api/gemini/research"
     };
 
     const normalize = value => String(value || "")
@@ -372,6 +373,7 @@
             try { await loadScript("Js/core/case-research-engine.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/pcdt-catalog-provider.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/reference-range-resolver.js"); } catch (e) { console.warn(e); }
+            try { await loadScript("Js/core/gemini-research-provider.js"); } catch (e) { console.warn(e); }
         }
 
         async loadResearchRules() {
@@ -1070,18 +1072,60 @@
                     return;
                 }
                 const researcher = new global.CaseResearchEngine({ config: this.researchRules });
-                this.research = await researcher.research({
-                    concept: this.currentCase.hidden?.diagnosis,
-                    primary_concept: this.currentCase.hidden?.diagnosis,
+                const concept = this.currentCase.hidden?.label
+                    || this.currentCase.hidden?.diagnosis
+                    || this.currentCase.title
+                    || "condição clínica";
+
+                const catalogResearch = await researcher.research({
+                    concept,
+                    primary_concept: concept,
                     anchors: [reason]
                 });
+
+                this.research = catalogResearch || { enabled: true, evidence: [], source_status: [] };
+
+                if (global.DiagnosysGeminiProvider) {
+                    try {
+                        const gemini = new global.DiagnosysGeminiProvider({ endpoint: CONFIG.geminiWorkerUrl });
+                        const response = await gemini.research({
+                            disease: concept,
+                            source: "msd_manuals",
+                            topics: [
+                                "fisiopatologia",
+                                "epidemiologia",
+                                "clinica",
+                                "exame_fisico",
+                                "diagnostico",
+                                "diagnostico_diferencial",
+                                "tratamento",
+                                "complicacoes",
+                                "evolucao",
+                                "seguimento"
+                            ]
+                        });
+
+                        this.research.gemini = response?.result || null;
+                        this.research.gemini_status = response?.ok ? "ok" : "error";
+                        if (response?.ok) {
+                            this.log("GEMINI", "Síntese clínica recebida pelo Worker e incorporada à Base Científica.");
+                        } else {
+                            this.log("GEMINI", "O Worker respondeu, mas a síntese do Gemini não pôde ser incorporada.");
+                        }
+                    } catch (error) {
+                        this.research.gemini_status = "error";
+                        this.research.gemini_error = error instanceof Error ? error.message : String(error);
+                        this.log("GEMINI", "Não foi possível consultar o Gemini nesta execução.");
+                    }
+                }
+
                 const count = this.research?.evidence?.length || 0;
                 const pcdt = (this.research?.evidence || []).find(item => item.source_id === "ministerio_saude");
                 const matches = pcdt?.result?.matches || [];
                 this.log(
                     "PESQUISA",
                     count
-                        ? `${count} registros retornados. PCDT: ${matches.length ? matches.slice(0, 3).map(item => item.name).join(" | ") : "sem correspondência"}.`
+                        ? count + " registros retornados. PCDT: " + (matches.length ? matches.slice(0, 3).map(item => item.name).join(" | ") : "sem correspondência") + "."
                         : "Nenhuma evidência retornada."
                 );
             } finally {
