@@ -172,4 +172,101 @@
       }
     ]
   }
+},
+{
+  "knowledge_id": "SIND_DIARREICA_MED_001_COMPLEX",
+  "topic": "Síndrome Diarreica - Complexidade e Dependências",
+  
+  "camada_1_knowledge_chunk": {
+    "observacao": "Aqui manteríamos todo aquele conhecimento clínico extenso (sintomas, epidemiologia, tratamentos) que extraímos anteriormente."
+  },
+
+  "camada_2_generation_constraints": {
+    "temporal_rules": [
+      {
+        "rule_id": "temp_01",
+        "condition": "tempo_evolucao < 14_dias",
+        "action": "MUST_NOT_GENERATE",
+        "target_diagnoses": ["Doença de Crohn", "Retocolite Ulcerativa"]
+      }
+    ],
+    "topographic_rules": [
+      {
+        "rule_id": "topo_01",
+        "condition": "sintomas_incluem CONTAINS_ANY ['tenesmo', 'muco', 'sangue_vivo']",
+        "action": "MUST_SET_STATE",
+        "target_variables": {"topografia": "baixa", "volume_fecal": "pequeno"}
+      }
+    ],
+    "causal_dependencies": [
+      {
+        "dependency_id": "causa_efeito_sangramento_cronico",
+        "trigger": "presenca_sangue == true AND tempo_evolucao >= 'cronico'",
+        "enforced_consequences": {
+          "exame_fisico": ["palidez_cutaneo_mucosa"],
+          "laboratorio_hemograma": {
+            "hemoglobina": "diminuida (ex: 8.5 - 11.0 g/dL)",
+            "vcm": "diminuido (microcitose)",
+            "hcm": "diminuido (hipocromia)"
+          },
+          "laboratorio_ferro": "ferritina_diminuida"
+        },
+        "reasoning": "Perda de sangue crónica pelas fezes leva inevitavelmente a anemia ferropénica."
+      },
+      {
+        "dependency_id": "causa_efeito_desidratacao",
+        "trigger": "volume_fecal == 'abundante' OR vomitos == 'frequentes'",
+        "enforced_consequences": {
+          "sinais_vitais": {
+            "frequencia_cardiaca": "aumentada (taquicardia > 100 bpm)",
+            "pressao_arterial": "normal_a_baixa (possível hipotensão ortostática)"
+          },
+          "exame_fisico": ["mucosas_secas", "turgor_cutaneo_diminuido", "olhos_encovados"],
+          "laboratorio_bioquimica": {
+            "ureia": "aumentada (sinal de azotemia pré-renal)",
+            "creatinina": "normal_ou_ligeiramente_aumentada"
+          }
+        },
+        "reasoning": "Perda de volume hídrico reflete-se na perfusão, gerando resposta simpática (taquicardia) e sofrimento renal inicial."
+      },
+      {
+        "dependency_id": "causa_efeito_inflamacao_sistemica",
+        "trigger": "febre == true OR presenca_sangue == true",
+        "enforced_consequences": {
+          "laboratorio_inflamacao": {
+            "pcr": "aumentada",
+            "vhs": "aumentada",
+            "leucocitos": "aumentados (leucocitose com possível neutrofilia)"
+          }
+        },
+        "reasoning": "Quadros invasivos (disenteria) desencadeiam resposta inflamatória sistémica visível nos marcadores laboratoriais."
+      }
+    ]
+  },
+
+  "camada_3_case_assembly_examples": {
+    "exemplo_montagem_1": {
+      "objetivo_do_motor": "Gerar um caso de Diarreia Invasiva Aguda (ex: Shigella).",
+      "sequencia_de_geracao": [
+        "1. Motor define o tempo: 'agudo' (3 dias).",
+        "2. Motor escolhe a topografia: 'baixa' (cólon).",
+        "3. Aplicando regra topo_01: Injeta sintomas ['tenesmo', 'sangue_vivo', 'muco'] e volume 'pequeno'.",
+        "4. Motor define fator sistémico: 'febre alta'.",
+        "5. Aplicando dependência causa_efeito_inflamacao_sistemica (por causa da febre/sangue): Motor altera exames laboratoriais -> Leucócitos 14.000, PCR 45 mg/L.",
+        "6. Aplicando dependência causa_efeito_sangramento_cronico: FALSO (pois é agudo, logo, o Hemograma mantém a hemoglobina normal).",
+        "7. Resultado Final: Doente com disenteria aguda, febril, com marcadores inflamatórios altos, mas sem anemia. Coerência médica 100% garantida."
+      ]
+    },
+    "exemplo_montagem_2": {
+      "objetivo_do_motor": "Gerar um caso de Doença de Crohn em atividade (Crónico).",
+      "sequencia_de_geracao": [
+        "1. Motor define o tempo: 'crónico' (6 meses de evolução flutuante).",
+        "2. Motor escolhe os sintomas base: diarreia intermitente, perda de peso.",
+        "3. Motor decide injetar complicação de sangramento: 'sangue_nas_fezes'.",
+        "4. Aplicando dependência causa_efeito_sangramento_cronico (sangue + crónico): Motor obrigatoriamente altera o Hemograma -> Hemoglobina 9.2 g/dL, VCM 72. Exame físico recebe 'palidez cutânea'.",
+        "5. Resultado Final: Doente emagrecido, pálido, com queixas de meses, e o médico precisará de interpretar a anemia microcítica como consequência das perdas, e não como uma doença separada."
+      ]
+    }
+  }
 }
+
