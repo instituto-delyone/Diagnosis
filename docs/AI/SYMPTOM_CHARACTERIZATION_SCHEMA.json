@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "purpose": "Representação estruturada da caracterização semiológica do sintoma-guia antes da conversa clínica.",
+  "principle": "O caso possui uma verdade clínica pré-construída; a conversa apenas revela essa verdade.",
+  "generic_dimensions": [
+    {"id":"onset","label":"Início","question":"Quando começou? Foi súbito ou gradual?"},
+    {"id":"duration","label":"Duração","question":"Há quanto tempo está presente? Quanto dura cada episódio?"},
+    {"id":"evolution","label":"Evolução","question":"Como evoluiu desde o início? Está piorando, melhorando ou estável?"},
+    {"id":"frequency","label":"Frequência/periodicidade","question":"Com que frequência acontece? É contínuo ou episódico?"},
+    {"id":"location","label":"Localização","question":"Onde exatamente ocorre?"},
+    {"id":"distribution","label":"Distribuição","question":"É localizado, difuso ou acomete um lado/segmento específico?"},
+    {"id":"quality","label":"Qualidade/característica","question":"Como você descreveria a sensação ou o sintoma?"},
+    {"id":"severity","label":"Intensidade/severidade","question":"Qual é a intensidade ou o quanto isso limita você?"},
+    {"id":"triggers","label":"Desencadeantes","question":"O que costuma desencadear ou iniciar o sintoma?"},
+    {"id":"aggravating_factors","label":"Agravantes","question":"O que piora o sintoma?"},
+    {"id":"relieving_factors","label":"Atenuantes","question":"O que melhora ou alivia o sintoma?"},
+    {"id":"functional_relations","label":"Relação com funções","question":"Existe relação com movimento, alimentação, respiração, micção, evacuação, esforço ou outras funções?"},
+    {"id":"associated_symptoms","label":"Sintomas associados","question":"O que mais acontece junto com esse sintoma?"},
+    {"id":"functional_impact","label":"Impacto funcional","question":"Como isso interfere nas atividades do dia a dia?"}
+  ],
+  "pain_module": {
+    "name": "Decálogo da Dor",
+    "status": "classical_semiologic_module",
+    "items": [
+      {"order":1,"id":"location","label":"Localização","question":"Onde exatamente dói?","required":true},
+      {"order":2,"id":"irradiation","label":"Irradiação","question":"A dor se espalha ou vai para algum outro lugar?","required":true},
+      {"order":3,"id":"quality","label":"Qualidade/característica","question":"Como é a dor: pressão, queimação, pontada, cólica, peso, choque ou outra descrição?","required":true},
+      {"order":4,"id":"intensity","label":"Intensidade","question":"De 0 a 10, quanto dói?","required":true},
+      {"order":5,"id":"duration","label":"Duração","question":"Quanto tempo dura cada episódio ou há quanto tempo a dor persiste?","required":true},
+      {"order":6,"id":"evolution","label":"Evolução","question":"Como a dor evoluiu desde o início?","required":true},
+      {"order":7,"id":"functional_relations","label":"Relação com funções orgânicas","question":"A dor tem relação com movimento, esforço, alimentação, respiração, evacuação, micção ou outra função?","required":true},
+      {"order":8,"id":"triggers_aggravating","label":"Desencadeantes/agravantes","question":"O que desencadeia ou piora a dor?","required":true},
+      {"order":9,"id":"relieving_factors","label":"Atenuantes","question":"O que melhora ou alivia a dor?","required":true},
+      {"order":10,"id":"associated_manifestations","label":"Manifestações concomitantes","question":"Que outros sintomas ou manifestações aparecem junto com a dor?","required":true}
+    ]
+  }
+}
