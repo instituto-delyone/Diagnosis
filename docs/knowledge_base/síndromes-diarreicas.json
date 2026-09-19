@@ -1,0 +1,175 @@
+{
+  "knowledge_id": "SIND_DIARREICA_MED_001",
+  "topic": "Síndrome Diarreica (Aguda e Crônica)",
+  "source_summary": "Mapa mental Med/Medcurso com foco em divisão topográfica (alta/baixa) e temporal (aguda/crônica), complementado com MSD Manuals para detalhamento de patógenos e sinais de alarme.",
+  
+  "camada_1_knowledge_chunk": {
+    "core_concepts": [
+      "[FONTE DIRETA] Diarreia aguda dura < 3 semanas; crônica dura > 3 semanas.",
+      "[COMPLEMENTAÇÃO MSD] Na literatura internacional (MSD), crônica é > 4 semanas, e 2-4 semanas é persistente. O motor deve permitir flexibilidade nesse limite.",
+      "[FONTE DIRETA] Topografia alta (intestino delgado) cursa com diarreia aquosa e grande volume.",
+      "[FONTE DIRETA] Topografia baixa (cólon/intestino grosso) cursa com disenteria (muco/pus/sangue) e tenesmo."
+    ],
+    "epidemiology": {
+      "typical_population": [
+        "[COMPLEMENTAÇÃO MSD] Qualquer idade, mas extremos de idade têm maior risco de desidratação."
+      ],
+      "risk_factors": [
+        "[FONTE DIRETA] Imunossupressão, viagens recentes, uso de antibióticos, hospitalização.",
+        "[COMPLEMENTAÇÃO MSD] Consumo de água/alimentos não seguros, creches."
+      ],
+      "contexts": [
+        "[COMPLEMENTAÇÃO MSD] Surtos epidêmicos (vírus, cólera), uso recente de antimicrobianos (C. difficile)."
+      ]
+    },
+    "pathophysiology": [
+      "[FONTE DIRETA] Não invasiva (secretória/osmótica): patógenos agem na luz intestinal sem destruir mucosa (ex: Cólera, Rotavírus).",
+      "[FONTE DIRETA] Invasiva/Inflamatória: invasão e destruição da mucosa colônica (ex: Shigella, Salmonella)."
+    ],
+    "clinical_manifestations": {
+      "common": [
+        "[FONTE DIRETA] Aumento do número de evacuações, redução da consistência fecal, cólica abdominal."
+      ],
+      "possible": [
+        "[FONTE DIRETA] Febre, náuseas, vômitos, desidratação, perda de peso."
+      ],
+      "less_common": [
+        "[COMPLEMENTAÇÃO MSD] Artrite reativa, eritema nodoso (mais comuns em DII ou pós-infecção bacteriana)."
+      ],
+      "severity_dependent": [
+        "[COMPLEMENTAÇÃO MSD] Sinais de alarme: hipotensão, taquicardia, letargia, oligúria (indicam desidratação grave)."
+      ],
+      "time_dependent": [
+        "[FONTE DIRETA] Duração dita a investigação. Aguda geralmente é autolimitada; crônica exige busca por causas inflamatórias, disabsortivas ou funcionais."
+      ]
+    },
+    "symptom_characterization": {
+      "alta_delgado": "[FONTE DIRETA] Grande volume, menor frequência, restos alimentares, dor periumbilical.",
+      "baixa_colonica": "[FONTE DIRETA] Pequeno volume, alta frequência, urgência fecal, tenesmo, muco/sangue, dor hipogástrica."
+    },
+    "physical_exam": {
+      "expected": [
+        "[COMPLEMENTAÇÃO MSD] RHA aumentados, dor leve à palpação difusa."
+      ],
+      "possible": [
+        "[COMPLEMENTAÇÃO MSD] Sinais de desidratação (turgor lentificado, mucosas secas)."
+      ],
+      "severity_dependent": [
+        "[COMPLEMENTAÇÃO MSD] Hipotensão postural, taquicardia repouso, rebaixamento de sensório."
+      ],
+      "negative_findings": [
+        "[COMPLEMENTAÇÃO MSD] Ausência de peritonismo (abdome em tábua/descompressão brusca positiva) afasta complicações perfurativas na maioria dos casos."
+      ]
+    },
+    "investigations": {
+      "laboratory": [
+        "[FONTE DIRETA] Leucócitos fecais, coprocultura, EPF, toxinas para C. difficile (apenas se sinais de alarme ou crônica)."
+      ],
+      "imaging": [
+        "[COMPLEMENTAÇÃO MSD] Geralmente desnecessária na aguda não complicada. TC de abdome se suspeita de complicação (megacólon, perfuração)."
+      ],
+      "other": [
+        "[FONTE DIRETA] Colonoscopia/Endoscopia com biópsia para quadros crônicos (DII, Doença Celíaca)."
+      ]
+    },
+    "diagnostic_reasoning": {
+      "syndromes": [
+        "[FONTE DIRETA] Síndrome diarreica aguda alta, Síndrome diarreica aguda baixa (disentérica), Síndrome disabsortiva."
+      ],
+      "differential_diagnoses": [
+        "[FONTE DIRETA] Intoxicação alimentar (S. aureus, B. cereus - incubação curta), parasitoses, Doença Inflamatória Intestinal, Síndrome do Intestino Irritável (SII)."
+      ],
+      "etiologic_diagnosis": [
+        "[FONTE DIRETA] Viral (Rotavírus, Norovírus), Bacteriana (E. coli, Shigella, Salmonella).",
+        "[COMPLEMENTAÇÃO MSD] C. difficile se uso de ATB."
+      ],
+      "confirmatory_evidence": [
+        "[COMPLEMENTAÇÃO MSD] Coprocultura positiva, pesquisa de toxina, biópsia compatível."
+      ],
+      "excluding_evidence": [
+        "[FONTE DIRETA] SII requer ausência de sinais de alarme (Roma IV)."
+      ]
+    },
+    "disease_evolution": [
+      "[FONTE DIRETA] Aguda viral/bacteriana não invasiva resolve em 3-7 dias."
+    ],
+    "complications": [
+      "[COMPLEMENTAÇÃO MSD] Desidratação grave, choque hipovolêmico, distúrbios hidroeletrolíticos (hipocalemia), Síndrome Hemolítico-Urêmica (E. coli O157:H7), Megacólon Tóxico (DII ou C. difficile)."
+    ],
+    "treatment": {
+      "stabilization": [
+        "[COMPLEMENTAÇÃO MSD] TRO (Terapia de Reidratação Oral) ou hidratação venosa (Ringer Lactato) se grave."
+      ],
+      "supportive": [
+        "[COMPLEMENTAÇÃO MSD] Antieméticos se necessário. Loperamida (apenas se diarreia aquosa sem sinais de alarme)."
+      ],
+      "specific": [
+        "[FONTE DIRETA] Antibióticos SÓ para diarreia invasiva grave, imunossuprimidos, cólera, ou suspeita de febre tifoide."
+      ],
+      "etiologic": [
+        "[FONTE DIRETA] Metronidazol/Vancomicina para C. difficile. Albendazol/Ivermectina para parasitoses específicas."
+      ],
+      "complications": [],
+      "monitoring": [
+        "[COMPLEMENTAÇÃO MSD] Diurese, sinais vitais, aceitação oral."
+      ],
+      "follow_up": []
+    }
+  },
+
+  "camada_2_generation_constraints": {
+    "temporal_rules": [
+      {
+        "rule_id": "temp_01",
+        "condition": "tempo_evolucao < 14_dias",
+        "action": "MUST_NOT_GENERATE",
+        "target_diagnoses": ["Doença de Crohn", "Retocolite Ulcerativa", "SII"],
+        "reasoning": "Diarreias agudas não fecham critério para DII ou SII no primeiro episódio."
+      },
+      {
+        "rule_id": "temp_02",
+        "condition": "tempo_evolucao > 28_dias",
+        "action": "MUST_NOT_GENERATE",
+        "target_diagnoses": ["Rotavírus", "Norovírus", "Cólera", "Intoxicação alimentar estafilocócica"],
+        "reasoning": "Patógenos agudos não causam quadros crônicos isoladamente."
+      }
+    ],
+    "topographic_rules": [
+      {
+        "rule_id": "topo_01",
+        "condition": "sintomas_incluem CONTAINS_ANY ['tenesmo', 'muco', 'sangue_vivo']",
+        "action": "MUST_SET_STATE",
+        "target_variables": {
+          "topografia": "baixa",
+          "volume_fecal": "pequeno"
+        },
+        "reasoning": "Presença de disenteria obriga o motor a localizar a lesão no cólon/reto."
+      },
+      {
+        "rule_id": "topo_02",
+        "condition": "volume_fecal == 'muito_abundante_aquoso'",
+        "action": "MUST_NOT_GENERATE",
+        "target_variables": ["tenesmo"],
+        "reasoning": "Diarreia de origem no intestino delgado não causa tenesmo."
+      }
+    ],
+    "severity_rules": [
+      {
+        "rule_id": "sev_01",
+        "condition": "diagnostico_definitivo == 'Síndrome do Intestino Irritável'",
+        "action": "MUST_NOT_GENERATE",
+        "target_variables": ["febre", "perda_de_peso", "sangramento_gastrointestinal", "anemia"],
+        "reasoning": "Presença de sinais de alarme exclui o diagnóstico funcional de SII (Critérios de Roma IV)."
+      }
+    ],
+    "therapeutic_penalties": [
+      {
+        "rule_id": "tx_01",
+        "condition": "presenca_sangue == true OR febre == true",
+        "action": "PENALIZE_ACTION",
+        "target_treatment": ["Loperamida", "Antidiarreicos"],
+        "reasoning": "Risco de megacólon tóxico ou retenção de patógeno invasivo."
+      }
+    ]
+  }
+}
