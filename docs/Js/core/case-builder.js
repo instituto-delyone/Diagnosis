@@ -37,6 +37,8 @@
         source.hidden?.syndromic_diagnosis ||
         source.primary_syndrome ||
         null;
+      clinicalTruth.research_snapshot = this.clone(this.research.evidence || []);
+      clinicalTruth.research_status = this.clone(this.research.source_status || []);
       if (global.SymptomCharacterization) {
         var symptomCharacterization = new global.SymptomCharacterization().create({
           source: Object.assign({}, history, {
