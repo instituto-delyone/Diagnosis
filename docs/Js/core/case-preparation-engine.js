@@ -120,7 +120,8 @@
       const usable = sourceCases.filter(item =>
         item &&
         (item.id || item.case_id) &&
-        (item.primary_concept || item.concept || item.title)
+        (item.primary_concept || item.concept || item.title) &&
+        this.isPlayableCase(item)
       );
 
       if (usable.length < count) {
