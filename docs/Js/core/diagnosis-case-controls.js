@@ -52,6 +52,14 @@
     if (!original || global.__diagnosisCaseControlsInstalled) return;
     global.__diagnosisCaseControlsInstalled = true;
 
+    function plannedActions(caseData) {
+        const management = caseData?.management;
+        if (Array.isArray(management)) return management;
+        if (Array.isArray(management?.possible_actions)) return management.possible_actions;
+        if (Array.isArray(caseData?.possible_actions)) return caseData.possible_actions;
+        return [];
+    }
+
     global.DiagnosisEngine.prototype.processAction = async function (input) {
         if (likelyTreatment(input)) {
             const state = this.context || (this.context = {});
@@ -61,9 +69,7 @@
                 timestamp: Date.now()
             });
 
-            const planned = Array.isArray(this.currentCase?.management)
-                ? this.currentCase.management
-                : [];
+            const planned = plannedActions(this.currentCase);
 
             const best = planned
                 .map(item => ({ item, overlap: overlaps(input, item) }))
@@ -113,7 +119,7 @@
 
         const hypothesis = this.finalizeHypothesis?.() || null;
         const actions = Array.isArray(state.managementActions) ? state.managementActions : [];
-        const planned = Array.isArray(this.currentCase?.management) ? this.currentCase.management : [];
+        const planned = plannedActions(this.currentCase);
 
         const matchedActions = actions.filter(action =>
             planned.some(item => overlaps(action.text, item) >= 2)
