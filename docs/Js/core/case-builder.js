@@ -31,6 +31,18 @@
       clinicalTruth.risk_factors = clinicalTruth.risk_factors || history.risk_factors || source.risk_factors || [];
       clinicalTruth.differentials = clinicalTruth.differentials || source.differential || [];
       clinicalTruth.pain = clinicalTruth.pain || history.pain || source.pain || null;
+      if (global.SymptomCharacterization) {
+        var symptomCharacterization = new global.SymptomCharacterization().create({
+          source: Object.assign({}, history, {
+            pain: clinicalTruth.pain
+          })
+        });
+        clinicalTruth.symptom_characterization = symptomCharacterization;
+        clinicalTruth.symptom_characterization_meta = {
+          engine: "SymptomCharacterization",
+          pain_decalogue: symptomCharacterization.dor && new global.SymptomCharacterization().validatePain(symptomCharacterization.dor.pain || {}) || null
+        };
+      }
       var initialReasons = Array.isArray(source.presentation && source.presentation.initial_reasons_for_hospital) ? source.presentation.initial_reasons_for_hospital.slice() : (Array.isArray(source.initial_reasons_for_hospital) ? source.initial_reasons_for_hospital.slice() : []);
 
       var clinicalCase = {
