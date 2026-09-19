@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Diagnosys Gemini Conversation Response",
+  "type": "object",
+  "required": [
+    "ok",
+    "response"
+  ],
+  "properties": {
+    "ok": {
+      "const": true
+    },
+    "response": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}
