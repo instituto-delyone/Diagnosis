@@ -92,6 +92,17 @@
         "As complicações/prognóstico específicos não estão disponíveis na base local.";
 
       const evidence = this.engine.research?.evidence || [];
+      const gemini = this.engine.research?.gemini || null;
+      const geminiSections = Array.isArray(gemini?.sections) ? gemini.sections : [];
+      const geminiSectionHTML = geminiSections.length
+        ? geminiSections.map(section => {
+            const title = section?.title || section?.topic || "Seção";
+            const content = section?.content || "Sem conteúdo sustentado nesta seção.";
+            const confidence = section?.confidence ? " · confiança: " + section.confidence : "";
+            const source = section?.source_reference ? "<small>Fonte indicada: " + escapeHTML(section.source_reference) + "</small>" : "";
+            return '<div class="scientific-section"><h3>' + escapeHTML(title) + '</h3><p>' + escapeHTML(content) + '</p>' + source + '</div>';
+          }).join("")
+        : '<div class="scientific-empty">A síntese do Gemini ainda não foi recuperada nesta execução.</div>';
       const evidenceItems = evidence.slice(0, 8).map(item => {
         const result = item.result || {};
         const matches = Array.isArray(result.matches) ? result.matches : [];
@@ -184,6 +195,7 @@
             '<button type="button" class="science-tab" data-science-tab="diagnostic">Pontos diagnósticos</button>' +
             '<button type="button" class="science-tab" data-science-tab="exams">Exames e referências</button>' +
             '<button type="button" class="science-tab" data-science-tab="sources">Fontes</button>' +
+            '<button type="button" class="science-tab" data-science-tab="gemini">Gemini</button>' +
           '</div>' +
 
           '<div class="science-tab-panel active" data-science-panel="knowledge">' +
@@ -207,11 +219,23 @@
             '</div>' +
           '</div>' +
 
+          '<div class="science-tab-panel" data-science-panel="gemini">' +
+            '<div class="scientific-section"><h3>Síntese cognitiva — Gemini</h3>' +
+              '<p>O Gemini atua como camada de síntese. A verdade interna do caso permanece no motor clínico do Diagnosys.</p>' +
+              geminiSectionHTML +
+            '</div>' +
+          '</div>' +
+
           '<div class="science-tab-panel" data-science-panel="sources">' +
             '<div class="scientific-source-row">' +
               '<a class="scientific-source" href="https://www.msdmanuals.com/pt/profissional/" target="_blank" rel="noopener">Manual MSD — Profissionais ↗</a>' +
               '<a class="scientific-source" href="https://www.gov.br/saude/pt-br/assuntos/pcdt" target="_blank" rel="noopener">Ministério da Saúde — PCDT ↗</a>' +
             '</div>' +
+            '<div class="scientific-section"><h3>Status da síntese</h3><p>' +
+              (this.engine.research?.gemini_status === "ok"
+                ? "Gemini conectado e síntese recebida pelo Worker."
+                : "Gemini não retornou uma síntese válida nesta execução.") +
+              '</p></div>' +
             (evidenceItems
               ? '<div class="scientific-section"><h3>Evidências localizadas nesta execução</h3>' + evidenceItems + '</div>'
               : '<div class="scientific-empty">Nenhuma evidência externa foi recuperada nesta execução.</div>') +
