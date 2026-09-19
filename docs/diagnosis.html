@@ -833,6 +833,88 @@
         }
 
 
+        .gemini-diagnostic {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .gemini-diag-row {
+            display: grid;
+            grid-template-columns: 12px 118px 1fr;
+            gap: 8px;
+            align-items: start;
+            padding: 8px 9px;
+            border-radius: 9px;
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255,255,255,0.05);
+            font-size: 11px;
+        }
+
+        .gemini-diag-dot {
+            width: 9px;
+            height: 9px;
+            margin-top: 3px;
+            border-radius: 50%;
+            background: var(--muted);
+        }
+
+        .gemini-diag-dot.ok {
+            background: var(--success);
+            box-shadow: 0 0 10px rgba(52,211,153,.35);
+        }
+
+        .gemini-diag-dot.bad {
+            background: var(--danger);
+            box-shadow: 0 0 10px rgba(251,113,133,.3);
+        }
+
+        .gemini-diag-label {
+            font-weight: 800;
+        }
+
+        .gemini-diag-detail {
+            color: var(--muted);
+            line-height: 1.45;
+            word-break: break-word;
+        }
+
+        .gemini-diag-success,
+        .gemini-diag-error {
+            padding: 10px;
+            border-radius: 9px;
+            line-height: 1.5;
+            font-size: 11px;
+        }
+
+        .gemini-diag-success {
+            color: #b9f7dc;
+            background: rgba(52,211,153,.07);
+            border: 1px solid rgba(52,211,153,.2);
+        }
+
+        .gemini-diag-error {
+            color: #ffd9df;
+            background: rgba(251,113,133,.07);
+            border: 1px solid rgba(251,113,133,.2);
+        }
+
+        .gemini-diag-meta {
+            color: var(--muted);
+            font-size: 10px;
+            line-height: 1.45;
+            word-break: break-all;
+        }
+
+        @media (max-width: 700px) {
+            .gemini-diag-row {
+                grid-template-columns: 12px 1fr;
+            }
+            .gemini-diag-detail {
+                grid-column: 2;
+            }
+        }
+
         .btn-warning {
             border: 1px solid rgba(255, 196, 92, 0.55);
             background: rgba(255, 178, 66, 0.12);
@@ -1453,6 +1535,29 @@
 
 
             <div id="caseResult" class="case-result case-result-hidden" aria-live="polite"></div>
+
+
+            <div class="side-section">
+
+                <div class="side-title">
+                    🧪 Diagnóstico do Gemini
+                </div>
+
+                <div class="gemini-diagnostic">
+                    <button id="geminiTest" class="btn btn-primary" type="button">
+                        🧪 TESTAR GEMINI
+                    </button>
+
+                    <div id="geminiDiagnostic" aria-live="polite">
+                        <div class="gemini-diag-row">
+                            <span class="gemini-diag-dot"></span>
+                            <span class="gemini-diag-label">Status</span>
+                            <span class="gemini-diag-detail">Clique para testar Frontend → Provider → Worker → Gemini API → JSON.</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
 
             <div class="side-section">
