@@ -653,15 +653,67 @@
                 return;
             }
 
-            if (/^(diagnostico|minha hipotese|suspeito|penso em)/.test(n)) {
+            if (/^(diagnostico|minha hipotese|suspeito|penso em)/.test(n) || /\b(e uma possivel causa|e uma possibilidade|pode ser|poderia ser|uma causa possivel|hipotese)\b/.test(n)) {
                 this.log("SISTEMA", "Hipótese registrada. Continue a investigação ou conduza o manejo conforme o estado clínico.");
                 this.context.phase = "diagnosis";
                 return;
             }
 
+            if (global.DiagnosysGeminiConversationProvider) {
+                try {
+                    const response = await this.converseWithPatient(input);
+                    if (response) {
+                        this.context.time += 1;
+                        this.syncCompatibilityState();
+                        this.log("PACIENTE", response);
+                        this.renderState();
+                        return;
+                    }
+                } catch (error) {
+                    console.warn("Conversa Gemini indisponível; mantendo fallback local:", error);
+                }
+            }
+
             this.context.errors += 1;
             this.syncCompatibilityState();
             this.log("SISTEMA", "Não encontrei uma ação clínica específica para essa frase. Tente perguntar sobre história, exame físico ou solicitar um exame disponível.");
+        }
+
+        async converseWithPatient(question) {
+            const c = this.currentCase || {};
+            const revealed = {};
+            const catalog = Array.isArray(c.investigations?.catalog) ? c.investigations.catalog : [];
+            for (const item of catalog) {
+                const id = item?.id;
+                if (id && this.context?.revealed?.has(id)) {
+                    revealed[id] = {
+                        name: item.name || item.exam || id,
+                        result: item.result,
+                        interpretation: item.interpretation || null
+                    };
+                }
+            }
+
+            const provider = new global.DiagnosysGeminiConversationProvider({
+                endpoint: CONFIG.geminiWorkerUrl.replace("/api/gemini/research", "/api/gemini/conversation")
+            });
+
+            const visibleCase = {
+                case_id: c.case_id || c.id || null,
+                patient: c.patient || {},
+                presentation: c.presentation || {},
+                history: c.history || {},
+                physical_exam: c.physical_exam || {},
+                revealed_investigations: revealed,
+                conversation: (this.context.history || []).slice(-10)
+            };
+
+            const response = await provider.respond({
+                question,
+                case: visibleCase
+            });
+
+            return response?.response || response?.result?.response || "";
         }
 
         hypothesisSimilarity(text) {
@@ -824,6 +876,10 @@
 
             if (/idade|quantos anos/.test(n)) return `Tenho ${this.currentCase.patient?.age ?? "idade não informada"} anos.`;
             if (/sexo|homem|mulher/.test(n)) return `Sou ${this.sexLabel(this.currentCase.patient?.sex).toLowerCase()}.`;
+            if (/ha quanto tempo|quanto tempo|desde quando|quando comecou|inicio dos sintomas|comecaram/.test(n)) {
+                const duration = h.duration || h.onset || h.time_course || h.tempo_evolucao;
+                if (duration) return `Os sintomas começaram há ${Array.isArray(duration) ? duration.join(", ") : duration}.`;
+            }
             if (/exame fisico|exame clinico|ao exame/.test(n)) return this.formatExam(pe);
 
             const termMap = [
