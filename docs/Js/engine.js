@@ -421,6 +421,8 @@
                 hypothesisInput: document.getElementById("hypothesisInput"),
                 hypothesisSubmit: document.getElementById("hypothesisSubmit"),
                 hypothesisStatus: document.getElementById("hypothesisStatus"),
+                geminiTest: document.getElementById("geminiTest"),
+                geminiDiagnostic: document.getElementById("geminiDiagnostic"),
                 fc: document.getElementById("fc"),
                 rr: document.getElementById("rr"),
                 spo2: document.getElementById("spo2"),
@@ -440,6 +442,7 @@
             // Scientific Base owns its own button listener; keeping a single owner avoids duplicate research calls.
             this.elements.hint?.addEventListener("click", () => this.showHint());
             this.elements.hypothesisSubmit?.addEventListener("click", () => this.submitHypothesis());
+            this.elements.geminiTest?.addEventListener("click", () => this.testGeminiConnection());
             this.elements.hypothesisInput?.addEventListener("keydown", event => {
                 if (event.key === "Enter") {
                     event.preventDefault();
@@ -672,13 +675,134 @@
                         return;
                     }
                 } catch (error) {
+                    const detail = error instanceof Error ? error.message : String(error);
                     console.warn("Conversa Gemini indisponível; mantendo fallback local:", error);
+                    this.log("GEMINI", "Falha na conversa: " + detail);
                 }
             }
 
             this.context.errors += 1;
             this.syncCompatibilityState();
             this.log("SISTEMA", "Não encontrei uma ação clínica específica para essa frase. Tente perguntar sobre história, exame físico ou solicitar um exame disponível.");
+        }
+
+        async testGeminiConnection() {
+            const root = this.elements.geminiDiagnostic;
+            const button = this.elements.geminiTest;
+            const endpoint = CONFIG.geminiWorkerUrl.replace("/api/gemini/research", "/api/gemini/conversation");
+            const startedAt = performance.now();
+
+            const render = (html) => {
+                if (root) root.innerHTML = html;
+            };
+            const row = (ok, label, detail) =>
+                '<div class="gemini-diag-row">' +
+                    '<span class="gemini-diag-dot ' + (ok ? "ok" : "bad") + '"></span>' +
+                    '<span class="gemini-diag-label">' + escapeHTML(label) + '</span>' +
+                    '<span class="gemini-diag-detail">' + escapeHTML(detail || "") + '</span>' +
+                '</div>';
+
+            if (button) button.disabled = true;
+            render(row(true, "Frontend", "teste iniciado") + row(!!global.DiagnosysGeminiConversationProvider, "Provider", global.DiagnosysGeminiConversationProvider ? "carregado" : "não carregado"));
+
+            let workerOk = false;
+            let workerDetail = "não verificado";
+            let workerMeta = null;
+
+            try {
+                const healthResponse = await fetch(endpoint.replace("/api/gemini/conversation", "/"), {
+                    method: "GET",
+                    headers: { "Accept": "application/json" },
+                    cache: "no-store"
+                });
+                const healthText = await healthResponse.text();
+                let healthData = null;
+                try { healthData = JSON.parse(healthText); } catch {}
+                workerOk = healthResponse.ok && healthData?.ok === true;
+                workerMeta = healthData;
+                workerDetail = workerOk
+                    ? "HTTP " + healthResponse.status + " · " + (healthData?.service || "Worker ativo")
+                    : "HTTP " + healthResponse.status + " · " + (healthData?.error || "resposta inválida");
+            } catch (error) {
+                workerDetail = error instanceof Error ? error.message : String(error);
+            }
+
+            if (!global.DiagnosysGeminiConversationProvider) {
+                render(
+                    row(true, "Frontend", "botão executado") +
+                    row(false, "Provider", "classe não carregada") +
+                    row(workerOk, "Cloudflare Worker", workerDetail) +
+                    row(false, "Gemini API", "não testada") +
+                    row(false, "JSON", "não testado")
+                );
+                if (button) button.disabled = false;
+                return;
+            }
+
+            let apiOk = false;
+            let jsonOk = false;
+            let apiDetail = "não verificado";
+            let jsonDetail = "não verificado";
+
+            try {
+                const provider = new global.DiagnosysGeminiConversationProvider({
+                    endpoint,
+                    timeoutMs: 30000
+                });
+
+                const response = await provider.respond({
+                    question: "Responda exatamente GEMINI_OK",
+                    case: {
+                        case_id: "gemini_diagnostic",
+                        patient: { age: 40, sex: "masculino" },
+                        presentation: { chief_complaint: "teste de conectividade", initial_narrative: "Teste técnico do Diagnosys." },
+                        history: {},
+                        symptom_characterization: {},
+                        clinical_symptoms: {},
+                        risk_factors: [],
+                        physical_exam: {},
+                        revealed_investigations: {},
+                        monitoring: { active: false, alerts: [] },
+                        care_mode: "diagnostic",
+                        conversation: []
+                    }
+                });
+
+                apiOk = response?.ok === true && typeof response?.response === "string";
+                jsonOk = apiOk && response.response.trim().length > 0;
+                apiDetail = apiOk
+                    ? "resposta recebida · " + (response.model || workerMeta?.model_default || "modelo informado pelo Worker")
+                    : "Worker respondeu sem contrato válido";
+                jsonDetail = jsonOk
+                    ? "contrato de conversa válido · resposta: " + response.response.trim().slice(0, 80)
+                    : "resposta ausente ou inválida";
+
+                render(
+                    row(true, "Frontend", "botão executado") +
+                    row(true, "Provider", "classe carregada") +
+                    row(workerOk, "Cloudflare Worker", workerDetail) +
+                    row(apiOk, "Gemini API", apiDetail) +
+                    row(jsonOk, "JSON", jsonDetail) +
+                    '<div class="gemini-diag-success">🟢 GEMINI_OK · ' + escapeHTML(response.response.trim()) + '</div>' +
+                    '<div class="gemini-diag-meta">Endpoint: ' + escapeHTML(endpoint) + ' · Latência: ' + Math.round(performance.now() - startedAt) + ' ms</div>'
+                );
+
+                this.log("GEMINI", "Diagnóstico concluído: conexão Gemini operacional.");
+            } catch (error) {
+                const detail = error instanceof Error ? error.message : String(error);
+                render(
+                    row(true, "Frontend", "botão executado") +
+                    row(true, "Provider", "classe carregada") +
+                    row(workerOk, "Cloudflare Worker", workerDetail) +
+                    row(false, "Gemini API", detail) +
+                    row(false, "JSON", "não validado") +
+                    '<div class="gemini-diag-error">🔴 Falha detectada: ' + escapeHTML(detail) + '</div>' +
+                    '<div class="gemini-diag-meta">Endpoint: ' + escapeHTML(endpoint) + ' · Latência: ' + Math.round(performance.now() - startedAt) + ' ms</div>'
+                );
+                this.log("GEMINI", "Diagnóstico falhou: " + detail);
+            } finally {
+                if (button) button.disabled = false;
+            }
         }
 
         async converseWithPatient(question) {
