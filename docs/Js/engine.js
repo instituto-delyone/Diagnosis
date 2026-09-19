@@ -700,13 +700,19 @@
                 endpoint: CONFIG.geminiWorkerUrl.replace("/api/gemini/research", "/api/gemini/conversation")
             });
 
+            const truth = c.clinical_truth || {};
             const visibleCase = {
                 case_id: c.case_id || c.id || null,
                 patient: c.patient || {},
                 presentation: c.presentation || {},
                 history: c.history || {},
+                symptom_characterization: truth.symptom_characterization || {},
+                clinical_symptoms: truth.symptoms || {},
+                risk_factors: truth.risk_factors || [],
                 physical_exam: c.physical_exam || {},
                 revealed_investigations: revealed,
+                monitoring: this.context?.clinicalFlow?.monitoring || { active: false, alerts: [] },
+                care_mode: c.initial_state?.care_mode || null,
                 conversation: (this.context.history || []).slice(-10)
             };
 
