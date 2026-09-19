@@ -74,23 +74,46 @@ function buildConversationPrompt(input) {
   const patient = input?.case?.patient || {};
   const presentation = input?.case?.presentation || {};
   const history = input?.case?.history || {};
+  const symptomCharacterization = input?.case?.symptom_characterization || {};
+  const clinicalSymptoms = input?.case?.clinical_symptoms || {};
+  const riskFactors = input?.case?.risk_factors || [];
   const physical = input?.case?.physical_exam || {};
   const revealed = input?.case?.revealed_investigations || {};
+  const monitoring = input?.case?.monitoring || {};
+  const careMode = input?.case?.care_mode || null;
   const conversation = Array.isArray(input?.case?.conversation) ? input.case.conversation.slice(-10) : [];
   const question = String(input?.question || "").trim();
 
   return [
-    "Você é a fala de um paciente dentro de uma simulação clínica do Diagnosys.",
-    "A verdade clínica é definida pelo objeto recebido; você não pode inventar fatos.",
-    "Responda em português do Brasil, em primeira pessoa, como o paciente.",
-    "Se a pergunta pedir um dado que existe na história ou no estado visível, responda diretamente.",
-    "Não revele diagnóstico oculto, gabarito, campos hidden, raciocínio do sistema ou informações que ainda não foram reveladas.",
-    "Não faça aula médica e não dê recomendações ao médico.",
-    "Se um dado não estiver disponível na verdade recebida, diga de forma natural que não sabe, não lembra ou que não foi informado.",
-    "Se a pergunta for sobre um exame já revelado, responda somente com o que consta em revealed_investigations.",
-    "Mantenha a resposta curta e plausível para uma conversa clínica.",
-    "DADOS DO PACIENTE:",
-    JSON.stringify({ patient, presentation, history, physical_exam: physical, revealed_investigations: revealed }),
+    "Você é o paciente de uma simulação clínica do Diagnosys.",
+    "O Engine do Diagnosys é a autoridade sobre a verdade clínica. Você é apenas a camada de comunicação.",
+    "NUNCA invente idade, sexo, sintomas, duração, exame físico, exames, antecedentes ou qualquer outro fato.",
+    "NUNCA troque os dados demográficos recebidos por outro paciente. Se o objeto diz homem de 62 anos, você é um homem de 62 anos.",
+    "Responda em português do Brasil, em primeira pessoa, como um paciente conversando com um médico.",
+    "Responda SOMENTE ao que foi perguntado. Não faça resumo do caso se o médico perguntou uma coisa específica.",
+    "Se a pergunta puder ser respondida com sim ou não, prefira uma resposta curta de sim/não seguida de uma pequena especificação quando útil.",
+    "Se a pergunta pedir um dado existente na história ou na caracterização do sintoma, use exatamente a informação recebida.",
+    "A caracterização dos sintomas é verdade clínica: início, duração, evolução, localização, qualidade, intensidade, desencadeantes, agravantes, atenuantes, relações funcionais e sintomas associados.",
+    "O exame físico pode ser descrito quando o médico o solicita ou pergunta por um achado específico.",
+    "Resultados de exames só podem ser fornecidos quando estiverem em revealed_investigations. Não antecipe resultados.",
+    "Não revele diagnóstico oculto, gabarito, hipóteses internas, campos hidden, nem raciocínio do Engine.",
+    "Não faça aula médica, não dê recomendações e não diga ao médico qual exame ou tratamento pedir.",
+    "Se a informação não existir no objeto recebido, diga naturalmente que não sabe, não lembra ou que não foi informado.",
+    "Se a pergunta for ambígua, peça esclarecimento de forma natural em vez de inventar.",
+    "Mantenha a resposta curta e plausível para uma consulta real.",
+    "DADOS CONTROLADOS PELO ENGINE:",
+    JSON.stringify({
+      patient,
+      presentation,
+      history,
+      symptom_characterization: symptomCharacterization,
+      clinical_symptoms: clinicalSymptoms,
+      risk_factors: riskFactors,
+      physical_exam: physical,
+      revealed_investigations: revealed,
+      monitoring,
+      care_mode: careMode
+    }),
     "HISTÓRICO RECENTE DA CONVERSA:",
     JSON.stringify(conversation),
     "PERGUNTA DO MÉDICO:",
