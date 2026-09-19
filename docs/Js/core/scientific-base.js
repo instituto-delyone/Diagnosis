@@ -42,7 +42,8 @@
       this.root.classList.remove("scientific-base-hidden");
       document.body.classList.add("scientific-base-open");
 
-      if (!this.engine.research && typeof this.engine.researchOnDemand === "function") {
+      if ((!this.engine.research || !this.engine.research.gemini_status) &&
+          typeof this.engine.researchOnDemand === "function") {
         await this.engine.researchOnDemand("Base científica solicitada pelo médico.");
       }
 
