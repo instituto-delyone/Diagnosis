@@ -185,7 +185,11 @@
       }
 
       this.validate(clinicalCase);
-      onStatus?.("caso " + (index + 1), "pronto", "caso validado");
+      if (clinicalCase.clinical_truth?.conversation_ready !== true) {
+        throw new Error("Caso " + (sourceCase.id || index) + " ainda não possui verdade clínica conversacional completa.");
+      }
+      onStatus?.("caso " + (index + 1), "memória clínica", "história · sintomas · exame · exames · manejo prontos");
+      onStatus?.("caso " + (index + 1), "pronto", "caso pesquisado, construído e validado");
       return clinicalCase;
     }
 
