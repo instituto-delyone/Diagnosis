@@ -1,0 +1,6 @@
+{
+  "schema":"Diagnosis/ECG/tests/fixtures","version":"0.1.0","source":{"document":"Medeletro","type":"source_derived"},
+  "paper":[{"speed":25,"gain":"N","one_small_square_ms":40,"one_mm_mV":0.1},{"speed":50,"gain":"N","one_small_square_ms":20,"one_mm_mV":0.1}],
+  "rate":[{"method":"1500","rr_small_squares":25,"expected_bpm":60},{"method":"300","rr_large_squares":5,"expected_bpm":60},{"method":"3_seconds","r_count":4,"expected_bpm":80}],
+  "normality":[{"feature":"PR","duration_ms":160,"expected":"within_source_range"},{"feature":"QRS","duration_ms":90,"expected":"within_preferred_source_range"},{"feature":"QTc","duration_ms":420,"expected":"not_above_source_upper_limit"}]
+}
