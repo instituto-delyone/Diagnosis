@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ECG Sinusal Estático</title>
+<style>
+  :root{--bg:#07111f;--panel:#0b1724;--grid:#183247;--grid2:#102536;--trace:#34d399;--text:#e8f0f7;--muted:#8fa7ba}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:var(--bg);color:var(--text);font:15px system-ui,-apple-system,sans-serif}
+  .card{width:min(1000px,100%);background:var(--panel);border:1px solid #1d3a52;border-radius:16px;overflow:hidden}
+  header{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid #183247}
+  h1{font-size:15px;margin:0;letter-spacing:.08em;text-transform:uppercase}
+  .live{color:var(--trace);font-weight:800;font-size:12px}
+  .ecg{padding:18px;background:#061019}
+  svg{display:block;width:100%;height:300px;background-image:linear-gradient(var(--grid2) 1px,transparent 1px),linear-gradient(90deg,var(--grid2) 1px,transparent 1px),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:8px 8px,8px 8px,40px 40px,40px 40px}
+  path{fill:none;stroke:var(--trace);stroke-width:3;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 5px rgba(52,211,153,.55))}
+  footer{display:flex;justify-content:space-between;padding:11px 18px;color:var(--muted);font-size:11px}
+</style>
+</head>
+<body>
+<main class="card">
+  <header>
+    <h1>Monitor cardiorrespiratório · ECG</h1>
+    <div class="live">● SINUSAL · 75 BPM</div>
+  </header>
+
+  <div class="ecg">
+    <svg viewBox="0 0 1200 300" preserveAspectRatio="none" aria-label="ECG sinusal estático">
+      <path d="
+        M 0 150
+        L 55 150
+        C 65 150 72 145 78 138
+        C 84 131 90 138 96 150
+        L 132 150
+        L 138 154
+        L 144 146
+        L 151 155
+        L 158 55
+        L 166 215
+        L 173 150
+        L 210 150
+        C 235 150 250 145 270 140
+        C 290 135 310 138 330 150
+        L 390 150
+
+        L 445 150
+        C 455 150 462 145 468 138
+        C 474 131 480 138 486 150
+        L 522 150
+        L 528 154
+        L 534 146
+        L 541 155
+        L 548 55
+        L 556 215
+        L 563 150
+        L 600 150
+        C 625 150 640 145 660 140
+        C 680 135 700 138 720 150
+        L 780 150
+
+        L 835 150
+        C 845 150 852 145 858 138
+        C 864 131 870 138 876 150
+        L 912 150
+        L 918 154
+        L 924 146
+        L 931 155
+        L 938 55
+        L 946 215
+        L 953 150
+        L 990 150
+        C 1015 150 1030 145 1050 140
+        C 1070 135 1090 138 1110 150
+        L 1200 150
+      "/>
+    </svg>
+  </div>
+
+  <footer>
+    <span>Traçado estático · referência visual</span>
+    <span>25 mm/s · 4 quadrados grandes · FC ≈ 75 bpm</span>
+  </footer>
+</main>
+</body>
+</html>
