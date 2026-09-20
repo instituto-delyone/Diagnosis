@@ -2012,7 +2012,15 @@
             
             engine.startNewCase = async function () {
                 engine.finalizeHypothesis?.();
-                await prepareCases(engine, true);
+                overlay.classList.remove("prep-hidden");
+                document.body.classList.add("preparing");
+                statusRoot.innerHTML = "";
+                cardsRoot.innerHTML = "";
+                cardsRoot.classList.add("prep-hidden");
+                errorRoot.classList.add("prep-hidden");
+                specialtyRoot?.classList.remove("prep-hidden");
+                subtitle.textContent = "Escolha o foco do próximo caso clínico.";
+                engine.__casePreparationReady = false;
             };
         } catch (error) {
             engine.startNewCase = originalStartNewCase;
