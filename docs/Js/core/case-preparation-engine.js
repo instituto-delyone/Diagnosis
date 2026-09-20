@@ -106,7 +106,44 @@
       }) || null;
     }
 
-    chooseSourceCases(count = 3) {
+    specialtyFromCase(item) {
+      const source = normalize(item?.kb_source || "");
+      const explicit = normalize(item?.specialty || item?.especialidade || item?.metadata?.specialty || "");
+      const text = normalize([
+        explicit,
+        item?.primary_concept,
+        item?.concept,
+        item?.title,
+        item?.hidden?.diagnosis
+      ].filter(Boolean).join(" | "));
+
+      if (/(cardiologia|cardiopatias|cardiologia)/.test(source) || /\b(cardiolog|infarto|iam|stemi|angina|arritmia|bloqueio atrioventricular|insuficiencia cardiaca|fibrilacao atrial|hipertensao)\b/.test(text)) return "cardiologia";
+      if (/endocrinologia/.test(source) || /\b(endocrin|diabetes|tireoide|hipotireoid|hipertireoid|dislipidemia|hipofise|adrenal)\b/.test(text)) return "endocrinologia";
+      if (/pneumologia|dispneia/.test(source) || /\b(pneumolog|asma|dpoc|pneumonia|dispneia|embolia pulmonar)\b/.test(text)) return "pneumologia";
+      if (/neurologia/.test(source) || /\b(neurolog|epileps|avc|demencia|cefaleia|meningite)\b/.test(text)) return "neurologia";
+      if (/reumatologia/.test(source) || /\b(reumatolog|artrite|lupus|vasculite|gota)\b/.test(text)) return "reumatologia";
+      if (/cirurgia/.test(source) || /\b(cirurg|apendic|colecist|hernia|abdome agudo)\b/.test(text)) return "cirurgia";
+      if (/anemia|hematologia/.test(source) || /\b(hematolog|anemia|hemolise|leucemia|linfoma)\b/.test(text)) return "hematologia";
+      if (/hipertensao/.test(source) || /\b(hipertensao arterial)\b/.test(text)) return "clinica_medica";
+      return "clinica_medica";
+    }
+
+    specialtyLabel(value) {
+      const labels = {
+        todos: "Todas as especialidades",
+        cardiologia: "Cardiologia",
+        endocrinologia: "Endocrinologia",
+        pneumologia: "Pneumologia",
+        neurologia: "Neurologia",
+        reumatologia: "Reumatologia",
+        cirurgia: "Cirurgia",
+        hematologia: "Hematologia",
+        clinica_medica: "Clínica médica"
+      };
+      return labels[value] || value || "Todas as especialidades";
+    }
+
+    chooseSourceCases(count = 3, specialty = "todos") {
       const sourceCases = Array.isArray(this.engine?.library?.cases)
         ? this.engine.library.cases
         : [];
@@ -117,11 +154,13 @@
        * O catálogo é enriquecimento/validação auxiliar; a fonte real de
        * seleção é o universo clínico carregado pelo CaseLibrary.
        */
+      const normalizedSpecialty = normalize(specialty || "todos").replace(/ /g, "_");
       const usable = sourceCases.filter(item =>
         item &&
         (item.id || item.case_id) &&
         (item.primary_concept || item.concept || item.title) &&
-        this.isPlayableCase(item)
+        this.isPlayableCase(item) &&
+        (normalizedSpecialty === "todos" || this.specialtyFromCase(item) === normalizedSpecialty)
       );
 
       if (usable.length < count) {
@@ -134,6 +173,8 @@
 
       return shuffle(usable).slice(0, count).map(item => {
         const copy = clone(item);
+        copy.specialty = this.specialtyFromCase(copy);
+        copy.specialty_label = this.specialtyLabel(copy.specialty);
         const catalogEntry = this.catalogEntryFor(copy);
         copy.catalog_context = catalogEntry
           ? {
@@ -257,10 +298,11 @@
       };
     }
 
-    async prepare(count = 3, onStatus) {
+    async prepare(count = 3, onStatus, specialty = "todos") {
       this.preparedCases = [];
       await this.loadMasterCatalog(onStatus);
-      const sourceCases = this.chooseSourceCases(count);
+      const normalizedSpecialty = normalize(specialty || "todos").replace(/ /g, "_");
+      const sourceCases = this.chooseSourceCases(count, normalizedSpecialty);
 
       const builtCases = await Promise.all(
         sourceCases.map((sourceCase, index) => this.researchAndBuild(sourceCase, index, onStatus))
@@ -269,7 +311,12 @@
       this.preparedCases = builtCases.map((built, index) => this.cardData(built, index));
 
       if (this.preparedCases.length !== count) {
-        throw new Error("Não foi possível preparar " + count + " casos clínicos completos.");
+        throw new Error(
+          "Não foi possível preparar " + count + " casos clínicos completos para " +
+          this.specialtyLabel(normalizedSpecialty) + ". A base carregada possui " +
+          this.chooseSourceCases(Math.min(9999, Number.MAX_SAFE_INTEGER), normalizedSpecialty).length +
+          " caso(s) elegível(is) nessa área."
+        );
       }
 
       return this.preparedCases;
