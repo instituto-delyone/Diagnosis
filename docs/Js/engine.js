@@ -597,13 +597,18 @@
             const patient = c.patient || {};
             const p = c.presentation || {};
             const vitals = p.vitals || {};
+            const rawHeartRate = vitals.HR || vitals.fc || c.vitals?.HR || c.vitals?.fc;
+            const rawRhythm = vitals.rhythm || vitals.ritmo || c.vitals?.rhythm || c.vitals?.ritmo;
+            const heartRate = rawHeartRate || "72 bpm";
+            const rhythm = rawRhythm || "sinusal";
             const age = patient.age != null ? `${patient.age} anos` : "idade não informada";
             const sex = this.sexLabel(patient.sex);
 
             this.setText("caseTitle", "Novo paciente");
             this.setText("difficultyLabel", c.difficulty || "Simulação clínica");
             this.setText("caseIntro", p.initial_narrative || this.composeNarrative(c));
-            this.setText("fc", vitals.HR || vitals.fc || "--");
+            this.setText("fc", heartRate);
+            this.setText("rhythm", rhythm);
             this.setText("rr", vitals.RR || vitals.fr || "--");
             this.setText("spo2", vitals.SpO2 || vitals.spo2 || "--");
             this.setText("pa", vitals.BP || vitals.pa || "--");
