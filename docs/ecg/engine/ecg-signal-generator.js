@@ -1,4 +1,13 @@
-import simulation from "../model/ecg_simulation_parameters.json" with { type: "json" };
+const SIMULATION_DEFAULTS = {
+  sample_rate_hz: 500,
+  cycle: {
+    p: { center_ms: 110, width_ms: 90, amplitude_mV: 0.15 },
+    qrs: { center_ms: 190, width_ms: 90, amplitude_mV: 1.0 },
+    t: { center_ms: 330, width_ms: 150, amplitude_mV: 0.3 },
+    u: { center_ms: 420, width_ms: 60, amplitude_mV: 0.05 }
+  },
+  baseline_mV: 0
+};
 
 function gaussian(t, center, width, amplitude) {
   const sigma = width / 2.355;
@@ -17,14 +26,14 @@ export function generateSinusCycle(options = {}) {
   if (!Number.isFinite(heartRate) || heartRate <= 0) throw new Error("heartRate must be positive");
 
   const cycleMs = 60000 / heartRate;
-  const sampleRate = Number(options.sampleRateHz ?? simulation.default.sample_rate_hz);
+  const sampleRate = Number(options.sampleRateHz ?? SIMULATION_DEFAULTS.sample_rate_hz);
   const dt = 1000 / sampleRate;
-  const params = simulation.default.cycle;
+  const params = SIMULATION_DEFAULTS.cycle;
   const points = [];
 
   for (let t = 0; t < cycleMs; t += dt) {
     const value =
-      simulation.default.baseline_mV +
+      SIMULATION_DEFAULTS.baseline_mV +
       gaussian(t, params.p.center_ms, params.p.width_ms, params.p.amplitude_mV) +
       qrsShape(t, {
         center: params.qrs.center_ms,
