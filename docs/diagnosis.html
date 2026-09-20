@@ -1397,6 +1397,15 @@
                     </button>
 
                     <button
+                        id="conversationLogDownload"
+                        class="btn"
+                        type="button"
+                        title="Baixar o registro estruturado desta sessão"
+                    >
+                        💾 Baixar log
+                    </button>
+
+                    <button
                         id="backBtn"
                         class="btn"
                         type="button"
@@ -1616,6 +1625,7 @@
 <script src="Js/core/possibility-engine.js"></script>
 <script src="Js/core/patient-generator.js"></script>
 <script src="Js/clinical/clinical-interlocutor.js"></script>
+<script src="conversation/conversation-logger.js"></script>
 <script src="Js/engine.js"></script>
 <script src="Js/core/case-preparation-engine.js"></script>
 
@@ -1696,6 +1706,7 @@
         engine.pendingResearch = false;
         engine.pendingClinicalChallenge = null;
         engine.currentCase = c;
+        engine.startConversationSession?.(c);
         engine.patientState = engine.createPatientState(c);
         engine.renderInitialCase();
         engine.log("SISTEMA", "Caso clínico preparado e selecionado. O diagnóstico permanece oculto.");
