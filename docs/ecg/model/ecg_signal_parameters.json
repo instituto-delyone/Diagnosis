@@ -1,0 +1,5 @@
+{
+  "schema":"Diagnosis/ECG/model/ecg_signal_parameters","version":"0.1.0",
+  "defaults":{"paper_speed_mm_s":25,"gain":"N"},
+  "conversion":{"at_25_mm_s":{"1_mm_time_ms":40,"5_mm_time_ms":200},"at_50_mm_s":{"1_mm_time_ms":20,"5_mm_time_ms":100},"at_N":{"1_mm_amplitude_mV":0.1,"5_mm_amplitude_mV":0.5,"10_mm_amplitude_mV":1}}
+}
