@@ -325,6 +325,7 @@
             this.errors = 0;
             this.hints = 0;
             this.time = 0;
+            this.conversationLogger = null;
             this.context = this.createContext();
         }
 
@@ -365,6 +366,7 @@
             await this.loadResearchRules();
             await this.loadPCDTCatalog();
             await this.loadReferenceRanges();
+            this.conversationLogger?.logEvent("engine_booted", { room: this.room });
             await this.startNewCase();
         }
 
@@ -376,6 +378,10 @@
             try { await loadScript("Js/core/reference-range-resolver.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/gemini-research-provider.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/gemini-conversation-provider.js"); } catch (e) { console.warn(e); }
+            try { await loadScript("conversation/conversation-logger.js"); } catch (e) { console.warn(e); }
+            if (global.AuroraConversationLogger) {
+                this.conversationLogger = new global.AuroraConversationLogger({ application: "Diagnosys" });
+            }
         }
 
         async loadResearchRules() {
@@ -423,6 +429,7 @@
                 hypothesisStatus: document.getElementById("hypothesisStatus"),
                 geminiTest: document.getElementById("geminiTest"),
                 geminiDiagnostic: document.getElementById("geminiDiagnostic"),
+                conversationLogDownload: document.getElementById("conversationLogDownload"),
                 fc: document.getElementById("fc"),
                 rr: document.getElementById("rr"),
                 spo2: document.getElementById("spo2"),
@@ -443,6 +450,7 @@
             this.elements.hint?.addEventListener("click", () => this.showHint());
             this.elements.hypothesisSubmit?.addEventListener("click", () => this.submitHypothesis());
             this.elements.geminiTest?.addEventListener("click", () => this.testGeminiConnection());
+            this.elements.conversationLogDownload?.addEventListener("click", () => this.downloadConversationLog());
             this.elements.hypothesisInput?.addEventListener("keydown", event => {
                 if (event.key === "Enter") {
                     event.preventDefault();
@@ -626,19 +634,23 @@
             if (!input) return;
             this.elements.input.value = "";
             this.log("MÉDICO", input);
+            this.conversationLogger?.logEvent("action_submitted", { phase: this.context?.phase || null });
             await this.processAction(input);
         }
 
         async processAction(input) {
             const n = normalize(input);
             this.context.history.push(input);
+            this.conversationLogger?.logEvent("action_processing_started", { phase: this.context?.phase || null });
 
             if (/^(base cientifica|pesquisa|busca cientifica|buscar evidencia|procure na literatura)/.test(n)) {
+                this.conversationLogger?.logEvent("intent_detected", { intent: "scientific_research" });
                 await this.researchOnDemand(input);
                 return;
             }
 
             if (this.isReferenceQuestion(n)) {
+                this.conversationLogger?.logEvent("intent_detected", { intent: "reference_question" });
                 this.answerReferenceQuestion(input);
                 return;
             }
@@ -649,16 +661,19 @@
                 this.syncCompatibilityState();
                 this.log("PACIENTE", physicalAnswer);
                 this.renderState();
+                this.conversationLogger?.logEvent("local_patient_response", { source: "local_patient_state" });
                 return;
             }
 
             const exam = this.matchInvestigation(input);
             if (exam) {
+                this.conversationLogger?.logEvent("intent_detected", { intent: "investigation", investigation: exam.name });
                 this.revealInvestigation(exam);
                 return;
             }
 
             if (/^(diagnostico|minha hipotese|suspeito|penso em)/.test(n) || /\b(e uma possivel causa|e uma possibilidade|pode ser|poderia ser|uma causa possivel|hipotese)\b/.test(n)) {
+                this.conversationLogger?.logEvent("intent_detected", { intent: "diagnostic_hypothesis" });
                 this.log("SISTEMA", "Hipótese registrada. Continue a investigação ou conduza o manejo conforme o estado clínico.");
                 this.context.phase = "diagnosis";
                 return;
@@ -666,11 +681,14 @@
 
             if (global.DiagnosysGeminiConversationProvider) {
                 try {
+                    const providerStartedAt = performance.now();
+                    this.conversationLogger?.logEvent("provider_call", { provider: "gemini_conversation" });
                     const response = await this.converseWithPatient(input);
                     if (response) {
                         this.context.time += 1;
                         this.syncCompatibilityState();
                         this.log("PACIENTE", response);
+                        this.conversationLogger?.logEvent("provider_response", { provider: "gemini_conversation", duration_ms: Math.round(performance.now() - providerStartedAt), success: true });
                         this.renderState();
                         return;
                     }
@@ -678,11 +696,13 @@
                     const detail = error instanceof Error ? error.message : String(error);
                     console.warn("Conversa Gemini indisponível; mantendo fallback local:", error);
                     this.log("GEMINI", "Falha na conversa: " + detail);
+                    this.conversationLogger?.logFallback("gemini_conversation_failed", { provider: "gemini_conversation", error: detail, duration_ms: Math.round(performance.now() - providerStartedAt) });
                 }
             }
 
             this.context.errors += 1;
             this.syncCompatibilityState();
+            this.conversationLogger?.logEvent("local_fallback", { reason: "no_clinical_action_matched" });
             this.log("SISTEMA", "Não encontrei uma ação clínica específica para essa frase. Tente perguntar sobre história, exame físico ou solicitar um exame disponível.");
         }
 
@@ -1347,7 +1367,30 @@
 
         clearLog() { if (this.elements.log) this.elements.log.innerHTML = ""; }
 
+        startConversationSession(caseData = {}) {
+            if (!this.conversationLogger) return;
+            this.conversationLogger.startSession({
+                mode: this.room === "vermelha" ? "sala_vermelha" : "sala_clinica",
+                case_id: caseData.case_id || caseData.id || null,
+                title: caseData.title || null,
+                difficulty: caseData.difficulty || null
+            });
+        }
+
+        downloadConversationLog() {
+            if (!this.conversationLogger) {
+                this.log("ERRO", "Logger de conversa não está disponível nesta execução.");
+                return;
+            }
+            this.conversationLogger.logEvent("manual_download_requested", { event_count_before_download: this.conversationLogger.getEventCount() });
+            this.conversationLogger.download();
+        }
+
         log(type, message) {
+            if (this.conversationLogger) {
+                const role = type === "MÉDICO" ? "user" : type === "PACIENTE" ? "assistant" : "system";
+                this.conversationLogger.logMessage(role, message, { clinical_type: type });
+            }
             const log = this.elements.log || document.getElementById("clinicalLog");
             if (!log) return;
             const entry = document.createElement("div");
