@@ -1,0 +1,5 @@
+{
+  "schema":"Diagnosis/ECG/model/ecg_cycle","version":"0.1.0",
+  "cycle":{"sequence":["P","PR","QRS","ST","T","U"],"reference_interval":"RR","measurements":["P_duration","PR_duration","QRS_duration","QT_duration","RR_duration"]},
+  "derived":{"heart_rate":{"regular":"computed from RR","irregular":"computed from 3-second method"},"qtc":"QT corrected using selected formula"}
+}
