@@ -1,0 +1,5 @@
+{
+  "schema":"Diagnosis/ECG/model/ecg_lead","version":"0.1.0",
+  "lead":{"id":"string","family":"frontal_bipolar|frontal_augmented|precordial|special","plane":"frontal|horizontal|special","positive_reference":"string|null","negative_reference":"string|null","position":"string|null","expected_normal_polarity":"positive|negative|variable|context_dependent|null"},
+  "standard_set":["DI","DII","DIII","aVR","aVL","aVF","V1","V2","V3","V4","V5","V6"]
+}
