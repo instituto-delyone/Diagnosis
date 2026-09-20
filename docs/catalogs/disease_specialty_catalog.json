@@ -39,30 +39,31 @@
   "counts": {
     "source_entries": 249,
     "specialty_memberships": {
-      "neurologia": 17,
+      "neurologia": 22,
       "ortopedia": 9,
-      "urgencia_toxicologia": 17,
-      "endocrinologia": 26,
+      "urgencia_toxicologia": 19,
+      "endocrinologia": 28,
       "oncologia": 29,
-      "gastroenterologia": 11,
+      "gastroenterologia": 12,
       "urologia": 5,
       "alergia_imunologia": 9,
-      "clinica_medica": 29,
-      "hematologia": 35,
-      "nefrologia": 11,
-      "cardiologia": 35,
+      "cardiologia": 41,
+      "hematologia": 39,
+      "nefrologia": 13,
       "reumatologia_ortopedia": 20,
-      "pneumologia": 18,
+      "pneumologia": 20,
       "ginecologia_obstetricia": 7,
+      "clinica_medica": 12,
       "infectologia": 15,
+      "pediatria": 23,
+      "dermatologia": 10,
       "otorrinolaringologia": 2,
       "mastologia": 1,
       "hepatologia": 9,
-      "cirurgia": 8,
+      "cirurgia": 10,
       "psiquiatria": 4,
-      "pediatria": 18,
       "oftalmologia": 5,
-      "dermatologia": 9,
+      "odontologia": 1,
       "cirurgia_vascular": 1,
       "geriatria": 5,
       "farmacologia_clinica": 1,
@@ -163,7 +164,9 @@
     {
       "name": "Amiloidoses associadas à Transtirretina",
       "specialties": [
-        "clinica_medica"
+        "cardiologia",
+        "hematologia",
+        "neurologia"
       ],
       "sources": [
         "PCDT — Ministério da Saúde"
@@ -364,7 +367,7 @@
     {
       "name": "Aterosclerose",
       "specialties": [
-        "clinica_medica"
+        "cardiologia"
       ],
       "sources": [
         "MSD Manual Professional"
@@ -373,7 +376,8 @@
     {
       "name": "Atrofia Muscular Espinhal",
       "specialties": [
-        "clinica_medica"
+        "neurologia",
+        "pediatria"
       ],
       "sources": [
         "PCDT — Ministério da Saúde"
@@ -391,7 +395,7 @@
     {
       "name": "Avaliação do paciente com problemas renais",
       "specialties": [
-        "clinica_medica"
+        "nefrologia"
       ],
       "sources": [
         "MSD Manual Professional"
@@ -400,7 +404,7 @@
     {
       "name": "Avaliação do paciente dermatológico",
       "specialties": [
-        "clinica_medica"
+        "dermatologia"
       ],
       "sources": [
         "MSD Manual Professional"
@@ -785,7 +789,8 @@
     {
       "name": "Distrator Osteogênico Mandibular (DOM)",
       "specialties": [
-        "clinica_medica"
+        "odontologia",
+        "cirurgia"
       ],
       "sources": [
         "PCDT — Ministério da Saúde"
@@ -803,7 +808,7 @@
     {
       "name": "Distúrbios endócrinos — visão geral",
       "specialties": [
-        "clinica_medica"
+        "endocrinologia"
       ],
       "sources": [
         "MSD Manual Professional"
@@ -867,7 +872,9 @@
     {
       "name": "Doença de Fabry",
       "specialties": [
-        "clinica_medica"
+        "cardiologia",
+        "nefrologia",
+        "neurologia"
       ],
       "sources": [
         "PCDT — Ministério da Saúde"
@@ -876,7 +883,8 @@
     {
       "name": "Doença de Gaucher",
       "specialties": [
-        "clinica_medica"
+        "hematologia",
+        "pediatria"
       ],
       "sources": [
         "PCDT — Ministério da Saúde"
@@ -885,7 +893,8 @@
     {
       "name": "Doença de Niemann-Pick Tipo C (Diretriz Brasileira)",
       "specialties": [
-        "clinica_medica"
+        "neurologia",
+        "pediatria"
       ],
       "sources": [
         "PCDT — Ministério da Saúde"
@@ -912,7 +921,8 @@
     {
       "name": "Doença de Pompe",
       "specialties": [
-        "clinica_medica"
+        "neurologia",
+        "pediatria"
       ],
       "sources": [
         "PCDT — Ministério da Saúde"
@@ -1079,7 +1089,7 @@
     {
       "name": "Esferocitose hereditária",
       "specialties": [
-        "clinica_medica"
+        "hematologia"
       ],
       "sources": [
         "Knowledge Base do Diagnosys"
@@ -1387,6 +1397,7 @@
     {
       "name": "Hipertensão essencial (primária)",
       "specialties": [
+        "cardiologia",
         "clinica_medica"
       ],
       "sources": [
@@ -1426,7 +1437,8 @@
     {
       "name": "Hipoglicemia grave",
       "specialties": [
-        "clinica_medica"
+        "endocrinologia",
+        "urgencia_toxicologia"
       ],
       "sources": [
         "Knowledge Base do Diagnosys"
@@ -1794,7 +1806,8 @@
     {
       "name": "Marca-passos cardíacos implantáveis e ressincronizadores (Protocolo de Uso)",
       "specialties": [
-        "clinica_medica"
+        "cardiologia",
+        "cirurgia"
       ],
       "sources": [
         "PCDT — Ministério da Saúde"
@@ -1952,7 +1965,8 @@
     {
       "name": "Palivizumabe para a Prevenção da Infecção pelo Vírus Sincicial Respiratório (Protocolo de Uso)",
       "specialties": [
-        "clinica_medica"
+        "pediatria",
+        "pneumologia"
       ],
       "sources": [
         "PCDT — Ministério da Saúde"
@@ -2203,7 +2217,7 @@
     {
       "name": "Sintomas gastrointestinais",
       "specialties": [
-        "clinica_medica"
+        "gastroenterologia"
       ],
       "sources": [
         "MSD Manual Professional"
@@ -2231,6 +2245,7 @@
     {
       "name": "Tabagismo",
       "specialties": [
+        "pneumologia",
         "clinica_medica"
       ],
       "sources": [
@@ -2366,7 +2381,9 @@
     {
       "name": "Trombose venosa profunda",
       "specialties": [
-        "clinica_medica"
+        "hematologia",
+        "cardiologia",
+        "urgencia_toxicologia"
       ],
       "sources": [
         "Knowledge Base do Diagnosys"
