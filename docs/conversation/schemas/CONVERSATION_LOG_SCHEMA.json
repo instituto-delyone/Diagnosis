@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/instituto-delyone/Diagnosis/blob/main/docs/conversation/schemas/CONVERSATION_LOG_SCHEMA.json",
+  "title": "Aurora Conversation Log",
+  "description": "Structured development log for Diagnosys conversational interactions and orchestration events.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "session",
+    "events"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "session": {
+      "type": "object",
+      "required": [
+        "session_id",
+        "started_at",
+        "application"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "session_id": {
+          "type": "string"
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ended_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "application": {
+          "type": "string"
+        },
+        "engine_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "mode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "case": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "case_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "title": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "difficulty": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "event_id",
+          "timestamp",
+          "type"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "event_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string"
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "user",
+              "assistant",
+              "system",
+              "tool",
+              "null"
+            ]
+          },
+          "text": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "data": {
+            "type": [
+              "object",
+              "array",
+              "string",
+              "number",
+              "boolean",
+              "null"
+            ]
+          },
+          "duration_ms": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          }
+        }
+      }
+    }
+  }
+}
