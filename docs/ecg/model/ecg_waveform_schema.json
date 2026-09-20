@@ -1,0 +1,8 @@
+{
+  "schema":"Diagnosis/ECG/model/ecg_waveform","version":"0.1.0","status":"implementation_model",
+  "source_basis":"Medeletro + organização computacional do projeto",
+  "record":{"paper_speed_mm_s":{"type":"number","enum":[25,50]},"gain":{"type":"string","enum":["N","N/2","2N"]},"leads":{"type":"array","items":"ECGLead"},"cycles":{"type":"array","items":"ECGCycle"}},
+  "wave":{"id":"P|Q|R|S|T|U","start_ms":"number","peak_ms":"number|null","end_ms":"number","amplitude_mV":"number","polarity":"positive|negative|biphasic|isoelectric","morphology":"string|null"},
+  "segment":{"id":"PR|ST","start_ms":"number","end_ms":"number","level_mV":"number|null"},
+  "interval":{"id":"PR|QT|RR","start_ms":"number","end_ms":"number","duration_ms":"number"}
+}
