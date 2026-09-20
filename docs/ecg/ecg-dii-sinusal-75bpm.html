@@ -43,8 +43,24 @@ svg{
     linear-gradient(90deg,var(--major) 1px,transparent 1px);
   background-size:20px 20px,20px 20px,100px 100px,100px 100px;
 }
+.ecg-strip{
+  animation: ecgBeat 0.8s linear infinite;
+  will-change: transform;
+}
+.ecg-strip path{
+  fill:none;
+  stroke:var(--trace);
+  stroke-width:3;
+  vector-effect:non-scaling-stroke;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 0 5px rgba(52,211,153,.55));
+}
+@keyframes ecgBeat{
+  from{transform:translateX(0)}
+  to{transform:translateX(-400px)}
+}
 path{
-  fill:none;stroke:var(--trace);stroke-width:3;
   vector-effect:non-scaling-stroke;
   stroke-linecap:round;stroke-linejoin:round;
   filter:drop-shadow(0 0 5px rgba(52,211,153,.55));
@@ -69,80 +85,44 @@ strong{color:var(--text)}
 </header>
 
 <div class="monitor">
-<svg viewBox="0 0 1200 300" preserveAspectRatio="none" aria-label="ECG DII sinusal estático a 75 bpm">
+<svg viewBox="0 0 1200 300" preserveAspectRatio="none" aria-label="ECG DII sinusal animado a 75 bpm">
+  <defs>
+    <clipPath id="ecgViewport"><rect x="0" y="0" width="1200" height="300"/></clipPath>
+  </defs>
 
-  <!-- 3 ciclos: R em x=200, 600 e 1000.
-       400 px = 20 quadradinhos = 4 quadrados grandes.
-       300 / 4 = 75 bpm. -->
+  <g clip-path="url(#ecgViewport)">
+    <g class="ecg-strip">
+      <!-- Cada ciclo ocupa 400 px. Em 25 mm/s:
+           20 quadradinhos = 800 ms.
+           1 ciclo / 800 ms = 75 ciclos/min. -->
+      <g transform="translate(0,0)">
+        <path d="M0 150 L70 150 C82 150 88 144 94 138 C100 132 106 138 112 150 L158 150 L174 150 L184 154 L191 146 L198 155 L202 52 L208 215 L215 150 L245 150 C275 150 292 145 310 139 C330 133 350 137 370 150 L400 150"/>
+      </g>
+      <g transform="translate(400,0)">
+        <path d="M0 150 L70 150 C82 150 88 144 94 138 C100 132 106 138 112 150 L158 150 L174 150 L184 154 L191 146 L198 155 L202 52 L208 215 L215 150 L245 150 C275 150 292 145 310 139 C330 133 350 137 370 150 L400 150"/>
+      </g>
+      <g transform="translate(800,0)">
+        <path d="M0 150 L70 150 C82 150 88 144 94 138 C100 132 106 138 112 150 L158 150 L174 150 L184 154 L191 146 L198 155 L202 52 L208 215 L215 150 L245 150 C275 150 292 145 310 139 C330 133 350 137 370 150 L400 150"/>
+      </g>
+      <g transform="translate(1200,0)">
+        <path d="M0 150 L70 150 C82 150 88 144 94 138 C100 132 106 138 112 150 L158 150 L174 150 L184 154 L191 146 L198 155 L202 52 L208 215 L215 150 L245 150 C275 150 292 145 310 139 C330 133 350 137 370 150 L400 150"/>
+      </g>
+    </g>
 
-  <path class="measure" d="M200 45 V255 M600 45 V255 M1000 45 V255"/>
+    <g class="measurements">
+      <line x1="200" y1="45" x2="200" y2="255"/>
+      <line x1="600" y1="45" x2="600" y2="255"/>
+      <line x1="1000" y1="45" x2="1000" y2="255"/>
+    </g>
+  </g>
+
   <text class="label" x="385" y="38">20 quadradinhos = 4 quadrados grandes</text>
-
-  <!-- CICLO 1 -->
-  <path d="
-    M0 150
-    L70 150
-    C82 150 88 144 94 138
-    C100 132 106 138 112 150
-    L158 150
-    L174 150
-    L184 154
-    L191 146
-    L198 155
-    L202 52
-    L208 215
-    L215 150
-    L245 150
-    C275 150 292 145 310 139
-    C330 133 350 137 370 150
-    L400 150
-  "/>
-
-  <!-- CICLO 2 -->
-  <path d="
-    M400 150
-    L470 150
-    C482 150 488 144 494 138
-    C500 132 506 138 512 150
-    L558 150
-    L574 150
-    L584 154
-    L591 146
-    L598 155
-    L602 52
-    L608 215
-    L615 150
-    L645 150
-    C675 150 692 145 710 139
-    C730 133 750 137 770 150
-    L800 150
-  "/>
-
-  <!-- CICLO 3 -->
-  <path d="
-    M800 150
-    L870 150
-    C882 150 888 144 894 138
-    C900 132 906 138 912 150
-    L958 150
-    L974 150
-    L984 154
-    L991 146
-    L998 155
-    L1002 52
-    L1008 215
-    L1015 150
-    L1045 150
-    C1075 150 1092 145 1110 139
-    C1130 133 1150 137 1170 150
-    L1200 150
-  "/>
 </svg>
 </div>
 
 <footer>
-  <span>DII · traçado sinusal estático</span>
-  <span><strong>25 mm/s</strong> · 1 quadradinho = 40 ms · 20 quadradinhos = 800 ms · <strong>75 bpm</strong></span>
+  <span>DII · traçado sinusal animado</span>
+  <span><strong>25 mm/s</strong> · 1 quadradinho = 40 ms · 20 quadradinhos = 800 ms · <strong>75 QRS/min</strong></span>
 </footer>
 </main>
 </body>
