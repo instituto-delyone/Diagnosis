@@ -155,13 +155,33 @@
        * seleção é o universo clínico carregado pelo CaseLibrary.
        */
       const normalizedSpecialty = normalize(specialty || "todos").replace(/ /g, "_");
-      const usable = sourceCases.filter(item =>
-        item &&
-        (item.id || item.case_id) &&
-        (item.primary_concept || item.concept || item.title) &&
-        this.isPlayableCase(item) &&
-        (normalizedSpecialty === "todos" || this.specialtyFromCase(item) === normalizedSpecialty)
-      );
+      const usable = sourceCases.filter(item => {
+        if (!item) return false;
+        if (!(item.id || item.case_id)) return false;
+        if (!(item.primary_concept || item.concept || item.title)) return false;
+
+        const specialtyMatch =
+          normalizedSpecialty === "todos" ||
+          this.specialtyFromCase(item) === normalizedSpecialty;
+
+        if (!specialtyMatch) return false;
+
+        /*
+         * Explicit clinical source files are already part of the curated
+         * Knowledge Base. They must remain selectable even when the master
+         * concept catalog uses a different canonical spelling.
+         *
+         * Before this rule, a valid cardiology/endocrinology/etc. record could
+         * be discarded by an exact-ish catalog-name comparison, leaving the
+         * generator apparently "stuck" on whichever specialty happened to
+         * have the most compatible records (notably pneumology/asma).
+         */
+        const source = normalize(item.kb_source || "");
+        const curatedClinicalSource =
+          /(?:cardiologia|cardiopatias|endocrinologia|neurologia|pneumologia|reumatologia|cirurgia|hematologia|hipertensao_arterial|dislipidemia)/.test(source);
+
+        return curatedClinicalSource || this.isPlayableCase(item);
+      });
 
       if (!usable.length) {
         throw new Error(
