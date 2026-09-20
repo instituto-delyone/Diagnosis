@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ECG — BAVT e IAMCSST</title>
+<style>
+:root{--bg:#050d15;--panel:#0a1722;--border:#1d394c;--text:#e8f2f7;--muted:#8fa7b7;--trace:#39e2a4;--danger:#ff6b78}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,sans-serif}
+header{padding:22px 26px;background:#07131e;border-bottom:1px solid var(--border)}
+h1{margin:0;font-size:23px}header p{margin:6px 0 0;color:var(--muted);font-size:13px}
+main{max-width:1180px;margin:22px auto;padding:0 16px}.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:22px}
+.head{padding:14px 17px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:15px}
+.title{font-weight:800;font-size:16px}.desc{font-size:12px;color:var(--muted);margin-top:3px}
+.badge{font-size:11px;border:1px solid var(--border);border-radius:999px;padding:6px 9px;color:#f2cf70;white-space:nowrap}
+.monitor{height:210px;background:#07121b;overflow:hidden}.monitor svg{width:100%;height:100%;display:block}
+.gridm{stroke:#173342;stroke-width:.7}.gridM{stroke:#2b5263;stroke-width:1}
+.base{stroke:#61869a;stroke-width:1}.trace{fill:none;stroke:var(--trace);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.sttrace{fill:none;stroke:var(--danger);stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+footer{padding:11px 17px;color:var(--muted);font-size:11px;border-top:1px solid var(--border)}
+.note{padding:12px 14px;margin-bottom:20px;border:1px solid var(--border);border-radius:10px;color:#b8cad5;font-size:12px;line-height:1.5}
+</style>
+</head>
+<body>
+<header><h1>ECG — BAVT e IAM com supra de ST</h1><p>DII sintético • estudo visual baseado nas referências enviadas</p></header>
+<main>
+<div class="note"><b>O foco deste protótipo:</b> no BAVT, as ondas P têm atividade atrial própria e independente do ritmo ventricular. Elas podem cair sobre a onda T ou sobre o QRS; não existe relação fixa P→QRS. No IAMCSST, o elemento visual central é o supradesnivelamento do segmento ST.</div>
+
+<section class="card">
+<div class="head"><div><div class="title">1 · BAVT — bloqueio atrioventricular total (3º grau)</div><div class="desc">Dissociação AV • P independente • atividade atrial mais rápida que a ventricular</div></div><div class="badge">P ≈ 3 × QRS</div></div>
+<div class="monitor"><svg viewBox="0 0 1200 210" preserveAspectRatio="none"><g id="grid1"></g><line class="base" x1="0" y1="112" x2="1200" y2="112"/><path id="bavt" class="trace"/></svg></div>
+<footer>Traçado sintético didático • as P são geradas independentemente dos QRS e algumas atravessam a T.</footer>
+</section>
+
+<section class="card">
+<div class="head"><div><div class="title">2 · IAMCSST — infarto agudo do miocárdio com supradesnivelamento de ST</div><div class="desc">QRS seguido por segmento ST elevado antes da onda T</div></div><div class="badge">↑ ST</div></div>
+<div class="monitor"><svg viewBox="0 0 1200 210" preserveAspectRatio="none"><g id="grid2"></g><line class="base" x1="0" y1="112" x2="1200" y2="112"/><path id="stemi" class="sttrace"/></svg></div>
+<footer>Traçado sintético didático • representação simplificada do supradesnivelamento do segmento ST.</footer>
+</section>
+</main>
+<script>
+function drawGrid(id){
+ const g=document.getElementById(id);let s="";
+ for(let x=0;x<=1200;x+=20)s+=`<line class="${x%100===0?'gridM':'gridm'}" x1="${x}" y1="0" x2="${x}" y2="210"/>`;
+ for(let y=10;y<210;y+=20)s+=`<line class="${y%100===0?'gridM':'gridm'}" x1="0" y1="${y}" x2="1200" y2="${y}"/>`;
+ g.innerHTML=s;
+}
+
+/* BAVT:
+   atrial cycle = 120 px; ventricular cycle = 360 px.
+   The P-wave train is independent of the QRS/T train.
+   Signal is synthesized as a sum of components so a P can merge
+   into a T/QRS rather than creating an artificial second ventricular complex.
+*/
+function gauss(x,c,w,a){const z=(x-c)/w;return a*Math.exp(-0.5*z*z)}
+function bavtSignal(x){
+ let y=112;
+ // ventricular rhythm: QRS + one T per ventricular beat
+ for(let v=60;v<1320;v+=360){
+   y+=gauss(x,v-12,4,-13);
+   y+=gauss(x,v,5,72);
+   y+=gauss(x,v+13,5,-19);
+   y+=gauss(x,v+92,30,29); // T
+ }
+ // independent atrial rhythm: three P waves per ventricular cycle
+ for(let p=0;p<1320;p+=120){
+   y+=gauss(x,p,7,-17);
+ }
+ return y;
+}
+function makeBavt(){
+ let d="";
+ for(let x=0;x<=1200;x+=2)d+=(x===0?"M":"L")+x.toFixed(1)+" "+bavtSignal(x).toFixed(1)+" ";
+ document.getElementById("bavt").setAttribute("d",d);
+}
+
+/* STEMI: sinus rhythm with a clearly elevated ST segment. */
+function stemiSignal(x){
+ let y=112;
+ for(let b=55;b<1320;b+=300){
+   y+=gauss(x,b-30,11,-12); // P
+   y+=gauss(x,b,4,-12);     // Q
+   y+=gauss(x,b+9,5,73);    // R
+   y+=gauss(x,b+20,5,-21);   // S
+   // elevated ST plateau
+   if(x>b+28 && x<b+105)y-=30;
+   y+=gauss(x,b+135,32,31); // T
+ }
+ return y;
+}
+function makeStemi(){
+ let d="";
+ for(let x=0;x<=1200;x+=2)d+=(x===0?"M":"L")+x.toFixed(1)+" "+stemiSignal(x).toFixed(1)+" ";
+ document.getElementById("stemi").setAttribute("d",d);
+}
+drawGrid("grid1");drawGrid("grid2");makeBavt();makeStemi();
+</script>
+</body>
+</html>
