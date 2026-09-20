@@ -1983,44 +1983,84 @@
      * sincronizados caso o engine atualize os IDs principais.
      */
 
-<script type="module">
-import { generateRepeatedSinus } from "./ecg/engine/ecg-signal-generator.js";
-
+<script>
 (function initLiveECG() {
     const fcElement = document.getElementById("fc");
     const path = document.getElementById("ecgSignalPath");
-    const svg = document.getElementById("ecgTrackSvg");
-    if (!fcElement || !path || !svg) return;
+    const liveLabel = document.getElementById("ecgLiveLabel");
+    const footerRate = document.getElementById("ecgFooterRate");
+    if (!path || !liveLabel || !footerRate) return;
 
-    const WINDOW_WIDTH = 2400;
-    const BASELINE = 66;
-    let lastRate = null;
+    // ECG educational baseline:
+    // 25 mm/s -> one large square = 200 ms.
+    // Four large squares between R waves -> RR = 800 ms -> FC = 300/4 = 75 bpm.
+    const BASELINE_RATE = 75;
+    const SAMPLE_RATE = 250;
+    const PAPER_SPEED_MM_S = 25;
+    const LARGE_SQUARE_MS = 200;
 
-    function readRate() {
-        const match = (fcElement.textContent || "").match(/\d+(?:\.\d+)?/);
-        // Enquanto o caso ainda não revelou a FC, o paciente assume
-        // ritmo sinusal basal. Traçados patológicos serão introduzidos
-        // pelo modelo de ritmo quando essa camada estiver conectada.
-        return match ? Number(match[0]) : 72;
+    function gaussian(t, center, width, amplitude) {
+        const sigma = width / 2.355;
+        return amplitude * Math.exp(-0.5 * Math.pow((t - center) / sigma, 2));
+    }
+
+    function normalSinusPoint(t, rrMs) {
+        const phase = ((t % rrMs) + rrMs) % rrMs;
+
+        const p = gaussian(phase, 120, 75, 0.13);
+
+        const q = gaussian(phase, 182, 16, -0.16);
+        const r = gaussian(phase, 200, 13, 1.05);
+        const s = gaussian(phase, 218, 16, -0.32);
+
+        const tWave = gaussian(phase, 390, 125, 0.30);
+        const u = gaussian(phase, 545, 55, 0.045);
+
+        return p + q + r + s + tWave + u;
+    }
+
+    function getRate() {
+        const match = (fcElement?.textContent || "").match(/\d+(?:\.\d+)?/);
+        const revealed = match ? Number(match[0]) : NaN;
+        return Number.isFinite(revealed) && revealed > 0 ? revealed : BASELINE_RATE;
     }
 
     function render(rate) {
-        if (!Number.isFinite(rate) || rate <= 0 || rate === lastRate) return;
-        lastRate = rate;
-        const data = generateRepeatedSinus({ heartRate: rate, cycles: 8, sampleRateHz: 500 });
-        const maxT = data.points.at(-1)?.t_ms || data.rr_ms;
-        const d = data.points.map((point, index) => {
-            const x = (point.t_ms / maxT) * WINDOW_WIDTH;
-            const y = BASELINE - point.amplitude_mV * 32;
-            return (index ? "L" : "M") + x.toFixed(2) + " " + y.toFixed(2);
-        }).join(" ");
-        path.setAttribute("d", d);
-        svg.dataset.heartRate = String(rate);
+        const rrMs = 60000 / rate;
+        const durationMs = rrMs * 5.25;
+        const points = [];
+
+        for (let t = 0; t <= durationMs; t += 1000 / SAMPLE_RATE) {
+            const amplitude = normalSinusPoint(t, rrMs);
+            const x = (t / durationMs) * 2400;
+            const y = 66 - amplitude * 31;
+            points.push((points.length ? "L" : "M") + x.toFixed(2) + " " + y.toFixed(2));
+        }
+
+        path.setAttribute("d", points.join(" "));
+
+        const largeSquares = 300 / rate;
+        const roundedSquares = Number(largeSquares.toFixed(1));
+
+        liveLabel.textContent = "LIVE · " + Math.round(rate) + " BPM";
+        footerRate.textContent = "FC " + Math.round(rate) + " bpm · RR ≈ " + Math.round(rrMs) + " ms · " + roundedSquares + " quadrados grandes";
+        path.setAttribute("aria-label", "ECG sinusal simulado a " + Math.round(rate) + " bpm");
+
+        const svg = document.getElementById("ecgTrackSvg");
+        if (svg) {
+            svg.dataset.heartRate = String(rate);
+            svg.dataset.paperSpeed = String(PAPER_SPEED_MM_S);
+            svg.dataset.largeSquareMs = String(LARGE_SQUARE_MS);
+        }
     }
 
-    const observer = new MutationObserver(() => render(readRate()));
-    observer.observe(fcElement, { childList: true, characterData: true, subtree: true });
-    render(readRate());
+    const observer = fcElement ? new MutationObserver(() => render(getRate())) : null;
+    if (observer) {
+        observer.observe(fcElement, { childList: true, characterData: true, subtree: true });
+    }
+
+    // Render immediately even before the clinical engine reveals vitals.
+    render(getRate());
 })();
 </script>
 
