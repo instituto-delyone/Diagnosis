@@ -1,0 +1,26 @@
+{
+  "session_id": "uuid",
+  "started_at": "...",
+  "ended_at": "...",
+  "application": "diagnosys",
+  "case_id": "...",
+  "provider": {
+    "gemini": "failed",
+    "local_engine": "active"
+  },
+  "messages": [
+    {
+      "timestamp": "...",
+      "speaker": "doctor",
+      "text": "..."
+    },
+    {
+      "timestamp": "...",
+      "speaker": "patient",
+      "text": "..."
+    }
+  ],
+  "events": [],
+  "errors": [],
+  "fallbacks": []
+}
