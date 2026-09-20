@@ -718,6 +718,59 @@
             line-height: 1.6;
         }
 
+        .prep-specialty {
+            margin-bottom: 20px;
+            padding: 14px;
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 13px;
+        }
+
+        .prep-specialty-title {
+            margin-bottom: 10px;
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .prep-specialty-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .prep-specialty-btn {
+            min-height: 44px;
+            padding: 9px 10px;
+            color: var(--text);
+            background: var(--panel-2);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform .15s ease, border-color .15s ease, background .15s ease;
+        }
+
+        .prep-specialty-btn:hover {
+            transform: translateY(-1px);
+            border-color: var(--primary);
+        }
+
+        .prep-specialty-btn.active {
+            color: #03131c;
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        @media (max-width: 760px) {
+            .prep-specialty-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         .prep-status {
             display: grid;
             gap: 8px;
@@ -1231,6 +1284,21 @@
         <p id="prepSubtitle" class="prep-subtitle">
             O Engine está preparando três casos completos antes de liberar a conversa clínica.
         </p>
+
+        <div id="prepSpecialty" class="prep-specialty">
+            <div class="prep-specialty-title">Escolha o foco do caso</div>
+            <div id="prepSpecialtyGrid" class="prep-specialty-grid">
+                <button class="prep-specialty-btn active" type="button" data-specialty="todos">🩺 Todas</button>
+                <button class="prep-specialty-btn" type="button" data-specialty="cardiologia">❤️ Cardiologia</button>
+                <button class="prep-specialty-btn" type="button" data-specialty="endocrinologia">🧬 Endocrinologia</button>
+                <button class="prep-specialty-btn" type="button" data-specialty="pneumologia">🫁 Pneumologia</button>
+                <button class="prep-specialty-btn" type="button" data-specialty="neurologia">🧠 Neurologia</button>
+                <button class="prep-specialty-btn" type="button" data-specialty="reumatologia">🦴 Reumatologia</button>
+                <button class="prep-specialty-btn" type="button" data-specialty="cirurgia">🔪 Cirurgia</button>
+                <button class="prep-specialty-btn" type="button" data-specialty="hematologia">🩸 Hematologia</button>
+                <button class="prep-specialty-btn" type="button" data-specialty="clinica_medica">🩺 Clínica médica</button>
+            </div>
+        </div>
 
         <div id="prepStatus" class="prep-status" aria-live="polite"></div>
 
@@ -1794,6 +1862,9 @@
     const statusRoot = document.getElementById("prepStatus");
     const cardsRoot = document.getElementById("prepCards");
     const errorRoot = document.getElementById("prepError");
+    const specialtyRoot = document.getElementById("prepSpecialty");
+    const specialtyGrid = document.getElementById("prepSpecialtyGrid");
+    let selectedSpecialty = "todos";
     const subtitle = document.getElementById("prepSubtitle");
 
     const originalBoot = window.DiagnosisEngine && window.DiagnosisEngine.prototype.boot;
@@ -1807,6 +1878,36 @@
             .replace(/>/g, "&gt;")
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
+    }
+
+    function specialtyLabel(value) {
+        const labels = {
+            todos: "Todas as especialidades",
+            cardiologia: "Cardiologia",
+            endocrinologia: "Endocrinologia",
+            pneumologia: "Pneumologia",
+            neurologia: "Neurologia",
+            reumatologia: "Reumatologia",
+            cirurgia: "Cirurgia",
+            hematologia: "Hematologia",
+            clinica_medica: "Clínica médica"
+        };
+        return labels[value] || value;
+    }
+
+    function bindSpecialtySelector() {
+        specialtyGrid?.querySelectorAll("[data-specialty]").forEach(button => {
+            button.addEventListener("click", () => {
+                selectedSpecialty = button.dataset.specialty || "todos";
+                specialtyGrid.querySelectorAll("[data-specialty]").forEach(item => item.classList.remove("active"));
+                button.classList.add("active");
+                subtitle.textContent = "Foco selecionado: " + specialtyLabel(selectedSpecialty) + ". Preparando três casos completos...";
+                prepareCases(window.idmtEngine, false, selectedSpecialty).catch(error => {
+                    errorRoot.textContent = "Não foi possível preparar os casos: " + (error.message || String(error));
+                    errorRoot.classList.remove("prep-hidden");
+                });
+            });
+        });
     }
 
     function statusRow(name, state, detail) {
@@ -1893,7 +1994,7 @@
             if (engine.__casePreparationReady && engine.__casePreparation) {
                 engine.finalizeHypothesis?.();
                 engine.__casePreparation.preparedCases = [];
-                await prepareCases(engine, true);
+                await prepareCases(engine, true, selectedSpecialty);
                 return;
             }
         };
@@ -1908,8 +2009,10 @@
 
             engine.startNewCase = originalStartNewCase;
 
-            await prepareCases(engine, false);
-
+            bindSpecialtySelector();
+            specialtyRoot?.classList.remove("prep-hidden");
+            subtitle.textContent = "Escolha uma especialidade para gerar três casos clínicos completos.";
+            
             engine.startNewCase = async function () {
                 engine.finalizeHypothesis?.();
                 await prepareCases(engine, true);
@@ -1923,7 +2026,7 @@
         }
     };
 
-    async function prepareCases(engine, fromNextCase) {
+    async function prepareCases(engine, fromNextCase, specialty = selectedSpecialty) {
         overlay.classList.remove("prep-hidden");
         document.body.classList.add("preparing");
         statusRoot.innerHTML = "";
@@ -1935,9 +2038,11 @@
         engine.__casePreparation = preparation;
 
         statusRow("catálogo mestre", "carregando", "resolvendo universo de conceitos");
-        const prepared = await preparation.prepare(3, statusRow);
+        selectedSpecialty = specialty || selectedSpecialty || "todos";
+        const prepared = await preparation.prepare(3, statusRow, selectedSpecialty);
 
         if (!fromNextCase) {
+            statusRow("foco", "selecionado", specialtyLabel(selectedSpecialty));
             statusRow("três casos", "pronto", "casos completos e validados");
         } else {
             statusRow("três casos", "renovado", "novo conjunto preparado");
@@ -1953,6 +2058,7 @@
         }
 
         showCards(engine, prepared);
+        if (specialtyRoot) specialtyRoot.classList.remove("prep-hidden");
         preparation.backgroundWarmup();
 
         if (engine.elements?.input) engine.elements.input.disabled = true;
