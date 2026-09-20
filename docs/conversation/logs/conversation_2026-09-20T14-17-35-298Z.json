@@ -1,0 +1,947 @@
+{
+  "schema_version": "1.0.0",
+  "session": {
+    "session_id": "ed3456d8-6863-4473-b098-51a0b88b116c",
+    "started_at": "2026-09-20T14:07:32.044Z",
+    "ended_at": null,
+    "application": "Diagnosys",
+    "engine_version": null,
+    "mode": "sala_clinica",
+    "case": {
+      "case_id": "kb_cardiopatias_si ndrome ao rtica aguda_15",
+      "title": null,
+      "difficulty": null
+    }
+  },
+  "events": [
+    {
+      "event_id": 1,
+      "timestamp": "2026-09-20T14:07:32.044Z",
+      "type": "session_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "mode": "sala_clinica",
+        "case_id": "kb_cardiopatias_si ndrome ao rtica aguda_15"
+      }
+    },
+    {
+      "event_id": 2,
+      "timestamp": "2026-09-20T14:07:32.046Z",
+      "type": "message",
+      "role": "assistant",
+      "text": "Paciente mulher, 45 anos, chega para avaliação.",
+      "data": {
+        "clinical_type": "PACIENTE"
+      }
+    },
+    {
+      "event_id": 3,
+      "timestamp": "2026-09-20T14:07:32.049Z",
+      "type": "message",
+      "role": "assistant",
+      "text": "Queixa principal: dor torácica súbita",
+      "data": {
+        "clinical_type": "PACIENTE"
+      }
+    },
+    {
+      "event_id": 4,
+      "timestamp": "2026-09-20T14:07:32.051Z",
+      "type": "message",
+      "role": "system",
+      "text": "Doutor, qual é a sua primeira hipótese diagnóstica?",
+      "data": {
+        "clinical_type": "SISTEMA"
+      }
+    },
+    {
+      "event_id": 5,
+      "timestamp": "2026-09-20T14:07:32.056Z",
+      "type": "message",
+      "role": "system",
+      "text": "Caso clínico preparado e selecionado. O diagnóstico permanece oculto.",
+      "data": {
+        "clinical_type": "SISTEMA"
+      }
+    },
+    {
+      "event_id": 6,
+      "timestamp": "2026-09-20T14:08:18.104Z",
+      "type": "message",
+      "role": "user",
+      "text": "Síndrome coronariana aguda",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 7,
+      "timestamp": "2026-09-20T14:08:18.106Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 8,
+      "timestamp": "2026-09-20T14:08:18.107Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 9,
+      "timestamp": "2026-09-20T14:08:18.107Z",
+      "type": "provider_call",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation"
+      }
+    },
+    {
+      "event_id": 10,
+      "timestamp": "2026-09-20T14:08:20.824Z",
+      "type": "message",
+      "role": "assistant",
+      "text": "Não entendi direito, doutor. O que isso significa?",
+      "data": {
+        "clinical_type": "PACIENTE"
+      }
+    },
+    {
+      "event_id": 11,
+      "timestamp": "2026-09-20T14:08:20.827Z",
+      "type": "provider_response",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation",
+        "duration_ms": 2719,
+        "success": true
+      }
+    },
+    {
+      "event_id": 12,
+      "timestamp": "2026-09-20T14:08:30.860Z",
+      "type": "message",
+      "role": "system",
+      "text": "Diagnóstico falhou: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 13,
+      "timestamp": "2026-09-20T14:08:48.999Z",
+      "type": "message",
+      "role": "user",
+      "text": "Infarto agudo do miocardio",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 14,
+      "timestamp": "2026-09-20T14:08:49.000Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 15,
+      "timestamp": "2026-09-20T14:08:49.001Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 16,
+      "timestamp": "2026-09-20T14:08:49.002Z",
+      "type": "provider_call",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation"
+      }
+    },
+    {
+      "event_id": 17,
+      "timestamp": "2026-09-20T14:08:50.391Z",
+      "type": "message",
+      "role": "system",
+      "text": "Falha na conversa: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 18,
+      "timestamp": "2026-09-20T14:09:33.274Z",
+      "type": "message",
+      "role": "user",
+      "text": "Como está a saturação de o2?",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 19,
+      "timestamp": "2026-09-20T14:09:33.275Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 20,
+      "timestamp": "2026-09-20T14:09:33.275Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 21,
+      "timestamp": "2026-09-20T14:09:33.275Z",
+      "type": "provider_call",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation"
+      }
+    },
+    {
+      "event_id": 22,
+      "timestamp": "2026-09-20T14:09:35.777Z",
+      "type": "message",
+      "role": "assistant",
+      "text": "Não sei te dizer, doutor, não foi informada a minha saturação de oxigênio.",
+      "data": {
+        "clinical_type": "PACIENTE"
+      }
+    },
+    {
+      "event_id": 23,
+      "timestamp": "2026-09-20T14:09:35.780Z",
+      "type": "provider_response",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation",
+        "duration_ms": 2505,
+        "success": true
+      }
+    },
+    {
+      "event_id": 24,
+      "timestamp": "2026-09-20T14:09:58.508Z",
+      "type": "message",
+      "role": "user",
+      "text": "Você tem crises de ansiedade?",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 25,
+      "timestamp": "2026-09-20T14:09:58.510Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 26,
+      "timestamp": "2026-09-20T14:09:58.510Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 27,
+      "timestamp": "2026-09-20T14:09:58.510Z",
+      "type": "provider_call",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation"
+      }
+    },
+    {
+      "event_id": 28,
+      "timestamp": "2026-09-20T14:10:00.457Z",
+      "type": "message",
+      "role": "system",
+      "text": "Falha na conversa: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 29,
+      "timestamp": "2026-09-20T14:10:09.492Z",
+      "type": "message",
+      "role": "system",
+      "text": "Diagnóstico concluído: conexão Gemini operacional.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 30,
+      "timestamp": "2026-09-20T14:10:25.213Z",
+      "type": "message",
+      "role": "user",
+      "text": "Qual a saturação de o2?",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 31,
+      "timestamp": "2026-09-20T14:10:25.214Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 32,
+      "timestamp": "2026-09-20T14:10:25.214Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 33,
+      "timestamp": "2026-09-20T14:10:25.215Z",
+      "type": "provider_call",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation"
+      }
+    },
+    {
+      "event_id": 34,
+      "timestamp": "2026-09-20T14:10:27.024Z",
+      "type": "message",
+      "role": "system",
+      "text": "Falha na conversa: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 35,
+      "timestamp": "2026-09-20T14:10:49.294Z",
+      "type": "message",
+      "role": "user",
+      "text": "Preciso de um eletrocardiograma",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 36,
+      "timestamp": "2026-09-20T14:10:49.296Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 37,
+      "timestamp": "2026-09-20T14:10:49.296Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 38,
+      "timestamp": "2026-09-20T14:10:49.296Z",
+      "type": "provider_call",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation"
+      }
+    },
+    {
+      "event_id": 39,
+      "timestamp": "2026-09-20T14:10:52.475Z",
+      "type": "message",
+      "role": "assistant",
+      "text": "Tudo bem, doutor. Pode fazer.",
+      "data": {
+        "clinical_type": "PACIENTE"
+      }
+    },
+    {
+      "event_id": 40,
+      "timestamp": "2026-09-20T14:10:52.478Z",
+      "type": "provider_response",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation",
+        "duration_ms": 3182,
+        "success": true
+      }
+    },
+    {
+      "event_id": 41,
+      "timestamp": "2026-09-20T14:11:01.142Z",
+      "type": "message",
+      "role": "user",
+      "text": "Qual o resultado?",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 42,
+      "timestamp": "2026-09-20T14:11:01.144Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 43,
+      "timestamp": "2026-09-20T14:11:01.144Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 44,
+      "timestamp": "2026-09-20T14:11:01.144Z",
+      "type": "provider_call",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation"
+      }
+    },
+    {
+      "event_id": 45,
+      "timestamp": "2026-09-20T14:11:03.125Z",
+      "type": "message",
+      "role": "system",
+      "text": "Falha na conversa: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 46,
+      "timestamp": "2026-09-20T14:11:34.820Z",
+      "type": "message",
+      "role": "user",
+      "text": "Glicemia e o2 por favor",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 47,
+      "timestamp": "2026-09-20T14:11:34.822Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 48,
+      "timestamp": "2026-09-20T14:11:34.823Z",
+      "type": "message",
+      "role": "system",
+      "text": "Certo. Glicemia realizado. glicose: 89 mg/dL. Não há alterações relevantes neste exame.",
+      "data": {
+        "clinical_type": "EXAME"
+      }
+    },
+    {
+      "event_id": 49,
+      "timestamp": "2026-09-20T14:12:17.302Z",
+      "type": "message",
+      "role": "user",
+      "text": "Monitor mostra ritmo sinusal, solicito troponina",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 50,
+      "timestamp": "2026-09-20T14:12:17.304Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 51,
+      "timestamp": "2026-09-20T14:12:17.304Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 52,
+      "timestamp": "2026-09-20T14:12:17.304Z",
+      "type": "provider_call",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation"
+      }
+    },
+    {
+      "event_id": 53,
+      "timestamp": "2026-09-20T14:12:19.823Z",
+      "type": "message",
+      "role": "system",
+      "text": "Falha na conversa: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 54,
+      "timestamp": "2026-09-20T14:12:30.376Z",
+      "type": "message",
+      "role": "user",
+      "text": "Solicito troponina",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 55,
+      "timestamp": "2026-09-20T14:12:30.377Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 56,
+      "timestamp": "2026-09-20T14:12:30.377Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 57,
+      "timestamp": "2026-09-20T14:12:30.377Z",
+      "type": "provider_call",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation"
+      }
+    },
+    {
+      "event_id": 58,
+      "timestamp": "2026-09-20T14:12:32.315Z",
+      "type": "message",
+      "role": "system",
+      "text": "Falha na conversa: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 59,
+      "timestamp": "2026-09-20T14:12:50.849Z",
+      "type": "message",
+      "role": "system",
+      "text": "Diagnóstico falhou: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 60,
+      "timestamp": "2026-09-20T14:12:59.931Z",
+      "type": "message",
+      "role": "system",
+      "text": "Hipótese sindrômica coerente. Agora procure a etiologia.",
+      "data": {
+        "clinical_type": "FEEDBACK"
+      }
+    },
+    {
+      "event_id": 61,
+      "timestamp": "2026-09-20T14:13:06.535Z",
+      "type": "message",
+      "role": "system",
+      "text": "Avaliação clínica dirigida solicitado.",
+      "data": {
+        "clinical_type": "INVESTIGAÇÃO"
+      }
+    },
+    {
+      "event_id": 62,
+      "timestamp": "2026-09-20T14:13:06.537Z",
+      "type": "message",
+      "role": "system",
+      "text": "Achados clínicos registrados: dor torácica súbita; dor dorsal; dor abdominal; déficit neurológico.",
+      "data": {
+        "clinical_type": "RESULTADO"
+      }
+    },
+    {
+      "event_id": 63,
+      "timestamp": "2026-09-20T14:13:08.294Z",
+      "type": "message",
+      "role": "system",
+      "text": "Avaliação clínica dirigida já foi realizado neste caso.",
+      "data": {
+        "clinical_type": "RESULTADO"
+      }
+    },
+    {
+      "event_id": 64,
+      "timestamp": "2026-09-20T14:13:45.437Z",
+      "type": "message",
+      "role": "user",
+      "text": "Paciente tem déficits neurológicos?",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 65,
+      "timestamp": "2026-09-20T14:13:45.438Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 66,
+      "timestamp": "2026-09-20T14:13:45.438Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 67,
+      "timestamp": "2026-09-20T14:13:45.438Z",
+      "type": "provider_call",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation"
+      }
+    },
+    {
+      "event_id": 68,
+      "timestamp": "2026-09-20T14:13:47.895Z",
+      "type": "message",
+      "role": "assistant",
+      "text": "Sim, estou sentindo um déficit neurológico.",
+      "data": {
+        "clinical_type": "PACIENTE"
+      }
+    },
+    {
+      "event_id": 69,
+      "timestamp": "2026-09-20T14:13:47.898Z",
+      "type": "provider_response",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation",
+        "duration_ms": 2460,
+        "success": true
+      }
+    },
+    {
+      "event_id": 70,
+      "timestamp": "2026-09-20T14:14:01.523Z",
+      "type": "message",
+      "role": "user",
+      "text": "Perda de força ou fala?",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 71,
+      "timestamp": "2026-09-20T14:14:01.525Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 72,
+      "timestamp": "2026-09-20T14:14:01.525Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 73,
+      "timestamp": "2026-09-20T14:14:01.525Z",
+      "type": "provider_call",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation"
+      }
+    },
+    {
+      "event_id": 74,
+      "timestamp": "2026-09-20T14:14:04.223Z",
+      "type": "message",
+      "role": "system",
+      "text": "Falha na conversa: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 75,
+      "timestamp": "2026-09-20T14:14:13.384Z",
+      "type": "message",
+      "role": "system",
+      "text": "Diagnóstico falhou: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 76,
+      "timestamp": "2026-09-20T14:14:17.685Z",
+      "type": "message",
+      "role": "system",
+      "text": "Diagnóstico falhou: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 77,
+      "timestamp": "2026-09-20T14:15:01.621Z",
+      "type": "message",
+      "role": "user",
+      "text": "É a primeira vez q sente isso?",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 78,
+      "timestamp": "2026-09-20T14:15:01.622Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 79,
+      "timestamp": "2026-09-20T14:15:01.623Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 80,
+      "timestamp": "2026-09-20T14:15:01.623Z",
+      "type": "message",
+      "role": "assistant",
+      "text": "A queixa inicial é: dor torácica súbita.",
+      "data": {
+        "clinical_type": "PACIENTE"
+      }
+    },
+    {
+      "event_id": 81,
+      "timestamp": "2026-09-20T14:15:01.623Z",
+      "type": "local_patient_response",
+      "role": "system",
+      "text": null,
+      "data": {
+        "source": "local_patient_state"
+      }
+    },
+    {
+      "event_id": 82,
+      "timestamp": "2026-09-20T14:15:31.380Z",
+      "type": "message",
+      "role": "user",
+      "text": "Qual o resultado do exame de troponina?",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 83,
+      "timestamp": "2026-09-20T14:15:31.382Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 84,
+      "timestamp": "2026-09-20T14:15:31.382Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 85,
+      "timestamp": "2026-09-20T14:15:31.382Z",
+      "type": "provider_call",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation"
+      }
+    },
+    {
+      "event_id": 86,
+      "timestamp": "2026-09-20T14:15:34.178Z",
+      "type": "message",
+      "role": "system",
+      "text": "Falha na conversa: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 87,
+      "timestamp": "2026-09-20T14:15:52.873Z",
+      "type": "message",
+      "role": "system",
+      "text": "Avaliação encerrada. Score geral: 0/100. Hipótese: 0/100. Conduta: 0/30. Erros: 0.",
+      "data": {
+        "clinical_type": "ENCERRAMENTO"
+      }
+    },
+    {
+      "event_id": 88,
+      "timestamp": "2026-09-20T14:16:11.199Z",
+      "type": "message",
+      "role": "system",
+      "text": "Consultando a camada de evidências configurada...",
+      "data": {
+        "clinical_type": "PESQUISA"
+      }
+    },
+    {
+      "event_id": 89,
+      "timestamp": "2026-09-20T14:16:15.138Z",
+      "type": "message",
+      "role": "system",
+      "text": "Não foi possível consultar o Gemini nesta execução.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 90,
+      "timestamp": "2026-09-20T14:16:15.140Z",
+      "type": "message",
+      "role": "system",
+      "text": "12 registros retornados. PCDT: Hidroxocobalamina na intoxicação aguda por cianeto (Protocolo de Uso) | Leucemia Linfoblástica Aguda Cromossoma Philadelphia Positivo de Crianças e Adolescentes (DDT) | Leucemia Linfoblástica Aguda Ph+ de Adulto com Mesilato de Imatinibe (DDT).",
+      "data": {
+        "clinical_type": "PESQUISA"
+      }
+    },
+    {
+      "event_id": 91,
+      "timestamp": "2026-09-20T14:17:35.298Z",
+      "type": "manual_download_requested",
+      "role": "system",
+      "text": null,
+      "data": {
+        "event_count_before_download": 90
+      }
+    },
+    {
+      "event_id": 92,
+      "timestamp": "2026-09-20T14:17:35.298Z",
+      "type": "log_downloaded",
+      "role": "system",
+      "text": null,
+      "data": {
+        "filename": "conversation_2026-09-20T14-17-35-298Z.json"
+      }
+    }
+  ]
+}
