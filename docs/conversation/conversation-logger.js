@@ -156,6 +156,7 @@
 
         download(filename) {
             const safeName = filename || ("conversation_" + new Date().toISOString().replace(/[:.]/g, "-") + ".json");
+            this.logEvent("log_downloaded", { filename: safeName });
             const blob = new Blob([this.exportJSON(true)], { type: "application/json;charset=utf-8" });
             const url = URL.createObjectURL(blob);
             const anchor = document.createElement("a");
@@ -165,7 +166,6 @@
             anchor.click();
             anchor.remove();
             setTimeout(() => URL.revokeObjectURL(url), 1000);
-            this.logEvent("log_downloaded", { filename: anchor.download });
             return anchor.download;
         }
 
