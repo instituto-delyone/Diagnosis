@@ -1,0 +1,42 @@
+{
+  "schema": "Diagnosis/ECG/knowledge/ecg_rhythm_rules",
+  "version": "0.1.0",
+  "source": {
+    "document": "Medeletro",
+    "type": "source_derived",
+    "note": "Estrutura de implementação construída a partir do curso Medeletro. Não substitui o material original nem acrescenta critérios externos silenciosamente."
+  },
+  "sinus_rhythm": {
+    "criterion": {
+      "P_positive_in": [
+        "DII",
+        "DI",
+        "aVF"
+      ]
+    }
+  },
+  "rate_methods": {
+    "rule_1500": {
+      "formula": "FC = 1500 / número de quadradinhos entre RR",
+      "paper_speed_mm_s": 25
+    },
+    "rule_300": {
+      "formula": "FC = 300 / número de quadradões entre RR",
+      "paper_speed_mm_s": 25
+    },
+    "rule_3_seconds": {
+      "formula": "FC = número de R em 15 quadradões × 20",
+      "preferred_when": "ritmo irregular"
+    }
+  },
+  "resting_rate": {
+    "usual_bpm": [
+      60,
+      100
+    ],
+    "alternative_reference_cited": [
+      50,
+      99
+    ]
+  }
+}

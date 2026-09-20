@@ -1,0 +1,84 @@
+{
+  "schema": "Diagnosis/ECG/knowledge/ecg_artifacts",
+  "version": "0.1.0",
+  "source": {
+    "document": "Medeletro",
+    "type": "source_derived",
+    "note": "Estrutura de implementação construída a partir do curso Medeletro. Não substitui o material original nem acrescenta critérios externos silenciosamente."
+  },
+  "technical_problems": [
+    {
+      "id": "upper_limb_lead_reversal",
+      "name": "Troca entre eletrodos dos membros superiores",
+      "clues": [
+        "P e QRS negativos em DI",
+        "aVR positivo"
+      ],
+      "differential_note": "Diferenciar de dextrocardia pela progressão da onda R em V1–V6 e exame do precórdio."
+    },
+    {
+      "id": "upper_lower_lead_reversal_right",
+      "name": "Troca braço direito/perna direita",
+      "clues": [
+        "sinal reduzido em DII",
+        "DI e DIII passam a construir imagens em espelho"
+      ]
+    },
+    {
+      "id": "upper_lower_lead_reversal_left",
+      "name": "Troca braço esquerdo/perna esquerda",
+      "clues": [
+        "reversão DI/DII",
+        "inversão DIII",
+        "reversão aVL/aVF",
+        "aVR não se altera"
+      ]
+    },
+    {
+      "id": "movement_artifact",
+      "name": "Artefato de movimento",
+      "clues": [
+        "linha de base ondulada e irregular",
+        "mais evidente nas derivações dos membros"
+      ]
+    },
+    {
+      "id": "baseline_wander",
+      "name": "Fuga da linha de base",
+      "clues": [
+        "linha de base deslocada/instável"
+      ],
+      "contexts": [
+        "após colocação de derivação",
+        "após cardioversão",
+        "movimento torácico durante respiração",
+        "eletrodo sobre estrutura óssea"
+      ]
+    },
+    {
+      "id": "electrical_interference",
+      "name": "Interferência elétrica",
+      "clues": [
+        "linha de base mais grossa e irregular",
+        "presente em todas as derivações"
+      ],
+      "contexts": [
+        "dispositivos elétricos próximos",
+        "linhas elétricas",
+        "telefonia celular"
+      ]
+    },
+    {
+      "id": "weak_signal",
+      "name": "Sinal fraco",
+      "clues": [
+        "amplitude pequena ou sinal reduzido"
+      ],
+      "possible_technical_causes": [
+        "eletrodos mal posicionados",
+        "cabos danificados"
+      ],
+      "course_action": "Quando relacionado à amplitude inadequada, considerar novo registro com nova detecção de voltagem."
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "schema": "Diagnosis/ECG/knowledge/ecg_variants",
+  "version": "0.1.0",
+  "source": {
+    "document": "Medeletro",
+    "type": "source_derived",
+    "note": "Estrutura de implementação construída a partir do curso Medeletro. Não substitui o material original nem acrescenta critérios externos silenciosamente."
+  },
+  "variants": [
+    {
+      "id": "cardiac_rotations",
+      "name": "Rotações cardíacas",
+      "types": [
+        "horizontalizacao",
+        "verticalizacao",
+        "rotacao_horaria",
+        "rotacao_anti_horaria"
+      ],
+      "features": [
+        "podem modificar o QRS no plano frontal",
+        "podem modificar a zona de transição no plano horizontal"
+      ]
+    },
+    {
+      "id": "juvenile_pattern",
+      "name": "Padrão juvenil",
+      "features": [
+        "inversão da onda T em V1–V3, eventualmente V4"
+      ],
+      "population_context": "principalmente infância/adolescência; pode persistir em alguns adultos jovens"
+    },
+    {
+      "id": "early_repolarization",
+      "name": "Repolarização precoce / padrão de vagotonia",
+      "features": [
+        "bradicardia sinusal",
+        "supradesnivelamento de ST até 4 mm com concavidade para cima em V3–V5",
+        "onda T alta, apiculada e simétrica",
+        "entalhe no final da onda R"
+      ]
+    },
+    {
+      "id": "athlete_heart",
+      "name": "Coração do atleta",
+      "features": [
+        "bradicardia relacionada ao aumento do tônus vagal",
+        "podem ocorrer graus variados de bloqueio AV",
+        "aumento das amplitudes de P e QRS pode ocorrer"
+      ],
+      "context_rule": "O curso ressalta a necessidade de interpretar o ECG junto ao contexto clínico."
+    }
+  ]
+}

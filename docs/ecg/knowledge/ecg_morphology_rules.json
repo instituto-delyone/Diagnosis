@@ -1,0 +1,32 @@
+{
+  "schema": "Diagnosis/ECG/knowledge/ecg_morphology_rules",
+  "version": "0.1.0",
+  "source": {
+    "document": "Medeletro",
+    "type": "source_derived",
+    "note": "Estrutura de implementação construída a partir do curso Medeletro. Não substitui o material original nem acrescenta critérios externos silenciosamente."
+  },
+  "qrs_nomenclature": {
+    "Q": "primeira onda negativa que antecede R",
+    "R": "primeira onda positiva",
+    "S": "onda negativa que sucede R",
+    "R_prime": "segunda onda positiva",
+    "S_prime": "onda negativa que sucede R'",
+    "QS": "complexo sem onda R, portanto totalmente negativo",
+    "capitalization": "onda de maior área recebe letra maiúscula; menor área, minúscula; áreas iguais, ambas maiúsculas"
+  },
+  "normal_progression": {
+    "precordial": "QRS gradualmente mais positivo de V1 para V6",
+    "transition_zone": "geralmente V3 ou V4"
+  },
+  "st": {
+    "primary_observation": "nível do ponto J em relação à linha de base do PR",
+    "minor_shift": "desnivelamentos menores que 1 mm podem ocorrer em pessoas normais",
+    "normal_variant_context": "concavidade para cima pode ocorrer especialmente em V2–V4 em jovens do sexo masculino e na repolarização precoce"
+  },
+  "t": {
+    "normal_shape": "assimétrica, ascensão lenta e queda mais rápida",
+    "usual_relation_to_qrs": "geralmente mesma polaridade do QRS na derivação",
+    "exception_context": "DIII, aVL e precordiais direitas podem apresentar orientação oposta ou isodifásica sem necessariamente significar patologia"
+  }
+}

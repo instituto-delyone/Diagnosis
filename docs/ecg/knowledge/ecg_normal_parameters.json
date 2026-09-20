@@ -1,0 +1,83 @@
+{
+  "schema": "Diagnosis/ECG/knowledge/ecg_normal_parameters",
+  "version": "0.1.0",
+  "source": {
+    "document": "Medeletro",
+    "type": "source_derived",
+    "note": "Estrutura de implementação construída a partir do curso Medeletro. Não substitui o material original nem acrescenta critérios externos silenciosamente."
+  },
+  "waves": {
+    "P": {
+      "meaning": "despolarização atrial",
+      "axis_deg": {
+        "min": 0,
+        "max": 90
+      },
+      "DII": {
+        "shape": "monofásica, positiva e arredondada",
+        "max_duration_ms": 100,
+        "max_amplitude_mm": 2.5
+      },
+      "V1": {
+        "shape": "bifásica",
+        "max_positive_amplitude_mm": 1.5
+      },
+      "frontal_polarity": {
+        "DI": "positive",
+        "DII": "positive",
+        "aVF": "positive",
+        "aVR": "negative",
+        "DIII": "variable",
+        "aVL": "variable"
+      }
+    },
+    "Q": {
+      "max_duration_ms": 40,
+      "max_amplitude_fraction_of_R": 0.3333333333
+    },
+    "QRS": {
+      "axis_deg": {
+        "min": -30,
+        "max": 90
+      },
+      "duration_ms": {
+        "preferred_upper": 100,
+        "absolute_upper": 120
+      },
+      "amplitude_mm": {
+        "frontal_min": 5,
+        "precordial_min": 10,
+        "note": "O curso também apresenta faixas usuais de 5–20 mm no plano frontal e 10–30 mm no horizontal."
+      },
+      "horizontal_progression": "Gradualmente mais positivo de V1 a V6; zona de transição geralmente em V3/V4."
+    },
+    "T": {
+      "axis_deg": {
+        "min": 0,
+        "max": 90
+      },
+      "shape": "monofásica e assimétrica",
+      "typical_amplitude_relative_to_QRS": "10–30%",
+      "formal_duration_or_amplitude_criteria": "não definidos no material"
+    },
+    "U": {
+      "frequency_in_population_percent": "40–50%",
+      "best_seen_in": [
+        "V2",
+        "V3"
+      ],
+      "max_amplitude_fraction_of_T": 0.25,
+      "normal_polarity": "mesma polaridade da onda T"
+    }
+  },
+  "rhythm": {
+    "sinus": {
+      "criterion": "onda P positiva em DII e também em DI e aVF",
+      "resting_rate_bpm": {
+        "min": 60,
+        "max": 100
+      },
+      "note": "O material cita também referências que usam 50–99 bpm em vigília."
+    }
+  }
+}

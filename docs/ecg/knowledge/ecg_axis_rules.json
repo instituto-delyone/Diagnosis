@@ -1,0 +1,72 @@
+{
+  "schema": "Diagnosis/ECG/knowledge/ecg_axis_rules",
+  "version": "0.1.0",
+  "source": {
+    "document": "Medeletro",
+    "type": "source_derived",
+    "note": "Estrutura de implementação construída a partir do curso Medeletro. Não substitui o material original nem acrescenta critérios externos silenciosamente."
+  },
+  "method": {
+    "primary_leads": [
+      "DI",
+      "aVF"
+    ],
+    "quadrants": [
+      {
+        "DI": "positive",
+        "aVF": "positive",
+        "range_deg": [
+          0,
+          90
+        ]
+      },
+      {
+        "DI": "positive",
+        "aVF": "negative",
+        "range_deg": [
+          -90,
+          0
+        ]
+      },
+      {
+        "DI": "negative",
+        "aVF": "negative",
+        "range_deg": [
+          -180,
+          -90
+        ]
+      },
+      {
+        "DI": "negative",
+        "aVF": "positive",
+        "range_deg": [
+          90,
+          180
+        ]
+      }
+    ],
+    "refinement": "Após determinar o quadrante, procurar derivação isoelétrica e usar a derivação perpendicular para estimar o eixo."
+  },
+  "qrs_normal": {
+    "range_deg": [
+      -30,
+      90
+    ],
+    "typical_deg": 60
+  },
+  "p_axis": {
+    "range_deg": [
+      0,
+      90
+    ],
+    "typical_deg": 60
+  },
+  "t_axis": {
+    "range_deg": [
+      0,
+      90
+    ],
+    "typical_deg": 45
+  },
+  "source_section": "Sistema hexaxial / análise do eixo / complexo QRS"
+}

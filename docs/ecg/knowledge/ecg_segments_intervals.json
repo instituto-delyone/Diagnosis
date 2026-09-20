@@ -1,0 +1,67 @@
+{
+  "schema": "Diagnosis/ECG/knowledge/ecg_segments_intervals",
+  "version": "0.1.0",
+  "source": {
+    "document": "Medeletro",
+    "type": "source_derived",
+    "note": "Estrutura de implementação construída a partir do curso Medeletro. Não substitui o material original nem acrescenta critérios externos silenciosamente."
+  },
+  "components": {
+    "PR_segment": {
+      "type": "segment",
+      "definition": "Linha isoelétrica do fim da onda P ao início do QRS.",
+      "physiologic_context": "Condução do estímulo pelo sistema atrioventricular descrita no curso.",
+      "analysis": [
+        "nivel_vs_linha_de_base",
+        "duracao"
+      ],
+      "source_section": "Intervalo e segmento PR"
+    },
+    "PR_interval": {
+      "type": "interval",
+      "definition": "Do início da onda P ao início do complexo QRS.",
+      "normal_ms": {
+        "min": 120,
+        "max": 200
+      },
+      "normal_small_squares": {
+        "min": 3,
+        "max": 5
+      },
+      "source_section": "Intervalo e segmento PR"
+    },
+    "QRS": {
+      "type": "complex",
+      "definition": "Despolarização ventricular; termina no ponto J.",
+      "normal_duration_ms": {
+        "preferred_upper": 100,
+        "absolute_upper": 120
+      },
+      "normal_small_squares": {
+        "preferred_upper": 2.5,
+        "absolute_upper": 3
+      },
+      "source_section": "Complexo QRS"
+    },
+    "ST_segment": {
+      "type": "segment",
+      "definition": "Do ponto J à onda T; analisado principalmente por forma e desnível em relação à linha de base definida pelo PR.",
+      "duration": "Sem duração normal bem estabelecida no material.",
+      "source_section": "Segmento ST"
+    },
+    "QT_interval": {
+      "type": "interval",
+      "definition": "Início do QRS ao fim da onda T; engloba QRS, ST e T.",
+      "preferred_leads": [
+        "DII",
+        "V5"
+      ],
+      "rate_dependence": "Duração varia inversamente com a frequência cardíaca.",
+      "qtc_bazett": "QTc = QT / sqrt(RR), com RR em segundos.",
+      "normal_qtc_upper_ms": 440,
+      "quick_rule": "Entre 60 e 100 bpm, QT deve ser menor que metade do RR.",
+      "measurement_method": "Usar linha de base pelo segmento PR e tangente à descida da onda T.",
+      "source_section": "Intervalo QT"
+    }
+  }
+}
