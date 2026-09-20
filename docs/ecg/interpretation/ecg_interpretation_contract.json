@@ -1,0 +1,6 @@
+{
+  "schema":"Diagnosis/ECG/interpretation/contract","version":"0.1.0",
+  "principle":"Separar detecção, medição, comparação com parâmetros e interpretação.",
+  "required_sequence":["validate_recording","measure_rate","assess_rhythm","assess_qrs_axis","measure_intervals","assess_waves","assess_segments","assess_precordial_progression","contextualize_variants","report"],
+  "guardrails":["Não concluir diagnóstico a partir de um único atributo isolado.","Verificar velocidade e ganho antes de usar medidas em quadradinhos.","Diferenciar artefato técnico de alteração biológica.","Registrar quando o material-fonte não fornece critério quantitativo."]
+}
