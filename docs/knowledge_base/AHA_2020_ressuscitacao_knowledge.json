@@ -1,0 +1,71 @@
+{
+  "id": "aha_cpr_ecc_2020_highlights",
+  "version": "2020",
+  "language": "pt-BR",
+  "source": {
+    "title": "Destaques das Diretrizes de RCP e ACE de 2020 da American Heart Association",
+    "scope": [
+      "adultos",
+      "pediatria",
+      "neonatal",
+      "educação em ressuscitação",
+      "sistemas de tratamento"
+    ],
+    "note": "Estrutura derivada do PDF enviado. Não substitui a diretriz original nem atualizações posteriores."
+  },
+  "knowledge_map": {
+    "adultos": {
+      "principais_conceitos": [
+        "RCP imediata por leigos",
+        "ênfase na administração precoce de epinefrina",
+        "feedback audiovisual para qualidade da RCP",
+        "monitoramento fisiológico com pressão arterial e ETCO2 quando viável",
+        "acesso IV preferido e IO como alternativa quando IV não está disponível ou é inviável",
+        "cuidados pós-PCR e neuroprognóstico multimodal"
+      ],
+      "ritmos": [
+        "chocável",
+        "não_chocável"
+      ]
+    },
+    "pediatria": {
+      "principais_conceitos": [
+        "SBVP e SAVP integrados",
+        "ventilação de resgate conforme contexto",
+        "epinefrina precoce",
+        "pressão arterial contínua quando disponível para avaliar qualidade da RCP",
+        "monitoramento e tratamento de convulsões após RCE",
+        "atenção a choque, overdose de opioides e miocardite"
+      ]
+    },
+    "neonatal": {
+      "principais_conceitos": [
+        "antecipação e preparação",
+        "prevenção de hipotermia",
+        "ventilação pulmonar como prioridade quando necessária",
+        "frequência cardíaca como indicador central de resposta",
+        "oximetria para orientar oxigenoterapia",
+        "ECG para monitorar resposta da frequência cardíaca durante compressões e medicações",
+        "via venosa umbilical como acesso preferencial quando necessário"
+      ]
+    },
+    "educacao": [
+      "prática deliberada",
+      "aprendizagem para o domínio",
+      "feedback imediato",
+      "treinamento de reforço",
+      "aprendizagem espaçada",
+      "simulação in situ",
+      "aprendizagem gamificada",
+      "realidade virtual"
+    ],
+    "sistemas": [
+      "cadeia de sobrevivência",
+      "recuperação",
+      "debriefing estruturado",
+      "coleta estruturada de dados",
+      "feedback de equipe",
+      "melhoria contínua"
+    ]
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "id": "diagnosis_resuscitation_monitor_profiles",
+  "schema_version": "0.1.0",
+  "source": {
+    "basis": "AHA 2020 Highlights enviado pelo usuário",
+    "note": "O PDF fornece categorias clínicas e algoritmos, mas não traçados digitais completos de ECG. As formas de onda devem ser uma biblioteca separada."
+  },
+  "channels": {
+    "ecg": {
+      "enabled": true,
+      "default_lead": "II",
+      "role": "ritmo e frequência cardíaca"
+    },
+    "spo2": {
+      "enabled": true,
+      "unit": "%",
+      "role": "oxigenação"
+    },
+    "blood_pressure": {
+      "enabled": true,
+      "unit": "mmHg",
+      "role": "hemodinâmica"
+    },
+    "etco2": {
+      "enabled": true,
+      "unit": "mmHg",
+      "role": "ventilação e qualidade da RCP"
+    },
+    "temperature": {
+      "enabled": true,
+      "unit": "°C",
+      "role": "estado fisiológico"
+    }
+  },
+  "states": [
+    {
+      "id": "stable",
+      "label": "Estável",
+      "ecg_semantics": "sinus"
+    },
+    {
+      "id": "bradycardia",
+      "label": "Bradicardia",
+      "ecg_semantics": "bradycardia"
+    },
+    {
+      "id": "tachycardia",
+      "label": "Taquicardia",
+      "ecg_semantics": "tachycardia"
+    },
+    {
+      "id": "shockable",
+      "label": "Ritmo chocável",
+      "ecg_semantics": "shockable"
+    },
+    {
+      "id": "non_shockable",
+      "label": "Ritmo não chocável",
+      "ecg_semantics": "non_shockable"
+    },
+    {
+      "id": "rosc",
+      "label": "Retorno da circulação espontânea",
+      "ecg_semantics": "post_rosc"
+    }
+  ],
+  "event_bindings": [
+    {
+      "event": "start_cpr",
+      "effects": [
+        "ecg_state_transition",
+        "etco2_monitoring",
+        "blood_pressure_monitoring"
+      ]
+    },
+    {
+      "event": "defibrillation",
+      "effects": [
+        "ecg_state_transition"
+      ]
+    },
+    {
+      "event": "epinephrine",
+      "effects": [
+        "timestamp_event",
+        "state_transition_possible"
+      ]
+    },
+    {
+      "event": "rosc",
+      "effects": [
+        "post_cardiac_arrest_mode"
+      ]
+    },
+    {
+      "event": "transfer_icu",
+      "effects": [
+        "monitoring_continuity"
+      ]
+    }
+  ],
+  "rendering_principles": [
+    "O estado clínico simulado deve dirigir o monitor.",
+    "O ECG visual deve ser separado da semântica clínica.",
+    "Eventos clínicos devem produzir transições observáveis.",
+    "Sinais simulados devem ser identificados como simulação."
+  ]
+}
