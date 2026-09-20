@@ -1,0 +1,8 @@
+{
+  "schema":"Diagnosis/ECG/render/ecg_render_schema","version":"0.1.0",
+  "purpose":"Contrato para renderização visual de traçados ECG.",
+  "canvas":{"paper_grid":true,"time_axis":"ms","amplitude_axis":"mV"},
+  "input":["paper_speed_mm_s","gain","lead","waveform"],
+  "rules":["Velocidade controla escala horizontal.","Ganho controla escala vertical.","A forma fisiológica do ciclo deve ser independente da escala visual."],
+  "planned_output":{"format":"SVG","layers":["grid","baseline","waveform","labels","calibration"]}
+}
