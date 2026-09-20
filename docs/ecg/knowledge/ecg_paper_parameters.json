@@ -1,0 +1,109 @@
+{
+  "schema": "Diagnosis/ECG/knowledge/ecg_paper_parameters",
+  "version": "0.1.0",
+  "status": "source_derived",
+  "purpose": "Parâmetros técnicos do papel e da calibração do ECG estruturados para uso pelo módulo ECG do Diagnosis/JACKNOSIS.",
+  "source": {
+    "document": "Medeletro",
+    "scope": "Conteúdo do curso utilizado como fonte primária nesta etapa.",
+    "pages": "bloco de papel, velocidade e calibração identificado no mapa de fontes",
+    "note": "A estrutura JSON é uma adaptação de implementação. Os parâmetros abaixo devem permanecer rastreáveis ao material-fonte."
+  },
+  "paper": {
+    "standard_speed_mm_per_s": 25,
+    "alternative_speed_mm_per_s": 50,
+    "time_scale_at_25_mm_per_s": {
+      "one_small_square_mm": {
+        "time_ms": 40
+      },
+      "one_large_square_5mm": {
+        "time_ms": 200
+      }
+    },
+    "time_scale_at_50_mm_per_s": {
+      "one_small_square_mm": {
+        "time_ms": 20
+      },
+      "one_large_square_5mm": {
+        "time_ms": 100
+      }
+    }
+  },
+  "amplitude": {
+    "standard_calibration": {
+      "gain_label": "N",
+      "mm_per_mV": 10,
+      "mV_per_10mm": 1
+    },
+    "half_gain": {
+      "gain_label": "N/2",
+      "mm_per_mV": 5,
+      "mV_per_5mm": 1
+    },
+    "double_gain": {
+      "gain_label": "2N",
+      "mm_per_mV": 20,
+      "mV_per_20mm": 1
+    }
+  },
+  "grid": {
+    "small_square": {
+      "width_mm": 1,
+      "height_mm": 1,
+      "time_ms_at_25_mm_per_s": 40,
+      "amplitude_mV_at_N": 0.1
+    },
+    "large_square": {
+      "width_mm": 5,
+      "height_mm": 5,
+      "time_ms_at_25_mm_per_s": 200,
+      "amplitude_mV_at_N": 0.5
+    }
+  },
+  "derived_relationships": {
+    "time_from_small_squares_at_25_mm_per_s": "small_squares * 40 ms",
+    "time_from_large_squares_at_25_mm_per_s": "large_squares * 200 ms",
+    "amplitude_from_small_vertical_squares_at_N": "small_squares * 0.1 mV",
+    "amplitude_from_large_vertical_squares_at_N": "large_squares * 0.5 mV"
+  },
+  "rendering": {
+    "default_speed_mm_per_s": 25,
+    "default_gain": "N",
+    "units": {
+      "time": "ms",
+      "amplitude": "mV",
+      "paper_distance": "mm"
+    },
+    "important": [
+      "A renderização deve separar escala temporal de escala de amplitude.",
+      "Alterar a velocidade do papel não deve alterar a amplitude do sinal.",
+      "Alterar o ganho não deve alterar a duração temporal do ciclo."
+    ]
+  },
+  "validation": {
+    "required_inputs": [
+      "paper_speed_mm_per_s",
+      "gain",
+      "signal_amplitude_mV",
+      "signal_duration_ms"
+    ],
+    "accepted_speeds_mm_per_s": [
+      25,
+      50
+    ],
+    "accepted_gains": [
+      "N",
+      "N/2",
+      "2N"
+    ]
+  },
+  "implementation_notes": {
+    "next_dependencies": [
+      "ecg_waves.json",
+      "ecg_segments_intervals.json",
+      "ecg_waveform_schema.json",
+      "ecg_signal_parameters.json"
+    ],
+    "scope_boundary": "Este arquivo descreve a escala física/técnica do registro; não contém regras diagnósticas."
+  }
+}
