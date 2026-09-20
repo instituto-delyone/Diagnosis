@@ -1901,7 +1901,7 @@
                 selectedSpecialty = button.dataset.specialty || "todos";
                 specialtyGrid.querySelectorAll("[data-specialty]").forEach(item => item.classList.remove("active"));
                 button.classList.add("active");
-                subtitle.textContent = "Foco selecionado: " + specialtyLabel(selectedSpecialty) + ". Preparando três casos completos...";
+                subtitle.textContent = "Foco selecionado: " + specialtyLabel(selectedSpecialty) + ". Preparando os casos disponíveis...";
                 prepareCases(window.idmtEngine, false, selectedSpecialty).catch(error => {
                     errorRoot.textContent = "Não foi possível preparar os casos: " + (error.message || String(error));
                     errorRoot.classList.remove("prep-hidden");
@@ -1942,7 +1942,7 @@
         }).join("");
 
         cardsRoot.classList.remove("prep-hidden");
-        subtitle.textContent = "Três casos foram preparados. Escolha um para iniciar a investigação.";
+        subtitle.textContent = prepared.length + (prepared.length === 1 ? " caso foi preparado" : " casos foram preparados") + ". Escolha um para iniciar a investigação.";
 
         cardsRoot.querySelectorAll("[data-case-index]").forEach(card => {
             card.addEventListener("click", () => {
@@ -2008,7 +2008,7 @@
 
             bindSpecialtySelector();
             specialtyRoot?.classList.remove("prep-hidden");
-            subtitle.textContent = "Escolha uma especialidade para gerar três casos clínicos completos.";
+            subtitle.textContent = "Escolha uma especialidade para gerar os casos clínicos disponíveis.";
             
             engine.startNewCase = async function () {
                 engine.finalizeHypothesis?.();
@@ -2024,7 +2024,7 @@
             };
         } catch (error) {
             engine.startNewCase = originalStartNewCase;
-            errorRoot.textContent = "Não foi possível preparar os três casos: " + (error.message || String(error));
+            errorRoot.textContent = "Não foi possível preparar os casos: " + (error.message || String(error));
             errorRoot.classList.remove("prep-hidden");
             subtitle.textContent = "A conversa permanece bloqueada até que a preparação clínica seja concluída.";
             statusRow("preparação", "erro", error.message || String(error));
@@ -2048,9 +2048,9 @@
 
         if (!fromNextCase) {
             statusRow("foco", "selecionado", specialtyLabel(selectedSpecialty));
-            statusRow("três casos", "pronto", "casos completos e validados");
+            statusRow("casos", "pronto", prepared.length + " caso(s) completo(s) e validado(s)");
         } else {
-            statusRow("três casos", "renovado", "novo conjunto preparado");
+            statusRow("casos", "renovado", prepared.length + " caso(s) preparado(s)");
 
             const previous = engine.__lastHypothesisResult;
             if (previous) {
