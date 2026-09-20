@@ -160,7 +160,8 @@
 
             return {
                 id: "kb_" + this.slug(sourcePath.replace(/\.json$/, "")) + "_" + this.slug(concept) + "_" + index,
-                primary_concept: item?.id || concept,
+                primary_concept: concept,
+                concept_id: item?.id || null,
                 title: concept,
                 difficulty: item?.difficulty?.base
                     ? ({1:"Básica",2:"Básica",3:"Intermediária",4:"Avançada",5:"Avançada"}[item.difficulty.base] || "Intermediária")
