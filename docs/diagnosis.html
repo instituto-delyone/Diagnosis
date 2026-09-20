@@ -242,6 +242,9 @@
             letter-spacing: 0.04em;
         }
 
+        .ecg-track { transform: translateX(0); }
+        .ecg-track path { transition: d 0.18s ease; }
+
         @keyframes ecgScroll {
             from { transform: translateX(0); }
             to { transform: translateX(-50%); }
@@ -1320,9 +1323,8 @@
 
         <div class="ecg-window">
             <div class="ecg-baseline"></div>
-            <svg class="ecg-track" viewBox="0 0 2400 132" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M0 66 L90 66 L105 65 L118 67 L130 66 L145 66 L154 64 L160 68 L166 66 L176 66 L184 65 L192 66 L205 66 L214 66 L222 66 L232 65 L240 66 L252 66 L260 64 L266 68 L272 66 L282 66 L292 65 L302 66 L315 66 L325 66 L336 66 L345 65 L352 66 L360 66 L368 66 L374 62 L378 70 L382 66 L388 66 L398 66 L410 66 L420 65 L432 66 L445 66 L456 66 L468 66 L478 66 L488 66 L498 66 L506 65 L514 67 L520 66 L528 66 L538 66 L548 66 L558 65 L566 66 L574 66 L582 65 L590 66 L598 66 L606 66 L612 62 L616 70 L620 66 L626 66 L638 66 L650 65 L662 66 L674 66 L688 66 L700 66 L712 66 L724 66 L736 66 L748 65 L756 67 L762 66 L770 66 L780 66 L790 66 L800 65 L808 66 L816 66 L824 65 L832 66 L840 66 L850 66 L858 66 L866 65 L874 66 L882 66 L890 66 L898 66 L906 65 L914 66 L922 66 L930 66 L938 65 L946 66 L954 66 L962 66 L970 65 L978 66 L986 66 L994 66 L1002 65 L1010 66 L1018 66 L1026 66 L1034 65 L1042 66 L1050 66 L1058 66 L1066 65 L1074 66 L1082 66 L1090 66 L1098 65 L1106 66 L1114 66 L1122 66 L1130 65 L1138 66 L1146 66 L1154 66 L1162 65 L1170 66 L1178 66 L1186 66 L1194 65 L1200 66
-                M1200 66 L1290 66 L1305 65 L1318 67 L1330 66 L1345 66 L1354 64 L1360 68 L1366 66 L1376 66 L1384 65 L1392 66 L1405 66 L1414 66 L1422 66 L1432 65 L1440 66 L1452 66 L1460 64 L1466 68 L1472 66 L1482 66 L1492 65 L1502 66 L1515 66 L1525 66 L1536 66 L1545 65 L1552 66 L1560 66 L1568 66 L1574 62 L1578 70 L1582 66 L1588 66 L1598 66 L1610 66 L1620 65 L1632 66 L1645 66 L1656 66 L1668 66 L1678 66 L1688 66 L1698 66 L1706 65 L1714 67 L1720 66 L1728 66 L1738 66 L1748 66 L1758 65 L1766 66 L1774 66 L1782 65 L1790 66 L1798 66 L1806 66 L1812 62 L1816 70 L1820 66 L1826 66 L1838 66 L1850 65 L1862 66 L1874 66 L1888 66 L1900 66 L1912 66 L1924 66 L1936 66 L1948 65 L1956 67 L1962 66 L1970 66 L1980 66 L1990 66 L2000 65 L2008 66 L2016 66 L2024 65 L2032 66 L2040 66 L2050 66 L2058 66 L2066 65 L2074 66 L2082 66 L2090 66 L2098 65 L2106 66 L2114 66 L2122 66 L2130 65 L2138 66 L2146 66 L2154 66 L2162 65 L2170 66 L2178 66 L2186 66 L2194 65 L2202 66 L2210 66 L2218 66 L2226 65 L2234 66 L2242 66 L2250 66 L2258 65 L2266 66 L2274 66 L2282 66 L2290 65 L2298 66 L2306 66 L2314 65 L2322 66 L2330 66 L2338 66 L2346 65 L2354 66 L2362 66 L2370 66 L2378 65 L2386 66 L2394 66 L2400 66"/>
+            <svg id="ecgTrackSvg" class="ecg-track" viewBox="0 0 2400 132" preserveAspectRatio="none" aria-hidden="true">
+                <path id="ecgSignalPath" d="M0 66 L2400 66"></path>
             </svg>
         </div>
 
@@ -1980,6 +1982,44 @@
      * Este bloco apenas mantém alguns elementos auxiliares
      * sincronizados caso o engine atualize os IDs principais.
      */
+
+<script type="module">
+import { generateRepeatedSinus } from "./ecg/engine/ecg-signal-generator.js";
+
+(function initLiveECG() {
+    const fcElement = document.getElementById("fc");
+    const path = document.getElementById("ecgSignalPath");
+    const svg = document.getElementById("ecgTrackSvg");
+    if (!fcElement || !path || !svg) return;
+
+    const WINDOW_WIDTH = 2400;
+    const BASELINE = 66;
+    let lastRate = null;
+
+    function readRate() {
+        const match = (fcElement.textContent || "").match(/\d+(?:\.\d+)?/);
+        return match ? Number(match[0]) : null;
+    }
+
+    function render(rate) {
+        if (!Number.isFinite(rate) || rate <= 0 || rate === lastRate) return;
+        lastRate = rate;
+        const data = generateRepeatedSinus({ heartRate: rate, cycles: 8, sampleRateHz: 500 });
+        const maxT = data.points.at(-1)?.t_ms || data.rr_ms;
+        const d = data.points.map((point, index) => {
+            const x = (point.t_ms / maxT) * WINDOW_WIDTH;
+            const y = BASELINE - point.amplitude_mV * 32;
+            return (index ? "L" : "M") + x.toFixed(2) + " " + y.toFixed(2);
+        }).join(" ");
+        path.setAttribute("d", d);
+        svg.dataset.heartRate = String(rate);
+    }
+
+    const observer = new MutationObserver(() => render(readRate()));
+    observer.observe(fcElement, { childList: true, characterData: true, subtree: true });
+    render(readRate());
+})();
+</script>
 
     document.addEventListener("DOMContentLoaded", () => {
 
