@@ -1,0 +1,239 @@
+{
+  "schema": "Diagnosis/ECG/knowledge/ecg_leads",
+  "version": "0.1.0",
+  "status": "source_derived",
+  "purpose": "Estruturação inicial do conhecimento sobre derivações eletrocardiográficas para o módulo ECG do Diagnosis/JACKNOSIS.",
+  "source": {
+    "document": "Medeletro",
+    "scope": "Conteúdo do curso utilizado como fonte primária para esta etapa.",
+    "pages": "6–26",
+    "note": "A organização em JSON é uma adaptação de implementação; não representa uma transcrição integral do material."
+  },
+  "frontal_plane": {
+    "description": "Derivações dos membros utilizadas para observar o plano frontal.",
+    "bipolar": [
+      {
+        "id": "DI",
+        "name": "Derivação I",
+        "type": "bipolar",
+        "electrodes": {
+          "negative": "braço direito",
+          "positive": "braço esquerdo"
+        },
+        "source_pages": [
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "id": "DII",
+        "name": "Derivação II",
+        "type": "bipolar",
+        "electrodes": {
+          "negative": "braço direito",
+          "positive": "perna esquerda"
+        },
+        "source_pages": [
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "id": "DIII",
+        "name": "Derivação III",
+        "type": "bipolar",
+        "electrodes": {
+          "negative": "braço esquerdo",
+          "positive": "perna esquerda"
+        },
+        "source_pages": [
+          6,
+          7,
+          8
+        ]
+      }
+    ],
+    "augmented": [
+      {
+        "id": "aVR",
+        "name": "aVR",
+        "type": "unipolar_aumentada",
+        "positive_reference": "braço direito",
+        "source_pages": [
+          9,
+          10
+        ]
+      },
+      {
+        "id": "aVL",
+        "name": "aVL",
+        "type": "unipolar_aumentada",
+        "positive_reference": "braço esquerdo",
+        "source_pages": [
+          9,
+          10
+        ]
+      },
+      {
+        "id": "aVF",
+        "name": "aVF",
+        "type": "unipolar_aumentada",
+        "positive_reference": "perna esquerda",
+        "source_pages": [
+          9,
+          10
+        ]
+      }
+    ],
+    "axis_system": {
+      "name": "Sistema hexaxial",
+      "purpose": "Representação das seis derivações do plano frontal para avaliação do eixo.",
+      "leads": [
+        "DI",
+        "DII",
+        "DIII",
+        "aVR",
+        "aVL",
+        "aVF"
+      ],
+      "source_pages": [
+        11,
+        12,
+        13
+      ]
+    }
+  },
+  "precordial": {
+    "description": "Derivações precordiais utilizadas para observar o plano horizontal.",
+    "standard": [
+      {
+        "id": "V1",
+        "name": "V1",
+        "position": "4º espaço intercostal, borda esternal direita",
+        "source_pages": [
+          14,
+          15
+        ]
+      },
+      {
+        "id": "V2",
+        "name": "V2",
+        "position": "4º espaço intercostal, borda esternal esquerda",
+        "source_pages": [
+          14,
+          15
+        ]
+      },
+      {
+        "id": "V3",
+        "name": "V3",
+        "position": "entre V2 e V4",
+        "source_pages": [
+          14,
+          15
+        ]
+      },
+      {
+        "id": "V4",
+        "name": "V4",
+        "position": "5º espaço intercostal, linha médio-clavicular esquerda",
+        "source_pages": [
+          14,
+          15
+        ]
+      },
+      {
+        "id": "V5",
+        "name": "V5",
+        "position": "mesma linha horizontal de V4, linha axilar anterior esquerda",
+        "source_pages": [
+          14,
+          15
+        ]
+      },
+      {
+        "id": "V6",
+        "name": "V6",
+        "position": "mesma linha horizontal de V4/V5, linha axilar média esquerda",
+        "source_pages": [
+          14,
+          15
+        ]
+      }
+    ],
+    "special": [
+      {
+        "id": "V3R",
+        "name": "V3R",
+        "description": "Derivação precordial direita.",
+        "source_pages": [
+          16,
+          17
+        ]
+      },
+      {
+        "id": "V4R",
+        "name": "V4R",
+        "description": "Derivação precordial direita.",
+        "source_pages": [
+          16,
+          17
+        ]
+      },
+      {
+        "id": "V7",
+        "name": "V7",
+        "description": "Derivação precordial posterior.",
+        "source_pages": [
+          18,
+          19
+        ]
+      },
+      {
+        "id": "V8",
+        "name": "V8",
+        "description": "Derivação precordial posterior.",
+        "source_pages": [
+          18,
+          19
+        ]
+      }
+    ]
+  },
+  "special_lead": {
+    "id": "LEWIS",
+    "name": "Derivação de Lewis",
+    "description": "Configuração especial apresentada no curso para melhor evidenciar a atividade atrial em situações específicas.",
+    "source_pages": [
+      20,
+      21
+    ]
+  },
+  "conceptual_model": {
+    "principles": [
+      "Cada derivação corresponde a uma perspectiva de observação da atividade elétrica cardíaca.",
+      "As derivações dos membros compõem a avaliação no plano frontal.",
+      "As derivações precordiais compõem a avaliação no plano horizontal.",
+      "O sistema hexaxial organiza as derivações do plano frontal para análise do eixo elétrico."
+    ],
+    "source_pages": [
+      6,
+      26
+    ]
+  },
+  "implementation_notes": {
+    "do_not_mix": [
+      "posição física do eletrodo",
+      "derivação resultante",
+      "plano anatômico observado",
+      "regra de interpretação"
+    ],
+    "next_dependencies": [
+      "ecg_paper_parameters.json",
+      "ecg_axis_rules.json",
+      "ecg_waveform_schema.json"
+    ]
+  }
+}
