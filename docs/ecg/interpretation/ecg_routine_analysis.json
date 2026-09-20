@@ -1,0 +1,11 @@
+{
+  "schema":"Diagnosis/ECG/interpretation/routine_analysis","version":"0.1.0","source":{"document":"Medeletro","type":"source_derived"},
+  "routine":[
+    {"step":1,"name":"Frequência cardíaca","methods":["1500","300","3_seconds"]},
+    {"step":2,"name":"Ritmo","checks":["P em DII/DI/aVF","regularidade quando aplicável"]},
+    {"step":3,"name":"Eixo médio do QRS","method":["DI","aVF","isoeletricidade"]},
+    {"step":4,"name":"Intervalos","checks":["PR","QRS","QT/QTc"]},
+    {"step":5,"name":"Ondas","checks":["P","QRS morphology","T","U"]},
+    {"step":6,"name":"Segmentos","checks":["PR","ST"]}
+  ]
+}
