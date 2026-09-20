@@ -1998,7 +1998,10 @@ import { generateRepeatedSinus } from "./ecg/engine/ecg-signal-generator.js";
 
     function readRate() {
         const match = (fcElement.textContent || "").match(/\d+(?:\.\d+)?/);
-        return match ? Number(match[0]) : null;
+        // Enquanto o caso ainda não revelou a FC, o paciente assume
+        // ritmo sinusal basal. Traçados patológicos serão introduzidos
+        // pelo modelo de ritmo quando essa camada estiver conectada.
+        return match ? Number(match[0]) : 72;
     }
 
     function render(rate) {
