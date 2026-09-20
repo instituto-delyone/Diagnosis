@@ -1,0 +1,11 @@
+{
+  "schema":"Diagnosis/ECG/training/cases","version":"0.1.0","source":{"document":"Medeletro","type":"source_derived"},
+  "case_types":[
+    {"id":"lead_identification","task":"Identificar derivações e plano.","source_basis":"Exercícios 1–4 do material."},
+    {"id":"axis_quadrant","task":"Determinar quadrante do eixo usando DI e aVF.","source_basis":"Exercício 5."},
+    {"id":"axis_refinement","task":"Refinar eixo usando derivação isoelétrica e perpendicular.","source_basis":"Exercício 6."},
+    {"id":"heart_rate","task":"Calcular FC por 1500, 300 e 3 segundos.","source_basis":"Seção de avaliação da frequência cardíaca."},
+    {"id":"technical_artifact","task":"Distinguir problemas técnicos de alterações do traçado.","source_basis":"Seção de problemas técnicos."}
+  ],
+  "principle":"Exercícios do curso são tratados como material de treinamento/validação, não como regras diagnósticas novas."
+}
