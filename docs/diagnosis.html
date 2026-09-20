@@ -1991,12 +1991,9 @@
 
         const originalStartNewCase = engine.startNewCase;
         engine.startNewCase = async function () {
-            if (engine.__casePreparationReady && engine.__casePreparation) {
-                engine.finalizeHypothesis?.();
-                engine.__casePreparation.preparedCases = [];
-                await prepareCases(engine, true, selectedSpecialty);
-                return;
-            }
+            // During boot, the original engine asks for a case automatically.
+            // We deliberately intercept that call so the user can choose the specialty first.
+            return;
         };
 
         try {
