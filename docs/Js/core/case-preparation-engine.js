@@ -163,15 +163,16 @@
         (normalizedSpecialty === "todos" || this.specialtyFromCase(item) === normalizedSpecialty)
       );
 
-      if (usable.length < count) {
+      if (!usable.length) {
         throw new Error(
-          "A biblioteca clínica possui apenas " + usable.length +
-          " casos compatíveis com o catálogo jogável; são necessários " + count +
-          "."
+          "A biblioteca clínica não possui casos elegíveis para " +
+          this.specialtyLabel(normalizedSpecialty) + "."
         );
       }
 
-      return shuffle(usable).slice(0, count).map(item => {
+      const targetCount = Math.min(count, usable.length);
+
+      return shuffle(usable).slice(0, targetCount).map(item => {
         const copy = clone(item);
         copy.specialty = this.specialtyFromCase(copy);
         copy.specialty_label = this.specialtyLabel(copy.specialty);
@@ -310,13 +311,8 @@
 
       this.preparedCases = builtCases.map((built, index) => this.cardData(built, index));
 
-      if (this.preparedCases.length !== count) {
-        throw new Error(
-          "Não foi possível preparar " + count + " casos clínicos completos para " +
-          this.specialtyLabel(normalizedSpecialty) + ". A base carregada possui " +
-          this.chooseSourceCases(Math.min(9999, Number.MAX_SAFE_INTEGER), normalizedSpecialty).length +
-          " caso(s) elegível(is) nessa área."
-        );
+      if (!this.preparedCases.length) {
+        throw new Error("Nenhum caso clínico completo foi preparado para " + this.specialtyLabel(normalizedSpecialty) + ".");
       }
 
       return this.preparedCases;
