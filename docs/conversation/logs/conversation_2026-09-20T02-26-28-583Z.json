@@ -1,0 +1,674 @@
+{
+  "schema_version": "1.0.0",
+  "session": {
+    "session_id": "13420a58-38d9-473b-86b4-e9cbf3fd4af1",
+    "started_at": "2026-09-20T02:10:07.377Z",
+    "ended_at": null,
+    "application": "Diagnosys",
+    "engine_version": null,
+    "mode": "sala_clinica",
+    "case": {
+      "case_id": "ANEMIA_CASE_02",
+      "title": null,
+      "difficulty": null
+    }
+  },
+  "events": [
+    {
+      "event_id": 1,
+      "timestamp": "2026-09-20T02:10:07.377Z",
+      "type": "session_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "mode": "sala_clinica",
+        "case_id": "ANEMIA_CASE_02"
+      }
+    },
+    {
+      "event_id": 2,
+      "timestamp": "2026-09-20T02:10:07.386Z",
+      "type": "message",
+      "role": "assistant",
+      "text": "Paciente mulher, 59 anos, chega para avaliação.",
+      "data": {
+        "clinical_type": "PACIENTE"
+      }
+    },
+    {
+      "event_id": 3,
+      "timestamp": "2026-09-20T02:10:07.399Z",
+      "type": "message",
+      "role": "assistant",
+      "text": "Queixa principal: Fadiga persistente há meses, sem dispneia em repouso.",
+      "data": {
+        "clinical_type": "PACIENTE"
+      }
+    },
+    {
+      "event_id": 4,
+      "timestamp": "2026-09-20T02:10:07.401Z",
+      "type": "message",
+      "role": "system",
+      "text": "Doutor, qual é a sua primeira hipótese diagnóstica?",
+      "data": {
+        "clinical_type": "SISTEMA"
+      }
+    },
+    {
+      "event_id": 5,
+      "timestamp": "2026-09-20T02:10:07.408Z",
+      "type": "message",
+      "role": "system",
+      "text": "Caso clínico preparado e selecionado. O diagnóstico permanece oculto.",
+      "data": {
+        "clinical_type": "SISTEMA"
+      }
+    },
+    {
+      "event_id": 6,
+      "timestamp": "2026-09-20T02:10:21.952Z",
+      "type": "message",
+      "role": "system",
+      "text": "Diagnóstico concluído: conexão Gemini operacional.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 7,
+      "timestamp": "2026-09-20T02:10:56.360Z",
+      "type": "message",
+      "role": "system",
+      "text": "Hemograma solicitado.",
+      "data": {
+        "clinical_type": "INVESTIGAÇÃO"
+      }
+    },
+    {
+      "event_id": 8,
+      "timestamp": "2026-09-20T02:10:56.362Z",
+      "type": "message",
+      "role": "system",
+      "text": "Hemoglobina: 8.9 | Hematócrito: 28 | Hemácias: 3.18 | VCM: 88 | HCM: 28 | CHCM: 32 | RDW: 14.5 | Leucócitos: 8600 | Plaquetas: 398000 | Reticulócitos: 0.7",
+      "data": {
+        "clinical_type": "RESULTADO"
+      }
+    },
+    {
+      "event_id": 9,
+      "timestamp": "2026-09-20T02:11:34.505Z",
+      "type": "message",
+      "role": "user",
+      "text": "quais são os valores de referencia usados para esse hemograma?",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 10,
+      "timestamp": "2026-09-20T02:11:34.506Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 11,
+      "timestamp": "2026-09-20T02:11:34.507Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 12,
+      "timestamp": "2026-09-20T02:11:34.507Z",
+      "type": "intent_detected",
+      "role": "system",
+      "text": null,
+      "data": {
+        "intent": "reference_question"
+      }
+    },
+    {
+      "event_id": 13,
+      "timestamp": "2026-09-20T02:11:34.507Z",
+      "type": "message",
+      "role": "system",
+      "text": "Consulte a tabela de valores de referência disponível no sistema; os intervalos podem variar conforme laboratório, método, idade e sexo.",
+      "data": {
+        "clinical_type": "REFERÊNCIA"
+      }
+    },
+    {
+      "event_id": 14,
+      "timestamp": "2026-09-20T02:14:50.476Z",
+      "type": "message",
+      "role": "user",
+      "text": "ela tem então uma sindrome anêmica hipocrômica né, gostaria do ferro sérico",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 15,
+      "timestamp": "2026-09-20T02:14:50.477Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 16,
+      "timestamp": "2026-09-20T02:14:50.477Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "investigation"
+      }
+    },
+    {
+      "event_id": 17,
+      "timestamp": "2026-09-20T02:14:50.478Z",
+      "type": "intent_detected",
+      "role": "system",
+      "text": null,
+      "data": {
+        "intent": "investigation",
+        "investigation": "ferro sérico"
+      }
+    },
+    {
+      "event_id": 18,
+      "timestamp": "2026-09-20T02:14:50.478Z",
+      "type": "message",
+      "role": "system",
+      "text": "ferro sérico solicitado.",
+      "data": {
+        "clinical_type": "INVESTIGAÇÃO"
+      }
+    },
+    {
+      "event_id": 19,
+      "timestamp": "2026-09-20T02:14:50.479Z",
+      "type": "message",
+      "role": "system",
+      "text": "baixo — ferro circulante reduzido",
+      "data": {
+        "clinical_type": "RESULTADO"
+      }
+    },
+    {
+      "event_id": 20,
+      "timestamp": "2026-09-20T02:15:05.768Z",
+      "type": "message",
+      "role": "system",
+      "text": "ferritina solicitado.",
+      "data": {
+        "clinical_type": "INVESTIGAÇÃO"
+      }
+    },
+    {
+      "event_id": 21,
+      "timestamp": "2026-09-20T02:15:05.769Z",
+      "type": "message",
+      "role": "system",
+      "text": "320 ng/mL — estoque/inflamação não compatível com deficiência absoluta isolada",
+      "data": {
+        "clinical_type": "RESULTADO"
+      }
+    },
+    {
+      "event_id": 22,
+      "timestamp": "2026-09-20T02:15:29.405Z",
+      "type": "message",
+      "role": "system",
+      "text": "eTFG solicitado.",
+      "data": {
+        "clinical_type": "INVESTIGAÇÃO"
+      }
+    },
+    {
+      "event_id": 23,
+      "timestamp": "2026-09-20T02:15:29.406Z",
+      "type": "message",
+      "role": "system",
+      "text": "23 mL/min/1.73m² — DRC avançada",
+      "data": {
+        "clinical_type": "RESULTADO"
+      }
+    },
+    {
+      "event_id": 24,
+      "timestamp": "2026-09-20T02:16:03.196Z",
+      "type": "message",
+      "role": "system",
+      "text": "Hipótese sindrômica coerente. Agora procure a etiologia.",
+      "data": {
+        "clinical_type": "FEEDBACK"
+      }
+    },
+    {
+      "event_id": 25,
+      "timestamp": "2026-09-20T02:17:44.275Z",
+      "type": "message",
+      "role": "system",
+      "text": "Ainda não. Você pode revisar a anamnese, exame físico ou exames antes da próxima tentativa.",
+      "data": {
+        "clinical_type": "FEEDBACK"
+      }
+    },
+    {
+      "event_id": 26,
+      "timestamp": "2026-09-20T02:19:10.595Z",
+      "type": "message",
+      "role": "user",
+      "text": "a anemia pode ser a consequencia da drc sim, fazendo cair os niveis de eritropoiese",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 27,
+      "timestamp": "2026-09-20T02:19:10.596Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 28,
+      "timestamp": "2026-09-20T02:19:10.597Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 29,
+      "timestamp": "2026-09-20T02:19:10.597Z",
+      "type": "intent_detected",
+      "role": "system",
+      "text": null,
+      "data": {
+        "intent": "diagnostic_hypothesis"
+      }
+    },
+    {
+      "event_id": 30,
+      "timestamp": "2026-09-20T02:19:10.597Z",
+      "type": "message",
+      "role": "system",
+      "text": "Hipótese registrada. Continue a investigação ou conduza o manejo conforme o estado clínico.",
+      "data": {
+        "clinical_type": "SISTEMA"
+      }
+    },
+    {
+      "event_id": 31,
+      "timestamp": "2026-09-20T02:19:39.238Z",
+      "type": "message",
+      "role": "system",
+      "text": "PCR solicitado.",
+      "data": {
+        "clinical_type": "INVESTIGAÇÃO"
+      }
+    },
+    {
+      "event_id": 32,
+      "timestamp": "2026-09-20T02:19:39.239Z",
+      "type": "message",
+      "role": "system",
+      "text": "elevada — atividade inflamatória",
+      "data": {
+        "clinical_type": "RESULTADO"
+      }
+    },
+    {
+      "event_id": 33,
+      "timestamp": "2026-09-20T02:19:52.774Z",
+      "type": "message",
+      "role": "system",
+      "text": "TIBC solicitado.",
+      "data": {
+        "clinical_type": "INVESTIGAÇÃO"
+      }
+    },
+    {
+      "event_id": 34,
+      "timestamp": "2026-09-20T02:19:52.775Z",
+      "type": "message",
+      "role": "system",
+      "text": "reduzido — padrão de inflamação",
+      "data": {
+        "clinical_type": "RESULTADO"
+      }
+    },
+    {
+      "event_id": 35,
+      "timestamp": "2026-09-20T02:19:56.576Z",
+      "type": "message",
+      "role": "system",
+      "text": "creatinina solicitado.",
+      "data": {
+        "clinical_type": "INVESTIGAÇÃO"
+      }
+    },
+    {
+      "event_id": 36,
+      "timestamp": "2026-09-20T02:19:56.577Z",
+      "type": "message",
+      "role": "system",
+      "text": "2.7 mg/dL — DRC relevante",
+      "data": {
+        "clinical_type": "RESULTADO"
+      }
+    },
+    {
+      "event_id": 37,
+      "timestamp": "2026-09-20T02:20:10.939Z",
+      "type": "message",
+      "role": "user",
+      "text": "a paciente é drc há muitos anos?",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 38,
+      "timestamp": "2026-09-20T02:20:10.940Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 39,
+      "timestamp": "2026-09-20T02:20:10.940Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 40,
+      "timestamp": "2026-09-20T02:20:10.940Z",
+      "type": "provider_call",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation"
+      }
+    },
+    {
+      "event_id": 41,
+      "timestamp": "2026-09-20T02:20:18.416Z",
+      "type": "message",
+      "role": "assistant",
+      "text": "Eu sei que tenho doença renal crônica, mas não lembro exatamente há quantos anos tenho esse diagnóstico.",
+      "data": {
+        "clinical_type": "PACIENTE"
+      }
+    },
+    {
+      "event_id": 42,
+      "timestamp": "2026-09-20T02:20:18.418Z",
+      "type": "provider_response",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation",
+        "duration_ms": 7477,
+        "success": true
+      }
+    },
+    {
+      "event_id": 43,
+      "timestamp": "2026-09-20T02:20:28.540Z",
+      "type": "message",
+      "role": "system",
+      "text": "reticulócitos solicitado.",
+      "data": {
+        "clinical_type": "INVESTIGAÇÃO"
+      }
+    },
+    {
+      "event_id": 44,
+      "timestamp": "2026-09-20T02:20:28.541Z",
+      "type": "message",
+      "role": "system",
+      "text": "inadequadamente baixos — resposta medular insuficiente",
+      "data": {
+        "clinical_type": "RESULTADO"
+      }
+    },
+    {
+      "event_id": 45,
+      "timestamp": "2026-09-20T02:21:50.214Z",
+      "type": "message",
+      "role": "user",
+      "text": "doença estreptococica recente documentada?",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 46,
+      "timestamp": "2026-09-20T02:21:50.215Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 47,
+      "timestamp": "2026-09-20T02:21:50.215Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 48,
+      "timestamp": "2026-09-20T02:21:50.216Z",
+      "type": "provider_call",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation"
+      }
+    },
+    {
+      "event_id": 49,
+      "timestamp": "2026-09-20T02:21:51.669Z",
+      "type": "message",
+      "role": "system",
+      "text": "Falha na conversa: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 50,
+      "timestamp": "2026-09-20T02:23:44.886Z",
+      "type": "message",
+      "role": "user",
+      "text": "tem glossite, queilite ou diarreia?",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 51,
+      "timestamp": "2026-09-20T02:23:44.887Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 52,
+      "timestamp": "2026-09-20T02:23:44.887Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 53,
+      "timestamp": "2026-09-20T02:23:44.888Z",
+      "type": "provider_call",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation"
+      }
+    },
+    {
+      "event_id": 54,
+      "timestamp": "2026-09-20T02:23:47.466Z",
+      "type": "message",
+      "role": "system",
+      "text": "Falha na conversa: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 55,
+      "timestamp": "2026-09-20T02:24:05.887Z",
+      "type": "message",
+      "role": "system",
+      "text": "Diagnóstico falhou: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+      "data": {
+        "clinical_type": "GEMINI"
+      }
+    },
+    {
+      "event_id": 56,
+      "timestamp": "2026-09-20T02:25:45.702Z",
+      "type": "message",
+      "role": "user",
+      "text": "dentro do que eu posso fazer eu fiz, sugiro uso de neutrofer e transfiro para cuidados especialiados do hematologista e avaliação com oncologista",
+      "data": {
+        "clinical_type": "MÉDICO"
+      }
+    },
+    {
+      "event_id": 57,
+      "timestamp": "2026-09-20T02:25:45.703Z",
+      "type": "action_submitted",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 58,
+      "timestamp": "2026-09-20T02:25:45.703Z",
+      "type": "action_processing_started",
+      "role": "system",
+      "text": null,
+      "data": {
+        "phase": "diagnosis"
+      }
+    },
+    {
+      "event_id": 59,
+      "timestamp": "2026-09-20T02:25:45.704Z",
+      "type": "provider_call",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation"
+      }
+    },
+    {
+      "event_id": 60,
+      "timestamp": "2026-09-20T02:25:53.660Z",
+      "type": "message",
+      "role": "assistant",
+      "text": "Entendi, doutor. Muito obrigada pela atenção e pelos encaminhamentos. Vou seguir as suas orientações e procurar os especialistas.",
+      "data": {
+        "clinical_type": "PACIENTE"
+      }
+    },
+    {
+      "event_id": 61,
+      "timestamp": "2026-09-20T02:25:53.662Z",
+      "type": "provider_response",
+      "role": "system",
+      "text": null,
+      "data": {
+        "provider": "gemini_conversation",
+        "duration_ms": 7958,
+        "success": true
+      }
+    },
+    {
+      "event_id": 62,
+      "timestamp": "2026-09-20T02:26:02.128Z",
+      "type": "message",
+      "role": "system",
+      "text": "Hipótese encerrada: 13/100. Tempo até fixação: 0 s. Proximidade: 13%.",
+      "data": {
+        "clinical_type": "RESULTADO"
+      }
+    },
+    {
+      "event_id": 63,
+      "timestamp": "2026-09-20T02:26:02.130Z",
+      "type": "message",
+      "role": "system",
+      "text": "Avaliação encerrada. Score geral: 7/100. Hipótese: 13/100. Conduta: 0/30. Erros: 1.",
+      "data": {
+        "clinical_type": "ENCERRAMENTO"
+      }
+    },
+    {
+      "event_id": 64,
+      "timestamp": "2026-09-20T02:26:28.583Z",
+      "type": "manual_download_requested",
+      "role": "system",
+      "text": null,
+      "data": {
+        "event_count_before_download": 63
+      }
+    },
+    {
+      "event_id": 65,
+      "timestamp": "2026-09-20T02:26:28.583Z",
+      "type": "log_downloaded",
+      "role": "system",
+      "text": null,
+      "data": {
+        "filename": "conversation_2026-09-20T02-26-28-583Z.json"
+      }
+    }
+  ]
+}
