@@ -1,0 +1,2433 @@
+{
+  "schema_version": "1.0",
+  "catalog_name": "Diagnosys — Catálogo Mestre de Doenças e Condições Clínicas com Especialidades",
+  "purpose": "Camada nominal unificada para seleção procedural de entidades clínicas por especialidade. Não é banco de casos.",
+  "taxonomy_source": {
+    "primary": "MSD Manual Professional — Medical Topics",
+    "msd_url": "https://www.msdmanuals.com/professional/health-topics",
+    "ministry_source": "Ministério da Saúde — Protocolos Clínicos e Diretrizes Terapêuticas",
+    "ministry_url": "https://www.gov.br/saude/pt-br/assuntos/pcdt"
+  },
+  "specialty_taxonomy": [
+    "alergia_imunologia",
+    "cardiologia",
+    "clinica_medica",
+    "cirurgia",
+    "dermatologia",
+    "endocrinologia",
+    "farmacologia_clinica",
+    "gastroenterologia",
+    "geriatria",
+    "ginecologia_obstetricia",
+    "hematologia",
+    "hepatologia",
+    "infectologia",
+    "nefrologia",
+    "neurologia",
+    "nutricao",
+    "oncologia",
+    "oftalmologia",
+    "otorrinolaringologia",
+    "ortopedia",
+    "pediatria",
+    "psiquiatria",
+    "pneumologia",
+    "reumatologia_ortopedia",
+    "urgencia_toxicologia",
+    "urologia"
+  ],
+  "counts": {
+    "source_entries": 249,
+    "specialty_memberships": {
+      "neurologia": 17,
+      "ortopedia": 9,
+      "urgencia_toxicologia": 17,
+      "endocrinologia": 26,
+      "oncologia": 29,
+      "gastroenterologia": 11,
+      "urologia": 5,
+      "alergia_imunologia": 9,
+      "clinica_medica": 29,
+      "hematologia": 35,
+      "nefrologia": 11,
+      "cardiologia": 35,
+      "reumatologia_ortopedia": 20,
+      "pneumologia": 18,
+      "ginecologia_obstetricia": 7,
+      "infectologia": 15,
+      "otorrinolaringologia": 2,
+      "mastologia": 1,
+      "hepatologia": 9,
+      "cirurgia": 8,
+      "psiquiatria": 4,
+      "pediatria": 18,
+      "oftalmologia": 5,
+      "dermatologia": 9,
+      "cirurgia_vascular": 1,
+      "geriatria": 5,
+      "farmacologia_clinica": 1,
+      "nutricao": 1
+    }
+  },
+  "entries": [
+    {
+      "name": "Acidente Vascular Cerebral Isquêmico Agudo",
+      "specialties": [
+        "neurologia",
+        "ortopedia",
+        "urgencia_toxicologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Acidente vascular encefálico",
+      "specialties": [
+        "neurologia",
+        "ortopedia",
+        "urgencia_toxicologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Acidentes Escorpiônicos",
+      "specialties": [
+        "urgencia_toxicologia",
+        "ortopedia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Acidentes Ofídicos",
+      "specialties": [
+        "urgencia_toxicologia",
+        "ortopedia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Acromegalia",
+      "specialties": [
+        "endocrinologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Adenocarcinoma de Cólon e Reto",
+      "specialties": [
+        "oncologia",
+        "gastroenterologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Adenocarcinoma de Estômago",
+      "specialties": [
+        "oncologia",
+        "gastroenterologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Adenocarcinoma de Próstata",
+      "specialties": [
+        "oncologia",
+        "urologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Alergia alimentar",
+      "specialties": [
+        "alergia_imunologia"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Amiloidoses associadas à Transtirretina",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Anafilaxia",
+      "specialties": [
+        "alergia_imunologia"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Anemia da inflamação/doença crônica",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Anemia Deficiência de Ferro",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Anemia Hemolítica Autoimune",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Anemia megaloblástica por B12/folato",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Anemia na Doença Renal Crônica - DRC",
+      "specialties": [
+        "hematologia",
+        "nefrologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Anemia por deficiência de ferro",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Anemia sideroblástica",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Aneurisma aorta abdominal",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Angina instável",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Angioedema deficiência C1 esterase",
+      "specialties": [
+        "alergia_imunologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Artrite Idiopática Juvenil",
+      "specialties": [
+        "reumatologia_ortopedia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Artrite Psoriásica",
+      "specialties": [
+        "reumatologia_ortopedia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Artrite Reativa",
+      "specialties": [
+        "reumatologia_ortopedia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Artrite Reumatóide",
+      "specialties": [
+        "reumatologia_ortopedia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Asma",
+      "specialties": [
+        "pneumologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Asma brônquica",
+      "specialties": [
+        "pneumologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Assistência ao Parto Normal - Diretriz Nacional",
+      "specialties": [
+        "ginecologia_obstetricia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Atenção à Gestante a operação cesariana - Diretriz",
+      "specialties": [
+        "ginecologia_obstetricia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Atenção Integral às Pessoas com Doenças Raras (Linha de Cuidado)",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Atenção Integral às Pessoas com Infecções Sexualmente Transmissíveis",
+      "specialties": [
+        "infectologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Aterosclerose",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Atrofia Muscular Espinhal",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Avaliação do paciente com problemas pulmonares",
+      "specialties": [
+        "pneumologia"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Avaliação do paciente com problemas renais",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Avaliação do paciente dermatológico",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Avaliação do paciente gastrointestinal",
+      "specialties": [
+        "gastroenterologia"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Beta-talassemia",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Blinatumomabe",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Bloqueio atrioventricular",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Brucelose Humana",
+      "specialties": [
+        "infectologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Câncer de Cabeça e Pescoço",
+      "specialties": [
+        "oncologia",
+        "otorrinolaringologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Câncer de Mama",
+      "specialties": [
+        "oncologia",
+        "mastologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Câncer de Pulmão",
+      "specialties": [
+        "oncologia",
+        "pneumologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Carcinoma de Células Renais",
+      "specialties": [
+        "oncologia",
+        "urologia",
+        "nefrologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Carcinoma de Esôfago",
+      "specialties": [
+        "oncologia",
+        "gastroenterologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Carcinoma Diferenciado da Tireoide",
+      "specialties": [
+        "oncologia",
+        "endocrinologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Carcinoma Hepatocelular no Adulto",
+      "specialties": [
+        "oncologia",
+        "hepatologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Cardiomiopatia hipertrófica",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Cirurgia de citorredução e hipertermoquimioterapia em caso de mesotelioma peritoneal maligno",
+      "specialties": [
+        "oncologia",
+        "gastroenterologia",
+        "cirurgia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Cirurgia de citorredução e hipertermoquimioterapia em caso de pseudomixoma peritoneal",
+      "specialties": [
+        "oncologia",
+        "gastroenterologia",
+        "cirurgia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Colangite Biliar Primária",
+      "specialties": [
+        "gastroenterologia",
+        "hepatologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Comportamento Agressivo no Transtorno do Espectro do Autismo",
+      "specialties": [
+        "psiquiatria",
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Cross-linking corneano no tratamento do ceratone",
+      "specialties": [
+        "oftalmologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Deficiência de alfa-1-antitripsina",
+      "specialties": [
+        "pneumologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Deficiência de Biotinidase",
+      "specialties": [
+        "endocrinologia",
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Deficiência de G6PD",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Deficiência do Hormônio de Crescimento - Hipopituitarismo",
+      "specialties": [
+        "endocrinologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Deficiência Intelectual - Protocolo para o Diagnóstico Etiológico",
+      "specialties": [
+        "neurologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Degeneração Macular Relacionada com a Idade - Portaria Conjunta nº 24",
+      "specialties": [
+        "oftalmologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Dermatite Atópica",
+      "specialties": [
+        "dermatologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Descrição das lesões cutâneas",
+      "specialties": [
+        "dermatologia"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Diabete Melito Tipo 1",
+      "specialties": [
+        "endocrinologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Diabete Melito Tipo 2",
+      "specialties": [
+        "endocrinologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Diabetes Insípido",
+      "specialties": [
+        "endocrinologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Diabetes mellitus",
+      "specialties": [
+        "endocrinologia"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Diabetes mellitus tipo 2",
+      "specialties": [
+        "endocrinologia"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Diagnóstico e tratamento de intoxicações por agrotóxicos - Capítulo 1",
+      "specialties": [
+        "urgencia_toxicologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Diagnóstico e tratamento de intoxicações por agrotóxicos - Capítulo 2",
+      "specialties": [
+        "urgencia_toxicologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Diagnóstico e tratamento de intoxicações por agrotóxicos - Capítulo 3",
+      "specialties": [
+        "urgencia_toxicologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Diagnóstico e tratamento de intoxicações por agrotóxicos - Capítulo 4",
+      "specialties": [
+        "urgencia_toxicologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Diagnóstico e tratamento de intoxicações por agrotóxicos - Capítulo 5",
+      "specialties": [
+        "urgencia_toxicologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Dislipidemia",
+      "specialties": [
+        "endocrinologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Dissecção aórtica tipo A",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Dissecção de aorta",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Distonias e Espasmo Hemifacial",
+      "specialties": [
+        "neurologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Distrator Osteogênico Mandibular (DOM)",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Distúrbio Mineral Ósseo na Doença Renal Crônica",
+      "specialties": [
+        "nefrologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Distúrbios endócrinos — visão geral",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Doença arterial coronariana",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Doença arterial obstrutiva periférica",
+      "specialties": [
+        "cardiologia",
+        "cirurgia_vascular"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Doença Celíaca",
+      "specialties": [
+        "gastroenterologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Alzheimer",
+      "specialties": [
+        "neurologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Chagas",
+      "specialties": [
+        "infectologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Crohn",
+      "specialties": [
+        "gastroenterologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Fabry",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Gaucher",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Niemann-Pick Tipo C (Diretriz Brasileira)",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Paget",
+      "specialties": [
+        "reumatologia_ortopedia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Parkinson",
+      "specialties": [
+        "neurologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Pompe",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença de Wilson",
+      "specialties": [
+        "hepatologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença Falciforme",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Doença Pulmonar Obstrutiva Crônica",
+      "specialties": [
+        "pneumologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Doença renal crônica",
+      "specialties": [
+        "nefrologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Doenças autoimunes",
+      "specialties": [
+        "alergia_imunologia"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Doenças infecciosas — seção profissional",
+      "specialties": [
+        "infectologia",
+        "clinica_medica"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Dor Crônica",
+      "specialties": [
+        "reumatologia_ortopedia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "DPOC",
+      "specialties": [
+        "pneumologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Edema agudo de pulmão cardiogênico",
+      "specialties": [
+        "oncologia",
+        "pneumologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Embolia gordurosa",
+      "specialties": [
+        "pneumologia",
+        "urgencia_toxicologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Endocardite infecciosa",
+      "specialties": [
+        "cardiologia",
+        "infectologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Endometriose",
+      "specialties": [
+        "ginecologia_obstetricia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Epidermólise Bolhosa (Diretriz Brasileira)",
+      "specialties": [
+        "dermatologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Epilepsia",
+      "specialties": [
+        "neurologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Esclerose Lateral Amiotrófica",
+      "specialties": [
+        "neurologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Esclerose Múltipla",
+      "specialties": [
+        "neurologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Esclerose Sistêmica",
+      "specialties": [
+        "reumatologia_ortopedia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Esferocitose hereditária",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Espasticidade",
+      "specialties": [
+        "neurologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Espondilite Ancilosante",
+      "specialties": [
+        "reumatologia_ortopedia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Espondilite Anquilosante",
+      "specialties": [
+        "reumatologia_ortopedia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Esquizofrenia",
+      "specialties": [
+        "psiquiatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Estratégias para Atenuar a Progressão da Doença Renal Crônica",
+      "specialties": [
+        "nefrologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Febre Reumática",
+      "specialties": [
+        "reumatologia_ortopedia",
+        "cardiologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Fenilcetonúria",
+      "specialties": [
+        "endocrinologia",
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Fibrilação atrial",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "MSD Manual Professional",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Fibrilação ventricular",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "MSD Manual Professional",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Fibrose Cística",
+      "specialties": [
+        "pneumologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Flutter atrial",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Fratura do Colo do Fêmur em Idosos (Linha de Cuidado)",
+      "specialties": [
+        "reumatologia_ortopedia",
+        "ortopedia",
+        "geriatria",
+        "urgencia_toxicologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Fratura do Colo do Fêmur em Idosos - Tratamento - Diretrizes Brasileiras",
+      "specialties": [
+        "reumatologia_ortopedia",
+        "ortopedia",
+        "geriatria",
+        "urgencia_toxicologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Glaucoma",
+      "specialties": [
+        "oftalmologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Gota",
+      "specialties": [
+        "reumatologia_ortopedia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hanseníase",
+      "specialties": [
+        "infectologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hemangioma Infantil",
+      "specialties": [
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hematologia — seção profissional",
+      "specialties": [
+        "hematologia",
+        "clinica_medica"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Hemofilia A – Uso do Emicizumabe (Protocolo de Uso)",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hemoglobinúria Paroxística Noturna",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hepatite Autoimune",
+      "specialties": [
+        "hepatologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hepatite B e coinfecções",
+      "specialties": [
+        "hepatologia",
+        "infectologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hepatite C e coinfecções",
+      "specialties": [
+        "hepatologia",
+        "infectologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hidradenite Supurativa",
+      "specialties": [
+        "dermatologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hidroxocobalamina na intoxicação aguda por cianeto (Protocolo de Uso)",
+      "specialties": [
+        "urgencia_toxicologia",
+        "farmacologia_clinica"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hiperplasia adrenal congênita",
+      "specialties": [
+        "endocrinologia",
+        "nefrologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hiperprolactinemia",
+      "specialties": [
+        "endocrinologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hipersensibilidade a medicamentos",
+      "specialties": [
+        "alergia_imunologia"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Hipertensão arterial resistente",
+      "specialties": [
+        "cardiologia",
+        "clinica_medica"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hipertensão Arterial Sistêmica",
+      "specialties": [
+        "cardiologia",
+        "clinica_medica"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hipertensão do avental branco",
+      "specialties": [
+        "cardiologia",
+        "clinica_medica"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hipertensão essencial (primária)",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hipertensão mascarada",
+      "specialties": [
+        "cardiologia",
+        "clinica_medica"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hipertensão Pulmonar",
+      "specialties": [
+        "cardiologia",
+        "pneumologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hipertensão secundária",
+      "specialties": [
+        "cardiologia",
+        "clinica_medica"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hipoglicemia grave",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Hipoparatireoidismo",
+      "specialties": [
+        "endocrinologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Hipotireoidismo Congênito",
+      "specialties": [
+        "endocrinologia",
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Homocistinúria Clássica",
+      "specialties": [
+        "endocrinologia",
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Ictioses Hereditárias",
+      "specialties": [
+        "dermatologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Imunodeficiência Primária com Predominância de Defeitos de Anticorpos - Imunoglobulina Humana",
+      "specialties": [
+        "alergia_imunologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Imunossupressão no Transplante Cardíaco",
+      "specialties": [
+        "alergia_imunologia",
+        "cirurgia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Imunossupressão no Transplante Hepático em Pediatria",
+      "specialties": [
+        "hepatologia",
+        "alergia_imunologia",
+        "pediatria",
+        "cirurgia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Imunossupressão no Transplante Renal",
+      "specialties": [
+        "nefrologia",
+        "urologia",
+        "alergia_imunologia",
+        "cirurgia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Imunosupressão no Transplante Hépático em Adultos",
+      "specialties": [
+        "hepatologia",
+        "cirurgia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Incontinência Urinária não Neurogênica",
+      "specialties": [
+        "urologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Indução de Imunotolerância para Indivíduos com Hemofilia A e Inibidor",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Infarto agudo do miocárdio com supradesnivelamento do segmento ST",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Infarto agudo do miocárdio sem supradesnivelamento do segmento ST",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Insuficiência Adrenal",
+      "specialties": [
+        "endocrinologia",
+        "nefrologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Insuficiência adrenal primária (doença de Addison)",
+      "specialties": [
+        "endocrinologia",
+        "nefrologia"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Insuficiência cardíaca",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Insuficiência cardíaca com fração de ejeção preservada",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Insuficiência Cardíaca com Fração de Ejeção Reduzida",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Insuficiência Pancreática Exócrina",
+      "specialties": [
+        "gastroenterologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Iodeto de Potássio na Emergência Nuclear",
+      "specialties": [
+        "urgencia_toxicologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Isotretinoína no tratamento da acne grave",
+      "specialties": [
+        "dermatologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Leiomioma de útero",
+      "specialties": [
+        "ginecologia_obstetricia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Leucemia Linfoblástica Aguda Cromossoma Philadelphia Positivo de Crianças e Adolescentes (DDT)",
+      "specialties": [
+        "oncologia",
+        "hematologia",
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Leucemia Linfoblástica Aguda Ph+ de Adulto com Mesilato de Imatinibe (DDT)",
+      "specialties": [
+        "oncologia",
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Leucemia Mieloide Aguda de Crianças e Adolescentes - Diretrizes Diagnósticas e Terapêuticas",
+      "specialties": [
+        "oncologia",
+        "hematologia",
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Leucemia Mieloide Aguda do Adulto - Diretrizes Diagnósticas e Terapêuticas",
+      "specialties": [
+        "oncologia",
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Leucemia Mieloide Crônica de Criança e Adolescente",
+      "specialties": [
+        "oncologia",
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Leucemia Mieloide Crônica do Adulto",
+      "specialties": [
+        "oncologia",
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Linfangioleiomiomatose",
+      "specialties": [
+        "pneumologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Linfoma de Hodgkin no Adulto",
+      "specialties": [
+        "oncologia",
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Linfoma Difuso de Grandes Células B",
+      "specialties": [
+        "oncologia",
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Linfoma Folicular",
+      "specialties": [
+        "oncologia",
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Linha de Cuidado do Infarto Agudo do Miocárdio e o Protocolo de Síndromes Coronarianas Agudas",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Manejo da Infecção pelo HIV em Adultos - Módulo 1",
+      "specialties": [
+        "infectologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Manejo da Infecção pelo HIV em Adultos - Módulo 2",
+      "specialties": [
+        "infectologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Manejo da Infecção pelo HIV em Crianças e Adolescentes - Módulo 1",
+      "specialties": [
+        "infectologia",
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Manejo da Infecção pelo HIV em Crianças e Adolescentes - Módulo 2",
+      "specialties": [
+        "infectologia",
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Marca-passos cardíacos implantáveis e ressincronizadores (Protocolo de Uso)",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Melanoma Cutâneo (DDT)",
+      "specialties": [
+        "oncologia",
+        "dermatologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Mesotelioma Pleural",
+      "specialties": [
+        "oncologia",
+        "pneumologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Miastenia Gravis",
+      "specialties": [
+        "neurologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Mieloma Múltiplo (DDT)",
+      "specialties": [
+        "oncologia",
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Miopatias Inflamatórias",
+      "specialties": [
+        "reumatologia_ortopedia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Mucopolissacaridose do Tipo I",
+      "specialties": [
+        "endocrinologia",
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Mucopolissacaridose do Tipo II",
+      "specialties": [
+        "endocrinologia",
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Mucopolissacaridose do Tipo VII",
+      "specialties": [
+        "endocrinologia",
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Mucopolissacaridose Tipo IV A",
+      "specialties": [
+        "endocrinologia",
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Mucopolissacaridose Tipo VI",
+      "specialties": [
+        "endocrinologia",
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Neurologia — seção profissional",
+      "specialties": [
+        "neurologia",
+        "urologia",
+        "clinica_medica"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Nirsevimabe para Prevenção de Infecção do Trato Respiratório Inferior Associado ao Vírus Sincicial Respiratório para Bebês Prematuros ou com Comorbidades (Protocolo de Uso)",
+      "specialties": [
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Osteoartrose",
+      "specialties": [
+        "reumatologia_ortopedia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Osteogênese Imperfeita",
+      "specialties": [
+        "reumatologia_ortopedia",
+        "ortopedia",
+        "geriatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Osteoporose",
+      "specialties": [
+        "reumatologia_ortopedia",
+        "ortopedia",
+        "geriatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Palivizumabe para a Prevenção da Infecção pelo Vírus Sincicial Respiratório (Protocolo de Uso)",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Parada cardiorrespiratória",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Pessoas com Deficiência Auditiva (Linha de Cuidado)",
+      "specialties": [
+        "neurologia",
+        "otorrinolaringologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Pneumoconiose",
+      "specialties": [
+        "pneumologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Porfirias",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Prevenção da Transmissão Vertical do HIV, Sífilis e Hepatites Virais",
+      "specialties": [
+        "hepatologia",
+        "infectologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Profilaxia Pós-Exposição de Risco (PEP) à Infecção pelo HIV",
+      "specialties": [
+        "infectologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Profilaxia Pré-Exposição (PrEP) Oral à Infecção pelo HIV",
+      "specialties": [
+        "infectologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Profilaxia primária em caso de Hemofilia Grave (Protocolo de Uso)",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Psoríase",
+      "specialties": [
+        "dermatologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Puberdade Precoce Central",
+      "specialties": [
+        "endocrinologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Raquitismo e Osteomalácia",
+      "specialties": [
+        "reumatologia_ortopedia",
+        "ortopedia",
+        "geriatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Rastreamento do Câncer do Colo do Útero (Diretriz Brasileira)",
+      "specialties": [
+        "oncologia",
+        "ginecologia_obstetricia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Retinopatia Diabética",
+      "specialties": [
+        "oftalmologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Reumatologia e ortopedia — seção profissional",
+      "specialties": [
+        "reumatologia_ortopedia",
+        "clinica_medica"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Síndrome aórtica aguda",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Síndrome coronariana aguda",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Síndrome de Falência Medular",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Síndrome de Guillain-Barré",
+      "specialties": [
+        "neurologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Síndrome de Ovários Policísticos",
+      "specialties": [
+        "ginecologia_obstetricia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Síndrome de Turner",
+      "specialties": [
+        "endocrinologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Síndrome de Wolff-Parkinson-White",
+      "specialties": [
+        "cardiologia",
+        "neurologia"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Síndrome hemolítica",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Síndrome hemolítico-urêmica",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Síndrome Mielodisplásica de Baixo Risco",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Síndrome Nefrótica Primária em Adultos",
+      "specialties": [
+        "nefrologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Síndrome Nefrótica Primária em Crianças e Adolescentes",
+      "specialties": [
+        "nefrologia",
+        "pediatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Sintomas gastrointestinais",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Sobrecarga de Ferro",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Sobrepeso e Obesidade em Adultos",
+      "specialties": [
+        "endocrinologia",
+        "nutricao"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Tabagismo",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Talidomida no tratamento da Doença Enxerto Contra Hospedeiro e do Mieloma Múltiplo",
+      "specialties": [
+        "oncologia",
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Taquicardia supraventricular paroxística",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Taquicardia ventricular",
+      "specialties": [
+        "cardiologia"
+      ],
+      "sources": [
+        "MSD Manual Professional",
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "TEP maciço",
+      "specialties": [
+        "cardiologia",
+        "pneumologia",
+        "urgencia_toxicologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Testes de função pulmonar",
+      "specialties": [
+        "pneumologia"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Testes diagnósticos para doenças cutâneas",
+      "specialties": [
+        "dermatologia"
+      ],
+      "sources": [
+        "MSD Manual Professional"
+      ]
+    },
+    {
+      "name": "Transtorno Afetivo Bipolar do Tipo I",
+      "specialties": [
+        "psiquiatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH",
+      "specialties": [
+        "neurologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Transtorno Esquizoafetivo",
+      "specialties": [
+        "psiquiatria"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Trombocitopenia Imune Primária",
+      "specialties": [
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Tromboembolia pulmonar",
+      "specialties": [
+        "cardiologia",
+        "pneumologia",
+        "urgencia_toxicologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Tromboembolismo pulmonar",
+      "specialties": [
+        "cardiologia",
+        "pneumologia",
+        "urgencia_toxicologia"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Tromboembolismo Venoso em Gestantes com Trombofilia",
+      "specialties": [
+        "ginecologia_obstetricia",
+        "hematologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Trombose venosa profunda",
+      "specialties": [
+        "clinica_medica"
+      ],
+      "sources": [
+        "Knowledge Base do Diagnosys"
+      ]
+    },
+    {
+      "name": "Tumor Cerebral no Adulto (DDT)",
+      "specialties": [
+        "oncologia",
+        "neurologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Tumor do Estroma Gastrointestinal",
+      "specialties": [
+        "oncologia",
+        "gastroenterologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Utilização de Endoprótese em Aorta Torácica Descendente (Diretrizes Brasileiras)",
+      "specialties": [
+        "cirurgia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Utilização de Stents em Pacientes com Doença Coronariana Estável (Diretrizes Brasileiras)",
+      "specialties": [
+        "cardiologia",
+        "cirurgia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Uveítes não Infecciosas",
+      "specialties": [
+        "oftalmologia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    },
+    {
+      "name": "Vasculite",
+      "specialties": [
+        "reumatologia_ortopedia"
+      ],
+      "sources": [
+        "PCDT — Ministério da Saúde"
+      ]
+    }
+  ]
+}
