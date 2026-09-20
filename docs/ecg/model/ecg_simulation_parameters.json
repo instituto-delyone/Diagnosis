@@ -1,0 +1,20 @@
+{
+  "schema": "Diagnosis/ECG/model/ecg_simulation_parameters",
+  "version": "0.1.0",
+  "status": "synthetic_render_parameters",
+  "source_basis": "Medeletro for paper/calibration conventions; waveform shape parameters below are implementation parameters for visual simulation, not clinical reference ranges.",
+  "purpose": "Generate a visually coherent educational ECG signal while keeping synthetic drawing parameters separate from documented physiology.",
+  "default": {
+    "paper_speed_mm_s": 25,
+    "gain": "N",
+    "sample_rate_hz": 500,
+    "baseline_mV": 0,
+    "cycle": {
+      "p": { "center_ms": 110, "width_ms": 90, "amplitude_mV": 0.15 },
+      "qrs": { "center_ms": 190, "width_ms": 90, "amplitude_mV": 1.0 },
+      "t": { "center_ms": 330, "width_ms": 150, "amplitude_mV": 0.3 },
+      "u": { "center_ms": 420, "width_ms": 60, "amplitude_mV": 0.05 }
+    }
+  },
+  "note": "These shape values are deliberately marked synthetic. They are not to be interpreted as authoritative normal ECG limits."
+}
