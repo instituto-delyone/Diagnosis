@@ -20,6 +20,10 @@
         engine.clinicalActionResolver=global.clinicalActionResolver||
             new global.ClinicalActionResolver();
 
+        engine.clinicalIntentRemoteRouter = typeof global.ClinicalIntentRemoteRouter === "function"
+            ? new global.ClinicalIntentRemoteRouter()
+            : null;
+
         if(!engine.clinicalInterlocutor&&typeof global.ClinicalInterlocutor==="function"){
             engine.clinicalInterlocutor=new global.ClinicalInterlocutor({
                 patientState:engine.patientState||null,
@@ -49,15 +53,57 @@
                 input:text,status:resolution.status,intent:resolution.intent,confidence:resolution.confidence
             });
 
+            /* First try the deterministic local resolver. If it cannot
+             * resolve the language safely, use UMLS/terminology and then Gemini
+             * as a semantic fallback. Neither remote layer executes actions. */
+            if(!resolution.recognized && this.clinicalIntentRemoteRouter){
+                try{
+                    const allowedActions=this.clinicalActionResolver?.registry?.list?.() || [];
+                    const remote=await this.clinicalIntentRemoteRouter.resolve(text,{
+                        resolver:this.clinicalActionResolver,
+                        allowedActions:allowedActions.map(def=>({
+                            id:def.id,
+                            domain:def.domain,
+                            operation:def.operation,
+                            targetType:def.targetType||null
+                        }))
+                    });
+
+                    if(remote?.recognized){
+                        this.context.lastActionResolution=remote;
+                        this.conversationLogger?.logEvent?.("clinical_action_remote_resolved",{
+                            input:text,
+                            source:remote.source,
+                            intent:remote.intent,
+                            confidence:remote.confidence
+                        });
+
+                        const remoteResult=await this.clinicalActionDispatcher.dispatch(text,{resolution:remote});
+                        if(remoteResult.handled)return remoteResult;
+                    }
+                }catch(error){
+                    this.conversationLogger?.logEvent?.("clinical_action_remote_error",{
+                        input:text,
+                        error:error?.message||String(error)
+                    });
+                }
+            }
+
             /* Non-regression path: unknown language remains handled by legacy code. */
             if(!resolution.recognized&&resolution.status!=="ambiguous")
                 return this.__phase1OriginalProcessAction(input);
+
+            if(resolution.status==="ambiguous"){
+                this.log?.("AÇÃO","Não consegui determinar com segurança a ação clínica solicitada. Tente especificar o exame, procedimento ou alvo.");
+                return {handled:true,status:"ambiguous",resolution};
+            }
 
             const result=await this.clinicalActionDispatcher.dispatch(text,{resolution});
 
             /* A recognized action without a safe handler is not swallowed. */
             if(!result.handled)return this.__phase1OriginalProcessAction(input);
             return result;
+
         };
 
         engine.__phase1ActionRuntimeInstalled=true;

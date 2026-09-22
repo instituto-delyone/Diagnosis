@@ -1719,6 +1719,21 @@
             </div>
 
 
+            <div id="knowledgeBaseStatus" class="side-section" aria-live="polite">
+
+                <div class="side-title">
+                    🧠 Knowledge Bases carregadas
+                </div>
+
+                <div id="knowledgeBaseStatusList" class="kb-status-list"></div>
+
+                <div id="knowledgeBaseSummary" class="kb-status-meta">
+                    Carregando bases clínicas...
+                </div>
+
+            </div>
+
+
             <div class="side-section">
 
                 <div class="side-title">
@@ -1787,9 +1802,14 @@
                 </div>
 
                 <div class="gemini-diagnostic">
-                    <button id="geminiTest" class="btn btn-primary" type="button">
-                        🧪 TESTAR GEMINI
-                    </button>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                        <button id="geminiTest" class="btn btn-primary" type="button">
+                            🧪 TESTAR GEMINI
+                        </button>
+                        <button id="umlsTest" class="btn" type="button">
+                            🔎 TESTAR UMLS
+                        </button>
+                    </div>
 
                     <div id="geminiDiagnostic" aria-live="polite">
                         <div class="gemini-diag-row">
@@ -1861,6 +1881,7 @@
 <script src="Js/clinical/clinical-interlocutor.js"></script>
 <script src="conversation/conversation-logger.js"></script>
 <script src="Js/engine.js"></script>
+<script src="Js/core/knowledge-base-status-ui.js"></script>
 <script src="Js/core/case-preparation-engine.js"></script>
 
 <script>
@@ -2092,6 +2113,7 @@
 <script src="Js/core/clinical-action-parser.js"></script>
 <script src="Js/core/clinical-action-resolver.js"></script>
 <script src="Js/core/clinical-action-dispatcher.js"></script>
+<script src="Js/core/clinical-intent-remote-router.js"></script>
 <script src="Js/core/clinical-action-runtime.js"></script>
 
 
@@ -2187,6 +2209,84 @@
 
     // Render immediately even before the clinical engine reveals vitals.
     render(getRate());
+})();
+</script>
+
+<script>
+(function initSemanticDiagnostics(){
+    "use strict";
+
+    const geminiBtn=document.getElementById("geminiTest");
+    const umlsBtn=document.getElementById("umlsTest");
+    const root=document.getElementById("geminiDiagnostic");
+
+    if(!geminiBtn||!umlsBtn||!root)return;
+
+    function row(label,state,detail){
+        root.innerHTML=
+            '<div class="gemini-diag-row">'+
+            '<span class="gemini-diag-dot"></span>'+
+            '<span class="gemini-diag-label">'+label+'</span>'+
+            '<span class="gemini-diag-detail">'+detail+'</span>'+
+            '</div>';
+    }
+
+    async function testUMLS(){
+        umlsBtn.disabled=true;
+        row("UMLS","testando","Consultando o proxy terminológico...");
+
+        try{
+            const router=window.idmtEngine?.clinicalIntentRemoteRouter ||
+                (typeof window.ClinicalIntentRemoteRouter==="function"
+                    ? new window.ClinicalIntentRemoteRouter()
+                    : null);
+
+            if(!router)throw new Error("Router semântico não carregado.");
+
+            const data=await router.queryUMLS("dor torácica");
+            const preview=data?.canonical_action || data?.clinicalAction ||
+                data?.result?.canonical_action || data?.result?.clinicalAction ||
+                "resposta recebida";
+
+            row("UMLS","OK","Proxy respondeu. Ação/termo: "+String(preview));
+        }catch(error){
+            row("UMLS","ERRO",error?.message||String(error));
+        }finally{
+            umlsBtn.disabled=false;
+        }
+    }
+
+    async function testGemini(){
+        geminiBtn.disabled=true;
+        row("Gemini","testando","Consultando o Worker Gemini...");
+
+        try{
+            const router=window.idmtEngine?.clinicalIntentRemoteRouter ||
+                (typeof window.ClinicalIntentRemoteRouter==="function"
+                    ? new window.ClinicalIntentRemoteRouter()
+                    : null);
+
+            if(!router)throw new Error("Router semântico não carregado.");
+
+            const data=await router.queryGemini(
+                "Quero pedir um ECG neste paciente.",
+                {allowedActions:[]}
+            );
+
+            const payload=data?.result || data?.data || data || {};
+            const action=payload?.clinicalAction || payload?.clinical_action ||
+                payload?.canonical_action || "resposta recebida";
+
+            row("Gemini","OK","Worker respondeu. Ação: "+String(action));
+        }catch(error){
+            row("Gemini","ERRO",error?.message||String(error));
+        }finally{
+            geminiBtn.disabled=false;
+        }
+    }
+
+    umlsBtn.addEventListener("click",testUMLS);
+    geminiBtn.addEventListener("click",testGemini);
 })();
 </script>
 
