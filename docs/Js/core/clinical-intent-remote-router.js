@@ -173,6 +173,17 @@
                 umlsError = error?.message || String(error);
             }
 
+            // Gemini é opt-in. O resolver remoto não deve disparar um modelo
+            // generativo só porque a resolução local/UMLS não reconheceu a frase.
+            if (context.useGemini !== true) {
+                return {
+                    recognized: false,
+                    status: "unresolved",
+                    source: "umls-only",
+                    evidence: { umlsError }
+                };
+            }
+
             try {
                 const gemini = await this.queryGemini(text, context);
                 const payload = gemini?.result || gemini?.data || gemini || {};
