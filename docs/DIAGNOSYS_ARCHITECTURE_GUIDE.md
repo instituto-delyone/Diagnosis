@@ -514,53 +514,56 @@ Quando a interface crescer, componentes visuais devem preferencialmente migrar p
 
 # 11. `docs/knowledge_base/` — CONHECIMENTO CLÍNICO ESTRUTURADO
 
-Esta pasta contém os dados clínicos estruturados que alimentam o motor.
+Esta pasta contém o conhecimento clínico estruturado utilizado pelo Diagnosis.
 
-## Bases por especialidade/domínio
+A organização atual da fase 1 segue o princípio:
 
-### `cardiologia.json`
-Base clínica estruturada relacionada à cardiologia.
+> **Um conhecimento → um arquivo canônico.**
 
-### `cardiopatias.json`
-Base específica de cardiopatias/conhecimento relacionado a doenças cardíacas.
+Os módulos clínicos canônicos são:
 
-### `cirurgia_4.json`
-Base clínica relacionada ao domínio cirúrgico presente no projeto.
+1. `DIAGNOSIS_CM01_SINDROME_ICTERICA_v0.3.json`
+2. `DIAGNOSIS_CM02_SINDROME_DIARREICA_v0.3.json`
+3. `DIAGNOSIS_CM03_SINDROME_METABOLICA_HAS_DISLIPIDEMIA_v0.3.json`
+4. `DIAGNOSIS_CM04_DIABETES_v0.3.json`
+5. `DIAGNOSIS_CM05_I_TIREOIDE_v0.3.json`
+6. `DIAGNOSIS_CM05_II_SUPRARRENAL_v0.3.json`
+7. `DIAGNOSIS_CM06_TERAPIA_INTENSIVA_v0.3.json`
+8. `DIAGNOSIS_CM07_PNEUMONIA_COMUNITARIA_NOSOCOMIAL_v0.3.json`
+9. `DIAGNOSIS_CM08_HIV_v0.3.json`
+10. `DIAGNOSIS_CM09_SINDROMES_BACTERIANAS_v0.3.json`
+11. `DIAGNOSIS_CM10_SINDROMES_FEBRIS_v0.3.json`
+12. `DIAGNOSIS_CM11_TOSSE_CRONICA_v0.3.json`
+13. `DIAGNOSIS_CM12_DISPNEIA_v0.3.json`
+14. `DIAGNOSIS_CM13_GERIATRIA_v0.3.json`
+15. `DIAGNOSIS_CM14_EPILEPSIA_v0.3.json`
+16. `DIAGNOSIS_CM15_FRAQUEZA_MUSCULAR_v0.3.json`
+17. `DIAGNOSIS_CM16_CEFALEIAS_v0.3.json`
+18. `DIAGNOSIS_CM17_COMPARTIMENTOS_RENAIS_v0.3.json`
+19. `DIAGNOSIS_CM18_SINDROME_UREMICA_v0.3.json`
+20. `DIAGNOSIS_CM19_DISTURBIOS_HIDROELETROLITICOS_ACIDOBASES_v0.3.json`
+21. `DIAGNOSIS_CM20_SINDROMES_ANEMICAS_v0.3.json`
+22. `DIAGNOSIS_CM21_PANCITOPENIAS_v0.3.json`
+23. `DIAGNOSIS_CM22_LINFONODO_ESPLENOMEGALIA_v0.3.json`
+24. `DIAGNOSIS_CM23_HEMOSTASIA_v0.3.json`
+25. `DIAGNOSIS_CM24_ARTRITES_v0.3.json`
+26. `DIAGNOSIS_CM25_COLAGENOSES_VASCULITES_v0.3.json`
+27. `DIAGNOSIS_CM26_SINDROME_EDEMIGENICA_v0.3.json`
+28. `DIAGNOSIS_CM27_DOR_TORACICA_v0.3.json`
+29. `DIAGNOSIS_CM28_ARRITMIAS_v0.2.json`
+30. `DIAGNOSIS_CM29_INTOXICACOES_v0.2.json`
+31. `DIAGNOSIS_CM30_SEMIOLOGIA_CARDIOVASCULAR_v0.2.json`
+32. `DIAGNOSIS_CM31_SINDROMES_NEUROLOGICAS_v0.3.json`
+33. `DIAGNOSIS_CM32_SEMIOLOGIA_OSTEOARTICULAR_v0.3.json`
+34. `DIAGNOSIS_CM33_SEMIOLOGIA_RESPIRATORIA_SOURCE_PENDING_v0.3.json`
+35. `DIAGNOSIS_CM34_MORDEDURAS_SOURCE_PENDING_v0.1.json`
+36. `DIAGNOSIS_CM35_OTORRINOLARINGOLOGIA_SOURCE_PENDING_v0.1.json`
 
-### `endocrinologia.json`
-Base clínica de endocrinologia.
+Além dos módulos clínicos, permanecem como camadas auxiliares separadas os catálogos e recursos transversais já definidos pelo projeto, incluindo `examinations.json`, `reference_ranges.json`, `pcdt_catalog.json`, `diagnosys_catalogo_mestre_doencas.json`, os recursos AHA de ressuscitação e os módulos transversais de glicemia/consciência e pulso/circulação.
 
-### `hipertensao_arterial.json`
-Base específica relacionada à hipertensão arterial.
+A pasta `interaction/` também permanece separada como camada de interação/recuperação de conhecimento e não deve ser confundida com os módulos CM.
 
-### `neurologia.json`
-Base clínica de neurologia.
-
-### `pneumologia.json`
-Base clínica de pneumologia.
-
-### `reumatologia.json`
-Base clínica de reumatologia.
-
-> As bases por especialidade são **dados de conhecimento**. Não são o motor que interpreta a linguagem e não são o Patient State.
-
----
-
-## Bases específicas / experimentais
-
-### `has_dislipidemia_knowledge_base.json`
-Knowledge Base específica para o conceito/caso de dislipidemia utilizado nos experimentos do projeto.
-
-### `med_cm12_dispneia_knowledge_base.json`
-Knowledge Base extensa associada ao material/caso de dispneia identificado como CM12.
-
-### `diagnosis_kb_glicemia_consciencia_v1.json`
-Knowledge Base específica do cenário glicemia/consciência.
-
-### `diagnosis_kb_pulso_circulacao_v1.json`
-Knowledge Base específica do cenário pulso/circulação.
-
-Esses arquivos são úteis para cenários controlados, validação e desenvolvimento incremental.
+> **Importante:** os nomes acima são os nomes canônicos atualmente definidos para a fase 1. Não recriar referências às antigas bases por especialidade.
 
 ---
 
@@ -658,409 +661,3 @@ sem transformar o navegador em um cliente com permissão de escrita direta no Gi
 # 16. UMLS — NOVA INTEGRAÇÃO AUTORIZADA
 
 ## Status
-
-**APROVADO:** a solicitação de licença UMLS foi aprovada pela NLM/UMLS.
-
-O e-mail de aprovação informa acesso à:
-- UMLS Metathesaurus;
-- UMLS API;
-- SNOMED CT;
-- RxNorm;
-- VSAC;
-- NIH Common Data Elements Repository;
-- recursos como MetaMap.
-
-## Status de implementação no código
-
-**PLANEJADO / AINDA NÃO INTEGRADO AO RUNTIME PRINCIPAL.**
-
-A aprovação da API não significa que os componentes UMLS já existam no repositório.
-
-A integração futura deverá preservar a arquitetura:
-
-```text
-LINGUAGEM DO MÉDICO
-        ↓
-CLINICAL INTERLOCUTOR / CSI
-        ↓
-UMLS / normalização terminológica
-        ↓
-conceito clínico canônico
-        ↓
-CLINICAL MODEL
-        ↓
-POSSIBILITY ENGINE
-        ↓
-PATIENT STATE
-```
-
-### O que UMLS deve fazer
-
-- auxiliar na normalização terminológica;
-- relacionar expressões clínicas a conceitos padronizados;
-- apoiar interoperabilidade;
-- fornecer identificadores e relações terminológicas;
-- auxiliar a interpretação semântica.
-
-### O que UMLS não deve fazer
-
-- decidir sozinho o diagnóstico;
-- alterar diretamente o estado do paciente;
-- substituir a Knowledge Base;
-- substituir o Clinical Model;
-- substituir o Possibility Engine;
-- transformar uma palavra isolada em uma ação clínica sem contexto.
-
-### Segurança de credenciais
-
-**Nunca colocar API keys, tokens ou credenciais UMLS no código público do repositório.**
-
----
-
-# 17. MATRIZ: “QUERO MUDAR X — ONDE VOU?”
-
-| Quero mudar... | Procuro primeiro em... |
-|---|---|
-| aparência/interface | `diagnosis.html`, `Js/ui/` |
-| inicialização/orquestração | `Js/engine.js` |
-| criação de pacientes | `Js/core/patient-generator.js` |
-| estado do paciente | `Js/core/patient-state.js` |
-| hipóteses/diferenciais | `Js/core/possibility-engine.js` |
-| carregamento das bases | `Js/core/knowledge_base_loader.js` |
-| modelo clínico | `Js/core/clinical-model.js` |
-| resolução de conhecimento | `Js/core/clinical-knowledge-resolver.js` |
-| investigação clínica | `Js/core/investigation-engine.js` |
-| interpretação da linguagem | `Js/clinical/clinical-interlocutor.js` |
-| regras de conversação | `AI/CLINICAL_CONVERSATION_PT.json` |
-| semântica/CSI | `AI/CSI_SEMANTIC_LAYER.json` |
-| protocolo da simulação | `AI/CASE_SIMULATION_PROTOCOL.md` |
-| estrutura da Knowledge Base | `AI/KNOWLEDGE_BASE_SCHEMA.json` |
-| regras da Knowledge Base | `AI/KNOWLEDGE_BASE_RULES.md` |
-| conteúdo médico estruturado | `knowledge_base/*.json` |
-| resultados/padrões de exames | `knowledge_base/examinations.json` |
-| biblioteca médica | `Js/core/medical-library.js` + `AI/MEDICAL_LIBRARY_RULES.json` |
-| documentos médicos | `medical_library/` |
-| evidência PubMed/PMC | `Js/core/evidence-resolver.js` |
-| desafios clínicos atuais | `Js/core/diagnosis-clinical-enhancements.js` / regras de conversa |
-| integração geral de runtime clínico | `Js/core/clinical-runtime-adapter.js` |
-| episódios futuros | `Js/episodes/` |
-| testes | `tests/` |
-| terminologia clínica padronizada | futura camada UMLS, integrada ao CSI/interlocutor |
-
----
-
-# 18. O QUE NÃO DEVE SER MISTURADO
-
-## A. Conhecimento ≠ estado
-
-```text
-Knowledge Base
-= o que o sistema sabe sobre medicina
-
-Patient State
-= o que é verdade sobre este paciente agora
-```
-
-## B. Linguagem ≠ ação
-
-```text
-texto do médico
-      ↓
-interpretação
-      ↓
-contexto
-      ↓
-ação clínica
-```
-
-## C. Evidência ≠ diagnóstico
-
-```text
-artigo / PubMed / livro
-      ↓
-evidência
-      ↓
-contexto clínico
-      ↓
-raciocínio
-```
-
-## D. Possibilidade ≠ verdade interna
-
-```text
-Possibility Engine
-= hipóteses / possibilidades
-
-Patient State.internal_truth
-= verdade interna da simulação
-```
-
-## E. Interface ≠ motor
-
-A interface mostra o sistema; ela não deve se tornar o sistema.
-
----
-
-# 19. REGRA DE OURO DA ARQUITETURA
-
-O Diagnosys deve preservar esta sequência:
-
-```text
-                 CONHECIMENTO
-                       ↓
-                  POSSIBILIDADES
-                       ↓
-                     PACIENTE
-                       ↓
-                 PATIENT STATE
-                       ↓
-              INTERPRETAÇÃO CLÍNICA
-                       ↓
-                  AÇÃO CLÍNICA
-                       ↓
-                  CONSEQUÊNCIA
-                       ↓
-                 NOVO ESTADO
-                       ↓
-                   AVALIAÇÃO
-```
-
-E, na linguagem:
-
-```text
-PALAVRA
-  ↓
-FRASE
-  ↓
-CONTEXTO
-  ↓
-ESTADO ATUAL
-  ↓
-SIGNIFICADO CLÍNICO
-  ↓
-AÇÃO
-```
-
-**Nunca inverter essa ordem simplesmente porque uma palavra parece corresponder a uma ação.**
-
----
-
-# 20. CHECKLIST PARA ADICIONAR UMA NOVA FUNÇÃO
-
-Antes de criar/modificar código, responder:
-
-1. Isso é **interface**, **regra**, **conhecimento**, **estado**, **interpretação**, **ação**, **consequência** ou **avaliação**?
-2. Existe um componente que já possui essa responsabilidade?
-3. A mudança deve entrar em `AI/`, `knowledge_base/` ou `Js/`?
-4. Estou misturando conhecimento médico com estado do paciente?
-5. Estou transformando uma palavra diretamente em uma ação sem considerar contexto?
-6. O comportamento precisa ser registrado no Patient State?
-7. A mudança precisa de evidência/proveniência?
-8. Existe teste para o comportamento novo?
-9. A interface precisa realmente ser modificada?
-10. Estou colocando uma credencial/API key no repositório? **Se sim: parar.**
-
----
-
-# 21. CHECKLIST DE DEPURAÇÃO
-
-Quando algo der errado:
-
-### O paciente está errado?
-
-Verificar, nesta ordem:
-
-```text
-patient-generator.js
-        ↓
-knowledge_base_loader.js
-        ↓
-knowledge_base/*.json
-        ↓
-patient-state.js
-```
-
-### O sistema não entendeu o médico?
-
-```text
-clinical-interlocutor.js
-        ↓
-CSI_SEMANTIC_LAYER.json
-        ↓
-CLINICAL_CONVERSATION_PT.json
-```
-
-### O exame está errado?
-
-```text
-examinations.json
-        ↓
-investigation-engine.js
-        ↓
-diagnosis-clinical-enhancements.js
-```
-
-### O diferencial está errado?
-
-```text
-clinical-model.js
-        ↓
-possibility-engine.js
-        ↓
-Knowledge Base
-```
-
-### A informação apareceu cedo demais?
-
-Verificar principalmente:
-
-```text
-patient-state.js
-        ↓
-revealed / revealable
-        ↓
-engine.js
-        ↓
-renderização
-```
-
-A verdade interna do caso não deve ser exposta simplesmente porque existe no objeto interno.
-
----
-
-# 22. PRINCÍPIO DE EVOLUÇÃO DO PROJETO
-
-O Diagnosys deve crescer por **camadas**, não por acúmulo indiscriminado no `engine.js`.
-
-Preferir:
-
-```text
-nova responsabilidade
-      ↓
-componente especializado
-      ↓
-integrado ao runtime
-```
-
-em vez de:
-
-```text
-nova responsabilidade
-      ↓
-mais 500 linhas no engine.js
-```
-
-A modularidade é especialmente importante agora que o projeto possui:
-- Knowledge Base estruturada;
-- Patient State estruturado;
-- CSI/semântica;
-- interlocução clínica;
-- investigação;
-- biblioteca médica;
-- evidência científica;
-- desafios clínicos;
-- futura terminologia UMLS.
-
----
-
-# 23. ESTADO ATUAL × FUTURO
-
-## Já existente no repositório
-
-- motor principal;
-- Patient State;
-- Patient Generator;
-- Possibility Engine;
-- Clinical Model;
-- Knowledge Base Loader;
-- Clinical Knowledge Resolver;
-- Investigation Engine;
-- Clinical Interlocutor;
-- Medical Library;
-- Evidence Resolver;
-- regras CSI;
-- regras de conversação;
-- catálogo inicial de exames;
-- bases clínicas estruturadas;
-- biblioteca documental.
-
-## Próximas extensões naturais
-
-- integração efetiva da UMLS API;
-- normalização terminológica clínica com identificadores;
-- persistência estruturada de evidência;
-- evolução mais profunda de consequências fisiológicas;
-- expansão dos desafios clínicos;
-- modularização progressiva da UI;
-- testes automatizados dos fluxos clínicos.
-
----
-
-# 24. RESUMO EM UMA FRASE POR COMPONENTE
-
-```text
-diagnosis.html
-→ mostra o sistema.
-
-engine.js
-→ coordena o sistema.
-
-patient-generator.js
-→ cria o paciente/caso.
-
-patient-state.js
-→ mantém a verdade e o estado do paciente.
-
-knowledge_base_loader.js
-→ traz o conhecimento para o runtime.
-
-clinical-model.js
-→ organiza o conhecimento clínico para raciocínio.
-
-possibility-engine.js
-→ trabalha com possibilidades/hipóteses.
-
-clinical-interlocutor.js
-→ entende o que o médico quis dizer.
-
-investigation-engine.js
-→ executa a lógica das investigações.
-
-clinical-knowledge-resolver.js
-→ resolve conhecimento clínico relevante.
-
-medical-library.js
-→ busca conhecimento documental.
-
-evidence-resolver.js
-→ busca evidência científica externa.
-
-diagnosis-clinical-enhancements.js
-→ acrescenta comportamentos clínicos/conversacionais ao runtime.
-
-clinical-runtime-adapter.js
-→ adapta/integrar fluxos clínicos ao runtime.
-
-knowledge_base/*.json
-→ contém conhecimento clínico estruturado.
-
-examinations.json
-→ contém padrões/regras dos exames simulados.
-
-AI/*.md / AI/*.json
-→ define como o sistema deve ser estruturado e se comportar.
-
-medical_library/*
-→ contém fontes documentais médicas.
-
-UMLS
-→ futura camada de normalização/interoperabilidade terminológica.
-```
-
----
-
-# 25. FRASE FINAL DO GABARITO
-
-> **O Diagnosys não deve ser pensado como um arquivo que sabe medicina. Ele deve ser pensado como um sistema em camadas no qual conhecimento, linguagem, estado, raciocínio, ação, consequência e avaliação possuem responsabilidades distintas.**
-
-Essa separação é o que permite que o projeto cresça sem perder coerência.
