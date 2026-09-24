@@ -1,0 +1,234 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM18",
+  "title": "Síndrome Urêmica",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "7CM 18 - Síndrome Urêmica.docx.pdf"
+      ],
+      "date": "30/09/2021",
+      "role": "fragmento/contexto original"
+    }
+  },
+  "summary_extraction": {
+    "scope": [
+      "síndrome urêmica",
+      "doença renal crônica",
+      "lesão renal aguda",
+      "anemia da DRC",
+      "osteodistrofia renal",
+      "distúrbios hidroeletrolíticos",
+      "terapia renal substitutiva"
+    ],
+    "important_source_fragments": [
+      "Síndrome urêmica: retenção de escórias nitrogenadas associada a pericardite, encefalopatia, gastrite e disfunção plaquetária, além de hipervolemia, acidose e distúrbios eletrolíticos.",
+      "DRC: anormalidade estrutural/funcional por mais de 3 meses ou TFG <60 mL/min/1,73m²; albuminúria aumentada é destacada como marcador funcional no resumo.",
+      "Principais causas citadas: diabetes, hipertensão e glomerulopatias.",
+      "Estágios da DRC são organizados pela TFG, com prevenção de progressão, tratamento de complicações e preparação para terapia renal substitutiva.",
+      "Anemia da DRC: deficiência relativa de eritropoetina, sangramento e outros fatores; o resumo cita EPO/darbepoetina e reposição de ferro.",
+      "Osteodistrofia renal: alteração do metabolismo cálcio-fósforo-vitamina D-PTH, com osteíte fibrosa por hiperparatireoidismo secundário e doença óssea adinâmica.",
+      "Achados radiológicos descritos: reabsorção subperiosteal, tumor marrom, crânio em sal e pimenta e coluna em rugger-jersey.",
+      "Tratamento do distúrbio mineral inclui restrição de fosfato, quelantes como sevelamer e vitamina D/calcitriol; paratireoidectomia é citada no hiperparatireoidismo terciário.",
+      "Terapia renal substitutiva: transplante e diálise; diálise reverte manifestações agudas como hipervolemia, alterações eletrolíticas, acidose, disfunção plaquetária e pericardite.",
+      "Lesão renal aguda: aumento de creatinina ou redução de débito urinário, classificada em pré-renal, intrínseca e pós-renal.",
+      "Para o resumo, causas pré-renais incluem hipovolemia/hipotensão/insuficiência cardíaca; intrínsecas incluem NTA, NIA e glomerulopatias; pós-renais incluem hiperplasia e neoplasias.",
+      "Indicações de diálise de urgência no resumo: hipervolemia, hipercalemia, acidose metabólica, encefalopatia, pericardite e hemorragia/uremia franca quando refratárias ou graves.",
+      "Pré-renal versus NTA: pré-renal com urina concentrada e menor sódio urinário; NTA com urina mais diluída e maior sódio urinário.",
+      "O resumo inclui comparação entre lesão renal aguda e crônica por anemia, alterações ósseas, creatinina prévia e ultrassonografia renal.",
+      "Observação de fonte: 'repor ferro de ferritina <200 e saturação <20%' aparece no material e deve permanecer explicitamente como regra histórica da fonte, não como regra atual."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "uremic_syndrome",
+      "features": [
+        "azotemia",
+        "pericardite",
+        "encefalopatia",
+        "disfunção plaquetária",
+        "acidose",
+        "hipervolemia",
+        "distúrbios eletrolíticos"
+      ]
+    },
+    {
+      "id": "chronic_kidney_disease",
+      "features": [
+        ">3 meses",
+        "TFG reduzida",
+        "albuminúria",
+        "progressão",
+        "complicações sistêmicas"
+      ]
+    },
+    {
+      "id": "acute_kidney_injury",
+      "features": [
+        "aumento de creatinina",
+        "oligúria",
+        "pré-renal",
+        "intrínseca",
+        "pós-renal"
+      ]
+    },
+    {
+      "id": "ckd_anemia",
+      "features": [
+        "eritropoetina reduzida",
+        "anemia",
+        "ferro",
+        "EPO/darbepoetina"
+      ]
+    },
+    {
+      "id": "renal_osteodystrophy",
+      "features": [
+        "PTH",
+        "vitamina D",
+        "cálcio",
+        "fosfato",
+        "osteíte fibrosa",
+        "doença óssea adinâmica"
+      ]
+    },
+    {
+      "id": "renal_replacement_therapy",
+      "features": [
+        "hemodiálise",
+        "diálise peritoneal",
+        "transplante"
+      ]
+    },
+    {
+      "id": "prerenal_aki",
+      "features": [
+        "hipovolemia",
+        "hipotensão",
+        "insuficiência cardíaca",
+        "retenção de sódio/água"
+      ]
+    },
+    {
+      "id": "acute_tubular_necrosis",
+      "features": [
+        "lesão tubular",
+        "sódio urinário maior",
+        "urina menos concentrada"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "A síndrome urêmica é mais do que azotemia isolada: o resumo a define por manifestações sistêmicas associadas à retenção de escórias e falência renal.",
+      "source": "summary"
+    },
+    {
+      "rule": "DRC é definida no material por alteração estrutural/funcional >3 meses ou TFG <60 mL/min/1,73m².",
+      "source": "summary"
+    },
+    {
+      "rule": "IRA é organizada em pré-renal, intrínseca e pós-renal.",
+      "source": "summary"
+    },
+    {
+      "rule": "Pré-renal é descrita como estado em que o túbulo preserva a capacidade de reabsorver sódio e água; NTA como perda dessa capacidade.",
+      "source": "summary"
+    },
+    {
+      "rule": "As indicações de diálise de urgência devem considerar manifestações graves/refratárias como hipercalemia, acidose, hipervolemia, encefalopatia e pericardite no resumo.",
+      "source": "summary"
+    },
+    {
+      "rule": "O distúrbio mineral ósseo da DRC é apresentado como interação entre fósforo, vitamina D, cálcio e PTH.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "DRC avançada + encefalopatia/pericardite/disfunção plaquetária",
+      "possibilities": [
+        "síndrome urêmica"
+      ]
+    },
+    {
+      "axis": "creatinina aumentada rapidamente + hipovolemia/hipotensão + urina concentrada",
+      "possibilities": [
+        "IRA pré-renal"
+      ]
+    },
+    {
+      "axis": "creatinina aumentada + contexto de NTA + urina menos concentrada/Na urinário elevado",
+      "possibilities": [
+        "IRA intrínseca/NTA"
+      ]
+    },
+    {
+      "axis": "IRA + obstrução do trato urinário",
+      "possibilities": [
+        "IRA pós-renal"
+      ]
+    },
+    {
+      "axis": "DRC + anemia",
+      "possibilities": [
+        "anemia da DRC"
+      ]
+    },
+    {
+      "axis": "DRC + alteração cálcio/fósforo/PTH + doença óssea",
+      "possibilities": [
+        "osteodistrofia renal"
+      ]
+    },
+    {
+      "axis": "hipercalemia/acidose/hipervolemia/encefalopatia/pericardite refratárias",
+      "possibilities": [
+        "necessidade de terapia renal substitutiva urgente"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "tempo de doença",
+      "TFG",
+      "creatinina",
+      "débito urinário",
+      "volemia",
+      "Na/K/Ca/P",
+      "pH",
+      "albuminúria",
+      "hemoglobina",
+      "PTH/vitamina D",
+      "sintomas urêmicos",
+      "obstrução",
+      "exposição a nefrotóxicos",
+      "doenças de base"
+    ],
+    "allowed_variability": [
+      "IRA/DRC",
+      "pré-renal/intrínseca/pós-renal",
+      "uremia manifesta/subclínica",
+      "distúrbio mineral/anemia isolados ou combinados",
+      "paciente em diálise ou pré-diálise"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "O limiar de TFG e a estrutura de estágios devem ser mantidos como conteúdo da fonte e versionados com classificações atuais antes da KB canônica.",
+    "A regra de reposição de ferro com ferritina <200 e saturação <20% é explicitamente um fragmento da fonte de 2021; não deve ser atualizada silenciosamente.",
+    "O alvo de hemoglobina e uso de ESA são conteúdos históricos do resumo e precisam de validação terapêutica atual.",
+    "As indicações de diálise estão resumidas didaticamente; a KB canônica deverá representar gravidade, refratariedade e contexto clínico, em vez de transformar cada item em gatilho isolado.",
+    "A comparação ultrassonográfica de tamanho renal é um ensinamento do material, não um critério único para diferenciar IRA e DRC."
+  ],
+  "validation_targets": [
+    "Manter o conteúdo do resumo original separado de qualquer camada externa.",
+    "Não transformar exemplos didáticos em casos canônicos.",
+    "Versionar regras históricas antes de utilizá-las operacionalmente.",
+    "Testar se as entidades e relações permitem múltiplas apresentações clínicas."
+  ],
+  "generated_at": "2026-09-23"
+}

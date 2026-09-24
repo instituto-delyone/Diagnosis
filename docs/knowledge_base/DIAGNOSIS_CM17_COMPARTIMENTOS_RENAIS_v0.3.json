@@ -1,0 +1,345 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM17",
+  "title": "Síndromes dos Compartimentos Renais",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "CM 17 - Síndromes dos Compartimentos Renais.docx.pdf"
+      ],
+      "date": "30/09/2021",
+      "role": "fragmento/contexto original"
+    }
+  },
+  "summary_extraction": {
+    "scope": [
+      "doença vascular renal",
+      "síndromes glomerulares",
+      "síndrome nefrítica",
+      "síndrome nefrótica",
+      "GNRP",
+      "nefropatia por IgA",
+      "GN pós-estreptocócica",
+      "doenças tubulointersticiais",
+      "acidose tubular renal",
+      "distúrbios tubulares"
+    ],
+    "important_source_fragments": [
+      "Estenose de artéria renal: hipofluxo renal → renina → angiotensina II → vasoconstrição e aldosterona → retenção de sódio; o resumo diferencia idosos/aterosclerose e mulheres jovens/displasia fibromuscular.",
+      "Diagnóstico da estenose renal inclui Doppler, angio-TC/angio-RM e arteriografia para confirmação/planejamento no resumo; tratamento diferencia angioplastia na displasia fibromuscular e IECA/BRA na aterosclerose, com ressalvas para estenose bilateral/rim único.",
+      "Ateroembolismo renal: o resumo associa procedimento vascular, placas de colesterol, livedo, dedo azul, placas de Hollenhorst, eosinofilia/eosinofilúria e queda de complemento.",
+      "Síndrome nefrítica: inflamação glomerular, hematúria dismórfica, hipertensão, edema, oligúria, cilindros hemáticos e proteinúria subnefrótica.",
+      "GN pós-estreptocócica: faringoamigdalite ou piodermite precedendo síndrome nefrítica; C3 baixo temporariamente; ASLO/anti-DNase B; microscopia proliferativa difusa e humps subepiteliais no resumo.",
+      "Doença de Berger/nefropatia por IgA: hematúria associada temporalmente à infecção, complemento normal, depósitos mesangiais de IgA.",
+      "GNRP: formação de crescentes em mais de 50% dos glomérulos; tipo 1 anti-MBG/Goodpasture, tipo 2 imunocomplexos, tipo 3 pauci-imune/ANCA no resumo.",
+      "Síndrome nefrótica: proteinúria >3,5 g/dia, hipoalbuminemia, edema, lipidúria e dislipidemia; perda de imunoglobulinas e antitrombina III é usada para explicar infecção e trombose.",
+      "Formas de síndrome nefrótica apresentadas: lesão mínima, GESF, glomerulonefrite proliferativa mesangial, nefropatia membranosa e glomerulonefrite membranoproliferativa.",
+      "Trombose de veia renal é associada no resumo a síndrome nefrótica e câncer renal; dor lombar, hematúria, piora da proteinúria e aumento da creatinina são descritos.",
+      "Doenças tubulointersticiais incluem nefrite intersticial aguda, nefrite intersticial crônica, necrose tubular aguda, necrose de papila e distúrbios específicos.",
+      "Nefrite intersticial aguda é associada a beta-lactâmicos, sulfas, rifampicina, AINEs, infecções e autoimunidade.",
+      "Necrose de papila: causas no resumo incluem pielonefrite, hemoglobinopatias, obstrução, diabetes e analgésicos; quadro com febre, dor lombar e hematúria.",
+      "Síndrome de Fanconi: perda proximal generalizada; o resumo usa mieloma múltiplo como exemplo e relaciona cadeia leve/Bence-Jones, hipercalcemia, hiperuricemia e amiloidose a diferentes lesões renais.",
+      "Acidose tubular renal: tipo I com defeito de acidificação e hipocalemia; tipo IV com hipoaldosteronismo/resistência e hipercalemia; tipo III descrito como controverso.",
+      "Alça de Henle e transportador Na-K-2Cl: furosemida e síndrome de Bartter são usados como exemplos; alteração do gradiente medular favorece poliúria, hipocalemia e alcalose.",
+      "Diabetes insipidus nefrogênico é associado a poliúria, hipostenúria e polidipsia."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "renal_artery_stenosis",
+      "features": [
+        "hipoperfusão",
+        "renina",
+        "SRAA",
+        "hipertensão",
+        "displasia fibromuscular",
+        "aterosclerose"
+      ]
+    },
+    {
+      "id": "renal_atheroembolism",
+      "features": [
+        "procedimento vascular",
+        "cristais/placas de colesterol",
+        "livedo",
+        "dedo azul",
+        "Hollenhorst",
+        "eosinofilia"
+      ]
+    },
+    {
+      "id": "nephritic_syndrome",
+      "features": [
+        "hematúria dismórfica",
+        "cilindros hemáticos",
+        "oligúria",
+        "hipertensão",
+        "edema",
+        "proteinúria subnefrótica"
+      ]
+    },
+    {
+      "id": "poststreptococcal_glomerulonephritis",
+      "features": [
+        "infecção estreptocócica prévia",
+        "C3 baixo",
+        "hematúria",
+        "edema",
+        "hipertensão",
+        "humps"
+      ]
+    },
+    {
+      "id": "iga_nephropathy",
+      "features": [
+        "hematúria sinfaringítica",
+        "IgA mesangial",
+        "complemento normal"
+      ]
+    },
+    {
+      "id": "rapidly_progressive_glomerulonephritis",
+      "features": [
+        "crescentes",
+        "anti-MBG",
+        "imunocomplexos",
+        "ANCA/pauci-imune"
+      ]
+    },
+    {
+      "id": "nephrotic_syndrome",
+      "features": [
+        "proteinúria maciça",
+        "hipoalbuminemia",
+        "edema",
+        "lipidúria",
+        "dislipidemia",
+        "trombose/infecção"
+      ]
+    },
+    {
+      "id": "minimal_change_disease",
+      "features": [
+        "crianças",
+        "fusão/retração podocitária",
+        "resposta a corticoide"
+      ]
+    },
+    {
+      "id": "fsgs",
+      "features": [
+        "GESF",
+        "adultos",
+        "associações sistêmicas"
+      ]
+    },
+    {
+      "id": "membranous_nephropathy",
+      "features": [
+        "espessamento da membrana basal",
+        "adultos",
+        "trombose de veia renal"
+      ]
+    },
+    {
+      "id": "membranoproliferative_glomerulonephritis",
+      "features": [
+        "expansão mesangial",
+        "duplo contorno",
+        "hipocomplementemia",
+        "hepatite C no resumo"
+      ]
+    },
+    {
+      "id": "acute_interstitial_nephritis",
+      "features": [
+        "fármacos",
+        "infecção",
+        "autoimunidade",
+        "interstício inflamado"
+      ]
+    },
+    {
+      "id": "papillary_necrosis",
+      "features": [
+        "febre",
+        "dor lombar",
+        "hematúria",
+        "diabetes",
+        "hemoglobinopatia",
+        "analgésicos",
+        "obstrução"
+      ]
+    },
+    {
+      "id": "fanconi_syndrome",
+      "features": [
+        "disfunção tubular proximal",
+        "glicosúria sem hiperglicemia",
+        "fosfatúria",
+        "bicarbonatúria"
+      ]
+    },
+    {
+      "id": "renal_tubular_acidosis",
+      "features": [
+        "distúrbio ácido-base tubular",
+        "tipos I e IV",
+        "potássio alterado"
+      ]
+    },
+    {
+      "id": "bartter_syndrome",
+      "features": [
+        "defeito Na-K-2Cl",
+        "hipocalemia",
+        "alcalose",
+        "poliúria"
+      ]
+    },
+    {
+      "id": "nephrogenic_diabetes_insipidus",
+      "features": [
+        "poliúria",
+        "hipostenúria",
+        "polidipsia"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "Síndrome nefrítica é reconhecida no resumo pelo conjunto inflamação glomerular + hematúria + oligúria + hipertensão + edema.",
+      "source": "summary"
+    },
+    {
+      "rule": "GNPE é diferenciada de nefropatia por IgA pela latência após infecção e pelo complemento, conforme o resumo.",
+      "source": "summary"
+    },
+    {
+      "rule": "GNRP é uma síndrome morfológica definida pela presença de crescentes em mais de 50% dos glomérulos no material.",
+      "source": "summary"
+    },
+    {
+      "rule": "Na síndrome nefrótica, perda de antitrombina III e proteínas anticoagulantes é usada para explicar predisposição trombótica.",
+      "source": "summary"
+    },
+    {
+      "rule": "Glicosúria sem hiperglicemia é apresentada como pista de lesão tubular proximal.",
+      "source": "summary"
+    },
+    {
+      "rule": "O resumo associa tipo I de acidose tubular renal a hipocalemia e tipo IV a hipercalemia.",
+      "source": "summary"
+    },
+    {
+      "rule": "A distinção entre estenose de artéria renal aterosclerótica e displasia fibromuscular orienta o tratamento descrito na fonte.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "hematúria dismórfica + cilindros hemáticos + edema + HAS",
+      "possibilities": [
+        "síndrome nefrítica"
+      ]
+    },
+    {
+      "axis": "infecção estreptocócica prévia + latência + C3 baixo",
+      "possibilities": [
+        "GN pós-estreptocócica"
+      ]
+    },
+    {
+      "axis": "hematúria próxima temporalmente à infecção + complemento normal",
+      "possibilities": [
+        "nefropatia por IgA"
+      ]
+    },
+    {
+      "axis": "crescentes + anti-MBG",
+      "possibilities": [
+        "GNRP tipo 1/Goodpasture"
+      ]
+    },
+    {
+      "axis": "crescentes + imunocomplexos",
+      "possibilities": [
+        "GNRP tipo 2"
+      ]
+    },
+    {
+      "axis": "crescentes + ANCA/pauci-imune",
+      "possibilities": [
+        "GNRP tipo 3"
+      ]
+    },
+    {
+      "axis": "proteinúria maciça + hipoalbuminemia + edema",
+      "possibilities": [
+        "síndrome nefrótica"
+      ]
+    },
+    {
+      "axis": "procedimento vascular + livedo + dedo azul + eosinofilia",
+      "possibilities": [
+        "ateroembolismo renal"
+      ]
+    },
+    {
+      "axis": "glicosúria sem hiperglicemia + perdas tubulares múltiplas",
+      "possibilities": [
+        "síndrome de Fanconi"
+      ]
+    },
+    {
+      "axis": "poliúria + hipocalemia + alcalose + defeito Na-K-2Cl",
+      "possibilities": [
+        "Bartter/efeito de diurético de alça"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "idade",
+      "pressão arterial",
+      "hematúria",
+      "proteinúria",
+      "edema",
+      "complemento",
+      "infecção prévia",
+      "fármacos",
+      "exposição vascular",
+      "eletrólitos",
+      "pH",
+      "glicosúria",
+      "poliúria",
+      "função renal",
+      "sedimento urinário",
+      "doença sistêmica"
+    ],
+    "allowed_variability": [
+      "glomerular/tubular/intersticial/vascular",
+      "agudo/subagudo/crônico",
+      "síndrome pura/mista",
+      "etiologia primária/secundária"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "O material é didático e usa alguns limiares e condutas de 2021; manter como conteúdo histórico até validação atual.",
+    "A arteriografia como padrão-ouro, o uso de IECA/BRA em estenose renal e as indicações intervencionistas precisam ser contextualizados clinicamente; não codificar como regra absoluta.",
+    "O resumo apresenta 'glomerulonefrite proliferativa mesangial' e outras categorias de modo didático; não presumir equivalência automática com classificações histopatológicas atuais.",
+    "As indicações e tratamentos de síndrome nefrótica, GNRP, acidose tubular e doenças tubulointersticiais precisam de versão terapêutica própria antes de serem usadas pelo simulador.",
+    "A relação entre tipo de acidose tubular e pH urinário foi apresentada didaticamente e deve ser preservada sem ampliar além do que a fonte sustenta."
+  ],
+  "validation_targets": [
+    "Manter o conteúdo do resumo original separado de qualquer camada externa.",
+    "Não transformar exemplos didáticos em casos canônicos.",
+    "Versionar regras históricas antes de utilizá-las operacionalmente.",
+    "Testar se as entidades e relações permitem múltiplas apresentações clínicas."
+  ],
+  "generated_at": "2026-09-23"
+}

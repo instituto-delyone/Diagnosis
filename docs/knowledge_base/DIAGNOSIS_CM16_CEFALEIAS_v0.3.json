@@ -1,0 +1,271 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM16",
+  "title": "Cefaleias",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "CM 16 - Cefaleias.docx.pdf"
+      ],
+      "date": "27/09/2021",
+      "role": "fragmento/contexto original"
+    }
+  },
+  "summary_extraction": {
+    "scope": [
+      "cefaleias primárias",
+      "cefaleias secundárias",
+      "enxaqueca",
+      "cefaleia tensional",
+      "cefaleia em salvas",
+      "meningite/meningoencefalite",
+      "hipertensão intracraniana",
+      "hemorragias intracranianas",
+      "arterite temporal",
+      "meningites específicas"
+    ],
+    "important_source_fragments": [
+      "Red flags para cefaleia: início após 50–55 anos, pior cefaleia da vida, início súbito, padrão progressivo, sinal neurológico focal, achados/doença sistêmica, trauma recente e edema de papila.",
+      "O resumo separa cefaleias primárias, recorrentes com exame físico normal, de cefaleias secundárias associadas a sinais de alarme.",
+      "Enxaqueca: descrita como mais comum em mulheres, com forte história familiar; dor pulsátil/latejante, unilateral, piora com movimento, moderada/forte e duração de 4–72h.",
+      "Aura é descrita como sinal neurológico focal transitório; o resumo chama essa apresentação de enxaqueca clássica.",
+      "Cefaleia tensional: dor opressiva, bilateral, leve/moderada, 30 minutos a 7 dias, associada a hiperestesia/hipertonia pericraniana.",
+      "Cefaleia em salvas: homens, dor em facada, unilateral/periorbitária, muito intensa, 15–180 minutos, sintomas autonômicos ipsilaterais; oxigênio e sumatriptano aparecem como tratamento abortivo no resumo.",
+      "Meningite: cefaleia, febre e rebaixamento de consciência podem levantar a hipótese mesmo sem rigidez de nuca; causas incluem bactéria, vírus, fungos, tuberculose e não infecciosas.",
+      "Meningite bacteriana: recém-nascidos com Streptococcus grupo B/E. coli/Listeria; idosos e imunodeprimidos com relevância para Listeria; H. influenzae associado no resumo a fístula liquórica.",
+      "Diagnóstico de meningite: hemocultura e líquor; o resumo indica neuroimagem antes da punção em imunocomprometidos, papiledema, alteração de consciência, déficit focal e TCE prévio.",
+      "Meningococcemia: febre + petéquias em quadro agudo é apresentada como situação que exige afastar doença meningocócica.",
+      "Hemorragia subaracnoide: cefaleia súbita, descrita como pior da vida, com possível rigidez de nuca e rebaixamento; o resumo cita cefaleia sentinela antes da ruptura.",
+      "Hemorragia intraparenquimatosa: cefaleia súbita intensa + sinal focal + alteração de consciência.",
+      "Arterite temporal: idade avançada, cefaleia temporal, claudicação de mandíbula, risco de amaurose; biópsia da artéria temporal e VHS são citados.",
+      "Hipertensão intracraniana: tríade de Cushing, edema de papila e rebaixamento de consciência aparecem no resumo."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "primary_headache",
+      "features": [
+        "recorrência",
+        "padrão semelhante ao longo da vida",
+        "exame físico/neurológico normal entre crises"
+      ]
+    },
+    {
+      "id": "migraine",
+      "features": [
+        "pulsátil",
+        "unilateral",
+        "4-72h",
+        "náuseas/vômitos",
+        "fotofobia",
+        "fonofobia",
+        "aura possível"
+      ]
+    },
+    {
+      "id": "tension_type_headache",
+      "features": [
+        "opressiva",
+        "bilateral",
+        "leve/moderada",
+        "30min-7d",
+        "musculatura pericraniana"
+      ]
+    },
+    {
+      "id": "cluster_headache",
+      "features": [
+        "unilateral",
+        "periorbitária",
+        "15-180min",
+        "lacrimejamento",
+        "hiperemia conjuntival",
+        "congestão nasal",
+        "ptose/miose",
+        "predomínio masculino no resumo"
+      ]
+    },
+    {
+      "id": "bacterial_meningitis",
+      "features": [
+        "febre",
+        "cefaleia",
+        "rigidez de nuca",
+        "alteração de consciência",
+        "convulsão",
+        "petéquias possível"
+      ]
+    },
+    {
+      "id": "meningococcemia",
+      "features": [
+        "sepse",
+        "petéquias",
+        "vasculite",
+        "progressão rápida"
+      ]
+    },
+    {
+      "id": "subarachnoid_hemorrhage",
+      "features": [
+        "cefaleia súbita",
+        "pior cefaleia da vida",
+        "rigidez de nuca",
+        "cefaleia sentinela"
+      ]
+    },
+    {
+      "id": "intracerebral_hemorrhage",
+      "features": [
+        "cefaleia súbita",
+        "déficit focal",
+        "rebaixamento"
+      ]
+    },
+    {
+      "id": "giant_cell_arteritis",
+      "features": [
+        "idade avançada",
+        "cefaleia temporal",
+        "claudicação mandibular",
+        "amaurose",
+        "VHS"
+      ]
+    },
+    {
+      "id": "intracranial_hypertension",
+      "features": [
+        "papiledema",
+        "tríade de Cushing",
+        "alteração de consciência"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "Sinais de alarme devem deslocar a hipótese de cefaleia primária para investigação de causa secundária.",
+      "source": "summary"
+    },
+    {
+      "rule": "O resumo usa primeira crise associada a sinal focal como motivo para neuroimagem.",
+      "source": "summary"
+    },
+    {
+      "rule": "Meningite pode ocorrer sem rigidez de nuca; o resumo enfatiza cefaleia + febre + alteração de consciência.",
+      "source": "summary"
+    },
+    {
+      "rule": "Em meningite, o resumo estabelece tempo porta-antibiótico de 60 minutos.",
+      "source": "summary"
+    },
+    {
+      "rule": "O resumo recomenda considerar neuroimagem antes da punção lombar em situações de maior risco de herniação.",
+      "source": "summary"
+    },
+    {
+      "rule": "A cefaleia súbita é organizada no resumo principalmente em causas vasculares hemorrágicas, especialmente HSA e hemorragia intraparenquimatosa.",
+      "source": "summary"
+    },
+    {
+      "rule": "A arterite temporal é associada no resumo a risco visual e necessidade de tratamento imunossupressor.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "cefaleia recorrente + padrão semelhante + exame normal",
+      "possibilities": [
+        "cefaleia primária"
+      ]
+    },
+    {
+      "axis": "dor pulsátil unilateral + náuseas/fotofobia/fonofobia",
+      "possibilities": [
+        "enxaqueca"
+      ]
+    },
+    {
+      "axis": "dor opressiva bilateral + leve/moderada",
+      "possibilities": [
+        "cefaleia tensional"
+      ]
+    },
+    {
+      "axis": "dor periorbitária unilateral + sintomas autonômicos + crises curtas",
+      "possibilities": [
+        "cefaleia em salvas"
+      ]
+    },
+    {
+      "axis": "cefaleia + febre + alteração de consciência",
+      "possibilities": [
+        "meningite/meningoencefalite"
+      ]
+    },
+    {
+      "axis": "pior cefaleia da vida + início súbito",
+      "possibilities": [
+        "hemorragia subaracnoide"
+      ]
+    },
+    {
+      "axis": "cefaleia súbita + déficit focal",
+      "possibilities": [
+        "hemorragia intraparenquimatosa"
+      ]
+    },
+    {
+      "axis": "idoso + cefaleia temporal + claudicação mandibular",
+      "possibilities": [
+        "arterite temporal"
+      ]
+    },
+    {
+      "axis": "cefaleia progressiva + papiledema/sinais de HIC",
+      "possibilities": [
+        "hipertensão intracraniana/lesão expansiva"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "idade",
+      "início",
+      "duração",
+      "recorrência",
+      "localização",
+      "qualidade",
+      "intensidade",
+      "sintomas autonômicos",
+      "náuseas/fotofobia/fonofobia",
+      "febre",
+      "déficit focal",
+      "papiledema",
+      "estado de consciência",
+      "trauma",
+      "imunossupressão"
+    ],
+    "allowed_variability": [
+      "primária/secundária",
+      "aguda/progressiva/recorrente",
+      "vascular/infecciosa/inflamatória/expansiva"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "O material mistura cefaleias com meningites e algumas regras de infectologia; conservar essa organização da fonte, mas manter as entidades separáveis na KB.",
+    "As doses, esquemas de quimioprofilaxia e critérios de isolamento são conteúdo histórico da fonte e não devem ser tratados como protocolo atual sem validação.",
+    "A expressão 'Lasegue' usada no resumo em contexto de irritação meníngea deve ser preservada como anotação da fonte, sem transformá-la em regra diagnóstica universal.",
+    "Os limiares laboratoriais do líquor apresentados são valores didáticos do material e devem permanecer versionados."
+  ],
+  "validation_targets": [
+    "Manter o conteúdo do resumo original separado de qualquer camada externa.",
+    "Não transformar exemplos didáticos em casos canônicos.",
+    "Versionar regras históricas antes de utilizá-las operacionalmente.",
+    "Testar se as entidades e relações permitem múltiplas apresentações clínicas."
+  ],
+  "generated_at": "2026-09-23"
+}

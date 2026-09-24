@@ -1,0 +1,286 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM19",
+  "title": "Distúrbios Hidroeletrolíticos e Acidobásicos",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "CM 19 - Distúrbios Hidroeletrolíticos e Ácidobásicos.docx.pdf"
+      ],
+      "date": "04/10/2021",
+      "role": "fragmento/contexto original"
+    }
+  },
+  "summary_extraction": {
+    "scope": [
+      "hiponatremia",
+      "hipernatremia/água livre",
+      "SIADH",
+      "síndrome cerebral perdedora de sal",
+      "diabetes insipidus",
+      "hipocalemia",
+      "hipercalemia",
+      "distúrbios ácido-básicos",
+      "ânion gap",
+      "compensação respiratória/metabólica",
+      "alcalose metabólica",
+      "acidose tubular"
+    ],
+    "important_source_fragments": [
+      "Distúrbios do sódio: o resumo apresenta Na+ como principal determinante osmótico extracelular e destaca o neurônio como célula vulnerável.",
+      "Na hiponatremia, o resumo relaciona entrada de água na célula, edema cerebral e sintomas neurológicos como cefaleia, vômitos, sonolência, convulsão e coma.",
+      "A osmolaridade plasmática é apresentada pela fórmula 2×Na + glicose/18 + ureia/6, com distinção entre osmolaridade total e efetiva.",
+      "A hiponatremia é organizada pela osmolaridade e pela volemia: hipovolêmica, hipervolêmica e normovolêmica.",
+      "SIADH é descrita como retenção de água livre, normovolemia clínica, urina com sódio/osmolaridade elevados e hipouricemia; o resumo lista causas neurológicas, medicamentosas, pulmonares e outras.",
+      "Síndrome cerebral perdedora de sal é diferenciada da SIADH pela hipovolemia e pela perda renal de sódio.",
+      "Desmielinização osmótica é apresentada como complicação de correção rápida da hiponatremia crônica.",
+      "Diabetes insipidus: o resumo usa poliúria/polidipsia como ponto de partida, diferencia DM e polidipsia primária e cita teste de restrição hídrica e desmopressina para DI central; DI nefrogênico recebe restrição de solutos, tiazídicos e indometacina.",
+      "Distúrbios do potássio: hipocalemia é associada a deslocamento intracelular ou perdas; hipercalemia a menor captação/menor excreção.",
+      "O ECG é usado como manifestação funcional do potássio: onda T achatada/onda U na hipocalemia e T alta/apiculada na hipercalemia.",
+      "Reposição de potássio: via oral como preferência; EV em situações descritas pelo resumo, com atenção a velocidade/concentração.",
+      "Tratamento da hipercalemia no resumo segue duas etapas: estabilizar membrana com cálcio e reduzir potássio por deslocamento intracelular e/ou remoção.",
+      "Distúrbios ácido-básicos: pH 7,35–7,45, HCO3- como componente metabólico e pCO2 como respiratório; o resumo enfatiza avaliação de compensação e possibilidade de distúrbio misto.",
+      "Ânion gap é calculado como Na - (Cl + HCO3), com faixa de referência apresentada como 8–12 mEq/L.",
+      "Acidose metabólica com ânion gap normal é associada no resumo a perda de bicarbonato; ânion gap aumentado a uremia, intoxicações, acidose láctica e cetoacidose.",
+      "O resumo usa a fórmula de Winter: pCO2 esperada = 1,5 × HCO3 + 8, com margem de ±2.",
+      "Alcalose metabólica é relacionada a hipovolemia, hipocloremia e hipocalemia, com exemplos de vômitos e hiperaldosteronismo.",
+      "Um caso didático relaciona glicosúria sem hiperglicemia, hipocalemia, hipofosfatemia/hipouricemia e acidose metabólica hiperclorêmica a ATR proximal em contexto sugestivo de mieloma."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "hyponatremia",
+      "features": [
+        "Na baixo",
+        "hipo/iso/hiperosmolaridade",
+        "hipovolemia/normovolemia/hipervolemia",
+        "sintomas neurológicos"
+      ]
+    },
+    {
+      "id": "siadh",
+      "features": [
+        "retenção de água livre",
+        "hiponatremia",
+        "urina concentrada",
+        "sódio urinário elevado",
+        "normovolemia"
+      ]
+    },
+    {
+      "id": "cerebral_salt_wasting",
+      "features": [
+        "perda renal de sódio",
+        "hiponatremia",
+        "hipovolemia",
+        "contexto neurológico"
+      ]
+    },
+    {
+      "id": "osmotic_demyelination",
+      "features": [
+        "correção rápida da hiponatremia",
+        "disartria",
+        "disfagia",
+        "tetraparesia",
+        "alteração neurológica"
+      ]
+    },
+    {
+      "id": "diabetes_insipidus",
+      "features": [
+        "poliúria",
+        "polidipsia",
+        "urina diluída",
+        "DI central/neurogênico"
+      ]
+    },
+    {
+      "id": "hypokalemia",
+      "features": [
+        "K baixo",
+        "fraqueza",
+        "onda U",
+        "onda T achatada",
+        "perdas/deslocamento intracelular"
+      ]
+    },
+    {
+      "id": "hyperkalemia",
+      "features": [
+        "K alto",
+        "onda T apiculada",
+        "alterações de condução",
+        "insuficiência renal/hipoaldosteronismo"
+      ]
+    },
+    {
+      "id": "metabolic_acidosis",
+      "features": [
+        "pH baixo",
+        "HCO3 baixo",
+        "compensação respiratória",
+        "ânion gap"
+      ]
+    },
+    {
+      "id": "metabolic_alkalosis",
+      "features": [
+        "pH alto",
+        "HCO3 alto",
+        "vômitos/hipovolemia/hipocloremia/hipocalemia"
+      ]
+    },
+    {
+      "id": "renal_tubular_acidosis",
+      "features": [
+        "acidose metabólica",
+        "ATR I/II/IV",
+        "alterações de potássio"
+      ]
+    },
+    {
+      "id": "anion_gap",
+      "features": [
+        "Na-(Cl+HCO3)",
+        "normal/aumentado",
+        "classificação de acidose metabólica"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "A hiponatremia deve ser analisada por osmolaridade e volemia, não apenas pelo valor do sódio.",
+      "source": "summary"
+    },
+    {
+      "rule": "SIADH e síndrome cerebral perdedora de sal são diferenciadas no resumo principalmente pelo estado volêmico.",
+      "source": "summary"
+    },
+    {
+      "rule": "Correção excessivamente rápida da hiponatremia pode produzir desmielinização osmótica.",
+      "source": "summary"
+    },
+    {
+      "rule": "Hipocalemia pode ser refratária quando há hipomagnesemia, segundo o resumo.",
+      "source": "summary"
+    },
+    {
+      "rule": "Na hipercalemia, o resumo prioriza estabilização da membrana quando há alteração eletrocardiográfica antes da remoção do potássio.",
+      "source": "summary"
+    },
+    {
+      "rule": "Para acidose metabólica, a compensação respiratória esperada é estimada pela fórmula de Winter apresentada no material.",
+      "source": "summary"
+    },
+    {
+      "rule": "pH normal não exclui distúrbio ácido-básico quando pCO2 e HCO3 estão alterados.",
+      "source": "summary"
+    },
+    {
+      "rule": "Ânion gap normal orienta para acidose metabólica hiperclorêmica; ânion gap aumentado orienta para causas como uremia, lactato, cetoácidos e algumas intoxicações.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "hiponatremia + osmolaridade baixa + hipovolemia",
+      "possibilities": [
+        "hiponatremia hipovolêmica"
+      ]
+    },
+    {
+      "axis": "hiponatremia + osmolaridade baixa + normovolemia + urina concentrada",
+      "possibilities": [
+        "SIADH"
+      ]
+    },
+    {
+      "axis": "hiponatremia + hipovolemia + contexto neurológico",
+      "possibilities": [
+        "síndrome cerebral perdedora de sal"
+      ]
+    },
+    {
+      "axis": "poliúria + polidipsia + urina muito diluída",
+      "possibilities": [
+        "diabetes insipidus/polidipsia primária"
+      ]
+    },
+    {
+      "axis": "hipocalemia + onda U",
+      "possibilities": [
+        "hipocalemia"
+      ]
+    },
+    {
+      "axis": "hipercalemia + T apiculada/alteração de condução",
+      "possibilities": [
+        "hipercalemia"
+      ]
+    },
+    {
+      "axis": "pH baixo + HCO3 baixo + AG normal",
+      "possibilities": [
+        "acidose metabólica hiperclorêmica"
+      ]
+    },
+    {
+      "axis": "pH baixo + HCO3 baixo + AG aumentado",
+      "possibilities": [
+        "acidose metabólica com AG aumentado"
+      ]
+    },
+    {
+      "axis": "pH alto + HCO3 alto + vômitos/hipovolemia",
+      "possibilities": [
+        "alcalose metabólica"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "Na",
+      "osmolaridade",
+      "volemia",
+      "K",
+      "Mg",
+      "Cl",
+      "HCO3",
+      "pH",
+      "pCO2",
+      "ânion gap",
+      "débito urinário",
+      "osmolaridade urinária",
+      "fármacos",
+      "doença neurológica",
+      "doença renal",
+      "perdas GI",
+      "estado volêmico"
+    ],
+    "allowed_variability": [
+      "distúrbio isolado/misto",
+      "agudo/crônico",
+      "sintomático/assintomático",
+      "renal/GI/endócrino/medicamentoso"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "Os valores de correção do sódio, velocidades de reposição e fórmulas de reposição são ensinamentos do material de 2021 e devem permanecer como conteúdo histórico até validação posterior.",
+    "O resumo apresenta vaptans, furosemida e soluções específicas de modo didático; não transformar isso em protocolo universal.",
+    "A distinção SIADH versus perda cerebral de sal deve permanecer como modelo da fonte, sem ampliar para critérios não presentes no resumo.",
+    "Os exemplos de tratamento da hipercalemia e acidose metabólica são fonte-específicos; a KB canônica deverá manter contexto e gravidade.",
+    "O texto usa simplificações sobre ácido úrico, ANP/BNP e fisiologia tubular que não devem ser expandidas além do que a fonte sustenta."
+  ],
+  "validation_targets": [
+    "Preservar o resumo como fragmento da fonte, sem atribuir a ele informação externa.",
+    "Não transformar exemplos terapêuticos ou limiares didáticos em regras canônicas sem validação posterior.",
+    "Manter entidades, relações e diferenciais separados de casos concretos.",
+    "Permitir múltiplas apresentações clínicas a partir do mesmo espaço de possibilidades."
+  ],
+  "generated_at": "2026-09-23"
+}
