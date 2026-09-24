@@ -1,0 +1,245 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM24",
+  "title": "Artrites",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "CM 24 - Artrites.docx.pdf"
+      ],
+      "date": "03/01/2022",
+      "role": "fragmento/contexto original; documento predominantemente visual"
+    },
+    "previous_structured_artifact": "DIAGNOSIS_MODELO_BASE_ARTRITES_v0.1.json"
+  },
+  "summary_extraction": {
+    "scope": [
+      "monoartrite",
+      "poliartrite",
+      "artrite crônica",
+      "artrite séptica",
+      "artrite reativa",
+      "artrite idiopática juvenil",
+      "osteoartrite",
+      "artrite reumatoide",
+      "espondiloartrites"
+    ],
+    "important_source_fragments": [
+      "Artrite crônica/monoartrite: o resumo inclui osteoartrite, artrite idiopática juvenil, artrite tuberculosa e fúngica como possibilidades.",
+      "Artrocentese é apresentada como instrumento para investigação, com contagem celular e culturas bacteriana, micobacteriana e fúngica em contextos apropriados.",
+      "Artrite idiopática juvenil: início antes dos 16 anos e artrite por mais de 6 semanas; o resumo divide em formas pauciarticular, poliarticular e sistêmica/Still.",
+      "Forma pauciarticular: meninas jovens, fator reumatoide negativo, ANA positivo e risco de uveíte anterior aparecem no resumo.",
+      "Forma poliarticular: quadro semelhante à artrite reumatoide, com maior número de articulações e variabilidade de FR/ANA.",
+      "Forma sistêmica/Still: febre e exantema salmão associados à artrite.",
+      "Artrite reativa: ocorre após infecção; o resumo cita infecções intestinais por Shigella/Salmonella e genital por Chlamydia, além de conjuntivite/uretrite/artrite na apresentação clássica.",
+      "Artrite reativa pode apresentar dactilite, balanite circinada e ceratoderma blenorrágico no resumo.",
+      "Tratamento da artrite reativa é descrito como controle sintomático e erradicação da infecção quando indicada, especialmente Chlamydia.",
+      "O material organiza artrites também por padrão mono/pauci/poliarticular, aguda/crônica e inflamatória/não inflamatória."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "arthritis",
+      "features": [
+        "dor",
+        "edema",
+        "limitação",
+        "rigidez",
+        "padrão articular"
+      ]
+    },
+    {
+      "id": "monoarthritis",
+      "features": [
+        "uma articulação",
+        "aguda/crônica",
+        "necessidade de excluir infecção/cristais"
+      ]
+    },
+    {
+      "id": "septic_arthritis",
+      "features": [
+        "artrite aguda",
+        "derrame",
+        "dor",
+        "febre possível",
+        "líquido sinovial/cultura"
+      ]
+    },
+    {
+      "id": "juvenile_idiopathic_arthritis",
+      "features": [
+        "<16 anos",
+        ">6 semanas",
+        "pauci/poli/sistêmica",
+        "uveíte"
+      ]
+    },
+    {
+      "id": "systemic_jia",
+      "features": [
+        "febre",
+        "rash salmão",
+        "artrite",
+        "Still"
+      ]
+    },
+    {
+      "id": "reactive_arthritis",
+      "features": [
+        "pós-infecciosa",
+        "Chlamydia",
+        "Shigella/Salmonella",
+        "dactilite",
+        "balanite",
+        "ceratoderma"
+      ]
+    },
+    {
+      "id": "rheumatoid_arthritis",
+      "features": [
+        "poliartrite inflamatória",
+        "padrão poliarticular",
+        "FR/anti-CCP no contexto complementar"
+      ]
+    },
+    {
+      "id": "osteoarthritis",
+      "features": [
+        "artrite degenerativa",
+        "dor mecânica",
+        "padrão crônico"
+      ]
+    },
+    {
+      "id": "tuberculous_or_fungal_arthritis",
+      "features": [
+        "monoartrite crônica",
+        "infecção específica",
+        "cultura/biologia molecular"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "O padrão mono/pauci/poliarticular é um eixo inicial de organização das artrites no resumo.",
+      "source": "summary"
+    },
+    {
+      "rule": "Artrocentese e estudo do líquido sinovial são fundamentais quando artrite infecciosa está entre as possibilidades.",
+      "source": "summary"
+    },
+    {
+      "rule": "Artrite idiopática juvenil exige início antes dos 16 anos e duração superior a 6 semanas no material.",
+      "source": "summary"
+    },
+    {
+      "rule": "Pauciarticular + ANA positivo no resumo está associado a maior risco de uveíte anterior.",
+      "source": "summary"
+    },
+    {
+      "rule": "A forma sistêmica da AIJ/Still combina febre, rash salmão e artrite.",
+      "source": "summary"
+    },
+    {
+      "rule": "Artrite reativa é organizada como síndrome pós-infecciosa; Chlamydia, Shigella e Salmonella aparecem como gatilhos no material.",
+      "source": "summary"
+    },
+    {
+      "rule": "Dactilite, balanite circinada e ceratoderma são manifestações extra-articulares destacadas na artrite reativa.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "monoartrite aguda + derrame + febre",
+      "possibilities": [
+        "artrite séptica",
+        "cristais"
+      ]
+    },
+    {
+      "axis": "monoartrite crônica + contexto epidemiológico",
+      "possibilities": [
+        "tuberculose/fúngica"
+      ]
+    },
+    {
+      "axis": "<16 anos + artrite >6 semanas",
+      "possibilities": [
+        "artrite idiopática juvenil"
+      ]
+    },
+    {
+      "axis": "AIJ + poucas articulações + ANA positivo",
+      "possibilities": [
+        "AIJ pauciarticular"
+      ]
+    },
+    {
+      "axis": "AIJ + febre + rash salmão",
+      "possibilities": [
+        "AIJ sistêmica/Still"
+      ]
+    },
+    {
+      "axis": "artrite após diarreia ou uretrite/cervicite + manifestações mucocutâneas",
+      "possibilities": [
+        "artrite reativa"
+      ]
+    },
+    {
+      "axis": "dor articular crônica com padrão mecânico",
+      "possibilities": [
+        "osteoartrite"
+      ]
+    },
+    {
+      "axis": "poliartrite inflamatória persistente",
+      "possibilities": [
+        "artrite reumatoide/espondiloartrites/outros"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "idade",
+      "número de articulações",
+      "distribuição",
+      "tempo",
+      "padrão inflamatório/mecânico",
+      "febre",
+      "derrame",
+      "líquido sinovial",
+      "cultura",
+      "FR/ANA/anti-CCP",
+      "infecção prévia",
+      "pele/olhos/uretra/intestino",
+      "sexo"
+    ],
+    "allowed_variability": [
+      "mono/pauci/poli",
+      "aguda/subaguda/crônica",
+      "infecciosa/autoimune/degenerativa/pós-infecciosa",
+      "articular/extrarticular"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "O material de 2022 deve ser mantido como fonte histórica; critérios diagnósticos e tratamentos contemporâneos não foram inseridos silenciosamente.",
+    "A nomenclatura 'Reiter' pode aparecer em materiais históricos, mas não deve ser assumida como nomenclatura preferencial da KB sem decisão editorial posterior.",
+    "A associação entre ANA e uveíte é contextual e não deve virar determinismo individual.",
+    "Antibioticoterapia e imunossupressão da artrite reativa devem ser versionadas por etiologia e diretriz.",
+    "O artefato anterior DIAGNOSIS_MODELO_BASE_ARTRITES_v0.1 foi usado apenas como registro de estruturação prévia; o conteúdo desta versão permanece ancorado no resumo original."
+  ],
+  "validation_targets": [
+    "Preservar o resumo original como fonte própria e separar qualquer complementação externa.",
+    "Não transformar critérios didáticos ou esquemas terapêuticos históricos em regras canônicas sem validação.",
+    "Representar relações clínicas e diferenciais sem criar casos concretos.",
+    "Permitir múltiplas apresentações a partir do mesmo espaço clínico."
+  ],
+  "generated_at": "2026-09-23"
+}

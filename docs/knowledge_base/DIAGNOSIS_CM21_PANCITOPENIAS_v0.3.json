@@ -1,0 +1,295 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM21",
+  "title": "Pancitopenias",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "CM 21 - Pancitopenias.docx.pdf"
+      ],
+      "date": "03/01/2022",
+      "role": "fragmento/contexto original"
+    }
+  },
+  "summary_extraction": {
+    "scope": [
+      "pancitopenia",
+      "neutropenia febril",
+      "fibrose de medula",
+      "anemia aplásica",
+      "síndrome mielodisplásica",
+      "leucemias agudas",
+      "leucemias crônicas",
+      "LMA",
+      "LLA",
+      "LMC",
+      "LLC",
+      "policitemia vera",
+      "trombocitemia essencial"
+    ],
+    "important_source_fragments": [
+      "Pancitopenia é apresentada pela combinação de plaquetas <150.000, hemoglobina <12 e leucócitos <4.500.",
+      "Clínica geral: sangramentos, cansaço/palidez/sonolência e infecções; a imagem clássica é paciente pálido, febril e com petéquias.",
+      "Neutropenia é definida no resumo como neutrófilos <1.500, com maior preocupação quando <500 e febre ≥38,5°C.",
+      "Neutropenia febril: o resumo orienta culturas, radiografia de tórax e beta-lactâmico antipseudomonas; vancomicina se evidência de MRSA e antifúngico se febre persistir por vários dias.",
+      "PTT e PTI são destacadas como situações em que o resumo orienta evitar transfusão de plaquetas.",
+      "Fibrose de medula: pancitopenia + organomegalias; sangue periférico com dacriócitos e leucoeritroblastose; o resumo diferencia forma primária e mieloftise.",
+      "Aplasia de medula: lesão da célula-tronco + pancitopenia, com biópsia mostrando hipocelularidade e gordura.",
+      "Síndrome mielodisplásica: idoso + citopenias + células anormais; o resumo cita sideroblastos em anel e outras alterações morfológicas e usa <20% de blastos para diferenciá-la de leucemia aguda.",
+      "Leucemia aguda: proliferação de blastos, ocupação da medula com pancitopenia, leucemização e infiltração tecidual; diagnóstico didático com ≥20% de blastos na medula.",
+      "LMA: bastonetes de Auer, mieloperoxidase/Sudan Black, imunofenótipo e citogenética; LPA/M3 é associada a CIVD e ATRA no resumo.",
+      "LLA: apresentada como câncer mais comum na infância, com infiltração de SNC/testículos, dor óssea e adenomegalia; diagnóstico por blastos e imunofenótipo.",
+      "LMC: cromossomo Philadelphia, leucocitose granulocítica com desvio à esquerda, esplenomegalia e tratamento com imatinibe no resumo.",
+      "LLC: linfócitos B CD5+, idosos, adenomegalia/esplenomegalia e infecções de repetição; associação com PTI/AHAI e transformação de Richter.",
+      "Policitemia vera: pancitose, prurido, esplenomegalia, hiperviscosidade, eritromelalgia; diagnóstico organizado por massa eritrocitária, EPO e JAK2.",
+      "Trombocitemia essencial: plaquetas elevadas, esplenomegalia, trombose/sangramento/eritromelalgia; diagnóstico por exclusão no resumo."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "pancytopenia",
+      "features": [
+        "anemia",
+        "leucopenia/neutropenia",
+        "plaquetopenia"
+      ]
+    },
+    {
+      "id": "febrile_neutropenia",
+      "features": [
+        "neutrófilos muito baixos",
+        "febre",
+        "risco infeccioso"
+      ]
+    },
+    {
+      "id": "primary_myelofibrosis",
+      "features": [
+        "pancitopenia",
+        "esplenomegalia",
+        "dacriócitos",
+        "leucoeritroblastose"
+      ]
+    },
+    {
+      "id": "aplastic_anemia",
+      "features": [
+        "pancitopenia",
+        "medula hipocelular",
+        "gordura",
+        "ausência de organomegalia típica"
+      ]
+    },
+    {
+      "id": "myelodysplastic_syndrome",
+      "features": [
+        "citopenias",
+        "displasia",
+        "células anormais",
+        "sideroblastos em anel"
+      ]
+    },
+    {
+      "id": "acute_myeloid_leukemia",
+      "features": [
+        "blastos",
+        "pancitopenia",
+        "Auer",
+        "MPO",
+        "infiltração",
+        "leucostase"
+      ]
+    },
+    {
+      "id": "acute_lymphoblastic_leukemia",
+      "features": [
+        "blastos linfoides",
+        "infância",
+        "SNC/testículo",
+        "dor óssea",
+        "adenomegalia"
+      ]
+    },
+    {
+      "id": "chronic_myeloid_leukemia",
+      "features": [
+        "Philadelphia",
+        "BCR-ABL no material",
+        "leucocitose granulocítica",
+        "esplenomegalia"
+      ]
+    },
+    {
+      "id": "chronic_lymphocytic_leukemia",
+      "features": [
+        "linfócitos B CD5+",
+        "idosos",
+        "adenomegalia",
+        "infecções",
+        "Richter"
+      ]
+    },
+    {
+      "id": "polycythemia_vera",
+      "features": [
+        "pancitose",
+        "prurido",
+        "esplenomegalia",
+        "eritromelalgia",
+        "JAK2"
+      ]
+    },
+    {
+      "id": "essential_thrombocythemia",
+      "features": [
+        "plaquetose",
+        "trombose",
+        "sangramento",
+        "eritromelalgia"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "Pancitopenia deve levar à avaliação das três linhagens e à investigação da medula quando indicado.",
+      "source": "summary"
+    },
+    {
+      "rule": "Neutropenia grave com febre é tratada pelo resumo como emergência infecciosa com cobertura antipseudomonas.",
+      "source": "summary"
+    },
+    {
+      "rule": "Dacriócitos + leucoeritroblastose + esplenomegalia formam o padrão didático de fibrose/mieloftise.",
+      "source": "summary"
+    },
+    {
+      "rule": "Hipocelularidade com gordura na biópsia é o padrão descrito para anemia aplásica.",
+      "source": "summary"
+    },
+    {
+      "rule": "Citopenias + células anormais + <20% blastos são apresentados como padrão de síndrome mielodisplásica.",
+      "source": "summary"
+    },
+    {
+      "rule": "≥20% de blastos na medula é o limiar didático usado pelo material para leucemia aguda.",
+      "source": "summary"
+    },
+    {
+      "rule": "Bastonetes de Auer e mieloperoxidase são pistas de linhagem mieloide no resumo.",
+      "source": "summary"
+    },
+    {
+      "rule": "Philadelphia é a pista central da LMC no material; imatinibe é o tratamento apresentado.",
+      "source": "summary"
+    },
+    {
+      "rule": "JAK2 é apresentado como exame confirmatório da policitemia vera após avaliação de massa eritrocitária e EPO.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "pancitopenia + medula hipocelular + gordura",
+      "possibilities": [
+        "anemia aplásica"
+      ]
+    },
+    {
+      "axis": "pancitopenia + esplenomegalia + dacriócitos + leucoeritroblastose",
+      "possibilities": [
+        "mielofibrose/mieloftise"
+      ]
+    },
+    {
+      "axis": "idoso + citopenias + displasia + blastos <20%",
+      "possibilities": [
+        "síndrome mielodisplásica"
+      ]
+    },
+    {
+      "axis": "blastos ≥20% + pancitopenia",
+      "possibilities": [
+        "leucemia aguda"
+      ]
+    },
+    {
+      "axis": "blastos + Auer + MPO",
+      "possibilities": [
+        "LMA"
+      ]
+    },
+    {
+      "axis": "criança + blastos + dor óssea + SNC/testículo",
+      "possibilities": [
+        "LLA"
+      ]
+    },
+    {
+      "axis": "leucocitose granulocítica + desvio à esquerda + Philadelphia",
+      "possibilities": [
+        "LMC"
+      ]
+    },
+    {
+      "axis": "idoso + linfócitos B CD5+ + adenomegalia",
+      "possibilities": [
+        "LLC"
+      ]
+    },
+    {
+      "axis": "pancitose + prurido + eritromelalgia + JAK2",
+      "possibilities": [
+        "policitemia vera"
+      ]
+    },
+    {
+      "axis": "plaquetose persistente + trombose/sangramento + diagnóstico de exclusão",
+      "possibilities": [
+        "trombocitemia essencial"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "hemoglobina",
+      "leucócitos",
+      "neutrófilos",
+      "plaquetas",
+      "blastos",
+      "morfologia periférica",
+      "celularidade medular",
+      "organomegalias",
+      "febre",
+      "sangramento",
+      "infecção",
+      "dor óssea",
+      "idade",
+      "esplenomegalia",
+      "JAK2/Philadelphia/imunofenótipo"
+    ],
+    "allowed_variability": [
+      "produção reduzida/infiltração/clonal/consumo",
+      "aguda/crônica",
+      "uma ou várias linhagens",
+      "hematológica versus reativa"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "Os limiares transfusionais e esquemas de neutropenia febril são mantidos como conteúdo da fonte de 2022, sem atualização silenciosa.",
+    "A recomendação de evitar plaquetas em PTI e PTT está registrada como regra do material; a KB canônica deverá manter o contexto clínico e não transformar isso em proibição absoluta.",
+    "As classificações de leucemias apresentadas incluem nomenclatura FAB/histórica; devem permanecer versionadas.",
+    "O texto associa subtipos de LMA a prognóstico e achados específicos; esses vínculos permanecem fonte-derivados.",
+    "O limiar de 20% de blastos é registrado como regra da fonte, sem ampliar para outras classificações que não aparecem no material."
+  ],
+  "validation_targets": [
+    "Preservar o resumo como fragmento da fonte, sem atribuir a ele informação externa.",
+    "Não transformar exemplos terapêuticos ou limiares didáticos em regras canônicas sem validação posterior.",
+    "Manter entidades, relações e diferenciais separados de casos concretos.",
+    "Permitir múltiplas apresentações clínicas a partir do mesmo espaço de possibilidades."
+  ],
+  "generated_at": "2026-09-23"
+}

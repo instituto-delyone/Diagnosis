@@ -1,0 +1,234 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM22",
+  "title": "Linfonodo e Esplenomegalia",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "CM 22 - Linfonodo e Esplenomegalia.docx.pdf"
+      ],
+      "date": "07/10/2021",
+      "role": "fragmento/contexto original; documento predominantemente visual"
+    }
+  },
+  "summary_extraction": {
+    "scope": [
+      "linfadenopatia",
+      "esplenomegalia",
+      "síndromes linfoproliferativas",
+      "linfoma de Hodgkin",
+      "linfomas não Hodgkin",
+      "mononucleose",
+      "doença de Chagas",
+      "tuberculose ganglionar",
+      "metástases"
+    ],
+    "important_source_fragments": [
+      "Mononucleose infecciosa: o resumo destaca febre, linfadenopatia cervical, faringite, hepatomegalia/esplenomegalia e associação ao EBV; diagnóstico por quadro clínico e alterações hematológicas/anticorpos heterófilos é apresentado.",
+      "Doença de Chagas: transmissão oral, vetorial, vertical e sanguínea; fase aguda com febre, hepatoesplenomegalia, adenomegalia e possível miocardite; fase crônica com formas cardíaca e digestiva.",
+      "Esplenomegalia: o resumo organiza causas em hipertensão portal/hiperesplenismo, doenças hematológicas e infiltrativas, infecções e outras condições.",
+      "Linfonodo suspeito: localização supraclavicular, crescimento progressivo, consistência endurecida/aderida e sintomas constitucionais aparecem como elementos de maior preocupação.",
+      "Biópsia de linfonodo é apresentada como exame importante quando há suspeita de doença linfoproliferativa/metastática; o resumo destaca preferência por retirada do linfonodo quando possível.",
+      "Linfoma é organizado em Hodgkin e não Hodgkin, com distinções clínicas e histológicas.",
+      "Linfoma de Hodgkin: células de Reed-Sternberg, disseminação característica entre cadeias e apresentação com adenomegalia cervical/supraclavicular/mediastinal; sintomas B aparecem como febre, sudorese noturna e perda de peso.",
+      "O resumo apresenta estágios de Ann Arbor I–IV e modificadores A/B, além de elementos prognósticos.",
+      "Laboratório/avaliação de linfoma inclui hemograma, função renal/hepática, LDH e investigação de infecções; o resumo menciona sorologias e avaliação de medula em contextos específicos.",
+      "Os linfomas não Hodgkin são apresentados como grupo heterogêneo, com formas indolentes e agressivas, e com possível acometimento extranodal."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "lymphadenopathy",
+      "features": [
+        "linfonodo aumentado",
+        "localização",
+        "tamanho",
+        "consistência",
+        "mobilidade",
+        "dor",
+        "evolução"
+      ]
+    },
+    {
+      "id": "splenomegaly",
+      "features": [
+        "baço aumentado",
+        "congestão",
+        "hiperesplenismo",
+        "infiltração",
+        "infecção",
+        "doença hematológica"
+      ]
+    },
+    {
+      "id": "infectious_mononucleosis",
+      "features": [
+        "EBV",
+        "febre",
+        "faringite",
+        "adenomegalia cervical",
+        "esplenomegalia"
+      ]
+    },
+    {
+      "id": "chagas_disease",
+      "features": [
+        "Trypanosoma cruzi",
+        "fase aguda",
+        "miocardite",
+        "hepatoesplenomegalia",
+        "forma cardíaca/digestiva crônica"
+      ]
+    },
+    {
+      "id": "hodgkin_lymphoma",
+      "features": [
+        "Reed-Sternberg",
+        "adenomegalia",
+        "mediastino",
+        "sintomas B",
+        "Ann Arbor"
+      ]
+    },
+    {
+      "id": "non_hodgkin_lymphoma",
+      "features": [
+        "heterogeneidade",
+        "indolente/agressivo",
+        "extranodal",
+        "linfoproliferativo"
+      ]
+    },
+    {
+      "id": "metastatic_lymphadenopathy",
+      "features": [
+        "supraclavicular",
+        "endurecido",
+        "aderido",
+        "crescimento progressivo",
+        "neoplasia"
+      ]
+    },
+    {
+      "id": "tuberculous_lymphadenitis",
+      "features": [
+        "adenomegalia",
+        "infecção granulomatosa",
+        "tuberculose"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "A avaliação de linfonodomegalia deve considerar localização, duração, evolução, consistência, mobilidade e sintomas sistêmicos.",
+      "source": "summary"
+    },
+    {
+      "rule": "Linfonodo supraclavicular, endurecido/aderido e progressivo é apresentado como sinal de maior suspeição para malignidade.",
+      "source": "summary"
+    },
+    {
+      "rule": "Hodgkin é associado à presença de células de Reed-Sternberg e ao padrão de disseminação entre cadeias linfonodais.",
+      "source": "summary"
+    },
+    {
+      "rule": "Sintomas B no resumo são febre, sudorese noturna e perda ponderal.",
+      "source": "summary"
+    },
+    {
+      "rule": "Esplenomegalia deve ser organizada etiologicamente em congestiva, infecciosa, hematológica/infiltrativa e outros grupos.",
+      "source": "summary"
+    },
+    {
+      "rule": "Doença de Chagas pode produzir manifestações agudas e crônicas em diferentes sistemas, segundo o resumo.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "febre + faringite + adenomegalia cervical + esplenomegalia",
+      "possibilities": [
+        "mononucleose infecciosa"
+      ]
+    },
+    {
+      "axis": "adenomegalia supraclavicular + endurecimento/aderência + crescimento",
+      "possibilities": [
+        "metástase/linfoma"
+      ]
+    },
+    {
+      "axis": "adenomegalia + sintomas B + Reed-Sternberg",
+      "possibilities": [
+        "linfoma de Hodgkin"
+      ]
+    },
+    {
+      "axis": "adenomegalia generalizada/extranodal + quadro variável",
+      "possibilities": [
+        "linfoma não Hodgkin"
+      ]
+    },
+    {
+      "axis": "adenomegalia crônica + contexto epidemiológico compatível",
+      "possibilities": [
+        "tuberculose ganglionar"
+      ]
+    },
+    {
+      "axis": "esplenomegalia + hipertensão portal",
+      "possibilities": [
+        "esplenomegalia congestiva/hiperesplenismo"
+      ]
+    },
+    {
+      "axis": "febre + hepatoesplenomegalia + miocardite/alterações sistêmicas em contexto epidemiológico",
+      "possibilities": [
+        "doença de Chagas"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "idade",
+      "localização do linfonodo",
+      "número de cadeias",
+      "tamanho",
+      "consistência",
+      "mobilidade",
+      "dor",
+      "tempo",
+      "febre",
+      "sudorese",
+      "perda de peso",
+      "hepatoesplenomegalia",
+      "exposição infecciosa",
+      "imunossupressão",
+      "sinais extranodais"
+    ],
+    "allowed_variability": [
+      "infeccioso/neoplásico/inflamatório",
+      "localizado/generalizado",
+      "agudo/subagudo/crônico",
+      "linfonodal/extranodal"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "O material usa critérios clínicos e estadiamento de 2021; eles permanecem como camada histórica.",
+    "Não transformar um único achado de linfonodo em diagnóstico de malignidade.",
+    "A decisão entre punção, core biopsy e excisão não deve ser codificada como regra universal apenas a partir do resumo.",
+    "As descrições de tratamento de Hodgkin/NHL presentes na fonte devem ser mantidas separadas de protocolos contemporâneos.",
+    "A doença de Chagas no resumo mistura formas e vias de transmissão; manter as relações exatamente no nível sustentado pela fonte."
+  ],
+  "validation_targets": [
+    "Preservar o resumo original como fonte própria e separar qualquer complementação externa.",
+    "Não transformar critérios didáticos ou esquemas terapêuticos históricos em regras canônicas sem validação.",
+    "Representar relações clínicas e diferenciais sem criar casos concretos.",
+    "Permitir múltiplas apresentações a partir do mesmo espaço clínico."
+  ],
+  "generated_at": "2026-09-23"
+}

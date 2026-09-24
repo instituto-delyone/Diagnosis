@@ -1,0 +1,237 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM23",
+  "title": "Hemostasia",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "CM 23 - Hemostasia.docx.pdf"
+      ],
+      "date": "07/10/2021",
+      "role": "fragmento/contexto original; documento predominantemente visual"
+    }
+  },
+  "summary_extraction": {
+    "scope": [
+      "hemostasia primária",
+      "hemostasia secundária",
+      "coagulação",
+      "plaquetas",
+      "doença de von Willebrand",
+      "hemofilias",
+      "PTI",
+      "PTT",
+      "CIVD",
+      "trombose"
+    ],
+    "important_source_fragments": [
+      "Triade de Virchow: lesão endotelial, estase/turbulência e hipercoagulabilidade são apresentadas como componentes da trombose.",
+      "Hemostasia primária envolve adesão, ativação e agregação plaquetária; o resumo usa fator de von Willebrand e receptores plaquetários como elementos centrais.",
+      "Hemostasia secundária envolve fatores de coagulação e geração de trombina/fibrina; o resumo organiza vias extrínseca, intrínseca e comum.",
+      "Distúrbios de plaquetas/hemostasia primária são associados a sangramento mucocutâneo, enquanto defeitos da coagulação são associados a sangramento mais profundo.",
+      "PT/INR avalia predominantemente a via extrínseca; aPTT avalia a via intrínseca; o resumo usa os testes para localização inicial do defeito.",
+      "Doença de von Willebrand: deficiência/disfunção do fator de von Willebrand, com alteração de adesão plaquetária e possível redução secundária do fator VIII.",
+      "Hemofilia A é associada ao fator VIII; hemofilia B ao fator IX; o resumo descreve herança ligada ao X e sangramento profundo/hemartroses.",
+      "PTI: trombocitopenia imune, com plaquetas baixas e sangramento; o resumo cita causas primárias e secundárias e tratamento com corticoide/IVIg em contextos indicados.",
+      "PTT: pentade didática com plaquetopenia, anemia hemolítica microangiopática, febre, alteração neurológica e renal; o resumo associa ADAMTS13 e plasmaférese.",
+      "CIVD: consumo de plaquetas e fatores de coagulação em processo sistêmico; o resumo relaciona TP/TTPa, fibrinogênio, D-dímero e doença de base.",
+      "O resumo diferencia trombose venosa e arterial e retoma a tríade de Virchow.",
+      "Anticoagulantes/antiagregantes aparecem em quadros de tratamento, incluindo heparina, antagonistas da vitamina K e agentes antiplaquetários."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "primary_hemostasis",
+      "features": [
+        "adesão",
+        "ativação",
+        "agregação",
+        "plaquetas",
+        "vWF"
+      ]
+    },
+    {
+      "id": "secondary_hemostasis",
+      "features": [
+        "fatores",
+        "trombina",
+        "fibrina",
+        "via extrínseca",
+        "intrínseca",
+        "comum"
+      ]
+    },
+    {
+      "id": "von_willebrand_disease",
+      "features": [
+        "sangramento mucocutâneo",
+        "adesão plaquetária",
+        "vWF",
+        "fator VIII"
+      ]
+    },
+    {
+      "id": "hemophilia_a",
+      "features": [
+        "fator VIII",
+        "hemartrose",
+        "sangramento profundo",
+        "ligada ao X"
+      ]
+    },
+    {
+      "id": "hemophilia_b",
+      "features": [
+        "fator IX",
+        "hemartrose",
+        "sangramento profundo",
+        "ligada ao X"
+      ]
+    },
+    {
+      "id": "immune_thrombocytopenia",
+      "features": [
+        "plaquetopenia",
+        "sangramento mucocutâneo",
+        "causas primária/secundária"
+      ]
+    },
+    {
+      "id": "thrombotic_thrombocytopenic_purpura",
+      "features": [
+        "plaquetopenia",
+        "hemólise microangiopática",
+        "ADAMTS13",
+        "neurológico/renal/febre"
+      ]
+    },
+    {
+      "id": "disseminated_intravascular_coagulation",
+      "features": [
+        "consumo",
+        "plaquetopenia",
+        "fatores baixos",
+        "D-dímero",
+        "fibrinogênio",
+        "doença de base"
+      ]
+    },
+    {
+      "id": "thrombosis",
+      "features": [
+        "estase",
+        "lesão endotelial",
+        "hipercoagulabilidade",
+        "venosa/arterial"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "Sangramento mucocutâneo orienta inicialmente para defeito plaquetário/hemostasia primária; hemartrose e sangramento profundo orientam para defeito de coagulação no modelo didático.",
+      "source": "summary"
+    },
+    {
+      "rule": "PT/INR e aPTT são usados como testes de triagem para localizar alterações nas vias de coagulação.",
+      "source": "summary"
+    },
+    {
+      "rule": "Hemofilia A corresponde ao fator VIII e hemofilia B ao fator IX no resumo.",
+      "source": "summary"
+    },
+    {
+      "rule": "Doença de von Willebrand envolve adesão plaquetária e pode alterar o fator VIII.",
+      "source": "summary"
+    },
+    {
+      "rule": "PTT é associada a plaquetopenia + hemólise microangiopática e deficiência grave de ADAMTS13; plasmaférese aparece como tratamento central.",
+      "source": "summary"
+    },
+    {
+      "rule": "CIVD deve ser interpretada no contexto de uma doença desencadeante sistêmica e de consumo de plaquetas/fatores.",
+      "source": "summary"
+    },
+    {
+      "rule": "A tríade de Virchow é o modelo do resumo para formação de trombo.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "sangramento mucocutâneo + plaquetas baixas",
+      "possibilities": [
+        "distúrbio plaquetário/PTI"
+      ]
+    },
+    {
+      "axis": "sangramento mucocutâneo + plaquetas normais + alteração de adesão",
+      "possibilities": [
+        "doença de von Willebrand"
+      ]
+    },
+    {
+      "axis": "hemartroses + aPTT alterado + plaquetas normais",
+      "possibilities": [
+        "hemofilia A/B"
+      ]
+    },
+    {
+      "axis": "plaquetopenia + esquizócitos + hemólise + déficit neurológico/renal",
+      "possibilities": [
+        "PTT"
+      ]
+    },
+    {
+      "axis": "sangramento + doença sistêmica grave + plaquetopenia + consumo de fatores",
+      "possibilities": [
+        "CIVD"
+      ]
+    },
+    {
+      "axis": "trombose + estase/lesão endotelial/hipercoagulabilidade",
+      "possibilities": [
+        "trombose"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "plaquetas",
+      "TP/INR",
+      "aPTT",
+      "fibrinogênio",
+      "D-dímero",
+      "hemoglobina",
+      "esfregaço",
+      "sangramento mucocutâneo/profundo",
+      "hemartrose",
+      "doença de base",
+      "medicamentos",
+      "história familiar",
+      "trombose"
+    ],
+    "allowed_variability": [
+      "hemorrágico/trombótico",
+      "primário/secundário",
+      "hereditário/adquirido",
+      "isolado/sistêmico"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "A pentade da PTT é uma construção didática histórica; não exigir todos os cinco componentes para suspeitar da síndrome.",
+    "Esquemas de tratamento com anticoagulantes, antiagregantes, plasmaférese e reposição de fatores devem permanecer separados da camada canônica até atualização.",
+    "O resumo usa a divisão clássica de vias intrínseca/extrínseca; a KB pode preservar essa representação sem tratá-la como descrição única da biologia moderna.",
+    "Não inferir diagnóstico apenas por TP ou aPTT isoladamente; o próprio modelo requer integração com clínica e outros exames."
+  ],
+  "validation_targets": [
+    "Preservar o resumo original como fonte própria e separar qualquer complementação externa.",
+    "Não transformar critérios didáticos ou esquemas terapêuticos históricos em regras canônicas sem validação.",
+    "Representar relações clínicas e diferenciais sem criar casos concretos.",
+    "Permitir múltiplas apresentações a partir do mesmo espaço clínico."
+  ],
+  "generated_at": "2026-09-23"
+}

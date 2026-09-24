@@ -1,0 +1,297 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM20",
+  "title": "Síndromes Anêmicas",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "CM 20 - Síndromes Anêmicas.docx.pdf"
+      ],
+      "date": "05/10/2021",
+      "role": "fragmento/contexto original; documento predominantemente visual"
+    }
+  },
+  "summary_extraction": {
+    "scope": [
+      "síndromes hemolíticas",
+      "anemia falciforme",
+      "esferocitose hereditária",
+      "anemia hemolítica imune",
+      "deficiência de G6PD",
+      "anemia de doença crônica",
+      "anemia sideroblástica",
+      "deficiência de vitamina B12",
+      "deficiência de folato",
+      "anemia ferropriva",
+      "anemia megaloblástica",
+      "anemias microcíticas/normocíticas/macrocíticas"
+    ],
+    "important_source_fragments": [
+      "Síndrome hemolítico-urêmica: infecção prévia respiratória ou intestinal, especialmente E. coli O157:H7, hemólise com esquizócitos, uremia e plaquetopenia; o resumo a associa à insuficiência renal em crianças.",
+      "Hemoglobinúria paroxística noturna: trombose abdominal + pancitopenia + hemólise; o resumo descreve defeito adquirido relacionado a CD55/CD59 e cita eculizumabe.",
+      "Doença falciforme: alteração da HbS por troca de ácido glutâmico por valina na cadeia beta; polimerização em febre, desidratação, acidose e desoxigenação.",
+      "Crise vaso-oclusiva, síndrome torácica aguda, sequestro esplênico/dactilite e eventos neurológicos aparecem como manifestações da doença falciforme.",
+      "O resumo relaciona doença falciforme a asplenia funcional, osteomielite por Salmonella, infecções por pneumococo e risco de AVE.",
+      "Esferocitose hereditária: alteração de proteínas de membrana, incluindo espectrina/anquiring, hemólise, esplenomegalia, anemia hipercrômica/esferócitos e teste de fragilidade osmótica.",
+      "Anemia hemolítica imune: Coombs direto positivo, esferócitos e distinção entre formas por IgG e IgM; o resumo cita LES, HIV, LLC, drogas e Mycoplasma como associações.",
+      "Deficiência de G6PD: hemólise desencadeada por estresse oxidativo, com destaque para sulfas, primaquina, dapsona e nitrofurantoína; corpúsculos de Heinz e haptoglobina baixa aparecem na investigação.",
+      "Anemia de doença crônica: inflamação → citocinas → fígado → aumento de hepcidina → aprisionamento/redução da disponibilidade de ferro; o resumo mostra ferritina alta, ferro sérico baixo e TIBC baixo.",
+      "Anemia sideroblástica: falha da síntese do heme, causas hereditárias ou secundárias como álcool/chumbo; ferro e ferritina elevados; sideroblastos em anel no mielograma e corpúsculos de Pappenheimer no sangue.",
+      "Anemia ferropriva: o material organiza investigação por índices de ferro e apresenta causas relacionadas a perdas, ingestão e metabolismo do ferro.",
+      "Deficiência de vitamina B12/folato: o resumo associa megaloblastose, macrocitose e manifestações hematológicas e neurológicas na deficiência de B12.",
+      "Índice de correção de reticulócitos é apresentado como ferramenta para avaliar resposta medular.",
+      "Classificação das anemias por VCM aparece no material em microcíticas, normocíticas e macrocíticas."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "hemolytic_uremic_syndrome",
+      "features": [
+        "hemólise",
+        "esquizócitos",
+        "plaquetopenia",
+        "uremia",
+        "infecção prévia"
+      ]
+    },
+    {
+      "id": "paroxysmal_nocturnal_hemoglobinuria",
+      "features": [
+        "hemólise",
+        "pancitopenia",
+        "trombose",
+        "defeito CD55/CD59"
+      ]
+    },
+    {
+      "id": "sickle_cell_disease",
+      "features": [
+        "HbS",
+        "polimerização",
+        "vaso-oclusão",
+        "hemólise",
+        "asplenia funcional"
+      ]
+    },
+    {
+      "id": "hereditary_spherocytosis",
+      "features": [
+        "defeito de membrana",
+        "esferócitos",
+        "hemólise",
+        "esplenomegalia",
+        "fragilidade osmótica"
+      ]
+    },
+    {
+      "id": "autoimmune_hemolytic_anemia",
+      "features": [
+        "Coombs direto",
+        "esferócitos",
+        "IgG/IgM",
+        "hemólise"
+      ]
+    },
+    {
+      "id": "g6pd_deficiency",
+      "features": [
+        "estresse oxidativo",
+        "hemólise",
+        "corpúsculos de Heinz",
+        "fármacos/infecção"
+      ]
+    },
+    {
+      "id": "anemia_chronic_disease",
+      "features": [
+        "inflamação",
+        "hepcidina",
+        "ferro sérico baixo",
+        "ferritina alta",
+        "TIBC baixo"
+      ]
+    },
+    {
+      "id": "sideroblastic_anemia",
+      "features": [
+        "defeito de síntese do heme",
+        "sideroblastos em anel",
+        "ferro alto",
+        "ferritina alta"
+      ]
+    },
+    {
+      "id": "iron_deficiency_anemia",
+      "features": [
+        "microcitose/hipocromia",
+        "deficiência de ferro",
+        "perdas sanguíneas"
+      ]
+    },
+    {
+      "id": "megaloblastic_anemia",
+      "features": [
+        "macrocitose",
+        "deficiência B12/folato",
+        "megaloblastose"
+      ]
+    },
+    {
+      "id": "vitamin_b12_deficiency",
+      "features": [
+        "anemia megaloblástica",
+        "manifestações neurológicas",
+        "macrocitose"
+      ]
+    },
+    {
+      "id": "folate_deficiency",
+      "features": [
+        "anemia megaloblástica",
+        "macrocitose"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "Esquizócitos + hemólise + plaquetopenia + uremia são o padrão didático de SHU apresentado no resumo.",
+      "source": "summary"
+    },
+    {
+      "rule": "Trombose abdominal + hemólise + pancitopenia é a combinação destacada para HPN.",
+      "source": "summary"
+    },
+    {
+      "rule": "Doença falciforme é apresentada como doença da HbS com polimerização favorecida por desoxigenação, febre, desidratação e acidose.",
+      "source": "summary"
+    },
+    {
+      "rule": "Coombs direto positivo é apresentado como pista central de anemia hemolítica imune.",
+      "source": "summary"
+    },
+    {
+      "rule": "G6PD é caracterizada no resumo por hemólise oxidativa desencadeada por drogas/infecção.",
+      "source": "summary"
+    },
+    {
+      "rule": "Anemia de doença crônica é associada ao aumento da hepcidina e à redução da disponibilidade de ferro.",
+      "source": "summary"
+    },
+    {
+      "rule": "Sideroblastos em anel no mielograma são apresentados como elemento diagnóstico da anemia sideroblástica.",
+      "source": "summary"
+    },
+    {
+      "rule": "VCM é usado pelo material para organizar o primeiro eixo de classificação das anemias.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "esquizócitos + plaquetopenia + insuficiência renal após infecção",
+      "possibilities": [
+        "síndrome hemolítico-urêmica"
+      ]
+    },
+    {
+      "axis": "pancitopenia + hemólise + trombose abdominal",
+      "possibilities": [
+        "hemoglobinúria paroxística noturna"
+      ]
+    },
+    {
+      "axis": "crises dolorosas + hemólise + HbS",
+      "possibilities": [
+        "doença falciforme"
+      ]
+    },
+    {
+      "axis": "criança + anemia hemolítica + esplenomegalia + esferócitos",
+      "possibilities": [
+        "esferocitose hereditária"
+      ]
+    },
+    {
+      "axis": "hemólise + Coombs direto positivo",
+      "possibilities": [
+        "anemia hemolítica imune"
+      ]
+    },
+    {
+      "axis": "hemólise após sulfa/primaquina/dapsona/nitrofurantoína",
+      "possibilities": [
+        "deficiência de G6PD"
+      ]
+    },
+    {
+      "axis": "anemia + inflamação + ferro baixo + ferritina alta + TIBC baixo",
+      "possibilities": [
+        "anemia de doença crônica"
+      ]
+    },
+    {
+      "axis": "microcitose + ferro/ferritina elevados + sideroblastos em anel",
+      "possibilities": [
+        "anemia sideroblástica"
+      ]
+    },
+    {
+      "axis": "microcitose/hipocromia + evidência de deficiência de ferro",
+      "possibilities": [
+        "anemia ferropriva"
+      ]
+    },
+    {
+      "axis": "macrocitose + megaloblastose + deficiência de B12/folato",
+      "possibilities": [
+        "anemia megaloblástica"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "VCM",
+      "hemoglobina",
+      "reticulócitos",
+      "bilirrubina",
+      "LDH",
+      "haptoglobina",
+      "esfregaço",
+      "ferro",
+      "ferritina",
+      "TIBC/transferrina",
+      "Coombs",
+      "plaquetas",
+      "função renal",
+      "exposição medicamentosa",
+      "infecção",
+      "história familiar",
+      "sintomas neurológicos"
+    ],
+    "allowed_variability": [
+      "produção diminuída/aumento de destruição/perda",
+      "micro/normo/macro",
+      "hereditária/adquirida",
+      "aguda/crônica",
+      "isolada/multissistêmica"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "O documento é predominantemente visual e algumas informações foram extraídas da leitura das páginas/imagens; detalhes que não ficaram legíveis não foram inventados.",
+    "Condutas como transfusão, esplenectomia, hidroxiureia, quelantes e terapias específicas são mantidas como ensinamentos da fonte, sem transformá-las em protocolo atual.",
+    "O material usa terminologia e classificações históricas de hemoglobinopatias e síndromes hemolíticas; a consolidação canônica deverá preservar a proveniência.",
+    "Valores de ferritina, saturação, VCM, reticulócitos e critérios diagnósticos devem permanecer vinculados ao contexto da fonte.",
+    "Não inferir etiologia de anemia apenas pelo VCM; o próprio material fornece outros eixos laboratoriais."
+  ],
+  "validation_targets": [
+    "Preservar o resumo como fragmento da fonte, sem atribuir a ele informação externa.",
+    "Não transformar exemplos terapêuticos ou limiares didáticos em regras canônicas sem validação posterior.",
+    "Manter entidades, relações e diferenciais separados de casos concretos.",
+    "Permitir múltiplas apresentações clínicas a partir do mesmo espaço de possibilidades."
+  ],
+  "generated_at": "2026-09-23"
+}
