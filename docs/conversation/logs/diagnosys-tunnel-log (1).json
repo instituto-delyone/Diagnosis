@@ -1,0 +1,105 @@
+{
+  "case_id": "cm01_muf1zehx",
+  "patient": {
+    "initials": "JOA",
+    "age": 48,
+    "sex": "masculino"
+  },
+  "history": [
+    {
+      "time": "2026-09-24T04:50:04.199Z",
+      "type": "SISTEMA",
+      "text": "CM01 → patologia → paciente sintético mínimo."
+    },
+    {
+      "time": "2026-09-24T04:50:04.202Z",
+      "type": "PACIENTE",
+      "text": "JOA, 48 anos, masculino. Notei icterícia."
+    },
+    {
+      "time": "2026-09-24T04:50:04.203Z",
+      "type": "SISTEMA",
+      "text": "A patologia está oculta. Pergunte, examine e solicite exames."
+    },
+    {
+      "time": "2026-09-24T04:50:51.886Z",
+      "type": "VOCÊ",
+      "text": "ha quanto tempo está ictérico?"
+    },
+    {
+      "time": "2026-09-24T04:50:51.888Z",
+      "type": "SISTEMA",
+      "text": "Pergunta ainda não coberta. Isso é proposital: agora sabemos exatamente onde conectar o próximo componente."
+    },
+    {
+      "time": "2026-09-24T04:51:03.155Z",
+      "type": "VOCÊ",
+      "text": "é etilista?"
+    },
+    {
+      "time": "2026-09-24T04:51:03.156Z",
+      "type": "SISTEMA",
+      "text": "Pergunta ainda não coberta. Isso é proposital: agora sabemos exatamente onde conectar o próximo componente."
+    },
+    {
+      "time": "2026-09-24T04:51:22.657Z",
+      "type": "VOCÊ",
+      "text": "teve relações sexuais desprotegidas?"
+    },
+    {
+      "time": "2026-09-24T04:51:22.658Z",
+      "type": "SISTEMA",
+      "text": "Pergunta ainda não coberta. Isso é proposital: agora sabemos exatamente onde conectar o próximo componente."
+    },
+    {
+      "time": "2026-09-24T04:51:36.353Z",
+      "type": "VOCÊ",
+      "text": "sente dor na região abdominal?"
+    },
+    {
+      "time": "2026-09-24T04:51:36.354Z",
+      "type": "PACIENTE",
+      "text": "Não há dor abdominal como sintoma principal."
+    },
+    {
+      "time": "2026-09-24T04:51:53.106Z",
+      "type": "VOCÊ",
+      "text": "gostaria de um hemograma"
+    },
+    {
+      "time": "2026-09-24T04:51:53.106Z",
+      "type": "SISTEMA",
+      "text": "Pergunta ainda não coberta. Isso é proposital: agora sabemos exatamente onde conectar o próximo componente."
+    },
+    {
+      "time": "2026-09-24T04:52:10.740Z",
+      "type": "VOCÊ",
+      "text": "tem doença autoimune?"
+    },
+    {
+      "time": "2026-09-24T04:52:10.740Z",
+      "type": "SISTEMA",
+      "text": "Pergunta ainda não coberta. Isso é proposital: agora sabemos exatamente onde conectar o próximo componente."
+    },
+    {
+      "time": "2026-09-24T04:53:45.998Z",
+      "type": "VOCÊ",
+      "text": "no exame físico abdominal eu iria avaliar : se o abdomen é plano ou globoso, se está tenso ou flácido, se tem aumento de paniculo adiposo se há presença ou não de visceromegalias e a hepatimetria"
+    },
+    {
+      "time": "2026-09-24T04:53:45.999Z",
+      "type": "EXAME",
+      "text": "Exame etiológico dirigido: Investigação etiológica compatível com lesão hepatocelular"
+    },
+    {
+      "time": "2026-09-24T04:54:21.461Z",
+      "type": "AVALIAÇÃO",
+      "text": "Hipótese registrada; verdade clínica no encerramento."
+    },
+    {
+      "time": "2026-09-24T04:54:26.885Z",
+      "type": "RESULTADO",
+      "text": "Verdade clínica: hepatite viral D. Pontuação: 5."
+    }
+  ]
+}
