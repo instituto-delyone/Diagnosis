@@ -396,6 +396,17 @@
             }
         }
 
+        async ensureGeminiResearchProvider() {
+            if (global.DiagnosysGeminiProvider) return true;
+            try {
+                await loadScript("Js/core/gemini-research-provider.js");
+                return Boolean(global.DiagnosysGeminiProvider);
+            } catch (error) {
+                console.warn("Gemini de pesquisa indisponível até o momento:", error);
+                return false;
+            }
+        }
+
         async loadModules() {
             try { await loadScript("Js/core/symptom-characterization.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/case-builder.js"); } catch (e) { console.warn(e); }
@@ -486,24 +497,42 @@
             this.elements.back?.addEventListener("click", () => this.log("SISTEMA", "Não há uma etapa anterior disponível neste caso."));
         }
 
-        async startNewCase() {
+        activatePreparedCase(clinicalCase) {
+            if (!clinicalCase) throw new Error("Nenhum caso clínico preparado.");
             this.context = this.createContext();
             this.score = 0;
             this.errors = 0;
             this.time = 0;
             this.clearLog();
-            this.research = null;
+            this.research = clinicalCase.evidence || null;
             this.pendingResearch = false;
             this.pendingClinicalChallenge = null;
-
-            const sourceCase = this.library.random();
-            if (!sourceCase) this.currentCase = this.createFallbackCase();
-            else this.currentCase = await this.buildCase(sourceCase);
-
-            this.patientState = this.createPatientState(this.currentCase);
+            this.currentCase = clinicalCase;
+            this.startConversationSession?.(clinicalCase);
+            this.patientState = this.createPatientState(clinicalCase);
             this.renderInitialCase();
             this.renderHypothesis();
-            this.log("SISTEMA", "Novo caso clínico carregado. O diagnóstico permanece oculto.");
+            this.log("SISTEMA", "Paciente clínico carregado a partir da Knowledge Base. O diagnóstico permanece oculto.");
+            if (this.elements?.input) this.elements.input.disabled = false;
+            if (this.elements?.send) this.elements.send.disabled = false;
+            return clinicalCase;
+        }
+
+        async startNewCase() {
+            const queued = Array.isArray(this.__backgroundPreparedCases) && this.__backgroundPreparedCases.length
+                ? this.__backgroundPreparedCases.shift()
+                : null;
+
+            if (queued?.case) {
+                return this.activatePreparedCase(queued.case);
+            }
+
+            if (this.__casePreparation?.prepareFirst) {
+                const first = await this.__casePreparation.prepareFirst();
+                return this.activatePreparedCase(first.case);
+            }
+
+            throw new Error("Nenhum caso preparado está disponível.");
         }
 
         async buildCase(sourceCase) {
@@ -599,23 +628,6 @@
             };
 
             return state;
-        }
-
-        createFallbackCase() {
-            return {
-                case_id: `fallback_${Date.now()}`,
-                title: "Caso clínico",
-                difficulty: "Simulação clínica",
-                patient: { age: 58, sex: "feminino" },
-                presentation: {
-                    chief_complaint: "Dor e aumento de volume em membro inferior esquerdo desde ontem.",
-                    initial_narrative: "Paciente chega ao pronto-socorro consciente e orientada, referindo dor e edema em membro inferior esquerdo.",
-                    vitals: { BP: "138/84 mmHg", HR: "96 bpm", RR: "18 irpm", SpO2: "97%", temperature: "37,2 °C" }
-                },
-                initial_state: { stability: "stable" },
-                history: {}, physical_exam: {}, investigations: {}, management: {}, evolution: {},
-                hidden: { diagnosis: "trombose venosa profunda" }, evidence: []
-            };
         }
 
         renderInitialCase() {
@@ -1312,7 +1324,11 @@
                     this.log("PESQUISA", "O gatilho está instalado, mas o conector externo ainda não está disponível nesta execução.");
                     return;
                 }
-                const researcher = new global.CaseResearchEngine({ config: this.researchRules });
+                const researchReady = await this.ensureGeminiResearchProvider();
+                const researcher = new global.CaseResearchEngine({
+                    config: this.researchRules,
+                    provider: researchReady ? global.DiagnosysGeminiProvider : null
+                });
                 const concept = this.currentCase.hidden?.label
                     || this.currentCase.hidden?.diagnosis
                     || this.currentCase.title
@@ -1326,7 +1342,7 @@
 
                 this.research = catalogResearch || { enabled: true, evidence: [], source_status: [] };
 
-                if (global.DiagnosysGeminiProvider) {
+                if (researchReady && global.DiagnosysGeminiProvider) {
                     try {
                         const gemini = new global.DiagnosysGeminiProvider({ endpoint: CONFIG.geminiWorkerUrl });
                         const response = await gemini.research({
