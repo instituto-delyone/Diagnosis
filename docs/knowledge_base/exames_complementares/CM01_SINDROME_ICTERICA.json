@@ -1,0 +1,68 @@
+{
+  "module": "CM01",
+  "syndrome": "Síndrome Ictérica",
+  "role": "exames_complementares",
+  "source_policy": {
+    "primary_knowledge_source": "DIAGNOSIS_CM01_SINDROME_ICTERICA_v0.3.json",
+    "external_sources": [
+      "Porto & Porto — Semiologia Médica",
+      "fontes complementares do registro de fontes do CM01"
+    ],
+    "do_not_invent": true
+  },
+  "exams": [
+    {
+      "id": "bilirrubina_total_fracoes",
+      "name": "Bilirrubina total e frações",
+      "result_by_pattern": {
+        "indireta": "Predomínio de hiperbilirrubinemia não conjugada.",
+        "obstr": "Predomínio de hiperbilirrubinemia conjugada.",
+        "colest": "Predomínio de hiperbilirrubinemia conjugada.",
+        "default": "Bilirrubina elevada, com componente direto."
+      }
+    },
+    {
+      "id": "ast_alt",
+      "name": "AST/ALT",
+      "result_by_pattern": {
+        "hepato": "AST e ALT elevadas.",
+        "indireta": "AST/ALT sem elevação importante.",
+        "default": "Elevação de transaminases compatível com investigação hepatocelular."
+      }
+    },
+    {
+      "id": "fa_ggt",
+      "name": "Fosfatase alcalina e GGT",
+      "result_by_pattern": {
+        "obstr": "Fosfatase alcalina e GGT elevadas, com padrão colestático.",
+        "colest": "Fosfatase alcalina e GGT elevadas, com padrão colestático.",
+        "default": "Fosfatase alcalina e GGT sem padrão colestático dominante."
+      }
+    },
+    {
+      "id": "albumina_inr",
+      "name": "Albumina e TP/INR",
+      "result_by_pattern": {
+        "cirrose": "Albumina reduzida e/ou alteração de coagulação conforme gravidade.",
+        "default": "Avaliação da função sintética hepática."
+      }
+    },
+    {
+      "id": "usg_abdominal",
+      "name": "Ultrassonografia abdominal",
+      "result_by_pattern": {
+        "obstr": "Ultrassonografia direcionada para vias biliares.",
+        "colest": "Ultrassonografia direcionada para vias biliares.",
+        "default": "Ultrassonografia abdominal para avaliação hepatobiliar."
+      }
+    },
+    {
+      "id": "exame_etiologico",
+      "name": "Exame etiológico dirigido",
+      "result_by_pattern": {
+        "hepato": "Investigação etiológica dirigida para lesão hepatocelular.",
+        "default": "Investigação etiológica dirigida conforme o padrão clínico."
+      }
+    }
+  ]
+}
