@@ -1,0 +1,17 @@
+{
+  "role": "exames_complementares_gerais",
+  "purpose": "Catálogo clínico de exames e separação entre exame solicitado e resultado.",
+  "rules": {
+    "one_exam_one_result": true,
+    "never_cross_assign_results": true,
+    "result_belongs_to_exam_id": true
+  },
+  "canonical_examples": [
+    {"id":"hemograma","name":"Hemograma","result_domain":"hematologico"},
+    {"id":"bilirrubina_total_fracoes","name":"Bilirrubina total e frações","result_domain":"bioquimico"},
+    {"id":"ast_alt","name":"AST/ALT","result_domain":"bioquimico"},
+    {"id":"fa_ggt","name":"Fosfatase alcalina e GGT","result_domain":"bioquimico"},
+    {"id":"albumina_inr","name":"Albumina e TP/INR","result_domain":"bioquimico"},
+    {"id":"usg_abdominal","name":"Ultrassonografia abdominal","result_domain":"imagem"}
+  ]
+}
