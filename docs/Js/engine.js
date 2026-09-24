@@ -722,29 +722,9 @@
                 return;
             }
 
-            // Gemini só é carregado quando a interação realmente precisa dele.
-            const geminiReady = await this.ensureGeminiConversationProvider();
-            if (geminiReady) {
-                try {
-                    const providerStartedAt = performance.now();
-                    this.conversationLogger?.logEvent("provider_call", { provider: "gemini_conversation" });
-                    const response = await this.converseWithPatient(input);
-                    if (response) {
-                        this.context.time += 1;
-                        this.syncCompatibilityState();
-                        this.log("PACIENTE", response);
-                        this.conversationLogger?.logEvent("provider_response", { provider: "gemini_conversation", duration_ms: Math.round(performance.now() - providerStartedAt), success: true });
-                        this.renderState();
-                        return;
-                    }
-                } catch (error) {
-                    const detail = error instanceof Error ? error.message : String(error);
-                    console.warn("Conversa Gemini indisponível; mantendo fallback local:", error);
-                    this.log("GEMINI", "Falha na conversa: " + detail);
-                    this.conversationLogger?.logFallback("gemini_conversation_failed", { provider: "gemini_conversation", error: detail, duration_ms: Math.round(performance.now() - providerStartedAt) });
-                }
-            }
-
+            // Gemini é uma camada opcional. O fluxo clínico local não depende dele
+            // e não o chama automaticamente quando uma frase não é reconhecida.
+            // A ativação ocorre somente por uma ação explícita (teste/recurso extra).
             this.context.errors += 1;
             this.syncCompatibilityState();
             this.conversationLogger?.logEvent("local_fallback", { reason: "no_clinical_action_matched" });
@@ -768,7 +748,14 @@
                 '</div>';
 
             if (button) button.disabled = true;
-            render(row(true, "Frontend", "teste iniciado") + row(!!global.DiagnosysGeminiConversationProvider, "Provider", global.DiagnosysGeminiConversationProvider ? "carregado" : "não carregado"));
+
+            // O provider só é carregado porque o usuário pediu explicitamente
+            // para testar o Gemini. Nunca durante o boot ou uma ação clínica comum.
+            const providerReady = await this.ensureGeminiConversationProvider();
+            render(
+                row(true, "Frontend", "teste iniciado") +
+                row(providerReady, "Provider", providerReady ? "carregado por solicitação explícita" : "não carregado")
+            );
 
             let workerOk = false;
             let workerDetail = "não verificado";
@@ -792,10 +779,10 @@
                 workerDetail = error instanceof Error ? error.message : String(error);
             }
 
-            if (!global.DiagnosysGeminiConversationProvider) {
+            if (!providerReady || !global.DiagnosysGeminiConversationProvider) {
                 render(
                     row(true, "Frontend", "botão executado") +
-                    row(false, "Provider", "classe não carregada") +
+                    row(false, "Provider", "não disponível") +
                     row(workerOk, "Cloudflare Worker", workerDetail) +
                     row(false, "Gemini API", "não testada") +
                     row(false, "JSON", "não testado")
