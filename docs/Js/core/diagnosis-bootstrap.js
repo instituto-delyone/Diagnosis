@@ -27,23 +27,7 @@
   };
 
   const activate = (engine, item) => {
-    const c = item.case;
-    engine.context = engine.createContext();
-    engine.score = 0;
-    engine.errors = 0;
-    engine.time = 0;
-    engine.clearLog();
-    engine.research = c.evidence || null;
-    engine.pendingResearch = false;
-    engine.pendingClinicalChallenge = null;
-    engine.currentCase = c;
-    engine.startConversationSession?.(c);
-    engine.patientState = engine.createPatientState(c);
-    engine.renderInitialCase();
-    engine.renderHypothesis();
-    engine.log("SISTEMA", "Paciente gerado pela Knowledge Base. O diagnóstico permanece oculto.");
-    engine.elements.input && (engine.elements.input.disabled = false);
-    engine.elements.send && (engine.elements.send.disabled = false);
+    engine.activatePreparedCase(item.case);
     engine.__activePreparedCase = item;
     hidePreparation();
   };
