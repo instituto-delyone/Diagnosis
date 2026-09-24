@@ -1,0 +1,32 @@
+{
+  "model_metadata": {
+    "model_name": "DIAGNOSIS_CLINICAL_KNOWLEDGE_MODEL",
+    "model_version": "0.3",
+    "instance_id": "cm33_semiologia_respiratoria_pending",
+    "status": "source_pending",
+    "canonical": false
+  },
+  "clinical_domain": {
+    "id": "semiologia_respiratoria",
+    "name": "Semiologia Respiratória"
+  },
+  "source_registry": [
+    {
+      "source_id": "project_module_list",
+      "type": "project_index",
+      "title": "Lista de módulos do Diagnosis",
+      "status": "confirms module exists as CM 33"
+    },
+    {
+      "source_id": "summary_cm33",
+      "type": "original_summary",
+      "title": "CM 33 - Semiologia Respiratória",
+      "status": "NOT_AVAILABLE_IN_CURRENT_PROJECT_FILES",
+      "note": "Nenhum arquivo do resumo CM33 foi localizado nos arquivos acessíveis nesta etapa."
+    }
+  ],
+  "extraction": null,
+  "external_research": null,
+  "generation": null,
+  "blocking_reason": "As regras do projeto determinam que o resumo seja preservado e que lacunas não sejam preenchidas silenciosamente. Portanto, este arquivo é apenas um registro de pendência, não uma KB inventada."
+}

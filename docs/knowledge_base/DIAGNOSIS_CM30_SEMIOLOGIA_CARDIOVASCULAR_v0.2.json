@@ -1,0 +1,444 @@
+{
+  "model_metadata": {
+    "model_name": "DIAGNOSIS_CLINICAL_KNOWLEDGE_MODEL",
+    "model_version": "0.2",
+    "instance_id": "semiologia_cardiovascular_prototipo_v02",
+    "role": "modelo provisório de estruturação do conhecimento clínico",
+    "status": "provisional_template",
+    "canonical": false,
+    "generation_is_downstream": true,
+    "principle": "O caso clínico é uma realização possível do espaço clínico; não é a unidade primária de conhecimento.",
+    "source_policy": {
+      "summary_role": "fragmento de conhecimento/contexto fornecido pelo material original",
+      "external_reference_role": "complementação e expansão explicitamente rastreável",
+      "silent_correction_forbidden": true,
+      "source_conflicts_must_be_preserved": true,
+      "generation_before_knowledge_forbidden": true
+    }
+  },
+  "clinical_domain": {
+    "id": "semiologia_cardiovascular",
+    "name": "Semiologia Cardiovascular",
+    "type": "clinical_domain",
+    "scope_note": "O escopo abaixo representa o domínio do resumo; não é uma lista fechada de doenças."
+  },
+  "source_registry": [
+    {
+      "source_id": "summary_cm_30___semiologia_cardiovascular",
+      "type": "original_summary",
+      "title": "CM 30 - Semiologia Cardiovascular.docx.pdf",
+      "provenance": "resumo visual fornecido no material do projeto",
+      "authority_role": "primary_source_for_summary_extraction",
+      "extraction_policy": "preservar o conteúdo e a terminologia sustentados pelo resumo; lacunas não são preenchidas silenciosamente"
+    },
+    {
+      "source_id": "merck_cardiovascular_exam_2026",
+      "type": "external_reference",
+      "title": "Cardiovascular Examination",
+      "publisher": "Merck Manual Professional Edition",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/approach-to-the-cardiac-patient/cardiovascular-examination",
+      "last_update": "2026-04",
+      "authority_role": "current_complementary_reference",
+      "accessed": "2026-09-23"
+    },
+    {
+      "source_id": "merck_cardiac_auscultation_2025",
+      "type": "external_reference",
+      "title": "Cardiac Auscultation",
+      "publisher": "Merck Manual Professional Edition",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/approach-to-the-cardiac-patient/cardiac-auscultation",
+      "last_update": "2025-04",
+      "authority_role": "current_complementary_reference",
+      "accessed": "2026-09-23"
+    }
+  ],
+  "summary_extraction": {
+    "source_id": "summary_cm30",
+    "observed_sections": [
+      "focos de ausculta",
+      "sons cardíacos",
+      "desdobramento de B2",
+      "valvopatias",
+      "estágios de progressão",
+      "estenose mitral",
+      "estenose aórtica",
+      "insuficiência mitral",
+      "insuficiência aórtica",
+      "manobras semiológicas para sopros",
+      "cardiomiopatia hipertrófica"
+    ],
+    "explicit_content": {
+      "auscultation_sites": [
+        "foco mitral",
+        "borda esternal esquerda baixa",
+        "foco aórtico",
+        "foco pulmonar",
+        "foco aórtico acessório"
+      ],
+      "heart_sounds": [
+        "B1",
+        "B2",
+        "B3",
+        "B4"
+      ],
+      "split_s2": [
+        "fisiológico",
+        "paradoxal",
+        "fixo"
+      ],
+      "valvular_concepts": [
+        "estenose = restrição à abertura",
+        "insuficiência = fechamento inadequado"
+      ],
+      "valvular_stage": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "mitral_stenosis": [
+        "sopro diastólico",
+        "B1 hiperfonética",
+        "estalido de abertura",
+        "reforço pré-sistólico que desaparece na FA"
+      ],
+      "aortic_stenosis": [
+        "sopro mesossistólico",
+        "desdobramento paradoxal de B2",
+        "pulso parvus et tardus",
+        "B4"
+      ],
+      "mitral_regurgitation": [
+        "sopro holossistólico",
+        "B3",
+        "ictus de VE desviado"
+      ],
+      "aortic_regurgitation": [
+        "sopro protodiastólico",
+        "Austin Flint",
+        "ictus desviado",
+        "pulso de Corrigan",
+        "Musset",
+        "Müller",
+        "Quincke",
+        "B3 possível"
+      ],
+      "maneuvers": [
+        "Valsalva",
+        "agachamento",
+        "handgrip",
+        "vasodilatador",
+        "inspiração/Rivero-Carvalho"
+      ],
+      "hypertrophic_cardiomyopathy": [
+        "sopro aumenta com Valsalva",
+        "sopro diminui com agachamento",
+        "relação com retorno venoso e obstrução dinâmica"
+      ]
+    }
+  },
+  "knowledge_entities": [
+    {
+      "id": "cardiovascular_exam",
+      "label": "Exame cardiovascular",
+      "entity_type": "physical_examination_domain",
+      "components": [
+        "inspeção",
+        "sinais vitais",
+        "pulsos",
+        "veias",
+        "precordio",
+        "ausculta",
+        "pulmões",
+        "abdome",
+        "extremidades"
+      ]
+    },
+    {
+      "id": "heart_sounds",
+      "label": "Sons cardíacos",
+      "entity_type": "auscultatory_finding",
+      "components": [
+        "B1",
+        "B2",
+        "B3",
+        "B4"
+      ]
+    },
+    {
+      "id": "s2_splitting",
+      "label": "Desdobramento de B2",
+      "entity_type": "auscultatory_pattern",
+      "subtypes": [
+        "fisiológico",
+        "paradoxal",
+        "fixo"
+      ]
+    },
+    {
+      "id": "mitral_stenosis",
+      "label": "Estenose mitral",
+      "entity_type": "valvular_lesion",
+      "summary_findings": [
+        "sopro diastólico",
+        "B1 hiperfonética",
+        "estalido de abertura",
+        "reforço pré-sistólico em ritmo sinusal"
+      ]
+    },
+    {
+      "id": "aortic_stenosis",
+      "label": "Estenose aórtica",
+      "entity_type": "valvular_lesion",
+      "summary_findings": [
+        "sopro mesossistólico",
+        "parvus et tardus",
+        "B4",
+        "desdobramento paradoxal de B2"
+      ]
+    },
+    {
+      "id": "mitral_regurgitation",
+      "label": "Insuficiência mitral",
+      "entity_type": "valvular_lesion",
+      "summary_findings": [
+        "sopro holossistólico",
+        "B3",
+        "ictus de VE desviado"
+      ]
+    },
+    {
+      "id": "aortic_regurgitation",
+      "label": "Insuficiência aórtica",
+      "entity_type": "valvular_lesion",
+      "summary_findings": [
+        "sopro protodiastólico",
+        "Austin Flint",
+        "pulso de Corrigan",
+        "sinais periféricos de pressão de pulso aumentada"
+      ]
+    },
+    {
+      "id": "hypertrophic_cardiomyopathy",
+      "label": "Cardiomiopatia hipertrófica",
+      "entity_type": "structural_heart_disease",
+      "summary_finding": "sopro dinâmico modificado por retorno venoso e pós-carga"
+    }
+  ],
+  "external_research_extension": {
+    "source_ids": [
+      "merck_cardiovascular_exam_2026",
+      "merck_cardiac_auscultation_2025"
+    ],
+    "exam_sequence": [
+      "aparência geral",
+      "sinais vitais",
+      "pulsos",
+      "veias",
+      "inspeção/palpação torácica",
+      "precordio",
+      "ausculta cardíaca",
+      "pulmões",
+      "abdome",
+      "extremidades"
+    ],
+    "auscultation_principles": [
+      "examinar sistematicamente o precórdio",
+      "usar diafragma para sons de maior frequência e campânula para sons de menor frequência",
+      "caracterizar intensidade, tonalidade, duração e momento no ciclo",
+      "descrever irradiação e resposta a manobras"
+    ],
+    "murmur_framework": {
+      "systolic": [
+        "ejetivo",
+        "regurgitante",
+        "shunt"
+      ],
+      "diastolic": [
+        "regurgitação aórtica/pulmonar",
+        "estenose mitral/tricúspide",
+        "outros conforme contexto"
+      ],
+      "continuous": "fluxo contínuo ao longo do ciclo"
+    },
+    "maneuvers": {
+      "Valsalva": "reduz retorno venoso e pode aumentar sopros de CMH obstrutiva e prolapso mitral",
+      "handgrip": "aumenta pós-carga; tende a aumentar regurgitações mitral/aórtica e reduzir estenose aórtica/CMH obstrutiva",
+      "squatting": "aumenta retorno venoso e pós-carga; modifica diversos sopros",
+      "inspiration": "aumenta achados relacionados ao coração direito"
+    },
+    "current_note": "A referência Merck atual enfatiza que ausculta continua útil à beira-leito e que ecocardiografia confirma e quantifica doença valvar quando indicada."
+  },
+  "clinical_rules": [
+    {
+      "rule_id": "S2_SPLIT",
+      "if": [
+        "desdobramento de B2"
+      ],
+      "classify": [
+        "fisiológico",
+        "fixo",
+        "paradoxal"
+      ],
+      "source_traceability": [
+        "summary_cm30",
+        "merck_cardiac_auscultation_2025"
+      ]
+    },
+    {
+      "rule_id": "MURMUR_TIMING",
+      "if": [
+        "sopro cardíaco"
+      ],
+      "evaluate": [
+        "sistólico/diastólico/contínuo",
+        "localização",
+        "irradiação",
+        "intensidade",
+        "forma",
+        "manobras"
+      ],
+      "source_traceability": [
+        "summary_cm30",
+        "merck_cardiac_auscultation_2025"
+      ]
+    },
+    {
+      "rule_id": "VALVULAR_PATTERN",
+      "if": [
+        "sopro + sinais de valvopatia"
+      ],
+      "integrate": [
+        "ausculta",
+        "pulsos",
+        "ictus",
+        "sinais periféricos",
+        "imagem quando indicada"
+      ],
+      "source_traceability": [
+        "summary_cm30",
+        "merck_cardiovascular_exam_2026"
+      ]
+    },
+    {
+      "rule_id": "DYNAMIC_MURMUR",
+      "if": [
+        "sopro modifica com Valsalva/agachamento/handgrip"
+      ],
+      "consider": "alteração dinâmica da fisiologia cardíaca",
+      "source_traceability": [
+        "summary_cm30",
+        "merck_cardiac_auscultation_2025"
+      ]
+    }
+  ],
+  "diagnostic_network": {
+    "entry_problem": [
+      "sopro",
+      "alteração de bulhas",
+      "pulso anormal",
+      "dispneia",
+      "edema",
+      "sinais de congestão"
+    ],
+    "axes": [
+      "timing",
+      "foco",
+      "irradiação",
+      "intensidade",
+      "frequência",
+      "qualidade",
+      "B1/B2/B3/B4",
+      "pulsos",
+      "veias",
+      "manobras",
+      "sinais sistêmicos"
+    ],
+    "confirmation": "ecocardiografia quando doença valvar ou estrutural é suspeita e a confirmação/quantificação é necessária"
+  },
+  "patient_generation": {
+    "variables": {
+      "age": "continuous",
+      "rhythm": [
+        "sinusal",
+        "fibrilação atrial",
+        "outro"
+      ],
+      "heart_sound_pattern": "variable",
+      "murmur_timing": [
+        "sistólico",
+        "diastólico",
+        "contínuo",
+        "nenhum"
+      ],
+      "murmur_location": "variable",
+      "radiation": "variable",
+      "pulse_pattern": "variable",
+      "venous_findings": "variable",
+      "precordial_impulse": "variable",
+      "maneuver_response": "variable",
+      "valvular_lesion": "variable"
+    },
+    "constraints": [
+      "coerência entre lesão, timing do sopro, foco, irradiação e achados periféricos",
+      "não transformar um conjunto de sinais em diagnóstico automático",
+      "permitir exame normal ou incompleto quando compatível com o estado do paciente"
+    ]
+  },
+  "differential_network": [
+    {
+      "presentation": "sopro sistólico ejetivo",
+      "nodes": [
+        "estenose aórtica",
+        "estenose pulmonar",
+        "CMH obstrutiva",
+        "aumento de fluxo",
+        "outros sopros de ejeção"
+      ]
+    },
+    {
+      "presentation": "sopro holossistólico",
+      "nodes": [
+        "insuficiência mitral",
+        "insuficiência tricúspide",
+        "CIV"
+      ]
+    },
+    {
+      "presentation": "sopro diastólico",
+      "nodes": [
+        "insuficiência aórtica",
+        "insuficiência pulmonar",
+        "estenose mitral",
+        "estenose tricúspide"
+      ]
+    },
+    {
+      "presentation": "desdobramento de B2",
+      "nodes": [
+        "fisiológico",
+        "BRD",
+        "CIA",
+        "BRE",
+        "estenose aórtica e outros contextos conforme mecanismo"
+      ]
+    }
+  ],
+  "conflicts_and_boundaries": [
+    {
+      "issue": "O resumo é um material didático condensado e algumas associações são apresentadas como regras de prova.",
+      "handling": "Preservar como fonte original, mas não transformá-las automaticamente em relações causais exclusivas."
+    },
+    {
+      "issue": "Ausculta isolada não substitui confirmação estrutural quando há suspeita de doença valvar.",
+      "handling": "A camada complementar incorpora ecocardiografia como método de confirmação/quantificação quando indicada."
+    }
+  ],
+  "validation_targets_for_phase_1": [
+    "comparar terminologia com KB cardiovascular existente",
+    "separar achado semiológico de diagnóstico",
+    "mapear relações sopro→lesão→fisiologia",
+    "validar achados com fonte atual",
+    "preservar proveniência"
+  ]
+}

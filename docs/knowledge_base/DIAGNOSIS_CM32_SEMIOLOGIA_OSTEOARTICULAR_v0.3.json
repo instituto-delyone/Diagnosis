@@ -1,0 +1,464 @@
+{
+  "model_metadata": {
+    "model_name": "DIAGNOSIS_CLINICAL_KNOWLEDGE_MODEL",
+    "model_version": "0.3",
+    "instance_id": "cm32_semiologia_osteoarticular_v03",
+    "role": "modelo provisório de estruturação do conhecimento clínico",
+    "status": "provisional_template",
+    "canonical": false,
+    "generation_is_downstream": true,
+    "principle": "O caso clínico é uma realização possível do espaço clínico; não é a unidade primária de conhecimento.",
+    "source_policy": {
+      "summary_role": "fragmento de conhecimento/contexto fornecido pelo material original",
+      "external_reference_role": "complementação explicitamente rastreável",
+      "silent_correction_forbidden": true,
+      "source_conflicts_must_be_preserved": true,
+      "generation_before_knowledge_forbidden": true
+    }
+  },
+  "clinical_domain": {
+    "id": "semiologia_osteoarticular",
+    "name": "CM 32 - Semiologia Osteoarticular",
+    "type": "clinical_domain"
+  },
+  "source_registry": [
+    {
+      "source_id": "summary_cm32_semiologia_osteoarticular_v03",
+      "type": "original_summary",
+      "title": "CM 32 - Semiologia Osteoarticular",
+      "provenance": "resumo visual fornecido no material do projeto",
+      "authority_role": "primary_source_for_summary_extraction",
+      "extraction_policy": "preservar o conteúdo sustentado pelo resumo; lacunas não são preenchidas silenciosamente"
+    },
+    {
+      "source_id": "merck_joint_exam_2025",
+      "type": "external_reference",
+      "title": "Evaluation of the Patient With Joint Symptoms",
+      "publisher": "Merck Manual Professional Edition",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/approach-to-the-patient-with-joint-symptoms/evaluation-of-the-patient-with-joint-symptoms",
+      "last_update": "2025-01",
+      "authority_role": "complementary_reference",
+      "accessed": "2026-09-23"
+    },
+    {
+      "source_id": "merck_shoulder_exam_2025",
+      "type": "external_reference",
+      "title": "Evaluation of the Shoulder",
+      "publisher": "Merck Manual Professional Edition",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/approach-to-the-patient-with-joint-symptoms/evaluation-of-the-shoulder",
+      "last_update": "2025-01",
+      "authority_role": "complementary_reference",
+      "accessed": "2026-09-23"
+    },
+    {
+      "source_id": "merck_knee_exam_2025",
+      "type": "external_reference",
+      "title": "Evaluation of the Knee",
+      "publisher": "Merck Manual Professional Edition",
+      "url": "https://www.merckmanuals.com/en-ca/professional/musculoskeletal-and-connective-tissue-disorders/approach-to-the-patient-with-joint-symptoms/evaluation-of-the-knee",
+      "last_update": "2025-01",
+      "authority_role": "complementary_reference",
+      "accessed": "2026-09-23"
+    }
+  ],
+  "summary_extraction": {
+    "source_id": "summary_cm32_semiologia_osteoarticular_v03",
+    "observed_sections": [
+      "dor no ombro",
+      "manguito rotador",
+      "síndrome do impacto",
+      "epicondilites",
+      "tenossinovite de De Quervain",
+      "síndrome do túnel do carpo",
+      "dor no joelho",
+      "ligamentos cruzados e colaterais",
+      "meniscos",
+      "testes especiais"
+    ],
+    "explicit_content": {
+      "shoulder": [
+        "síndrome do impacto como manifestações relacionadas a dor na elevação do braço",
+        "etiologias listadas: lesão do manguito rotador, tendinite bicipital, capsulite adesiva, lesão acromioclavicular, artrose glenoumeral, bursite",
+        "supraespinhoso: abdução/elevação, especialmente primeiros 45°",
+        "infraespinhoso: rotação externa",
+        "subescapular: rotação interna",
+        "redondo menor: auxilia rotação externa",
+        "tendinite do manguito: dor; ruptura: fraqueza"
+      ],
+      "shoulder_maneuvers": [
+        {
+          "name": "Neer",
+          "summary_meaning": "síndrome do impacto"
+        },
+        {
+          "name": "Hawkins",
+          "summary_meaning": "síndrome do impacto"
+        },
+        {
+          "name": "Jobe",
+          "summary_meaning": "supraespinhoso; dor sugere tendinite e fraqueza sugere ruptura no resumo"
+        },
+        {
+          "name": "Patte",
+          "summary_meaning": "infraespinhoso; dor/tendinite e fraqueza/ruptura no resumo"
+        },
+        {
+          "name": "Gerber",
+          "summary_meaning": "subescapular/rotação interna"
+        },
+        {
+          "name": "Yergason",
+          "summary_meaning": "tendinite bicipital"
+        },
+        {
+          "name": "Speed",
+          "summary_meaning": "tendinite bicipital"
+        }
+      ],
+      "elbow": [
+        "epicondilite lateral: extensão repetitiva do punho; cotovelo do tenista",
+        "epicondilite medial: flexão repetitiva do punho; cotovelo do golfista",
+        "Cozen: dor associada à epicondilite lateral no resumo",
+        "Mill: dor associada à epicondilite medial no resumo"
+      ],
+      "dequervain": [
+        "inflamação dos tendões/bainhas do abdutor longo e extensor curto do polegar",
+        "dor com movimentos repetidos do polegar",
+        "dor à extensão/abdução contra resistência",
+        "dor à palpação do processo estiloide",
+        "Finkelstein positivo como manobra provocativa"
+      ],
+      "carpal_tunnel": [
+        "compressão do nervo mediano no túnel do carpo",
+        "território sensitivo: 1º, 2º, 3º e metade lateral do 4º dedo",
+        "Tinel: parestesia no território do mediano",
+        "Phalen: parestesia após flexão palmar mantida"
+      ],
+      "knee": [
+        "LCM e LCL estabilizam o joelho",
+        "LCA e LCP estabilizam a tíbia anteroposteriormente",
+        "gaveta anterior: deslizamento anterior associado a LCA",
+        "Lachman: lesão de LCA",
+        "Pivot shift: lesão de LCA",
+        "gaveta posterior: lesão de LCP",
+        "estresse em valgo: LCM",
+        "estresse em varo: LCL",
+        "McMurray: menisco medial/lateral conforme rotação",
+        "Apley: avaliação de meniscos"
+      ]
+    }
+  },
+  "knowledge_entities": [
+    {
+      "id": "shoulder_impingement",
+      "label": "Síndrome do impacto do ombro",
+      "entity_type": "shoulder_pain_pattern",
+      "summary_etiologies": [
+        "manguito rotador",
+        "tendinite bicipital",
+        "capsulite adesiva",
+        "lesão acromioclavicular",
+        "artrose glenoumeral",
+        "bursite"
+      ]
+    },
+    {
+      "id": "rotator_cuff",
+      "label": "Manguito rotador",
+      "entity_type": "shoulder_structure",
+      "components": [
+        "supraespinhoso",
+        "infraespinhoso",
+        "subescapular",
+        "redondo menor"
+      ]
+    },
+    {
+      "id": "rotator_cuff_tendinopathy_or_tear",
+      "label": "Lesão do manguito rotador",
+      "entity_type": "tendon_disorder",
+      "summary_distinction": "tendinite associada a dor; ruptura associada a fraqueza no resumo"
+    },
+    {
+      "id": "biceps_tendinopathy",
+      "label": "Tendinite bicipital",
+      "entity_type": "tendon_disorder",
+      "summary_tests": [
+        "Yergason",
+        "Speed"
+      ]
+    },
+    {
+      "id": "epicondylitis",
+      "label": "Epicondilites",
+      "entity_type": "elbow_tendinopathy",
+      "subtypes": [
+        "lateral",
+        "medial"
+      ]
+    },
+    {
+      "id": "dequervain",
+      "label": "Tenossinovite de De Quervain",
+      "entity_type": "thumb_tenosynovitis",
+      "structures": [
+        "abdutor longo do polegar",
+        "extensor curto do polegar"
+      ],
+      "summary_test": "Finkelstein"
+    },
+    {
+      "id": "carpal_tunnel",
+      "label": "Síndrome do túnel do carpo",
+      "entity_type": "median_nerve_entrapment",
+      "summary_territory": [
+        "1º dedo",
+        "2º dedo",
+        "3º dedo",
+        "metade lateral do 4º dedo"
+      ],
+      "summary_tests": [
+        "Tinel",
+        "Phalen"
+      ]
+    },
+    {
+      "id": "knee_ligament_injury",
+      "label": "Lesões ligamentares do joelho",
+      "entity_type": "knee_ligament_injury",
+      "subtypes": [
+        "LCA",
+        "LCP",
+        "LCM",
+        "LCL"
+      ]
+    },
+    {
+      "id": "meniscal_injury",
+      "label": "Lesão meniscal",
+      "entity_type": "knee_internal_derangement",
+      "summary_tests": [
+        "McMurray",
+        "Apley"
+      ]
+    }
+  ],
+  "external_research_extension": {
+    "source_ids": [
+      "merck_joint_exam_2025",
+      "merck_shoulder_exam_2025",
+      "merck_knee_exam_2025"
+    ],
+    "general_exam_sequence": [
+      "inspeção",
+      "palpação",
+      "amplitude ativa",
+      "amplitude passiva",
+      "força",
+      "testes provocativos/especiais",
+      "comparação contralateral",
+      "avaliação neurovascular quando pertinente"
+    ],
+    "shoulder": [
+      "Neer e Hawkins são testes de impacto",
+      "Jobe/empty can avalia supraespinhoso",
+      "rotação externa resistida avalia infraespinhoso/redondo menor",
+      "Gerber lift-off avalia subescapular",
+      "dor pode ser referida da coluna cervical, portanto o pescoço deve ser examinado"
+    ],
+    "knee": [
+      "Lachman, gavetas e testes de estresse ajudam a avaliar instabilidade ligamentar",
+      "McMurray é usado na avaliação de lesão meniscal",
+      "a pesquisa do joelho deve incluir derrame, deformidade, atrofia, amplitude e comparação com lado oposto"
+    ],
+    "joint_localization_principle": "Distinguir dor articular de dor periarticular; localizar dor na linha articular, tendão, entese ou bursa pode modificar o espaço diagnóstico."
+  },
+  "clinical_rules": [
+    {
+      "rule_id": "SHOULDER_PAIN_LOCALIZE",
+      "if": [
+        "dor no ombro"
+      ],
+      "evaluate": [
+        "articulação",
+        "manguito",
+        "bursa",
+        "bíceps",
+        "acromioclavicular",
+        "coluna cervical"
+      ],
+      "source_traceability": [
+        "summary_cm32",
+        "merck_shoulder_exam_2025"
+      ]
+    },
+    {
+      "rule_id": "ROTATOR_CUFF",
+      "if": [
+        "dor/fraqueza na elevação do braço"
+      ],
+      "evaluate": [
+        "supraespinhoso",
+        "infraespinhoso",
+        "subescapular",
+        "redondo menor"
+      ],
+      "source_traceability": [
+        "summary_cm32",
+        "merck_shoulder_exam_2025"
+      ]
+    },
+    {
+      "rule_id": "ELBOW_LATERAL_MEDIAL",
+      "if": [
+        "dor no cotovelo"
+      ],
+      "evaluate": [
+        "extensão do punho",
+        "flexão do punho",
+        "localização epicondilar"
+      ],
+      "source_traceability": [
+        "summary_cm32"
+      ]
+    },
+    {
+      "rule_id": "KNEE_INSTABILITY",
+      "if": [
+        "trauma/dor com suspeita ligamentar"
+      ],
+      "evaluate": [
+        "Lachman",
+        "gaveta anterior/posterior",
+        "valgo/varo",
+        "Pivot shift"
+      ],
+      "source_traceability": [
+        "summary_cm32",
+        "merck_knee_exam_2025"
+      ]
+    },
+    {
+      "rule_id": "JOINT_VS_PERIARTICULAR",
+      "if": [
+        "dor musculoesquelética"
+      ],
+      "first_decision": "distinguir origem articular de periarticular",
+      "source_traceability": [
+        "summary_cm32",
+        "merck_joint_exam_2025"
+      ]
+    }
+  ],
+  "diagnostic_network": {
+    "entry_problems": [
+      "dor no ombro",
+      "dor no cotovelo",
+      "parestesia na mão",
+      "dor no joelho",
+      "instabilidade",
+      "fraqueza funcional"
+    ],
+    "axes": [
+      "anatomia",
+      "movimento que provoca dor",
+      "movimento que revela fraqueza",
+      "amplitude ativa/passiva",
+      "teste específico",
+      "mecanismo de trauma/uso"
+    ],
+    "confirmation_methods": "imagem ou outros testes devem ser escolhidos conforme a hipótese clínica; exame físico não deve ser convertido em diagnóstico automático"
+  },
+  "patient_generation": {
+    "variables": {
+      "age": "continuous",
+      "anatomic_region": [
+        "ombro",
+        "cotovelo",
+        "punho/mão",
+        "joelho"
+      ],
+      "onset": [
+        "traumático",
+        "por sobreuso",
+        "insidioso"
+      ],
+      "pain_trigger": "variable",
+      "weakness": "variable",
+      "paresthesia": "variable",
+      "range_of_motion": "variable",
+      "special_test_pattern": "variable",
+      "neurovascular_status": "variable",
+      "dominant_side": "variable",
+      "sport_or_occupation": "variable"
+    },
+    "constraints": [
+      "coerência entre estrutura anatômica e manobra",
+      "não tratar teste positivo como diagnóstico absoluto",
+      "permitir apresentações com dor, fraqueza, limitação ou combinação"
+    ]
+  },
+  "differential_network": [
+    {
+      "presentation": "dor na elevação do braço",
+      "nodes": [
+        "síndrome do impacto",
+        "manguito rotador",
+        "bursite",
+        "bicipital",
+        "acromioclavicular",
+        "cervical"
+      ]
+    },
+    {
+      "presentation": "parestesia em território do mediano",
+      "nodes": [
+        "síndrome do túnel do carpo",
+        "radiculopatia cervical",
+        "neuropatia periférica",
+        "outras compressões"
+      ]
+    },
+    {
+      "presentation": "dor/instabilidade do joelho após trauma",
+      "nodes": [
+        "LCA",
+        "LCP",
+        "LCM",
+        "LCL",
+        "menisco",
+        "fratura",
+        "derrame"
+      ]
+    },
+    {
+      "presentation": "dor no cotovelo relacionada a punho",
+      "nodes": [
+        "epicondilite lateral",
+        "epicondilite medial",
+        "outras tendinopatias"
+      ]
+    }
+  ],
+  "conflicts_and_boundaries": [
+    {
+      "issue": "O resumo contém Finkelstein na seção de De Quervain e reapresenta Finkelstein dentro da seção de túnel do carpo.",
+      "handling": "Preservar ambas as ocorrências como estrutura da fonte e marcar a duplicação; não substituir silenciosamente o teste."
+    },
+    {
+      "issue": "O resumo usa associações manobra→diagnóstico de forma didática.",
+      "handling": "Na camada estruturada, tratar manobras como evidências de apoio, não como regras diagnósticas absolutas."
+    },
+    {
+      "issue": "O resumo é datado de 03/01/2022.",
+      "handling": "Manter como fonte histórica e complementar com exame musculoesquelético atual."
+    }
+  ],
+  "validation_targets_for_phase_1": [
+    "comparar com KB reumatológica/ortopédica existente",
+    "detectar duplicidades de testes",
+    "separar anatomia de hipótese diagnóstica",
+    "validar testes especiais em fonte atual",
+    "preservar a estrutura do resumo"
+  ]
+}

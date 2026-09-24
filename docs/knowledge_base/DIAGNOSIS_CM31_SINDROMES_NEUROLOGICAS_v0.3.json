@@ -1,0 +1,548 @@
+{
+  "model_metadata": {
+    "model_name": "DIAGNOSIS_CLINICAL_KNOWLEDGE_MODEL",
+    "model_version": "0.3",
+    "instance_id": "cm31_sindromes_neurologicas_v03",
+    "role": "modelo provisório de estruturação do conhecimento clínico",
+    "status": "provisional_template",
+    "canonical": false,
+    "generation_is_downstream": true,
+    "principle": "O caso clínico é uma realização possível do espaço clínico; não é a unidade primária de conhecimento.",
+    "source_policy": {
+      "summary_role": "fragmento de conhecimento/contexto fornecido pelo material original",
+      "external_reference_role": "complementação explicitamente rastreável",
+      "silent_correction_forbidden": true,
+      "source_conflicts_must_be_preserved": true,
+      "generation_before_knowledge_forbidden": true
+    }
+  },
+  "clinical_domain": {
+    "id": "sindromes_neurologicas",
+    "name": "CM 31 - Síndromes Neurológicas",
+    "type": "clinical_domain"
+  },
+  "source_registry": [
+    {
+      "source_id": "summary_cm31_sindromes_neurologicas_v03",
+      "type": "original_summary",
+      "title": "CM 31 - Síndromes Neurológicas",
+      "provenance": "resumo visual fornecido no material do projeto",
+      "authority_role": "primary_source_for_summary_extraction",
+      "extraction_policy": "preservar o conteúdo sustentado pelo resumo; lacunas não são preenchidas silenciosamente"
+    },
+    {
+      "source_id": "merck_neurologic_exam_2025",
+      "type": "external_reference",
+      "title": "Introduction to the Neurologic Examination",
+      "publisher": "Merck Manual Professional Edition",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/neurologic-examination/introduction-to-the-neurologic-examination",
+      "last_update": "2025-08",
+      "authority_role": "complementary_reference",
+      "accessed": "2026-09-23"
+    },
+    {
+      "source_id": "statpearls_umn_2023",
+      "type": "external_reference",
+      "title": "Neuroanatomy, Upper Motor Neuron Lesion",
+      "publisher": "NCBI Bookshelf / StatPearls",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK537305/",
+      "last_update": "2023-08-14",
+      "authority_role": "complementary_reference",
+      "accessed": "2026-09-23"
+    },
+    {
+      "source_id": "statpearls_cerebellar_2024",
+      "type": "external_reference",
+      "title": "Cerebellar Dysfunction",
+      "publisher": "NCBI Bookshelf / StatPearls",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK562317/",
+      "authority_role": "complementary_reference",
+      "accessed": "2026-09-23"
+    }
+  ],
+  "summary_extraction": {
+    "source_id": "summary_cm31_sindromes_neurologicas_v03",
+    "observed_sections": [
+      "sistema motor",
+      "primeiro e segundo neurônios motores",
+      "síndrome piramidal",
+      "síndromes cruzadas",
+      "doença degenerativa do 1º e 2º neurônios motores",
+      "neuropatia periférica",
+      "nervos cranianos III e VII",
+      "polineuropatia desmielinizante aguda / Guillain-Barré",
+      "vias sensitivas e medula",
+      "hemissecção medular / Brown-Séquard",
+      "síndrome cordonal posterior",
+      "degeneração combinada da medula",
+      "síndrome extrapiramidal",
+      "síndrome cerebelar",
+      "transmissão / placa motora",
+      "hipertensão intracraniana"
+    ],
+    "explicit_content": {
+      "motor_pathway": [
+        "1º neurônio motor: córtex motor frontal → vias descendentes → decussação das pirâmides → sinapse com 2º neurônio",
+        "2º neurônio: corno anterior → nervo periférico → músculo",
+        "cápsula interna como região de confluência das fibras motoras"
+      ],
+      "upper_motor_neuron": [
+        "hiperreflexia",
+        "hipertonia/espasticidade",
+        "hipotrofia",
+        "Babinski",
+        "quadro agudo pode inicialmente apresentar hiporreflexia e hipotonia"
+      ],
+      "lower_motor_neuron": [
+        "arreflexia",
+        "hipotonia/flacidez",
+        "atrofia",
+        "miofasciculações"
+      ],
+      "neuromuscular": [
+        "fatigabilidade",
+        "miastenia",
+        "Eaton-Lambert",
+        "botulismo"
+      ],
+      "peripheral_nerves": [
+        "nervo mediano: síndrome do túnel do carpo",
+        "nervo mediano: mão em bênção",
+        "nervo ulnar: mão em garra",
+        "nervo radial: mão caída"
+      ],
+      "guillain_barre": [
+        "polineuropatia desmielinizante aguda",
+        "fraqueza flácida, arreflexa, simétrica e ascendente",
+        "pode apresentar disautonomia",
+        "dor lombar",
+        "alteração da sensibilidade",
+        "liquor com dissociação proteinocitológica",
+        "tratamento com plasmaférese ou imunoglobulina",
+        "corticoide não indicado no resumo"
+      ],
+      "spinal_cord": [
+        "dor/temperatura: trato que cruza próximo à entrada",
+        "tato/vibração/propriocepção: via dorsal com cruzamento posterior no tronco encefálico",
+        "hemissecção: perda ipsilateral de movimento e propriocepção/vibração/tato discriminativo, com perda contralateral de dor/temperatura",
+        "síndrome cordonal posterior: perda de tato, vibração, propriocepção e marcha tabética",
+        "degeneração combinada: cordão posterior + sistema piramidal; deficiência de B12"
+      ],
+      "cerebellar": [
+        "tremor intencional",
+        "força preservada",
+        "hipotonia",
+        "disdiadococinesia",
+        "dismetria",
+        "reflexo normal/pendular",
+        "sensibilidade preservada",
+        "marcha ebriosa/atáxica"
+      ],
+      "intracranial_hypertension": [
+        "cefaleia",
+        "queda do nível de consciência",
+        "papiledema",
+        "vômitos, podendo ser em jato",
+        "paralisia do VI par",
+        "tríade de Cushing: hipertensão, bradicardia, respiração irregular"
+      ]
+    }
+  },
+  "knowledge_entities": [
+    {
+      "id": "upper_motor_neuron_syndrome",
+      "label": "Síndrome do primeiro neurônio motor / síndrome piramidal",
+      "entity_type": "motor_localization",
+      "summary_findings": [
+        "fraqueza",
+        "hiperreflexia",
+        "espasticidade",
+        "Babinski"
+      ],
+      "temporal_qualification": "o resumo distingue apresentação aguda inicial de fase tardia"
+    },
+    {
+      "id": "lower_motor_neuron_syndrome",
+      "label": "Síndrome do segundo neurônio motor / neuropatia periférica",
+      "entity_type": "motor_localization",
+      "summary_findings": [
+        "fraqueza",
+        "arreflexia",
+        "flacidez",
+        "atrofia",
+        "miofasciculações"
+      ]
+    },
+    {
+      "id": "motor_neuron_degenerative_disease",
+      "label": "Doença degenerativa do 1º e 2º neurônios motores",
+      "entity_type": "motor_neuron_disease",
+      "summary_findings": [
+        "sensibilidade preservada",
+        "Babinski",
+        "espasticidade",
+        "hiperreflexia",
+        "atrofia",
+        "miofasciculações",
+        "preservação de movimentos oculares e controle esfincteriano no resumo"
+      ],
+      "summary_treatment": "suporte + riluzol",
+      "naming_note": "O resumo não nomeia explicitamente a doença nesta seção; não converter silenciosamente para um diagnóstico nominal."
+    },
+    {
+      "id": "guillain_barre",
+      "label": "Síndrome de Guillain-Barré",
+      "entity_type": "acute_demyelinating_polyneuropathy",
+      "summary_findings": [
+        "fraqueza flácida",
+        "arreflexia",
+        "simetria",
+        "ascensão",
+        "disautonomia possível",
+        "alteração sensitiva possível"
+      ],
+      "summary_diagnosis": "dissociação proteinocitológica no líquor",
+      "summary_treatment": [
+        "plasmaférese",
+        "imunoglobulina"
+      ]
+    },
+    {
+      "id": "brown_sequard",
+      "label": "Síndrome de Brown-Séquard",
+      "entity_type": "spinal_cord_hemisection",
+      "summary_findings": [
+        "perda motora ipsilateral",
+        "perda de propriocepção/vibração/tato ipsilateral",
+        "perda de dor/temperatura contralateral"
+      ]
+    },
+    {
+      "id": "posterior_column_syndrome",
+      "label": "Síndrome cordonal posterior",
+      "entity_type": "sensory_spinal_syndrome",
+      "summary_findings": [
+        "perda de tato",
+        "perda de vibração",
+        "perda de propriocepção",
+        "marcha tabética"
+      ],
+      "summary_causes": [
+        "deficiência de vitamina B12",
+        "sífilis terciária"
+      ]
+    },
+    {
+      "id": "subacute_combined_degeneration",
+      "label": "Degeneração combinada da medula",
+      "entity_type": "spinal_cord_syndrome",
+      "summary_findings": [
+        "comprometimento cordonal posterior",
+        "comprometimento piramidal",
+        "perda de tato/vibração/propriocepção",
+        "perda motora"
+      ],
+      "summary_cause": "deficiência de vitamina B12"
+    },
+    {
+      "id": "extrapyramidal_syndrome",
+      "label": "Síndrome extrapiramidal",
+      "entity_type": "movement_syndrome",
+      "summary_patterns": [
+        "parkinsoniana: bradicinética/hipertônica",
+        "coreiforme: hipercinética/hipotônica"
+      ],
+      "summary_causes_parkinsonian": [
+        "doença de Parkinson",
+        "doença de Lewy",
+        "medicamentos",
+        "AVE",
+        "TCE"
+      ]
+    },
+    {
+      "id": "cerebellar_syndrome",
+      "label": "Síndrome cerebelar",
+      "entity_type": "cerebellar_syndrome",
+      "summary_findings": [
+        "tremor intencional",
+        "hipotonia",
+        "dismetria",
+        "disdiadococinesia",
+        "marcha atáxica",
+        "força preservada",
+        "sensibilidade preservada"
+      ]
+    },
+    {
+      "id": "neuromuscular_transmission_syndrome",
+      "label": "Síndrome de transmissão neuromuscular",
+      "entity_type": "neuromuscular_junction",
+      "summary_feature": "fraqueza que piora com o movimento / fatigabilidade",
+      "summary_entities": [
+        "miastenia",
+        "Eaton-Lambert",
+        "botulismo"
+      ]
+    },
+    {
+      "id": "intracranial_hypertension",
+      "label": "Hipertensão intracraniana",
+      "entity_type": "intracranial_pressure_syndrome",
+      "summary_findings": [
+        "cefaleia",
+        "rebaixamento de consciência",
+        "papiledema",
+        "vômitos",
+        "paresia do VI",
+        "tríade de Cushing"
+      ]
+    }
+  ],
+  "external_research_extension": {
+    "source_ids": [
+      "merck_neurologic_exam_2025",
+      "statpearls_umn_2023",
+      "statpearls_cerebellar_2024"
+    ],
+    "neurologic_exam_framework": [
+      "estado mental",
+      "pares cranianos",
+      "sistema motor",
+      "força",
+      "marcha/coordenação",
+      "sensibilidade",
+      "reflexos",
+      "sistema autonômico"
+    ],
+    "localization_principle": "A interpretação deve relacionar achados a estruturas anatômicas do sistema nervoso; exame neurológico repetido também ajuda a acompanhar evolução.",
+    "motor_localization": {
+      "upper_motor_neuron": [
+        "fraqueza",
+        "espasticidade",
+        "hiperreflexia"
+      ],
+      "lower_motor_neuron": [
+        "fraqueza",
+        "atrofia",
+        "hipotonia",
+        "hiporreflexia/arreflexia",
+        "fasciculações"
+      ]
+    },
+    "cerebellar_framework": [
+      "ataxia",
+      "dismetria",
+      "disdiadococinesia",
+      "tremor de intenção",
+      "nistagmo",
+      "hipotonia"
+    ],
+    "sensory_localization": [
+      "dor/temperatura",
+      "vibração/propriocepção",
+      "distribuição do déficit",
+      "nível sensitivo"
+    ],
+    "cranial_nerve_framework": "A avaliação dos pares cranianos ajuda a localizar lesões centrais, de tronco e periféricas; sinais centrais e periféricos devem ser distinguidos."
+  },
+  "clinical_rules": [
+    {
+      "rule_id": "MOTOR_LOCALIZATION",
+      "if": [
+        "fraqueza"
+      ],
+      "evaluate": [
+        "força",
+        "tônus",
+        "reflexos",
+        "Babinski",
+        "atrofia",
+        "fasciculações",
+        "distribuição"
+      ],
+      "source_traceability": [
+        "summary_cm31",
+        "statpearls_umn_2023"
+      ]
+    },
+    {
+      "rule_id": "SENSORY_LOCALIZATION",
+      "if": [
+        "alteração sensitiva"
+      ],
+      "evaluate": [
+        "dor/temperatura",
+        "vibração/propriocepção",
+        "nível sensitivo",
+        "lateralidade"
+      ],
+      "source_traceability": [
+        "summary_cm31",
+        "merck_neurologic_exam_2025"
+      ]
+    },
+    {
+      "rule_id": "CEREBELLAR_PATTERN",
+      "if": [
+        "ataxia"
+      ],
+      "evaluate": [
+        "dismetria",
+        "disdiadococinesia",
+        "tremor de intenção",
+        "nistagmo",
+        "marcha",
+        "propriocepção"
+      ],
+      "source_traceability": [
+        "summary_cm31",
+        "statpearls_cerebellar_2024"
+      ]
+    },
+    {
+      "rule_id": "GBS_PATTERN",
+      "if": [
+        "fraqueza ascendente simétrica + arreflexia"
+      ],
+      "consider": "síndrome de Guillain-Barré",
+      "source_traceability": [
+        "summary_cm31"
+      ]
+    },
+    {
+      "rule_id": "ICP_PATTERN",
+      "if": [
+        "cefaleia + papiledema/rebaixamento/vômitos"
+      ],
+      "consider": "hipertensão intracraniana",
+      "source_traceability": [
+        "summary_cm31"
+      ]
+    }
+  ],
+  "diagnostic_network": {
+    "entry_problems": [
+      "fraqueza",
+      "alteração de sensibilidade",
+      "ataxia",
+      "movimentos anormais",
+      "paresia de nervos cranianos",
+      "rebaixamento de consciência",
+      "cefaleia com sinais de alarme"
+    ],
+    "localization_axes": [
+      "cérebro",
+      "tronco encefálico",
+      "cerebelo",
+      "medula",
+      "raiz",
+      "plexo",
+      "nervo periférico",
+      "junção neuromuscular",
+      "músculo"
+    ],
+    "high_value_observations": [
+      "força",
+      "tônus",
+      "reflexos",
+      "sensibilidade",
+      "coordenação",
+      "marcha",
+      "pares cranianos",
+      "padrão temporal"
+    ]
+  },
+  "patient_generation": {
+    "variables": {
+      "age": "continuous",
+      "onset": [
+        "hiperagudo",
+        "agudo",
+        "subagudo",
+        "crônico"
+      ],
+      "motor_pattern": [
+        "piramidal",
+        "periférico",
+        "neuromuscular",
+        "miopático",
+        "cerebelar",
+        "misto"
+      ],
+      "sensory_pattern": "variable",
+      "cranial_nerve_involvement": "variable",
+      "laterality": [
+        "unilateral",
+        "bilateral",
+        "alternante",
+        "multifocal"
+      ],
+      "autonomic_features": "variable",
+      "consciousness": "variable",
+      "intracranial_pressure_features": "variable"
+    },
+    "constraints": [
+      "coerência anatômica entre sinais e localização",
+      "não transformar um padrão de exame em diagnóstico único sem contexto",
+      "permitir evolução temporal diferente para a mesma entidade"
+    ]
+  },
+  "differential_network": [
+    {
+      "presentation": "fraqueza + hiperreflexia/espasticidade",
+      "nodes": [
+        "lesão de neurônio motor superior",
+        "lesão medular",
+        "lesão cerebral",
+        "doença neurodegenerativa"
+      ]
+    },
+    {
+      "presentation": "fraqueza + arreflexia + atrofia/fasciculações",
+      "nodes": [
+        "neurônio motor inferior",
+        "neuropatia periférica",
+        "radiculopatia",
+        "doença de junção neuromuscular"
+      ]
+    },
+    {
+      "presentation": "ataxia",
+      "nodes": [
+        "síndrome cerebelar",
+        "ataxia sensitiva",
+        "distúrbio vestibular",
+        "causas metabólicas/tóxicas/genéticas"
+      ]
+    },
+    {
+      "presentation": "perda sensitiva dissociada por lateralidade",
+      "nodes": [
+        "síndrome medular",
+        "lesão de vias ascendentes"
+      ]
+    }
+  ],
+  "conflicts_and_boundaries": [
+    {
+      "issue": "O resumo usa nomenclatura didática e contém possíveis simplificações anatômicas.",
+      "handling": "Preservar a formulação original na camada de extração; usar a referência complementar para estruturar a camada anatômica sem reescrever o resumo."
+    },
+    {
+      "issue": "A seção da doença degenerativa do 1º/2º neurônios não nomeia explicitamente a doença.",
+      "handling": "Manter o rótulo descritivo do resumo; não inferir nominalmente uma doença na camada de extração."
+    },
+    {
+      "issue": "O resumo é datado de 03/01/2022.",
+      "handling": "Protocolos diagnósticos/terapêuticos atuais devem ser validados antes de se tornarem regras operacionais."
+    }
+  ],
+  "validation_targets_for_phase_1": [
+    "comparar com neurologia.json existente",
+    "detectar duplicidades de síndromes",
+    "separar localização anatômica de diagnóstico etiológico",
+    "preservar nomenclatura original",
+    "validar tratamento de GBS e doenças motoras em fontes atuais"
+  ]
+}
