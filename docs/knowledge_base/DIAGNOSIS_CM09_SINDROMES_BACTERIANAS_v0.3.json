@@ -1,0 +1,370 @@
+{
+  "model_metadata": {
+    "name": "DIAGNOSIS — Modelo de Conhecimento Clínico — CM 9 Síndromes Bacterianas",
+    "version": "0.3",
+    "status": "phase_1_semantic_mapping_provisional",
+    "clinical_domain": "infectious diseases / bacterial syndromes",
+    "architecture_principle": "KNOWLEDGE → POSSIBILITIES → PATIENT → CASE → SIMULATION → EVALUATION",
+    "core_principle": "O caso não é o conhecimento; o caso é uma amostra do espaço clínico produzido pelo conhecimento.",
+    "phase": "Fase 1 — mapeamento semântico dos resumos",
+    "canonical_schema": false,
+    "case_generation": "deferred",
+    "source_policy": {
+      "summary_is_fragment": true,
+      "external_references_are_complementary": true,
+      "preserve_source_content": true,
+      "do_not_silently_correct_source": true,
+      "separate_source_from_external_research": true
+    }
+  },
+  "source_registry": [
+    {
+      "id": "src_summary",
+      "type": "uploaded_summary",
+      "title": "CM 9 - Síndromes Bacterianas.docx",
+      "role": "primary_fragment"
+    },
+    {
+      "id": "ext_esc_ie_2023",
+      "type": "external_research",
+      "title": "2023 ESC Guidelines for the management of endocarditis",
+      "publisher": "European Society of Cardiology",
+      "url": "https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/endocarditis/",
+      "role": "current endocarditis verification"
+    },
+    {
+      "id": "ext_brazil_hiv_not_used",
+      "type": "external_research",
+      "title": "Reference registry placeholder",
+      "publisher": "—",
+      "url": "",
+      "role": "not used; no silent expansion"
+    }
+  ],
+  "summary_extraction": {
+    "scope": [
+      "osteomielite",
+      "febre de origem obscura/indeterminada",
+      "abscesso hepático piogênico",
+      "infecção do trato urinário",
+      "erisipela/celulite",
+      "endocardite"
+    ],
+    "osteomyelitis": {
+      "classification": {
+        "hematogenous": "20%, principalmente criança, aguda/subaguda, crianças: metáfise de ossos longos",
+        "contiguous_secondary": "80%, principalmente adulto, crônica, lesão penetrante no pé com Pseudomonas"
+      },
+      "agent": "Staphylococcus aureus; falcêmico: Salmonella no resumo",
+      "diagnosis": [
+        "RX simples pouco sensível inicialmente",
+        "RNM mais acurada",
+        "cintilografia se prótese",
+        "PCR/VHS acompanham doença",
+        "não indicar RNM em prótese metálica no resumo por risco de deslocamento — nota a verificar"
+      ],
+      "treatment": [
+        "oxacilina ou cefazolina ou vancomicina",
+        "Salmonella/falciforme: ceftriaxona",
+        "4–6 semanas; vertebral 6–8 semanas"
+      ]
+    },
+    "fever_unknown_origin": {
+      "source_definition": ">38.3°C em 2 ocasiões, ≥3 semanas, sem imunocomprometimento e diagnóstico incerto após investigação mínima de 1 semana",
+      "causes": [
+        "neoplasias",
+        "infecções: TB extrapulmonar/abscessos",
+        "doenças inflamatórias não infecciosas"
+      ],
+      "source_examples": [
+        "idosos → arterite temporal",
+        "medicamentos → febre fênitoína"
+      ]
+    },
+    "pyogenic_liver_abscess": {
+      "causes": [
+        "colangite",
+        "colecistite",
+        "embolia séptica"
+      ],
+      "agents": [
+        "E. coli",
+        "Klebsiella pneumoniae",
+        "via hematogênica: S. aureus"
+      ],
+      "clinical": [
+        "febre",
+        "dor em hipocôndrio direito",
+        "icterícia",
+        "leucocitose/anemia/VHS/transaminases/FA aumentadas"
+      ],
+      "diagnosis": "clínica + imagem (RNM no resumo)",
+      "treatment": [
+        "drenagem",
+        "beta-lactâmico com inibidor de beta-lactamase ou cefalosporina 3ª geração + metronidazol"
+      ]
+    },
+    "uti": {
+      "asymptomatic_bacteriuria": {
+        "thresholds": [
+          "≥10^5 UFC/mL ou ≥10^2 UFC/mL em cateterizado"
+        ],
+        "treat_when": [
+          "gestantes",
+          "procedimento urológico invasivo"
+        ]
+      },
+      "cystitis": {
+        "features": [
+          "disúria",
+          "polaciúria",
+          "urgência",
+          "noctúria",
+          "sem febre"
+        ],
+        "diagnosis": [
+          "EAS: piúria, esterase leucocitária, nitrito",
+          "urocultura nem sempre necessária"
+        ],
+        "source_treatment": [
+          "fosfomicina 3g dose única",
+          "quinolona 3 dias",
+          "cistite recorrente/homem 7 dias"
+        ]
+      },
+      "pyelonephritis": {
+        "features": [
+          "febre",
+          "dor no flanco",
+          "calafrios",
+          "sinal de Giordano",
+          "sintomas de cistite"
+        ],
+        "agent": "E. coli",
+        "diagnosis": [
+          "EAS/piória",
+          "urocultura"
+        ],
+        "imaging_source": "TC com contraste se dúvida, falha terapêutica, abscesso ou obstrução",
+        "source_treatment": [
+          "não complicada: cipro/levofloxacino/ceftriaxona",
+          "complicada: piperacilina-tazobactam/cefepime/imipenem",
+          "média 14 dias no resumo"
+        ]
+      }
+    },
+    "cellulitis_erysipelas": {
+      "erysipelas": [
+        "superficial",
+        "bem delimitada",
+        "vermelhidão",
+        "dor intensa",
+        "S. pyogenes",
+        "penicilina 10–14d"
+      ],
+      "cellulitis": [
+        "subcutânea",
+        "bordas imprecisas",
+        "S. aureus/S. pyogenes",
+        "cefalosporina 1ª geração ou oxacilina",
+        "10–14d"
+      ],
+      "source_note": "na dúvida, tratar como celulite; erisipela associada a deficiência de drenagem linfática"
+    },
+    "endocarditis": {
+      "heuristic": "sopro + febre",
+      "pathogenesis_chain": [
+        "lesão do endocárdio",
+        "ativação da coagulação",
+        "trombo",
+        "endocardite trombótica não bacteriana",
+        "bacteremia",
+        "endocardite bacteriana",
+        "disseminação sistêmica"
+      ],
+      "agents": {
+        "native_subacute": [
+          "Streptococcus viridans",
+          "Enterococcus faecalis",
+          "Streptococcus gallolyticus → fazer colonoscopia no resumo"
+        ],
+        "native_acute": [
+          "Staphylococcus aureus",
+          "usuário de drogas EV: tricúspide, sem sopro → MRSA no resumo"
+        ],
+        "prosthetic": [
+          "<2 meses: coag negative staph e S. aureus; >1 ano: como nativa; 2 meses–1 ano: mistura dos anteriores"
+        ]
+      },
+      "clinical": [
+        "febre",
+        "sopro/regurgitação",
+        "manifestações periféricas: petéquias, hemorragias subungueais, manchas de Janeway; imunológicas: GNDA, FR+, nódulos de Osler, manchas de Roth"
+      ],
+      "duke_source": {
+        "major": [
+          "hemocultura típica em 2 amostras ou sorologia Coxiella",
+          "ecocardiograma com vegetação/abscesso/deiscência de prótese",
+          "nova regurgitação valvar"
+        ],
+        "minor": [
+          "febre ≥38",
+          "predisposição/droga EV",
+          "fenômenos vasculares",
+          "fenômenos imunológicos",
+          "evidência microbiológica que não preenche maior"
+        ]
+      },
+      "treatment_source": {
+        "duration": "4–6 semanas",
+        "native": "oxacilina + penicilina + gentamicina no esquema didático; quadro também menciona cobertura para S. aureus/S. viridans/Enterococcus",
+        "IV_drug_user": "vancomicina + gentamicina",
+        "prosthetic_early": "vancomicina + gentamicina + rifampicina VO no resumo"
+      },
+      "prophylaxis_source": {
+        "when": "gengiva/dentes/perfuração de mucosa oral/respiratória",
+        "who": "prótese valvar, endocardite prévia, cardiopatia cianótica não reparada, correção incompleta",
+        "drug": "amoxicilina 2g VO 1h antes"
+      }
+    }
+  },
+  "knowledge_entities": [
+    {
+      "id": "osteomyelitis",
+      "type": "syndrome",
+      "name": "Osteomielite",
+      "reusable": true
+    },
+    {
+      "id": "fuo",
+      "type": "syndrome",
+      "name": "Febre de origem obscura/indeterminada",
+      "reusable": true
+    },
+    {
+      "id": "liver_abscess",
+      "type": "infection",
+      "name": "Abscesso hepático piogênico",
+      "reusable": true
+    },
+    {
+      "id": "uti",
+      "type": "syndrome",
+      "name": "Infecção do trato urinário",
+      "reusable": true
+    },
+    {
+      "id": "cellulitis",
+      "type": "infection",
+      "name": "Erisipela/celulite",
+      "reusable": true
+    },
+    {
+      "id": "endocarditis",
+      "type": "infection",
+      "name": "Endocardite infecciosa",
+      "reusable": true
+    }
+  ],
+  "clinical_rules": [
+    {
+      "id": "endocarditis_duke",
+      "rule": "O resumo apresenta Duke University: 2 maiores ou 1 maior+3 menores ou 5 menores.",
+      "source": "summary"
+    },
+    {
+      "id": "asymptomatic_bacteriuria",
+      "rule": "O resumo define bacteriúria assintomática e restringe tratamento a gestantes e procedimento urológico invasivo.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": {},
+  "patient_generation": {
+    "axes": [
+      "síndrome bacteriana",
+      "porta de entrada",
+      "agudo/subagudo/crônico",
+      "hematogênico vs contíguo",
+      "comorbidades",
+      "prótese/dispositivo",
+      "agente provável",
+      "localização",
+      "complicações",
+      "resposta ao tratamento"
+    ],
+    "constraints": [
+      "não converter as tabelas em casos fixos",
+      "permitir sobreposição de síndromes e trajetórias",
+      "manter endocardite, ITU, osteomielite etc. como entidades relacionadas mas distintas"
+    ]
+  },
+  "differential_network": {
+    "osteomyelitis": [
+      "leucemia aguda na criança com febre+dor óssea",
+      "infecção contígua",
+      "prótese/infeção associada"
+    ],
+    "fuo": [
+      "neoplasia",
+      "infecção",
+      "inflamatória não infecciosa",
+      "fármaco"
+    ],
+    "liver_abscess": [
+      "colangite",
+      "colecistite",
+      "embolia séptica"
+    ],
+    "uti": [
+      "cistite",
+      "pielonefrite",
+      "bacteriúria assintomática"
+    ],
+    "cellulitis": [
+      "erisipela",
+      "celulite"
+    ],
+    "endocarditis": [
+      "endocardite trombótica não bacteriana",
+      "bacteremia sem endocardite"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    {
+      "topic": "osteomyelitis_imaging",
+      "issue": "O resumo afirma que RNM não deve ser indicada em prótese metálica por risco de deslocamento; isso é uma afirmação histórica que precisa de verificação técnica atual antes de virar regra do motor.",
+      "status": "verify_current"
+    },
+    {
+      "topic": "endocarditis_treatment",
+      "issue": "O resumo traz combinações antibióticas didáticas que não devem ser tratadas como protocolo universal atual.",
+      "status": "versioned_source_only"
+    },
+    {
+      "topic": "endocarditis_prophylaxis",
+      "issue": "A profilaxia e os grupos de alto risco devem ser verificados na diretriz ESC 2023/atualizações antes de codificação.",
+      "status": "external_update"
+    },
+    {
+      "topic": "uti_antibiotics",
+      "issue": "Os esquemas do resumo são datados e não devem ser aplicados sem contexto de resistência/local/protocolo vigente.",
+      "status": "versioned_source_only"
+    }
+  ],
+  "external_research_extension": {
+    "current_notes": [
+      "A ESC publicou em 2023 diretriz atual de endocardite, com algoritmo diagnóstico e atualizações em profilaxia, equipes de endocardite e manejo de complicações."
+    ],
+    "sources": [
+      "ext_esc_ie_2023"
+    ]
+  },
+  "validation_targets_for_phase_1": [
+    "gerar osteomielite hematogênica infantil e contígua adulta",
+    "gerar febre prolongada com diferentes classes etiológicas",
+    "gerar abscesso hepático por diferentes vias",
+    "gerar bacteriúria assintomática vs cistite vs pielonefrite",
+    "gerar erisipela vs celulite",
+    "gerar endocardite nativa/protética com diferentes agentes e manifestações"
+  ]
+}

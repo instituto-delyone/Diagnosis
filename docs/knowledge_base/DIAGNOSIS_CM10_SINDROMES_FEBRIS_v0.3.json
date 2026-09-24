@@ -1,0 +1,262 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM10",
+  "title": "Síndromes Febris",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "CM 10 - Síndromes Febris.docx.pdf"
+      ],
+      "date": "18/06/2021",
+      "role": "fragmento/contexto original; não representa sozinho todo o conhecimento clínico"
+    },
+    "external_sources": {
+      "sources": [
+        {
+          "title": "Ministério da Saúde — Dengue: diagnóstico e manejo clínico, 6ª ed., 2024",
+          "url": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/d/dengue/publicacoes/dengue-diagnostico-e-manejo-clinico-adulto-e-crianca",
+          "role": "atualização brasileira para dengue"
+        },
+        {
+          "title": "WHO — Dengue and severe dengue",
+          "url": "https://www.who.int/news-room/questions-and-answers/item/dengue-and-severe-dengue",
+          "role": "referência internacional atual"
+        }
+      ]
+    }
+  },
+  "summary_extraction": {
+    "scope": [
+      "síndromes febris infecciosas",
+      "arboviroses",
+      "doenças transmitidas por vetores/animais"
+    ],
+    "entities_explicitly_present": [
+      "malária",
+      "calazar (leishmaniose visceral)",
+      "leptospirose",
+      "hantavirose",
+      "febre maculosa",
+      "doença de Lyme",
+      "febre amarela",
+      "dengue"
+    ],
+    "source_organization": "O resumo organiza as entidades por agente, vetor/reservatório, incubação, quadro clínico, diagnóstico e conduta; dengue possui estratificação A/B/C/D.",
+    "important_source_fragments": [
+      "P. falciparum é descrito como mais grave, com maior parasitemia e acometimento de hemácias jovens.",
+      "Calazar: Leishmania chagasi; vetor Lutzomyia longipalpis; reservatório cão; febre, hepatoesplenomegalia e pancitopenia; hipergamaglobulinemia policlonal.",
+      "Leptospirose: Leptospira interrogans; contato com urina de roedores; forma anictérica e forma íctero-hemorrágica/doença de Weil.",
+      "Hantavirose: contato/inalação de material contaminado por roedores; forma cardiopulmonar grave no Brasil.",
+      "Febre maculosa: Rickettsia, carrapatos; febre, cefaleia, exantema e possível disfunção renal/choque.",
+      "Doença de Lyme: Borrelia; carrapatos Ixodes; eritema migratório e possíveis manifestações neurológicas/articulares.",
+      "Febre amarela: ciclos silvestre e urbano descritos no resumo; formas autolimitada e grave.",
+      "Dengue: classificação em dengue, dengue com sinais de alarme e dengue grave; sinais de alarme relacionados a extravasamento plasmático, plaquetopenia e disfunção orgânica."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "malaria",
+      "features": [
+        "Plasmodium",
+        "P. vivax",
+        "P. falciparum",
+        "P. malariae",
+        "Anopheles",
+        "febre",
+        "hemólise/anemia",
+        "fase hepática e eritrocitária"
+      ]
+    },
+    {
+      "id": "visceral_leishmaniasis",
+      "features": [
+        "Leishmania chagasi",
+        "Lutzomyia longipalpis",
+        "cão",
+        "macrófagos",
+        "hepatoesplenomegalia",
+        "pancitopenia",
+        "hipergamaglobulinemia"
+      ]
+    },
+    {
+      "id": "leptospirosis",
+      "features": [
+        "Leptospira interrogans",
+        "roedores",
+        "urina",
+        "sufusão conjuntival",
+        "mialgia em panturrilhas",
+        "doença de Weil",
+        "vasculite infecciosa"
+      ]
+    },
+    {
+      "id": "hantavirus",
+      "features": [
+        "roedores",
+        "síndrome cardiopulmonar",
+        "choque",
+        "insuficiência respiratória",
+        "tratamento de suporte"
+      ]
+    },
+    {
+      "id": "rocky_mountain_spotted_fever_like",
+      "features": [
+        "Rickettsia",
+        "carrapatos",
+        "febre",
+        "exantema",
+        "choque",
+        "disfunção renal"
+      ]
+    },
+    {
+      "id": "lyme_disease",
+      "features": [
+        "Borrelia",
+        "Ixodes",
+        "eritema migratório",
+        "neurocardite",
+        "artrite"
+      ]
+    },
+    {
+      "id": "yellow_fever",
+      "features": [
+        "Flavivirus",
+        "Haemagogus",
+        "Aedes aegypti",
+        "ciclo silvestre/urbano",
+        "icterícia",
+        "hemorragia",
+        "oligúria",
+        "disfunção hepatorrenal"
+      ]
+    },
+    {
+      "id": "dengue",
+      "features": [
+        "Flavivirus",
+        "Aedes aegypti",
+        "febre",
+        "dor retro-orbital",
+        "mialgia",
+        "artralgia",
+        "exantema",
+        "plaquetopenia",
+        "extravasamento plasmático",
+        "choque",
+        "disfunção orgânica"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "Em dengue, a melhora da febre por volta do 3º–4º dia não exclui piora clínica; o resumo associa esse período à fase de maior risco de sinais de alarme.",
+      "source": "summary"
+    },
+    {
+      "rule": "Sinais de alarme do resumo incluem aumento do hematócrito, lipotímia/hipotensão postural, ascite/derrame, dor abdominal, vômitos persistentes, hepatomegalia >2 cm, letargia e sangramento de mucosas.",
+      "source": "summary"
+    },
+    {
+      "rule": "Dengue grave no resumo é organizado em choque, disfunção orgânica grave e sangramento grave.",
+      "source": "summary"
+    },
+    {
+      "rule": "Leptospirose grave é associada no resumo à forma íctero-hemorrágica/doença de Weil.",
+      "source": "summary"
+    },
+    {
+      "rule": "Malária deve permitir diferenciação entre espécies, gravidade e necessidade de investigação específica.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "febre + mialgia + sufusão conjuntival",
+      "possibilities": [
+        "leptospirose"
+      ]
+    },
+    {
+      "axis": "febre + exantema + carrapato",
+      "possibilities": [
+        "febre maculosa",
+        "doença de Lyme"
+      ]
+    },
+    {
+      "axis": "febre + hepatoesplenomegalia + pancitopenia",
+      "possibilities": [
+        "leishmaniose visceral"
+      ]
+    },
+    {
+      "axis": "febre + anemia hemolítica/parasitismo eritrocitário",
+      "possibilities": [
+        "malária"
+      ]
+    },
+    {
+      "axis": "febre + icterícia + hemorragia/oligúria",
+      "possibilities": [
+        "febre amarela grave",
+        "leptospirose íctero-hemorrágica"
+      ]
+    },
+    {
+      "axis": "febre + dor retro-orbital + plaquetopenia/exantema",
+      "possibilities": [
+        "dengue"
+      ]
+    },
+    {
+      "axis": "febre + choque + insuficiência respiratória após exposição a roedores",
+      "possibilities": [
+        "hantavirose"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "agente",
+      "vetor/reservatório",
+      "exposição",
+      "incubação",
+      "síndrome febril",
+      "gravidade",
+      "fase temporal",
+      "alterações hematológicas",
+      "disfunção orgânica"
+    ],
+    "allowed_variability": [
+      "idade",
+      "comorbidades",
+      "dias de doença",
+      "intensidade febril",
+      "presença/ausência de sinais de alarme",
+      "contexto epidemiológico",
+      "apresentação incompleta ou sobreposta"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "O resumo é datado de 2021 e contém condutas/doses históricas; estas não devem ser promovidas automaticamente a regras vigentes.",
+    "A classificação A/B/C/D do resumo deve permanecer como representação da fonte; a camada atual brasileira deve ser versionada separadamente.",
+    "A afirmação do resumo sobre quinto sorotipo de dengue deve permanecer como conteúdo histórico da fonte, não como regra clínica operacional.",
+    "Tratamentos de malária, leishmaniose, leptospirose e riquetsioses precisam de validação por protocolo vigente antes de uso operacional."
+  ],
+  "validation_targets": [
+    "Preservar a distinção entre conteúdo do resumo e conteúdo externo.",
+    "Não transformar uma apresentação específica em caso canônico.",
+    "Permitir múltiplas apresentações clínicas a partir do mesmo espaço de conhecimento.",
+    "Manter rastreabilidade de regras, incertezas e informações históricas."
+  ],
+  "generated_at": "2026-09-23"
+}

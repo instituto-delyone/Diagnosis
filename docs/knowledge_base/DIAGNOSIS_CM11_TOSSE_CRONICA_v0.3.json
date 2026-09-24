@@ -1,0 +1,223 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM11",
+  "title": "Tosse Crônica",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "CM 11 - Tosse Crônica.docx.pdf"
+      ],
+      "date": "21/06/2021",
+      "role": "fragmento/contexto original; não representa sozinho todo o conhecimento clínico"
+    },
+    "external_sources": {
+      "sources": [
+        {
+          "title": "Chronic Cough in Adults: Make the Diagnosis and Make a Difference",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6966942/",
+          "role": "complementação da abordagem de tosse crônica"
+        },
+        {
+          "title": "CHEST — Chronic Cough Due to Gastroesophageal Reflux in Adults",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6026249/",
+          "role": "causas e abordagem de tosse relacionada a refluxo"
+        }
+      ]
+    }
+  },
+  "summary_extraction": {
+    "scope": [
+      "tosse aguda/subaguda/crônica",
+      "tuberculose pulmonar",
+      "tuberculose extrapulmonar",
+      "micose pulmonar",
+      "coqueluche",
+      "tuberculose pleural"
+    ],
+    "source_organization": "O resumo começa pela classificação temporal da tosse e depois percorre etiologias infecciosas, com grande ênfase em tuberculose.",
+    "important_source_fragments": [
+      "Classificação temporal apresentada: aguda (<3 semanas), subaguda (3–8 semanas) e crônica (>8 semanas).",
+      "O resumo destaca que tosse crônica pode ter causas medicamentosas, especialmente IECA, e causas pulmonares.",
+      "Tuberculose pulmonar: sintomas, transmissão, formas primária/pós-primária e complicações são organizados no resumo.",
+      "O resumo afirma que é possível diagnóstico de tuberculose pela clínica e imagens compatíveis, mas recomenda pesquisa de BAAR sempre que possível.",
+      "O resumo apresenta escore de tuberculose e a anotação 'a partir de 30 pontos já pode começar o tto'.",
+      "Micose pulmonar: paracoccidioidomicose, histoplasmose e manifestações pulmonares.",
+      "Coqueluche: fases catarral, paroxística e convalescente; acesso de tosse e guincho inspiratório.",
+      "Tuberculose meníngea: diagnóstico, tratamento, esquema e efeitos adversos aparecem em tabela.",
+      "Tuberculose pleural: líquido exsudativo, ADA, cultura e biópsia pleural aparecem no resumo."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "chronic_cough",
+      "features": [
+        ">8 semanas",
+        "causas pulmonares",
+        "medicamentos",
+        "investigação estruturada"
+      ]
+    },
+    {
+      "id": "pulmonary_tuberculosis",
+      "features": [
+        "Mycobacterium tuberculosis",
+        "tosse",
+        "BAAR",
+        "imagem",
+        "transmissão aérea",
+        "formas primária/pós-primária"
+      ]
+    },
+    {
+      "id": "tuberculous_meningitis",
+      "features": [
+        "tuberculose",
+        "meningite",
+        "diagnóstico",
+        "tratamento prolongado",
+        "corticosteroide"
+      ]
+    },
+    {
+      "id": "tuberculous_pleuritis",
+      "features": [
+        "derrame pleural",
+        "exsudato",
+        "ADA",
+        "cultura",
+        "biópsia pleural"
+      ]
+    },
+    {
+      "id": "paracoccidioidomycosis",
+      "features": [
+        "micose pulmonar",
+        "exposição ambiental",
+        "forma crônica adulta"
+      ]
+    },
+    {
+      "id": "histoplasmosis",
+      "features": [
+        "Histoplasma",
+        "exposição ambiental",
+        "cavitações/lesões pulmonares",
+        "formas aguda/crônica"
+      ]
+    },
+    {
+      "id": "pertussis",
+      "features": [
+        "Bordetella pertussis",
+        "fase catarral",
+        "fase paroxística",
+        "guincho inspiratório",
+        "convalescença"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "Tosse crônica deve ser tratada como síndrome com múltiplas etiologias possíveis, não como diagnóstico único.",
+      "source": "summary+external"
+    },
+    {
+      "rule": "No resumo, tuberculose pode ser considerada por clínica/imagem, mas BAAR deve ser pesquisado quando possível.",
+      "source": "summary"
+    },
+    {
+      "rule": "A anotação de '30 pontos' pertence ao escore apresentado na fonte e deve ser preservada como regra histórica/contextual, não universalizada sem identificar o escore e sua versão.",
+      "source": "summary"
+    },
+    {
+      "rule": "Em pacientes com suspeita de doença infecciosa pulmonar, a avaliação deve considerar risco de transmissão e necessidade de investigação microbiológica.",
+      "source": "summary+external"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "tosse crônica + tabagismo/medicação",
+      "possibilities": [
+        "DPOC",
+        "neoplasia",
+        "tosse por IECA"
+      ]
+    },
+    {
+      "axis": "tosse crônica + sintomas nasais/asma/refluxo",
+      "possibilities": [
+        "síndrome de vias aéreas superiores",
+        "asma",
+        "DRGE"
+      ]
+    },
+    {
+      "axis": "tosse + febre/perda ponderal/sudorese noturna",
+      "possibilities": [
+        "tuberculose",
+        "micose",
+        "neoplasia"
+      ]
+    },
+    {
+      "axis": "tosse + cavitação/exposição ambiental",
+      "possibilities": [
+        "tuberculose",
+        "paracoccidioidomicose",
+        "histoplasmose"
+      ]
+    },
+    {
+      "axis": "acessos paroxísticos + guincho",
+      "possibilities": [
+        "coqueluche"
+      ]
+    },
+    {
+      "axis": "derrame pleural exsudativo + ADA elevado",
+      "possibilities": [
+        "tuberculose pleural"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "tempo",
+      "exposição",
+      "tabagismo",
+      "medicações",
+      "sintomas associados",
+      "imagem",
+      "microbiologia",
+      "imunidade",
+      "forma anatômica",
+      "gravidade"
+    ],
+    "allowed_variability": [
+      "tosse seca/produtiva",
+      "hemoptise",
+      "febre",
+      "perda ponderal",
+      "sudorese noturna",
+      "achados radiológicos variáveis",
+      "coinfecção"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "O resumo não fornece uma diretriz completa para todas as causas de tosse crônica; não devem ser inventadas doses ou esquemas ausentes.",
+    "O escore de tuberculose precisa ser identificado/versionado antes de virar regra computacional.",
+    "As tabelas terapêuticas do resumo devem ser tratadas como fonte histórica até confronto com PCDT/TB vigente.",
+    "A abordagem contemporânea reconhece causas comuns como síndrome de vias aéreas superiores, asma e refluxo; isso é camada externa, não conteúdo atribuído ao resumo."
+  ],
+  "validation_targets": [
+    "Preservar a distinção entre conteúdo do resumo e conteúdo externo.",
+    "Não transformar uma apresentação específica em caso canônico.",
+    "Permitir múltiplas apresentações clínicas a partir do mesmo espaço de conhecimento.",
+    "Manter rastreabilidade de regras, incertezas e informações históricas."
+  ],
+  "generated_at": "2026-09-23"
+}
