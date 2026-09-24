@@ -1,0 +1,24 @@
+{
+  "module": "CM01",
+  "syndrome": "Síndrome Ictérica",
+  "role": "exame_fisico",
+  "source_policy": {
+    "primary_knowledge_source": "DIAGNOSIS_CM01_SINDROME_ICTERICA_v0.3.json",
+    "semiology_source_target": "Porto & Porto — Semiologia Médica",
+    "source_target_status": "Porto deve ser consultado e mapeado nesta camada antes de ampliar o conteúdo.",
+    "do_not_invent": true
+  },
+  "items": [
+    "estado corporal e estado nutricional",
+    "estigmas de hepatopatia crônica",
+    "linfonodomegalias",
+    "turgência jugular/congestão",
+    "hepatomegalia e esplenomegalia",
+    "ascite",
+    "dor à palpação em hipocôndrio direito",
+    "vesícula palpável / sinal de Courvoisier"
+  ],
+  "current_patient_fields": {
+    "ictericia_escleral": true
+  }
+}
