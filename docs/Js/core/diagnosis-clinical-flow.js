@@ -318,7 +318,9 @@
 
       const wasStabilization = treatmentText(input);
       const response = await oldProcessAction.call(this, input);
-      await this.researchTreatment(input);
+
+      // Pesquisa científica/Gemini é um recurso explícito, não uma etapa
+      // automática de cada conduta. O médico pode solicitá-la pela Base Científica.
 
       if (this.context?.caseEnded) return;
 
