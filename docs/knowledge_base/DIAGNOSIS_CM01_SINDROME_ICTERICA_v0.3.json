@@ -1,0 +1,717 @@
+{
+  "model_metadata": {
+    "name": "DIAGNOSIS — Modelo de Conhecimento Clínico — CM 1 Síndrome Ictérica",
+    "version": "0.3",
+    "status": "phase_1_semantic_mapping_provisional",
+    "canonical": false,
+    "module": "CM 1",
+    "clinical_domain": "hepatobiliary / hematologic / bilirubin metabolism",
+    "architecture_principle": "KNOWLEDGE → POSSIBILITIES → PATIENT → CASE → SIMULATION → EVALUATION",
+    "core_principle": "O caso não é o conhecimento; o caso é uma amostra do espaço clínico produzido pelo conhecimento.",
+    "purpose": "Transformar o resumo-fonte em uma representação reutilizável do espaço clínico da síndrome ictérica, sem transformar o resumo em banco de casos.",
+    "source_policy": {
+      "summary_is_fragment": true,
+      "external_references_are_complementary": true,
+      "case_generation_is_deferred": true,
+      "preserve_source_terminology": true,
+      "do_not_silently_correct_source": true,
+      "distinguish_source_from_external_research": true
+    }
+  },
+  "source_registry": [
+    {
+      "id": "src_summary_cm01",
+      "type": "uploaded_summary",
+      "title": "Síndrome ictérica",
+      "file": "Síndrome ictérica.pdf",
+      "date_in_source": "26/01/2021 18:19",
+      "role": "primary_fragment",
+      "locator": "uploaded PDF, page 1",
+      "file_evidence": "The first compact block runs through the Gilbert/Crigler-Najjar, complications, hepatitis, cholecystitis/choledocholithiasis, gallbladder cancer, perinatal HBV and primary biliary cholangitis notes."
+    },
+    {
+      "id": "src_embedded_hyperbilirubinemia",
+      "type": "embedded_external_reference",
+      "title": "Hyperbilirubinemia",
+      "publisher": "StatPearls / NCBI Bookshelf",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK544252/",
+      "role": "embedded_reference_in_uploaded_summary",
+      "matched_by": "title, wording and section structure in the uploaded document",
+      "web_verification": {
+        "last_update": "2023-08-08",
+        "verified_against_current_page": true
+      }
+    },
+    {
+      "id": "src_pcdt_hepatite_b",
+      "type": "external_research",
+      "title": "PCDT de Hepatite B e Coinfecções",
+      "publisher": "Ministério da Saúde / SUS",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hepatite-b-e-coinfeccoes/view",
+      "role": "current Brazilian guideline context for hepatitis B"
+    },
+    {
+      "id": "src_pcdt_hepatite_c",
+      "type": "external_research",
+      "title": "PCDT de Hepatite C e Coinfecções",
+      "publisher": "Ministério da Saúde / SUS",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hepatite-c-coinfeccoes/view",
+      "role": "current Brazilian guideline context for hepatitis C"
+    },
+    {
+      "id": "src_pcdt_hepatite_autoimune",
+      "type": "external_research",
+      "title": "PCDT de Hepatite Autoimune",
+      "publisher": "Ministério da Saúde / SUS",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hepatite-autoimune/view",
+      "role": "current Brazilian guideline context for autoimmune hepatitis"
+    },
+    {
+      "id": "src_pcdt_index",
+      "type": "external_research",
+      "title": "Protocolos Clínicos e Diretrizes Terapêuticas — PCDT",
+      "publisher": "Ministério da Saúde",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/pcdt",
+      "role": "reference index for current SUS protocols"
+    }
+  ],
+  "summary_extraction": {
+    "explicit_compact_content": {
+      "hereditary_bilirubin_disorders": [
+        "Gilbert syndrome — source mnemonic: 'a do bem'",
+        "Crigler-Najjar syndrome — source mnemonic: 'a do mal'"
+      ],
+      "complications_or_patterns": [
+        "Colestase (A)",
+        "Fulminante (B)",
+        "Recorrente",
+        "Crônica (B/C)",
+        "Autoimune (B/C)"
+      ],
+      "hepatitis_notes": [
+        "The summary attributes periportal necrosis to an immune mechanism and notes portal-entry distribution of inflammatory cells.",
+        "Bridge necrosis is described as following the sinusoidal pathway.",
+        "The summary states that treatment after discovery of hepatitis C is used to avoid chronicity.",
+        "The summary includes corticosteroid use in severe hepatitis with Maddrey > 32 and a 28-day duration."
+      ],
+      "hepatitis_b_chronic_treatment_criteria_as_written": [
+        "HBeAg-positive and ALT >2x ULN",
+        "HBeAg-positive and age >30 years",
+        "HBeAg-negative, >2000 copies and TGP >2x ULN"
+      ],
+      "biliary_disease": [
+        "Cholecystitis + choledocholithiasis: papillotomy by ERCP and cholecystectomy; source states both may be performed in the same surgical period.",
+        "Tokyo classification is described as a severity classification related to conduct.",
+        "Gallbladder cancer: source identifies ultrasound as the best diagnostic exam and Salmonella typhi infection as a risk factor."
+      ],
+      "perinatal_hepatitis_b": [
+        "Maternal high viral load or HBeAg-positive: tenofovir at 24–28 weeks.",
+        "Newborn: vaccine + immunoglobulin, preferably within the first 12 hours.",
+        "Source states treatment of the newborn prophylaxis approach regardless of maternal viral load."
+      ],
+      "primary_biliary_cholangitis": [
+        "Antimitochondrial antibody is described as the classic marker.",
+        "ANA is stated to be positive in 70% of cases."
+      ]
+    },
+    "semantic_structure": {
+      "syndrome_definition": "Jaundice/hyperbilirubinemia is represented as visible tissue discoloration caused by bilirubin accumulation.",
+      "bilirubin_classes": [
+        "unconjugated / indirect",
+        "conjugated / direct"
+      ],
+      "mechanistic_axes": [
+        "increased bilirubin production",
+        "reduced hepatic uptake",
+        "impaired conjugation",
+        "reduced intrahepatic excretion",
+        "extrahepatic biliary obstruction"
+      ],
+      "three_phase_model": [
+        "prehepatic",
+        "hepatic",
+        "posthepatic"
+      ],
+      "clinical_classification": [
+        "hepatocellular",
+        "cholestatic",
+        "mixed"
+      ]
+    }
+  },
+  "embedded_reference_extraction": {
+    "scope": "The uploaded page contains a long external-reference block beginning after the compact summary. It matches the NCBI/StatPearls Hyperbilirubinemia article.",
+    "definition": "Jaundice is yellow discoloration from excess bilirubin; scleral icterus is generally appreciable at bilirubin levels above about 3 mg/dL in the cited reference.",
+    "etiologic_classes": {
+      "conjugated_hyperbilirubinemia": {
+        "transport_or_excretion_disorders": [
+          "Dubin-Johnson syndrome",
+          "Rotor syndrome"
+        ],
+        "hepatocellular_disease": [
+          "viral hepatitis A, B, D",
+          "alcoholic hepatitis",
+          "cirrhosis",
+          "nonalcoholic steatohepatitis",
+          "EBV",
+          "CMV",
+          "HSV",
+          "Wilson disease",
+          "autoimmune disease"
+        ],
+        "cholestatic_liver_disease": [
+          "primary biliary cholangitis",
+          "primary sclerosing cholangitis"
+        ],
+        "infiltrative_disease": [
+          "amyloidosis",
+          "lymphoma",
+          "sarcoidosis",
+          "tuberculosis"
+        ],
+        "systemic_or_iatrogenic": [
+          "sepsis",
+          "hypoperfusion states",
+          "total parenteral nutrition",
+          "drugs and toxins"
+        ],
+        "other": [
+          "sickle-cell hepatic crisis",
+          "pregnancy"
+        ],
+        "extrahepatic_cholestasis": [
+          "choledocholithiasis",
+          "cholangiocarcinoma",
+          "pancreatic head cancer",
+          "biliary atresia",
+          "acute or chronic pancreatitis",
+          "biliary strictures",
+          "parasitic infections including Ascaris and liver flukes"
+        ]
+      },
+      "unconjugated_hyperbilirubinemia": {
+        "increased_production": [
+          "hemolytic anemias",
+          "extravasation of blood into tissues",
+          "dyserythropoiesis"
+        ],
+        "reduced_hepatic_uptake": [
+          "Gilbert syndrome"
+        ],
+        "impaired_conjugation": [
+          "Crigler-Najjar syndrome type 1 and 2"
+        ],
+        "additional_associations_listed": [
+          "hyperthyroidism",
+          "estrogen"
+        ]
+      }
+    },
+    "pathophysiology": {
+      "prehepatic": [
+        "heme released from senescent or defective RBCs",
+        "heme → biliverdin → bilirubin",
+        "bilirubin initially unconjugated and poorly water-soluble"
+      ],
+      "hepatic": [
+        "transport to hepatocytes bound to albumin",
+        "hepatic uptake",
+        "conjugation with glucuronic acid by UDP-glucuronosyltransferase",
+        "formation of water-soluble conjugated bilirubin"
+      ],
+      "posthepatic": [
+        "secretion into bile canaliculi and bile ducts",
+        "delivery to small bowel",
+        "intestinal bacterial metabolism to urobilinogen",
+        "conversion predominantly to stercobilin and fecal excretion",
+        "partial enterohepatic circulation",
+        "renal excretion of a fraction of urobilinogen"
+      ],
+      "pattern_mapping": [
+        "prehepatic dysfunction → predominantly unconjugated bilirubin elevation",
+        "hepatic dysfunction → may elevate both fractions",
+        "posthepatic dysfunction → predominantly conjugated bilirubin elevation"
+      ]
+    },
+    "clinical_features": {
+      "history": [
+        "duration of jaundice",
+        "pruritus",
+        "drug exposure",
+        "alcohol and toxic substances",
+        "hepatitis risk factors including travel and unsafe sexual practices",
+        "HIV status",
+        "personal/family history of inherited disorders",
+        "hemolytic disorders",
+        "urine and stool changes",
+        "arthralgias/myalgias",
+        "fever/chills",
+        "right-upper-quadrant pain",
+        "anorexia/malaise",
+        "weight loss"
+      ],
+      "physical_exam": [
+        "body habitus and nutritional status",
+        "stigmata of chronic liver disease",
+        "lymphadenopathy",
+        "jugular venous distension / congestion",
+        "hepatosplenomegaly",
+        "ascites",
+        "right-upper-quadrant tenderness",
+        "palpable gallbladder / Courvoisier sign"
+      ]
+    },
+    "evaluation": {
+      "initial": [
+        "history",
+        "physical examination",
+        "liver chemistry / liver function assessment",
+        "fractionation of bilirubin"
+      ],
+      "laboratory": [
+        "AST",
+        "ALT",
+        "alkaline phosphatase",
+        "GGT",
+        "albumin",
+        "total protein",
+        "bilirubin",
+        "prothrombin time"
+      ],
+      "pattern_interpretation_as_presented_in_source": [
+        "predominant transaminase elevation suggests hepatocellular injury",
+        "marked alkaline phosphatase elevation with relatively modest transaminases suggests cholestatic/biliary disease",
+        "GGT can support hepatic origin of elevated alkaline phosphatase",
+        "normal AST/ALT/ALP shifts attention toward non-hepatocellular causes such as inherited disorders or hematologic causes"
+      ],
+      "additional_workup": {
+        "hepatocellular": [
+          "viral serologies",
+          "autoimmune antibodies",
+          "ceruloplasmin",
+          "ferritin"
+        ],
+        "cholestatic": [
+          "abdominal ultrasound",
+          "CT",
+          "MRCP",
+          "ERCP",
+          "percutaneous transhepatic cholangiography",
+          "EUS"
+        ]
+      }
+    },
+    "management": {
+      "general": "Treat the underlying hepatobiliary or hematologic disease whenever possible.",
+      "cholestatic_pruritus": [
+        "supportive measures",
+        "antihistamines",
+        "bile-acid sequestrants such as cholestyramine or colestipol",
+        "other therapies listed by the source include rifampin, naltrexone, sertraline and phenobarbital"
+      ],
+      "severe_disease": "The source states that jaundice may indicate hepatic decompensation and may prompt transplant evaluation depending on severity."
+    },
+    "differential": [
+      "carotenoderma",
+      "quinacrine-associated yellow discoloration"
+    ],
+    "neonatal_complication": {
+      "entity": "kernicterus / bilirubin-induced neurologic dysfunction",
+      "mechanism": "severe unconjugated hyperbilirubinemia with bilirubin neurotoxicity in neonates",
+      "source_note": "The uploaded reference emphasizes neonatal vulnerability."
+    }
+  },
+  "knowledge_entities": [
+    {
+      "id": "syndrome_ictérica",
+      "type": "clinical_syndrome",
+      "core": "hyperbilirubinemia/jaundice",
+      "presentation_space": [
+        "visible scleral icterus",
+        "skin yellowing",
+        "pruritus",
+        "possible urine/stool changes",
+        "may be asymptomatic apart from discoloration"
+      ],
+      "mechanistic_routes": [
+        "overproduction",
+        "reduced uptake",
+        "impaired conjugation",
+        "impaired intrahepatic excretion",
+        "extrahepatic obstruction"
+      ]
+    },
+    {
+      "id": "hyperbilirubinemia_unconjugated",
+      "type": "biochemical_pattern",
+      "causal_space": [
+        "hemolysis",
+        "blood extravasation",
+        "dyserythropoiesis",
+        "Gilbert syndrome",
+        "Crigler-Najjar syndrome",
+        "selected endocrine/drug associations"
+      ]
+    },
+    {
+      "id": "hyperbilirubinemia_conjugated",
+      "type": "biochemical_pattern",
+      "causal_space": [
+        "Dubin-Johnson",
+        "Rotor",
+        "hepatocellular disease",
+        "cholestatic liver disease",
+        "infiltrative disease",
+        "sepsis/hypoperfusion",
+        "drugs/toxins",
+        "extrahepatic obstruction"
+      ]
+    },
+    {
+      "id": "hepatocellular_jaundice",
+      "type": "syndrome_pattern",
+      "associated_domains": [
+        "viral hepatitis",
+        "alcohol-associated liver disease",
+        "metabolic liver disease",
+        "autoimmune hepatitis",
+        "Wilson disease",
+        "drug-induced liver injury",
+        "ischemic/toxic injury"
+      ]
+    },
+    {
+      "id": "cholestatic_jaundice",
+      "type": "syndrome_pattern",
+      "associated_domains": [
+        "primary biliary cholangitis",
+        "primary sclerosing cholangitis",
+        "choledocholithiasis",
+        "cholangiocarcinoma",
+        "pancreatic head malignancy",
+        "biliary stricture",
+        "pancreatitis",
+        "parasitic obstruction"
+      ]
+    },
+    {
+      "id": "mixed_jaundice",
+      "type": "syndrome_pattern",
+      "note": "The source explicitly uses a hepatocellular/cholestatic/mixed classification but does not provide a complete quantitative definition in the compact summary."
+    },
+    {
+      "id": "bilirubin_metabolism",
+      "type": "physiologic_process",
+      "steps": [
+        "heme breakdown",
+        "unconjugated bilirubin transport bound to albumin",
+        "hepatocyte uptake",
+        "conjugation",
+        "biliary secretion",
+        "intestinal metabolism",
+        "urobilinogen/stercobilin formation",
+        "partial enterohepatic circulation",
+        "renal excretion of a fraction"
+      ]
+    },
+    {
+      "id": "primary_biliary_cholangitis",
+      "type": "disease_entity",
+      "source_specific_markers": [
+        "antimitochondrial antibody described as classic marker",
+        "ANA described in compact summary as positive in 70%"
+      ]
+    },
+    {
+      "id": "hepatitis_b",
+      "type": "disease_entity",
+      "relationships": [
+        "can cause hepatocellular jaundice",
+        "has chronic-treatment criteria in the compact source",
+        "has perinatal transmission-prevention content in the compact source"
+      ]
+    },
+    {
+      "id": "hepatitis_c",
+      "type": "disease_entity",
+      "relationships": [
+        "can cause hepatocellular jaundice",
+        "source emphasizes treatment to prevent chronicity"
+      ]
+    },
+    {
+      "id": "extrahepatic_biliary_obstruction",
+      "type": "syndrome_mechanism",
+      "causes": [
+        "choledocholithiasis",
+        "cholangiocarcinoma",
+        "pancreatic head cancer",
+        "biliary strictures",
+        "pancreatitis",
+        "parasitic obstruction"
+      ]
+    },
+    {
+      "id": "neonatal_bilirubin_neurotoxicity",
+      "type": "complication",
+      "associated_entities": [
+        "kernicterus",
+        "bilirubin-induced neurologic dysfunction"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "id": "rule_01",
+      "statement": "Jaundice should first be approached with history and physical examination, followed by classification by etiologic/mechanistic pattern.",
+      "source_layer": "embedded_external_reference"
+    },
+    {
+      "id": "rule_02",
+      "statement": "Unconjugated hyperbilirubinemia shifts the causal search toward increased production, reduced uptake or impaired conjugation.",
+      "source_layer": "embedded_external_reference"
+    },
+    {
+      "id": "rule_03",
+      "statement": "Conjugated hyperbilirubinemia shifts the causal search toward impaired excretion/cholestasis and biliary obstruction.",
+      "source_layer": "embedded_external_reference"
+    },
+    {
+      "id": "rule_04",
+      "statement": "Hepatocellular dysfunction can elevate both bilirubin fractions.",
+      "source_layer": "embedded_external_reference"
+    },
+    {
+      "id": "rule_05",
+      "statement": "Marked alkaline phosphatase elevation with relatively modest transaminase elevation points toward a cholestatic/biliary pattern; GGT can support hepatic origin of alkaline phosphatase.",
+      "source_layer": "embedded_external_reference"
+    },
+    {
+      "id": "rule_06",
+      "statement": "A jaundiced patient with fever/chills and severe right-upper-quadrant pain raises concern for cholangitis in the source's clinical reasoning framework.",
+      "source_layer": "embedded_external_reference"
+    },
+    {
+      "id": "rule_07",
+      "statement": "Jaundice with ascites is associated in the source with cirrhosis or malignancy with peritoneal spread.",
+      "source_layer": "embedded_external_reference"
+    },
+    {
+      "id": "rule_08",
+      "statement": "Yellow skin with scleral sparing suggests carotenoderma rather than bilirubin-mediated jaundice.",
+      "source_layer": "embedded_external_reference"
+    },
+    {
+      "id": "rule_09",
+      "statement": "Severe neonatal unconjugated hyperbilirubinemia can produce bilirubin-induced neurologic injury/kernicterus.",
+      "source_layer": "embedded_external_reference"
+    }
+  ],
+  "diagnostic_network": {
+    "entry_point": "jaundice / suspected hyperbilirubinemia",
+    "first_branch": [
+      "confirm clinical jaundice versus mimics",
+      "fractionate bilirubin",
+      "characterize liver chemistry pattern",
+      "assess severity/synthetic function",
+      "direct targeted etiologic investigation"
+    ],
+    "pattern_nodes": {
+      "unconjugated_predominant": [
+        "hemolysis/overproduction",
+        "Gilbert",
+        "Crigler-Najjar",
+        "other uptake/conjugation disorders"
+      ],
+      "conjugated_predominant": [
+        "cholestatic liver disease",
+        "hepatocellular disease",
+        "extrahepatic obstruction",
+        "infiltrative/systemic causes"
+      ],
+      "mixed": [
+        "hepatocellular injury",
+        "selected drug/toxin-related injury",
+        "severe systemic disease"
+      ]
+    },
+    "severity_axes": [
+      "synthetic dysfunction",
+      "coagulopathy",
+      "encephalopathy/neurologic dysfunction",
+      "ascites/decompensation",
+      "systemic infection/cholangitis",
+      "malignancy"
+    ]
+  },
+  "temporal_trajectories": [
+    {
+      "pattern": "acute",
+      "possible_realizations": [
+        "acute viral/toxic/ischemic hepatocellular injury",
+        "acute biliary obstruction",
+        "acute hemolysis"
+      ]
+    },
+    {
+      "pattern": "recurrent",
+      "possible_realizations": [
+        "intermittent obstruction",
+        "inherited bilirubin disorders",
+        "recurrent hepatic/systemic triggers"
+      ],
+      "note": "This is a generation-space category; the uploaded compact summary explicitly mentions recurrent patterns but does not enumerate all causes."
+    },
+    {
+      "pattern": "chronic",
+      "possible_realizations": [
+        "chronic viral hepatitis",
+        "cirrhosis",
+        "primary biliary cholangitis",
+        "primary sclerosing cholangitis",
+        "malignant obstruction"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "status": "knowledge_only_no_case_generation",
+    "axes": {
+      "age": [
+        "neonate",
+        "child",
+        "adult",
+        "older adult"
+      ],
+      "bilirubin_pattern": [
+        "unconjugated predominant",
+        "conjugated predominant",
+        "mixed"
+      ],
+      "injury_pattern": [
+        "hepatocellular",
+        "cholestatic",
+        "mixed"
+      ],
+      "tempo": [
+        "acute",
+        "recurrent",
+        "chronic"
+      ],
+      "symptom_profile": [
+        "isolated jaundice",
+        "pruritus",
+        "fever/chills",
+        "right-upper-quadrant pain",
+        "constitutional symptoms",
+        "urine/stool changes",
+        "asymptomatic laboratory hyperbilirubinemia"
+      ],
+      "context": [
+        "drug/toxin exposure",
+        "alcohol exposure",
+        "hepatitis risk",
+        "family history",
+        "hemolytic context",
+        "pregnancy",
+        "ulcerative colitis/PSC context",
+        "malignancy context",
+        "biliary stone context"
+      ],
+      "severity": [
+        "uncomplicated",
+        "cholestatic obstruction",
+        "infection/cholangitis",
+        "synthetic dysfunction",
+        "decompensated liver disease",
+        "neonatal neurotoxicity"
+      ]
+    },
+    "generation_constraints": [
+      "Do not generate a case until the knowledge graph has been reviewed and the causal route selected.",
+      "A generated patient may combine more than one axis, provided the combination is clinically coherent.",
+      "Do not make the most common textbook presentation the only valid realization.",
+      "Preserve enough information to allow the clinician to discriminate between competing causal routes."
+    ]
+  },
+  "differential_network": {
+    "jaundice_mimics": [
+      "carotenoderma",
+      "quinacrine-associated yellow discoloration"
+    ],
+    "major_competing_routes": [
+      "hemolysis/overproduction",
+      "impaired bilirubin uptake",
+      "impaired conjugation",
+      "hepatocellular injury",
+      "intrahepatic cholestasis",
+      "extrahepatic obstruction",
+      "infiltrative/systemic disease"
+    ]
+  },
+  "external_research_extension": {
+    "current_brazilian_context": [
+      {
+        "topic": "Hepatite B e coinfecções",
+        "finding": "The Ministry of Health currently lists the PCDT for hepatitis B and coinfections, with an updated page and an annex altered in July 2024.",
+        "source": "Ministério da Saúde",
+        "url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hepatite-b-e-coinfeccoes/view"
+      },
+      {
+        "topic": "Hepatite C e coinfecções",
+        "finding": "The Ministry of Health lists a current PCDT page updated in July 2026; the CONITEC PCDT index identifies Portaria SCTIE/MS nº 39, dated 20 July 2026.",
+        "source": "Ministério da Saúde / CONITEC",
+        "url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hepatite-c-coinfeccoes/view"
+      },
+      {
+        "topic": "Hepatite autoimune",
+        "finding": "The Ministry of Health lists a PCDT for autoimmune hepatitis, with the annex altered in July 2024.",
+        "source": "Ministério da Saúde",
+        "url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/h/hepatite-autoimune/view"
+      }
+    ],
+    "important_boundary": "Current PCDTs are recorded as external/current guideline context. They do not replace the uploaded summary; specific therapeutic criteria should be imported into the canonical knowledge base only after the relevant PCDT has been parsed and mapped."
+  },
+  "conflicts_and_boundaries": [
+    {
+      "issue": "The compact summary uses mnemonic/condensed statements such as 'Gilbert: a do bem' and 'Crigler Najjar: a do mal'.",
+      "handling": "Preserve as source terminology but do not treat the mnemonic itself as a clinical rule."
+    },
+    {
+      "issue": "The compact summary states specific hepatitis B treatment criteria that may be version-dependent.",
+      "handling": "Keep them as source-derived historical content and verify against the current Brazilian PCDT before using them as active treatment rules."
+    },
+    {
+      "issue": "The compact summary states 'corticoide' for severe hepatitis with Maddrey >32 and 28 days.",
+      "handling": "Preserve as source content; do not generalize this into treatment of all severe hepatitis. It requires disease-specific context and current guideline verification."
+    },
+    {
+      "issue": "The uploaded PDF embeds a long external reference that is not merely the compact summary.",
+      "handling": "Represent the compact block and embedded reference as separate source layers."
+    },
+    {
+      "issue": "The source mentions 'Tokyo classification' for cholecystitis but does not provide the full classification in the compact block.",
+      "handling": "Do not reconstruct the classification here; mark it as a knowledge-extension target."
+    }
+  ],
+  "validation_targets_for_phase_1": [
+    "Can the knowledge model produce multiple distinct jaundice patients without copying a fixed case?",
+    "Can it distinguish unconjugated, conjugated and mixed bilirubin patterns?",
+    "Can it distinguish hepatocellular, cholestatic and mixed injury patterns?",
+    "Can it generate both hemolytic/inherited and hepatobiliary realizations?",
+    "Can it represent neonatal and adult trajectories without collapsing them into one presentation?",
+    "Can it preserve source provenance for each rule/entity?",
+    "Can it prevent outdated source-specific therapeutic criteria from being treated as current universal rules?",
+    "Can it connect symptoms, laboratory pattern, anatomy and causal mechanism before selecting a diagnosis?",
+    "Can it generate plausible competing diagnoses and information gaps rather than always revealing the diagnosis immediately?"
+  ],
+  "phase_1_assessment": {
+    "module_quality": "high_information_density",
+    "why": [
+      "The source contains a compact syndrome map plus a large embedded reference.",
+      "It spans pathophysiology, etiologic classification, physical examination, laboratory pattern recognition, imaging, differential diagnosis, complications and treatment.",
+      "It naturally supports generative axes rather than a single canonical case."
+    ],
+    "recommended_role_in_model_library": "reference prototype for syndrome-based knowledge mapping",
+    "next_step": "Compare this structure against CM 2 and CM 3 after their original summaries are uploaded, then identify recurring canonical fields across modules rather than freezing this JSON as the final schema."
+  }
+}

@@ -1,0 +1,283 @@
+{
+  "model_metadata": {
+    "name": "DIAGNOSIS — Modelo de Conhecimento Clínico — CM 3 Síndrome Metabólica / HAS e Dislipidemia",
+    "version": "0.3",
+    "status": "phase_1_semantic_mapping_provisional",
+    "clinical_domain": "cardiometabolic / hypertension / dyslipidemia / metabolic syndrome",
+    "architecture_principle": "KNOWLEDGE → POSSIBILITIES → PATIENT → CASE → SIMULATION → EVALUATION",
+    "core_principle": "O caso não é o conhecimento; o caso é uma amostra do espaço clínico produzido pelo conhecimento.",
+    "phase": "Fase 1 — mapeamento semântico dos resumos",
+    "canonical_schema": false,
+    "case_generation": "deferred",
+    "source_policy": {
+      "summary_is_fragment": true,
+      "external_references_are_complementary": true,
+      "preserve_source_content": true,
+      "do_not_silently_correct_source": true,
+      "separate_source_from_external_research": true
+    }
+  },
+  "source_registry": [
+    {
+      "id": "src_cm03_summary",
+      "type": "uploaded_summary",
+      "title": "Síndrome Metabólica - HAS e Dislipidemia",
+      "file": "Síndrome Metabólica - HAS e Dislipidemia.docx.pdf",
+      "date_in_source": "25/03/2021 21:11",
+      "role": "primary_fragment"
+    },
+    {
+      "id": "src_cm03_reference",
+      "type": "embedded_reference",
+      "title": "Metabolic Syndrome",
+      "publisher": "StatPearls / NCBI Bookshelf",
+      "role": "reference/complementary layer embedded in the source"
+    },
+    {
+      "id": "src_cm03_brazil_htn",
+      "type": "external_research",
+      "title": "Diretrizes Brasileiras de Hipertensão Arterial — 2020",
+      "publisher": "SBC/SBH/SBN",
+      "url": "https://www.scielo.br/j/abc/a/Z6m5gGNQCvrW3WLV7csqbqh/?lang=pt",
+      "role": "Brazilian hypertension framework"
+    },
+    {
+      "id": "src_cm03_brazil_dyslipidemia",
+      "type": "external_research",
+      "title": "PCDT Dislipidemia: prevenção de eventos cardiovasculares e pancreatite",
+      "publisher": "Ministério da Saúde / CONITEC",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/dislipidemia/view",
+      "role": "Brazilian SUS dyslipidemia framework"
+    },
+    {
+      "id": "src_cm03_current_dyslipidemia_update",
+      "type": "external_research",
+      "title": "Consulta Pública 94/2026 — PCDT Dislipidemia e Prevenção de Eventos Cardiovasculares Ateroscleróticos",
+      "publisher": "CONITEC",
+      "url": "https://www.gov.br/conitec/pt-br/assuntos/participacao-social/consultas-publicas/vigentes",
+      "role": "current update status as of September 2026"
+    },
+    {
+      "id": "src_cm03_aha_htn",
+      "type": "external_research",
+      "title": "2025 AHA/ACC High Blood Pressure Guideline",
+      "publisher": "American Heart Association / American College of Cardiology",
+      "url": "https://professional.heart.org/en/science-news/2025-high-blood-pressure-guideline/top-things-to-know",
+      "role": "current international hypertension framework"
+    }
+  ],
+  "summary_extraction": {
+    "metabolic_syndrome": {
+      "core_components": [
+        "central obesity",
+        "insulin resistance / hyperglycemia",
+        "hypertension",
+        "atherogenic dyslipidemia"
+      ],
+      "source_definition_embedded_reference": "3 or more metabolic abnormalities",
+      "criteria_listed_in_embedded_reference": {
+        "waist": ">40 inches men; >35 inches women",
+        "triglycerides": ">=150 mg/dL",
+        "HDL": "<40 mg/dL men; <50 mg/dL women",
+        "fasting_glucose": ">=100 mg/dL",
+        "blood_pressure": ">=130 systolic or >=85 diastolic"
+      },
+      "pathophysiology": [
+        "visceral adiposity",
+        "insulin resistance",
+        "adipose inflammatory signaling",
+        "endothelial dysfunction",
+        "prothrombotic state",
+        "hypertension",
+        "atherogenesis"
+      ]
+    },
+    "hypertension": {
+      "source_focus": [
+        "classification and treatment",
+        "target-organ damage",
+        "secondary hypertension",
+        "hypertensive crisis",
+        "resistant hypertension"
+      ],
+      "initial_tests_listed": [
+        "urinalysis",
+        "potassium",
+        "creatinine",
+        "fasting glucose/HbA1c",
+        "total cholesterol/HDL/triglycerides",
+        "uric acid",
+        "ECG"
+      ],
+      "source_notes": [
+        "AAS/ASA is not to be used routinely in asymptomatic patients without established target-organ/atherosclerotic context, according to the compact note.",
+        "In aortic dissection, the source emphasizes normalization/rapid reduction rather than a generic 25% reduction.",
+        "Source describes a stress-related pseudocrisis in a patient with irregular antihypertensive use and suggests anxiolysis/analgesia.",
+        "Ascending aortic dissection is marked as requiring surgery.",
+        "The source contains a resistant-hypertension section and a secondary-hypertension workup."
+      ]
+    },
+    "dyslipidemia": {
+      "source_focus": [
+        "cholesterol fractions",
+        "triglycerides",
+        "risk-based treatment",
+        "statins",
+        "high-intensity statin therapy"
+      ],
+      "source_specific_note": "The compact summary explicitly mentions rosuvastatin 40–80 mg as a high-intensity option; this should be treated as source content requiring dose verification before canonicalization."
+    }
+  },
+  "knowledge_entities": [
+    "metabolic_syndrome",
+    "central_obesity",
+    "insulin_resistance",
+    "hypertension",
+    "target_organ_damage",
+    "secondary_hypertension",
+    "hypertensive_emergency",
+    "hypertensive_urgency/severe_asymptomatic_elevation",
+    "resistant_hypertension",
+    "dyslipidemia",
+    "atherogenic_dyslipidemia",
+    "atherosclerotic_cardiovascular_risk"
+  ],
+  "clinical_rules": [
+    {
+      "id": "cm03_r01",
+      "statement": "Metabolic syndrome is a cluster rather than a single isolated laboratory abnormality; the embedded source uses 3 or more abnormalities as its diagnostic threshold.",
+      "source_layer": "embedded_reference"
+    },
+    {
+      "id": "cm03_r02",
+      "statement": "Central obesity/visceral adiposity is represented as a major upstream driver of insulin resistance, dyslipidemia and hypertension.",
+      "source_layer": "embedded_reference"
+    },
+    {
+      "id": "cm03_r03",
+      "statement": "Hypertension evaluation should look for target-organ damage and clues to secondary causes.",
+      "source_layer": "summary"
+    },
+    {
+      "id": "cm03_r04",
+      "statement": "Brazilian 2020 guidance defines hypertension in office measurements as persistent PAS ≥140 mmHg and/or PAD ≥90 mmHg, confirmed by repeated measurements or out-of-office measurements in appropriate patients.",
+      "source_layer": "external_research"
+    },
+    {
+      "id": "cm03_r05",
+      "statement": "The 2025 AHA/ACC guideline uses a different adult BP classification framework and emphasizes a treatment goal <130/80 mmHg, with treatment decisions incorporating overall cardiovascular risk.",
+      "source_layer": "external_research",
+      "important": "Do not merge this classification into the Brazilian source as if they were identical."
+    }
+  ],
+  "diagnostic_network": {
+    "metabolic_entry": [
+      "central obesity",
+      "blood pressure",
+      "glycemic status",
+      "lipid profile",
+      "family history",
+      "lifestyle"
+    ],
+    "hypertension_entry": [
+      "confirm BP phenotype",
+      "assess severity",
+      "look for acute target-organ injury",
+      "look for chronic target-organ damage",
+      "review adherence/measurement/pseudoresistance",
+      "screen for secondary causes when indicated"
+    ],
+    "dyslipidemia_entry": [
+      "lipid phenotype",
+      "ASCVD risk",
+      "secondary causes",
+      "family/genetic context",
+      "hypertriglyceridemia/pancreatitis risk"
+    ]
+  },
+  "patient_generation": {
+    "axes": [
+      "central adiposity",
+      "blood pressure phenotype",
+      "glycemic phenotype",
+      "lipid phenotype",
+      "target-organ damage",
+      "ASCVD burden",
+      "renal function",
+      "secondary-cause clues",
+      "adherence/pseudoresistance",
+      "acute versus chronic presentation"
+    ],
+    "high_value_combinations": [
+      "metabolic syndrome without overt diabetes",
+      "metabolic syndrome with diabetes",
+      "hypertension with CKD",
+      "hypertension with target-organ damage",
+      "resistant hypertension with secondary-cause clues",
+      "severe BP elevation without acute organ injury",
+      "hypertensive emergency with aortic dissection",
+      "dyslipidemia with very high triglycerides and pancreatitis risk"
+    ]
+  },
+  "differential_network": [
+    "renal parenchymal disease",
+    "renovascular hypertension",
+    "endocrine hypertension",
+    "coarctation of aorta",
+    "hypothyroidism",
+    "polycystic ovary syndrome",
+    "pheochromocytoma",
+    "Cushing syndrome",
+    "acromegaly",
+    "familial dyslipidemia",
+    "secondary dyslipidemia"
+  ],
+  "conflicts_and_boundaries": [
+    {
+      "issue": "The source is dated 2021 and mixes Brazilian teaching material with an embedded international metabolic-syndrome reference.",
+      "handling": "Keep provenance by layer."
+    },
+    {
+      "issue": "Hypertension thresholds differ between the 2020 Brazilian guideline and the 2025 AHA/ACC guideline.",
+      "handling": "Do not collapse them into one threshold. Store guideline/version/region metadata."
+    },
+    {
+      "issue": "The source contains a note that ascending aortic dissection 'always' requires surgery.",
+      "handling": "Preserve as source teaching point; canonical emergency management must remain disease-specific and guideline-verified."
+    },
+    {
+      "issue": "The source mentions high-intensity rosuvastatin 40–80 mg.",
+      "handling": "Flag for verification; do not encode the stated dose as a validated prescription rule."
+    },
+    {
+      "issue": "As of September 2026, CONITEC has an active public consultation for an updated PCDT on dyslipidemia and prevention of ASCVD.",
+      "handling": "The existing SUS PCDT and the pending update must be versioned separately."
+    }
+  ],
+  "external_research_extension": {
+    "hypertension_brazil": {
+      "finding": "The Brazilian 2020 guideline defines office hypertension as PAS ≥140 and/or PAD ≥90 mmHg with confirmation through repeated measurements or out-of-office monitoring in appropriate patients.",
+      "source": "https://www.scielo.br/j/abc/a/Z6m5gGNQCvrW3WLV7csqbqh/?lang=pt"
+    },
+    "hypertension_current_international": {
+      "finding": "The 2025 AHA/ACC guideline replaces the 2017 guideline, retains stage thresholds beginning at 130/80, and emphasizes treatment decisions based on BP plus cardiovascular risk.",
+      "source": "https://professional.heart.org/en/science-news/2025-high-blood-pressure-guideline/top-things-to-know"
+    },
+    "dyslipidemia_brazil": {
+      "finding": "The Ministry of Health's current page still lists the SUS PCDT for dyslipidemia, approved in 2019 with a later annex alteration; a new PCDT on dyslipidemia and ASCVD prevention was under public consultation in September 2026.",
+      "sources": [
+        "https://www.gov.br/saude/pt-br/assuntos/pcdt/d/dislipidemia/view",
+        "https://www.gov.br/conitec/pt-br/assuntos/participacao-social/consultas-publicas/vigentes"
+      ]
+    }
+  },
+  "validation_targets_for_phase_1": [
+    "Generate metabolic syndrome from combinations of components rather than from a named disease template.",
+    "Distinguish BP phenotype, target-organ injury and overall cardiometabolic risk.",
+    "Generate resistant hypertension only after accounting for adherence, measurement and pseudo-resistance.",
+    "Represent secondary hypertension as a branching diagnostic space.",
+    "Keep Brazilian and international BP guideline versions separate.",
+    "Generate dyslipidemia by lipid phenotype and risk context, not by a single LDL threshold alone.",
+    "Allow the same patient state to evolve toward diabetes, CKD, ASCVD or acute hypertensive disease."
+  ]
+}

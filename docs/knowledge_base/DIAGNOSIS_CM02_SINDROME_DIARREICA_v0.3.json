@@ -1,0 +1,360 @@
+{
+  "model_metadata": {
+    "name": "DIAGNOSIS — Modelo de Conhecimento Clínico — CM 2 Síndrome Diarreica",
+    "version": "0.3",
+    "status": "phase_1_semantic_mapping_provisional",
+    "clinical_domain": "gastroenterology / infectious diseases / malabsorption / inflammatory bowel disease",
+    "architecture_principle": "KNOWLEDGE → POSSIBILITIES → PATIENT → CASE → SIMULATION → EVALUATION",
+    "core_principle": "O caso não é o conhecimento; o caso é uma amostra do espaço clínico produzido pelo conhecimento.",
+    "phase": "Fase 1 — mapeamento semântico dos resumos",
+    "canonical_schema": false,
+    "case_generation": "deferred",
+    "source_policy": {
+      "summary_is_fragment": true,
+      "external_references_are_complementary": true,
+      "preserve_source_content": true,
+      "do_not_silently_correct_source": true,
+      "separate_source_from_external_research": true
+    }
+  },
+  "source_registry": [
+    {
+      "id": "src_cm02_summary",
+      "type": "uploaded_summary",
+      "title": "Síndrome diarreica",
+      "file": "Síndrome diarreica.pdf",
+      "date_in_source": "17/02/2021 09:18",
+      "role": "primary_fragment"
+    },
+    {
+      "id": "src_cm02_reference",
+      "type": "embedded_reference",
+      "title": "Diarrhea",
+      "publisher": "StatPearls / NCBI Bookshelf",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK448082/",
+      "role": "reference/complementary layer embedded in the source"
+    },
+    {
+      "id": "src_cm02_ms",
+      "type": "external_research",
+      "title": "Doenças diarreicas agudas",
+      "publisher": "Ministério da Saúde",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/d/dda",
+      "role": "Brazilian current public-health/management reference"
+    },
+    {
+      "id": "src_cm02_idsa",
+      "type": "external_research",
+      "title": "IDSA 2017 Clinical Practice Guidelines for the Diagnosis and Management of Infectious Diarrhea",
+      "publisher": "IDSA",
+      "url": "https://www.idsociety.org/practice-guideline/infectious-diarrhea/",
+      "role": "infectious diarrhea diagnostic framework"
+    },
+    {
+      "id": "src_cm02_cdi",
+      "type": "external_research",
+      "title": "SHEA/IDSA 2021 Clinical Practice Guideline Update for Clostridioides difficile Infection",
+      "publisher": "IDSA/SHEA",
+      "url": "https://www.idsociety.org/practice-guideline/clostridioides-difficile-2021-focused-update/",
+      "role": "current CDI treatment verification"
+    }
+  ],
+  "summary_extraction": {
+    "classification_axes": [
+      "small-bowel/high-volume vs colonic/low-volume",
+      "invasive vs non-invasive",
+      "acute (<2 weeks) vs chronic (>4 weeks); the visual summary also leaves a persistent/intermediate interval between these categories",
+      "presence/absence of blood, mucus and pus",
+      "frequency and tenesmus"
+    ],
+    "physiologic_framing": [
+      "small intestine: absorption of nutrients, iron and protein",
+      "colon: fecal continence",
+      "small-bowel lesions are linked in the source to larger stool volume",
+      "colitis is linked in the source to smaller-volume, more frequent stools and tenesmus"
+    ],
+    "acute_diarrhea": {
+      "dominant_cause": "infection",
+      "viruses": [
+        "Norovirus — emphasized as common in adults",
+        "Rotavirus — emphasized as severe in children <2 years"
+      ],
+      "bacteria_and_associations": {
+        "STEC_EHEC": [
+          "E. coli O157:H7",
+          "hemolytic-uremic syndrome",
+          "renal involvement",
+          "neurologic manifestations are mentioned in the summary"
+        ],
+        "Shigella": [
+          "central nervous system complications are mentioned"
+        ],
+        "Campylobacter_jejuni": [
+          "Guillain-Barré association"
+        ],
+        "Salmonella": [
+          "systemic/distant infection"
+        ],
+        "Yersinia": [
+          "pseudoappendicitis"
+        ],
+        "Clostridioides_difficile": [
+          "pseudomembranous colitis"
+        ]
+      }
+    },
+    "acute_diarrhea_investigation": {
+      "source_alarm_signs": [
+        "dehydration",
+        "bloody stool",
+        "fever",
+        "failure to improve after 48 h",
+        "older age",
+        "immunocompromise",
+        "recent antibiotic use"
+      ],
+      "tests_listed": [
+        "CBC",
+        "biochemistry/electrolytes/renal function",
+        "stool examination for leukocytes/blood/culture/antibiogram",
+        "parasitologic stool examination"
+      ]
+    },
+    "celiac_disease": {
+      "trigger": "gluten proteins from wheat, rye and barley",
+      "mechanism_as_source": "autoimmune inflammatory response in susceptible individuals with environmental contributions",
+      "clinical_space": [
+        "asymptomatic",
+        "partial malabsorption",
+        "calcium/iron deficiency",
+        "steatorrhea",
+        "neuropsychiatric manifestations are listed"
+      ],
+      "associated_conditions": [
+        "dermatitis herpetiformis",
+        "IgA deficiency",
+        "Down syndrome",
+        "increased risk of lymphoma and jejunal adenocarcinoma"
+      ],
+      "diagnosis": [
+        "serology",
+        "upper endoscopy + biopsy as source's gold standard"
+      ],
+      "treatment": "gluten-free diet"
+    },
+    "protozoa": {
+      "entities": [
+        "Entamoeba histolytica",
+        "Entamoeba coli",
+        "Giardia lamblia"
+      ],
+      "source_points": [
+        "protozoa are unicellular",
+        "eosinophilia is not expected",
+        "many infections are asymptomatic",
+        "stool may show cysts/trophozoites"
+      ],
+      "specific_patterns": [
+        "E. histolytica: invasive colitis/dysentery, ameboma, hepatic abscess",
+        "Giardia: noninvasive small-bowel disease and malabsorption",
+        "E. coli: source says do not treat"
+      ]
+    },
+    "helminths": {
+      "shared_features": [
+        "eosinophilia",
+        "possible pulmonary migration",
+        "many infections are asymptomatic",
+        "diarrhea and abdominal pain"
+      ],
+      "entities": [
+        "Ascaris lumbricoides",
+        "Toxocara canis",
+        "Ancylostoma duodenale",
+        "Necator americanus",
+        "Strongyloides stercoralis",
+        "Enterobius vermicularis",
+        "Trichuris trichiura"
+      ],
+      "mnemonic": "SANTA = Strongyloides, Ancylostoma, Necator, Toxocara, Ascaris"
+    },
+    "inflammatory_bowel_disease": {
+      "Crohn": [
+        "transmural",
+        "mouth-to-anus distribution",
+        "skip lesions",
+        "terminal ileum common",
+        "diarrhea + abdominal pain + weight loss",
+        "fistulizing/perianal complications",
+        "noncaseating granuloma mentioned as biopsy finding"
+      ],
+      "ulcerative_colitis": [
+        "mucosal disease",
+        "continuous/ascending distribution",
+        "colonic/rectal disease",
+        "dysentery/low diarrhea pattern"
+      ],
+      "extraintestinal_manifestations": [
+        "erythema nodosum",
+        "pyoderma gangrenosum",
+        "sacroiliitis",
+        "biliary disease/cholangitis"
+      ],
+      "investigation": [
+        "endoscopy + biopsy",
+        "fecal lactoferrin",
+        "fecal calprotectin",
+        "ASCA/p-ANCA are used as suggestive markers in the source"
+      ],
+      "treatment_framework_as_source": [
+        "aminosalicylates",
+        "corticosteroids",
+        "antibiotics",
+        "immunomodulators",
+        "biologics",
+        "surgery for selected complications or refractory disease"
+      ]
+    },
+    "irritable_bowel_syndrome": {
+      "source_profile": [
+        "functional disorder",
+        "commonly women 30–50 years",
+        "abdominal pain with diarrhea and/or constipation"
+      ],
+      "diagnosis": "Rome-type symptom-based framework with pain related to defecation and change in stool frequency/form; source graphic indicates at least one day/week during the preceding 3 months",
+      "treatment": "symptomatic and orientation"
+    }
+  },
+  "knowledge_entities": [
+    "diarrheal_syndrome",
+    "acute_infectious_diarrhea",
+    "persistent_or_chronic_diarrhea",
+    "colitis",
+    "small_bowel_diarrhea",
+    "Clostridioides_difficile_colitis",
+    "celiac_disease",
+    "protozoal_diarrhea",
+    "helminthic_diarrhea",
+    "Crohn_disease",
+    "ulcerative_colitis",
+    "irritable_bowel_syndrome"
+  ],
+  "clinical_rules": [
+    {
+      "id": "cm02_r01",
+      "statement": "The syndrome should be decomposed by tempo, anatomic/topographic pattern, inflammatory/invasive features and stool characteristics.",
+      "source_layer": "summary"
+    },
+    {
+      "id": "cm02_r02",
+      "statement": "Recent antibiotic exposure should raise suspicion for C. difficile infection.",
+      "source_layer": "summary",
+      "external_support": "SHEA/IDSA guideline"
+    },
+    {
+      "id": "cm02_r03",
+      "statement": "In diarrheal illness with fever, bloody or mucoid stool, severe abdominal cramping/tenderness or sepsis, IDSA recommends targeted stool testing for major invasive/important pathogens including Salmonella, Shigella, Campylobacter, Yersinia, C. difficile and STEC.",
+      "source_layer": "external_research"
+    },
+    {
+      "id": "cm02_r04",
+      "statement": "Dehydration assessment and rehydration are central to acute diarrheal disease management.",
+      "source_layer": "external_research",
+      "source": "Ministério da Saúde"
+    }
+  ],
+  "diagnostic_network": {
+    "entry_point": "diarrhea",
+    "branches": [
+      "acute vs persistent/chronic",
+      "small-bowel vs colonic",
+      "inflammatory/invasive vs noninflammatory",
+      "infectious vs malabsorptive vs inflammatory vs functional",
+      "immunocompetent vs immunocompromised",
+      "alarm features vs uncomplicated presentation"
+    ],
+    "high_information_patterns": [
+      "blood/mucus/pus",
+      "fever",
+      "tenesmus",
+      "recent antibiotics",
+      "travel/exposure",
+      "weight loss",
+      "nocturnal symptoms",
+      "dehydration",
+      "eosinophilia",
+      "malabsorption/steatorrhea",
+      "extraintestinal manifestations"
+    ]
+  },
+  "patient_generation": {
+    "axes": [
+      "tempo",
+      "anatomic pattern",
+      "stool characteristics",
+      "infectious exposure",
+      "immune status",
+      "malabsorption",
+      "inflammatory bowel phenotype",
+      "functional phenotype",
+      "severity/dehydration"
+    ],
+    "constraints": [
+      "Do not turn the source's disease list into a fixed case list.",
+      "Generate coherent combinations of phenotype, mechanism, exposure, investigation and trajectory.",
+      "Preserve competing causal routes when the presentation is nonspecific."
+    ]
+  },
+  "differential_network": [
+    "acute infection",
+    "C. difficile",
+    "celiac/malabsorption",
+    "protozoal infection",
+    "helminthiasis",
+    "Crohn disease",
+    "ulcerative colitis",
+    "IBS",
+    "other structural/secretory/osmotic causes not fully represented in the compact summary"
+  ],
+  "conflicts_and_boundaries": [
+    {
+      "issue": "The source states that vancomycin is ALWAYS first choice for C. difficile and places fidaxomicin second.",
+      "handling": "Preserve as source-derived historical teaching point, but do not encode it as a current universal rule. The 2021 SHEA/IDSA focused update recommends fidaxomicin over a standard course of vancomycin for an initial CDI episode, with vancomycin remaining an acceptable alternative."
+    },
+    {
+      "issue": "The source proposes empirical quinolone therapy when acute diarrhea has alarm signs.",
+      "handling": "Preserve as source content. Current infectious-diarrhea guidance requires pathogen/clinical context and specifically cautions against inappropriate antibiotics in STEC because of HUS risk; this must be a contextual rule, not a blanket generator rule."
+    },
+    {
+      "issue": "The source gives detailed antiparasitic regimens but the compact material does not establish all modern dosing/context rules.",
+      "handling": "Do not promote every dose into the canonical layer without disease-specific guideline verification."
+    },
+    {
+      "issue": "The source uses some shorthand such as 'giardiasis is more common than amebiasis' and public-health comments about albendazole.",
+      "handling": "Preserve as source notes; treat epidemiologic statements as context-dependent rather than universal generator rules."
+    }
+  ],
+  "external_research_extension": {
+    "brazilian_acute_diarrhea": {
+      "finding": "The Brazilian Ministry of Health states that acute diarrheal disease management is centered on prevention and rapid correction of dehydration using oral rehydration solution or IV fluids according to hydration status and severity.",
+      "source": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/d/dda"
+    },
+    "infectious_diarrhea": {
+      "finding": "IDSA recommends stool testing in selected diarrheal presentations with fever, bloody/mucoid stool, severe abdominal pain/tenderness or sepsis.",
+      "source": "https://www.idsociety.org/practice-guideline/infectious-diarrhea/"
+    },
+    "cdi": {
+      "finding": "SHEA/IDSA 2021 focused update specifically changed the treatment hierarchy by addressing fidaxomicin and bezlotoxumab.",
+      "source": "https://www.idsociety.org/practice-guideline/clostridioides-difficile-2021-focused-update/"
+    }
+  },
+  "validation_targets_for_phase_1": [
+    "Generate small-bowel and colonic phenotypes without relying on fixed cases.",
+    "Generate acute infectious, chronic inflammatory, malabsorptive and functional presentations.",
+    "Represent C. difficile as an antibiotic-associated syndrome without hard-coding the source's outdated treatment hierarchy.",
+    "Represent STEC as a high-stakes branch where inappropriate antibiotic/antimotility choices matter.",
+    "Generate parasitic cases with epidemiology, eosinophilia and life-cycle clues when appropriate.",
+    "Generate Crohn/UC differentiation from anatomy, pathology, extraintestinal features and biomarkers.",
+    "Generate IBS only after structural/inflammatory alarm features are handled appropriately."
+  ]
+}
