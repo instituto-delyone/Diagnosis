@@ -374,6 +374,8 @@
         async loadModules() {
             try { await loadScript("Js/core/symptom-characterization.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/case-builder.js"); } catch (e) { console.warn(e); }
+            try { await loadScript("Js/core/knowledge-base-adapter.js"); } catch (e) { console.warn(e); }
+            try { await loadScript("Js/core/knowledge-to-patient-engine.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/case-research-engine.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/pcdt-catalog-provider.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/reference-range-resolver.js"); } catch (e) { console.warn(e); }
