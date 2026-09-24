@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "status": "active",
+  "purpose": "Define os slots mínimos e as regras estruturais para transformar conhecimento clínico em uma instância de paciente sem armazenar casos prontos.",
+  "principles": {
+    "knowledge_is_source": true,
+    "case_is_generated": true,
+    "no_case_library_required": true,
+    "probabilities_optional": true,
+    "local_first": true,
+    "research_is_complementary": true
+  },
+  "patient_slots": ["age","sex","context","chief_complaint","initial_narrative","onset","duration","symptoms","symptoms_absent","past_medical_history","medications","allergies","family_history","social_history","risk_factors","exposures","vital_signs","physical_exam","investigations","differentials","management","evolution"],
+  "generation_order": ["select_concept","read_knowledge","select_demographics","select_presentation","build_history","build_physical_exam","build_investigations","build_hidden_truth","build_opening","validate"],
+  "defaults_v0_1": {
+    "age_range": [20,60],
+    "sex_values": ["feminino","masculino"],
+    "initial_symptom_count": [1,3],
+    "default_stability": "estável",
+    "default_care_mode": "clinica_medica"
+  },
+  "source_priority": ["knowledge_entities","patient_generation","diagnostic_network","clinical_rules","summary_extraction"],
+  "research_policy": {
+    "trigger": "generation_when_local_knowledge_is_insufficient",
+    "before_presentation": true,
+    "local_first": true,
+    "never_replace_local_truth": true
+  },
+  "validation": {
+    "required": ["diagnosis","age","sex","chief_complaint","initial_narrative","history","physical_exam","investigations","clinical_truth"],
+    "reject_if": ["missing_diagnosis","missing_complaint","available_investigation_without_frozen_result"]
+  }
+}
