@@ -1,0 +1,110 @@
+{
+  "case_id": "cm01_muf17x6s",
+  "patient": {
+    "initials": "CAI",
+    "age": 46,
+    "sex": "feminino"
+  },
+  "history": [
+    {
+      "time": "2026-09-24T04:28:42.065Z",
+      "type": "SISTEMA",
+      "text": "CM01 → patologia → paciente sintético mínimo."
+    },
+    {
+      "time": "2026-09-24T04:28:42.094Z",
+      "type": "PACIENTE",
+      "text": "CAI, 46 anos, feminino. Estou ficando amarelo e me sentindo mal."
+    },
+    {
+      "time": "2026-09-24T04:28:42.096Z",
+      "type": "SISTEMA",
+      "text": "A patologia está oculta. Pergunte, examine e solicite exames."
+    },
+    {
+      "time": "2026-09-24T04:31:06.454Z",
+      "type": "VOCÊ",
+      "text": "qual a idade?"
+    },
+    {
+      "time": "2026-09-24T04:31:06.466Z",
+      "type": "PACIENTE",
+      "text": "Tenho 46 anos."
+    },
+    {
+      "time": "2026-09-24T04:31:13.731Z",
+      "type": "VOCÊ",
+      "text": "voce sente dor?"
+    },
+    {
+      "time": "2026-09-24T04:31:13.735Z",
+      "type": "PACIENTE",
+      "text": "Não há dor abdominal como sintoma principal."
+    },
+    {
+      "time": "2026-09-24T04:31:32.279Z",
+      "type": "VOCÊ",
+      "text": "voce tem outra doença?"
+    },
+    {
+      "time": "2026-09-24T04:31:32.280Z",
+      "type": "SISTEMA",
+      "text": "Pergunta ainda não coberta. Isso é proposital: agora sabemos exatamente onde conectar o próximo componente."
+    },
+    {
+      "time": "2026-09-24T04:31:53.177Z",
+      "type": "VOCÊ",
+      "text": "há quanto tempo se sente assim?"
+    },
+    {
+      "time": "2026-09-24T04:31:53.177Z",
+      "type": "SISTEMA",
+      "text": "Pergunta ainda não coberta. Isso é proposital: agora sabemos exatamente onde conectar o próximo componente."
+    },
+    {
+      "time": "2026-09-24T04:32:07.054Z",
+      "type": "VOCÊ",
+      "text": "vou solicitar bilirrubina"
+    },
+    {
+      "time": "2026-09-24T04:32:07.055Z",
+      "type": "EXAME",
+      "text": "Bilirrubina total e frações: Bilirrubina direta predominante"
+    },
+    {
+      "time": "2026-09-24T04:32:41.188Z",
+      "type": "VOCÊ",
+      "text": "hum, um sinal de doença das vias biliares"
+    },
+    {
+      "time": "2026-09-24T04:32:41.189Z",
+      "type": "SISTEMA",
+      "text": "Pergunta ainda não coberta. Isso é proposital: agora sabemos exatamente onde conectar o próximo componente."
+    },
+    {
+      "time": "2026-09-24T04:32:59.606Z",
+      "type": "VOCÊ",
+      "text": "como está o exame físico abdominal"
+    },
+    {
+      "time": "2026-09-24T04:32:59.607Z",
+      "type": "EXAME",
+      "text": "Exame etiológico dirigido: AST elevada e maior que ALT"
+    },
+    {
+      "time": "2026-09-24T04:33:17.509Z",
+      "type": "VOCÊ",
+      "text": "hepatite alcoolica"
+    },
+    {
+      "time": "2026-09-24T04:33:17.510Z",
+      "type": "PACIENTE",
+      "text": "O hábito relevante é consumo crônico de álcool."
+    },
+    {
+      "time": "2026-09-24T04:33:31.206Z",
+      "type": "AVALIAÇÃO",
+      "text": "Hipótese coerente com a verdade clínica."
+    }
+  ]
+}
