@@ -166,8 +166,11 @@
       if (!window.KnowledgeToPatientEngine) {
         await this.ensureScript("Js/core/knowledge-to-patient-engine.js");
       }
+      if (!window.ClinicalCaseGenerator) {
+        await this.ensureScript("Js/core/clinical-case-generator.js");
+      }
 
-      if (!window.KnowledgeBaseAdapter || !window.KnowledgeToPatientEngine) {
+      if (!window.KnowledgeBaseAdapter || !window.KnowledgeToPatientEngine || !window.ClinicalCaseGenerator) {
         throw new Error("Componentes essenciais de geração não carregaram.");
       }
 
@@ -189,6 +192,14 @@
       this.knowledgeAdapter = new window.KnowledgeBaseAdapter();
       await this.knowledgeAdapter.load();
       this.patientGenerator = new window.KnowledgeToPatientEngine({
+        adapter: this.knowledgeAdapter,
+        blueprint: this.generationBlueprint
+      });
+
+      // The clinical case generator is the authoritative creator of the playable
+      // patient seed. The older patient generator remains available as a lower-level
+      // compatibility layer, but it no longer defines the opening case.
+      this.clinicalCaseGenerator = new window.ClinicalCaseGenerator({
         adapter: this.knowledgeAdapter,
         blueprint: this.generationBlueprint
       });
@@ -352,13 +363,22 @@
       for (let i = 0; i < candidates.length; i += 1) {
         const entity = candidates[i];
         try {
-          const sourceCase = this.patientGenerator.generate({ conceptId: entity.id });
+          const sourceCase = await this.clinicalCaseGenerator.generate({
+            conceptId: entity.id,
+            research: false
+          });
           const clinicalCase = this.buildLocalCase(sourceCase);
           this.validate(clinicalCase);
           if (clinicalCase.clinical_truth?.conversation_ready !== true) {
             throw new Error("verdade clínica conversacional incompleta");
           }
-          onStatus?.("seleção", "ok", "conceito clínico selecionado após leitura da Knowledge Base");
+
+          // External/local reference enrichment is deliberately non-blocking.
+          // The player gets a minimal case first; the evidence context can warm up
+          // underneath the interaction.
+          this.enrichCaseInBackground(clinicalCase);
+
+          onStatus?.("seleção", "ok", "patologia selecionada e paciente sintético criado");
           return { sourceCase, card: this.cardData(clinicalCase, 0), case: clinicalCase };
         } catch (error) {
           lastError = error;
@@ -370,11 +390,43 @@
     }
 
     buildLocalCase(sourceCase) {
-      if (!window.CaseBuilder) throw new Error("CaseBuilder não carregou.");
-      return new window.CaseBuilder({
-        caseSource: sourceCase,
-        research: { enabled: false, evidence: [], source_status: [] }
-      }).build();
+      if (!sourceCase) throw new Error("Gerador não retornou paciente clínico.");
+
+      // The generator already returns the playable minimal clinical case.
+      // Do not pass it through the legacy CaseBuilder: that layer was designed
+      // to expand cases before the new knowledge-driven architecture existed.
+      return clone(sourceCase);
+    }
+
+    enrichCaseInBackground(clinicalCase) {
+      if (!clinicalCase || !window.CaseResearchEngine || !this.engine?.researchRules) return;
+
+      Promise.resolve().then(async () => {
+        try {
+          const researcher = new window.CaseResearchEngine({
+            config: this.engine.researchRules,
+            provider: null
+          });
+
+          const concept = clinicalCase.hidden?.diagnosis
+            || clinicalCase.primary_concept
+            || clinicalCase.title;
+
+          const evidence = await researcher.research({
+            concept,
+            primary_concept: concept,
+            anchors: clinicalCase.reference_context?.external_sources?.map(item => item.title).filter(Boolean) || []
+          });
+
+          clinicalCase.reference_context = clinicalCase.reference_context || {};
+          clinicalCase.reference_context.research = evidence || null;
+          clinicalCase.reference_context.research_status = "completed";
+        } catch (error) {
+          clinicalCase.reference_context = clinicalCase.reference_context || {};
+          clinicalCase.reference_context.research_status = "unavailable";
+          clinicalCase.reference_context.research_error = error instanceof Error ? error.message : String(error);
+        }
+      });
     }
 
     async prepareRemaining(count, onStatus, usedConceptIds = []) {
@@ -386,9 +438,13 @@
       const results = [];
       for (let i = 0; i < Math.min(count, candidates.length); i += 1) {
         const entity = candidates[i];
-        const sourceCase = this.patientGenerator.generate({ conceptId: entity.id });
+        const sourceCase = await this.clinicalCaseGenerator.generate({
+          conceptId: entity.id,
+          research: false
+        });
         const clinicalCase = this.buildLocalCase(sourceCase);
         this.validate(clinicalCase);
+        this.enrichCaseInBackground(clinicalCase);
         results.push({ sourceCase, card: this.cardData(clinicalCase, i + 1), case: clinicalCase });
         onStatus?.("caso " + (i + 2), "pronto", "gerado em segundo plano");
       }
