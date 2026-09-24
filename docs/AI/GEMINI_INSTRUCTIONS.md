@@ -731,10 +731,12 @@ docs/
 │   └── KNOWLEDGE_BASE_SCHEMA.json
 │
 ├── knowledge_base/
-│   ├── cardiopatias.json
-│   ├── endocrinologia.json
-│   ├── neurologia.json
-│   └── pneumologia.json
+│   ├── DIAGNOSIS_CM01_* ... DIAGNOSIS_CM35_*
+│   ├── knowledge_sources_manifest.json
+│   ├── examinations.json
+│   ├── reference_ranges.json
+│   ├── pcdt_catalog.json
+│   └── recursos auxiliares (AHA / transversais / interaction)
 │
 └── Js/
     ├── clinical/
