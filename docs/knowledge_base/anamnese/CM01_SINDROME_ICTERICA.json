@@ -1,0 +1,29 @@
+{
+  "module": "CM01",
+  "syndrome": "Síndrome Ictérica",
+  "role": "anamnese",
+  "source_policy": {
+    "primary_knowledge_source": "DIAGNOSIS_CM01_SINDROME_ICTERICA_v0.3.json",
+    "semiology_source_target": "Porto & Porto — Semiologia Médica",
+    "source_target_status": "Usar a fonte de semiologia para ampliar a estrutura da história clínica sem transformar frases em respostas fixas.",
+    "do_not_invent": true
+  },
+  "domains": [
+    "tempo de evolução da icterícia",
+    "prurido",
+    "exposição a medicamentos e toxinas",
+    "álcool",
+    "fatores de risco para hepatites",
+    "viagens e exposições infecciosas",
+    "práticas sexuais de risco",
+    "HIV",
+    "antecedentes pessoais e familiares",
+    "doenças hemolíticas",
+    "alterações urinárias e fecais",
+    "artralgias e mialgias",
+    "febre e calafrios",
+    "dor em hipocôndrio direito",
+    "anorexia e mal-estar",
+    "perda ponderal"
+  ]
+}
