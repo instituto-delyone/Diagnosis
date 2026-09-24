@@ -345,18 +345,28 @@
 
     async prepareFirst(onStatus) {
       await this.loadGenerationLayer(onStatus);
-      const candidates = this.knowledgeAdapter.candidatesForSpecialty("todos");
+      const candidates = shuffle(this.knowledgeAdapter.getAllEntities());
       if (!candidates.length) throw new Error("Nenhum conceito clínico disponível na Knowledge Base.");
 
-      const entity = shuffle(candidates)[0];
-      onStatus?.("seleção", "ok", "conceito clínico selecionado");
-      const sourceCase = this.patientGenerator.generate({ conceptId: entity.id });
-      const clinicalCase = this.buildLocalCase(sourceCase);
-      this.validate(clinicalCase);
-      if (clinicalCase.clinical_truth?.conversation_ready !== true) {
-        throw new Error("O primeiro caso não alcançou a estrutura clínica mínima.");
+      let lastError = null;
+      for (let i = 0; i < candidates.length; i += 1) {
+        const entity = candidates[i];
+        try {
+          const sourceCase = this.patientGenerator.generate({ conceptId: entity.id });
+          const clinicalCase = this.buildLocalCase(sourceCase);
+          this.validate(clinicalCase);
+          if (clinicalCase.clinical_truth?.conversation_ready !== true) {
+            throw new Error("verdade clínica conversacional incompleta");
+          }
+          onStatus?.("seleção", "ok", "conceito clínico selecionado após leitura da Knowledge Base");
+          return { sourceCase, card: this.cardData(clinicalCase, 0), case: clinicalCase };
+        } catch (error) {
+          lastError = error;
+        }
       }
-      return { sourceCase, card: this.cardData(clinicalCase, 0), case: clinicalCase };
+
+      throw new Error("Nenhum dos conceitos carregados conseguiu produzir um caso clínico mínimo. " +
+        (lastError?.message || ""));
     }
 
     buildLocalCase(sourceCase) {
