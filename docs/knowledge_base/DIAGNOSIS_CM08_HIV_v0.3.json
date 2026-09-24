@@ -1,0 +1,353 @@
+{
+  "model_metadata": {
+    "name": "DIAGNOSIS — Modelo de Conhecimento Clínico — CM 8 HIV",
+    "version": "0.3",
+    "status": "phase_1_semantic_mapping_provisional",
+    "clinical_domain": "infectious diseases / HIV / opportunistic infections",
+    "architecture_principle": "KNOWLEDGE → POSSIBILITIES → PATIENT → CASE → SIMULATION → EVALUATION",
+    "core_principle": "O caso não é o conhecimento; o caso é uma amostra do espaço clínico produzido pelo conhecimento.",
+    "phase": "Fase 1 — mapeamento semântico dos resumos",
+    "canonical_schema": false,
+    "case_generation": "deferred",
+    "source_policy": {
+      "summary_is_fragment": true,
+      "external_references_are_complementary": true,
+      "preserve_source_content": true,
+      "do_not_silently_correct_source": true,
+      "separate_source_from_external_research": true
+    }
+  },
+  "source_registry": [
+    {
+      "id": "src_summary",
+      "type": "uploaded_summary",
+      "title": "CM 8 - HIV.docx",
+      "role": "primary_fragment"
+    },
+    {
+      "id": "ext_brazil_hiv_m1",
+      "type": "external_research",
+      "title": "PCDT Manejo da Infecção pelo HIV em Adultos — Módulo 1: Tratamento",
+      "publisher": "Ministério da Saúde",
+      "url": "https://www.gov.br/aids/pt-br/central-de-conteudo/pcdts/pcdt_hiv_modulo_1_2024.pdf",
+      "role": "current Brazilian treatment framework"
+    },
+    {
+      "id": "ext_brazil_hiv_m2",
+      "type": "external_research",
+      "title": "PCDT Manejo da Infecção pelo HIV em Adultos — Módulo 2: Coinfecções e Infecções Oportunistas",
+      "publisher": "Ministério da Saúde",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/pcdt/m/manejo-da-infeccao-pelo-hiv-em-adultos-modulo-2/view",
+      "role": "current Brazilian OI framework"
+    },
+    {
+      "id": "ext_nih_hiv",
+      "type": "external_research",
+      "title": "NIH HIV Clinical Guidelines",
+      "publisher": "NIH ClinicalInfo",
+      "url": "https://clinicalinfo.hiv.gov/en/guidelines",
+      "role": "current external verification"
+    }
+  ],
+  "summary_extraction": {
+    "disease_model": {
+      "virus": "HIV, retrovírus; resumo menciona HIV-1 como mais comum no Brasil e HIV-2 na África",
+      "AIDS": "fase caracterizada por doenças definidoras; resumo também usa CD4 <200 como eixo didático"
+    },
+    "natural_history": {
+      "acute": [
+        "síndrome mononucleose-like",
+        "febre",
+        "rash",
+        "carga viral ↑",
+        "CD4 ↓",
+        "soroconversão 4–10 semanas",
+        "RNA detectável a partir do 10º dia segundo resumo"
+      ],
+      "latency": [
+        "fase assintomática",
+        "linfadenopatia generalizada persistente",
+        "set-point viral",
+        "queda de CD4 ao longo do tempo no modelo didático do resumo"
+      ],
+      "symptomatic": [
+        "doenças definidoras de AIDS; podem ocorrer precocemente ou com CD4 muito baixo"
+      ]
+    },
+    "diagnosis": {
+      "<=18_months": [
+        "HIV RNA/DNA pró-viral",
+        "2 HIV-RNA no esquema resumido"
+      ],
+      ">18_months": [
+        "anticorpo por imunoensaio/teste rápido",
+        "estratégia tradicional 2 testes",
+        "situações especiais: TR1+TR2 com kits diferentes",
+        "HIV-RNA como componente de confirmação em cenários específicos"
+      ],
+      "source_confirmation": [
+        "não reagente: IE/TR (-)",
+        "suspeito: repetir em 30 dias no resumo",
+        "reagente: HIV-RNA ou Imunoblot",
+        "discordantes: Western Blot ou Imunoblot"
+      ]
+    },
+    "opportunistic_conditions": {
+      "Kaposi": [
+        "HHV-8",
+        "CD4 <200/lesão cutânea violácea",
+        "tratamento tópico/QT no resumo"
+      ],
+      "MAC": [
+        "Mycobacterium avium complex",
+        "CD4 <50/enterite",
+        "claritromicina+etambutol no resumo"
+      ],
+      "histoplasmosis": [
+        "Histoplasma capsulatum",
+        "CD4 <100/forma disseminada",
+        "itraconazol no resumo"
+      ],
+      "cryptococcal_meningitis": [
+        "Cryptococcus neoformans",
+        "CD4 <100",
+        "cefaleia/confusão/PIC alta",
+        "punção lombar após excluir risco de herniação",
+        "pressão liquórica elevada e alterações de células/proteína/glicose",
+        "tinta nanquim, antígeno criptocócico/látex, cultura",
+        "anfotericina B + flucitosina 2 semanas + fluconazol 8 semanas no resumo"
+      ],
+      "toxoplasmosis": [
+        "Toxoplasma gondii",
+        "CD4 <100",
+        "lesões hipodensas geralmente múltiplas, edema e realce em anel",
+        "sulfadiazina+pirimetamina+ácido folínico",
+        "profilaxia primária: CD4 <100 + IgG positivo no resumo"
+      ],
+      "primary_cns_lymphoma": [
+        "EBV",
+        "CD4 <50",
+        "RM com lesão única",
+        "PCR EBV no líquor no resumo",
+        "TARV como conduta citada"
+      ],
+      "PML": [
+        "JC vírus",
+        "CD4 <200",
+        "RM hiperintensidade T2",
+        "TARV"
+      ]
+    },
+    "TB": {
+      "clinical": [
+        "febre",
+        "tosse",
+        "sudorese noturna",
+        "emagrecimento"
+      ],
+      "radiography": "cavitação CD4 >350; miliar CD4 <350 no resumo",
+      "diagnosis": [
+        "escarro",
+        "teste rápido",
+        "BAAR",
+        "cultura"
+      ],
+      "treatment": "RIPE 6 meses no resumo",
+      "ART_timing_source": [
+        "CD4 <50: TARV em até 2 semanas",
+        "TARV 8 semanas após início do tratamento para CD4 mais alto no resumo"
+      ],
+      "prophylaxis_source": "isoniazida 270 doses; PPD ≥5 ou contactante ou RX com cicatriz/reator prévio"
+    },
+    "PCP": {
+      "clinical": [
+        "tosse seca",
+        "dispneia progressiva",
+        "hipoxemia",
+        "LDH ↑"
+      ],
+      "radiography": "infiltrado bilateral sem linfonodomegalia/derrame",
+      "diagnosis": [
+        "isolamento do escarro",
+        "coloração por metenamina",
+        "broncoscopia"
+      ],
+      "treatment": "SMZ+TMP 21 dias",
+      "adjunct": "PaO2 <70 → corticoide",
+      "primary_prophylaxis_source": "CD4 <200 ou candidíase oral ou febre >2 semanas"
+    },
+    "ART": {
+      "source_principles": [
+        "TARV não é emergência médica, exceto PEP/ocupacional no quadro",
+        "iniciar sem demora segundo o resumo",
+        "tratamento com no mínimo 3 drogas",
+        "indicação: todo HIV (+) e prioritários",
+        "objetivo: carga viral indetectável; resumo cita 6 meses após início"
+      ],
+      "classes": [
+        "NRTI",
+        "NNRTI",
+        "INSTI",
+        "PI",
+        "inibidor de fusão",
+        "inibidor CCR5"
+      ],
+      "source_initial_regimen": "TDF + 3TC + DTG",
+      "source_special_regimens": [
+        "TB-HIV: TDF+3TC+EFV no resumo",
+        "gestante/TB grave: 3TC+TDF+RAL no resumo"
+      ],
+      "failure_source": "carga viral detectável após 6 meses ou rebote após supressão"
+    },
+    "PrEP_PEP": {
+      "PrEP_source": "ARV → TDF + entricitabina; resumo traz esquemas de relação anal e vaginal",
+      "PEP_source": "exposição de risco até 72h (ideal 2h); risco percutâneo/mucoso/pele não íntegra/mordedura com sangue; esquema citado TDF+3TC+DTG",
+      "source_exposure_types": [
+        "sangue",
+        "sêmen",
+        "secreção vaginal",
+        "líquidos compartimentalizados; saliva/urina/fezes sem sangue não transmitem segundo resumo"
+      ]
+    },
+    "vertical_transmission": {
+      "source_risk_without_intervention": "25%",
+      "source_risk_with_measures": "2% ou mesmo 0%",
+      "source_regimen": "TDF+3TC+RAL pré-natal a partir da 14ª semana no resumo",
+      "delivery_source": [
+        "cesárea eletiva + AZT EV em CV detectável/alta conforme quadro",
+        "AZT EV 3h antes do parto em certas situações",
+        "CV <1000: indicação obstétrica"
+      ],
+      "newborn_source": [
+        "AZT 4 semanas + NVP em doses nas primeiras 96h",
+        "SMX+TMP a partir de 4 semanas até 1 ano ou excluir HIV"
+      ]
+    }
+  },
+  "knowledge_entities": [
+    {
+      "id": "hiv_infection",
+      "type": "disease",
+      "name": "Infecção pelo HIV",
+      "reusable": true
+    },
+    {
+      "id": "aids",
+      "type": "syndrome",
+      "name": "Síndrome da imunodeficiência adquirida",
+      "reusable": true
+    },
+    {
+      "id": "pcp",
+      "type": "opportunistic_infection",
+      "name": "Pneumocistose",
+      "reusable": true
+    },
+    {
+      "id": "toxoplasmosis",
+      "type": "opportunistic_infection",
+      "name": "Neurotoxoplasmose",
+      "reusable": true
+    },
+    {
+      "id": "cryptococcosis",
+      "type": "opportunistic_infection",
+      "name": "Meningite criptocócica",
+      "reusable": true
+    },
+    {
+      "id": "tb_hiv",
+      "type": "coinfection",
+      "name": "Tuberculose em pessoa com HIV",
+      "reusable": true
+    },
+    {
+      "id": "kaposi",
+      "type": "neoplasm",
+      "name": "Sarcoma de Kaposi",
+      "reusable": true
+    },
+    {
+      "id": "pml",
+      "type": "opportunistic_infection",
+      "name": "Leucoencefalopatia multifocal progressiva",
+      "reusable": true
+    }
+  ],
+  "clinical_rules": [
+    {
+      "id": "hiv_art",
+      "rule": "O resumo estrutura TARV como indicada para todo HIV positivo e usa TDF+3TC+DTG como esquema inicial didático.",
+      "source": "summary"
+    },
+    {
+      "id": "cd4_opportunism",
+      "rule": "A expressão clínica e as profilaxias são relacionadas no resumo a faixas de CD4 e doenças oportunistas específicas.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": {},
+  "patient_generation": {
+    "axes": [
+      "fase da infecção",
+      "carga viral",
+      "CD4",
+      "assintomático vs sintomático",
+      "doença oportunista",
+      "coinfecção TB",
+      "gestação",
+      "exposição ocupacional/sexual",
+      "adesão/TARV",
+      "falha virológica"
+    ],
+    "constraints": [
+      "não tratar CD4 como determinante único de toda apresentação",
+      "permitir múltiplas trajetórias clínicas",
+      "manter distinção entre conteúdo histórico do resumo e protocolos atuais"
+    ]
+  },
+  "differential_network": {},
+  "conflicts_and_boundaries": [
+    {
+      "topic": "ART_and_OI_management",
+      "issue": "Os esquemas do resumo são didáticos e datados; o PCDT brasileiro foi atualizado em 2024 e a plataforma NIH continua sendo atualizada em 2026.",
+      "status": "versioned_source_only"
+    },
+    {
+      "topic": "diagnostic_testing",
+      "issue": "O algoritmo do resumo inclui nomenclaturas/etapas históricas; não deve ser convertido diretamente em algoritmo atual sem consulta ao PCDT vigente.",
+      "status": "verify_current"
+    },
+    {
+      "topic": "opportunistic_infection_thresholds",
+      "issue": "CD4 thresholds are useful teaching anchors in the summary but do not exhaust current indications for prophylaxis or treatment.",
+      "status": "preserve_as_teaching_anchor"
+    },
+    {
+      "topic": "vertical_transmission",
+      "issue": "The summary contains regimen and timing details that require current Brazilian verification before clinical use.",
+      "status": "verify_current"
+    }
+  ],
+  "external_research_extension": {
+    "current_notes": [
+      "O Ministério da Saúde mantém PCDT para HIV em adultos dividido em módulos de tratamento e coinfecções/OIs.",
+      "As diretrizes NIH para HIV em adultos e adolescentes foram atualizadas em 2026 e as diretrizes de OIs também recebem atualizações contínuas."
+    ],
+    "sources": [
+      "ext_brazil_hiv_m1",
+      "ext_brazil_hiv_m2",
+      "ext_nih_hiv"
+    ]
+  },
+  "validation_targets_for_phase_1": [
+    "gerar paciente em fase aguda",
+    "gerar paciente assintomático com diferentes CD4/carga viral",
+    "gerar pneumocistose",
+    "gerar neurotoxoplasmose",
+    "gerar meningite criptocócica",
+    "gerar TB-HIV",
+    "gerar falha/rebote virológico",
+    "gerar cenário de PEP/PrEP e transmissão vertical como domínios separados"
+  ]
+}

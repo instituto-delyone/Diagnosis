@@ -1,0 +1,313 @@
+{
+  "schema_version": "3.0",
+  "artifact_type": "diagnosis_knowledge_module",
+  "status": "phase_1_provisional",
+  "canonical": false,
+  "module": "CM06",
+  "title": "Terapia Intensiva",
+  "knowledge_base": {
+    "purpose": "Estruturar conhecimento clínico reutilizável antes da geração de casos.",
+    "principle": "FONTES → CONHECIMENTO → ESPAÇO DE POSSIBILIDADES CLÍNICAS → ESTADO DO PACIENTE → CASO → SIMULAÇÃO"
+  },
+  "source_registry": [
+    {
+      "id": "SRC_SUMMARY",
+      "type": "original_summary",
+      "name": "CM 6 - Terapia Intensiva.docx",
+      "date": "06/05/2021"
+    },
+    {
+      "id": "REF_SSC_2026",
+      "type": "guideline",
+      "name": "Surviving Sepsis Campaign 2026",
+      "url": "https://sccm.org/clinical-resources/guidelines/guidelines/surviving-sepsis-campaign-international-guidelines-for-management-of-sepsis-and-septic-shock-2026"
+    },
+    {
+      "id": "REF_SSC_2021",
+      "type": "guideline",
+      "name": "Surviving Sepsis Campaign 2021",
+      "url": "https://sccm.org/clinical-resources/guidelines/guidelines/surviving-sepsis-guidelines-2021"
+    },
+    {
+      "id": "REF_ARDS",
+      "type": "guideline",
+      "name": "ATS guideline dissemination — mechanical ventilation in ARDS",
+      "url": "https://www.atsjournals.org/doi/pdf/10.1513/AnnalsATS.201704-332CME?download=true"
+    }
+  ],
+  "summary_extraction": {
+    "source_date": "06/05/2021",
+    "content_note": "Resumo visual de terapia intensiva cobrindo abordagem inicial do paciente grave, choque, monitorização hemodinâmica, sepse/choque séptico, alteração da consciência/coma, morte encefálica e insuficiência respiratória/SDRA.",
+    "extracted_topics": [
+      "BLS/ACLS",
+      "monitorização inicial",
+      "choque hipovolêmico/cardiogênico/obstrutivo/distributivo",
+      "PVC/PAP/pressão capilar pulmonar/DC/IRVS",
+      "ressuscitação volêmica e vasoativos",
+      "sepse",
+      "choque séptico",
+      "Glasgow",
+      "coma metabólico vs estrutural",
+      "morte encefálica",
+      "insuficiência respiratória tipo 1 e tipo 2",
+      "SDRA",
+      "ventilação protetora",
+      "pronação",
+      "bloqueador neuromuscular",
+      "ECMO"
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "critical_initial",
+      "name": "Abordagem inicial ao paciente grave",
+      "class": "workflow",
+      "steps": [
+        "chamar ajuda/BLS-ACLS",
+        "monitor–oxigênio–acesso venoso",
+        "anamnese e exame dirigidos",
+        "glicemia capilar",
+        "avaliar diurese",
+        "procurar insuficiência respiratória, alteração de consciência e instabilidade hemodinâmica"
+      ]
+    },
+    {
+      "id": "shock",
+      "name": "Choque",
+      "class": "syndrome",
+      "definition": "Estado de baixa perfusão tecidual/hipoperfusão orgânica generalizada.",
+      "types": [
+        "hipovolêmico",
+        "cardiogênico",
+        "obstrutivo",
+        "distributivo"
+      ],
+      "hemodynamics": [
+        "DC determinado por volume + bomba íntegra",
+        "RVP determinada principalmente pelas arteríolas"
+      ],
+      "source_monitoring": [
+        "PVC",
+        "PAP",
+        "pressão capilar pulmonar/PAOP",
+        "débito cardíaco/índice cardíaco",
+        "IRVS"
+      ]
+    },
+    {
+      "id": "septic_shock",
+      "name": "Sepse/choque séptico",
+      "class": "syndrome",
+      "source_concept": "Resposta inflamatória desregulada à infecção, com disfunção orgânica; o resumo usa SIRS como estrutura antiga e descreve choque séptico como persistência de hipoperfusão/necessidade de vasopressor após volume.",
+      "organ_dysfunction_axes": [
+        "neurológico/Glasgow",
+        "renal/creatinina-diurese",
+        "hepático/bilirrubina",
+        "hematológico/plaquetas",
+        "respiratório/PaO2-FiO2",
+        "hemodinâmico/PAM"
+      ],
+      "source_treatment": [
+        "culturas + antibiótico",
+        "reposição volêmica",
+        "noradrenalina",
+        "corticoide em refratários",
+        "dobutamina quando débito reduzido"
+      ]
+    },
+    {
+      "id": "coma",
+      "name": "Alteração da consciência/coma",
+      "class": "syndrome",
+      "levels": [
+        "alerta",
+        "sonolência",
+        "torpor",
+        "coma"
+      ],
+      "assessment": [
+        "Glasgow 3–15",
+        "reflexos de tronco",
+        "pupilas",
+        "déficit focal",
+        "causas tóxico-metabólicas vs estruturais"
+      ],
+      "source_examples": [
+        "hipoglicemia",
+        "drogas",
+        "uremia",
+        "tumor",
+        "AVE",
+        "hemorragia"
+      ]
+    },
+    {
+      "id": "brain_death",
+      "name": "Morte encefálica",
+      "class": "diagnostic_process",
+      "source_elements": [
+        "causa conhecida e irreversível",
+        "período de observação/tratamento",
+        "temperatura e oxigenação adequadas",
+        "PAM adequada",
+        "coma + ausência de reflexos de tronco",
+        "teste de apneia",
+        "exame complementar quando indicado"
+      ],
+      "versioning_note": "O resumo contém intervalos etários e requisitos específicos; devem ser verificados contra a regulamentação brasileira vigente antes de codificação normativa."
+    },
+    {
+      "id": "respiratory_failure",
+      "name": "Insuficiência respiratória",
+      "class": "syndrome",
+      "types": [
+        "tipo 1/hipoxêmica: distúrbio V/Q, pneumonia, edema/SDRA; PaO2/FiO2 reduzida",
+        "tipo 2/hipercápnica: hipoventilação, neuromuscular/obstrutiva; PaCO2 elevada"
+      ]
+    },
+    {
+      "id": "ards",
+      "name": "Síndrome do desconforto respiratório agudo (SDRA)",
+      "class": "syndrome",
+      "source_features": [
+        "edema pulmonar inflamatório difuso",
+        "sepse como principal causa no resumo",
+        "opacidades bilaterais sem outra explicação",
+        "excluir causa cardiogênica/hipervolemia",
+        "gravidade por PaO2/FiO2"
+      ],
+      "source_severity": [
+        "leve <300",
+        "moderada <200",
+        "grave <100"
+      ],
+      "source_treatment": [
+        "corrigir causa base",
+        "ventilação protetora",
+        "volume corrente <6 mL/kg no resumo",
+        "PEEP/FiO2",
+        "pressão de platô <30 cmH2O",
+        "pressão de distensão <15 cmH2O",
+        "pronação",
+        "bloqueador neuromuscular",
+        "ECMO em refratários"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "id": "rule_shock",
+      "rule": "Classificar choque pelo mecanismo fisiopatológico e pelo perfil hemodinâmico antes de escolher reposição, vasopressor ou inotrópico."
+    },
+    {
+      "id": "rule_sepsis_current",
+      "rule": "Para a versão atual, o módulo deve usar a diretriz SSC 2026 como camada de referência contemporânea; o SIRS do resumo é preservado como conteúdo histórico/educacional."
+    },
+    {
+      "id": "rule_sepsis_vaso",
+      "rule": "SSC atual mantém norepinefrina como vasopressor inicial, alvo inicial de PAM 65 mmHg e possibilidade de iniciar vasopressor perifericamente sem atrasar tratamento quando apropriado."
+    },
+    {
+      "id": "rule_ards",
+      "rule": "Na SDRA, estratégia protetora deve ser codificada com peso corporal previsto, pressão de platô e gravidade; o resumo não deve ser transformado em um protocolo fechado sem versionamento."
+    },
+    {
+      "id": "rule_coma",
+      "rule": "Alteração da consciência exige distinção entre causa estrutural e metabólica/tóxica, com exame de pupilas, reflexos de tronco e déficit focal."
+    }
+  ],
+  "diagnostic_network": {
+    "nodes": [
+      "choque hipovolêmico",
+      "choque cardiogênico",
+      "choque obstrutivo",
+      "choque distributivo",
+      "sepse",
+      "choque séptico",
+      "coma metabólico/tóxico",
+      "coma estrutural",
+      "insuficiência respiratória tipo 1",
+      "insuficiência respiratória tipo 2",
+      "SDRA"
+    ],
+    "edges": [
+      "mecanismo → perfil DC/RVP/PVC/PCap",
+      "infecção + disfunção orgânica → sepse",
+      "sepse + choque → choque séptico",
+      "PaO2/FiO2 → gravidade de hipoxemia/SDRA",
+      "exame neurológico → estrutural vs metabólico"
+    ],
+    "differentials": [
+      "hipovolêmico vs distributivo",
+      "cardiogênico vs obstrutivo",
+      "choque séptico vs outras causas de hipotensão",
+      "coma metabólico/tóxico vs estrutural",
+      "edema cardiogênico vs SDRA",
+      "tipo 1 vs tipo 2 de insuficiência respiratória"
+    ]
+  },
+  "patient_generation": {
+    "dimensions": [
+      "tipo de choque",
+      "volume intravascular",
+      "função ventricular",
+      "RVP",
+      "PAM",
+      "lactato",
+      "diurese",
+      "estado mental",
+      "causa infecciosa",
+      "PaO2/FiO2",
+      "PaCO2",
+      "tempo de evolução",
+      "resposta à intervenção",
+      "necessidade de ventilação/vasopressor"
+    ],
+    "trajectories": [
+      "choque inicial → resposta ou refratariedade",
+      "sepse → disfunção orgânica → choque séptico",
+      "insuficiência respiratória → ventilação invasiva → desmame/falha",
+      "SDRA → progressão ou resolução",
+      "coma → reversível vs irreversível"
+    ],
+    "case_generation_rule": "Casos devem variar mecanismo, gravidade, contexto e trajetória; não repetir protocolos como se fossem casos."
+  },
+  "conflicts_and_boundaries": {
+    "issues": [
+      "O resumo é de 2021 e contém critérios/protocolos anteriores. A SSC 2026 deve ser a camada contemporânea para sepse/choque séptico.",
+      "O resumo descreve 30 mL/kg e metas da abordagem de 2021; a SSC atual enfatiza individualização após o bolus inicial, medidas dinâmicas, cristaloides e noradrenalina.",
+      "A classificação de morte encefálica e intervalos etários do resumo precisam de validação normativa brasileira vigente antes de serem convertidos em regra computável.",
+      "Doses e escolhas de drogas do resumo são históricas e não devem ser codificadas como universais."
+    ]
+  },
+  "external_research_extension": [
+    {
+      "source": "REF_SSC_2026",
+      "findings": [
+        "SSC 2026 mantém alvo inicial de PAM 65 mmHg, norepinefrina como vasopressor inicial e permite início periférico para não atrasar restauração da pressão quando apropriado."
+      ],
+      "citation": "web:turn0search7"
+    },
+    {
+      "source": "REF_SSC_2021",
+      "findings": [
+        "SSC 2021 recomendava cristaloides como primeira linha, norepinefrina como vasopressor inicial e alvo de PAM 65 mmHg; o resumo de 2021 deve ser versionado contra a atualização atual."
+      ],
+      "citation": "web:turn0search1"
+    },
+    {
+      "source": "REF_ARDS",
+      "findings": [
+        "Recomendação ATS para SDRA inclui volume corrente inicial de 6 mL/kg de peso corporal previsto e posição prona por mais de 12 h/dia em SDRA grave; pressão de platô <30 cmH2O é parte da ventilação protetora."
+      ],
+      "citation": "web:turn0search48"
+    }
+  ],
+  "validation_targets": [
+    "Não transformar o resumo em caso concreto.",
+    "Preservar rastreabilidade entre resumo, fonte externa e conhecimento estruturado.",
+    "Permitir múltiplas apresentações plausíveis a partir do mesmo conhecimento.",
+    "Separar fatos históricos do resumo de regras clínicas atuais quando houver atualização externa."
+  ],
+  "generated_at": "2026-09-23"
+}

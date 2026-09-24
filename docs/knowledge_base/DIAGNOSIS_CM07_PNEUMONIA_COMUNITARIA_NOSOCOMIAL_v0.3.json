@@ -1,0 +1,270 @@
+{
+  "model_metadata": {
+    "name": "DIAGNOSIS — Modelo de Conhecimento Clínico — CM 7 Pneumonia Comunitária e Nosocomial",
+    "version": "0.3",
+    "status": "phase_1_semantic_mapping_provisional",
+    "clinical_domain": "infectious diseases / pulmonology / pneumonia",
+    "architecture_principle": "KNOWLEDGE → POSSIBILITIES → PATIENT → CASE → SIMULATION → EVALUATION",
+    "core_principle": "O caso não é o conhecimento; o caso é uma amostra do espaço clínico produzido pelo conhecimento.",
+    "phase": "Fase 1 — mapeamento semântico dos resumos",
+    "canonical_schema": false,
+    "case_generation": "deferred",
+    "source_policy": {
+      "summary_is_fragment": true,
+      "external_references_are_complementary": true,
+      "preserve_source_content": true,
+      "do_not_silently_correct_source": true,
+      "separate_source_from_external_research": true
+    }
+  },
+  "source_registry": [
+    {
+      "id": "src_summary",
+      "type": "uploaded_summary",
+      "title": "CM 7 - Pneumonia Comunitária e Nosocomial.docx",
+      "role": "primary_fragment"
+    },
+    {
+      "id": "ext_ats_cap_2025",
+      "type": "external_research",
+      "title": "ATS Clinical Practice Guideline — Diagnosis and Management of Community-acquired Pneumonia",
+      "publisher": "American Thoracic Society",
+      "url": "https://www.atsjournals.org/doi/pdf/10.1164/rccm.202507-1692ST?download=true",
+      "role": "current CAP verification"
+    },
+    {
+      "id": "ext_ats_idsa_2019",
+      "type": "external_research",
+      "title": "ATS/IDSA Diagnosis and Treatment of Adults with Community-acquired Pneumonia",
+      "publisher": "ATS/IDSA",
+      "url": "https://www.atsjournals.org/doi/10.1164/rccm.201908-1581ST",
+      "role": "baseline CAP guidance referenced for comparison"
+    }
+  ],
+  "summary_extraction": {
+    "source_scope": [
+      "pneumonia adquirida na comunidade (PAC)",
+      "pneumonia nosocomial/associada à ventilação mecânica",
+      "tratamento por cenário",
+      "PAC grave",
+      "derrame pleural",
+      "abscesso pulmonar",
+      "aspiração"
+    ],
+    "cap": {
+      "diagnosis": "clínico-radiológico; queda do estado geral, febre, tosse secretiva, crepitações, broncofonia + infiltrado pulmonar",
+      "etiology_teaching": [
+        "Streptococcus pneumoniae",
+        "Mycoplasma pneumoniae",
+        "vírus"
+      ],
+      "pathophysiology_chain": [
+        "fator predisponente",
+        "inflamação e preenchimento alveolar"
+      ],
+      "tests": [
+        "escarro/hemocultura em refratário, internado ou complicado"
+      ],
+      "severity_tools": {
+        "CURB65": [
+          "confusão mental",
+          "ureia ≥43 (50)",
+          "FR ≥30",
+          "baixa PA (PAS <90 ou PAD ≤60)",
+          "idade ≥65"
+        ],
+        "PORT": "o resumo usa PORT como ferramenta alternativa de decisão de internação"
+      },
+      "severe_cap": {
+        "major": [
+          "choque séptico",
+          "ventilação mecânica invasiva"
+        ],
+        "minor": [
+          "confusão mental",
+          "ureia ≥43 (50)",
+          "FR ≥30",
+          "baixa PA",
+          "multilobar",
+          "PaO2/FiO2 <250",
+          "leucopenia",
+          "plaquetopenia",
+          "hipotermia"
+        ]
+      },
+      "source_teaching": "internação → buscar agente com Gram e cultura"
+    },
+    "treatment": {
+      "ambulatory": [
+        "S. pneumoniae: macrolídeo (azitro/claritro) + comum, exceto RN e DPOC; doxiciclina/amoxicilina em alta dose no quadro brasileiro do resumo",
+        "pneumococo resistente/comorbidade/ATB <3 meses/alta prevalência: cefalosporina 2ª/3ª geração ou quinolona respiratória",
+        "Mycoplasma: macrolídeo ou doxiciclina ou quinolona respiratória"
+      ],
+      "inpatient": [
+        "Klebsiella: cefalosporina 3ª ou ampicilina+sulbactam ou quinolona respiratória",
+        "S. aureus pós-influenza/drogas EV/pneumoceles/derrame pleural: oxacilina/cefalosporinas/quinolona respiratória",
+        "MRSA: vancomicina ou linezolida"
+      ],
+      "ICU": [
+        "Legionella pneumophila: macrolídeo ou quinolona respiratória; o resumo cita ar-condicionado, encanamento, hiponatremia/SIADH, diarreia/dor abdominal e aumento de AST/ALT"
+      ]
+    },
+    "pleural_effusion": {
+      "transudate_examples": [
+        "insuficiência cardíaca",
+        "síndrome nefrótica",
+        "cirrose"
+      ],
+      "exudate_examples": [
+        "tuberculose",
+        "câncer"
+      ],
+      "light": [
+        "proteína líquido/serum >0.5",
+        "LDH líquido/sérico >0.6",
+        "LDH líquido >2/3 do limite superior sérico"
+      ],
+      "complicated_empyema_source": [
+        "pH <7.2",
+        "glicose <60",
+        "LDH >1000",
+        "pus ou bactérias no Gram"
+      ]
+    },
+    "abscess": {
+      "aspiration_context": [
+        "etilistas",
+        "neuropatias",
+        "dentição ruim"
+      ],
+      "source_teaching": "pneumonite química inicial (síndrome de Mendelson), depois possível pneumonia necrosante/polimicrobiana; resumo cita clindamicina ou cluvulanato"
+    },
+    "nosocomial": {
+      "timing": [
+        "≥48h após internação",
+        "≥48h de intubação → PAVM"
+      ],
+      "organisms": [
+        "S. aureus",
+        "Pseudomonas aeruginosa"
+      ],
+      "antipseudomonal_options": [
+        "ceftazidima ou cefepime",
+        "piperacilina+tazobactam",
+        "meropenem ou imipenem"
+      ],
+      "MDR_risk_source": [
+        "ATB EV em 90 dias",
+        "internação ≥5 dias",
+        "choque séptico",
+        "SDRA ou diálise",
+        "bronquiectasia ou fibrose cística"
+      ],
+      "MDR_add_on_source": [
+        "cipro ou levofloxacino ou amicacina ou gentamicina",
+        "considerar polimixina B ou colistina conforme resistência"
+      ],
+      "MRSA_source": [
+        "ATB EV em 90 dias",
+        "vancomicina ou linezolida"
+      ]
+    }
+  },
+  "knowledge_entities": [
+    {
+      "id": "cap",
+      "type": "syndrome",
+      "name": "Pneumonia adquirida na comunidade",
+      "reusable": true
+    },
+    {
+      "id": "hap_vap",
+      "type": "syndrome",
+      "name": "Pneumonia nosocomial / PAVM",
+      "reusable": true
+    },
+    {
+      "id": "pleural_effusion",
+      "type": "complication",
+      "name": "Derrame pleural associado à pneumonia",
+      "reusable": true
+    },
+    {
+      "id": "lung_abscess",
+      "type": "complication",
+      "name": "Abscesso pulmonar",
+      "reusable": true
+    },
+    {
+      "id": "legionella",
+      "type": "etiologic_entity",
+      "name": "Legionella pneumophila",
+      "reusable": true
+    }
+  ],
+  "clinical_rules": [
+    {
+      "id": "cap_severity",
+      "rule": "PAC: CURB-65/PORT são apresentados pelo resumo como ferramentas para decisão de internação; PAC grave é definida no resumo por ≥1 critério maior ou ≥3 menores.",
+      "source": "summary"
+    },
+    {
+      "id": "nosocomial_timing",
+      "rule": "Pneumonia nosocomial ≥48h após internação; PAVM ≥48h após intubação.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": {},
+  "patient_generation": {
+    "axes": [
+      "comunitária vs nosocomial",
+      "ambulatorial vs internação vs UTI",
+      "gravidade",
+      "etiologia provável",
+      "fatores predisponentes",
+      "resposta/refratariedade",
+      "derrame/abscesso",
+      "risco de MDR/MRSA",
+      "aspiração"
+    ],
+    "constraints": [
+      "não transformar nenhuma tabela em caso fixo",
+      "permitir múltiplas combinações plausíveis"
+    ]
+  },
+  "differential_network": {},
+  "conflicts_and_boundaries": [
+    {
+      "topic": "antibiotic_regimens",
+      "issue": "O resumo é um material didático datado e contém esquemas específicos; eles devem ser preservados como fonte histórica e não tratados automaticamente como protocolo vigente.",
+      "status": "versioned_source_only"
+    },
+    {
+      "topic": "CAP_guidance_update",
+      "issue": "A ATS publicou nova diretriz oficial em 2025 para diagnóstico e manejo de PAC; ela deve ser consultada na camada externa quando o motor precisar de regras atuais.",
+      "status": "external_update",
+      "source": "ext_ats_cap_2025"
+    },
+    {
+      "topic": "HAP/VAP",
+      "issue": "O resumo apresenta fatores de MDR e combinações terapêuticas; não foi silenciosamente convertido em uma regra universal.",
+      "status": "preserve_with_provenance"
+    }
+  ],
+  "external_research_extension": {
+    "current_notes": [
+      "A ATS aprovou em maio de 2025 nova diretriz oficial para PAC, incluindo recomendações sobre ultrassom pulmonar, terapia antibacteriana empírica e outras questões."
+    ],
+    "sources": [
+      "ext_ats_cap_2025",
+      "ext_ats_idsa_2019"
+    ]
+  },
+  "validation_targets_for_phase_1": [
+    "gerar PAC de baixa, moderada e alta gravidade",
+    "gerar PAC com diferentes etiologias/fatores predisponentes",
+    "gerar HAP/PAVM com e sem risco de MDR",
+    "gerar derrame simples vs complicado",
+    "gerar aspiração com trajetória inicial química e possível evolução infecciosa"
+  ]
+}
