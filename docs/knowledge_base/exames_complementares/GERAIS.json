@@ -4,7 +4,8 @@
   "rules": {
     "one_exam_one_result": true,
     "never_cross_assign_results": true,
-    "result_belongs_to_exam_id": true
+    "result_belongs_to_exam_id": true,
+    "module_result_overrides_generic_result": true
   },
   "canonical_examples": [
     {"id":"hemograma","name":"Hemograma","result_domain":"hematologico"},
