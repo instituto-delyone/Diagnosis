@@ -1,0 +1,673 @@
+{
+  "model_metadata": {
+    "model_name": "DIAGNOSIS_CLINICAL_KNOWLEDGE_MODEL",
+    "model_version": "0.1",
+    "instance_id": "artrites_prototipo",
+    "role": "modelo-base de estruturação do conhecimento clínico",
+    "status": "provisional_template",
+    "canonical": false,
+    "generation_is_downstream": true,
+    "principle": "O caso clínico é uma realização possível do espaço clínico; não é a unidade primária de conhecimento.",
+    "source_policy": {
+      "summary_role": "fragmento de conhecimento/contexto fornecido pelo material original",
+      "external_reference_role": "complementação e expansão explicitamente rastreável",
+      "silent_correction_forbidden": true,
+      "source_conflicts_must_be_preserved": true
+    }
+  },
+  "clinical_domain": {
+    "id": "artrites",
+    "name": "Artrites",
+    "type": "clinical_syndrome_domain",
+    "scope": "doenças e padrões de inflamação/dor articular, incluindo formas degenerativas, infecciosas, autoimunes, cristalinas e reativas"
+  },
+  "source_registry": [
+    {
+      "source_id": "summary_cm24",
+      "type": "original_summary",
+      "title": "CM 24 - Artrites",
+      "provenance": "resumo visual fornecido no material do projeto",
+      "authority_role": "primary_source_for_summary_extraction",
+      "extraction_policy": "preservar apenas o que o resumo sustenta",
+      "observed_sections": [
+        "monoartrite crônica",
+        "artrite idiopática juvenil",
+        "artrite reativa",
+        "conduta diagnóstica",
+        "tratamento"
+      ]
+    },
+    {
+      "source_id": "arthritis_statpearls_2023",
+      "type": "external_reference",
+      "title": "Arthritis - StatPearls",
+      "publisher": "NCBI Bookshelf / StatPearls",
+      "last_update": "2023-06-20",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK518992/",
+      "authority_role": "complementary_reference",
+      "accessed": "2026-09-23"
+    }
+  ],
+  "summary_extraction": {
+    "source_id": "summary_cm24",
+    "etiologies_and_entities_explicitly_present": [
+      {
+        "entity": "osteoartrose",
+        "role": "cause/entity in chronic monoarthritis differential"
+      },
+      {
+        "entity": "artrite idiopática juvenil",
+        "role": "chronic monoarthritis / juvenile arthritis entity"
+      },
+      {
+        "entity": "artrite tuberculosa",
+        "role": "chronic monoarthritis infectious cause"
+      },
+      {
+        "entity": "artrite fúngica",
+        "role": "chronic monoarthritis infectious cause"
+      },
+      {
+        "entity": "artrite reativa",
+        "role": "post-infectious inflammatory arthritis"
+      },
+      {
+        "entity": "Shigella",
+        "role": "intestinal infectious trigger for reactive arthritis"
+      },
+      {
+        "entity": "Salmonella",
+        "role": "intestinal infectious trigger for reactive arthritis"
+      },
+      {
+        "entity": "Chlamydia trachomatis",
+        "role": "genitourinary infectious trigger for reactive arthritis"
+      }
+    ],
+    "classification_rules_explicitly_present": [
+      {
+        "condition": "idade < 16 anos e artrite > 6 semanas",
+        "classification": "artrite idiopática juvenil"
+      },
+      {
+        "pattern": "até 4 articulações",
+        "classification": "forma pauciarticular"
+      },
+      {
+        "pattern": "> 4 articulações",
+        "classification": "forma poliarticular"
+      },
+      {
+        "pattern": "forma sistêmica",
+        "classification": "doença de Still"
+      }
+    ],
+    "clinical_features_explicitly_present": [
+      {
+        "entity": "AIJ pauciarticular",
+        "features": [
+          "forma mais comum",
+          "meninas ≤ 4 anos",
+          "FR negativo",
+          "VHS normal",
+          "se FAN positivo: uveíte anterior"
+        ]
+      },
+      {
+        "entity": "AIJ poliarticular",
+        "features": [
+          "semelhante à artrite reumatoide do adulto",
+          "meninas > 10 anos",
+          "FR variável",
+          "VHS aumentado",
+          "se FAN positivo: uveíte anterior"
+        ]
+      },
+      {
+        "entity": "doença de Still",
+        "features": [
+          "febre",
+          "rash de cor salmão no tronco",
+          "artrite"
+        ]
+      },
+      {
+        "entity": "artrite reativa",
+        "features": [
+          "processo infeccioso à distância",
+          "tríade clássica: artrite + uretrite/cervicite + conjuntivite",
+          "dactilite",
+          "balanite circinada",
+          "ceratoderma blenorrágico"
+        ]
+      }
+    ],
+    "diagnostic_actions_explicitly_present": [
+      {
+        "action": "artrocentese",
+        "purpose": "investigação de monoartrite crônica",
+        "tests": [
+          "cultura para BK",
+          "cultura para fungos"
+        ]
+      }
+    ],
+    "treatment_explicitly_present": [
+      {
+        "condition": "artrite tuberculosa",
+        "treatment": "esquema RIPE por 6 meses"
+      },
+      {
+        "condition": "artrite reativa",
+        "treatment": [
+          "sintomáticos",
+          "erradicação de Chlamydia com doxiciclina ou azitromicina"
+        ]
+      }
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "arthritis_general",
+      "label": "Artrite",
+      "entity_type": "clinical_domain",
+      "definition": "Inflamação articular aguda ou crônica; o termo não é sinônimo de artralgia.",
+      "source_traceability": [
+        "arthritis_statpearls_2023"
+      ],
+      "clinical_dimensions": {
+        "onset": [
+          "agudo",
+          "insidioso"
+        ],
+        "joint_count": [
+          "monoarticular",
+          "oligoarticular",
+          "poliarticular"
+        ],
+        "symmetry": [
+          "simétrica",
+          "assimétrica"
+        ],
+        "distribution": [
+          "periférica",
+          "axial",
+          "mista"
+        ],
+        "pattern": [
+          "aditivo",
+          "migratório",
+          "intermitente"
+        ]
+      }
+    },
+    {
+      "id": "osteoarthritis",
+      "label": "Osteoartrose",
+      "entity_type": "degenerative_arthritis",
+      "etiologies_or_risk_factors": [
+        "idade avançada",
+        "sexo feminino",
+        "trauma articular",
+        "obesidade",
+        "fatores genéticos"
+      ],
+      "pathophysiology": {
+        "mechanism": "perda progressiva de cartilagem com alterações ósseas subcondrais",
+        "downstream_findings": [
+          "osteófitos",
+          "cistos subcondrais",
+          "espessamento da placa subcondral"
+        ]
+      },
+      "source_traceability": [
+        "summary_cm24",
+        "arthritis_statpearls_2023"
+      ]
+    },
+    {
+      "id": "juvenile_idiopathic_arthritis",
+      "label": "Artrite Idiopática Juvenil",
+      "entity_type": "juvenile_inflammatory_arthritis",
+      "summary_definition": "No resumo: artrite em menor de 16 anos com duração superior a 6 semanas.",
+      "subtypes_from_summary": [
+        {
+          "id": "pauciarticular",
+          "criteria": "≤ 4 articulações",
+          "features": [
+            "mais comum",
+            "predomínio em meninas ≤ 4 anos",
+            "FR negativo",
+            "VHS normal"
+          ],
+          "association": "FAN positivo associado a risco de uveíte anterior"
+        },
+        {
+          "id": "polyarticular",
+          "criteria": "> 4 articulações",
+          "features": [
+            "semelhante à AR do adulto",
+            "meninas > 10 anos",
+            "FR variável",
+            "VHS aumentado"
+          ],
+          "association": "FAN positivo associado a risco de uveíte anterior"
+        },
+        {
+          "id": "systemic_still",
+          "label": "Doença de Still",
+          "features": [
+            "febre",
+            "rash salmão no tronco",
+            "artrite"
+          ]
+        }
+      ],
+      "source_traceability": [
+        "summary_cm24"
+      ]
+    },
+    {
+      "id": "tuberculous_arthritis",
+      "label": "Artrite tuberculosa",
+      "entity_type": "infectious_arthritis",
+      "etiologic_agent": "Mycobacterium tuberculosis",
+      "clinical_pattern": "monoartrite crônica; no resumo, destacada especialmente em jovens",
+      "diagnostic_action": {
+        "procedure": "artrocentese",
+        "testing": [
+          "cultura para BK"
+        ]
+      },
+      "treatment_in_summary": "RIPE por 6 meses",
+      "source_traceability": [
+        "summary_cm24"
+      ]
+    },
+    {
+      "id": "fungal_arthritis",
+      "label": "Artrite fúngica",
+      "entity_type": "infectious_arthritis",
+      "clinical_pattern": "monoartrite crônica",
+      "diagnostic_action": {
+        "procedure": "artrocentese",
+        "testing": [
+          "cultura para fungos"
+        ]
+      },
+      "source_traceability": [
+        "summary_cm24"
+      ]
+    },
+    {
+      "id": "reactive_arthritis",
+      "label": "Artrite reativa",
+      "entity_type": "post_infectious_inflammatory_arthritis",
+      "mechanism": {
+        "type": "post_infectious",
+        "description": "Processo inflamatório articular desencadeado por infecção em outro sítio."
+      },
+      "triggers_from_summary": {
+        "intestinal": [
+          "Shigella",
+          "Salmonella"
+        ],
+        "genitourinary": [
+          "Chlamydia trachomatis"
+        ]
+      },
+      "classic_pattern": [
+        "artrite",
+        "uretrite/cervicite",
+        "conjuntivite"
+      ],
+      "additional_features": [
+        "dactilite",
+        "balanite circinada",
+        "ceratoderma blenorrágico"
+      ],
+      "treatment_in_summary": [
+        "tratamento sintomático",
+        "doxiciclina ou azitromicina para erradicação de Chlamydia"
+      ],
+      "source_traceability": [
+        "summary_cm24"
+      ]
+    }
+  ],
+  "external_research_extension": {
+    "source_id": "arthritis_statpearls_2023",
+    "purpose": "expandir o fragmento do resumo para demonstrar o comportamento do modelo-base",
+    "etiologic_classes": [
+      {
+        "class": "degenerativa",
+        "examples": [
+          "osteoartrose"
+        ]
+      },
+      {
+        "class": "autoimune_inflamatoria",
+        "examples": [
+          "artrite reumatoide",
+          "artrite psoriásica",
+          "espondilite anquilosante",
+          "artrite associada a lúpus",
+          "artrite associada a Sjögren",
+          "artrite associada a esclerodermia",
+          "artrite associada a miosite"
+        ]
+      },
+      {
+        "class": "cristalina",
+        "examples": [
+          "gota",
+          "pseudogota",
+          "doença por fosfato de cálcio básico"
+        ]
+      },
+      {
+        "class": "infecciosa",
+        "examples": [
+          "artrite séptica",
+          "artrite de Lyme",
+          "artrites micobacterianas",
+          "artrites fúngicas"
+        ]
+      },
+      {
+        "class": "associada_a_doenca_sistemica",
+        "examples": [
+          "doença inflamatória intestinal",
+          "doença celíaca",
+          "doenças do tecido conjuntivo"
+        ]
+      }
+    ],
+    "pattern_network": {
+      "acute_onset": [
+        "artrite séptica",
+        "artropatias por cristais",
+        "artrite reativa"
+      ],
+      "insidious_onset": [
+        "osteoartrose",
+        "artrite reumatoide",
+        "artrite psoriásica",
+        "artrites autoimunes"
+      ],
+      "monoarthritis": [
+        "infecções bacterianas",
+        "doença de Lyme",
+        "infecções micobacterianas",
+        "gota",
+        "pseudogota",
+        "trauma",
+        "osteoartrose",
+        "hemartrose",
+        "tumores"
+      ],
+      "polyarthritis_inflammatory": [
+        "artrite reumatoide",
+        "artrite psoriásica",
+        "espondilite anquilosante",
+        "artrite reativa",
+        "artrite associada a DII",
+        "AIJ",
+        "gota",
+        "pseudogota",
+        "LES",
+        "doença mista do tecido conjuntivo"
+      ],
+      "migratory": [
+        "doença de Whipple",
+        "artrite gonocócica",
+        "febre reumática"
+      ],
+      "intermittent": [
+        "reumatismo palindrômico",
+        "gota",
+        "pseudogota",
+        "febre familiar do Mediterrâneo",
+        "doença de Still do adulto"
+      ]
+    },
+    "evaluation": {
+      "laboratory": [
+        "VHS",
+        "PCR",
+        "fator reumatoide",
+        "anticorpos anti-CCP",
+        "FAN quando indicado",
+        "ácido úrico como dado auxiliar, não como critério isolado"
+      ],
+      "imaging": [
+        "radiografia simples",
+        "ultrassonografia musculoesquelética",
+        "ressonância magnética",
+        "tomografia computadorizada em situações selecionadas",
+        "DECT para avaliação de gota em contextos apropriados"
+      ],
+      "synovial_fluid": [
+        "contagem celular e diferencial",
+        "pesquisa de cristais",
+        "cultura bacteriana",
+        "cultura para micobactérias quando indicada",
+        "cultura fúngica quando indicada",
+        "PCR para Lyme quando apropriado"
+      ]
+    },
+    "management_principles": {
+      "osteoarthritis": [
+        "exercício/fisioterapia",
+        "redução de peso quando indicada",
+        "AINEs tópicos ou sistêmicos conforme contexto",
+        "outras terapias sintomáticas",
+        "cirurgia em doença refratária selecionada"
+      ],
+      "inflammatory_autoimmune": [
+        "tratamento modificador da doença",
+        "biológicos em contextos apropriados",
+        "anti-inflamatórios como adjuvantes",
+        "corticosteroides em exacerbações selecionadas"
+      ],
+      "gout": [
+        "tratamento anti-inflamatório da crise",
+        "terapia redutora de urato em pacientes selecionados"
+      ],
+      "septic_arthritis": [
+        "drenagem articular",
+        "antibioticoterapia orientada por culturas"
+      ]
+    }
+  },
+  "clinical_rules": [
+    {
+      "rule_id": "ARTRITE_MONOARTICULAR_CRONICA",
+      "if": [
+        "monoartrite",
+        "curso crônico"
+      ],
+      "consider": [
+        "osteoartrose",
+        "AIJ",
+        "artrite tuberculosa",
+        "artrite fúngica"
+      ],
+      "source_traceability": [
+        "summary_cm24"
+      ]
+    },
+    {
+      "rule_id": "ARTRITE_REATIVA_TRIGGER",
+      "if": [
+        "artrite",
+        "infecção intestinal ou geniturinária prévia"
+      ],
+      "consider": [
+        "artrite reativa"
+      ],
+      "triggers": [
+        "Shigella",
+        "Salmonella",
+        "Chlamydia trachomatis"
+      ],
+      "source_traceability": [
+        "summary_cm24"
+      ]
+    },
+    {
+      "rule_id": "PATTERN_FIRST",
+      "if": [
+        "artrite presente"
+      ],
+      "evaluate_in_order": [
+        "início",
+        "número de articulações",
+        "simetria",
+        "distribuição",
+        "padrão temporal"
+      ],
+      "source_traceability": [
+        "arthritis_statpearls_2023"
+      ]
+    }
+  ],
+  "diagnostic_network": {
+    "entry_problem": "artrite",
+    "first_questions": [
+      "A dor é realmente articular?",
+      "O início foi agudo ou insidioso?",
+      "É mono, oligo ou poliarticular?",
+      "O acometimento é simétrico ou assimétrico?",
+      "Qual é a distribuição?",
+      "O padrão é aditivo, migratório ou intermitente?",
+      "Há sinais sistêmicos ou manifestações extra-articulares?"
+    ],
+    "high_value_test": {
+      "procedure": "artrocentese",
+      "when": "especialmente na monoartrite em que infecção ou cristalização precisam ser diferenciadas"
+    }
+  },
+  "temporal_trajectories": [
+    {
+      "trajectory_id": "acute_inflammatory",
+      "initial_state": "dor/inflamação articular aguda",
+      "possible_directions": [
+        "resolução",
+        "recorrência",
+        "progressão",
+        "dano estrutural"
+      ],
+      "associated_classes": [
+        "séptica",
+        "cristalina",
+        "reativa"
+      ]
+    },
+    {
+      "trajectory_id": "chronic_degenerative",
+      "initial_state": "dor e limitação funcional insidiosas",
+      "possible_directions": [
+        "progressão estrutural",
+        "perda funcional",
+        "necessidade de intervenção"
+      ],
+      "associated_classes": [
+        "osteoartrose"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "purpose": "descrever o espaço de variação possível sem fixar um caso único",
+    "variables": {
+      "age": "contínua",
+      "sex": "categorical",
+      "joint_count": [
+        "monoarticular",
+        "oligoarticular",
+        "poliarticular"
+      ],
+      "onset": [
+        "agudo",
+        "insidioso"
+      ],
+      "symmetry": [
+        "simétrica",
+        "assimétrica"
+      ],
+      "distribution": [
+        "periférica",
+        "axial",
+        "mista"
+      ],
+      "pattern": [
+        "aditivo",
+        "migratório",
+        "intermitente"
+      ],
+      "systemic_features": "variable",
+      "skin_findings": "variable",
+      "ocular_findings": "variable",
+      "infectious_exposure": "variable",
+      "autoimmune_context": "variable",
+      "metabolic_context": "variable"
+    },
+    "constraints": [
+      "Não gerar combinação incompatível com a entidade clínica selecionada.",
+      "Manter coerência entre idade, padrão articular, etiologia e evolução.",
+      "Permitir apresentações não idênticas ao resumo original.",
+      "Não transformar um caso específico do resumo em template fixo."
+    ]
+  },
+  "differential_network": [
+    {
+      "presentation": "monoartrite crônica",
+      "nodes": [
+        "osteoartrose",
+        "AIJ",
+        "artrite tuberculosa",
+        "artrite fúngica"
+      ]
+    },
+    {
+      "presentation": "poliartrite inflamatória",
+      "nodes": [
+        "artrite reumatoide",
+        "artrite psoriásica",
+        "espondiloartrites",
+        "AIJ",
+        "gota",
+        "pseudogota",
+        "LES",
+        "doença mista do tecido conjuntivo"
+      ]
+    },
+    {
+      "presentation": "artrite aguda",
+      "nodes": [
+        "artrite séptica",
+        "gota",
+        "pseudogota",
+        "artrite reativa"
+      ]
+    }
+  ],
+  "conflicts_and_boundaries": [
+    {
+      "issue": "O resumo de artrites é altamente condensado.",
+      "handling": "Não interpretar sua ausência de informação como ausência clínica; complementar apenas por fonte explicitamente identificada."
+    },
+    {
+      "issue": "Tratamentos do resumo podem refletir material educacional específico e precisam de validação atual antes de serem usados como regra terapêutica do sistema.",
+      "handling": "Preservar como conteúdo da fonte, mas marcar para validação nas etapas de atualização."
+    }
+  ],
+  "validation_targets_for_phase_1": [
+    "Comparar cada entidade extraída com a Knowledge Base atual.",
+    "Detectar duplicidades, lacunas e entidades em formato inadequado.",
+    "Separar conhecimento reutilizável de elementos específicos do resumo.",
+    "Verificar quais relações etiologia → mecanismo → apresentação → investigação → tratamento já existem.",
+    "Registrar proveniência de cada informação.",
+    "Somente após a análise dos 32 resumos decidir o modelo canônico definitivo."
+  ]
+}

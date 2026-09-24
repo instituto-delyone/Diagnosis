@@ -1,0 +1,37 @@
+{
+  "model_metadata": {
+    "project": "Diagnosis",
+    "phase": "fase_1",
+    "module": "CM35",
+    "title": "Otorrinolaringologia",
+    "version": "0.1",
+    "status": "source_pending",
+    "canonical": false,
+    "purpose": "Registro formal de pendência até que o resumo-fonte original esteja disponível para leitura."
+  },
+  "source_registry": {
+    "summary_source": {
+      "status": "not_available_in_current_accessible_source_set",
+      "expected_module": "CM35 – Otorrinolaringologia"
+    },
+    "project_index": {
+      "status": "confirmed",
+      "basis": "links de pesquisa para complementar a KB do Diagnosis"
+    }
+  },
+  "summary_extraction": null,
+  "external_research_extension": null,
+  "knowledge_entities": null,
+  "clinical_rules": null,
+  "diagnostic_network": null,
+  "patient_generation": null,
+  "differential_network": null,
+  "conflicts_and_boundaries": {
+    "blocking_reason": "O índice do projeto confirma a existência do módulo, mas o resumo original não está disponível no conjunto de fontes acessível nesta etapa. Não preencher lacunas com conhecimento geral antes da leitura do resumo.",
+    "next_required_step": "Disponibilizar/localizar o PDF ou imagem do resumo original e então executar a extração semântica."
+  },
+  "validation_targets_for_phase_1": {
+    "status": "blocked_until_source_available",
+    "rule": "FONTES → CONHECIMENTO → ESPAÇO DE POSSIBILIDADES CLÍNICAS → ESTADO DO PACIENTE → CASO → SIMULAÇÃO"
+  }
+}
