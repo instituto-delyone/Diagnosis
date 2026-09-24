@@ -1,0 +1,298 @@
+{
+  "model_metadata": {
+    "model_type": "DIAGNOSIS_CLINICAL_KNOWLEDGE_MODEL",
+    "schema_role": "provisional_template_for_phase_1",
+    "canonical": false,
+    "version": "0.2",
+    "architecture_principle": "FONTES -> CONHECIMENTO -> ESPAÇO DE POSSIBILIDADES CLÍNICAS -> ESTADO DO PACIENTE -> CASO -> SIMULAÇÃO",
+    "case_bank": false
+  },
+  "construction_policy": {
+    "summary_role": "fragmento_de_contexto",
+    "external_sources_role": "complemento_verificacao_atualizacao",
+    "traceability": "obrigatoria",
+    "silent_correction": false,
+    "generation_before_knowledge": false
+  },
+  "clinical_domain": {
+    "module_id": "CM27",
+    "name": "Dor Torácica",
+    "scope": "síndrome de dor torácica aguda e crônica, com diferenciação de causas cardiovasculares e não cardiovasculares"
+  },
+  "source_registry": {
+    "primary_summary": {
+      "type": "uploaded_summary_pdf",
+      "filename": "CM 27 - Dor Torácica.docx.pdf",
+      "source_layer": "summary_original"
+    },
+    "project_reference_links": [
+      {
+        "type": "PCDT_MoH",
+        "url": "https://www.gov.br/saude/pt-br/assuntos/pcdt"
+      },
+      {
+        "type": "MSD_Manuals",
+        "name": "Dor torácica",
+        "url": "https://www.msdmanuals.com/pt/profissional/doen%C3%A7as-cardiovasculares/sintomas-de-doen%C3%A7as-cardiovasculares/dor-tor%C3%A1cica"
+      },
+      {
+        "type": "specific_reference",
+        "name": "AHA/ACC 2021 Chest Pain Guideline",
+        "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001029"
+      },
+      {
+        "type": "specific_reference",
+        "name": "ACC/AHA/ACEP/NAEMSP/SCAI 2025 ACS Guideline",
+        "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001309"
+      }
+    ],
+    "external_sources_consulted": [
+      {
+        "name": "MSD — Dor torácica",
+        "url": "https://www.msdmanuals.com/pt/profissional/doen%C3%A7as-cardiovasculares/sintomas-de-doen%C3%A7as-cardiovasculares/dor-tor%C3%A1cica"
+      },
+      {
+        "name": "AHA/ACC 2021 Chest Pain Guideline",
+        "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001029"
+      },
+      {
+        "name": "ACC/AHA/ACEP/NAEMSP/SCAI 2025 ACS Guideline",
+        "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001309"
+      },
+      {
+        "name": "AHA 2022 high-sensitivity troponin primer",
+        "url": "https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.122.059678"
+      }
+    ]
+  },
+  "summary_extraction": {
+    "fidelity_note": "O resumo contém algoritmos de emergência e condutas de uma época anterior à diretriz ACS 2025; o conteúdo é preservado como source_layer.",
+    "initial_evaluation": [
+      "clínica",
+      "ECG",
+      "radiografia de tórax"
+    ],
+    "differential": [
+      "isquêmica",
+      "dissecção de aorta",
+      "pericardite",
+      "cardiomiopatia",
+      "valvopatias",
+      "pleuropulmonar",
+      "gastrointestinal",
+      "músculo-esquelética",
+      "herpes-zoster",
+      "psicogênica"
+    ],
+    "aortic_dissection": {
+      "clinical": [
+        "dor intensa e súbita",
+        "irradiação dorsal/interescapular",
+        "sopro de insuficiência aórtica",
+        "diferença de PA entre membros"
+      ],
+      "complications": [
+        "insuficiência aórtica",
+        "tamponamento",
+        "síncope/AVE",
+        "hemotórax",
+        "isquemia mesentérica",
+        "isquemia renal"
+      ],
+      "classification": [
+        "Stanford A",
+        "Stanford B"
+      ],
+      "diagnosis": [
+        "angioTC/RM em estáveis",
+        "ecocardiograma transesofágico em instáveis",
+        "angioTC se alternativas indisponíveis/contraindicadas"
+      ]
+    },
+    "pericarditis": {
+      "clinical": [
+        "dor pleurítica",
+        "melhora sentado/piora deitado",
+        "atrito pericárdico"
+      ],
+      "ECG": [
+        "supra de ST",
+        "infra de PR"
+      ],
+      "imaging": [
+        "derrame pericárdico ao eco"
+      ]
+    },
+    "esophageal_spasm": {
+      "clinical": [
+        "dor pós-prandial",
+        "dor com deglutição/estresse",
+        "simula dor coronariana"
+      ],
+      "diagnosis": [
+        "esofagografia baritada",
+        "esofagomanometria"
+      ],
+      "treatment_in_summary": [
+        "nitrato",
+        "antagonista de canal de cálcio"
+      ]
+    },
+    "chronic_ischemia": {
+      "patterns": [
+        "angina estável",
+        "Prinzmetal",
+        "microvascular/síndrome X",
+        "silenciosa/atípica"
+      ],
+      "typical_angina": [
+        "desconforto retroesternal",
+        "piora com estresse/exercício",
+        "alívio com repouso/nitrato"
+      ],
+      "tests": [
+        "ECG",
+        "teste ergométrico",
+        "perfusão por radionuclídeos",
+        "eco/RM com dobutamina",
+        "angioTC/angioRM",
+        "coronariografia"
+      ],
+      "therapy_framework_in_summary": [
+        "antiagregação",
+        "estatina",
+        "betabloqueador",
+        "IECA em condições descritas",
+        "nitrato sintomático",
+        "outras drogas anti-isquêmicas",
+        "revascularização"
+      ]
+    },
+    "acute_coronary_syndrome": {
+      "clinical": [
+        "dor >15–20 min",
+        "instalação rápida/em crescendo",
+        "repouso ou pequeno esforço",
+        "náuseas",
+        "vômitos",
+        "diaforese"
+      ],
+      "entities": [
+        "angina instável",
+        "IAM sem supra",
+        "IAM com supra"
+      ],
+      "initial_evaluation": [
+        "ECG em 10 min",
+        "troponina seriada",
+        "CK-MB se troponina indisponível no resumo"
+      ],
+      "risk_stratification_in_summary": [
+        "imediata",
+        "precoce",
+        "retardada"
+      ],
+      "STEMI": [
+        "reperfusão imediata",
+        "ICP ou fibrinolítico quando indicado"
+      ],
+      "complications": [
+        "arritmias",
+        "IAM de ventrículo direito",
+        "CIV",
+        "pericardite precoce",
+        "Dressler"
+      ]
+    },
+    "ECG_territories": {
+      "inferior": [
+        "DII,DIII,aVF"
+      ],
+      "anterior": [
+        "V1-V4/V1-V6 conforme extensão"
+      ],
+      "lateral": [
+        "DI,aVL,V5,V6"
+      ],
+      "right_ventricle": [
+        "V3R,V4R"
+      ],
+      "posterior": [
+        "V7,V8"
+      ]
+    }
+  },
+  "external_research_extension": {
+    "updates": [
+      "A diretriz AHA/ACC 2021 organiza avaliação de dor torácica por risco e prioriza exclusão rápida de condições ameaçadoras à vida.",
+      "Troponina cardíaca de alta sensibilidade é preferida para diagnóstico bioquímico de IAM nas recomendações contemporâneas.",
+      "A diretriz ACC/AHA/ACEP/NAEMSP/SCAI 2025 atualiza o manejo de SCA e deve substituir a lógica terapêutica histórica do resumo antes de produção."
+    ],
+    "boundary": "tempos, doses, critérios de reperfusão e escolhas farmacológicas do resumo devem ser reconciliados com a diretriz ACS 2025"
+  },
+  "clinical_knowledge_map": {
+    "life_threatening_first": [
+      "SCA",
+      "dissecção de aorta",
+      "embolia pulmonar",
+      "pneumotórax hipertensivo",
+      "tamponamento/pericardite complicada"
+    ],
+    "causal_chains": [
+      "obstrução coronária -> isquemia -> lesão miocárdica -> sintomas/biomarcadores/ECG",
+      "dissecção -> comprometimento da parede e/ou ramos -> isquemia/insuficiência/tamponamento",
+      "inflamação pericárdica -> dor pleurítica/postural -> alterações ECG/derrame",
+      "disfunção esofágica -> dor torácica não cardíaca que pode simular angina"
+    ],
+    "pattern_axes": [
+      "tempo",
+      "qualidade",
+      "irradiação",
+      "esforço",
+      "respiração",
+      "posição",
+      "alimentação",
+      "sintomas associados",
+      "instabilidade",
+      "ECG",
+      "troponina",
+      "imagem",
+      "fatores de risco"
+    ]
+  },
+  "patient_generation": {
+    "dimensions": [
+      "aguda/crônica",
+      "cardíaca/não cardíaca",
+      "instável/estável",
+      "isquêmica/inflamatória/vascular/esofágica/musculoesquelética",
+      "ECG",
+      "troponina",
+      "imagem",
+      "perfil de risco"
+    ],
+    "safety_constraints": [
+      "condições potencialmente fatais exigem avaliação compatível",
+      "manter coerência temporal entre sintomas, ECG, biomarcadores e evolução"
+    ]
+  },
+  "validation_targets": [
+    "múltiplas causas de dor torácica",
+    "gravidade não inferida apenas pela intensidade",
+    "diferenciar dissecção/SCA/pericardite/não cardíaca",
+    "SCA com ECG inicialmente não diagnóstico e biomarcadores seriados",
+    "reconciliar terapêutica com ACS 2025"
+  ],
+  "conflicts_and_boundaries": [
+    {
+      "type": "guideline_update",
+      "issue": "condutas do resumo antecedem guideline ACS 2025",
+      "handling": "preservar source_layer e atualizar production_layer"
+    },
+    {
+      "type": "historical_thresholds",
+      "issue": "limiares e sequências podem depender de protocolo/época",
+      "handling": "não converter em regra universal sem versionamento"
+    }
+  ]
+}

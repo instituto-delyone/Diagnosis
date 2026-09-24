@@ -1,0 +1,495 @@
+{
+  "model_metadata": {
+    "model_name": "DIAGNOSIS_CLINICAL_KNOWLEDGE_MODEL",
+    "model_version": "0.2",
+    "instance_id": "intoxicacoes_prototipo_v02",
+    "role": "modelo provisório de estruturação do conhecimento clínico",
+    "status": "provisional_template",
+    "canonical": false,
+    "generation_is_downstream": true,
+    "principle": "O caso clínico é uma realização possível do espaço clínico; não é a unidade primária de conhecimento.",
+    "source_policy": {
+      "summary_role": "fragmento de conhecimento/contexto fornecido pelo material original",
+      "external_reference_role": "complementação e expansão explicitamente rastreável",
+      "silent_correction_forbidden": true,
+      "source_conflicts_must_be_preserved": true,
+      "generation_before_knowledge_forbidden": true
+    }
+  },
+  "clinical_domain": {
+    "id": "intoxicacoes",
+    "name": "Intoxicacoes",
+    "type": "clinical_domain",
+    "scope_note": "O escopo abaixo representa o domínio do resumo; não é uma lista fechada de doenças."
+  },
+  "source_registry": [
+    {
+      "source_id": "summary_cm_29___intoxicações",
+      "type": "original_summary",
+      "title": "CM 29 - Intoxicações.docx.pdf",
+      "provenance": "resumo visual fornecido no material do projeto",
+      "authority_role": "primary_source_for_summary_extraction",
+      "extraction_policy": "preservar o conteúdo e a terminologia sustentados pelo resumo; lacunas não são preenchidas silenciosamente"
+    },
+    {
+      "source_id": "msd_general_poisoning",
+      "type": "external_reference",
+      "title": "General Principles of Poisoning",
+      "publisher": "MSD Manual Professional Edition",
+      "url": "https://www.msdmanuals.com/professional/injuries-poisoning/poisoning/general-principles-of-poisoning",
+      "authority_role": "current_complementary_reference",
+      "accessed": "2026-09-23"
+    },
+    {
+      "source_id": "msd_acetaminophen",
+      "type": "external_reference",
+      "title": "Acetaminophen Poisoning",
+      "publisher": "MSD Manual Professional Edition",
+      "url": "https://www.msdmanuals.com/professional/injuries-poisoning/poisoning/acetaminophen-poisoning",
+      "authority_role": "current_complementary_reference",
+      "accessed": "2026-09-23"
+    },
+    {
+      "source_id": "msd_organophosphate",
+      "type": "external_reference",
+      "title": "Organophosphate Poisoning and Carbamate Poisoning",
+      "publisher": "MSD Manual Professional Edition",
+      "url": "https://www.msdmanuals.com/professional/injuries-poisoning/poisoning/organophosphate-poisoning-and-carbamate-poisoning",
+      "authority_role": "current_complementary_reference",
+      "accessed": "2026-09-23"
+    }
+  ],
+  "summary_extraction": {
+    "source_id": "summary_cm29",
+    "observed_sections": [
+      "abordagem geral",
+      "acetaminofeno/paracetamol",
+      "intoxicação digitálica",
+      "síndrome colinérgica",
+      "benzodiazepínicos",
+      "opioides",
+      "antidepressivos tricíclicos",
+      "animais peçonhentos",
+      "ofidismo",
+      "araneísmo",
+      "escorpionismo"
+    ],
+    "explicit_content": {
+      "general_approach": [
+        "suporte clínico",
+        "via aérea e circulação",
+        "descontaminação",
+        "antídoto"
+      ],
+      "acetaminophen": [
+        "NAPQI",
+        "glutationa",
+        "hepatotoxicidade",
+        "insuficiência hepática",
+        "insuficiência renal",
+        "N-acetilcisteína",
+        "carvão ativado"
+      ],
+      "digoxin": [
+        "náuseas/vômitos",
+        "alterações visuais/cromatopsia",
+        "alteração do nodo AV",
+        "automatismo atrial/ventricular",
+        "hipercalemia",
+        "anti-Fab"
+      ],
+      "cholinergic": [
+        "miose",
+        "broncoconstrição/broncorreia",
+        "incontinência",
+        "salivação",
+        "bradicardia",
+        "miofasciculações",
+        "fraqueza",
+        "carbamatos",
+        "organofosforados",
+        "atropina",
+        "pralidoxima"
+      ],
+      "benzodiazepine": [
+        "depressão do SNC",
+        "flumazenil como antídoto apresentado pelo resumo"
+      ],
+      "opioid": [
+        "depressão respiratória",
+        "miose",
+        "constipação",
+        "náuseas/vômitos",
+        "naloxona"
+      ],
+      "tricyclic_antidepressants": [
+        "síndrome anticolinérgica",
+        "convulsão/sedação/coma",
+        "bloqueio alfa-adrenérgico",
+        "cardiotoxicidade",
+        "bicarbonato de sódio"
+      ],
+      "envenomation": [
+        "ofidismo",
+        "acidentes botrópico/crotálico/laquético/elapídico",
+        "araneísmo",
+        "escorpionismo",
+        "soroterapia",
+        "prevenção",
+        "medidas que não devem ser feitas"
+      ]
+    },
+    "source_age_note": "O resumo é datado de 03/01/2022. Várias recomendações de descontaminação e tratamento precisam de validação contemporânea antes de virar regra operacional."
+  },
+  "knowledge_entities": [
+    {
+      "id": "poisoning_general",
+      "label": "Intoxicação",
+      "entity_type": "toxicologic_syndrome",
+      "dimensions": [
+        "exposição",
+        "toxidrome",
+        "órgão-alvo",
+        "tempo",
+        "dose",
+        "rota",
+        "suporte",
+        "descontaminação",
+        "antídoto"
+      ]
+    },
+    {
+      "id": "acetaminophen_poisoning",
+      "label": "Intoxicação por acetaminofeno/paracetamol",
+      "entity_type": "hepatotoxic_poisoning",
+      "mechanism": "formação de NAPQI quando a capacidade de conjugação e glutationa é excedida",
+      "summary_antidote": "N-acetilcisteína"
+    },
+    {
+      "id": "digoxin_toxicity",
+      "label": "Intoxicação digitálica",
+      "entity_type": "cardiotoxic_drug_poisoning",
+      "summary_features": [
+        "náuseas/vômitos",
+        "alterações visuais",
+        "BAV",
+        "arritmias",
+        "hipercalemia"
+      ],
+      "summary_antidote": "anticorpo anti-Fab"
+    },
+    {
+      "id": "cholinergic_toxidrome",
+      "label": "Síndrome colinérgica",
+      "entity_type": "toxidrome",
+      "causes": [
+        "carbamatos",
+        "organofosforados"
+      ],
+      "summary_antidotes": [
+        "atropina",
+        "pralidoxima"
+      ]
+    },
+    {
+      "id": "benzodiazepine_poisoning",
+      "label": "Intoxicação por benzodiazepínico",
+      "entity_type": "sedative_hypnotic_poisoning",
+      "summary_antidote": "flumazenil",
+      "validation_note": "uso do antagonista depende do contexto clínico e tem contraindicações importantes"
+    },
+    {
+      "id": "opioid_poisoning",
+      "label": "Intoxicação por opioide",
+      "entity_type": "opioid_toxidrome",
+      "summary_features": [
+        "depressão respiratória",
+        "miose",
+        "sedação"
+      ],
+      "summary_antidote": "naloxona"
+    },
+    {
+      "id": "tricyclic_poisoning",
+      "label": "Intoxicação por antidepressivos tricíclicos",
+      "entity_type": "cardiotoxic_poisoning",
+      "summary_antidote": "bicarbonato de sódio"
+    },
+    {
+      "id": "snake_envenomation",
+      "label": "Ofidismo",
+      "entity_type": "envenomation",
+      "subtypes": [
+        "botrópico",
+        "crotálico",
+        "laquético",
+        "elapídico"
+      ]
+    },
+    {
+      "id": "spider_envenomation",
+      "label": "Araneísmo",
+      "entity_type": "envenomation",
+      "subtypes": [
+        "Phoneutria",
+        "Latrodectus",
+        "Loxosceles"
+      ]
+    },
+    {
+      "id": "scorpion_envenomation",
+      "label": "Escorpionismo",
+      "entity_type": "envenomation",
+      "summary_entity": "Tityus serrulatus no resumo"
+    }
+  ],
+  "external_research_extension": {
+    "source_ids": [
+      "msd_general_poisoning",
+      "msd_acetaminophen",
+      "msd_organophosphate"
+    ],
+    "general_principles": [
+      "suporte de via aérea, ventilação, circulação e monitorização é central",
+      "toxíndrome pode orientar o diagnóstico",
+      "testes toxicológicos devem ser seletivos e interpretados no contexto",
+      "descontaminação depende da substância, via e tempo; lavagem gástrica não é rotina para a maioria das ingestões",
+      "carvão ativado é seletivo, não universal",
+      "antídotos são específicos para determinados agentes"
+    ],
+    "toxidromes": {
+      "cholinergic": [
+        "miose",
+        "salivação",
+        "lacrimejamento",
+        "urinação",
+        "diarreia",
+        "broncorreia",
+        "broncoespasmo",
+        "bradicardia",
+        "fasciculações"
+      ],
+      "opioid": [
+        "hipoventilação",
+        "miose",
+        "sedação",
+        "hipotensão"
+      ],
+      "sympathomimetic": [
+        "taquicardia",
+        "hipertensão",
+        "midríase",
+        "agitação",
+        "diaforese",
+        "hipertermia",
+        "convulsões"
+      ],
+      "sedative_hypnotic": [
+        "depressão do SNC",
+        "sedação",
+        "coma em casos graves"
+      ]
+    },
+    "antidote_map": [
+      {
+        "agent": "acetaminofeno",
+        "antidote": "N-acetilcisteína"
+      },
+      {
+        "agent": "digoxina",
+        "antidote": "fragmentos Fab específicos para digoxina"
+      },
+      {
+        "agent": "opioides",
+        "antidote": "naloxona"
+      },
+      {
+        "agent": "organofosforados",
+        "antidote": "atropina + pralidoxima"
+      },
+      {
+        "agent": "antidepressivos tricíclicos",
+        "antidote_or_specific_therapy": "bicarbonato de sódio"
+      },
+      {
+        "agent": "benzodiazepínicos",
+        "antidote": "flumazenil em situações selecionadas; não tratar como antídoto universal"
+      }
+    ],
+    "current_acetaminophen_note": "MSD atualizado em 2026 descreve hepatotoxicidade tipicamente 1–3 dias após ingestão aguda significativa, uso do nível sérico/Rumack-Matthew quando aplicável e N-acetilcisteína como tratamento.",
+    "current_organophosphate_note": "MSD atualizado em 2025 descreve suporte, atropina titulada à resposta respiratória e pralidoxima para manifestações neuromusculares."
+  },
+  "clinical_rules": [
+    {
+      "rule_id": "TOXICOLOGIA_FIRST_SUPPORT",
+      "if": [
+        "suspeita de intoxicação"
+      ],
+      "first_steps": [
+        "avaliar segurança",
+        "via aérea",
+        "ventilação",
+        "circulação",
+        "estado neurológico",
+        "glicemia/monitorização conforme contexto"
+      ],
+      "source_traceability": [
+        "summary_cm29",
+        "msd_general_poisoning"
+      ]
+    },
+    {
+      "rule_id": "TOXIDROME",
+      "if": [
+        "quadro clínico compatível"
+      ],
+      "consider": "síndrome toxicológica antes de depender exclusivamente da identificação do agente",
+      "source_traceability": [
+        "summary_cm29",
+        "msd_general_poisoning"
+      ]
+    },
+    {
+      "rule_id": "ACETAMINOPHEN",
+      "if": [
+        "possível ingestão de acetaminofeno"
+      ],
+      "evaluate": [
+        "tempo",
+        "dose",
+        "nível sérico quando aplicável",
+        "função hepática"
+      ],
+      "therapy": "N-acetilcisteína quando indicada",
+      "source_traceability": [
+        "summary_cm29",
+        "msd_acetaminophen"
+      ]
+    },
+    {
+      "rule_id": "CHOLINERGIC",
+      "if": [
+        "toxíndrome colinérgica"
+      ],
+      "therapy": [
+        "suporte",
+        "atropina para manifestações muscarínicas/respiratórias",
+        "pralidoxima para manifestações neuromusculares em exposições apropriadas"
+      ],
+      "source_traceability": [
+        "summary_cm29",
+        "msd_organophosphate"
+      ]
+    }
+  ],
+  "diagnostic_network": {
+    "entry_problem": "paciente com possível intoxicação/envenenamento",
+    "axes": [
+      "agente",
+      "rota",
+      "dose",
+      "tempo",
+      "toxíndrome",
+      "órgão-alvo",
+      "gravidade",
+      "exposição ambiental/profissional",
+      "coingestões"
+    ],
+    "tests": "selecionados pelo agente e pelo quadro; níveis séricos são úteis apenas para determinadas substâncias"
+  },
+  "patient_generation": {
+    "variables": {
+      "age": "continuous",
+      "exposure_route": [
+        "oral",
+        "cutânea",
+        "inalatória",
+        "parenteral",
+        "picada/mordedura"
+      ],
+      "time_since_exposure": "continuous",
+      "agent": "variable",
+      "dose": "variable",
+      "toxidrome": "variable",
+      "organ_injury": [
+        "hepática",
+        "cardíaca",
+        "neurológica",
+        "respiratória",
+        "renal",
+        "multissistêmica"
+      ],
+      "severity": [
+        "leve",
+        "moderada",
+        "grave"
+      ],
+      "coingestion": "variable",
+      "environment": "variable"
+    },
+    "constraints": [
+      "coerência entre agente e toxíndrome",
+      "coerência temporal",
+      "não aplicar antídoto universal",
+      "não transformar uma receita do resumo em regra automática"
+    ]
+  },
+  "differential_network": [
+    {
+      "presentation": "miose + depressão respiratória",
+      "nodes": [
+        "opioide",
+        "outras causas de depressão do SNC",
+        "causas neurológicas/respiratórias"
+      ]
+    },
+    {
+      "presentation": "miose + secreções + fasciculações",
+      "nodes": [
+        "organofosforado/carbamato",
+        "outras causas colinérgicas"
+      ]
+    },
+    {
+      "presentation": "agitação + midríase + hipertermia",
+      "nodes": [
+        "simpaticomimético",
+        "anticolinérgico",
+        "síndrome serotoninérgica",
+        "abstinência"
+      ]
+    },
+    {
+      "presentation": "coma/alteração de consciência",
+      "nodes": [
+        "intoxicação",
+        "hipoglicemia",
+        "AVC",
+        "trauma",
+        "infecção SNC",
+        "encefalopatia"
+      ]
+    }
+  ],
+  "conflicts_and_boundaries": [
+    {
+      "issue": "O resumo recomenda lavagem gástrica com base em tempos específicos.",
+      "handling": "Preservar como conteúdo histórico da fonte; a referência MSD atual informa que lavagem gástrica é raramente utilizada e não é benéfica na maioria das ingestões."
+    },
+    {
+      "issue": "O resumo apresenta flumazenil como antídoto para benzodiazepínico.",
+      "handling": "Preservar a associação, mas marcar contraindicações e uso seletivo na camada atualizada."
+    },
+    {
+      "issue": "Conteúdo de acidentes por animais peçonhentos é fortemente dependente de protocolos locais.",
+      "handling": "Manter o resumo como fonte e exigir PCDT/protocolo brasileiro atualizado antes de operacionalizar soroterapia/doses."
+    }
+  ],
+  "validation_targets_for_phase_1": [
+    "comparar toxidromes com KB existente",
+    "separar mecanismo de agente",
+    "validar antídotos",
+    "validar protocolos brasileiros de acidentes por animais peçonhentos",
+    "preservar diferenças entre resumo histórico e camada atual"
+  ]
+}

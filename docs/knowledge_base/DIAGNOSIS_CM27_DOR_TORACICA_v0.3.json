@@ -1,0 +1,265 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM27",
+  "title": "Dor Torácica",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "CM 27 - Dor Torácica.docx.pdf"
+      ],
+      "date": "22/10/2021",
+      "role": "fragmento/contexto original; documento visual"
+    }
+  },
+  "summary_extraction": {
+    "scope": [
+      "dor torácica",
+      "síndrome coronariana aguda",
+      "IAM com supra",
+      "SCA sem supra",
+      "angina instável",
+      "IAM sem supra",
+      "doença isquêmica crônica",
+      "angina estável",
+      "Prinzmetal",
+      "isquemia microvascular",
+      "testes funcionais/anatômicos"
+    ],
+    "important_source_fragments": [
+      "Dor torácica deve ser organizada em causas cardiovasculares e não cardiovasculares; o resumo destaca síndrome coronariana aguda, dissecção, TEP, pericardite e causas pulmonares/digestivas/musculoesqueléticas.",
+      "SCA é apresentada como dor prolongada, de instalação rápida/em crescendo, com pequeno esforço ou repouso, podendo acompanhar náusea, vômito e diaforese.",
+      "ECG deve ser realizado e interpretado rapidamente; o resumo coloca 10 minutos como referência.",
+      "Troponina é o marcador de necrose central no resumo, com medidas seriadas; CK-MB fica como alternativa quando troponina não está disponível.",
+      "IAM com supra é associado a oclusão coronariana e reperfusão imediata; o resumo descreve ICP ou fibrinólise conforme contexto.",
+      "O material usa supra de ST em derivações consecutivas como critério de IAM com supra, com particularidades para V2-V3.",
+      "Complicações destacadas: arritmias, infarto de ventrículo direito, comunicação interventricular e pericardite precoce/Dressler.",
+      "SCA sem supra: terapia anti-isquêmica, antiagregação, anticoagulação e estratégia invasiva com tempos definidos pela estratificação de risco no resumo.",
+      "GRACE aparece como ferramenta de estratificação; risco alto inclui instabilidade, arritmia grave, alterações de ST/T e troponina, com estratégia invasiva mais precoce.",
+      "Infarto inferior é associado à coronária direita; o resumo orienta derivação direita e posteriores quando apropriado.",
+      "Imagem em espelho é apresentada para interpretar infra de ST em paredes opostas.",
+      "Doença isquêmica crônica: angina típica com desconforto retroesternal desencadeado por esforço/estresse e aliviado por repouso/nitrato.",
+      "Teste ergométrico, cintilografia/PET, eco/RM com estresse e angioTC aparecem como métodos de investigação funcional/anatômica.",
+      "Coronariografia é apresentada como padrão-ouro anatômico e com refinamentos como IVUS e FFR.",
+      "Variantes de isquemia crônica: Prinzmetal por vasoespasmo, microvascular/síndrome X e apresentações silenciosas/atípicas.",
+      "Tratamento da doença isquêmica crônica é organizado em controle da obstrução e controle da demanda miocárdica de oxigênio, com antiagregante, estatina, beta-bloqueador, IECA em indicações e nitrato sintomático."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "chest_pain",
+      "features": [
+        "cardíaca",
+        "pulmonar",
+        "gastrointestinal",
+        "musculoesquelética",
+        "psicogênica"
+      ]
+    },
+    {
+      "id": "acute_coronary_syndrome",
+      "features": [
+        "dor prolongada",
+        "isquemia",
+        "troponina",
+        "ECG",
+        "SCA"
+      ]
+    },
+    {
+      "id": "stemi",
+      "features": [
+        "supra ST",
+        "oclusão coronariana",
+        "reperfusão"
+      ]
+    },
+    {
+      "id": "nstemi",
+      "features": [
+        "troponina positiva",
+        "sem supra persistente",
+        "isquemia subendocárdica"
+      ]
+    },
+    {
+      "id": "unstable_angina",
+      "features": [
+        "isquemia",
+        "troponina negativa",
+        "SCA sem supra"
+      ]
+    },
+    {
+      "id": "chronic_coronary_syndrome",
+      "features": [
+        "angina estável",
+        "reserva coronariana reduzida",
+        "aterosclerose"
+      ]
+    },
+    {
+      "id": "prinzmetal_angina",
+      "features": [
+        "vasoespasmo",
+        "supra transitório",
+        "angina em repouso"
+      ]
+    },
+    {
+      "id": "microvascular_angina",
+      "features": [
+        "disfunção endotelial/microvascular",
+        "dor isquêmica",
+        "mulheres no resumo"
+      ]
+    },
+    {
+      "id": "right_ventricular_infarction",
+      "features": [
+        "IAM inferior",
+        "dependência de pré-carga",
+        "evitar redução de volume no resumo"
+      ]
+    },
+    {
+      "id": "acute_pericarditis_post_mi",
+      "features": [
+        "pericardite precoce",
+        "Dressler tardio"
+      ]
+    },
+    {
+      "id": "coronary_testing",
+      "features": [
+        "teste ergométrico",
+        "cintilografia/PET",
+        "eco/RM estresse",
+        "angioTC",
+        "coronariografia",
+        "FFR",
+        "IVUS"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "SCA deve ser inicialmente avaliada com ECG rápido e marcador de necrose no modelo do resumo.",
+      "source": "summary"
+    },
+    {
+      "rule": "Troponina positiva diferencia IAM sem supra de angina instável dentro da organização didática da fonte.",
+      "source": "summary"
+    },
+    {
+      "rule": "IAM com supra é tratado no resumo como situação de reperfusão imediata.",
+      "source": "summary"
+    },
+    {
+      "rule": "IAM inferior deve levantar possibilidade de acometimento de ventrículo direito e motivar avaliação de derivações direitas no contexto apropriado.",
+      "source": "summary"
+    },
+    {
+      "rule": "Infra de ST pode representar imagem em espelho de um supra em outra parede.",
+      "source": "summary"
+    },
+    {
+      "rule": "GRACE é usado como ferramenta de estratificação de risco em SCA sem supra.",
+      "source": "summary"
+    },
+    {
+      "rule": "Angina estável é caracterizada no resumo por desconforto desencadeado por esforço/estresse e aliviado por repouso/nitrato.",
+      "source": "summary"
+    },
+    {
+      "rule": "Prinzmetal é associada a vasoespasmo e supra transitório; microvascular é descrita como síndrome de disfunção microvascular/endotelial.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "dor prolongada + diaforese/náusea + supra de ST",
+      "possibilities": [
+        "IAM com supra"
+      ]
+    },
+    {
+      "axis": "dor isquêmica + troponina positiva sem supra persistente",
+      "possibilities": [
+        "IAM sem supra"
+      ]
+    },
+    {
+      "axis": "dor isquêmica + troponina negativa",
+      "possibilities": [
+        "angina instável"
+      ]
+    },
+    {
+      "axis": "dor ao esforço + melhora com repouso/nitrato",
+      "possibilities": [
+        "angina estável"
+      ]
+    },
+    {
+      "axis": "dor em repouso + supra transitório + vasoespasmo",
+      "possibilities": [
+        "Prinzmetal"
+      ]
+    },
+    {
+      "axis": "IAM inferior + hipotensão/achados de VD",
+      "possibilities": [
+        "infarto de ventrículo direito"
+      ]
+    },
+    {
+      "axis": "dor torácica + causa não coronariana",
+      "possibilities": [
+        "TEP/dissecção/pericardite/pulmão/GI/musculoesquelética"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "idade",
+      "fatores de risco",
+      "característica da dor",
+      "duração",
+      "gatilho",
+      "alívio",
+      "ECG",
+      "troponina",
+      "pressão",
+      "frequência",
+      "sinais de congestão",
+      "território coronariano",
+      "GRACE",
+      "complicações"
+    ],
+    "allowed_variability": [
+      "SCA/doença crônica/não cardíaca",
+      "supra/sem supra",
+      "troponina positiva/negativa",
+      "estável/instável",
+      "complicada/não complicada"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "Os limiares de ECG, tempos de reperfusão, contraindicações à fibrinólise e esquemas antitrombóticos pertencem à fonte histórica e não devem ser tratados como protocolo atual.",
+    "A regra de que todo supra significa oclusão total é uma simplificação didática da fonte.",
+    "A relação entre territórios do ECG e artérias é apresentada como padrão de ensino; não é determinística em todos os pacientes.",
+    "Os tempos de estratégia invasiva do GRACE permanecem source-derived.",
+    "Tratamento crônico com antiagregantes, estatinas, beta-bloqueadores, IECA e antianginosos permanece na camada histórica até validação contemporânea."
+  ],
+  "validation_targets": [
+    "Preservar o conteúdo do resumo como camada própria e não atribuir complementações externas à fonte.",
+    "Manter números, critérios, mnemônicos e tratamentos históricos identificáveis como source-derived.",
+    "Não transformar um quadro didático em caso fixo.",
+    "Representar relações, mecanismos, diferenciais e eixos de geração."
+  ],
+  "generated_at": "2026-09-23"
+}

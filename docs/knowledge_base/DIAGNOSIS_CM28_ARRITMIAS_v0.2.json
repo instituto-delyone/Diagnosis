@@ -1,0 +1,483 @@
+{
+  "model_metadata": {
+    "model_name": "DIAGNOSIS_CLINICAL_KNOWLEDGE_MODEL",
+    "model_version": "0.2",
+    "instance_id": "arritmias_prototipo_v02",
+    "role": "modelo provisório de estruturação do conhecimento clínico",
+    "status": "provisional_template",
+    "canonical": false,
+    "generation_is_downstream": true,
+    "principle": "O caso clínico é uma realização possível do espaço clínico; não é a unidade primária de conhecimento.",
+    "source_policy": {
+      "summary_role": "fragmento de conhecimento/contexto fornecido pelo material original",
+      "external_reference_role": "complementação e expansão explicitamente rastreável",
+      "silent_correction_forbidden": true,
+      "source_conflicts_must_be_preserved": true,
+      "generation_before_knowledge_forbidden": true
+    }
+  },
+  "clinical_domain": {
+    "id": "arritmias",
+    "name": "Arritmias",
+    "type": "clinical_domain",
+    "scope_note": "O escopo abaixo representa o domínio do resumo; não é uma lista fechada de doenças."
+  },
+  "source_registry": [
+    {
+      "source_id": "summary_cm_28___arritmias",
+      "type": "original_summary",
+      "title": "CM 28 - Arritmias.docx.pdf",
+      "provenance": "resumo visual fornecido no material do projeto",
+      "authority_role": "primary_source_for_summary_extraction",
+      "extraction_policy": "preservar o conteúdo e a terminologia sustentados pelo resumo; lacunas não são preenchidas silenciosamente"
+    },
+    {
+      "source_id": "arrhythmias_statpearls_2023",
+      "type": "external_reference",
+      "title": "Arrhythmias - StatPearls",
+      "publisher": "NCBI Bookshelf / StatPearls",
+      "last_update": "2023-06-05",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK558923/",
+      "authority_role": "complementary_reference",
+      "accessed": "2026-09-23"
+    },
+    {
+      "source_id": "acls_statpearls_current",
+      "type": "external_reference",
+      "title": "Advanced Cardiac Life Support (ACLS) - StatPearls",
+      "publisher": "NCBI Bookshelf / StatPearls",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK613285/",
+      "authority_role": "current_complementary_reference",
+      "accessed": "2026-09-23"
+    }
+  ],
+  "summary_extraction": {
+    "source_id": "summary_cm28",
+    "observed_sections": [
+      "taquiarritmias",
+      "intervalos e ritmo sinusal",
+      "taquicardia sinusal",
+      "flutter atrial",
+      "extrassístoles",
+      "fibrilação atrial",
+      "taquicardia supraventricular",
+      "WPW/via acessória",
+      "taquicardia ventricular",
+      "bradiarritmias",
+      "disfunção sinusal",
+      "ritmos de escape",
+      "bloqueios AV",
+      "síncope e arritmias",
+      "síndrome do QT longo",
+      "parada cardiorrespiratória",
+      "BLS/ACLS",
+      "cuidados pós-parada"
+    ],
+    "explicit_content": {
+      "ecg_framework": [
+        "frequência cardíaca",
+        "intervalo PR",
+        "largura do QRS",
+        "intervalo QT",
+        "ritmo sinusal"
+      ],
+      "tachyarrhythmia_algorithm": [
+        "há taquicardia?",
+        "há onda P?",
+        "há onda F de flutter?",
+        "QRS estreito ou alargado?",
+        "RR regular ou irregular?"
+      ],
+      "atrial_fibrillation": [
+        "causas cardíacas e reversíveis",
+        "classificação paroxística/persistente/longa duração/permanente",
+        "complicação hemodinâmica",
+        "complicação tromboembólica",
+        "controle da frequência",
+        "controle do ritmo",
+        "anticoagulação"
+      ],
+      "supraventricular_tachycardia": [
+        "reentrada nodal",
+        "reentrada por via acessória",
+        "manobras vagais",
+        "adenosina",
+        "ablação por radiofrequência"
+      ],
+      "ventricular_tachycardia": [
+        "TV sustentada",
+        "TV não sustentada/extrassístoles",
+        "instabilidade hemodinâmica",
+        "tratamento elétrico ou farmacológico"
+      ],
+      "bradyarrhythmias": [
+        "disfunção sinusal",
+        "ritmos de escape",
+        "bloqueios AV"
+      ],
+      "syncope": [
+        "reflexa/neurogênica",
+        "ortostática",
+        "neurológica",
+        "cardíaca"
+      ],
+      "long_qt": [
+        "congênito",
+        "drogas",
+        "distúrbios eletrolíticos",
+        "torsades de pointes"
+      ],
+      "cardiac_arrest": [
+        "reconhecimento de PCR",
+        "CAB/BLS",
+        "ritmos chocáveis e não chocáveis",
+        "RCP",
+        "desfibrilação",
+        "vasopressor",
+        "antiarrítmico",
+        "causas reversíveis",
+        "cuidados pós-parada"
+      ]
+    },
+    "source_age_note": "O resumo é datado de 22/10/2021; doses, algoritmos e critérios terapêuticos devem ser validados por referências atuais antes de serem convertidos em regras operacionais."
+  },
+  "knowledge_entities": [
+    {
+      "id": "arrhythmia_general",
+      "label": "Arritmia",
+      "entity_type": "rhythm_disorder",
+      "dimensions": [
+        "bradiarritmia",
+        "taquiarritmia",
+        "origem",
+        "condução",
+        "mecanismo",
+        "impacto hemodinâmico"
+      ]
+    },
+    {
+      "id": "atrial_fibrillation",
+      "label": "Fibrilação atrial",
+      "entity_type": "atrial_arrhythmia",
+      "summary_features": [
+        "ritmo irregular",
+        "perda da contração atrial",
+        "risco tromboembólico"
+      ],
+      "summary_management": [
+        "controle de frequência",
+        "controle de ritmo",
+        "avaliação de anticoagulação"
+      ]
+    },
+    {
+      "id": "atrial_flutter",
+      "label": "Flutter atrial",
+      "entity_type": "atrial_arrhythmia",
+      "summary_features": [
+        "ondas F",
+        "condução AV variável",
+        "padrão de 2:1 destacado no resumo"
+      ]
+    },
+    {
+      "id": "supraventricular_tachycardia",
+      "label": "Taquicardia supraventricular",
+      "entity_type": "supraventricular_tachyarrhythmia",
+      "mechanisms": [
+        "reentrada nodal",
+        "reentrada por via acessória"
+      ]
+    },
+    {
+      "id": "wpw",
+      "label": "Wolff-Parkinson-White / via acessória",
+      "entity_type": "preexcitation_syndrome",
+      "summary_features": [
+        "PR curto",
+        "onda delta",
+        "taquicardia associada a via acessória"
+      ]
+    },
+    {
+      "id": "ventricular_tachycardia",
+      "label": "Taquicardia ventricular",
+      "entity_type": "ventricular_arrhythmia",
+      "summary_features": [
+        "TV sustentada",
+        "TV não sustentada",
+        "instabilidade",
+        "possibilidade de desfibrilação quando sem pulso"
+      ]
+    },
+    {
+      "id": "sinus_node_dysfunction",
+      "label": "Disfunção do nó sinusal",
+      "entity_type": "bradyarrhythmia",
+      "summary_features": [
+        "bradicardia sinusal",
+        "pausa sinusal"
+      ]
+    },
+    {
+      "id": "av_blocks",
+      "label": "Bloqueios atrioventriculares",
+      "entity_type": "conduction_disorder",
+      "subtypes": [
+        "BAV 1º grau",
+        "BAV 2º grau Mobitz I",
+        "BAV 2º grau Mobitz II",
+        "BAV 2:1",
+        "BAV 3º grau"
+      ]
+    },
+    {
+      "id": "long_qt",
+      "label": "Síndrome do QT longo",
+      "entity_type": "channelopathy_or_acquired_long_qt",
+      "summary_features": [
+        "causas congênitas",
+        "fármacos",
+        "distúrbios eletrolíticos",
+        "torsades de pointes"
+      ]
+    },
+    {
+      "id": "cardiac_arrest",
+      "label": "Parada cardiorrespiratória",
+      "entity_type": "cardiac_arrest",
+      "summary_features": [
+        "irresponsividade",
+        "respiração agônica/apneia",
+        "ausência de pulso",
+        "ritmo chocável versus não chocável"
+      ]
+    }
+  ],
+  "external_research_extension": {
+    "source_ids": [
+      "arrhythmias_statpearls_2023",
+      "acls_statpearls_current"
+    ],
+    "clinical_structure": [
+      "classificar por frequência, origem e mecanismo",
+      "relacionar ritmo com sintomas e estabilidade hemodinâmica",
+      "documentar o ritmo e, quando necessário, correlacioná-lo com sintomas por monitorização",
+      "considerar doença estrutural e história familiar na avaliação de risco"
+    ],
+    "ecg_pattern_space": {
+      "rate": [
+        "bradicardia",
+        "faixa normal",
+        "taquicardia"
+      ],
+      "qrs": [
+        "estreito",
+        "alargado"
+      ],
+      "regularity": [
+        "regular",
+        "irregular"
+      ],
+      "atrial_activity": [
+        "onda P identificável",
+        "atividade atrial anormal",
+        "ausência de relação AV"
+      ]
+    },
+    "mechanisms": [
+      "reentrada",
+      "automaticidade aumentada",
+      "atividade deflagrada"
+    ],
+    "acute_decision_axes": [
+      "presença de pulso",
+      "estabilidade hemodinâmica",
+      "QRS estreito/alargado",
+      "regularidade",
+      "etiologia reversível"
+    ],
+    "research_note": "A referência ACLS atual consultada descreve abordagem inicial baseada em estabilidade, ECG e causas reversíveis; o resumo de 2021 contém recomendações que devem ser tratadas como conteúdo histórico até validação."
+  },
+  "clinical_rules": [
+    {
+      "rule_id": "TAQUICARDIA_ESTABILIDADE",
+      "if": [
+        "taquicardia"
+      ],
+      "first_decision": "avaliar estabilidade hemodinâmica",
+      "source_traceability": [
+        "summary_cm28",
+        "acls_statpearls_current"
+      ]
+    },
+    {
+      "rule_id": "TAQUICARDIA_PADRAO_ECG",
+      "if": [
+        "taquicardia com pulso"
+      ],
+      "evaluate": [
+        "QRS",
+        "regularidade",
+        "atividade atrial"
+      ],
+      "source_traceability": [
+        "summary_cm28",
+        "arrhythmias_statpearls_2023"
+      ]
+    },
+    {
+      "rule_id": "ARRITMIA_SINCOPE",
+      "if": [
+        "síncope com suspeita de arritmia"
+      ],
+      "evaluate": [
+        "história",
+        "exame",
+        "ECG",
+        "risco de doença estrutural",
+        "monitorização quando necessária"
+      ],
+      "source_traceability": [
+        "summary_cm28",
+        "arrhythmias_statpearls_2023"
+      ]
+    },
+    {
+      "rule_id": "PCR_RITMO",
+      "if": [
+        "parada cardiorrespiratória"
+      ],
+      "branch": [
+        "FV/TV sem pulso",
+        "assistolia/AESP"
+      ],
+      "note": "Fluxo terapêutico deve ser validado contra ACLS vigente.",
+      "source_traceability": [
+        "summary_cm28",
+        "acls_statpearls_current"
+      ]
+    }
+  ],
+  "diagnostic_network": {
+    "entry_problems": [
+      "palpitação",
+      "síncope",
+      "bradicardia",
+      "taquicardia",
+      "alteração de ECG",
+      "parada cardiorrespiratória"
+    ],
+    "axes": [
+      "ritmo",
+      "frequência",
+      "regularidade",
+      "QRS",
+      "atividade atrial",
+      "estabilidade",
+      "contexto estrutural/metabólico/tóxico"
+    ],
+    "tests_and_monitoring": [
+      "ECG 12 derivações",
+      "monitorização",
+      "Holter/monitor ambulatorial quando indicado",
+      "estudo eletrofisiológico em situações selecionadas"
+    ]
+  },
+  "patient_generation": {
+    "variables": {
+      "age": "continuous",
+      "symptoms": [
+        "assintomático",
+        "palpitação",
+        "tontura",
+        "síncope",
+        "dor torácica",
+        "dispneia"
+      ],
+      "rate": "variable",
+      "rhythm": "variable",
+      "qrs": [
+        "estreito",
+        "alargado"
+      ],
+      "regularity": [
+        "regular",
+        "irregular"
+      ],
+      "hemodynamic_status": [
+        "estável",
+        "instável"
+      ],
+      "structural_heart_disease": "variable",
+      "reversible_trigger": [
+        "eletrólito",
+        "hipoxemia",
+        "isquemia",
+        "fármaco/toxina",
+        "endócrino",
+        "pós-operatório",
+        "nenhum identificado"
+      ]
+    },
+    "constraints": [
+      "não combinar padrões eletrocardiográficos incompatíveis",
+      "manter coerência entre ritmo, mecanismo, sintomas e estabilidade",
+      "não transformar o caso do resumo em template fixo"
+    ]
+  },
+  "differential_network": [
+    {
+      "presentation": "taquicardia regular de QRS estreito",
+      "nodes": [
+        "taquicardia sinusal",
+        "TSV por reentrada",
+        "flutter com condução fixa"
+      ]
+    },
+    {
+      "presentation": "taquicardia irregular de QRS estreito",
+      "nodes": [
+        "fibrilação atrial",
+        "flutter com condução variável",
+        "taquicardia atrial multifocal"
+      ]
+    },
+    {
+      "presentation": "taquicardia de QRS largo",
+      "nodes": [
+        "taquicardia ventricular",
+        "TSV com aberrância",
+        "pré-excitação"
+      ],
+      "safety_note": "Em contexto agudo, a distinção deve ser feita com método e considerar TV até avaliação adequada."
+    },
+    {
+      "presentation": "bradicardia",
+      "nodes": [
+        "bradicardia sinusal",
+        "disfunção sinusal",
+        "BAV",
+        "ritmo de escape",
+        "causas farmacológicas/metabólicas"
+      ]
+    }
+  ],
+  "conflicts_and_boundaries": [
+    {
+      "issue": "Resumo de 2021 contém doses e fluxos de RCP/ACLS que podem estar desatualizados.",
+      "handling": "Preservar como conteúdo do resumo, mas não transformá-los em regra operacional sem validação atual."
+    },
+    {
+      "issue": "Algumas categorias do resumo usam classificações didáticas simplificadas.",
+      "handling": "Manter a terminologia do resumo na camada de extração e usar fontes complementares para a camada estruturada."
+    }
+  ],
+  "validation_targets_for_phase_1": [
+    "comparar entidades com KB existente",
+    "separar ECG/diagnóstico de tratamento",
+    "validar protocolos agudos atuais",
+    "mapear relações ritmo→mecanismo→apresentação→risco",
+    "preservar proveniência"
+  ]
+}
