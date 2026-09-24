@@ -1,0 +1,227 @@
+{
+  "model_metadata": {
+    "model_type": "DIAGNOSIS_CLINICAL_KNOWLEDGE_MODEL",
+    "schema_role": "provisional_template_for_phase_1",
+    "canonical": false,
+    "version": "0.2",
+    "architecture_principle": "FONTES -> CONHECIMENTO -> ESPAÇO DE POSSIBILIDADES CLÍNICAS -> ESTADO DO PACIENTE -> CASO -> SIMULAÇÃO",
+    "case_bank": false
+  },
+  "construction_policy": {
+    "summary_role": "fragmento_de_contexto",
+    "external_sources_role": "complemento_verificacao_atualizacao",
+    "traceability": "obrigatoria",
+    "silent_correction": false,
+    "generation_before_knowledge": false
+  },
+  "clinical_domain": {
+    "module_id": "CM26",
+    "name": "Síndrome Edemigênica",
+    "scope": "edema generalizado, localizado e cavitário, com foco do resumo em insuficiência cardíaca e cardiomiopatias"
+  },
+  "source_registry": {
+    "primary_summary": {
+      "type": "uploaded_summary_pdf",
+      "filename": "CM 26 - Síndrome Edemigênica.docx.pdf",
+      "source_layer": "summary_original"
+    },
+    "project_reference_links": [
+      {
+        "type": "PCDT_MoH",
+        "url": "https://www.gov.br/saude/pt-br/assuntos/pcdt"
+      },
+      {
+        "type": "MSD_Manuals",
+        "url": "https://www.msdmanuals.com/pt/profissional/"
+      },
+      {
+        "type": "specific_reference",
+        "name": "AHA/ACC/HFSA 2022 Heart Failure Guideline",
+        "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001062"
+      }
+    ],
+    "external_sources_consulted": [
+      {
+        "name": "AHA/ACC/HFSA 2022 Heart Failure Guideline",
+        "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001062"
+      },
+      {
+        "name": "MSD — Insuficiência cardíaca",
+        "url": "https://www.msdmanuals.com/pt/profissional/doen%C3%A7as-cardiovasculares/insufici%C3%AAncia-card%C3%ADaca/vis%C3%A3o-geral-da-insufici%C3%AAncia-card%C3%ADaca"
+      }
+    ]
+  },
+  "summary_extraction": {
+    "fidelity_note": "Critérios e condutas do resumo são preservados como source_layer e não são automaticamente tratados como protocolo atual.",
+    "edema": {
+      "generalized": [
+        "coração",
+        "rim",
+        "fígado",
+        "tireoide",
+        "anasarca"
+      ],
+      "localized": [
+        "venoso",
+        "linfático",
+        "arterial",
+        "alérgico"
+      ],
+      "cavitary": [
+        "pleura",
+        "pericárdio",
+        "peritônio"
+      ],
+      "physical": [
+        "cacifo/Godet",
+        "edema linfático descrito como não depressível"
+      ]
+    },
+    "heart_failure": {
+      "classification": [
+        "aguda",
+        "crônica",
+        "direita",
+        "esquerda",
+        "alto débito",
+        "baixo débito",
+        "FE reduzida",
+        "FE preservada"
+      ],
+      "high_output_causes": [
+        "anemia",
+        "tireotoxicose",
+        "fístula",
+        "deficiência de B1/beribéri",
+        "doença de Paget"
+      ],
+      "main_causes": [
+        "doença coronariana",
+        "hipertensão"
+      ],
+      "HFrEF_pattern": [
+        "B3",
+        "ictus globoso/difuso",
+        "cardiomegalia",
+        "hipertrofia excêntrica",
+        "cavidades dilatadas"
+      ],
+      "HFpEF_pattern": [
+        "B4",
+        "ictus normal/propulsivo",
+        "cavidades normais",
+        "disfunção diastólica",
+        "hipertrofia concêntrica"
+      ],
+      "diagnosis": "essencialmente clínico, com critérios de Framingham apresentados",
+      "biomarkers": [
+        "BNP",
+        "NT-proBNP"
+      ],
+      "functional": [
+        "classes I–IV",
+        "estágios A–D"
+      ],
+      "treatment_framework": [
+        "tratar HAS/DM",
+        "IECA/BRA",
+        "betabloqueador",
+        "espironolactona",
+        "diurético na hipervolemia",
+        "digoxina em situações descritas",
+        "sacubitril/valsartana",
+        "ivabradina",
+        "ressincronização",
+        "CDI",
+        "transplante"
+      ],
+      "acute_profiles": [
+        "quente/seco",
+        "quente/úmido",
+        "frio/seco",
+        "frio/úmido"
+      ]
+    },
+    "cardiomyopathies": {
+      "restrictive": [
+        "endomiocardiofibrose",
+        "amiloidose"
+      ],
+      "hypertrophic": [
+        "genética",
+        "jovem",
+        "história familiar",
+        "sopro sistólico",
+        "piora com Valsalva",
+        "melhora com agachamento",
+        "HVE",
+        "septo assimétrico",
+        "movimento anterior sistólico da mitral"
+      ]
+    }
+  },
+  "external_research_extension": {
+    "updates": [
+      "MSD define IC como síndrome clínica por anormalidade estrutural/funcional com baixo débito, pressão de enchimento elevada ou ambos.",
+      "MSD relaciona falência esquerda principalmente a dispneia/fadiga e falência direita a acúmulo de líquido periférico/abdominal.",
+      "A diretriz AHA/ACC/HFSA 2022 deve servir como camada contemporânea para atualizar diagnóstico, classificação e terapêutica."
+    ],
+    "boundary": "Framingham e outros números do resumo são preservados como fonte histórica; não são a única lógica diagnóstica do motor"
+  },
+  "clinical_knowledge_map": {
+    "causal_chains": [
+      "disfunção cardíaca -> pressão de enchimento elevada e/ou baixo débito -> congestão/hipoperfusão",
+      "falência esquerda -> congestão pulmonar -> dispneia",
+      "falência direita -> congestão sistêmica -> edema/ascite",
+      "ativação neuro-hormonal -> retenção hidrossalina/remodelamento -> progressão"
+    ],
+    "pattern_axes": [
+      "distribuição do edema",
+      "cacifo",
+      "órgão causal",
+      "congestão",
+      "perfusão",
+      "FE",
+      "agudo/crônico",
+      "alto/baixo débito",
+      "etiologia",
+      "gravidade"
+    ]
+  },
+  "patient_generation": {
+    "dimensions": [
+      "edema isolado ou associado a dispneia",
+      "congestão sistêmica/pulmonar",
+      "hipoperfusão",
+      "etiologia cardíaca/não cardíaca",
+      "FE reduzida/preservada",
+      "agudo/crônico",
+      "comorbidades",
+      "cardiomiopatia"
+    ],
+    "negative_space": [
+      "edema sem IC",
+      "edema linfático",
+      "edema por doença renal/hepática/endócrina",
+      "derrames cavitários"
+    ]
+  },
+  "validation_targets": [
+    "não colapsar todo edema em IC",
+    "gerar causas cardíacas e não cardíacas",
+    "separar congestão de hipoperfusão",
+    "gerar HFrEF/HFpEF como padrões distintos"
+  ],
+  "conflicts_and_boundaries": [
+    {
+      "type": "legacy_framework",
+      "issue": "Framingham e limiares de BNP/NT-proBNP aparecem no resumo",
+      "handling": "preservar e validar contra fontes atuais"
+    },
+    {
+      "type": "therapy_update",
+      "issue": "terapêutica do resumo é anterior às diretrizes atuais",
+      "handling": "referência externa obrigatória antes da produção"
+    }
+  ]
+}

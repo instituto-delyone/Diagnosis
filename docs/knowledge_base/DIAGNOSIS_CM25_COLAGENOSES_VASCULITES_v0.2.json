@@ -1,0 +1,317 @@
+{
+  "model_metadata": {
+    "model_type": "DIAGNOSIS_CLINICAL_KNOWLEDGE_MODEL",
+    "schema_role": "provisional_template_for_phase_1",
+    "canonical": false,
+    "version": "0.2",
+    "architecture_principle": "FONTES -> CONHECIMENTO -> ESPAÇO DE POSSIBILIDADES CLÍNICAS -> ESTADO DO PACIENTE -> CASO -> SIMULAÇÃO",
+    "case_bank": false
+  },
+  "construction_policy": {
+    "summary_role": "fragmento_de_contexto",
+    "external_sources_role": "complemento_verificacao_atualizacao",
+    "traceability": "obrigatoria",
+    "silent_correction": false,
+    "generation_before_knowledge": false
+  },
+  "clinical_domain": {
+    "module_id": "CM25",
+    "name": "Colagenoses e Vasculites",
+    "scope": "doenças autoimunes sistêmicas do tecido conjuntivo e vasculites de diferentes calibres, conforme o resumo-fonte"
+  },
+  "source_registry": {
+    "primary_summary": {
+      "type": "uploaded_summary_pdf",
+      "filename": "CM 25 - Colagenoses e Vasculites.docx.pdf",
+      "source_layer": "summary_original"
+    },
+    "project_reference_links": [
+      {
+        "type": "PCDT_MoH",
+        "url": "https://www.gov.br/saude/pt-br/assuntos/pcdt"
+      },
+      {
+        "type": "MSD_Manuals",
+        "url": "https://www.msdmanuals.com/pt/profissional/"
+      },
+      {
+        "type": "external_update",
+        "name": "EULAR 2023 SLE",
+        "url": "https://ard.bmj.com/doi/10.1136/ard-2023-224762"
+      }
+    ],
+    "external_sources_consulted": [
+      {
+        "name": "MSD — LES",
+        "url": "https://www.msdmanuals.com/pt/profissional/dist%C3%BArbios-dos-tecidos-conjuntivo-e-musculoesquel%C3%A9tico/doen%C3%A7as-reum%C3%A1ticas-sist%C3%AAmicas/l%C3%BApus-eritematoso-sist%C3%AAmico-les"
+      },
+      {
+        "name": "MSD — Nefrite lúpica",
+        "url": "https://www.msdmanuals.com/pt/profissional/nefrologia/doen%C3%A7as-glomerulares/nefrite-l%C3%BApica"
+      },
+      {
+        "name": "EULAR 2023 — SLE",
+        "url": "https://ard.bmj.com/doi/10.1136/ard-2023-224762"
+      },
+      {
+        "name": "ACR 2025 — SLE guideline release",
+        "url": "https://rheumatology.org/press-releases/new-lupus-sle-clinical-practice-guidelines-released"
+      }
+    ]
+  },
+  "summary_extraction": {
+    "fidelity_note": "Critérios, mnemônicos, números e condutas são preservados como conteúdo do resumo; não são automaticamente tratados como recomendações atuais.",
+    "collagenoses": {
+      "definition": "doença autoimune em que o paciente produz anticorpos contra o tecido conjuntivo",
+      "entities": [
+        "LES",
+        "Esclerodermia",
+        "Miopatias inflamatórias idiopáticas",
+        "Síndrome de Sjögren",
+        "Doença mista do tecido conjuntivo"
+      ]
+    },
+    "SLE": {
+      "course": "surtos e remissões",
+      "manifestations": [
+        "dermatite",
+        "nefrite",
+        "pleurite",
+        "pericardite",
+        "cerebrite",
+        "citopenias",
+        "artrite",
+        "rash malar",
+        "fotossensibilidade",
+        "lúpus discoide",
+        "úlceras orais",
+        "convulsão/psicose"
+      ],
+      "serologies": [
+        "anti-dsDNA",
+        "anti-Sm",
+        "antifosfolipídio",
+        "FAN",
+        "complemento",
+        "Coombs direto"
+      ],
+      "hematology": [
+        "anemia hemolítica",
+        "leucopenia",
+        "linfopenia",
+        "plaquetopenia"
+      ],
+      "renal": [
+        "proteinúria",
+        "cilindros celulares",
+        "classe IV descrita como nefrite difusa",
+        "classe V descrita como nefrite membranosa/síndrome nefrótica"
+      ],
+      "drug_induced": [
+        "procainamida",
+        "hidralazina",
+        "difenil-hidantoína/fenitoína"
+      ],
+      "historical_diagnostic_frameworks": [
+        "4 de 11 critérios",
+        "4 de 17 critérios com requisito imunológico ou biópsia com nefrite lúpica associada a FAN/anti-DNA"
+      ]
+    },
+    "APS": {
+      "mechanism": "anticorpos contra fosfolipídios/endotélio com trombose e morbidade gestacional",
+      "types": [
+        "primária",
+        "secundária associada no resumo ao LES"
+      ],
+      "clinical": [
+        "trombose arterial/venosa",
+        "perdas gestacionais",
+        "prematuridade por insuficiência uteroplacentária"
+      ],
+      "laboratory": [
+        "anticardiolipina IgM/IgG",
+        "anti-beta-2-glicoproteína I",
+        "anticoagulante lúpico"
+      ]
+    },
+    "systemic_sclerosis": {
+      "patterns": [
+        "cutânea limitada",
+        "cutânea difusa"
+      ],
+      "clinical": [
+        "Raynaud",
+        "esofagopatia/refluxo/disfagia",
+        "esclerodactilia",
+        "alveolite/fibrose",
+        "hipertensão pulmonar",
+        "crise renal"
+      ],
+      "CREST": [
+        "Raynaud",
+        "Esofagopatia",
+        "Esclerodactilia",
+        "Calcinoses",
+        "Telangiectasias"
+      ],
+      "antibodies": {
+        "CREST": "anticentrômero",
+        "cutânea_difusa": "anti-topoisomerase I"
+      }
+    },
+    "vasculitides": {
+      "large_vessel": [
+        "Takayasu",
+        "arterite temporal/células gigantes"
+      ],
+      "medium_vessel": [
+        "poliarterite nodosa",
+        "Kawasaki"
+      ],
+      "small_vessel": [
+        "poliangeíte microscópica",
+        "granulomatose com poliangeíte/Wegener",
+        "Churg-Strauss/EGPA",
+        "crioglobulinemia",
+        "vasculite por IgA",
+        "Behçet",
+        "Buerger"
+      ],
+      "diagnostic_principles": [
+        "biópsia",
+        "angiografia quando biópsia não é possível"
+      ],
+      "ANCA": [
+        "C-ANCA no resumo associado à GPA/Wegener",
+        "P-ANCA associado à PAM e Churg-Strauss"
+      ],
+      "pulmonary_renal_syndrome": [
+        "GPA/Wegener",
+        "PAM",
+        "Goodpasture",
+        "leptospirose",
+        "LES"
+      ]
+    },
+    "selected_entities": {
+      "PAN": [
+        "homem de meia idade",
+        "mononeurite múltipla",
+        "HAS/insuficiência renal renovascular",
+        "angina mesentérica",
+        "dor testicular",
+        "lesões cutâneas",
+        "investigar HBV"
+      ],
+      "Kawasaki": [
+        "meninos 1–5 anos",
+        "febre >5 dias",
+        "congestão ocular",
+        "alteração oral",
+        "linfadenopatia cervical",
+        "exantema",
+        "alteração de extremidades",
+        "aneurisma coronariano"
+      ],
+      "GPA": [
+        "vias aéreas superiores",
+        "pulmão",
+        "rim",
+        "olho",
+        "C-ANCA",
+        "biópsia"
+      ],
+      "EGPA": [
+        "asma tardia",
+        "eosinofilia",
+        "fase vasculítica",
+        "P-ANCA"
+      ],
+      "IgA_vasculitis": [
+        "3–20 anos",
+        "púrpura palpável",
+        "hematúria",
+        "dor abdominal",
+        "artralgia"
+      ],
+      "Buerger": [
+        "homens jovens",
+        "tabagismo",
+        "isquemia/necrose de extremidades"
+      ],
+      "Behçet": [
+        "20–35 anos",
+        "úlceras orais/genitais",
+        "hipópio",
+        "patergia",
+        "aneurisma de artéria pulmonar"
+      ]
+    }
+  },
+  "external_research_extension": {
+    "updates": [
+      "MSD descreve LES como doença inflamatória crônica multissistêmica com manifestações articulares, cutâneas, serosas, renais, neurológicas e hematológicas.",
+      "MSD descreve urinálise e avaliação de proteinúria no rastreamento renal e biópsia renal para classificação/conduta quando indicada.",
+      "EULAR 2023 reforça manejo individualizado, avaliação de atividade/dano e prevenção de dano; o ACR publicou atualização de guideline de LES em 2025."
+    ],
+    "boundary": "os critérios numéricos e mnemônicos do resumo devem ser versionados e reconciliados antes de virar regra do motor"
+  },
+  "clinical_knowledge_map": {
+    "causal_chains": [
+      "autoimunidade -> autoanticorpos/imunocomplexos -> inflamação -> lesão de órgãos",
+      "SAF -> estado pró-trombótico -> trombose/morbidade gestacional",
+      "esclerodermia -> vasculopatia/fibrose -> Raynaud/lesão de órgãos",
+      "vasculite -> inflamação vascular -> isquemia/hemorragia/disfunção do território"
+    ],
+    "pattern_axes": [
+      "idade",
+      "sexo",
+      "calibre vascular",
+      "órgão predominante",
+      "pele/mucosa",
+      "rim",
+      "pulmão",
+      "sistema nervoso",
+      "articulações",
+      "sorologia",
+      "curso",
+      "gravidade"
+    ]
+  },
+  "patient_generation": {
+    "dimensions": [
+      "síndrome predominante",
+      "órgão-alvo",
+      "idade",
+      "sexo",
+      "curso",
+      "gravidade",
+      "marcadores imunológicos",
+      "contexto medicamentoso/infeccioso",
+      "complicação inicial",
+      "diferenciais"
+    ],
+    "constraints": [
+      "não transformar um caso do resumo em template fixo",
+      "não usar critérios históricos como leis sem validação atual"
+    ]
+  },
+  "validation_targets": [
+    "múltiplas apresentações de LES",
+    "separação entre LES, SAF, esclerodermia e vasculites",
+    "síndrome pulmão-rim com etiologias diferentes",
+    "conflito entre fonte histórica e guideline atual"
+  ],
+  "conflicts_and_boundaries": [
+    {
+      "type": "historical_criteria",
+      "issue": "o resumo apresenta frameworks diferentes para LES",
+      "handling": "preservar como source_layer e reconciliar depois"
+    },
+    {
+      "type": "therapy_update",
+      "issue": "condutas do resumo podem ser históricas/simplificadas",
+      "handling": "consultar referência contemporânea antes de produção"
+    }
+  ]
+}

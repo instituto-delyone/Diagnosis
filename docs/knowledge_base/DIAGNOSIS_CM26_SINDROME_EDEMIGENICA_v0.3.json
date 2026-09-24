@@ -1,0 +1,207 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM26",
+  "title": "Síndrome Edemigênica",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "CM 26 - Síndrome Edemigênica.docx.pdf"
+      ],
+      "date": "22/10/2021",
+      "role": "fragmento/contexto original; documento visual"
+    }
+  },
+  "summary_extraction": {
+    "scope": [
+      "edema",
+      "insuficiência cardíaca",
+      "IC sistólica/diastólica",
+      "IC com fração de ejeção reduzida/preservada",
+      "causas de alto débito",
+      "classificação funcional",
+      "tratamento farmacológico",
+      "critérios de Framingham"
+    ],
+    "important_source_fragments": [
+      "Síndrome edemigênica: o resumo organiza edema por causas generalizadas e localizadas, incluindo disfunção cardíaca, renal, hepática e vascular.",
+      "Insuficiência cardíaca aparece como causa central do edema, com congestão e baixo débito como componentes funcionais.",
+      "O material diferencia insuficiência cardíaca com fração de ejeção reduzida e preservada; ICFER é associada à sobrecarga de volume/cavidades dilatadas e ICFEP à sobrecarga de pressão/hipertrofia concêntrica.",
+      "O resumo usa FE ≤40% como referência para ICFER e FE >40–50% para ICFEP, com distinção por ecocardiograma.",
+      "Insuficiência cardíaca de alto débito é apresentada como situação em que o débito pode ser normal ou aumentado apesar de insuficiência clínica; causas citadas incluem anemia, tireotoxicose, fístula, deficiência de tiamina/beribéri e doença de Paget.",
+      "O material apresenta classificação funcional da IC em classes I–IV, relacionando limitação aos esforços e sintomas.",
+      "Tratamento da ICFER é organizado em quatro grupos A/B/C/D e inclui diurético, IECA/BRA, beta-bloqueador, antagonista mineralocorticoide, hidralazina/nitrato, entre outros; a sequência é a da fonte.",
+      "ICFEP é apresentada com controle da congestão e tratamento das comorbidades/fatores precipitantes.",
+      "Critérios de Framingham: 2 maiores ou 1 maior + 2 menores no padrão clássico, mas o resumo contém uma formulação própria que deve ser preservada sem atualização silenciosa.",
+      "Critérios maiores listados: dispneia paroxística noturna, perda de peso com tratamento, turgência jugular, estertores, edema agudo de pulmão, pressão venosa elevada, refluxo hepatojugular, cardiomegalia e edema/congestão pulmonar.",
+      "Critérios menores listados: tosse noturna, dispneia aos esforços, capacidade vital reduzida, derrame pleural, taquicardia e edema de membros inferiores.",
+      "O resumo traz observações sobre suspensão/reintrodução de beta-bloqueador em descompensação e combinação de terapias, como conteúdo didático."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "edema",
+      "features": [
+        "intersticial",
+        "generalizado/localizado",
+        "pressão hidrostática",
+        "pressão oncótica",
+        "retenção de sódio",
+        "permeabilidade"
+      ]
+    },
+    {
+      "id": "heart_failure",
+      "features": [
+        "congestão",
+        "baixo débito",
+        "dispneia",
+        "edema",
+        "ICFER/ICFEP"
+      ]
+    },
+    {
+      "id": "hfrEF",
+      "features": [
+        "fração de ejeção reduzida",
+        "sobrecarga de volume",
+        "cavidades dilatadas",
+        "disfunção sistólica"
+      ]
+    },
+    {
+      "id": "hfpef",
+      "features": [
+        "fração preservada",
+        "sobrecarga de pressão",
+        "hipertrofia concêntrica",
+        "disfunção diastólica"
+      ]
+    },
+    {
+      "id": "high_output_heart_failure",
+      "features": [
+        "débito alto/normal",
+        "anemia",
+        "tireotoxicose",
+        "fístula",
+        "beribéri",
+        "Paget"
+      ]
+    },
+    {
+      "id": "framingham_heart_failure",
+      "features": [
+        "critérios maiores/menores",
+        "diagnóstico clínico histórico"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "Edema deve ser interpretado pela fisiopatologia e pela distribuição, não apenas pela presença de aumento de volume.",
+      "source": "summary"
+    },
+    {
+      "rule": "IC pode apresentar congestão, baixo débito ou ambos.",
+      "source": "summary"
+    },
+    {
+      "rule": "O resumo separa ICFER e ICFEP pela fração de ejeção e pelo padrão estrutural/funcional cardíaco.",
+      "source": "summary"
+    },
+    {
+      "rule": "IC de alto débito é uma entidade distinta no resumo, com anemia e tireotoxicose entre as causas.",
+      "source": "summary"
+    },
+    {
+      "rule": "A classificação funcional I–IV descreve limitação funcional e sintomas conforme esforço.",
+      "source": "summary"
+    },
+    {
+      "rule": "Os critérios de Framingham aparecem como ferramenta clínica histórica de apoio ao diagnóstico de IC.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "edema bilateral + turgência jugular + dispneia + estertores",
+      "possibilities": [
+        "insuficiência cardíaca"
+      ]
+    },
+    {
+      "axis": "IC + FE reduzida + cavidades dilatadas",
+      "possibilities": [
+        "ICFER"
+      ]
+    },
+    {
+      "axis": "IC + FE preservada + hipertrofia/disfunção diastólica",
+      "possibilities": [
+        "ICFEP"
+      ]
+    },
+    {
+      "axis": "IC + débito elevado/normal + anemia/tireotoxicose/fístula",
+      "possibilities": [
+        "IC de alto débito"
+      ]
+    },
+    {
+      "axis": "edema generalizado + baixa pressão oncótica/hipoalbuminemia",
+      "possibilities": [
+        "causa renal/hepática/proteica"
+      ]
+    },
+    {
+      "axis": "edema localizado + assimetria",
+      "possibilities": [
+        "causa vascular/local"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "distribuição do edema",
+      "volemia",
+      "pressão arterial",
+      "frequência",
+      "dispneia",
+      "ortopneia",
+      "DPN",
+      "turgência jugular",
+      "estertores",
+      "FE",
+      "cavidades",
+      "hipertrofia",
+      "causa de base",
+      "classe funcional",
+      "comorbidades"
+    ],
+    "allowed_variability": [
+      "IC direita/esquerda/biventricular",
+      "ICFER/ICFEP",
+      "baixo débito/alto débito",
+      "aguda/crônica/descompensada",
+      "cardíaca/não cardíaca"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "Os critérios de Framingham e os limiares de fração de ejeção são mantidos como conteúdo da fonte de 2021; não corrigir silenciosamente.",
+    "A tabela terapêutica é histórica e não deve ser tratada como protocolo atual do motor.",
+    "A observação sobre retirar beta-bloqueador em descompensação é dependente de contexto e permanece apenas como anotação da fonte.",
+    "Edema por causas renal/hepática/vascular aparece no módulo, mas o conhecimento detalhado dessas etiologias deve permanecer ligado aos módulos correspondentes.",
+    "Os critérios diagnósticos do resumo têm uma formulação textual que não deve ser reinterpretada além do que está escrito."
+  ],
+  "validation_targets": [
+    "Preservar o conteúdo do resumo como camada própria e não atribuir complementações externas à fonte.",
+    "Manter números, critérios, mnemônicos e tratamentos históricos identificáveis como source-derived.",
+    "Não transformar um quadro didático em caso fixo.",
+    "Representar relações, mecanismos, diferenciais e eixos de geração."
+  ],
+  "generated_at": "2026-09-23"
+}

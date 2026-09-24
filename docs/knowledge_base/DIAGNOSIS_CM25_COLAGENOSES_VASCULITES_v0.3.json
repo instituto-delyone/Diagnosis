@@ -1,0 +1,329 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM25",
+  "title": "Colagenoses e Vasculites",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "CM 25 - Colagenoses e Vasculites.docx.pdf"
+      ],
+      "date": "03/01/2022",
+      "role": "fragmento/contexto original; documento visual"
+    },
+    "previous_artifact": "DIAGNOSIS_CM25_COLAGENOSES_VASCULITES_v0.2.json"
+  },
+  "summary_extraction": {
+    "scope": [
+      "LES",
+      "síndrome antifosfolípide",
+      "esclerodermia",
+      "síndrome de Sjögren",
+      "doença mista do tecido conjuntivo",
+      "vasculites de grandes/médios/pequenos vasos",
+      "ANCA",
+      "síndrome pulmão-rim",
+      "Behçet",
+      "Buerger",
+      "Kawasaki",
+      "vasculite por IgA"
+    ],
+    "important_source_fragments": [
+      "Colagenoses são apresentadas como doenças autoimunes sistêmicas com produção de anticorpos contra estruturas do tecido conjuntivo.",
+      "LES: curso em surtos e remissões, com manifestações cutâneas, articulares, serosas, renais, neurológicas e hematológicas; o resumo cita FAN, anti-dsDNA, anti-Sm, antifosfolipídios, complemento e Coombs.",
+      "Síndrome antifosfolípide: trombose arterial/venosa e morbidade gestacional; anticardiolipina, anti-beta2-glicoproteína I e anticoagulante lúpico aparecem como marcadores.",
+      "Esclerodermia: formas cutânea limitada e difusa; Raynaud, esclerodactilia, refluxo/disfagia, calcinoses, telangiectasias, fibrose/alveolite, hipertensão pulmonar e crise renal.",
+      "CREST é apresentado com Calcinoses, Raynaud, Esclerodactilia, alterações Esofágicas e Telangiectasias; anticentrômero é associado à forma limitada e anti-topoisomerase I à difusa.",
+      "Vasculites são organizadas por calibre: grandes vasos (Takayasu/arterite temporal), médios (PAN/Kawasaki), pequenos (PAM, GPA/Wegener, EGPA/Churg-Strauss, crioglobulinemia, vasculite por IgA) e variáveis como Behçet/Buerger no resumo.",
+      "ANCA é associado no material a lesão glomerular; C-ANCA é associado à GPA/Wegener e P-ANCA à PAM/Churg-Strauss.",
+      "Síndrome pulmão-rim: hemoptise + glomerulonefrite; o resumo cita GPA, PAM, Goodpasture, leptospirose e LES.",
+      "GPA: vias aéreas superiores + pulmão + rim, podendo haver olho/orbita; C-ANCA; biópsia.",
+      "PAM: P-ANCA, homem de meia idade, manifestação renal/pulmonar.",
+      "Goodpasture: síndrome pulmão-rim com padrão linear na imunofluorescência e anticorpos anti-membrana basal.",
+      "EGPA/Churg-Strauss: asma de início tardio, eosinofilia e fase vasculítica; P-ANCA.",
+      "PAN: mononeurite múltipla, hipertensão/lesão renal renovascular, sintomas gastrointestinais, dor testicular e lesões cutâneas; investigar HBV.",
+      "Vasculite por IgA: criança/adolescente, púrpura palpável em membros inferiores/nádegas, hematúria, dor abdominal e artralgia.",
+      "Behçet: úlceras orais/genitais, lesões oculares, patergia e possibilidade de aneurisma pulmonar.",
+      "Buerger: homem jovem tabagista, acometimento de vasos pequenos/médios e isquemia/necrose de extremidades.",
+      "Kawasaki: criança, febre prolongada, congestão ocular, alteração oral, adenopatia cervical, exantema e alteração de extremidades; aneurisma coronariano é a complicação destacada.",
+      "Takayasu é descrita em mulheres jovens, com acometimento de subclávia/carótida/renal, claudicação e hipertensão renovascular; arterite temporal em mulheres idosas, com cefaleia/claudicação mandibular/risco visual."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "sle",
+      "features": [
+        "autoimunidade",
+        "surtos/remissões",
+        "pele",
+        "articulações",
+        "rim",
+        "serosas",
+        "SNC",
+        "citopenias",
+        "FAN",
+        "anti-dsDNA",
+        "anti-Sm"
+      ]
+    },
+    {
+      "id": "antiphospholipid_syndrome",
+      "features": [
+        "trombose",
+        "perdas gestacionais",
+        "anticardiolipina",
+        "anti-beta2GPI",
+        "anticoagulante lúpico"
+      ]
+    },
+    {
+      "id": "systemic_sclerosis",
+      "features": [
+        "Raynaud",
+        "esclerodactilia",
+        "esôfago",
+        "calcinoses",
+        "telangiectasias",
+        "fibrose",
+        "hipertensão pulmonar",
+        "crise renal"
+      ]
+    },
+    {
+      "id": "gpa",
+      "features": [
+        "vias aéreas superiores",
+        "pulmão",
+        "rim",
+        "olho",
+        "C-ANCA",
+        "granulomatose"
+      ]
+    },
+    {
+      "id": "microscopic_polyangiitis",
+      "features": [
+        "vasculite de pequenos vasos",
+        "P-ANCA",
+        "rim/pulmão"
+      ]
+    },
+    {
+      "id": "egpa",
+      "features": [
+        "asma",
+        "eosinofilia",
+        "vasculite",
+        "P-ANCA"
+      ]
+    },
+    {
+      "id": "goodpasture",
+      "features": [
+        "hemorragia alveolar",
+        "glomerulonefrite",
+        "anti-MBG",
+        "padrão linear"
+      ]
+    },
+    {
+      "id": "polyarteritis_nodosa",
+      "features": [
+        "médios vasos",
+        "mononeurite múltipla",
+        "pele",
+        "abdome",
+        "rim renovascular",
+        "HBV"
+      ]
+    },
+    {
+      "id": "iga_vasculitis",
+      "features": [
+        "púrpura palpável",
+        "hematúria",
+        "dor abdominal",
+        "artralgia"
+      ]
+    },
+    {
+      "id": "behcet",
+      "features": [
+        "úlceras orais/genitais",
+        "uveíte/lesão ocular",
+        "patergia",
+        "aneurisma"
+      ]
+    },
+    {
+      "id": "buergers_disease",
+      "features": [
+        "tabagismo",
+        "isquemia distal",
+        "vasos pequenos/médios"
+      ]
+    },
+    {
+      "id": "kawasaki",
+      "features": [
+        "febre",
+        "conjuntivite",
+        "alteração oral",
+        "adenopatia",
+        "rash",
+        "extremidades",
+        "coronárias"
+      ]
+    },
+    {
+      "id": "takayasu",
+      "features": [
+        "grandes vasos",
+        "mulheres jovens",
+        "claudicação",
+        "pulso",
+        "estenoses"
+      ]
+    },
+    {
+      "id": "giant_cell_arteritis",
+      "features": [
+        "idade avançada",
+        "cefaleia temporal",
+        "claudicação mandibular",
+        "risco visual"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "A classificação por calibre vascular é um eixo central do resumo para organizar vasculites.",
+      "source": "summary"
+    },
+    {
+      "rule": "ANCA é associado pelo material à lesão glomerular e às vasculites GPA/PAM/EGPA.",
+      "source": "summary"
+    },
+    {
+      "rule": "Síndrome pulmão-rim deve considerar causas autoimunes, infecciosas e vasculíticas listadas pelo resumo.",
+      "source": "summary"
+    },
+    {
+      "rule": "Esclerodermia limitada e difusa são diferenciadas pelo padrão cutâneo, órgãos internos e autoanticorpos apresentados.",
+      "source": "summary"
+    },
+    {
+      "rule": "Kawasaki tem risco de aneurisma coronariano como complicação central no resumo.",
+      "source": "summary"
+    },
+    {
+      "rule": "PAN é apresentada como vasculite de médio calibre sem comprometimento glomerular típico, com possível associação ao HBV.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "Raynaud + esclerodactilia + calcinoses/telangiectasias + esôfago",
+      "possibilities": [
+        "esclerodermia/CREST"
+      ]
+    },
+    {
+      "axis": "hemoptise + glomerulonefrite + C-ANCA + vias aéreas",
+      "possibilities": [
+        "GPA"
+      ]
+    },
+    {
+      "axis": "hemoptise + glomerulonefrite + P-ANCA sem doença granulomatosa de vias aéreas",
+      "possibilities": [
+        "PAM"
+      ]
+    },
+    {
+      "axis": "hemoptise + glomerulonefrite + padrão linear anti-MBG",
+      "possibilities": [
+        "Goodpasture"
+      ]
+    },
+    {
+      "axis": "asma tardia + eosinofilia + vasculite",
+      "possibilities": [
+        "EGPA"
+      ]
+    },
+    {
+      "axis": "mononeurite múltipla + dor abdominal/pele + doença renovascular",
+      "possibilities": [
+        "PAN"
+      ]
+    },
+    {
+      "axis": "púrpura palpável + hematúria + dor abdominal + artralgia em jovem",
+      "possibilities": [
+        "vasculite por IgA"
+      ]
+    },
+    {
+      "axis": "úlceras orais/genitais + patergia + lesão ocular",
+      "possibilities": [
+        "Behçet"
+      ]
+    },
+    {
+      "axis": "jovem tabagista + isquemia distal",
+      "possibilities": [
+        "Buerger"
+      ]
+    },
+    {
+      "axis": "criança + febre prolongada + mucocutâneo + adenopatia + extremidades",
+      "possibilities": [
+        "Kawasaki"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "idade",
+      "sexo",
+      "calibre vascular",
+      "órgão predominante",
+      "pele/mucosa",
+      "rim",
+      "pulmão",
+      "SNC",
+      "articulações",
+      "sorologia",
+      "curso",
+      "gravidade",
+      "infecção associada",
+      "medicamentos"
+    ],
+    "allowed_variability": [
+      "sistêmica/localizada",
+      "pulmão-rim",
+      "cutânea",
+      "renal",
+      "vascular periférica",
+      "mucocutânea",
+      "pediátrica/adulta"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "Os critérios e tratamentos do resumo são históricos e devem permanecer versionados.",
+    "A antiga classificação e os nomes C-ANCA/P-ANCA são preservados como terminologia da fonte; não assumir equivalência absoluta com todos os biomarcadores modernos.",
+    "O resumo usa algumas associações epidemiológicas rígidas; elas devem ser tratadas como pistas, não determinantes.",
+    "Condutas como plasmaférese, ciclofosfamida, imunoglobulina e AAS são source-derived e não devem ser convertidas automaticamente em protocolos atuais."
+  ],
+  "validation_targets": [
+    "Preservar o conteúdo do resumo como camada própria e não atribuir complementações externas à fonte.",
+    "Manter números, critérios, mnemônicos e tratamentos históricos identificáveis como source-derived.",
+    "Não transformar um quadro didático em caso fixo.",
+    "Representar relações, mecanismos, diferenciais e eixos de geração."
+  ],
+  "generated_at": "2026-09-23"
+}
