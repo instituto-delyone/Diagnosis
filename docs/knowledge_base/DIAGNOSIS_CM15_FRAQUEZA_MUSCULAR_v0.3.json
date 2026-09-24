@@ -1,0 +1,293 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM15",
+  "title": "Fraqueza Muscular",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "]CM 15 - Fraqueza Muscular.docx.pdf"
+      ],
+      "date": "01/08/2021",
+      "role": "fragmento/contexto original"
+    },
+    "external_sources": [
+      {
+        "title": "European Academy of Neurology/Peripheral Nerve Society — GBS guideline, 2023",
+        "url": "https://onlinelibrary.wiley.com/doi/10.1111/ene.16073",
+        "role": "complementação atual para síndrome de Guillain-Barré"
+      },
+      {
+        "title": "International Consensus Guidance for Management of Myasthenia Gravis: 2020 Update",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33144515/",
+        "role": "complementação para miastenia gravis"
+      },
+      {
+        "title": "Ministério da Saúde — Síndrome de Guillain-Barré",
+        "url": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/g/sindrome-de-guillain-barre",
+        "role": "referência brasileira"
+      }
+    ]
+  },
+  "summary_extraction": {
+    "scope": [
+      "localização da fraqueza",
+      "primeiro neurônio motor",
+      "segundo neurônio motor",
+      "placa motora",
+      "músculo",
+      "miastenia gravis",
+      "Lambert-Eaton",
+      "esclerose múltipla",
+      "dermatomiosite/polimiosite",
+      "Guillain-Barré",
+      "ELA",
+      "poliarterite nodosa"
+    ],
+    "important_source_fragments": [
+      "Fraqueza é definida no resumo como incapacidade de vencer resistência.",
+      "O movimento voluntário é organizado pelo primeiro neurônio motor, segundo neurônio, nervo periférico, placa motora e músculo.",
+      "Primeiro neurônio: espasticidade, hiperreflexia, Babinski; segundo neurônio: flacidez, atrofia, miofasciculações.",
+      "Miastenia gravis: fraqueza + fatigabilidade, forma ocular com ptose/diplopia, forma generalizada com acometimento ocular/bulbar/proximal, sensibilidade e pupilas preservadas.",
+      "Miastenia: ENMG, decremento, fibra única, anti-AChR, anti-MuSK, investigação do timo; piridostigmina, timectomia e imunossupressão; crise com imunoglobulina ou plasmaférese no resumo.",
+      "Lambert-Eaton: fraqueza proximal de membros inferiores, manifestações autonômicas e associação paraneoplásica com câncer de pulmão de pequenas células no resumo.",
+      "Esclerose múltipla: doença autoimune desmielinizante do SNC, neurite óptica, sintomas sensitivos, síndrome piramidal, sintomas medulares/cerebelares, Uhthoff e Lhermitte.",
+      "Dermatomiosite: fraqueza proximal simétrica, disfagia, mialgia, heliotropo e pápulas de Gottron, aumento de enzimas musculares e associação com neoplasia.",
+      "Polimiosite é descrita como quadro semelhante sem lesão cutânea e sem associação com neoplasia no resumo.",
+      "ELA: sinais combinados de primeiro e segundo neurônio, com miofasciculações, atrofia, espasticidade, hiperreflexia e Babinski; suporte e riluzol.",
+      "Guillain-Barré: fraqueza flácida, arreflexa, simétrica e ascendente, disautonomia, sensibilidade/esfíncteres geralmente preservados, dissociação proteinocitológica e ENMG; IgIV ou plasmaférese.",
+      "Poliarterite nodosa: vasculite de médio/pequeno calibre associada no exemplo à hepatite B, com mononeurite múltipla e hipertensão renovascular."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "upper_motor_neuron",
+      "features": [
+        "espasticidade",
+        "hiperreflexia",
+        "Babinski",
+        "síndrome piramidal"
+      ]
+    },
+    {
+      "id": "lower_motor_neuron",
+      "features": [
+        "flacidez",
+        "atrofia",
+        "hiporreflexia/arreflexia",
+        "miofasciculações"
+      ]
+    },
+    {
+      "id": "neuromuscular_junction",
+      "features": [
+        "fraqueza fatigável",
+        "sensibilidade preservada",
+        "miastenia",
+        "Lambert-Eaton"
+      ]
+    },
+    {
+      "id": "myopathy",
+      "features": [
+        "fraqueza proximal",
+        "enzimas musculares elevadas",
+        "sensibilidade preservada",
+        "miosite"
+      ]
+    },
+    {
+      "id": "myasthenia_gravis",
+      "features": [
+        "ptose",
+        "diplopia",
+        "fatigabilidade",
+        "bulbar",
+        "AChR/MuSK",
+        "timo"
+      ]
+    },
+    {
+      "id": "lambert_eaton",
+      "features": [
+        "fraqueza proximal de MMII",
+        "disautonomia",
+        "paraneoplasia"
+      ]
+    },
+    {
+      "id": "multiple_sclerosis",
+      "features": [
+        "neurite óptica",
+        "desmielinização SNC",
+        "sintomas disseminados no tempo/espaço",
+        "Uhthoff",
+        "Lhermitte"
+      ]
+    },
+    {
+      "id": "dermatomyositis",
+      "features": [
+        "fraqueza proximal",
+        "heliotropo",
+        "Gottron",
+        "enzimas musculares",
+        "neoplasia"
+      ]
+    },
+    {
+      "id": "als",
+      "features": [
+        "sinais 1º e 2º neurônio",
+        "miofasciculações",
+        "atrofia",
+        "espasticidade"
+      ]
+    },
+    {
+      "id": "guillain_barre",
+      "features": [
+        "fraqueza ascendente",
+        "arreflexia",
+        "disautonomia",
+        "dissociação proteinocitológica"
+      ]
+    },
+    {
+      "id": "polyarteritis_nodosa",
+      "features": [
+        "vasculite",
+        "mononeurite múltipla",
+        "hepatite B",
+        "hipertensão renovascular"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "A topografia da fraqueza deve ser determinada antes de nomear a doença: primeiro neurônio, segundo neurônio, placa motora ou músculo.",
+      "source": "summary"
+    },
+    {
+      "rule": "Alteração sensitiva associada favorece lesão neural/periférica ou central em vez de distúrbio isolado da junção neuromuscular/músculo.",
+      "source": "summary"
+    },
+    {
+      "rule": "Miastenia é modelada pela fatigabilidade e preservação sensitiva/pupilar no resumo.",
+      "source": "summary"
+    },
+    {
+      "rule": "ELA é definida no resumo pela coexistência de sinais de primeiro e segundo neurônio.",
+      "source": "summary"
+    },
+    {
+      "rule": "Guillain-Barré é associado a fraqueza ascendente arreflexa e dissociação proteinocitológica; tratamento imunomodulador é IgIV ou plasmaférese.",
+      "source": "summary+external"
+    },
+    {
+      "rule": "A diretriz EAN/PNS de 2023 recomenda IgIV ou plasmaférese em pacientes selecionados com GBS e não recomenda corticoide como tratamento da GBS.",
+      "source": "external"
+    },
+    {
+      "rule": "A orientação internacional de miastenia inclui tratamento sintomático/imunossupressor, IVIg/plasmaférese em situações apropriadas e recomendações específicas para timectomia e terapias imunológicas.",
+      "source": "external"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "espasticidade + hiperreflexia + Babinski",
+      "possibilities": [
+        "lesão de primeiro neurônio motor",
+        "síndrome piramidal"
+      ]
+    },
+    {
+      "axis": "flacidez + atrofia + miofasciculações",
+      "possibilities": [
+        "lesão de segundo neurônio",
+        "ELA"
+      ]
+    },
+    {
+      "axis": "fraqueza fatigável + ptose/diplopia + sensibilidade preservada",
+      "possibilities": [
+        "miastenia gravis"
+      ]
+    },
+    {
+      "axis": "fraqueza proximal MMII + disautonomia + câncer de pulmão de pequenas células",
+      "possibilities": [
+        "Lambert-Eaton"
+      ]
+    },
+    {
+      "axis": "fraqueza proximal + CPK/enzimas elevadas + lesões cutâneas típicas",
+      "possibilities": [
+        "dermatomiosite"
+      ]
+    },
+    {
+      "axis": "fraqueza ascendente + arreflexia + diarreia prévia",
+      "possibilities": [
+        "Guillain-Barré"
+      ]
+    },
+    {
+      "axis": "neurite óptica + sinais disseminados no tempo/espaço",
+      "possibilities": [
+        "esclerose múltipla"
+      ]
+    },
+    {
+      "axis": "mononeurite múltipla + hepatite B + manifestações sistêmicas",
+      "possibilities": [
+        "poliarterite nodosa"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "topografia",
+      "distribuição proximal/distal",
+      "simetria",
+      "tempo de evolução",
+      "fatigabilidade",
+      "sensibilidade",
+      "reflexos",
+      "tônus",
+      "atrofia",
+      "miofasciculações",
+      "enzimas musculares",
+      "sintomas autonômicos",
+      "sinais bulbares/oculares",
+      "exposição/infeção",
+      "neoplasia",
+      "autoimunidade"
+    ],
+    "allowed_variability": [
+      "central/periférica/junção/músculo",
+      "aguda/subaguda/crônica",
+      "ocular/generalizada",
+      "motor puro/motor+sensitivo",
+      "leve a grave",
+      "com ou sem disautonomia"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "O resumo usa linguagem didática simplificada para o arco motor; manter essa organização pedagógica, mas não transformá-la em anatomia completa.",
+    "A afirmação de que anti-MuSK ocorre somente na forma generalizada deve ser tratada como simplificação histórica.",
+    "A associação de dermatomiosite com neoplasia é importante no resumo, mas o grau de risco depende de subtipo, idade e contexto.",
+    "Os critérios e tratamentos de GBS e miastenia devem ser versionados separadamente; a camada externa não substitui o conteúdo histórico do resumo.",
+    "A frase do resumo de que a IgIV seria 'mais fácil' e teria benefícios idênticos à plasmaférese é uma justificativa didática e não deve virar regra de escolha automática."
+  ],
+  "validation_targets": [
+    "Separar conteúdo do resumo original de complementação externa.",
+    "Não transformar exemplos de prova em casos canônicos.",
+    "Manter regras históricas identificáveis quando não forem compatíveis com a camada atual.",
+    "Permitir geração de apresentações múltiplas a partir do espaço de conhecimento."
+  ],
+  "generated_at": "2026-09-23"
+}

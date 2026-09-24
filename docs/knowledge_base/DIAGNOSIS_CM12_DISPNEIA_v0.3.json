@@ -1,0 +1,215 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM12",
+  "title": "Dispneia",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [],
+      "date": "fonte-resumo não localizada nesta conversa",
+      "role": "fragmento/contexto original; não representa sozinho todo o conhecimento clínico"
+    },
+    "external_sources": {
+      "sources": [
+        {
+          "title": "StatPearls — Dyspnea, NCBI Bookshelf NBK499965, atualização 13/12/2025",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK499965/",
+          "role": "fonte de referência indicada pelo projeto e usada para reconstrução do módulo"
+        },
+        {
+          "title": "MSD Manual Professional — Dispneia, atualização nov. 2025",
+          "url": "https://www.msdmanuals.com/pt/profissional/dist%C3%BArbios-pulmonares/sintomas-de-doen%C3%A7as-pulmonares/dispneia",
+          "role": "complementação atual da avaliação clínica"
+        }
+      ]
+    }
+  },
+  "summary_extraction": {
+    "scope": [
+      "dispneia aguda",
+      "dispneia subaguda",
+      "dispneia crônica"
+    ],
+    "status": "knowledge reconstructed from the project's designated reference because the original CM12 summary file was not available in the uploaded conversation materials.",
+    "important_source_fragments": [
+      "A referência indicada pelo próprio projeto para dispneia é StatPearls/NCBI Bookshelf NBK499965.",
+      "Dispneia é sintoma, não diagnóstico.",
+      "Etiologias podem ser respiratórias, cardíacas, neuromusculares, sistêmicas, psicogênicas ou multifatoriais.",
+      "Avaliação estruturada começa por história, exame físico e testes direcionados.",
+      "Em dispneia aguda, radiografia de tórax, ECG, hemograma, eletrólitos e oximetria aparecem entre avaliações iniciais usuais.",
+      "POCUS pode auxiliar na diferenciação de edema pulmonar, pneumotórax, derrame, função ventricular e sobrecarga de VD.",
+      "Em suspeita de embolia pulmonar, a estratégia diagnóstica depende da probabilidade clínica e pode envolver PERC, dímero-D e angiotomografia.",
+      "Dispneia crônica pode exigir TC, provas de função pulmonar, ecocardiograma, broncoscopia ou teste cardiopulmonar conforme contexto."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "acute_dyspnea",
+      "features": [
+        "início horas-dias",
+        "necessidade de estabilização ABC",
+        "hipoxemia",
+        "taquipneia",
+        "causas potencialmente fatais"
+      ]
+    },
+    {
+      "id": "chronic_dyspnea",
+      "features": [
+        ">4 semanas",
+        "DPOC",
+        "doença intersticial",
+        "insuficiência cardíaca",
+        "descondicionamento",
+        "doença neuromuscular"
+      ]
+    },
+    {
+      "id": "respiratory_causes",
+      "features": [
+        "asma",
+        "DPOC",
+        "pneumonia",
+        "pneumotórax",
+        "TEP",
+        "doença intersticial",
+        "derrame pleural",
+        "obstrução de via aérea"
+      ]
+    },
+    {
+      "id": "cardiac_causes",
+      "features": [
+        "insuficiência cardíaca",
+        "isquemia",
+        "arritmia",
+        "doença valvar",
+        "tamponamento",
+        "hipertensão pulmonar"
+      ]
+    },
+    {
+      "id": "systemic_causes",
+      "features": [
+        "anemia",
+        "acidose metabólica",
+        "obesidade",
+        "gestação",
+        "descondicionamento"
+      ]
+    },
+    {
+      "id": "neuromuscular_psychogenic",
+      "features": [
+        "miastenia/GBS e outras fraquezas",
+        "ansiedade",
+        "causas psicogênicas após exclusão de causas orgânicas relevantes"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "Dispneia é sintoma e exige identificação da etiologia subjacente.",
+      "source": "external reference"
+    },
+    {
+      "rule": "Dispneia aguda com instabilidade exige estabilização de via aérea, respiração e circulação antes de completar investigação etiológica.",
+      "source": "external reference"
+    },
+    {
+      "rule": "Sinais como alteração do sensório, cianose, estridor, esforço respiratório importante, hipoxemia ou instabilidade hemodinâmica aumentam a urgência.",
+      "source": "external reference"
+    },
+    {
+      "rule": "A seleção de testes para TEP deve ser condicionada à probabilidade clínica, evitando transformar um único teste em regra universal.",
+      "source": "external reference"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "dispneia + sibilos",
+      "possibilities": [
+        "asma",
+        "DPOC",
+        "edema pulmonar",
+        "anafilaxia",
+        "obstrução de via aérea"
+      ]
+    },
+    {
+      "axis": "dispneia + estertores/ortopneia/edema",
+      "possibilities": [
+        "insuficiência cardíaca",
+        "pneumonia",
+        "doença intersticial"
+      ]
+    },
+    {
+      "axis": "dispneia súbita + dor torácica/hipoxemia",
+      "possibilities": [
+        "TEP",
+        "pneumotórax",
+        "síndrome coronariana"
+      ]
+    },
+    {
+      "axis": "dispneia + assimetria de murmúrio",
+      "possibilities": [
+        "pneumotórax",
+        "derrame",
+        "hemotórax"
+      ]
+    },
+    {
+      "axis": "dispneia + palidez/anemia",
+      "possibilities": [
+        "anemia",
+        "doença cardiopulmonar concomitante"
+      ]
+    },
+    {
+      "axis": "dispneia + acidose/Kussmaul",
+      "possibilities": [
+        "cetoacidose",
+        "acidose metabólica por outras causas"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "tempo",
+      "gravidade",
+      "posição",
+      "esforço",
+      "sintomas associados",
+      "sinais vitais",
+      "oximetria",
+      "exame pulmonar",
+      "exame cardiovascular",
+      "contexto tromboembólico",
+      "comorbidades"
+    ],
+    "allowed_variability": [
+      "aguda/subaguda/crônica",
+      "hipoxêmica/não hipoxêmica",
+      "pulmonar/cardíaca/sistêmica",
+      "isolada/multifatorial"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "O arquivo-resumo original do CM12 não foi localizado nos materiais desta conversa; portanto, nenhum conteúdo foi atribuído a um 'resumo CM12' inexistente.",
+    "Este módulo é provisório e deve receber a camada do resumo original quando o arquivo for disponibilizado.",
+    "O conteúdo clínico atual deste JSON deriva das referências externas explicitamente identificadas; não representa uma transcrição do resumo do curso.",
+    "Regras terapêuticas específicas de doenças causadoras de dispneia devem ser buscadas nas diretrizes correspondentes, e não codificadas como tratamento genérico da dispneia."
+  ],
+  "validation_targets": [
+    "Preservar a distinção entre conteúdo do resumo e conteúdo externo.",
+    "Não transformar uma apresentação específica em caso canônico.",
+    "Permitir múltiplas apresentações clínicas a partir do mesmo espaço de conhecimento.",
+    "Manter rastreabilidade de regras, incertezas e informações históricas."
+  ],
+  "generated_at": "2026-09-23"
+}

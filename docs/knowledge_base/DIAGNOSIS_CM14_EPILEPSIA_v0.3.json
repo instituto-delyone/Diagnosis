@@ -1,0 +1,207 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM14",
+  "title": "Epilepsia",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "CM 14 - Epilepsia.docx.pdf"
+      ],
+      "date": "23/07/2021",
+      "role": "fragmento/contexto original"
+    },
+    "external_sources": [
+      {
+        "title": "ILAE — Updated Classification of Epileptic Seizures, 2025",
+        "url": "https://www.ilae.org/guidelines/definition-and-classification",
+        "role": "classificação atual de tipos de crise"
+      },
+      {
+        "title": "ILAE — Classification of the Epilepsies, 2017",
+        "url": "https://www.ilae.org/guidelines/definition-and-classification/ilae-classification-of-the-epilepsies-2017",
+        "role": "classificação de epilepsias e síndromes"
+      }
+    ]
+  },
+  "summary_extraction": {
+    "scope": [
+      "epilepsia",
+      "tipos de crises",
+      "síndromes epilépticas",
+      "status epilepticus",
+      "convulsão febril",
+      "neurocisticercose"
+    ],
+    "important_source_fragments": [
+      "Epilepsia do lobo temporal: síndrome epiléptica comum no adulto, crises focais disperceptivas e associação com esclerose hipocampal.",
+      "Ausência infantil: início descrito entre 5–8 anos, hiperventilação como desencadeante e ponta-onda de 3 Hz no EEG.",
+      "Síndrome de West: espasmos + hipsarritmia + atraso do desenvolvimento; ACTH e vigabatrina no resumo.",
+      "Convulsão febril: 6 meses–5 anos, curta, descrita como não sendo síndrome epiléptica.",
+      "Estado de mal epiléptico: crises contínuas/repetitivas sem recuperação da consciência; o resumo traz sequência medicamentosa específica.",
+      "Classificação do resumo usa focal perceptiva/disperceptiva e generalizada, além de focal evoluindo para tônico-clônica bilateral.",
+      "Crise tônico-clônica generalizada: fase tônica, seguida de fase clônica e período pós-ictal.",
+      "Diagnóstico: anamnese, EEG e neuroimagem em situações indicadas.",
+      "Tratamento do resumo associa tipos de crise a valproato, lamotrigina, carbamazepina e etossuximida.",
+      "Neurocisticercose: Taenia solium, ingestão de ovos, acometimento do SNC, crises epilépticas como manifestação frequente; TC/RM e tratamento antiparasitário + corticoide aparecem no resumo."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "epilepsy",
+      "features": [
+        "crises epilépticas recorrentes",
+        "etiologia estrutural/genética/infecciosa/metabólica",
+        "distribuição bimodal descrita no resumo"
+      ]
+    },
+    {
+      "id": "temporal_lobe_epilepsy",
+      "features": [
+        "crise focal com comprometimento da consciência",
+        "esclerose hipocampal",
+        "EEG/RM"
+      ]
+    },
+    {
+      "id": "childhood_absence",
+      "features": [
+        "5–8 anos",
+        "hiperventilação",
+        "ponta-onda 3 Hz"
+      ]
+    },
+    {
+      "id": "west_syndrome",
+      "features": [
+        "espasmos",
+        "hipsarritmia",
+        "atraso do desenvolvimento"
+      ]
+    },
+    {
+      "id": "febrile_seizure",
+      "features": [
+        "6 meses–5 anos",
+        "febre",
+        "crise curta",
+        "não é epilepsia por si só"
+      ]
+    },
+    {
+      "id": "status_epilepticus",
+      "features": [
+        "crises contínuas/repetitivas",
+        "ausência de recuperação",
+        "forma convulsiva e não convulsiva"
+      ]
+    },
+    {
+      "id": "neurocysticercosis",
+      "features": [
+        "Taenia solium",
+        "cistos no SNC",
+        "crises",
+        "calcificações",
+        "edema/inflamação"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "O resumo diferencia crise epiléptica de epilepsia e de convulsão febril.",
+      "source": "summary"
+    },
+    {
+      "rule": "A terminologia focal perceptiva/disperceptiva é a terminologia histórica do resumo; a ILAE publicou atualização da classificação em 2025.",
+      "source": "summary+external"
+    },
+    {
+      "rule": "A classificação atual da ILAE mantém classes focal, generalizada, desconhecida e não classificada e atualiza a terminologia de consciência e descrição semiológica.",
+      "source": "external"
+    },
+    {
+      "rule": "A sequência terapêutica do status epilepticus do resumo é histórica e deve ser confrontada com protocolo vigente antes de virar regra operacional.",
+      "source": "summary"
+    },
+    {
+      "rule": "Neurocisticercose deve ser modelada como etiologia infecciosa/estrutural possível de crises, com localização e estágio do cisto influenciando apresentação.",
+      "source": "summary"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "crise focal + comprometimento de consciência + temporal",
+      "possibilities": [
+        "epilepsia do lobo temporal"
+      ]
+    },
+    {
+      "axis": "criança 5–8 anos + episódios breves + hiperventilação + ponta-onda 3 Hz",
+      "possibilities": [
+        "ausência infantil"
+      ]
+    },
+    {
+      "axis": "lactente + espasmos + hipsarritmia + atraso",
+      "possibilities": [
+        "síndrome de West"
+      ]
+    },
+    {
+      "axis": "6 meses–5 anos + crise associada à febre",
+      "possibilities": [
+        "convulsão febril"
+      ]
+    },
+    {
+      "axis": "crise contínua/repetitiva sem recuperação",
+      "possibilities": [
+        "estado de mal epiléptico"
+      ]
+    },
+    {
+      "axis": "crises + múltiplas calcificações/cistos em contexto epidemiológico",
+      "possibilities": [
+        "neurocisticercose"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "idade",
+      "etiologia",
+      "tipo de crise",
+      "consciência",
+      "foco anatômico",
+      "frequência",
+      "duração",
+      "estado pós-ictal",
+      "febre/desencadeantes",
+      "neuroimagem",
+      "EEG"
+    ],
+    "allowed_variability": [
+      "crise focal/generalizada/desconhecida",
+      "primeira crise vs epilepsia estabelecida",
+      "apresentação típica/atípica",
+      "etiologia estrutural/infecciosa/genética/metabólica"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "A classificação do resumo é de 2021 e usa terminologia de 2017; a ILAE publicou uma classificação atualizada em 2025, portanto as duas camadas devem permanecer versionadas.",
+    "As doses e a sequência de tratamento do status epilepticus presentes no resumo não devem ser tratados como protocolo atual sem validação.",
+    "O texto do resumo contém simplificações sobre diagnóstico e tratamento; elas devem permanecer como ensinamento da fonte, não como regra universal.",
+    "A seção de neurocisticercose contém afirmações sobre RM, LCR, duração e corticoide que precisam de validação por diretriz atual antes de codificação terapêutica."
+  ],
+  "validation_targets": [
+    "Separar conteúdo do resumo original de complementação externa.",
+    "Não transformar exemplos de prova em casos canônicos.",
+    "Manter regras históricas identificáveis quando não forem compatíveis com a camada atual.",
+    "Permitir geração de apresentações múltiplas a partir do espaço de conhecimento."
+  ],
+  "generated_at": "2026-09-23"
+}

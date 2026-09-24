@@ -1,0 +1,252 @@
+{
+  "schema_version": "3.0",
+  "artifact_version": "0.3",
+  "status": "phase_1_structured_knowledge_provisional",
+  "canonical": false,
+  "module": "CM13",
+  "title": "Geriatria",
+  "construction_principle": "KNOWLEDGE -> POSSIBILITIES -> PATIENT -> CASE -> SIMULATION",
+  "source_registry": {
+    "primary_summary": {
+      "files": [
+        "CM 13 - Geriatria.docx.pdf"
+      ],
+      "date": "19/07/2021",
+      "role": "fragmento/contexto original"
+    },
+    "external_sources": [
+      {
+        "title": "American Geriatrics Society — Clinical Tools / Beers Criteria",
+        "url": "https://www.americangeriatrics.org/publications-tools",
+        "role": "referência atual para medicamentos potencialmente inapropriados em idosos"
+      },
+      {
+        "title": "AGS 2023 Beers Criteria",
+        "url": "https://www.americangeriatrics.org/media-center/news/ags-2023-updates-beers-criteria-older-adults",
+        "role": "referência atual da camada de segurança medicamentosa"
+      }
+    ]
+  },
+  "summary_extraction": {
+    "scope": [
+      "síndromes geriátricas",
+      "demências",
+      "parkinsonismo",
+      "quedas",
+      "fragilidade",
+      "avaliação geriátrica ampla",
+      "rastreamento",
+      "imunização",
+      "iatrogenia"
+    ],
+    "important_source_fragments": [
+      "Síndrome parkinsoniana: tremor de repouso, bradicinesia, instabilidade postural e rigidez; doença de Parkinson como principal causa.",
+      "Parkinsonismo secundário descrito por drogas antagonistas dopaminérgicas, dano estrutural e doenças degenerativas.",
+      "Hidrocefalia normobárica: tríade demência + alteração da marcha/ataxia + incontinência urinária; dilatação ventricular sem atrofia cortical; derivação ventriculoperitoneal mencionada.",
+      "Paralisia supranuclear progressiva: alteração do olhar, especialmente descrita como desvio superior.",
+      "Demência por príons: demência rapidamente progressiva + mioclonias; Creutzfeldt-Jakob como forma clássica.",
+      "Demência de Alzheimer: início descrito no hipocampo, déficit colinérgico, beta-amiloide e tau; evolução para afasia, apraxia, agnosia, imobilidade e incontinência.",
+      "Demência vascular: doença de grandes vasos com evolução em degraus e doença de pequenos vasos/Binswanger com leucoaraiose.",
+      "Demência com corpos de Lewy: alucinações visuais e flutuação do nível de consciência.",
+      "Demência frontotemporal/Pick: alteração comportamental e atrofia frontotemporal.",
+      "Fragilidade: conjunto de fadiga, perda de peso, redução de atividade física e comprometimento funcional/marcha.",
+      "Avaliação geriátrica ampla: cognição, funcionalidade, marcha, visão, audição, continência e suporte social; Katz para AVDs e Lawton para AIVDs.",
+      "Quedas: fatores intrínsecos e extrínsecos; polifarmácia/psicotrópicos aparecem como fatores relevantes.",
+      "O resumo inclui imunização e rastreamentos específicos com idades e intervalos; esses valores devem permanecer como conteúdo histórico até confronto com calendários atuais."
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "geriatric_assessment",
+      "features": [
+        "avaliação geriátrica ampla",
+        "cognição",
+        "funcionalidade",
+        "marcha",
+        "visão",
+        "audição",
+        "continência",
+        "suporte social"
+      ]
+    },
+    {
+      "id": "frailty",
+      "features": [
+        "fadiga",
+        "perda de peso",
+        "redução de atividade física",
+        "comprometimento funcional/marcha"
+      ]
+    },
+    {
+      "id": "parkinsonism",
+      "features": [
+        "tremor de repouso",
+        "bradicinesia",
+        "rigidez",
+        "instabilidade postural",
+        "causas medicamentosas/estruturais/degenerativas"
+      ]
+    },
+    {
+      "id": "alzheimer_disease",
+      "features": [
+        "amnésia progressiva",
+        "hipocampo",
+        "beta-amiloide",
+        "tau",
+        "afasia",
+        "apraxia",
+        "agnosia"
+      ]
+    },
+    {
+      "id": "vascular_dementia",
+      "features": [
+        "AVEs prévios",
+        "evolução em degraus",
+        "doença de pequenos vasos",
+        "leucoaraiose"
+      ]
+    },
+    {
+      "id": "dementia_with_lewy_bodies",
+      "features": [
+        "alucinações visuais",
+        "flutuação cognitiva",
+        "parkinsonismo"
+      ]
+    },
+    {
+      "id": "frontotemporal_dementia",
+      "features": [
+        "alteração comportamental",
+        "desinibição",
+        "atrofia frontotemporal"
+      ]
+    },
+    {
+      "id": "normal_pressure_hydrocephalus",
+      "features": [
+        "demência",
+        "alteração de marcha",
+        "incontinência",
+        "ventriculomegalia"
+      ]
+    },
+    {
+      "id": "prion_dementia",
+      "features": [
+        "demência rapidamente progressiva",
+        "mioclonia",
+        "Creutzfeldt-Jakob"
+      ]
+    },
+    {
+      "id": "falls",
+      "features": [
+        "fatores intrínsecos",
+        "fatores extrínsecos",
+        "ambiente",
+        "polifarmácia",
+        "psicotrópicos"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "rule": "Na geriatria, o resumo coloca a autonomia como objetivo central do plano terapêutico.",
+      "source": "summary"
+    },
+    {
+      "rule": "Mini-mental é apresentado como teste de rastreamento dependente da escolaridade, não como diagnóstico isolado.",
+      "source": "summary"
+    },
+    {
+      "rule": "Katz avalia atividades básicas de vida diária; Lawton avalia atividades instrumentais.",
+      "source": "summary"
+    },
+    {
+      "rule": "Quedas devem ser modeladas pela interação entre fatores intrínsecos e extrínsecos.",
+      "source": "summary"
+    },
+    {
+      "rule": "O resumo recomenda cautela com medicamentos e cita critérios de Beers; a composição exata dos critérios deve ser versionada conforme a edição vigente.",
+      "source": "summary+external"
+    }
+  ],
+  "diagnostic_network": [
+    {
+      "axis": "demência + alucinações visuais + flutuação",
+      "possibilities": [
+        "demência com corpos de Lewy"
+      ]
+    },
+    {
+      "axis": "demência + evolução em degraus + AVC",
+      "possibilities": [
+        "demência vascular"
+      ]
+    },
+    {
+      "axis": "demência + alteração comportamental predominante + atrofia frontotemporal",
+      "possibilities": [
+        "demência frontotemporal"
+      ]
+    },
+    {
+      "axis": "demência + alteração da marcha + incontinência + ventriculomegalia",
+      "possibilities": [
+        "hidrocefalia normobárica"
+      ]
+    },
+    {
+      "axis": "demência rapidamente progressiva + mioclonia",
+      "possibilities": [
+        "doença por príons"
+      ]
+    },
+    {
+      "axis": "tremor de repouso + bradicinesia + rigidez",
+      "possibilities": [
+        "doença de Parkinson/parkinsonismo"
+      ]
+    }
+  ],
+  "patient_generation": {
+    "axes": [
+      "idade",
+      "comorbidades",
+      "fragilidade",
+      "polifarmácia",
+      "estado funcional",
+      "cognição",
+      "marcha",
+      "risco de quedas",
+      "rede social",
+      "ambiente",
+      "síndrome geriátrica predominante"
+    ],
+    "allowed_variability": [
+      "idoso robusto/frágil",
+      "comprometimento cognitivo isolado ou combinado",
+      "quedas recorrentes",
+      "polifarmácia",
+      "déficit funcional progressivo",
+      "múltiplas síndromes simultâneas"
+    ]
+  },
+  "conflicts_and_boundaries": [
+    "O material de 2021 contém idades e recomendações de rastreamento/imunização que podem ter mudado; não codificar como regra atual sem versionamento.",
+    "A anotação sobre uso inicial/poupança de levodopa deve permanecer como ensinamento histórico da fonte e não ser convertida em regra universal.",
+    "A frase 'na dúvida > tratar' aparece no resumo em contexto de parkinsonismo e não deve virar regra computacional sem contexto.",
+    "Critérios de Beers devem ser consultados na versão vigente; a AGS mantém ferramentas específicas para isso."
+  ],
+  "validation_targets": [
+    "Separar conteúdo do resumo original de complementação externa.",
+    "Não transformar exemplos de prova em casos canônicos.",
+    "Manter regras históricas identificáveis quando não forem compatíveis com a camada atual.",
+    "Permitir geração de apresentações múltiplas a partir do espaço de conhecimento."
+  ],
+  "generated_at": "2026-09-23"
+}
