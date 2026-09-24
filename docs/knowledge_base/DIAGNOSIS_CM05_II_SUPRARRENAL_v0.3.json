@@ -1,0 +1,261 @@
+{
+  "schema_version": "3.0",
+  "artifact_type": "diagnosis_knowledge_module",
+  "status": "phase_1_provisional",
+  "canonical": false,
+  "module": "CM05-II",
+  "title": "Endocrinopatias II — Suprarrenal",
+  "knowledge_base": {
+    "purpose": "Estruturar conhecimento clínico reutilizável antes da geração de casos.",
+    "principle": "FONTES → CONHECIMENTO → ESPAÇO DE POSSIBILIDADES CLÍNICAS → ESTADO DO PACIENTE → CASO → SIMULAÇÃO"
+  },
+  "source_registry": [
+    {
+      "id": "SRC_SUMMARY",
+      "type": "original_summary",
+      "name": "CM 5 - Endocrinopatias II - Suprarrenal.docx",
+      "date": "07/04/2021"
+    },
+    {
+      "id": "REF_PROJECT",
+      "type": "external_reference",
+      "name": "Adrenal disease — an update (RACGP)",
+      "url": "https://www1.racgp.org.au/ajgp/2021/january-february/adrenal-disease-an-update"
+    },
+    {
+      "id": "REF_PAI",
+      "type": "guideline",
+      "name": "Endocrine Society — Primary Adrenal Insufficiency",
+      "url": "https://www.endocrine.org/clinical-practice-guidelines/primary-adrenal-insufficiency"
+    },
+    {
+      "id": "REF_CUSHING",
+      "type": "guideline",
+      "name": "Endocrine Society — Diagnosis/Treatment of Cushing syndrome",
+      "url": "https://www.endocrine.org/clinical-practice-guidelines/diagnosis-of-cushing-syndrome"
+    },
+    {
+      "id": "REF_PA",
+      "type": "guideline",
+      "name": "Endocrine Society — Primary Aldosteronism 2025",
+      "url": "https://www.endocrine.org/clinical-practice-guidelines/primary-aldosteronism-2"
+    }
+  ],
+  "summary_extraction": {
+    "source_date": "07/04/2021",
+    "content_note": "Resumo visual condensado sobre anatomia funcional do córtex/medula, insuficiência adrenal, síndrome de Cushing, hiperaldosteronismo primário e hiperparatireoidismo/alterações ósseas associadas ao bloco endocrinológico.",
+    "extracted_topics": [
+      "zona glomerulosa/aldosterona",
+      "zona fasciculada/cortisol",
+      "zona reticular/androgênios",
+      "medula/catecolaminas",
+      "insuficiência adrenal primária e secundária",
+      "crise adrenal",
+      "Cushing",
+      "hiperaldosteronismo",
+      "metabolismo ósseo/paratormônio"
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "adrenal_cortex",
+      "name": "Córtex suprarrenal",
+      "class": "physiology",
+      "zones": [
+        "glomerulosa → aldosterona",
+        "fasciculada → cortisol",
+        "reticular → androgênios"
+      ],
+      "medulla": "catecolaminas; efeitos cardiovasculares no resumo"
+    },
+    {
+      "id": "adrenal_insufficiency",
+      "name": "Insuficiência adrenal",
+      "class": "syndrome",
+      "primary": [
+        "cortisol baixo",
+        "aldosterona baixa",
+        "ACTH elevado",
+        "hiperpigmentação descrita no resumo",
+        "hipotensão/hiponatremia/hipercalemia/acidose/hipoglicemia"
+      ],
+      "secondary": [
+        "cortisol baixo",
+        "aldosterona relativamente preservada segundo o resumo",
+        "ACTH baixo/inadequado"
+      ],
+      "causes_in_source": [
+        "autoimune",
+        "doença hipotalâmica/hipofisária",
+        "suspensão abrupta de corticoide"
+      ],
+      "diagnostics": [
+        "cortisol",
+        "ACTH",
+        "teste de estímulo com ACTH"
+      ],
+      "treatment_in_source": [
+        "hidrocortisona",
+        "mineralocorticoide se primária",
+        "não suspender glicocorticoide abruptamente"
+      ]
+    },
+    {
+      "id": "cushing",
+      "name": "Síndrome de Cushing",
+      "class": "syndrome",
+      "etiologies": [
+        "doença de Cushing/pituitária ACTH",
+        "ACTH ectópico",
+        "carcinoma/adenoma suprarrenal",
+        "iatrogênico por glicocorticoide"
+      ],
+      "features": [
+        "obesidade centrípeta",
+        "gibosidade",
+        "fácies em lua-cheia",
+        "hiperglicemia",
+        "hirsutismo",
+        "estrias violáceas espessas",
+        "osteopenia",
+        "hipertensão",
+        "hiperpigmentação quando ACTH elevado",
+        "eosinopenia/linfopenia"
+      ],
+      "workup_in_source": [
+        "cortisol/triagem",
+        "ACTH",
+        "testes de supressão com dexametasona",
+        "imagem conforme eixo"
+      ],
+      "treatment_in_source": [
+        "cirurgia quando causa localizada",
+        "tratamento dirigido à etiologia",
+        "bloqueio da esteroidogênese em situações específicas"
+      ]
+    },
+    {
+      "id": "primary_aldosteronism",
+      "name": "Hiperaldosteronismo primário",
+      "class": "syndrome",
+      "mechanism": "produção autônoma de aldosterona com supressão de renina; leva a retenção de sódio, expansão de volume e hipertensão, podendo ocorrer hipocalemia.",
+      "source_context": "O resumo trabalha hipertensão, aldosterona e renina no bloco de causas endócrinas."
+    },
+    {
+      "id": "bone_metabolism",
+      "name": "Metabolismo ósseo/paratormônio",
+      "class": "physiology",
+      "content": [
+        "cálcio alimentar como principal fonte",
+        "remodelamento ósseo contínuo",
+        "PTH mobiliza cálcio do osso para o sangue",
+        "vitamina D ativada pelo rim",
+        "hiperparatireoidismo primário com PTH alto no resumo"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "id": "rule_primary_vs_secondary",
+      "rule": "Insuficiência adrenal primária deve ser diferenciada da secundária pela combinação cortisol–ACTH e pela preservação/alteração do eixo mineralocorticoide."
+    },
+    {
+      "id": "rule_adrenal_crisis",
+      "rule": "Suspeita de crise adrenal é uma situação tempo-dependente; o resumo coloca hidrocortisona e reposição como eixo do tratamento."
+    },
+    {
+      "id": "rule_cushing_axis",
+      "rule": "Em Cushing, ACTH é utilizado para distinguir produção ACTH-dependente de produção adrenal independente após confirmação bioquímica de hipercortisolismo."
+    },
+    {
+      "id": "rule_pa",
+      "rule": "O hiperaldosteronismo primário deve entrar no diferencial de hipertensão secundária, especialmente quando o padrão clínico/laboratorial for compatível."
+    }
+  ],
+  "diagnostic_network": {
+    "nodes": [
+      "insuficiência adrenal primária",
+      "insuficiência adrenal secundária",
+      "crise adrenal",
+      "Cushing exógeno",
+      "Cushing ACTH-dependente",
+      "Cushing adrenal",
+      "hiperaldosteronismo primário",
+      "doenças do metabolismo ósseo"
+    ],
+    "edges": [
+      "cortisol + ACTH → localização provável da insuficiência",
+      "ACTH → classificação etiológica de hipercortisolismo",
+      "aldosterona + renina → investigação de hiperaldosteronismo",
+      "PTH + cálcio + função renal/vitamina D → metabolismo ósseo"
+    ],
+    "differentials": [
+      "primária vs secundária insuficiência adrenal",
+      "crise adrenal vs choque séptico/hipovolêmico",
+      "Cushing exógeno vs endógeno",
+      "Cushing pituitário vs ectópico vs adrenal",
+      "hiperaldosteronismo primário vs hipertensão essencial/renovascular",
+      "hiperparatireoidismo primário vs secundário"
+    ]
+  },
+  "patient_generation": {
+    "dimensions": [
+      "primária vs secundária",
+      "gravidade",
+      "infecção/estresse",
+      "uso prévio de corticoide",
+      "hiperpigmentação",
+      "hipotensão",
+      "distúrbios de sódio/potássio/glicose",
+      "hipertensão resistente",
+      "hipocalemia",
+      "fenótipo cushingoide",
+      "incidentaloma adrenal",
+      "história familiar/MEN"
+    ],
+    "trajectories": [
+      "crise adrenal",
+      "insuficiência crônica com descompensação",
+      "hipercortisolismo progressivo",
+      "hipertensão por hiperaldosteronismo"
+    ],
+    "case_generation_rule": "A origem anatômica/funcional do distúrbio deve ser definida antes da narrativa; o caso pode variar em gravidade e apresentação."
+  },
+  "conflicts_and_boundaries": {
+    "issues": [
+      "O resumo mistura conteúdo adrenal com metabolismo ósseo/paratormônio; o módulo preserva essa organização, mas marca a fronteira semântica.",
+      "Os esquemas e doses do resumo são históricos. A diretriz de insuficiência adrenal consultada é de 2016; a diretriz de hiperaldosteronismo foi atualizada em 2025.",
+      "A triagem de Cushing deve ser separada da localização etiológica; a Endocrine Society recomenda testes bioquímicos específicos antes da investigação etiológica."
+    ]
+  },
+  "external_research_extension": [
+    {
+      "source": "REF_PAI",
+      "findings": [
+        "Para insuficiência adrenal primária confirmada, Endocrine Society recomenda reposição glicocorticoide; hidrocortisona 15–25 mg/dia em 2–3 doses é esquema oral citado."
+      ],
+      "citation": "web:turn1search2"
+    },
+    {
+      "source": "REF_CUSHING",
+      "findings": [
+        "Diagnóstico de Cushing requer excluir exposição exógena e usar testes bioquímicos apropriados; random cortisol/ACTH não são testes iniciais de rastreio."
+      ],
+      "citation": "web:turn1search3"
+    },
+    {
+      "source": "REF_PA",
+      "findings": [
+        "Diretriz 2025 recomenda rastreamento de hiperaldosteronismo primário em pessoas com hipertensão, usando aldosterona e renina com relação aldosterona/renina; tratamento específico depende da lateralização e elegibilidade."
+      ],
+      "citation": "web:turn1search1"
+    }
+  ],
+  "validation_targets": [
+    "Não transformar o resumo em caso concreto.",
+    "Preservar rastreabilidade entre resumo, fonte externa e conhecimento estruturado.",
+    "Permitir múltiplas apresentações plausíveis a partir do mesmo conhecimento.",
+    "Separar fatos históricos do resumo de regras clínicas atuais quando houver atualização externa."
+  ],
+  "generated_at": "2026-09-23"
+}

@@ -1,0 +1,424 @@
+{
+  "model_metadata": {
+    "name": "DIAGNOSIS — Modelo de Conhecimento Clínico — CM 4 Síndrome Metabólica 2 / Diabetes",
+    "version": "0.3",
+    "status": "phase_1_semantic_mapping_provisional",
+    "clinical_domain": "endocrinology / diabetes / hyperglycemic crises / chronic complications",
+    "architecture_principle": "KNOWLEDGE → POSSIBILITIES → PATIENT → CASE → SIMULATION → EVALUATION",
+    "core_principle": "O caso não é o conhecimento; o caso é uma amostra do espaço clínico produzido pelo conhecimento.",
+    "phase": "Fase 1 — mapeamento semântico dos resumos",
+    "canonical_schema": false,
+    "case_generation": "deferred",
+    "source_policy": {
+      "summary_is_fragment": true,
+      "external_references_are_complementary": true,
+      "preserve_source_content": true,
+      "do_not_silently_correct_source": true,
+      "separate_source_from_external_research": true
+    }
+  },
+  "source_registry": [
+    {
+      "id": "src_cm04_summary",
+      "type": "uploaded_summary",
+      "title": "Síndrome metabólica 2 diabetes",
+      "file": "Síndrome metabólica 2 diabetes.pdf",
+      "date_in_source": "28/03/2021 16:54",
+      "role": "primary_fragment"
+    },
+    {
+      "id": "src_cm04_ada_2026_diagnosis",
+      "type": "external_research",
+      "title": "Standards of Care in Diabetes—2026: Diagnosis and Classification of Diabetes",
+      "publisher": "American Diabetes Association",
+      "url": "https://diabetesjournals.org/care/article/49/Supplement_1/S27/163926/2-Diagnosis-and-Classification-of-Diabetes",
+      "role": "current diagnostic/classification verification"
+    },
+    {
+      "id": "src_cm04_ada_2026_pharm",
+      "type": "external_research",
+      "title": "Standards of Care in Diabetes—2026: Pharmacologic Approaches to Glycemic Treatment",
+      "publisher": "American Diabetes Association",
+      "url": "https://diabetesjournals.org/care/article/49/Supplement_1/S183/163934/9-Pharmacologic-Approaches-to-Glycemic-Treatment",
+      "role": "current T2D pharmacotherapy verification"
+    },
+    {
+      "id": "src_cm04_ada_crisis",
+      "type": "external_research",
+      "title": "Hyperglycemic Crises in Adults With Diabetes: A Consensus Report",
+      "publisher": "American Diabetes Association",
+      "url": "https://diabetesjournals.org/care/article/47/8/1257/156808/Hyperglycemic-Crises-in-Adults-With-Diabetes-A",
+      "role": "current DKA/HHS verification"
+    },
+    {
+      "id": "src_cm04_brazil_dm2",
+      "type": "external_research",
+      "title": "PCDT Diabete Melito Tipo 2 — atualização 2026",
+      "publisher": "Ministério da Saúde / CONITEC",
+      "url": "https://www.gov.br/conitec/pt-br/midias/relatorios/2026/relatorio-de-recomendacao-1074-pcdt-diabete-melito-tipo-2",
+      "role": "current Brazilian SUS framework"
+    }
+  ],
+  "summary_extraction": {
+    "conceptual_model": {
+      "diabetes": "disturbance of intermediary metabolism",
+      "hormonal_balance": "insulin versus counter-regulatory hormones such as glucagon, GH and cortisol",
+      "insulin_role": "anabolic/building",
+      "counterregulatory_role": "catabolic"
+    },
+    "classification": {
+      "type_1": {
+        "mechanism": "absolute insulin deficiency / beta-cell destruction",
+        "source_clues": [
+          "genetic/autoimmune",
+          "HLA DR3-DR4",
+          "anti-ICA",
+          "younger age and lean phenotype are emphasized as teaching clues",
+          "C-peptide described as low/undetectable"
+        ]
+      },
+      "type_2": {
+        "mechanism": "peripheral insulin resistance plus progressive insulin-secretory dysfunction",
+        "source_clues": [
+          "genetic/environmental",
+          "older age and obesity emphasized as teaching clues",
+          "C-peptide relatively preserved early"
+        ]
+      },
+      "other": [
+        "gestational diabetes",
+        "specific diabetes due to endocrinopathy/drugs",
+        "LADA",
+        "MODY"
+      ]
+    },
+    "diagnosis_source": {
+      "diabetes": [
+        "fasting glucose >=126 mg/dL",
+        "2-h OGTT 75 g >=200 mg/dL",
+        "HbA1c >=6.5%",
+        "random glucose >=200 mg/dL with classic symptoms"
+      ],
+      "prediabetes_source": [
+        "fasting glucose 100–125 mg/dL",
+        "2-h OGTT 140–199 mg/dL",
+        "HbA1c 5.7–6.4%"
+      ],
+      "confirmation": "The source states that two abnormal tests are needed when there is no unequivocal hyperglycemia.",
+      "important_source_note": "Capillary glucose is described as not being diagnostic and peripheral/laboratory blood should be used."
+    },
+    "screening_source": [
+      "type 2 diabetes screening from age >45 in the source",
+      "or younger patients with overweight/obesity plus risk factors such as hypertension, sedentary lifestyle, dyslipidemia, family history or gestational diabetes",
+      "children/adolescents with overweight plus multiple risk factors"
+    ],
+    "glycemic_targets_source": {
+      "preprandial": "80–130 mg/dL",
+      "postprandial": "<180 mg/dL"
+    },
+    "insulin": {
+      "source_regimens": [
+        "regular + NPH twice daily",
+        "basal-bolus with glargine/detemir/NPH plus rapid-acting analogues",
+        "pump/continuous infusion",
+        "source mentions pramlintide and pancreas transplantation as alternatives"
+      ],
+      "adjustment_logic": [
+        "pre-breakfast glucose → adjust nighttime NPH",
+        "pre-lunch glucose → adjust morning regular insulin",
+        "pre-dinner glucose → adjust morning NPH",
+        "bedtime glucose → adjust evening regular insulin"
+      ],
+      "morning_hyperglycemia": [
+        "dawn phenomenon",
+        "Somogyi effect"
+      ]
+    },
+    "type_2_treatment_source": {
+      "nonpharmacologic": "lifestyle modification",
+      "mechanistic_classes": [
+        "metformin / insulin resistance",
+        "thiazolidinediones",
+        "sulfonylureas/glinides / insulin secretion",
+        "DPP-4 inhibitors",
+        "GLP-1-based therapies",
+        "SGLT2 inhibitors / glycosuria",
+        "alpha-glucosidase inhibition"
+      ],
+      "source_stepwise_scheme": [
+        "metformin",
+        "metformin + second drug or basal insulin",
+        "metformin + third drug or second drug + basal insulin",
+        "metformin + basal and prandial insulin"
+      ],
+      "insulin_early_use_source": [
+        "marked hyperglycemia",
+        "pregnancy",
+        "surgery/infection",
+        "advanced organ dysfunction"
+      ]
+    },
+    "chronic_complications": {
+      "macrovascular": [
+        "myocardial infarction",
+        "stroke",
+        "atherosclerosis"
+      ],
+      "microvascular": [
+        "retinopathy",
+        "nephropathy",
+        "neuropathy"
+      ],
+      "retinopathy": {
+        "screening": "fundoscopy",
+        "nonproliferative_features": [
+          "microaneurysms",
+          "hard exudates",
+          "flame hemorrhages",
+          "cotton-wool spots"
+        ],
+        "proliferative": [
+          "neovascularization",
+          "laser photocoagulation mentioned in source"
+        ],
+        "screening_timing_source": [
+          "type 2 at diagnosis",
+          "type 1 approximately 5 years after onset"
+        ]
+      },
+      "nephropathy": {
+        "screening": [
+          "albuminuria",
+          "eGFR/TFG"
+        ],
+        "source_pathology": [
+          "diffuse glomerulosclerosis as common lesion",
+          "nodular glomerulosclerosis as more specific lesion"
+        ],
+        "management_source": [
+          "glycemic control",
+          "ACE inhibitor/ARB for albuminuria in source"
+        ]
+      },
+      "neuropathy": {
+        "most_common": "distal symmetric polyneuropathy",
+        "features": [
+          "sensory alteration",
+          "loss of vibration as an early sensory deficit",
+          "diabetic foot",
+          "major nontraumatic amputation risk"
+        ],
+        "screening": [
+          "tuning fork",
+          "monofilament",
+          "reflexes"
+        ],
+        "other_forms": [
+          "mononeuropathies",
+          "autonomic neuropathy"
+        ]
+      }
+    },
+    "dka": {
+      "pathophysiology": [
+        "severe insulin deficiency",
+        "counterregulatory hormone predominance",
+        "lipolysis",
+        "ketone production",
+        "anion-gap metabolic acidosis"
+      ],
+      "source_diagnostic_profile": [
+        "glucose >250 mg/dL",
+        "ketonemia/ketonuria",
+        "pH <7.30",
+        "HCO3 <15"
+      ],
+      "clinical_features": [
+        "abdominal pain",
+        "nausea/vomiting",
+        "ketone breath",
+        "Kussmaul breathing",
+        "leukocytosis",
+        "dehydration/creatinine elevation"
+      ],
+      "source_treatment_pillars": [
+        "volume",
+        "insulin",
+        "potassium"
+      ],
+      "source_complications": [
+        "thrombosis",
+        "cerebral edema",
+        "severe hypokalemia",
+        "mucormycosis"
+      ]
+    },
+    "hhs": {
+      "pathophysiology": [
+        "severe hyperglycemia",
+        "hyperosmolarity",
+        "osmotic diuresis",
+        "water deficit",
+        "relative rather than complete insulin deficiency"
+      ],
+      "source_diagnostic_profile": [
+        "glucose >600 mg/dL",
+        "osmolarity >320",
+        "pH >7.3",
+        "HCO3 >18"
+      ],
+      "clinical_risk": "neurologic dysfunction/coma from hyperosmolar dehydration is emphasized"
+    }
+  },
+  "knowledge_entities": [
+    "diabetes_mellitus",
+    "type_1_diabetes",
+    "type_2_diabetes",
+    "gestational_diabetes",
+    "LADA",
+    "MODY",
+    "prediabetes",
+    "insulin_therapy",
+    "diabetic_retinopathy",
+    "diabetic_kidney_disease",
+    "diabetic_neuropathy",
+    "diabetic_ketoacidosis",
+    "hyperosmolar_hyperglycemic_state"
+  ],
+  "clinical_rules": [
+    {
+      "id": "cm04_r01",
+      "statement": "Diabetes diagnosis is based on A1C or plasma-glucose criteria; in the absence of unequivocal hyperglycemia, confirmatory testing is required.",
+      "source_layer": "external_research",
+      "source": "ADA Standards of Care 2026"
+    },
+    {
+      "id": "cm04_r02",
+      "statement": "The source's four diagnostic routes are fasting glucose ≥126, 2-h 75-g OGTT ≥200, A1C ≥6.5%, or random glucose ≥200 with classic symptoms/crisis.",
+      "source_layer": "summary"
+    },
+    {
+      "id": "cm04_r03",
+      "statement": "Type 1, type 2, gestational and specific/monogenic/drug-related diabetes are distinct causal categories; LADA and MODY are explicitly highlighted in the source.",
+      "source_layer": "summary"
+    },
+    {
+      "id": "cm04_r04",
+      "statement": "Current ADA 2026 guidance recommends person-centered medication selection in type 2 diabetes and prioritizes agents with cardiovascular/kidney benefit in relevant comorbidity contexts.",
+      "source_layer": "external_research"
+    },
+    {
+      "id": "cm04_r05",
+      "statement": "Current consensus management of DKA/HHS uses fluids, insulin and electrolyte management with frequent laboratory monitoring; potassium status can require delaying insulin when markedly low.",
+      "source_layer": "external_research"
+    }
+  ],
+  "diagnostic_network": {
+    "entry_point": "hyperglycemia / suspected diabetes",
+    "branches": [
+      "confirm biochemical diagnosis",
+      "classify diabetes mechanism/type",
+      "assess severity and symptomatic hyperglycemia",
+      "identify acute hyperglycemic crisis",
+      "assess chronic complications",
+      "evaluate cardiovascular/renal risk",
+      "select individualized therapy"
+    ],
+    "acute_crisis_split": [
+      "DKA",
+      "HHS",
+      "mixed DKA/HHS"
+    ],
+    "chronic_complication_split": [
+      "retinopathy",
+      "kidney disease",
+      "neuropathy/diabetic foot",
+      "macrovascular disease"
+    ]
+  },
+  "patient_generation": {
+    "axes": [
+      "diabetes type",
+      "age/phenotype",
+      "tempo of onset",
+      "degree of insulin deficiency",
+      "glycemic severity",
+      "obesity/insulin resistance",
+      "pregnancy",
+      "drug/endocrine/genetic cause",
+      "microvascular complications",
+      "macrovascular complications",
+      "DKA/HHS",
+      "kidney function",
+      "cardiovascular risk"
+    ],
+    "constraints": [
+      "Do not equate age or body habitus with diabetes type; treat them as probabilistic clues.",
+      "Do not generate a treatment pathway without the patient's comorbidities, kidney function, hypoglycemia risk and severity context.",
+      "Allow atypical presentations such as LADA, MODY and secondary diabetes.",
+      "Keep chronic complication timelines as generation axes, not fixed universal deadlines."
+    ]
+  },
+  "differential_network": [
+    "type 1 diabetes",
+    "type 2 diabetes",
+    "LADA",
+    "MODY/monogenic diabetes",
+    "gestational diabetes",
+    "pancreatic/exocrine diabetes",
+    "endocrinopathy-associated diabetes",
+    "drug-induced diabetes",
+    "stress hyperglycemia",
+    "DKA",
+    "HHS"
+  ],
+  "conflicts_and_boundaries": [
+    {
+      "issue": "The source uses age/weight as strong teaching clues for type 1 versus type 2.",
+      "handling": "Preserve as heuristic context, not a deterministic classifier. ADA 2026 explicitly recognizes broader categories and recommends classification to guide personalized management."
+    },
+    {
+      "issue": "The source's insulin regimens and treatment sequence are from 2021 teaching material.",
+      "handling": "Keep them as source-derived architecture; current pharmacologic choices must be versioned against ADA 2026 and the updated Brazilian PCDT."
+    },
+    {
+      "issue": "The source uses older DKA/HHS thresholds and a simplified treatment narrative.",
+      "handling": "Do not overwrite the source. Store it as historical source content and use the 2024 consensus report for active management rules."
+    },
+    {
+      "issue": "The source mentions metformin + oral drug for fasting glucose 200–300 with symptoms.",
+      "handling": "Flag for context. ADA 2026 recommends considering insulin when symptoms are present or A1C >10% or glucose ≥300 mg/dL, while GLP-1-based therapy is preferred to insulin in many adults without severe hyperglycemia/crisis."
+    },
+    {
+      "issue": "The source says 'an analog avoids hypoglycemia' in a broad way.",
+      "handling": "Preserve as source wording but do not encode as absolute; hypoglycemia risk depends on the regimen, agent, dose and patient context."
+    }
+  ],
+  "external_research_extension": {
+    "current_diagnosis": {
+      "finding": "ADA 2026 confirms diagnosis through A1C or plasma glucose criteria and requires confirmation in the absence of unequivocal hyperglycemia.",
+      "source": "https://diabetesjournals.org/care/article/49/Supplement_1/S27/163926/2-Diagnosis-and-Classification-of-Diabetes"
+    },
+    "current_type_2_pharmacotherapy": {
+      "finding": "ADA 2026 emphasizes person-centered therapy and recommends GLP-1 RA and/or SGLT2 inhibitor therapy with demonstrated cardiovascular/kidney benefit in appropriate ASCVD, HF or CKD contexts, independent of A1C in those indications.",
+      "source": "https://diabetesjournals.org/care/article/49/Supplement_1/S183/163934/9-Pharmacologic-Approaches-to-Glycemic-Treatment"
+    },
+    "current_brazilian_pcdt": {
+      "finding": "Brazil updated its SUS PCDT for type 2 diabetes in February 2026; the new protocol incorporates rapid- and long-acting insulin analogues previously incorporated into SUS.",
+      "source": "https://www.gov.br/conitec/pt-br/midias/relatorios/2026/relatorio-de-recomendacao-1074-pcdt-diabete-melito-tipo-2"
+    },
+    "hyperglycemic_crises": {
+      "finding": "The 2024 consensus report frames DKA/HHS management around IV fluids, insulin and electrolytes, with frequent glucose/electrolyte/pH monitoring and specific potassium safeguards.",
+      "source": "https://diabetesjournals.org/care/article/47/8/1257/156808/Hyperglycemic-Crises-in-Adults-With-Diabetes-A"
+    }
+  },
+  "validation_targets_for_phase_1": [
+    "Generate multiple diabetes phenotypes without equating diabetes with a single textbook patient.",
+    "Distinguish type 1, type 2, LADA, MODY and secondary diabetes through causal evidence.",
+    "Generate chronic complications according to disease duration and phenotype while allowing exceptions.",
+    "Generate DKA and HHS as dynamic physiologic states rather than static diagnostic labels.",
+    "Represent insulin titration as a feedback system between glucose timing and pharmacokinetics.",
+    "Represent type 2 treatment as a comorbidity-aware decision space.",
+    "Keep historical source treatment rules separate from current guideline rules."
+  ]
+}

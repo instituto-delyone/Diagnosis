@@ -1,0 +1,291 @@
+{
+  "schema_version": "3.0",
+  "artifact_type": "diagnosis_knowledge_module",
+  "status": "phase_1_provisional",
+  "canonical": false,
+  "module": "CM05-I",
+  "title": "Endocrinopatias I — Tireoide",
+  "knowledge_base": {
+    "purpose": "Estruturar conhecimento clínico reutilizável antes da geração de casos.",
+    "principle": "FONTES → CONHECIMENTO → ESPAÇO DE POSSIBILIDADES CLÍNICAS → ESTADO DO PACIENTE → CASO → SIMULAÇÃO"
+  },
+  "source_registry": [
+    {
+      "id": "SRC_SUMMARY",
+      "type": "original_summary",
+      "name": "CM 5 - Endocrinopatias I - Tireoide.docx",
+      "date": "31/03/2021"
+    },
+    {
+      "id": "REF_ATA_2026",
+      "type": "external_guideline",
+      "name": "American Thyroid Association 2026 — Thyroid disease in preconception, pregnancy and postpartum",
+      "url": "https://doi.org/10.1177/10507256261445624",
+      "scope": "gestação/preconcepção/pós-parto"
+    },
+    {
+      "id": "REF_ATA_GUIDELINES",
+      "type": "guideline_index",
+      "name": "American Thyroid Association Guidelines & Statements",
+      "url": "https://www.thyroid.org/professionals/ata-professional-guidelines/"
+    }
+  ],
+  "summary_extraction": {
+    "source_date": "31/03/2021",
+    "content_note": "Resumo visual de uma página, altamente condensado, contendo fisiologia, interpretação de TSH/T4, tireotoxicose/hipertireoidismo, doença de Graves, tireoidites, hipotireoidismo, nódulos e câncer de tireoide.",
+    "extracted_topics": [
+      "fisiologia T3/T4",
+      "eixo hipotálamo-hipófise-tireoide",
+      "TSH como exame inicial",
+      "hipotireoidismo primário/secundário/subclínico",
+      "hipertireoidismo e tireotoxicose",
+      "Doença de Graves",
+      "captação de iodo radioativo",
+      "tireoidite subaguda",
+      "tireoidite de Hashimoto",
+      "hipotireoidismo e levotiroxina",
+      "nódulo tireoidiano",
+      "câncer papilífero, folicular, medular e anaplásico"
+    ],
+    "not_silently_corrected": [
+      "critérios numéricos e doses presentes no resumo são preservados como conteúdo histórico e não são tratados como regra atual sem verificação"
+    ]
+  },
+  "knowledge_entities": [
+    {
+      "id": "thyroid_physiology",
+      "name": "Fisiologia tireoidiana",
+      "class": "physiology",
+      "content": [
+        "T4 e T3 como hormônios tireoidianos; conversão periférica de T4 em T3 e rT3 é representada no resumo.",
+        "TSH participa do eixo regulatório hipotálamo–hipófise–tireoide.",
+        "T3 é descrito como hormônio metabolicamente mais ativo."
+      ]
+    },
+    {
+      "id": "thyroid_function_pattern",
+      "name": "Padrões laboratoriais por nível do eixo",
+      "class": "diagnostic_pattern",
+      "patterns": [
+        "hipotireoidismo primário: TSH alto com T4L baixo;",
+        "hipertireoidismo primário: TSH baixo com T4L alto;",
+        "hipotireoidismo secundário/central: TSH baixo/inadequadamente normal com T4L baixo;",
+        "hipertireoidismo secundário: TSH alto com T4L alto;",
+        "subclínicos: alteração de TSH com T4L preservado, conforme contexto."
+      ]
+    },
+    {
+      "id": "thyrotoxicosis",
+      "name": "Tireotoxicose/hipertireoidismo",
+      "class": "syndrome",
+      "features": [
+        "aumento da ação beta-adrenérgica: tremor, taquicardia, sudorese e HAS divergente no resumo",
+        "aumento do metabolismo basal",
+        "aumento da produção de calor",
+        "perda ponderal apesar de apetite aumentado é compatível com o quadro resumido"
+      ]
+    },
+    {
+      "id": "graves",
+      "name": "Doença de Graves",
+      "class": "disease",
+      "mechanism": "Doença autoimune associada a anticorpos estimuladores do receptor de TSH (TRAb).",
+      "clinical": [
+        "bócio difuso",
+        "oftalmopatia/edema periorbitário no resumo",
+        "mixedema pré-tibial",
+        "manifestações sistêmicas de tireotoxicose"
+      ],
+      "diagnostics": [
+        "TSH/T4L",
+        "TRAb",
+        "captação de iodo radioativo quando apropriado"
+      ],
+      "treatment_options_in_source": [
+        "betabloqueadores",
+        "metimazol",
+        "iodo radioativo",
+        "tireoidectomia"
+      ],
+      "source_specific_notes": [
+        "o resumo traz esquemas/doses e critérios operacionais históricos; devem permanecer versionados"
+      ]
+    },
+    {
+      "id": "thyroiditis",
+      "name": "Tireoidites",
+      "class": "disease_family",
+      "subtypes": [
+        "subaguda/de Quervain",
+        "Hashimoto/crônica",
+        "pós-parto conforme extensão do material"
+      ],
+      "subacute": [
+        "fase tireotóxica por liberação de hormônio",
+        "fase hipotireóidea",
+        "fase de recuperação/eutireoidismo",
+        "dor cervical e quadro inflamatório"
+      ],
+      "hashimoto": [
+        "principal causa de hipotireoidismo no material",
+        "anti-TPO",
+        "bócio inicial ou tireoide atrófica em evolução",
+        "linfócitos T e centros germinativos como mecanismo histológico descrito"
+      ]
+    },
+    {
+      "id": "hypothyroidism",
+      "name": "Hipotireoidismo",
+      "class": "syndrome",
+      "features": [
+        "bradicardia",
+        "HAS convergente",
+        "redução do metabolismo basal",
+        "dislipidemia",
+        "anemia/pancitopenia no quadro clínico do resumo",
+        "hiperprolactinemia e mixedema aparecem como associações"
+      ],
+      "treatment": "levotiroxina; o resumo destaca cautela no coronariopata, com introdução gradual da reposição."
+    },
+    {
+      "id": "thyroid_nodule",
+      "name": "Nódulo tireoidiano",
+      "class": "diagnostic_entity",
+      "workflow": [
+        "TSH inicial",
+        "TSH suprimido → cintilografia para avaliar autonomia",
+        "TSH normal → USG",
+        "USG estratifica risco; PAAF conforme tamanho/características",
+        "nódulos suspeitos incluem microcalcificações, sólidos, hipoecogênicos/irregulares, vascularização (descrição do resumo)"
+      ],
+      "size_note": "O resumo apresenta limiares de tamanho para acompanhamento/PAAF; manter esses limiares vinculados à versão da fonte."
+    },
+    {
+      "id": "thyroid_cancer",
+      "name": "Câncer de tireoide",
+      "class": "disease_family",
+      "subtypes": [
+        "papilífero",
+        "folicular",
+        "medular",
+        "anaplásico"
+      ],
+      "papillary": [
+        "mais comum no resumo",
+        "bom prognóstico relativo",
+        "associação com irradiação"
+      ],
+      "follicular": [
+        "mais diferenciado que o anaplásico",
+        "disseminação hematogênica descrita"
+      ],
+      "medullary": [
+        "células C/parafoliculares",
+        "calcitonina",
+        "associação familiar/MEN2 no resumo",
+        "PAAF e tratamento cirúrgico descritos"
+      ],
+      "anaplastic": [
+        "mais agressivo e menos diferenciado",
+        "tratamento descrito como tireoidectomia total + linfadenectomia no resumo"
+      ]
+    }
+  ],
+  "clinical_rules": [
+    {
+      "id": "rule_tsh_first",
+      "rule": "TSH é apresentado como exame inicial para avaliação da função tireoidiana, com interpretação conjunta de T4L e contexto clínico."
+    },
+    {
+      "id": "rule_central",
+      "rule": "Alteração de T4L com TSH não coerente com o padrão primário deve abrir possibilidade de doença central."
+    },
+    {
+      "id": "rule_graves",
+      "rule": "Quadro de tireotoxicose + TRAb positivo/achados compatíveis sustenta Graves; captação de radioiodo pode ajudar na diferenciação quando indicada."
+    },
+    {
+      "id": "rule_nodule",
+      "rule": "No nódulo tireoidiano, TSH baixo leva à investigação funcional antes de tratar o nódulo apenas pela morfologia."
+    },
+    {
+      "id": "rule_coronary",
+      "rule": "O resumo alerta para introdução gradual de T4 em coronariopatas pela possibilidade de aumentar demanda cardíaca."
+    }
+  ],
+  "diagnostic_network": {
+    "nodes": [
+      "hipotireoidismo primário",
+      "hipotireoidismo central",
+      "hipertireoidismo primário",
+      "tireotoxicose por tireoidite",
+      "Graves",
+      "nódulo tóxico",
+      "tireoidite de Hashimoto",
+      "câncer de tireoide"
+    ],
+    "edges": [
+      "TSH/T4L → classificação do eixo",
+      "TRAb → Graves",
+      "captação de radioiodo → diferenciação de tireotoxicose",
+      "TSH baixo + nódulo → cintilografia",
+      "USG → estratificação de nódulo → PAAF quando indicada"
+    ],
+    "differentials": [
+      "Graves vs tireoidite",
+      "Graves vs bócio multinodular tóxico/adenoma tóxico",
+      "hipotireoidismo primário vs central",
+      "hipotireoidismo vs síndrome do eutireoidiano doente",
+      "nódulo benigno vs maligno",
+      "papilífero vs folicular vs medular vs anaplásico"
+    ]
+  },
+  "patient_generation": {
+    "dimensions": [
+      "idade",
+      "sexo",
+      "gestação/pós-parto",
+      "comorbidade coronariana",
+      "uso de hormônio tireoidiano",
+      "uso de amiodarona/outros fármacos",
+      "autoimunidade",
+      "dor cervical",
+      "presença de bócio",
+      "oftalmopatia",
+      "características ultrassonográficas do nódulo",
+      "história de irradiação",
+      "história familiar de câncer tireoidiano/MEN2"
+    ],
+    "trajectories": [
+      "tireotoxicose por Graves persistente",
+      "tireoidite subaguda com fase tireotóxica→hipotireóidea→recuperação",
+      "Hashimoto progressivo",
+      "nódulo funcional versus nódulo estrutural",
+      "câncer diferenciado versus medular/anaplásico"
+    ],
+    "case_generation_rule": "Gerar estado do paciente primeiro; a vinheta deve ser uma projeção desse estado e não uma cópia do resumo."
+  },
+  "conflicts_and_boundaries": {
+    "issues": [
+      "O resumo é de 2021; critérios terapêuticos e doses não devem ser tratados como atuais sem atualização.",
+      "A referência externa fornecida pelo projeto para tireoidopatias é especificamente voltada a preconcepção, gestação e pós-parto; ela não substitui uma diretriz geral para todo o domínio tireoidiano.",
+      "Os limiares de PAAF/acompanhamento do resumo devem ser versionados conforme sistema de estratificação usado."
+    ]
+  },
+  "external_research_extension": [
+    {
+      "source": "REF_ATA_2026",
+      "findings": [
+        "Diretriz ATA 2026 é específica para preconcepção, gestação e pós-parto e atualiza teste de função tireoidiana, autoimunidade, hipotireoidismo, hipertireoidismo/Graves, nódulos/câncer e disfunção pós-parto."
+      ],
+      "citation": "web:turn2search0"
+    }
+  ],
+  "validation_targets": [
+    "Não transformar o resumo em caso concreto.",
+    "Preservar rastreabilidade entre resumo, fonte externa e conhecimento estruturado.",
+    "Permitir múltiplas apresentações plausíveis a partir do mesmo conhecimento.",
+    "Separar fatos históricos do resumo de regras clínicas atuais quando houver atualização externa."
+  ],
+  "generated_at": "2026-09-23"
+}
