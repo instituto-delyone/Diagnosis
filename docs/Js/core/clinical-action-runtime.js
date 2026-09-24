@@ -61,6 +61,7 @@
                     const allowedActions=this.clinicalActionResolver?.registry?.list?.() || [];
                     const remote=await this.clinicalIntentRemoteRouter.resolve(text,{
                         resolver:this.clinicalActionResolver,
+                        useGemini:false,
                         allowedActions:allowedActions.map(def=>({
                             id:def.id,
                             domain:def.domain,
