@@ -38,22 +38,31 @@ Criar estado de revelação
 Apresentar somente a abertura do caso
 ```
 
-## Seleção local antes da pesquisa
+## Seleção do conceito antes da pesquisa
 
-A pesquisa externa não escolhe aleatoriamente uma doença. Primeiro a biblioteca local fornece o caso/modelo que será enriquecido.
+A pesquisa externa não escolhe aleatoriamente uma doença. Primeiro a Knowledge Base local fornece um conceito clínico e suas possibilidades. O gerador instancia um paciente novo a partir desse conhecimento. Não é necessário manter casos pré-fabricados na Knowledge Base.
 
-Exemplo:
+Fluxo funcional V0.1:
+
+```text
+Knowledge Base
+      ↓
+KnowledgeBaseAdapter
+      ↓
+KnowledgeToPatientEngine
+      ↓
+Patient State / Case Builder
+      ↓
+Pesquisa complementar quando necessária
+      ↓
+Clinical Case Model
+```
+
+Exemplo de entrada do gerador:
 
 ```json
 {
-  "case_id": "ANEMIA_CASE_01",
-  "primary_concept": "iron_deficiency_anemia",
-  "anchors": [
-    "fadiga",
-    "microcitose",
-    "pica",
-    "perda gastrointestinal"
-  ]
+  "concept_id": "iron_deficiency_anemia"
 }
 ```
 
@@ -207,20 +216,24 @@ O Gemini e a camada conversacional podem apresentar o resultado naturalmente, ma
 ```text
 Knowledge Base
       ↓
-Case Selection
+Concept Selection
       ↓
-External Research
+KnowledgeBaseAdapter
+      ↓
+KnowledgeToPatientEngine
+      ↓
+Patient State / Case Builder
+      ↓
+External Research (quando necessária)
       ↓
 Evidence Layer
       ↓
-Case Builder
-      ↓
 Clinical Case Model
-      ↓
-Patient State
       ↓
 Clinical Conversation
 ```
+
+A antiga `CaseLibrary` não é a fonte de geração. O sistema pode manter compatibilidade temporária com ela, mas a criação de novos casos deve partir do conhecimento estruturado.
 
 ## Protocolo clínico de construção do caso
 
