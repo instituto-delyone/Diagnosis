@@ -382,8 +382,18 @@
             await this.loadResearchRules();
             await this.loadPCDTCatalog();
             await this.loadReferenceRanges();
-            this.conversationLogger?.logEvent("engine_booted", { room: this.room });
-            await this.startNewCase();
+            this.conversationLogger?.logEvent("engine_booted", { room: this.room, case_generation: "knowledge_driven" });
+        }
+
+        async ensureGeminiConversationProvider() {
+            if (global.DiagnosysGeminiConversationProvider) return true;
+            try {
+                await loadScript("Js/core/gemini-conversation-provider.js");
+                return Boolean(global.DiagnosysGeminiConversationProvider);
+            } catch (error) {
+                console.warn("Gemini de conversação indisponível até o momento:", error);
+                return false;
+            }
         }
 
         async loadModules() {
@@ -394,8 +404,6 @@
             try { await loadScript("Js/core/case-research-engine.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/pcdt-catalog-provider.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/reference-range-resolver.js"); } catch (e) { console.warn(e); }
-            try { await loadScript("Js/core/gemini-research-provider.js"); } catch (e) { console.warn(e); }
-            try { await loadScript("Js/core/gemini-conversation-provider.js"); } catch (e) { console.warn(e); }
             try { await loadScript("conversation/conversation-logger.js"); } catch (e) { console.warn(e); }
             if (global.AuroraConversationLogger) {
                 this.conversationLogger = new global.AuroraConversationLogger({ application: "Diagnosys" });
@@ -702,7 +710,9 @@
                 return;
             }
 
-            if (global.DiagnosysGeminiConversationProvider) {
+            // Gemini só é carregado quando a interação realmente precisa dele.
+            const geminiReady = await this.ensureGeminiConversationProvider();
+            if (geminiReady) {
                 try {
                     const providerStartedAt = performance.now();
                     this.conversationLogger?.logEvent("provider_call", { provider: "gemini_conversation" });
