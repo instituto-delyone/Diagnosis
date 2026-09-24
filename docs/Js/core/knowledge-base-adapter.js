@@ -9,6 +9,7 @@
       this.modules = [];
       this.entities = [];
       this.loaded = false;
+      this.sourceStatus = [];
     }
 
     async load() {
@@ -17,15 +18,22 @@
       if (!manifestResponse.ok) throw new Error("Manifesto da Knowledge Base indisponível: HTTP " + manifestResponse.status);
       const manifest = await manifestResponse.json();
       const paths = Array.isArray(manifest.include) ? manifest.include : [];
+      this.sourceStatus = [];
 
       for (const rawPath of paths) {
         const cleanPath = String(rawPath).replace(/^knowledge_base\//,"");
         if (!/^DIAGNOSIS_CM\d+_/i.test(cleanPath)) continue;
         try {
           const response = await fetch("knowledge_base/" + cleanPath,{cache:"no-store"});
-          if (!response.ok) continue;
+          if (!response.ok) {
+            this.sourceStatus.push({ path: cleanPath, state: "error", error: "HTTP " + response.status, entities: 0 });
+            continue;
+          }
           const data = await response.json();
-          if (!Array.isArray(data?.knowledge_entities)) continue;
+          if (!Array.isArray(data?.knowledge_entities)) {
+            this.sourceStatus.push({ path: cleanPath, state: "error", error: "knowledge_entities ausente", entities: 0 });
+            continue;
+          }
 
           const module = {
             path: cleanPath,
@@ -39,6 +47,7 @@
           };
           this.modules.push(module);
           this.sources.push(cleanPath);
+          this.sourceStatus.push({ path: cleanPath, state: "ok", error: null, entities: data.knowledge_entities.length });
 
           data.knowledge_entities.forEach(entity => {
             if (!entity || typeof entity !== "object" || !entity.id) return;
@@ -57,12 +66,21 @@
             });
           });
         } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          this.sourceStatus.push({ path: cleanPath, state: "error", error: message, entities: 0 });
           console.warn("Falha ao adaptar Knowledge Base:",cleanPath,error);
         }
       }
+
       this.loaded = true;
+      if (!this.entities.length) {
+        throw new Error("Nenhuma Knowledge Base clínica pôde ser carregada.");
+      }
       return this;
     }
+
+    getSourceStatus(){ return this.sourceStatus.slice(); }
+    getLoadedSourceCount(){ return this.sourceStatus.filter(s => s.state === "ok").length; }
 
     getAllEntities(){ return this.entities.slice(); }
 
