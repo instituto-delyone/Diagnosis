@@ -33,6 +33,9 @@
         : null;
       this.playableCatalog = [];
       this.preparedCases = [];
+      this.generationBlueprint = null;
+      this.knowledgeAdapter = null;
+      this.patientGenerator = null;
     }
 
     async loadClinicalCatalogModule() {
@@ -143,68 +146,69 @@
       return labels[value] || value || "Todas as especialidades";
     }
 
-    chooseSourceCases(count = 3, specialty = "todos") {
-      const sourceCases = Array.isArray(this.engine?.library?.cases)
-        ? this.engine.library.cases
-        : [];
+    async loadGenerationLayer(onStatus) {
+      if (!window.KnowledgeBaseAdapter || !window.KnowledgeToPatientEngine) {
+        throw new Error("Camada de geração de pacientes não foi carregada.");
+      }
 
-      /*
-       * UNIVERSAL KNOWLEDGE BASE:
-       * O conceito não precisa existir no catálogo mestre para ser usado.
-       * O catálogo é enriquecimento/validação auxiliar; a fonte real de
-       * seleção é o universo clínico carregado pelo CaseLibrary.
-       */
-      const normalizedSpecialty = normalize(specialty || "todos").replace(/ /g, "_");
-      const usable = sourceCases.filter(item => {
-        if (!item) return false;
-        if (!(item.id || item.case_id)) return false;
-        if (!(item.primary_concept || item.concept || item.title)) return false;
+      try {
+        const blueprintResponse = await fetch("knowledge_base/patient_generation/patient_generation_blueprint.json", { cache: "no-store" });
+        if (!blueprintResponse.ok) throw new Error("HTTP " + blueprintResponse.status);
+        this.generationBlueprint = await blueprintResponse.json();
+      } catch (error) {
+        this.generationBlueprint = {
+          defaults_v0_1: {
+            age_range: [20, 60],
+            sex_values: ["feminino", "masculino"],
+            initial_symptom_count: [1, 3]
+          }
+        };
+        console.warn("Blueprint de geração indisponível; usando defaults mínimos:", error);
+      }
 
-        const specialtyMatch =
-          normalizedSpecialty === "todos" ||
-          this.specialtyFromCase(item) === normalizedSpecialty;
-
-        if (!specialtyMatch) return false;
-
-        /*
-         * Explicit clinical source files are already part of the curated
-         * Knowledge Base. They must remain selectable even when the master
-         * concept catalog uses a different canonical spelling.
-         *
-         * Before this rule, a valid cardiology/endocrinology/etc. record could
-         * be discarded by an exact-ish catalog-name comparison, leaving the
-         * generator apparently "stuck" on whichever specialty happened to
-         * have the most compatible records (notably pneumology/asma).
-         */
-        const source = normalize(item.kb_source || "");
-        const curatedClinicalSource =
-          /(?:cardiologia|cardiopatias|endocrinologia|neurologia|pneumologia|reumatologia|cirurgia|hematologia|hipertensao_arterial|dislipidemia)/.test(source);
-
-        return curatedClinicalSource || this.isPlayableCase(item);
+      this.knowledgeAdapter = new window.KnowledgeBaseAdapter();
+      await this.knowledgeAdapter.load();
+      this.patientGenerator = new window.KnowledgeToPatientEngine({
+        adapter: this.knowledgeAdapter,
+        blueprint: this.generationBlueprint
       });
 
-      if (!usable.length) {
+      onStatus?.(
+        "gerador de pacientes",
+        "ok",
+        this.knowledgeAdapter.entities.length + " conceitos clínicos disponíveis para geração"
+      );
+    }
+
+    async chooseSourceCases(count = 3, specialty = "todos") {
+      await this.loadGenerationLayer();
+
+      const candidates = this.knowledgeAdapter.candidatesForSpecialty(specialty);
+      if (!candidates.length) {
         throw new Error(
-          "A biblioteca clínica não possui casos elegíveis para " +
-          this.specialtyLabel(normalizedSpecialty) + "."
+          "A Knowledge Base não possui conceitos elegíveis para " +
+          this.specialtyLabel(normalize(specialty || "todos").replace(/ /g, "_")) + "."
         );
       }
 
-      const targetCount = Math.min(count, usable.length);
+      const sourceCases = [];
+      const used = new Set();
 
-      return shuffle(usable).slice(0, targetCount).map(item => {
-        const copy = clone(item);
-        copy.specialty = this.specialtyFromCase(copy);
-        copy.specialty_label = this.specialtyLabel(copy.specialty);
-        const catalogEntry = this.catalogEntryFor(copy);
-        copy.catalog_context = catalogEntry
-          ? {
-              concept: catalogEntry.name,
-              sources: clone(catalogEntry.sources || [])
-            }
-          : null;
-        return copy;
-      });
+      while (sourceCases.length < Math.min(count, candidates.length)) {
+        const entity = candidates[Math.floor(Math.random() * candidates.length)];
+        if (!entity || used.has(entity.id)) continue;
+        used.add(entity.id);
+
+        const generated = this.patientGenerator.generate({
+          conceptId: entity.id
+        });
+
+        generated.specialty = this.knowledgeAdapter.specialtyFor(entity);
+        generated.specialty_label = this.specialtyLabel(generated.specialty);
+        sourceCases.push(generated);
+      }
+
+      return sourceCases;
     }
 
     async researchAndBuild(sourceCase, index, onStatus) {
@@ -323,11 +327,12 @@
       this.preparedCases = [];
       await this.loadMasterCatalog(onStatus);
       const normalizedSpecialty = normalize(specialty || "todos").replace(/ /g, "_");
-      const sourceCases = this.chooseSourceCases(count, normalizedSpecialty);
+      const sourceCases = await this.chooseSourceCases(count, normalizedSpecialty);
 
-      const builtCases = await Promise.all(
-        sourceCases.map((sourceCase, index) => this.researchAndBuild(sourceCase, index, onStatus))
-      );
+      const builtCases = [];
+      for (let index = 0; index < sourceCases.length; index += 1) {
+        builtCases.push(await this.researchAndBuild(sourceCases[index], index, onStatus));
+      }
 
       this.preparedCases = builtCases.map((built, index) => this.cardData(built, index));
 
