@@ -2002,6 +2002,9 @@
                 engine.finalizeHypothesis?.();
                 await prepareCases(engine, true);
             };
+
+            // Primeira execução: gerar imediatamente os 3 casos antes de liberar a conversa.
+            await prepareCases(engine, false);
         } catch (error) {
             engine.startNewCase = originalStartNewCase;
             errorRoot.textContent = "Não foi possível preparar os casos: " + (error.message || String(error));
