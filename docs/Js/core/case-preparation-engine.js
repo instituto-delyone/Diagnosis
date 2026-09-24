@@ -146,9 +146,29 @@
       return labels[value] || value || "Todas as especialidades";
     }
 
+    async ensureScript(src) {
+      if (Array.from(document.scripts).some(script => script.src.endsWith(src))) return true;
+      return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = src;
+        script.onload = () => resolve(true);
+        script.onerror = () => reject(new Error("Falha ao carregar " + src));
+        document.head.appendChild(script);
+      });
+    }
+
     async loadGenerationLayer(onStatus) {
+      onStatus?.("gerador", "carregando", "carregando o adaptador da Knowledge Base");
+
+      if (!window.KnowledgeBaseAdapter) {
+        await this.ensureScript("Js/core/knowledge-base-adapter.js");
+      }
+      if (!window.KnowledgeToPatientEngine) {
+        await this.ensureScript("Js/core/knowledge-to-patient-engine.js");
+      }
+
       if (!window.KnowledgeBaseAdapter || !window.KnowledgeToPatientEngine) {
-        throw new Error("Camada de geração de pacientes não foi carregada.");
+        throw new Error("Componentes essenciais de geração não carregaram.");
       }
 
       try {
@@ -321,6 +341,48 @@
         difficulty: clinicalCase.metadata?.difficulty || clinicalCase.difficulty || "Simulação clínica",
         case: clinicalCase
       };
+    }
+
+    async prepareFirst(onStatus) {
+      await this.loadGenerationLayer(onStatus);
+      const candidates = this.knowledgeAdapter.candidatesForSpecialty("todos");
+      if (!candidates.length) throw new Error("Nenhum conceito clínico disponível na Knowledge Base.");
+
+      const entity = shuffle(candidates)[0];
+      onStatus?.("seleção", "ok", "conceito clínico selecionado");
+      const sourceCase = this.patientGenerator.generate({ conceptId: entity.id });
+      const clinicalCase = this.buildLocalCase(sourceCase);
+      this.validate(clinicalCase);
+      if (clinicalCase.clinical_truth?.conversation_ready !== true) {
+        throw new Error("O primeiro caso não alcançou a estrutura clínica mínima.");
+      }
+      return { sourceCase, card: this.cardData(clinicalCase, 0), case: clinicalCase };
+    }
+
+    buildLocalCase(sourceCase) {
+      if (!window.CaseBuilder) throw new Error("CaseBuilder não carregou.");
+      return new window.CaseBuilder({
+        caseSource: sourceCase,
+        research: { enabled: false, evidence: [], source_status: [] }
+      }).build();
+    }
+
+    async prepareRemaining(count, onStatus, usedConceptIds = []) {
+      await this.loadGenerationLayer(onStatus);
+      const blocked = new Set(usedConceptIds);
+      const candidates = shuffle(this.knowledgeAdapter.candidatesForSpecialty("todos"))
+        .filter(entity => !blocked.has(entity.id));
+
+      const results = [];
+      for (let i = 0; i < Math.min(count, candidates.length); i += 1) {
+        const entity = candidates[i];
+        const sourceCase = this.patientGenerator.generate({ conceptId: entity.id });
+        const clinicalCase = this.buildLocalCase(sourceCase);
+        this.validate(clinicalCase);
+        results.push({ sourceCase, card: this.cardData(clinicalCase, i + 1), case: clinicalCase });
+        onStatus?.("caso " + (i + 2), "pronto", "gerado em segundo plano");
+      }
+      return results;
     }
 
     async prepare(count = 3, onStatus, specialty = "todos") {
