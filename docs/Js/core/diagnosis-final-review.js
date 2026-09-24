@@ -159,14 +159,19 @@
             if (!this.drawer) return;
 
             const engine = this.engine;
-            const kb = engine.library;
+            const preparation = engine.__casePreparation || null;
+            const kb = preparation?.knowledgeAdapter || null;
             const research = engine.research;
             const geminiLoaded = !!global.DiagnosysGeminiProvider || !!global.DiagnosysGeminiConversationProvider;
-            const localKnowledge = !!kb;
+            const localKnowledge = !!kb && Number(kb?.entities?.length || 0) > 0;
+            const preparedCases = Array.isArray(engine.__backgroundPreparedCases)
+                ? engine.__backgroundPreparedCases.length
+                : 0;
             const sources = [
                 ["Motor clínico", true],
-                ["Knowledge Base", localKnowledge && Number(kb?.stats?.files || 0) > 0],
-                ["Casos carregados", Number(kb?.stats?.playable || 0) > 0],
+                ["Knowledge Base", localKnowledge],
+                ["Gerador de pacientes", !!preparation?.patientGenerator],
+                ["Casos preparados", preparedCases > 0 || !!engine.currentCase],
                 ["PCDT", !!engine.pcdtCatalog],
                 ["Faixas de referência", !!engine.referenceRanges],
                 ["MSD / pesquisa científica", !!global.CaseResearchEngine],
@@ -186,8 +191,8 @@
             const c = engine.currentCase || {};
             const caseId = c.id || c.case_id || "—";
             const difficulty = c.difficulty || "—";
-            const files = Number(kb?.stats?.files || 0);
-            const records = Number(kb?.stats?.records || 0);
+            const files = Number(kb?.getLoadedSourceCount?.() || 0);
+            const records = Number(kb?.entities?.length || 0);
             const revealed = engine.context?.revealed?.size || 0;
 
             this.drawer.innerHTML =
@@ -198,7 +203,8 @@
                     '<div class="system-meta-card"><span>Caso</span><strong>' + escapeHTML(caseId) + '</strong></div>' +
                     '<div class="system-meta-card"><span>Dificuldade</span><strong>' + escapeHTML(difficulty) + '</strong></div>' +
                     '<div class="system-meta-card"><span>Fontes locais</span><strong>' + files + ' arquivos</strong></div>' +
-                    '<div class="system-meta-card"><span>Registros</span><strong>' + records + '</strong></div>' +
+                    '<div class="system-meta-card"><span>Conceitos clínicos</span><strong>' + records + '</strong></div>' +
+                    '<div class="system-meta-card"><span>Casos em espera</span><strong>' + preparedCases + '</strong></div>' +
                     '<div class="system-meta-card"><span>Investigações reveladas</span><strong>' + revealed + '</strong></div>' +
                     '<div class="system-meta-card"><span>Pesquisa</span><strong>' + escapeHTML(research?.gemini_status || "não solicitada") + '</strong></div>' +
                 '</div>';
