@@ -128,6 +128,8 @@ E.prototype.input=function(){
  if(/^(hepatite|cirrose|colangite|coledocolitiase|coledocolitíase|pancreatite|cancer|câncer|sindrome|síndrome|anemia|cmv|ebv|hsv)/.test(n)&&!/qual|como|o que|por que|porque/.test(n)){this.log("SISTEMA","Hipótese clínica registrada como raciocínio. Use o campo Diagnóstico para fixá-la.");return}
  var x=this.c.exams.find(function(z){return n.includes(N(z.name))||N(z.name).split(" ").some(function(t){return t.length>3&&n.includes(t)})});
  if(x&&/pedir|solicitar|solicito|gostaria|quero|peco|peco|exame|lab|ultrassom|usg/.test(n)){this.exam(x.id);return}
+ var general=(this.knowledge.exames_gerais&&this.knowledge.exames_gerais.canonical_examples||[]).find(function(z){return n.includes(N(z.name))||N(z.name).split(" ").some(function(t){return t.length>3&&n.includes(t)})});
+ if(general&&/pedir|solicitar|solicito|gostaria|quero|peco|peco|exame|lab|hemograma/.test(n)){this.log("EXAME",""+general.name+": solicitado. Resultado específico ainda não parametrizado nesta síndrome.");return}
  var a=this.answerHistory(n);if(a!==null){this.log("PACIENTE",a);return}
  var f=this.answerPhysical(n);if(f!==null){this.log("EXAME FÍSICO",f);return}
  if(/tratamento|tratar|conduta|manejo/.test(n)){this.log("SISTEMA","Conduta não está sendo construída nesta etapa do túnel.");return}
