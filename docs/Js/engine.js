@@ -1441,10 +1441,6 @@
 
     global.DiagnosisEngine = DiagnosisEngine;
     global.idmtEngine = new DiagnosisEngine();
-    global.addEventListener("DOMContentLoaded", () => {
-        global.idmtEngine.boot().catch(error => {
-            console.error("Diagnosis boot failure:", error);
-            global.idmtEngine.log("ERRO", "Não foi possível inicializar o caso clínico.");
-        });
-    });
+    // Boot is intentionally owned by diagnosis-bootstrap.js.
+    // The engine defines the clinical runtime; the page bootstrap decides when/how to start it.
 })(window);
