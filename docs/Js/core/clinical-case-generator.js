@@ -242,6 +242,92 @@
       return null;
     }
 
+    investigationsFor(module, pathology) {
+      const n = normalize(pathology.name);
+      const initial = module?.embedded_reference_extraction?.evaluation?.initial || [];
+      const laboratory = module?.embedded_reference_extraction?.evaluation?.laboratory || [];
+      const additional = module?.embedded_reference_extraction?.evaluation?.additional_workup || {};
+      const names = unique([
+        ...initial,
+        ...laboratory.slice(0, 8),
+        ...Object.values(additional).flat().slice(0, 3)
+      ]);
+
+      const examResult = (exam) => {
+        const e = normalize(exam);
+
+        // CM1 disease-pattern seed. Values are synthetic, internally coherent,
+        // and intentionally kept hidden until the corresponding investigation is requested.
+        if (/hepatite alcoolica|alcoholic hepatitis/.test(n)) {
+          if (/bilirrubin/.test(e)) return "Bilirrubina total elevada, com predomínio da fração direta.";
+          if (/ast/.test(e)) return "AST elevada, com elevação superior à ALT.";
+          if (/alt/.test(e)) return "ALT elevada, em grau menor que a AST.";
+          if (/fosfatase|alkaline phosphatase/.test(e)) return "Fosfatase alcalina discretamente a moderadamente elevada.";
+          if (/ggt/.test(e)) return "GGT elevada.";
+          if (/albumin/.test(e)) return "Albumina reduzida.";
+          if (/prothrombin|tempo de protrombina|tp/.test(e)) return "Tempo de protrombina prolongado.";
+          if (/ultrassom|ultrasound/.test(e)) return "Fígado com alterações compatíveis com doença hepática; sem obstrução biliar extra-hepática evidente.";
+        }
+
+        if (/hepatite [abcde]|viral hepatitis/.test(n)) {
+          if (/bilirrubin/.test(e)) return "Hiperbilirrubinemia com componente conjugado.";
+          if (/ast/.test(e) || /alt/.test(e)) return "Transaminases acentuadamente elevadas, com padrão hepatocelular.";
+          if (/fosfatase|alkaline phosphatase|ggt/.test(e)) return "Enzimas canaliculares sem predomínio sobre as transaminases.";
+          if (/albumin/.test(e)) return "Albumina preservada no quadro agudo.";
+          if (/prothrombin|tempo de protrombina|tp/.test(e)) return "Tempo de protrombina sem alteração importante.";
+          if (/viral|sorolog|serolog/.test(e)) return "Sorologia compatível com a etiologia viral selecionada.";
+        }
+
+        if (/cirrose/.test(n)) {
+          if (/bilirrubin/.test(e)) return "Bilirrubina elevada, predominantemente conjugada.";
+          if (/ast|alt/.test(e)) return "Transaminases discretamente elevadas.";
+          if (/albumin/.test(e)) return "Albumina reduzida.";
+          if (/prothrombin|tempo de protrombina|tp/.test(e)) return "Tempo de protrombina prolongado.";
+          if (/ultrassom|ultrasound/.test(e)) return "Fígado com alterações morfológicas compatíveis com doença hepática crônica.";
+        }
+
+        if (/wilson/.test(n)) {
+          if (/bilirrubin/.test(e)) return "Bilirrubina elevada, podendo haver componente hemolítico.";
+          if (/ast|alt/.test(e)) return "Transaminases elevadas em padrão hepatocelular.";
+          if (/ceruloplasmin/.test(e)) return "Ceruloplasmina reduzida.";
+        }
+
+        if (/autoimune/.test(n)) {
+          if (/ast|alt/.test(e)) return "Transaminases elevadas em padrão hepatocelular.";
+          if (/bilirrubin/.test(e)) return "Bilirrubina elevada com componente conjugado.";
+          if (/autoimun|anticorp|antibod/.test(e)) return "Autoanticorpos compatíveis com doença hepática autoimune.";
+        }
+
+        if (/cmv|ebv|hsv/.test(n)) {
+          if (/bilirrubin/.test(e)) return "Hiperbilirrubinemia com componente conjugado.";
+          if (/ast|alt/.test(e)) return "Transaminases elevadas em padrão hepatocelular.";
+          if (/viral|sorolog|serolog/.test(e)) return "Investigação infecciosa compatível com a etiologia selecionada.";
+        }
+
+        if (/chol|colelit|obstrucao|pancreat|colang/.test(n)) {
+          if (/bilirrubin/.test(e)) return "Bilirrubina elevada, com predomínio da fração direta.";
+          if (/fosfatase|alkaline phosphatase/.test(e)) return "Fosfatase alcalina acentuadamente elevada.";
+          if (/ggt/.test(e)) return "GGT acentuadamente elevada.";
+          if (/ast|alt/.test(e)) return "Transaminases discretamente a moderadamente elevadas.";
+          if (/ultrassom|ultrasound/.test(e)) return "Dilatação das vias biliares ou achado compatível com a etiologia obstrutiva selecionada.";
+        }
+
+        return "Resultado sintético coerente com a patologia selecionada, baseado nas relações disponíveis na Knowledge Base.";
+      };
+
+      const selected = names.slice(0, 10);
+      return selected.map((name, index) => ({
+        id: "generated_exam_" + index + "_" + normalize(name).replace(/ /g, "_").slice(0, 40),
+        exam: String(name),
+        name: label(name),
+        result: examResult(name),
+        interpretation: null,
+        available: true,
+        performed: false,
+        source: "clinical_case_generator"
+      }));
+    }
+
     buildReferenceContext(module, pathology) {
       const registry = Array.isArray(module?.source_registry) ? module.source_registry : [];
       const relevant = registry.filter(source => {
@@ -302,6 +388,11 @@
         duration: pick(["há alguns dias", "há cerca de uma semana", "há algumas semanas"])
       };
 
+      const investigations = this.investigationsFor(module, pathology);
+      const physicalFindings = /hepatite|cirrose|wilson|cmv|ebv|hsv|autoimune|obstrucao|colang|colelit/.test(normalize(pathology.name))
+        ? ["icterícia escleral"]
+        : [];
+
       const narrativeParts = [
         patient.initials + ", " + patient.age + " anos, " + (patient.sex === "feminino" ? "mulher" : "homem") + ".",
         symptoms[0]
@@ -348,12 +439,12 @@
         },
         history,
         physical_exam: {
-          findings: [],
+          findings: physicalFindings,
           vitals: {}
         },
         investigations: {
-          catalog: [],
-          available: []
+          catalog: investigations,
+          available: investigations
         },
         management: {
           possible_actions: []
