@@ -14,6 +14,7 @@
         researchRules: "AI/CASE_RESEARCH_RULES.json",
         pcdtCatalog: "knowledge_base/pcdt_catalog.json",
         defaultRoom: "clinica",
+        clinicalCaseGenerator: "Js/core/clinical-case-generator.js",
         geminiWorkerUrl: "https://diagnosis-gemini-proxy.dr-delyone.workers.dev/api/gemini/research"
     };
 
@@ -412,6 +413,9 @@
             try { await loadScript("Js/core/case-builder.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/knowledge-base-adapter.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/knowledge-to-patient-engine.js"); } catch (e) { console.warn(e); }
+            // Case creation is a first-class local capability of the Engine.
+            // Gemini is not part of this path.
+            try { await loadScript(CONFIG.clinicalCaseGenerator); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/case-research-engine.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/pcdt-catalog-provider.js"); } catch (e) { console.warn(e); }
             try { await loadScript("Js/core/reference-range-resolver.js"); } catch (e) { console.warn(e); }
