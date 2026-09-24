@@ -1295,17 +1295,9 @@
         </p>
 
         <div id="prepSpecialty" class="prep-specialty">
-            <div class="prep-specialty-title">Escolha o foco do caso</div>
-            <div id="prepSpecialtyGrid" class="prep-specialty-grid">
-                <button class="prep-specialty-btn active" type="button" data-specialty="todos">🩺 Todas</button>
-                <button class="prep-specialty-btn" type="button" data-specialty="cardiologia">❤️ Cardiologia</button>
-                <button class="prep-specialty-btn" type="button" data-specialty="endocrinologia">🧬 Endocrinologia</button>
-                <button class="prep-specialty-btn" type="button" data-specialty="pneumologia">🫁 Pneumologia</button>
-                <button class="prep-specialty-btn" type="button" data-specialty="neurologia">🧠 Neurologia</button>
-                <button class="prep-specialty-btn" type="button" data-specialty="reumatologia">🦴 Reumatologia</button>
-                <button class="prep-specialty-btn" type="button" data-specialty="cirurgia">🔪 Cirurgia</button>
-                <button class="prep-specialty-btn" type="button" data-specialty="hematologia">🩸 Hematologia</button>
-                <button class="prep-specialty-btn" type="button" data-specialty="clinica_medica">🩺 Clínica médica</button>
+            <div class="prep-specialty-title">Modo de geração</div>
+            <div style="padding:12px 14px;border:1px solid var(--border);border-radius:10px;background:var(--panel-2);font-weight:800;color:var(--primary);">
+                🩺 Clínica médica · geração livre a partir da Knowledge Base
             </div>
         </div>
 
@@ -1893,8 +1885,6 @@
     const cardsRoot = document.getElementById("prepCards");
     const errorRoot = document.getElementById("prepError");
     const specialtyRoot = document.getElementById("prepSpecialty");
-    const specialtyGrid = document.getElementById("prepSpecialtyGrid");
-    let selectedSpecialty = "todos";
     const subtitle = document.getElementById("prepSubtitle");
 
     const originalBoot = window.DiagnosisEngine && window.DiagnosisEngine.prototype.boot;
@@ -1908,36 +1898,6 @@
             .replace(/>/g, "&gt;")
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
-    }
-
-    function specialtyLabel(value) {
-        const labels = {
-            todos: "Todas as especialidades",
-            cardiologia: "Cardiologia",
-            endocrinologia: "Endocrinologia",
-            pneumologia: "Pneumologia",
-            neurologia: "Neurologia",
-            reumatologia: "Reumatologia",
-            cirurgia: "Cirurgia",
-            hematologia: "Hematologia",
-            clinica_medica: "Clínica médica"
-        };
-        return labels[value] || value;
-    }
-
-    function bindSpecialtySelector() {
-        specialtyGrid?.querySelectorAll("[data-specialty]").forEach(button => {
-            button.addEventListener("click", () => {
-                selectedSpecialty = button.dataset.specialty || "todos";
-                specialtyGrid.querySelectorAll("[data-specialty]").forEach(item => item.classList.remove("active"));
-                button.classList.add("active");
-                subtitle.textContent = "Foco selecionado: " + specialtyLabel(selectedSpecialty) + ". Preparando os casos disponíveis...";
-                prepareCases(window.idmtEngine, false, selectedSpecialty).catch(error => {
-                    errorRoot.textContent = "Não foi possível preparar os casos: " + (error.message || String(error));
-                    errorRoot.classList.remove("prep-hidden");
-                });
-            });
-        });
     }
 
     function statusRow(name, state, detail) {
@@ -1972,7 +1932,9 @@
         }).join("");
 
         cardsRoot.classList.remove("prep-hidden");
-        subtitle.textContent = prepared.length + (prepared.length === 1 ? " caso foi preparado" : " casos foram preparados") + ". Escolha um para iniciar a investigação.";
+        subtitle.textContent = prepared.length + (prepared.length === 1
+            ? " caso foi preparado"
+            : " casos foram preparados") + ". Escolha um para iniciar a investigação.";
 
         cardsRoot.querySelectorAll("[data-case-index]").forEach(card => {
             card.addEventListener("click", () => {
@@ -2021,8 +1983,6 @@
 
         const originalStartNewCase = engine.startNewCase;
         engine.startNewCase = async function () {
-            // During boot, the original engine asks for a case automatically.
-            // We deliberately intercept that call so the user can choose the specialty first.
             return;
         };
 
@@ -2035,22 +1995,12 @@
             statusRow("faixas de referência", engine.referenceRanges ? "ok" : "aviso", engine.referenceRanges ? "tabela disponível" : "tabela indisponível");
 
             engine.startNewCase = originalStartNewCase;
-
-            bindSpecialtySelector();
             specialtyRoot?.classList.remove("prep-hidden");
-            subtitle.textContent = "Escolha uma especialidade para gerar os casos clínicos disponíveis.";
-            
+            subtitle.textContent = "Clínica médica · preparando 3 casos clínicos a partir da Knowledge Base.";
+
             engine.startNewCase = async function () {
                 engine.finalizeHypothesis?.();
-                overlay.classList.remove("prep-hidden");
-                document.body.classList.add("preparing");
-                statusRoot.innerHTML = "";
-                cardsRoot.innerHTML = "";
-                cardsRoot.classList.add("prep-hidden");
-                errorRoot.classList.add("prep-hidden");
-                specialtyRoot?.classList.remove("prep-hidden");
-                subtitle.textContent = "Escolha o foco do próximo caso clínico.";
-                engine.__casePreparationReady = false;
+                await prepareCases(engine, true);
             };
         } catch (error) {
             engine.startNewCase = originalStartNewCase;
@@ -2061,39 +2011,27 @@
         }
     };
 
-    async function prepareCases(engine, fromNextCase, specialty = selectedSpecialty) {
+    async function prepareCases(engine, fromNextCase) {
         overlay.classList.remove("prep-hidden");
         document.body.classList.add("preparing");
         statusRoot.innerHTML = "";
         cardsRoot.innerHTML = "";
         cardsRoot.classList.add("prep-hidden");
         errorRoot.classList.add("prep-hidden");
+        specialtyRoot?.classList.remove("prep-hidden");
+        subtitle.textContent = "Clínica médica · aguardando a geração dos 3 casos...";
 
         const preparation = new window.CasePreparationEngine({ engine });
         engine.__casePreparation = preparation;
 
         statusRow("catálogo mestre", "carregando", "resolvendo universo de conceitos");
-        selectedSpecialty = specialty || selectedSpecialty || "todos";
-        const prepared = await preparation.prepare(3, statusRow, selectedSpecialty);
+        statusRow("gerador", "carregando", "transformando conhecimento em pacientes");
+        const prepared = await preparation.prepare(3, statusRow, "todos");
 
-        if (!fromNextCase) {
-            statusRow("foco", "selecionado", specialtyLabel(selectedSpecialty));
-            statusRow("casos", "pronto", prepared.length + " caso(s) completo(s) e validado(s)");
-        } else {
-            statusRow("casos", "renovado", prepared.length + " caso(s) preparado(s)");
-
-            const previous = engine.__lastHypothesisResult;
-            if (previous) {
-                const detail = previous.registered
-                    ? `${previous.score}/100 · ${Math.round(previous.similarity * 100)}% de proximidade · ${Math.round(previous.elapsedSeconds)} s até a fixação`
-                    : "nenhuma hipótese foi fixada";
-                statusRow("resultado anterior", "encerrado", detail);
-                engine.__lastHypothesisResult = null;
-            }
-        }
+        statusRow("foco", "fixo", "Clínica médica");
+        statusRow("casos", "pronto", prepared.length + " caso(s) completo(s) e validado(s)");
 
         showCards(engine, prepared);
-        if (specialtyRoot) specialtyRoot.classList.remove("prep-hidden");
         preparation.backgroundWarmup();
 
         if (engine.elements?.input) engine.elements.input.disabled = true;
