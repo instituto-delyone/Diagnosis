@@ -1,0 +1,21 @@
+{
+  "version": "0.1",
+  "architecture": "CLINICAL KNOWLEDGE BY MEDICAL DOMAIN",
+  "principle": "O programa não decide o conteúdo clínico; ele localiza o arquivo clínico correspondente.",
+  "modules": {
+    "CM01": {
+      "syndrome": "Síndrome Ictérica",
+      "knowledge_base": "knowledge_base/DIAGNOSIS_CM01_SINDROME_ICTERICA_v0.3.json",
+      "anamnese": "knowledge_base/anamnese/CM01_SINDROME_ICTERICA.json",
+      "exame_fisico": "knowledge_base/exame_fisico/CM01_SINDROME_ICTERICA.json",
+      "exames_complementares": "knowledge_base/exames_complementares/CM01_SINDROME_ICTERICA.json",
+      "exames_gerais": "knowledge_base/exames_complementares/GERAIS.json"
+    }
+  },
+  "resolution": {
+    "anamnese": "consultar o arquivo de anamnese da síndrome",
+    "exame_fisico": "consultar o arquivo de exame_fisico da síndrome",
+    "exames_complementares": "consultar o arquivo de exames_complementares da síndrome",
+    "knowledge_base": "consultar a KB do módulo para possibilidades e diagnóstico"
+  }
+}
